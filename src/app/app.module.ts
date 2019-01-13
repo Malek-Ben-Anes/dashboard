@@ -54,7 +54,6 @@ import { ImageService } from './services/image.service';*/
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    AppComponent,
     LoginComponent,
     UserComponent,
     RegisterComponent,

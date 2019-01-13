@@ -55,13 +55,6 @@ export const AdminLayoutRoutes: Routes = [
     , {
         path: '',
         children: [ {
-            path: 'u',
-            component: UserProfileComponent
-        }]
-    },
-    , {
-        path: '',
-        children: [ {
             path: 'user-profile',
             component: UserProfileComponent
         }]
