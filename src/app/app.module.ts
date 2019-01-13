@@ -18,9 +18,9 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
 import { PmComponent } from './pm/pm.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { TableListComponent } from './table-list/table-list.component';
+import { TeacherListComponent } from './teacher-list/teacher-list.component';
 import { TypographyComponent } from './typography/typography.component';
 import { IconsComponent } from './icons/icons.component';
 import { MapsComponent } from './maps/maps.component';
@@ -59,7 +59,10 @@ import { ImageService } from './services/image.service';*/
     RegisterComponent,
     HomeComponent,
     AdminComponent,
-    PmComponent
+    PmComponent,
+    TableListComponent,
+    TeacherListComponent,
+    UserProfileComponent,
   ],
   providers: [TeacherService/*, ImageService, FileUploadService*/],
   bootstrap: [AppComponent]

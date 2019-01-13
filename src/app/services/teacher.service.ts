@@ -27,20 +27,31 @@ export class TeacherService {
     this.teacherSubject.next(this.teachers);
   }
 
-  getTeachers(){
-    return this.http.get<Teacher[]>(TEACHER_URL).subscribe(
-      teachers => { 
-        this.teachers = teachers; 
-        this.emitTeachers();
-        console.log(this.teachers);
-      }, (err: HttpErrorResponse) => {
-        if (err.error instanceof Error) {
-          console.log("Client-side error occured.");
-        } else {
-          console.log("Server-side error occured.");
-        }
-      }
-    );
+  // getTeachers(){
+  //   return this.http.get<Teacher[]>(TEACHER_URL).subscribe(
+  //     teachers => { 
+  //       this.teachers = teachers; 
+  //       this.emitTeachers();
+  //       console.log(this.teachers);
+  //     }, (err: HttpErrorResponse) => {
+  //       if (err.error instanceof Error) {
+  //         console.log("Client-side error occured.");
+  //       } else {
+  //         console.log("Server-side error occured.");
+  //       }
+  //     }
+  //   );
+  // }
+  
+  getTeachers(): Observable<Teacher[]> {
+    // return of(HEROES);
+    return this.http.get<Teacher[]>(TEACHER_URL);/*.subscribe(
+          teachers => { 
+            this.teachers = teachers; 
+            this.emitTeachers();
+            console.log(this.teachers);
+          }
+        );*/
   }
 
   getSingleTeacher(id: number) {

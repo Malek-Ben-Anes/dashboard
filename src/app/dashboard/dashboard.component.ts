@@ -8,6 +8,8 @@ import * as Chartist from 'chartist';
 })
 export class DashboardComponent implements OnInit {
 
+  matTooltipPosition: any;
+
   constructor() { }
   startAnimationForLineChart(chart){
       let seq: any, delays: any, durations: any;

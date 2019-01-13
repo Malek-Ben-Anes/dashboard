@@ -10,11 +10,11 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Teacher } from 'app/models/Teacher';
 
 @Component({
-  selector: 'app-table-list',
-  templateUrl: './table-list.component.html',
-  styleUrls: ['./table-list.component.css']
+  selector: 'app-teacher-list',
+  templateUrl: './teacher-list.component.html',
+  styleUrls: ['./teacher-list.component.css']
 })
-export class TableListComponent implements OnInit, OnDestroy {
+export class TeacherListComponent implements OnInit, OnDestroy {
 
 
   teachers: Teacher[] = [];

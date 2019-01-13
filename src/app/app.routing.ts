@@ -10,6 +10,10 @@ import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user/user.component';
 import { PmComponent } from './pm/pm.component';
 import { AdminComponent } from './admin/admin.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { TableListComponent } from './table-list/table-list.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { TeacherListComponent } from './teacher-list/teacher-list.component';
 
 const routes: Routes = [
     {
@@ -37,10 +41,27 @@ const routes: Routes = [
         component: RegisterComponent
     },
     {
+        path: 'teachers',
+        component: TeacherListComponent
+    },
+    {
+        path: 'teacher-profile/:id',
+        component: UserProfileComponent
+    },
+
+    
+
+    // {
+    //     path: 'user-profile',
+    //     component: UserProfileComponent
+    // },
+    {
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full',
-    }, 
+    },
+     
+    //{ path: 'dashboard',      component: DashboardComponent },
         /*{
         path: '',
         redirectTo: 'home',

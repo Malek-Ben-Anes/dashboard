@@ -23,21 +23,21 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
 
-    this.initTeacher();
+    //this.initTeacher();
     console.log(this.teacher);
 
-   /* let id = this.route.snapshot.params['id'];
+    let id = this.route.snapshot.params['id'];
 
     this.teachersService.getSingleTeacher(3).then(
       (teacher: Teacher) => {
         console.log(teacher);
         this.teacher = teacher;
-        this.updateForm(this.teacher);
+        //this.updateForm(this.teacher);
       }
     ).catch(err => { console.log(err); });
-    this.initForm();*/
-  }
-
+    //this.initForm();
+ }
+/* 
   initTeacher() {
     this.teacher = new Teacher(12, "Alec", "Thompson", Gender.MALE, "high", 1200);
 this.teacher.email = "saifeddine@plumedor.tn";
@@ -58,7 +58,7 @@ this.teacher.phone = "saifeddine@plumedor.tn";
       echelon: ['', Validators.required],
     });
   }
-/*
+
   updateForm(teacher: Teacher): void {
     this.teacherForm.patchValue({
       firstname: teacher.firstname,
