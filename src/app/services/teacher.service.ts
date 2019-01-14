@@ -44,18 +44,23 @@ export class TeacherService {
   // }
   
   getTeachers(): Observable<Teacher[]> {
-    // return of(HEROES);
-    return this.http.get<Teacher[]>(TEACHER_URL);/*.subscribe(
+    return this.http.get<Teacher[]>(TEACHER_URL);
+  }
+    /*.subscribe(
+      // return of(HEROES);
           teachers => { 
             this.teachers = teachers; 
             this.emitTeachers();
             console.log(this.teachers);
           }
         );*/
-  }
+  
 
-  getSingleTeacher(id: number) {
-    return new Promise((resolve, reject) => {
+  getSingleTeacher(id: number): Observable<Teacher>  {
+    return this.http.get<Teacher>(TEACHER_URL + '/' + id);
+  }
+  
+    /*return new Promise((resolve, reject) => {
         let singleTeacher = this.teachers.find((el) => {
             return el.id == id
         })
@@ -64,13 +69,15 @@ export class TeacherService {
         else 
           reject("can't find this teacher");
       })
-      /*let SingleTeacher: Teacher = new Teacher();
+      let SingleTeacher: Teacher = new Teacher();
       this.http.get<Teacher>(url + '/' + id).subscribe( teacher => { 
         SingleTeacher = teacher;
         resolve(SingleTeacher); }*/
-}
-  saveTeacher(teacher: Teacher) {
-    const req = this.http.post(TEACHER_URL, teacher).subscribe(teacherAdded => {
+
+  saveTeacher(teacher: Teacher) : Observable<Teacher>  {
+    return this.http.post<Teacher>(TEACHER_URL, teacher);
+    
+    /*.subscribe(teacherAdded => {
       this.teachers.push(<Teacher>teacherAdded);
       this.emitTeachers();
     }, (err: HttpErrorResponse) => {
@@ -80,24 +87,26 @@ export class TeacherService {
         console.log("Server-side error occured.");
       }
     }
-    )
+    )*/
   }
-  updateTeacher(teacher: Teacher) {
-    const req = this.http.put(TEACHER_URL, teacher).subscribe( (teacherUpdated: Teacher) => {
-      let singleTeacher = this.teachers.find((el) => {
-        return el.id == teacherUpdated.id
-    })
-      singleTeacher = teacherUpdated;
-      console.log(singleTeacher);
-      this.emitTeachers();
-    }, (err: HttpErrorResponse) => {
-      if (err.error instanceof Error) {
-        console.log("Client-side error occured.");
-      } else {
-        console.log("Server-side error occured.");
-      }
-    }
-    )
+  updateTeacher(teacher: Teacher) : Observable<Teacher>  {
+
+    return this.http.put<Teacher>(TEACHER_URL  + '/' + teacher.id, teacher);
+    // const req = this.http.put<Teacher>(TEACHER_URL, teacher).subscribe( (teacherUpdated: Teacher) => {
+    //   let singleTeacher = this.teachers.find((el) => {
+    //     return el.id == teacherUpdated.id
+    // })
+    //   singleTeacher = teacherUpdated;
+    //   console.log(singleTeacher);
+    //   this.emitTeachers();
+    // }, (err: HttpErrorResponse) => {
+    //   if (err.error instanceof Error) {
+    //     console.log("Client-side error occured.");
+    //   } else {
+    //     console.log("Server-side error occured.");
+    //   }
+    // }
+    // )
   }
 
 

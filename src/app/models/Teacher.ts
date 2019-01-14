@@ -14,4 +14,6 @@ export class Teacher extends User{
         this.echelon = _echelon;
         this.salary = _salary;
     }
+
+    
 }

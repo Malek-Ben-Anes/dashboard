@@ -1,6 +1,8 @@
 export class User {
 
     id?: number;
+    username?: string;
+    name?: string;
     firstname?: string;
     lastname?: string;
     email?: string;
@@ -8,6 +10,9 @@ export class User {
     photo?: string;
     birthDate?: Date;
     phone?: string;
+    adress?: string;
+    createdAt?: string;
+    updatedAt?: string;
 
     constructor(_id: number, _firstname?: string, _lastname?: string, _gender?: Gender,
         _email?: string, _photo?: string, _birthDate?: Date, _phone?: string) {
