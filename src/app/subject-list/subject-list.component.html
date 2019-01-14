@@ -47,12 +47,14 @@
                                   
                               </thead>
                               <tbody>
-                                  <tr *ngFor="let subject of subjects">
+                                  <tr *ngFor="let subject of subjects" >
+
                                       <td>
-                                            <a routerLink="/{{'subjects/' + subject.id }}">{{ subject.id }}</a> 
+                                            <p >{{ subject.id }}</p> 
+                                            <!-- <a routerLink="/subjects/{{ subject.id }}">{{ subject.id }}</a>  -->
                                       </td>
                                       <td class="text-primary">
-                                            <a routerLink="/{{'subjects/' + subject.id }}">{{ subject.name }}</a>
+                                            <a>{{ subject.name }}</a>
                                       </td>
                                       <td>
                                           {{ subject.description }}

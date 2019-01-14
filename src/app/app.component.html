@@ -8,13 +8,21 @@
               <div class="logo-img">
                   <img src="/assets/img/plumedor-logo.png"/>
               </div>
-              La plume d'or
           </a>
+          <a routerLink="/" class="simple-text">La Plume D'or&nbsp;</a>
       </div>
-      <a routerLink="/teachers" class="simple-text">teachers</a>
+
       </div>
       <ul class="nav navbar-nav" routerLinkActive="active">
         <!-- <li class="nav-item"><a class="nav-link" routerLink="home">Home</a></li> -->
+
+        <li class="nav-item">
+            <a routerLink="/teachers" class="simple-text">teachers&nbsp;</a>
+            <a routerLink="/subjects" class="simple-text">Subjects&nbsp;</a>
+            <a routerLink="/groups" class="simple-text">groups&nbsp;</a>
+            <a routerLink="/lessons" class="simple-text">lessons&nbsp;</a>
+          </li>
+
         <li *ngIf="authority === 'user'" class="nav-item">
           <a class="nav-link" routerLink="user">User Board</a>
         </li>

@@ -18,6 +18,7 @@ import { TeacherComponent } from './teacher/teacher.component';
 import { SubjectListComponent } from './subject-list/subject-list.component';
 import { GroupListComponent } from './group-list/group-list.component';
 import { GroupDetailComponent } from './group-detail/group-detail.component';
+import { LessonListComponent } from './lesson-list/lesson-list.component';
 
 const routes: Routes = [
     {
@@ -67,6 +68,18 @@ const routes: Routes = [
     {
         path: 'group-detail',
         component: GroupDetailComponent
+    },
+    {
+        path: 'group-detail/:id',
+        component: GroupDetailComponent
+    },
+    {
+        path: 'lessons',
+        component: LessonListComponent
+    },
+    {
+        path: '',
+        component: HomeComponent
     },
 
     

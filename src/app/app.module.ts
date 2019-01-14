@@ -30,6 +30,11 @@ import { UpgradeComponent } from './upgrade/upgrade.component';
 
 import {MatSelectModule} from '@angular/material/select';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatRadioModule} from '@angular/material/radio';      
+import {MatCardModule} from '@angular/material/card';     
+
+ 
 
 import {
   MatButtonModule,
@@ -37,7 +42,8 @@ import {
   MatRippleModule,
   MatFormFieldModule,
   MatTooltipModule,
-  MatDatepickerModule, MatNativeDateModule 
+  MatDatepickerModule, 
+  MatNativeDateModule ,
 } from '@angular/material';
 
 /*import {
@@ -45,7 +51,9 @@ import {
 } from '@agm/core';*/
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { TeacherService } from './services/teacher.service';
+import { StudentService } from './services/student.service';
 import { SubjectService } from './services/subject.service';
+import { GroupService } from './services/group.service';
 import { DataService } from './services/data.service';
 import { StepperComponent } from './stepper/stepper.component';
 import { TeacherComponent } from './teacher/teacher.component';
@@ -53,6 +61,7 @@ import { TeacherSubjectComponent } from './teacher-subject/teacher-subject.compo
 import { GroupListComponent } from './group-list/group-list.component';
 import { SubjectListComponent } from './subject-list/subject-list.component';
 import { GroupDetailComponent } from './group-detail/group-detail.component';
+import { LessonListComponent } from './lesson-list/lesson-list.component';
 
 /*import { DataService } from './services/teacher.service';
 import { FileUploadService } from './services/file-upload.service';
@@ -72,22 +81,24 @@ import { ImageService } from './services/image.service';*/
     RouterModule,
     AppRoutingModule,
 
+    MatDatepickerModule,        // <----- import(must)
+    MatNativeDateModule,        // <----- import for date formating(optional)
+
+
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
     MatStepperModule,
 
-    
-    MatDatepickerModule,        // <----- import(must)
-    MatNativeDateModule,        // <----- import for date formating(optional)
-
-
     MatButtonModule,
     MatRippleModule,
     MatFormFieldModule,
-    MatInputModule,
     MatSelectModule,
     MatTooltipModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatCardModule,
+
    
   ],
   declarations: [
@@ -105,11 +116,12 @@ import { ImageService } from './services/image.service';*/
     StepperComponent,
     TeacherComponent,
     TeacherSubjectComponent,
-    GroupListComponent,
     SubjectListComponent,
+    GroupListComponent,
     GroupDetailComponent,
+    LessonListComponent,
   ],
-  providers: [TeacherService, DataService, SubjectService/*, ImageService, FileUploadService*/],
+  providers: [TeacherService,StudentService, DataService, SubjectService, GroupService/*, ImageService, FileUploadService*/],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

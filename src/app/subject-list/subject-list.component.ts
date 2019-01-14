@@ -73,7 +73,7 @@ export class SubjectListComponent implements OnInit {
     else 
     this.subjectService.saveSubject(this.newSubject)
                         .subscribe(subject => { 
-                          this.newSubject = subject; 
+                          this.initForm();
                           console.log("Subject created");
                         this.newSubject =  new Subject();
                       this.getSubjects();},
@@ -90,5 +90,17 @@ export class SubjectListComponent implements OnInit {
     this.newSubject.name = this.subjectForm.get('name').value;
     this.newSubject.description = this.subjectForm.get('description').value;
    
+  }
+
+  onClick(subject: Subject) {
+    console.log(subject);
+    this.newSubject = subject;
+    this.updateForm(this.newSubject);
+  }
+
+  clickMessage = '';
+ 
+  public onClickMe() {
+    this.clickMessage = 'You are my hero!';
   }
 }
