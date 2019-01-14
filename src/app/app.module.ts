@@ -27,17 +27,34 @@ import { MapsComponent } from './maps/maps.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
 
-import { MatFormFieldModule, MatInputModule } from '@angular/material';
+
 import {MatSelectModule} from '@angular/material/select';
+import {MatStepperModule} from '@angular/material/stepper';
+
+import {
+  MatButtonModule,
+  MatInputModule,
+  MatRippleModule,
+  MatFormFieldModule,
+  MatTooltipModule,
+  MatDatepickerModule, MatNativeDateModule 
+} from '@angular/material';
 
 /*import {
   AgmCoreModule
 } from '@agm/core';*/
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { TeacherService } from './services/teacher.service';
+import { SubjectService } from './services/subject.service';
+import { DataService } from './services/data.service';
 import { StepperComponent } from './stepper/stepper.component';
+import { TeacherComponent } from './teacher/teacher.component';
+import { TeacherSubjectComponent } from './teacher-subject/teacher-subject.component';
+import { GroupListComponent } from './group-list/group-list.component';
+import { SubjectListComponent } from './subject-list/subject-list.component';
+import { GroupDetailComponent } from './group-detail/group-detail.component';
 
-/*import { TeacherService } from './services/teacher.service';
+/*import { DataService } from './services/teacher.service';
 import { FileUploadService } from './services/file-upload.service';
 import { ImageService } from './services/image.service';*/
 
@@ -58,7 +75,19 @@ import { ImageService } from './services/image.service';*/
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatStepperModule,
 
+    
+    MatDatepickerModule,        // <----- import(must)
+    MatNativeDateModule,        // <----- import for date formating(optional)
+
+
+    MatButtonModule,
+    MatRippleModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatTooltipModule,
    
   ],
   declarations: [
@@ -74,8 +103,13 @@ import { ImageService } from './services/image.service';*/
     TeacherListComponent,
     UserProfileComponent,
     StepperComponent,
+    TeacherComponent,
+    TeacherSubjectComponent,
+    GroupListComponent,
+    SubjectListComponent,
+    GroupDetailComponent,
   ],
-  providers: [TeacherService/*, ImageService, FileUploadService*/],
+  providers: [TeacherService, DataService, SubjectService/*, ImageService, FileUploadService*/],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

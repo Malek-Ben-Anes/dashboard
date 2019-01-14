@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TeacherService } from 'app/services/teacher.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { DataService } from 'app/services/data.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -18,12 +19,16 @@ export class UserProfileComponent implements OnInit {
   teacherForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private teachersService: TeacherService,
-    private router: Router, private route: ActivatedRoute) {
+    private router: Router, private route: ActivatedRoute, private dataService: DataService) {
   }
 
   ngOnInit() {
     this.initForm();
     let id = this.route.snapshot.params['id'];
+    
+    if(id === undefined )
+      this.teacher = new Teacher();
+
     this.teachersService.getSingleTeacher(id)
                         .subscribe(teacher => { this.teacher = teacher;
                         this.updateForm(this.teacher);
@@ -50,6 +55,7 @@ export class UserProfileComponent implements OnInit {
       adress: ['', Validators.required],
       description: ['', Validators.required],
     });
+    //this.dataService.setFirstForGroup(this.teacherForm);
   }
 
 
@@ -66,6 +72,7 @@ export class UserProfileComponent implements OnInit {
       adress: teacher.adress,
       description: teacher.echelon,
     });
+    this.dataService.setFirstForGroup(this.teacherForm);
   }
 
   onSubmit() {
@@ -109,6 +116,7 @@ export class UserProfileComponent implements OnInit {
     this.teacher.gender = <Gender>Gender['MALE'];
     this.teacher.adress = this.teacherForm.get('adress').value;
     this.teacher.echelon = this.teacherForm.get('description').value;
+    this.dataService.setFirstForGroup(this.teacherForm);
   }
 
   /*

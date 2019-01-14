@@ -1,0 +1,66 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+
+          <div class="col-md-12">
+                <div class="card">
+                <div class="card-body">
+                                <form [formGroup]="subjectForm" (ngSubmit)="onSubmit()">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <mat-form-field class="example-full-width">
+                                                    <input matInput placeholder="Name" formControlName="name" required>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <mat-form-field class="example-full-width">
+                                                    <input matInput placeholder="Description" formControlName="description" required>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <button mat-raised-button type="submit" class="btn btn-info pull-right">Create Subject</button>
+                                        <div class="clearfix"></div>
+                                    </form>
+                    </div>
+                </div>
+          </div>
+
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-warning">
+                      <h4 class="card-title ">Subjects Table</h4>
+                      <p class="card-category"> Here is a details for all groups</p>
+                  </div>
+                  <div class="card-body">
+                      <div class="table-responsive">
+                          <table class="table">
+                              <thead class=" text-primary">
+                                  <th>
+                                      ID
+                                  </th>
+                                  <th>
+                                      Name
+                                  </th>
+                                  <th>
+                                      Description
+                                  </th>
+                                  
+                              </thead>
+                              <tbody>
+                                  <tr *ngFor="let subject of subjects">
+                                      <td>
+                                            <a routerLink="/{{'subjects/' + subject.id }}">{{ subject.id }}</a> 
+                                      </td>
+                                      <td class="text-primary">
+                                            <a routerLink="/{{'subjects/' + subject.id }}">{{ subject.name }}</a>
+                                      </td>
+                                      <td>
+                                          {{ subject.description }}
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>

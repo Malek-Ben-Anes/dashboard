@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 
 
@@ -14,7 +14,7 @@ import { Teacher } from 'app/models/Teacher';
   templateUrl: './teacher-list.component.html',
   styleUrls: ['./teacher-list.component.css']
 })
-export class TeacherListComponent implements OnInit, OnDestroy {
+export class TeacherListComponent implements OnInit {
 
 
   teachers: Teacher[] = [];
@@ -23,27 +23,19 @@ export class TeacherListComponent implements OnInit, OnDestroy {
   constructor(private teachersService: TeacherService, private router: Router, private http: HttpClient) { }
 
   ngOnInit() {
-    console.log("ngoninit");
-
-    // this.teachersSubscription = this.teachersService.teacherSubject.subscribe(
-    //   (teachers) => {
-    //     this.teachers = teachers;
-    //     this.teachersService.emitTeachers();
-    //   }, (err: HttpErrorResponse) => {
-    //     if (err.error instanceof Error) {
-    //       console.log("Client-side error occured.");
-    //     } else {
-    //       console.log("Server-side error occured.");
-    //     }
-    //   }
-    // );
     this.getTeachers();
   }
+  
   getTeachers(): void {
     this.teachersService.getTeachers()
-        .subscribe(teachers => this.teachers = teachers);
+        .subscribe(teachers => this.teachers = teachers, 
+          (err: HttpErrorResponse) => {
+              if (err.error instanceof Error) {
+                console.log("Client-side error occured.");
+              } else {
+                console.log("Server-side error occured.");
+              }
+            }
+          );
   }
- ngOnDestroy() {
-  //this.getTeachers.unsubscribe();
-   }
 }

@@ -14,6 +14,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TableListComponent } from './table-list/table-list.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { TeacherListComponent } from './teacher-list/teacher-list.component';
+import { TeacherComponent } from './teacher/teacher.component';
+import { SubjectListComponent } from './subject-list/subject-list.component';
+import { GroupListComponent } from './group-list/group-list.component';
+import { GroupDetailComponent } from './group-detail/group-detail.component';
 
 const routes: Routes = [
     {
@@ -46,11 +50,23 @@ const routes: Routes = [
     },
     {
         path: 'teacher-profile/:id',
-        component: UserProfileComponent
+        component: TeacherComponent
     },
     {
         path: 'teacher-profile',
-        component: UserProfileComponent
+        component: TeacherComponent
+    },
+    {
+        path: 'subjects',
+        component: SubjectListComponent
+    },
+    {
+        path: 'groups',
+        component: GroupListComponent
+    },
+    {
+        path: 'group-detail',
+        component: GroupDetailComponent
     },
 
     
