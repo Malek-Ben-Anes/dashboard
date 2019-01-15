@@ -13,6 +13,7 @@ export class User {
     adress?: string;
     createdAt?: string;
     updatedAt?: string;
+    role: string[];
 
     constructor(_id: number, _firstname?: string, _lastname?: string, _gender?: Gender,
         _email?: string, _photo?: string, _birthDate?: Date, _phone?: string) {
@@ -24,6 +25,7 @@ export class User {
         this.photo = _photo;
         this.birthDate = _birthDate;
         this.phone = _phone;
+        this.role = ['user'];
     }
 }
 

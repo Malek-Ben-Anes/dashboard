@@ -1,0 +1,28 @@
+import { User, Gender } from './User';
+
+export class Lesson{
+
+    id?: LessonId;
+    name?: string;
+    createdAt?: Date;
+    updatedAt?: Date;
+
+    constructor(_id?:LessonId, _name?: string, _description?: string ){
+        this.id = _id;
+        this.name = _name;
+        this.createdAt = new Date();
+        this.updatedAt = new Date();
+    }
+}
+
+class LessonId {
+        teacherId: number;
+        subjectId: number;
+        groupId: number;
+
+        constructor(_teacherId: number, _subjectId: number, _groupId: number) {
+            this.teacherId = _teacherId;
+            this.subjectId = _subjectId;
+            this.groupId = _groupId;
+        }
+}

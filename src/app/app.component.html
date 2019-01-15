@@ -18,19 +18,20 @@
 
         <li class="nav-item">
             <a routerLink="/teachers" class="simple-text">teachers&nbsp;</a>
+            <a routerLink="/students" class="simple-text">students&nbsp;</a>
             <a routerLink="/subjects" class="simple-text">Subjects&nbsp;</a>
             <a routerLink="/groups" class="simple-text">groups&nbsp;</a>
             <a routerLink="/lessons" class="simple-text">lessons&nbsp;</a>
           </li>
 
         <li *ngIf="authority === 'user'" class="nav-item">
-          <a class="nav-link" routerLink="user">User Board</a>
+          <a class="nav-link" routerLink="user">Student Board</a>
         </li>
         <li *ngIf="authority === 'admin'" class="nav-item">
           <a class="nav-link" routerLink="admin">Admin Board</a>
         </li>
         <li *ngIf="authority === 'pm'" class="nav-item">
-          <a class="nav-link" routerLink="pm">PM Board</a>
+          <a class="nav-link" routerLink="pm">Teacher Board</a>
         </li>
         <li *ngIf="!authority" class="nav-item">
           <a class="nav-link" routerLink="auth/login">Login</a>

@@ -42,7 +42,7 @@ export class TokenStorageService {
     this.roles = [];
 
     if (sessionStorage.getItem(TOKEN_KEY)) {
-              this.roles.push("ADMIN");
+              this.roles.push("admin");
 
       // JSON.parse(sessionStorage.getItem(AUTHORITIES_KEY)).forEach(authority => {
       //   this.roles.push(authority.authority);

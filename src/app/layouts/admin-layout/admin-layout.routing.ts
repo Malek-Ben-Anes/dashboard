@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 
 import { DashboardComponent } from '../../dashboard/dashboard.component';
-import { UserProfileComponent } from '../../user-profile/user-profile.component';
-import { TableListComponent } from '../../table-list/table-list.component';
+import { TeacherProfileComponent } from '../../teacher/teacher-profile/teacher-profile.component';
+import { TableListComponent } from '../../teacher/table-list/table-list.component';
 import { TypographyComponent } from '../../typography/typography.component';
 import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
@@ -19,7 +19,7 @@ export const AdminLayoutRoutes: Routes = [
     path: '',
     children: [ {
       path: 'userprofile',
-      component: UserProfileComponent
+      component: TeacherProfileComponent
     }]
     }, {
       path: '',
@@ -56,7 +56,7 @@ export const AdminLayoutRoutes: Routes = [
         path: '',
         children: [ {
             path: 'user-profile',
-            component: UserProfileComponent
+            component: TeacherProfileComponent
         }]
     },
     /*{ path: 'dashboard',      component: DashboardComponent },

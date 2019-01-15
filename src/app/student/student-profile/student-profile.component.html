@@ -1,0 +1,168 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-profile">
+                    <div class="card-avatar">
+                        <a href="#pablo">
+                            <img class="img" src="./assets/img/faces/marc.jpg" alt="Smiley face" height="42" width="42" />
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-category text-gray">Student Profile</h6>
+                        <h4 class="card-title">{{student.firstname}} {{student.lastname}}</h4>
+                        <p class="card-description">
+                            {{ student.email }}
+                        </p>
+                        <p class="card-description">
+                            Registred: {{ student.createdAt }}
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title">Edit Profile</h4>
+                        <p class="card-category">Complete your profile</p>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="User Name" formControlName="username" disabled>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Fist Name" formControlName="firstname" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Last Name" formControlName="lastname" required>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Email address" type="email" disabled formControlName="email" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Phone Number" type="text" formControlName="phone" required>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <!-- changed by Malek -->
+
+
+                            <div class="row">
+                                <div class="col-md-6">
+
+                              
+                                                <mat-form-field class="example-full-width">
+                                                    <input matInput placeholder="Gender" formControlName="gender">
+                                                </mat-form-field>
+                                            
+
+                                
+                                 <!-- <mat-form-field class="example-full-width">
+                                <mat-select matInput placeholder="Gender" formControlName="gender" >
+                                        <mat-option matInput [value]="MALE">MALE</mat-option>
+                                        <mat-option  matInput [value]="FEMALE">FEMALE</mat-option>
+                                     <mat-option *ngFor="let food of Object.values(Gender)" [value]="food.value"> -->
+                                    <!-- {{ food }} -->
+                                    <!-- </mat-option> 
+                                </mat-select>
+                                </mat-form-field>-->
+
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Birth date" formControlName="birthDate" type="date">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Adress" type="text" required>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <!-- <label>About Me</label> -->
+                                    <mat-form-field class="example-full-width">
+                                        <textarea matInput placeholder="About Me" formControlName="description"></textarea>
+                                    </mat-form-field>
+                                    <!-- <div class="form-group">
+
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating"> Lamborghini Mercy, Your chick she so
+                                                thirsty, I'm in that two seat Lambo.</label>
+                                            <textarea class="form-control" rows="5"></textarea>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+
+                            <!-- changed by Malek -->
+                            <!-- <div class="row">
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Adress" type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="City" type="text">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Country" type="text">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Postal Code" type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>About Me</label>
+                                    <mat-form-field class="example-full-width">
+                                        <textarea matInput placeholder="Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."></textarea>
+                                    </mat-form-field>
+                                    <div class="form-group">
+
+                                      <div class="form-group">
+                                          <label class="bmd-label-floating"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
+                                          <textarea class="form-control" rows="5"></textarea>
+                                      </div>
+                                  </div> 
+                                </div>
+                            </div>-->
+                            <!--<a href="#pablo" class="btn btn-danger btn-round">Follow</a>-->
+                            <button mat-raised-button type="submit" class="btn btn-info pull-right" *ngIf="student.id  === undefined">Create Profile</button>
+                            <button mat-raised-button type="submit" class="btn btn-warning pull-right" *ngIf="student.id !== undefined">Update Profile</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

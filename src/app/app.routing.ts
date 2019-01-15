@@ -11,14 +11,17 @@ import { UserComponent } from './user/user.component';
 import { PmComponent } from './pm/pm.component';
 import { AdminComponent } from './admin/admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { TableListComponent } from './table-list/table-list.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
-import { TeacherListComponent } from './teacher-list/teacher-list.component';
-import { TeacherComponent } from './teacher/teacher.component';
+import { TableListComponent } from './teacher/table-list/table-list.component';
+import { TeacherProfileComponent } from './teacher/teacher-profile/teacher-profile.component';
+import { TeacherListComponent } from './teacher/teacher-list/teacher-list.component';
+import { TeacherComponent } from './teacher/teacher/teacher.component';
 import { SubjectListComponent } from './subject-list/subject-list.component';
 import { GroupListComponent } from './group-list/group-list.component';
 import { GroupDetailComponent } from './group-detail/group-detail.component';
 import { LessonListComponent } from './lesson-list/lesson-list.component';
+import { StudentComponent } from './student/student/student.component';
+import { StudentListComponent } from './student/student-list/student-list.component';
+import { LessonDetailComponent } from './lesson-detail/lesson-detail.component';
 
 const routes: Routes = [
     {
@@ -57,6 +60,20 @@ const routes: Routes = [
         path: 'teacher-profile',
         component: TeacherComponent
     },
+
+    {
+        path: 'students',
+        component: StudentListComponent
+    },
+    {
+        path: 'student-profile/:id',
+        component: StudentComponent
+    },
+    {
+        path: 'student-profile',
+        component: StudentComponent
+    },
+    
     {
         path: 'subjects',
         component: SubjectListComponent
@@ -76,6 +93,14 @@ const routes: Routes = [
     {
         path: 'lessons',
         component: LessonListComponent
+    },
+    {
+        path: 'lesson-detail',
+        component: LessonDetailComponent
+    },
+    {
+        path: 'lesson-detail/:id',
+        component: LessonDetailComponent
     },
     {
         path: '',

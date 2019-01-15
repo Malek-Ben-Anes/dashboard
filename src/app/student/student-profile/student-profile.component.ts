@@ -6,19 +6,21 @@ import { TeacherService } from 'app/services/teacher.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DataService } from 'app/services/data.service';
+import { Student } from 'app/models/Student';
+import { StudentService } from 'app/services/student.service';
 
 @Component({
-  selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  selector: 'app-student-profile',
+  templateUrl: './student-profile.component.html',
+  styleUrls: ['./student-profile.component.css']
 })
-export class UserProfileComponent implements OnInit {
+export class StudentProfileComponent implements OnInit {
 
-  teacher: Teacher;
+  student: Student;
 
-  teacherForm: FormGroup;
+  studentForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private teachersService: TeacherService,
+  constructor(private formBuilder: FormBuilder, private studentService: StudentService,
     private router: Router, private route: ActivatedRoute, private dataService: DataService) {
   }
 
@@ -27,14 +29,14 @@ export class UserProfileComponent implements OnInit {
     let id = this.route.snapshot.params['id'];
     
     if(id === undefined )
-      this.teacher = new Teacher();
+      this.student = new Student();
 
-    this.teachersService.getSingleTeacher(id)
-                        .subscribe(teacher => { this.teacher = teacher;
-                        this.updateForm(this.teacher);
+    this.studentService.getSingleStudent(id)
+                        .subscribe(student => { this.student = student;
+                        this.updateForm(this.student);
                        },
       (err: HttpErrorResponse) => {
-        this.teacher = new Teacher();
+        this.student = new Teacher();
         if (err.error instanceof Error) {
           console.log("Client-side error occured.");
         } else {
@@ -44,7 +46,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   initForm() {
-    this.teacherForm = this.formBuilder.group({
+    this.studentForm = this.formBuilder.group({
       username: ['', Validators.required],
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
@@ -60,29 +62,28 @@ export class UserProfileComponent implements OnInit {
 
 
 
-  updateForm(teacher: Teacher): void {
-    this.teacherForm.patchValue({
-      username: teacher.username,
-      firstname: teacher.firstname,
-      lastname: teacher.lastname,
-      phone: teacher.phone,
-      email: teacher.email,
-      birthDate: teacher.birthDate,
-      gender: <Gender>teacher.gender,
-      adress: teacher.adress,
-      description: teacher.echelon,
+  updateForm(student: Teacher): void {
+    this.studentForm.patchValue({
+      username: student.username,
+      firstname: student.firstname,
+      lastname: student.lastname,
+      phone: student.phone,
+      email: student.email,
+      birthDate: student.birthDate,
+      gender: <Gender>student.gender,
+      adress: student.adress,
+      description: student.echelon,
     });
-    this.dataService.setFirstForGroup(this.teacherForm);
   }
 
   onSubmit() {
     this.getSubmitedData();
-    console.log(this.teacher);
-    if(this.teacher.id !== undefined ) {
+    console.log(this.student);
+    if(this.student.id !== undefined ) {
 
     
-      this.teachersService.updateTeacher(this.teacher)
-                          .subscribe(teacher => { this.teacher = teacher; console.log("teacher updated")},
+      this.studentService.updateStudent(this.student)
+                          .subscribe(student => { this.student = student; console.log("student updated")},
                     (err: HttpErrorResponse) => {
                     if (err.error instanceof Error) {
                       console.log(err.error);
@@ -94,8 +95,8 @@ export class UserProfileComponent implements OnInit {
                     });
                   }
     else 
-    this.teachersService.saveTeacher(this.teacher)
-                        .subscribe(teacher => { this.teacher = teacher; console.log("teacher created")},
+    this.studentService.saveStudent(this.student)
+                        .subscribe(student => { this.student = student; console.log("student created")},
                           (err: HttpErrorResponse) => {
                           if (err.error instanceof Error) {
                           console.log("Client-side error occured.");
@@ -106,17 +107,16 @@ export class UserProfileComponent implements OnInit {
   }
 
   getSubmitedData() {
-    this.teacher.username = this.teacherForm.get('username').value;
-    this.teacher.name = this.teacherForm.get('username').value;
-    this.teacher.firstname = this.teacherForm.get('firstname').value;
-    this.teacher.lastname = this.teacherForm.get('lastname').value;
-    this.teacher.phone = this.teacherForm.get('phone').value;
-    this.teacher.email = this.teacherForm.get('email').value;
-    this.teacher.birthDate = new Date(this.teacherForm.get('birthDate').value);
-    this.teacher.gender = <Gender>Gender['MALE'];
-    this.teacher.adress = this.teacherForm.get('adress').value;
-    this.teacher.echelon = this.teacherForm.get('description').value;
-    this.dataService.setFirstForGroup(this.teacherForm);
+    this.student.username = this.studentForm.get('username').value;
+    this.student.name = this.studentForm.get('username').value;
+    this.student.firstname = this.studentForm.get('firstname').value;
+    this.student.lastname = this.studentForm.get('lastname').value;
+    this.student.phone = this.studentForm.get('phone').value;
+    this.student.email = this.studentForm.get('email').value;
+    this.student.birthDate = new Date(this.studentForm.get('birthDate').value);
+    this.student.gender = <Gender>Gender['MALE'];
+    this.student.adress = this.studentForm.get('adress').value;
+    this.student.echelon = this.studentForm.get('description').value;
   }
 
   /*

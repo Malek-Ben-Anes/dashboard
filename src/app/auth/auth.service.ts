@@ -15,14 +15,18 @@ const httpOptions = {
 })
 export class AuthService {
 
-  private loginUrl = 'http://localhost:8090/api/auth/signin';
-  private signupUrl = 'http://localhost:8090/api/auth/signup';
+  private loginUrl = 'https://infinite-sands-30212.herokuapp.com/api/auth/signin';
+  private signupUrl = 'https://infinite-sands-30212.herokuapp.com/api/auth/signup';
+
 
   constructor(private http: HttpClient) {
   }
 
   attemptAuth(credentials: AuthLoginInfo): Observable<JwtResponse> {
     return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions);
+              // this is just the HTTP call, 
+             // we still need to handle the reception of the token
+            //.shareReplay();
   }
 
   signUp(info: SignUpInfo): Observable<string> {
