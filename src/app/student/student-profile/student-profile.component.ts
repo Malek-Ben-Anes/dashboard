@@ -114,7 +114,7 @@ export class StudentProfileComponent implements OnInit {
   private extractFormData(): void {
     this.student.firstname = this.extractFieldData('firstname');
     this.student.lastname = this.extractFieldData('lastname');
-    this.student.name = this.student.firstname + this.student.lastname;
+    this.student.name = this.student.firstname + ' ' + this.student.lastname;
     this.student.email = this.extractFieldData('email');
     this.student.username = this.student.email;
     this.student.phone = this.extractFieldData('phone');
