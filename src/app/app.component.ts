@@ -8,7 +8,7 @@ import { TokenStorageService } from './auth/token-storage.service';
 })
 export class AppComponent implements OnInit {
   private roles: string[];
-  private authority: string;
+  authority: string;
 
   constructor(private tokenStorage: TokenStorageService) { }
 

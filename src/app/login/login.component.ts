@@ -35,11 +35,10 @@ export class LoginComponent implements OnInit {
 
     this.authService.attemptAuth(this.loginInfo).subscribe(
       data => {
-        console.log("jwt:");
         console.log(data);
-        this.tokenStorage.saveToken("data.accessToken");
-        this.tokenStorage.saveUsername("data.username");
-        this.tokenStorage.saveAuthorities(["data.authorities"]);
+        this.tokenStorage.saveToken(data.accessToken);
+        this.tokenStorage.saveUsername(data.username);
+        this.tokenStorage.saveAuthorities(data.authorities);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;

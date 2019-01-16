@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 
 import { DashboardComponent } from '../../dashboard/dashboard.component';
-import { TeacherProfileComponent } from '../../teacher/teacher-profile/teacher-profile.component';
-import { TableListComponent } from '../../teacher/table-list/table-list.component';
+//import { TeacherProfileComponent } from '../../teacher/teacher-profile/teacher-profile.component';
+//import { TableListComponent } from '../../teacher/table-list/table-list.component';
 import { TypographyComponent } from '../../typography/typography.component';
 import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
@@ -15,7 +15,7 @@ export const AdminLayoutRoutes: Routes = [
       children: [ {
         path: 'dashboard',
         component: DashboardComponent
-    }]}, {
+    }]}, /*{
     path: '',
     children: [ {
       path: 'userprofile',
@@ -33,32 +33,33 @@ export const AdminLayoutRoutes: Routes = [
             path: 'notifications',
             component: NotificationsComponent
         }]
-    }, {
-        path: '',
-        children: [ {
-            path: 'maps',
-            component: MapsComponent
-        }]
-    }, {
-        path: '',
-        children: [ {
-            path: 'typography',
-            component: TypographyComponent
-        }]
-    }, {
-        path: '',
-        children: [ {
-            path: 'upgrade',
-            component: UpgradeComponent
-        }]
-    },
-    , {
-        path: '',
-        children: [ {
-            path: 'user-profile',
-            component: TeacherProfileComponent
-        }]
-    },
+    }, */
+    // {
+    //     path: '',
+    //     children: [ {
+    //         path: 'maps',
+    //         component: MapsComponent
+    //     }]
+    // }, {
+    //     path: '',
+    //     children: [ {
+    //         path: 'typography',
+    //         component: TypographyComponent
+    //     }]
+    // }, {
+    //     path: '',
+    //     children: [ {
+    //         path: 'upgrade',
+    //         component: UpgradeComponent
+    //     }]
+    // },
+    // ,{
+    //     path: '',
+    //     children: [ {
+    //         path: 'user-profile',
+    //         component: TeacherProfileComponent
+    //     }]
+    // },
     /*{ path: 'dashboard',      component: DashboardComponent },
     { path: 'user-profile/:id',   component: UserProfileComponent },
     { path: 'table-list',     component: TableListComponent },

@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-
+import {CdkTableModule} from '@angular/cdk/table';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
@@ -27,25 +27,7 @@ import { MapsComponent } from './maps/maps.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { UpgradeComponent } from './upgrade/upgrade.component';
 
-
-import {MatSelectModule} from '@angular/material/select';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatRadioModule} from '@angular/material/radio';      
-import {MatCardModule} from '@angular/material/card';     
-
- 
-
-import {
-  MatButtonModule,
-  MatInputModule,
-  MatRippleModule,
-  MatFormFieldModule,
-  MatTooltipModule,
-  MatDatepickerModule, 
-  MatNativeDateModule ,
-} from '@angular/material';
-
+//import * as jwt_decode from "jwt-decode";
 
 
 /*import {
@@ -67,15 +49,97 @@ import { SubjectListComponent } from './subject-list/subject-list.component';
 import { GroupDetailComponent } from './group-detail/group-detail.component';
 import { LessonListComponent } from './lesson-list/lesson-list.component';
 
+
+/*import { DataService } from './services/teacher.service';
+import { FileUploadService } from './services/file-upload.service';
+import { ImageService } from './services/image.service';*/
 import { StudentComponent } from './student/student/student.component';
 import { StudentListComponent } from './student/student-list/student-list.component';
 import { StudentProfileComponent } from './student/student-profile/student-profile.component';
 import { LessonDetailComponent } from './lesson-detail/lesson-detail.component';
 import { LessonService } from './services/lesson.service';
+import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 
-/*import { DataService } from './services/teacher.service';
-import { FileUploadService } from './services/file-upload.service';
-import { ImageService } from './services/image.service';*/
+
+import {
+  MatAutocompleteModule,
+  MatBadgeModule,
+  MatBottomSheetModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatDividerModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatStepperModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule,
+  MatTreeModule,
+} from '@angular/material';
+
+@NgModule({
+  exports: [
+    CdkTableModule,
+    MatAutocompleteModule,
+    MatBadgeModule,
+    MatBottomSheetModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatStepperModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatTreeModule,
+  ]
+})
+export class DemoMaterialModule {}
 
 
 @NgModule({
@@ -90,26 +154,8 @@ import { ImageService } from './services/image.service';*/
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
-
-    MatDatepickerModule,        // <----- import(must)
-    MatNativeDateModule,        // <----- import for date formating(optional)
-
-
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatStepperModule,
-
-    MatButtonModule,
-    MatRippleModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatTooltipModule,
-    MatCheckboxModule,
-    MatRadioModule,
-    MatCardModule,
-
-   
+    
+    DemoMaterialModule,  
   ],
   declarations: [
     AppComponent,
@@ -120,12 +166,14 @@ import { ImageService } from './services/image.service';*/
     HomeComponent,
     AdminComponent,
     PmComponent,
+    MapsComponent,
 
     TeacherComponent,
     TeacherSubjectComponent,
     TableListComponent,
     TeacherListComponent,
     TeacherProfileComponent,
+    FourOhFourComponent,
 
     StudentComponent,
     StudentListComponent,
@@ -137,6 +185,7 @@ import { ImageService } from './services/image.service';*/
     GroupDetailComponent,
     LessonListComponent,
     LessonDetailComponent,
+    TableListComponent,
   ],
   exports: [
     StepperComponent,

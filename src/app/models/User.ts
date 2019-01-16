@@ -30,6 +30,6 @@ export class User {
 }
 
 export enum Gender {
-    MALE,
-    FEMALE
+    MALE = "MALE",
+    FEMALE = "FEMALE",
 }

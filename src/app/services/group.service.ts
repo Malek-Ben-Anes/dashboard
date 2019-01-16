@@ -3,19 +3,28 @@ import { Observable } from 'rxjs';
 
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Group } from 'app/models/Group';
+import { group } from '@angular/animations';
 
-const GROUP_URL: string = 'https://infinite-sands-30212.herokuapp.com/groups';
+const GROUP_URL: string = 'https://infinite-sands-30212.herokuapp.com/api/groups';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GroupService {
   
-  subjects: Group[] = [];
-  teachers: Group[] = [];
+  private groups: Group[] = [];
+  private teachers: Group[] = [];
 
+  
   constructor(private http: HttpClient) {}
-
+  
+  // setGroup(groups: Group[]) {
+  //   this.groups = groups;
+  // }
+  
+  // getGroup(): Group[] {
+  //   return this.groups;
+  // }
   getGroups(): Observable<Group[]> {
     return this.http.get<Group[]>(GROUP_URL);
   }

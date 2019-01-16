@@ -1,10 +1,12 @@
 import { User, Gender } from './User';
 import { Student } from './Student';
+import { Level } from './Level';
 
 export class Group{
 
-    id?: number;
-    name?: string;
+    id: number;
+    name: string;
+    level: Level;
     description?: string;
     students?: Student[];
 

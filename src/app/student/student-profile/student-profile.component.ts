@@ -1,13 +1,17 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Teacher } from 'app/models/Teacher';
 import { Gender } from 'app/models/User';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { TeacherService } from 'app/services/teacher.service';
+import { FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DataService } from 'app/services/data.service';
 import { Student } from 'app/models/Student';
 import { StudentService } from 'app/services/student.service';
+import { Level } from 'app/models/Level';
+import { Group } from 'app/models/Group';
+import { GroupService } from 'app/services/group.service';
+
+
+const EMAIL_PATTERN = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
 
 @Component({
   selector: 'app-student-profile',
@@ -16,135 +20,146 @@ import { StudentService } from 'app/services/student.service';
 })
 export class StudentProfileComponent implements OnInit {
 
-  student: Student;
+  isNew: boolean = true;
+
+  student: Student = new Student;
 
   studentForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private studentService: StudentService,
+  genders = Object.keys(Gender);
+  levels = Object.keys(Level);
+
+  groups: Group[] = [];
+
+  constructor(private formBuilder: FormBuilder, private studentService: StudentService, private groupService: GroupService,
     private router: Router, private route: ActivatedRoute, private dataService: DataService) {
   }
 
   ngOnInit() {
+
     this.initForm();
     let id = this.route.snapshot.params['id'];
-    
-    if(id === undefined )
-      this.student = new Student();
 
     this.studentService.getSingleStudent(id)
-                        .subscribe(student => { this.student = student;
-                        this.updateForm(this.student);
-                       },
-      (err: HttpErrorResponse) => {
-        this.student = new Teacher();
-        if (err.error instanceof Error) {
-          console.log("Client-side error occured.");
-        } else {
-          console.log("Server-side error occured.");
-        }
-      });
+      .subscribe(student => {
+        this.student = student;
+        console.log(this.student);
+        this.isNew = false;
+        this.updateForm(this.student);
+      },
+        (err: HttpErrorResponse) => {
+          if (err.error instanceof Error) {
+            console.log("Client-side error occured.");
+          } else {
+            console.log("Server-side error occured.");
+          }
+        });
   }
 
   initForm() {
+    this.groupService.getGroups().subscribe(groups => { this.groups = groups; console.log(this.groups); });
     this.studentForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      email: ['', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]],
-      birthDate: [new Date, Validators.required],
+      firstname: ['', [Validators.required,
+                Validators.minLength(3),
+                Validators.maxLength(50)]],
+      lastname: ['', [Validators.required,
+                Validators.minLength(3),
+                Validators.maxLength(50)]],
+      email: ['', [Validators.required, Validators.pattern(EMAIL_PATTERN)]],
+      birthDate: [null, Validators.required],
       phone: ['', Validators.required],
-      gender: [Gender, Validators.required],
+      gender: ['', Validators.required],
+      level: [null, Validators.required],
+      group: [null, Validators.required],
+      parentName: ['', Validators.required],
+      parentPhone: ['', Validators.required],
       adress: ['', Validators.required],
       description: ['', Validators.required],
     });
-    //this.dataService.setFirstForGroup(this.teacherForm);
   }
 
-
-
-  updateForm(student: Teacher): void {
+  updateForm(student: Student): void {
     this.studentForm.patchValue({
-      username: student.username,
       firstname: student.firstname,
       lastname: student.lastname,
       phone: student.phone,
       email: student.email,
-      birthDate: student.birthDate,
       gender: <Gender>student.gender,
       adress: student.adress,
-      description: student.echelon,
-    });
+      parentName: student.parentName,
+      parentPhone: student.parentPhone,
+      description: student.description,
+      });
+
+      this.studentForm.get('birthDate').setValue(new Date(this.student.birthDate));
+      const toSelect1 = this.groups.find(group => group.id == this.student.group.id);
+
+      this.studentForm.get('group').setValue(toSelect1);
+
+      const toSelect2 = this.levels.find(level => level == this.student.level);
+      this.studentForm.get('level').setValue(toSelect2);
   }
 
   onSubmit() {
-    this.getSubmitedData();
+    this.extractFormData();
     console.log(this.student);
-    if(this.student.id !== undefined ) {
-
-    
-      this.studentService.updateStudent(this.student)
-                          .subscribe(student => { this.student = student; console.log("student updated")},
-                    (err: HttpErrorResponse) => {
-                    if (err.error instanceof Error) {
-                      console.log(err.error);
-                    console.log("Client-side error occured.");
-                    } else {
-                      console.log(err.error);
-                    console.log("Server-side error occured.");
-                    }
-                    });
-                  }
-    else 
-    this.studentService.saveStudent(this.student)
-                        .subscribe(student => { this.student = student; console.log("student created")},
-                          (err: HttpErrorResponse) => {
-                          if (err.error instanceof Error) {
-                          console.log("Client-side error occured.");
-                          } else {
-                          console.log("Server-side error occured.");
-                          }
-                          });
+    if (this.student.id !== undefined) {
+      this.updateStudent(this.student);     
+    }
+    else{
+      this.createStudent(this.student);
+    }
+  }
+  
+  private extractFormData(): void {
+    this.student.firstname = this.extractFieldData('firstname');
+    this.student.lastname = this.extractFieldData('lastname');
+    this.student.name = this.student.firstname + this.student.lastname;
+    this.student.email = this.extractFieldData('email');
+    this.student.username = this.student.email;
+    this.student.phone = this.extractFieldData('phone');
+    this.student.birthDate = new Date(this.extractFieldData('birthDate'));
+    this.student.gender = this.extractFieldData('gender');
+    this.student.group = this.extractFieldData('group');
+    this.student.level = this.extractFieldData('level');
+    this.student.adress = this.extractFieldData('adress');
+    this.student.parentName = this.extractFieldData('parentName');
+    this.student.parentPhone = this.extractFieldData('parentPhone');
+    this.student.description = this.extractFieldData('description');
+  }
+  
+  private extractFieldData(property: string): any {
+    return this.studentForm.get(property).value;
+  }
+  
+  private updateStudent(studentRequest: Student): void {
+    this.studentService.updateStudent(studentRequest)
+        .subscribe(student => { this.student = student; console.log("student updated") },
+          (err: HttpErrorResponse) => {
+            if (err.error instanceof Error) {
+              console.log(err.error);
+              console.log("Client-side error occured.");
+            } else {
+              console.log(err.error);
+              console.log("Server-side error occured.");
+            }
+          });
   }
 
-  getSubmitedData() {
-    this.student.username = this.studentForm.get('username').value;
-    this.student.name = this.studentForm.get('username').value;
-    this.student.firstname = this.studentForm.get('firstname').value;
-    this.student.lastname = this.studentForm.get('lastname').value;
-    this.student.phone = this.studentForm.get('phone').value;
-    this.student.email = this.studentForm.get('email').value;
-    this.student.birthDate = new Date(this.studentForm.get('birthDate').value);
-    this.student.gender = <Gender>Gender['MALE'];
-    this.student.adress = this.studentForm.get('adress').value;
-    this.student.echelon = this.studentForm.get('description').value;
+  private createStudent(studentRequest: Student): void {
+    this.studentService.saveStudent(studentRequest)
+        .subscribe(student => { this.student = student; console.log("student created") },
+          (err: HttpErrorResponse) => {
+            if (err.error instanceof Error) {
+              console.log("Client-side error occured.");
+            } else {
+              console.log("Server-side error occured.");
+            }
+          });
   }
-
   /*
-  ngOnInit(): void {
-    this.productForm = this.fb.group({
-        productName: ['', [Validators.required,
-                           Validators.minLength(3),
-                           Validators.maxLength(50)]],
-        productCode: ['', Validators.required],
-        starRating: ['', NumberValidators.range(1, 5)],
-        description: ''
-    });
-}
-
-
   onBack() {
     this.router.navigate(['table-list']);
   }
 */
-
-
-// initTeacher() {
-//   this.teacher = new Teacher(12, "Alec", "Thompson", Gender.MALE, "high", 1200);
-//   this.teacher.email = "saifeddine@plumedor.tn";
-//   this.teacher.photo = "./assets/img/faces/marc.jpg";
-//   this.teacher.birthDate = new Date();
-//   this.teacher.phone = "saifeddine@plumedor.tn";
-
-// }
-
 }

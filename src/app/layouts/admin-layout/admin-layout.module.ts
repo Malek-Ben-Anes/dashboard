@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
-import { TeacherProfileComponent } from '../../teacher/teacher-profile/teacher-profile.component';
-import { TableListComponent } from '../../teacher/table-list/table-list.component';
+//import { TeacherProfileComponent } from '../../teacher/teacher-profile/teacher-profile.component';
+//import { TableListComponent } from '../../teacher/table-list/table-list.component';
 import { TypographyComponent } from '../../typography/typography.component';
 import { IconsComponent } from '../../icons/icons.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
@@ -22,7 +22,7 @@ import {
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(AdminLayoutRoutes),
+    //RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
     MatButtonModule,
     MatRippleModule,
@@ -33,8 +33,8 @@ import {
   ],
   declarations: [
     DashboardComponent,
-    TeacherProfileComponent,
-    TableListComponent,
+    //TeacherProfileComponent,
+    //TableListComponent,
     TypographyComponent,
     IconsComponent,
     // MapsComponent,

@@ -9,7 +9,7 @@ import { Student } from 'app/models/Student';
 
 //const url: string = 'http://localhost:8090/api/teachers';
 
-const STUDENT_URL: string = 'https://infinite-sands-30212.herokuapp.com/api/v1/students';
+const STUDENT_URL: string = 'https://infinite-sands-30212.herokuapp.com/api/students';
 
 @Injectable({
   providedIn: 'root'

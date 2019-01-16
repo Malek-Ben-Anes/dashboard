@@ -4,7 +4,7 @@
             <div class="col-md-4">
                 <div class="card card-profile">
                     <div class="card-avatar">
-                        <a href="#pablo">
+                        <a>
                             <img class="img" src="./assets/img/faces/marc.jpg" alt="Smiley face" height="42" width="42" />
                         </a>
                     </div>
@@ -15,7 +15,7 @@
                             {{ student.email }}
                         </p>
                         <p class="card-description">
-                            Registred: {{ student.createdAt }}
+                            Registred: {{ student.createdAt | date }}
                         </p>
 
                     </div>
@@ -29,18 +29,14 @@
                     </div>
                     <div class="card-body">
                         <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="User Name" formControlName="username" disabled>
+                                        <input matInput placeholder="First Name" formControlName="firstname" required>
                                     </mat-form-field>
                                 </div>
-                                <div class="col-md-3">
-                                    <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Fist Name" formControlName="firstname" required>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
                                         <input matInput placeholder="Last Name" formControlName="lastname" required>
                                     </mat-form-field>
@@ -50,42 +46,76 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Email address" type="email" disabled formControlName="email" required>
+                                        <input matInput placeholder="Email address" type="email" formControlName="email"
+                                            required [disabled]="isNew">
                                     </mat-form-field>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Phone Number" type="text" formControlName="phone" required>
+                                        <mat-select matInput placeholder="Gender" formControlName="gender">
+                                            <mat-option *ngFor="let gen of genders" [value]="gen" required>
+                                                {{ gen }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Phone Number" type="text" formControlName="phone">
                                     </mat-form-field>
                                 </div>
                             </div>
-                            <!-- changed by Malek -->
-
 
                             <div class="row">
-                                <div class="col-md-6">
-
-                              
-                                                <mat-form-field class="example-full-width">
-                                                    <input matInput placeholder="Gender" formControlName="gender">
-                                                </mat-form-field>
-                                            
-
-                                
-                                 <!-- <mat-form-field class="example-full-width">
-                                <mat-select matInput placeholder="Gender" formControlName="gender" >
-                                        <mat-option matInput [value]="MALE">MALE</mat-option>
-                                        <mat-option  matInput [value]="FEMALE">FEMALE</mat-option>
-                                     <mat-option *ngFor="let food of Object.values(Gender)" [value]="food.value"> -->
-                                    <!-- {{ food }} -->
-                                    <!-- </mat-option> 
-                                </mat-select>
-                                </mat-form-field>-->
-
-                                </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Birth date" formControlName="birthDate" type="date">
+                                        <input matInput [matDatepicker]="picker" placeholder="Choose Birth Date"
+                                            formControlName="birthDate" required>
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker touchUi #picker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-select matInput placeholder="Level" formControlName="level" required>
+                                            <mat-option *ngFor="let lev of levels" [value]="lev" required>
+                                                {{ lev }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <!-- <mat-error *ngIf="animalControl.hasError('required')">Please choose an animal</mat-error>
+                                        <mat-hint>{{animalControl.value?.sound}}</mat-hint>   -->
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-select matInput placeholder="Group" formControlName="group">
+                                            <mat-option *ngFor="let grp of groups" [value]="grp">
+                                                <!-- <mat-option [value]="null" [disabled]="true">Select Category</mat-option> -->
+                                                <!-- <mat-option *ngFor="let grp of groups" [value]="grp" [selected]="grp.name == student.group.name"> -->
+                                                {{ grp.name }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Parent name" type="text">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Parent Phone" type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Adress" type="text" formControlName="adress"
+                                            required>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -93,25 +123,9 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Adress" type="text" required>
+                                        <textarea matInput placeholder="Additional information" formControlName="description"
+                                            rows="3"></textarea>
                                     </mat-form-field>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <!-- <label>About Me</label> -->
-                                    <mat-form-field class="example-full-width">
-                                        <textarea matInput placeholder="About Me" formControlName="description"></textarea>
-                                    </mat-form-field>
-                                    <!-- <div class="form-group">
-
-                                        <div class="form-group">
-                                            <label class="bmd-label-floating"> Lamborghini Mercy, Your chick she so
-                                                thirsty, I'm in that two seat Lambo.</label>
-                                            <textarea class="form-control" rows="5"></textarea>
-                                        </div>
-                                    </div> -->
                                 </div>
                             </div>
 
@@ -156,8 +170,10 @@
                                 </div>
                             </div>-->
                             <!--<a href="#pablo" class="btn btn-danger btn-round">Follow</a>-->
-                            <button mat-raised-button type="submit" class="btn btn-info pull-right" *ngIf="student.id  === undefined">Create Profile</button>
-                            <button mat-raised-button type="submit" class="btn btn-warning pull-right" *ngIf="student.id !== undefined">Update Profile</button>
+                            <button mat-raised-button type="submit" class="btn btn-info pull-right" *ngIf="student.id  === undefined">Create
+                                Profile</button>
+                            <button mat-raised-button type="submit" class="btn btn-warning pull-right" *ngIf="student.id !== undefined">Update
+                                Profile</button>
                             <div class="clearfix"></div>
                         </form>
                     </div>

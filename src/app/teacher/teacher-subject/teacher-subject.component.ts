@@ -93,4 +93,6 @@ export class TeacherSubjectComponent implements OnInit {
    
   // }
 
+  above: string;
+
 }
