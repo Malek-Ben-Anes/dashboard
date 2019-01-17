@@ -1,6 +1,7 @@
 <div class="main-content">
   <div class="container-fluid">
 
+    
     <div class="row">
       <div class="col-lg-12 col-md-12">
         <div class="card">
@@ -36,20 +37,27 @@
                         <input matInput placeholder="Name" formControlName="name" required>
                       </mat-form-field>
                     </div>
+                    <div class="col-md-4">
+                      <mat-form-field class="example-full-width">
+                        <mat-select matInput placeholder="Level" formControlName="level" required>
+                          <mat-option *ngFor="let lev of levels" [value]="lev" required>
+                            {{ lev }}
+                          </mat-option>
+                        </mat-select>
+                        <!-- <mat-error *ngIf="animalControl.hasError('required')">Please choose an animal</mat-error>
+                                            <mat-hint>{{animalControl.value?.sound}}</mat-hint>   -->
+                      </mat-form-field>
+                    </div>
                   </div>
                   <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                       <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Description" formControlName="description" required>
+                        <textarea matInput placeholder="Additional information" formControlName="description" rows="2"></textarea>
                       </mat-form-field>
                     </div>
                   </div>
 
                   <div class="row">
-                    <div class="col-md-6">
-                      <label>Student Number:</label>
-                      <p>{{ group.students.length }}</p>
-                    </div>
                     <div class="col-md-6">
                       <div class="col-md-6">
                         <label>Others details...</label>
@@ -61,89 +69,59 @@
                   <div class="clearfix"></div>
                 </form>
 
-
-
-              </div>
-              <div class="tab-pane" id="messages">
-
-                Students Number: {{ group.students.length}}
-                <form>
-                  <table class="table">
-                    <thead class=" text-primary">
-                      <!-- <th>
-                        Add
-                      </th> -->
-                      <th>
-                        Photo
-                      </th>
-                      <th>
-                        ID
-                      </th>
-                      <th>
-                        First Name
-                      </th>
-                      <th>
-                        First Name
-                      </th>
-                      <th>
-                        Email
-                      </th>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let student of group.students">
-                        <!-- <td>
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input class="form-check-input" type="checkbox" value="" checked>
-                              <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                            </label>
-                          </div>
-                        </td> -->
-                        <td>
-                          <img src="{{ student.photo }}" alt="student photo" height="49" width="49" />
-                        </td>
-                        <td>{{ student.id }}
-                        </td>
-                        <td>{{ student.firstname }}
-                        </td>
-                        <td>{{ student.lastname }}
-                        </td>
-                        <td>{{ student.email }}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <!-- <button mat-raised-button type="submit" class="btn btn-warning pull-right">Update Group</button> -->
-                </form>
-
+                <!-- STUDENTS LIST -->
+                <div> 
+                  <hr />
+                  <p>Students Number: {{ group.students.length}}</p>
+                  <form>
+                    <table class="table">
+                      <thead class=" text-primary">
+                        <th>
+                          Photo
+                        </th>
+                        <th>
+                          ID
+                        </th>
+                        <th>
+                          First Name
+                        </th>
+                        <th>
+                          First Name
+                        </th>
+                        <th>
+                          Email
+                        </th>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let student of group.students">
+                          <td>
+                            <img src="{{ student.photo }}" alt="student photo" height="49" width="49" />
+                          </td>
+                          <td>{{ student.id }}
+                          </td>
+                          <td>{{ student.firstname }}
+                          </td>
+                          <td>{{ student.lastname }}
+                          </td>
+                          <td>{{ student.email }}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </form>
+                </div>
+                <!-- STUDENTS LIST -->
 
               </div>
+
+              <!-- STUDENT ASSIGN COMPONENT-->
+              <app-student-assign class="tab-pane" id="messages" [group]="group"></app-student-assign>
+              <!-- END STUDENT ASSIGN COMPONENT-->
 
             </div>
           </div>
         </div>
       </div>
-
-      <!-- <form [formGroup]="subjectForm" (ngSubmit)="onSubmit()">
-                                        <div class="row">
-                                            <div class="col-md-8">
-                                                <mat-form-field class="example-full-width">
-                                                    <input matInput placeholder="Name" formControlName="name" required>
-                                                </mat-form-field>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <mat-form-field class="example-full-width">
-                                                    <input matInput placeholder="Description" formControlName="description" required>
-                                                </mat-form-field>
-                                            </div>
-                                        </div>
-                                        <button mat-raised-button type="submit" class="btn btn-info pull-right">Create Subject</button>
-                                        <div class="clearfix"></div>
-                                    </form> -->
-
-
     </div>
   </div>
 </div>

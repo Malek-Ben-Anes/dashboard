@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import {CdkTableModule} from '@angular/cdk/table';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
@@ -60,6 +61,8 @@ import { LessonDetailComponent } from './lesson-detail/lesson-detail.component';
 import { LessonService } from './services/lesson.service';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 
+import { StudentAssignComponent } from './group-detail/group-detail/student-assign/student-assign.component';
+
 
 import {
   MatAutocompleteModule,
@@ -99,6 +102,7 @@ import {
   MatTreeModule,
 } from '@angular/material';
 
+
 @NgModule({
   exports: [
     CdkTableModule,
@@ -137,7 +141,7 @@ import {
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
-  ]
+  ],
 })
 export class DemoMaterialModule {}
 
@@ -156,6 +160,7 @@ export class DemoMaterialModule {}
     AppRoutingModule,
     
     DemoMaterialModule,  
+    DragDropModule,
   ],
   declarations: [
     AppComponent,
@@ -186,6 +191,7 @@ export class DemoMaterialModule {}
     LessonListComponent,
     LessonDetailComponent,
     TableListComponent,
+    StudentAssignComponent,
   ],
   exports: [
     StepperComponent,

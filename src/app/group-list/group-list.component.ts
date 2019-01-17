@@ -36,16 +36,6 @@ export class GroupListComponent implements OnInit {
   }
 
 
-  // updateForm(group: Group): void {
-  //   this.groupForm.patchValue({
-  //     name: group.name,
-  //     description: group.description,
-  //     studentsNumber: group.students.length,
-  //   });
-
-  //   const toSelect = this.levels.find(level => level == this.newGroup.level );
-  //     this.groupForm.get('group').setValue(toSelect);
-  // }
 
   onSubmit() {
     this.getSubmitedData();
