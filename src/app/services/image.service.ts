@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../models/User';
 
+
+//https://aberezkin.github.io/ng2-image-upload/#/demo
 export class ImageService {
 /*
   constructor(private http: HttpClient) {}

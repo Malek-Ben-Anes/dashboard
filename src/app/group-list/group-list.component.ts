@@ -3,6 +3,7 @@ import { Group } from 'app/models/Group';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { GroupService } from 'app/services/group.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Level } from 'app/models/Level';
 
 @Component({
   selector: 'app-group-list',
@@ -17,6 +18,8 @@ export class GroupListComponent implements OnInit {
 
   groupForm: FormGroup;
 
+  levels = Object.keys(Level);
+
   constructor(private formBuilder: FormBuilder, private groupService: GroupService) { }
 
   ngOnInit() {
@@ -27,70 +30,87 @@ export class GroupListComponent implements OnInit {
   initForm() {
     this.groupForm = this.formBuilder.group({
       name: ['', Validators.required],
+      level: ['', Validators.required],
       description: ['', Validators.required],
     });
   }
 
-  getGroups(): void {
-    this.groupService.getGroups()
-        .subscribe(groups => this.groups = groups, 
-          (err: HttpErrorResponse) => {
-              if (err.error instanceof Error) {
-                console.log("Client-side error occured.");
-              } else {
-                console.log("Server-side error occured.");
-              }
-            }
-          );
-  }
 
-  updateForm(group: Group): void {
-    this.groupForm.patchValue({
-      name: group.name,
-      description: group.description,
-      //studentsNumber: group.Number,
-    });
-  }
+  // updateForm(group: Group): void {
+  //   this.groupForm.patchValue({
+  //     name: group.name,
+  //     description: group.description,
+  //     studentsNumber: group.students.length,
+  //   });
+
+  //   const toSelect = this.levels.find(level => level == this.newGroup.level );
+  //     this.groupForm.get('group').setValue(toSelect);
+  // }
 
   onSubmit() {
     this.getSubmitedData();
     console.log(this.newGroup);
-    if(this.newGroup.id !== undefined ) {
 
-    
-      this.groupService.updateGroup(this.newGroup)
-                          .subscribe(subject => { this.newGroup = subject; console.log("subject updated")},
-                    (err: HttpErrorResponse) => {
-                    if (err.error instanceof Error) {
-                      console.log(err.error);
-                    console.log("Client-side error occured.");
-                    } else {
-                      console.log(err.error);
-                    console.log("Server-side error occured.");
-                    }
-                    });
-                  }
-    else 
-    this.groupService.saveGroup(this.newGroup)
-                        .subscribe(subject => { 
-                          this.initForm();
-                          console.log("Subject created");
-                        this.newGroup =  new Group();
-                      this.getGroups();},
-                          (err: HttpErrorResponse) => {
-                          if (err.error instanceof Error) {
-                          console.log("Client-side error occured.");
-                          } else {
-                          console.log("Server-side error occured.");
-                          }
-                          });
+    if (this.newGroup.id !== undefined) {
+
+      this.updateGroup(this.newGroup);
+    }
+    else
+      this.saveGroup(this.newGroup);
   }
 
   getSubmitedData() {
-    this.newGroup.name = this.groupForm.get('name').value;
-    this.newGroup.description = this.groupForm.get('description').value;  
+    this.newGroup.name = this.extractFieldData('name');
+    this.newGroup.level = this.extractFieldData('level');
+    this.newGroup.description = this.extractFieldData('description');
   }
 
+  private extractFieldData(property: string): any {
+    return this.groupForm.get(property).value;
+  }
+
+  private getGroups(): void {
+    this.groupService.getGroups()
+      .subscribe(groups => this.groups = groups,
+        (err: HttpErrorResponse) => {
+          if (err.error instanceof Error) {
+            console.log("Client-side error occured.");
+          } else {
+            console.log("Server-side error occured.");
+          }
+        }
+      );
+  }
+
+  private saveGroup(groupRequest: Group): void {
+    this.groupService.saveGroup(groupRequest)
+      .subscribe(group => {
+        this.initForm(); console.log("Subject created");
+        this.newGroup = new Group();
+        this.getGroups();
+      },
+        (err: HttpErrorResponse) => {
+          if (err.error instanceof Error) {
+            console.log("Client-side error occured.");
+          } else {
+            console.log("Server-side error occured.");
+          }
+        });
+  }
+
+  private updateGroup(groupRequest: Group): void {
+    this.groupService.updateGroup(groupRequest)
+      .subscribe(group => { groupRequest = group; console.log("subject updated") },
+        (err: HttpErrorResponse) => {
+          if (err.error instanceof Error) {
+            console.log(err.error);
+            console.log("Client-side error occured.");
+          } else {
+            console.log(err.error);
+            console.log("Server-side error occured.");
+          }
+        });
+  }
   // onClick(subject: Subject) {
   //   console.log(subject);
   //   this.newSubject = subject;
@@ -98,7 +118,7 @@ export class GroupListComponent implements OnInit {
   // }
 
   // clickMessage = '';
- 
+
   // public onClickMe() {
   //   this.clickMessage = 'You are my hero!';
   // }

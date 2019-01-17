@@ -1,37 +1,50 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-  
             <div class="col-md-12">
-                  <div class="card">
-                  <div class="card-body">
-                                  <form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
-                                          <div class="row">
-                                              <div class="col-md-8">
-                                                  <mat-form-field class="example-full-width">
-                                                      <input matInput placeholder="Name" formControlName="name" required>
-                                                  </mat-form-field>
-                                              </div>
-                                          </div>
-                                          <div class="row">
-                                            <div class="col-md-8">
-                                                <mat-form-field class="example-full-width">
-                                                    <input matInput placeholder="Description" formControlName="description" required>
-                                                </mat-form-field>
-                                            </div>
-                                        </div>
-                                          <button mat-raised-button type="submit" class="btn btn-warning pull-right">Create new Group</button>
-                                          <div class="clearfix"></div>
-                                      </form>
-                      </div>
-                  </div>
+                <div class="card">
+                    <div class="card-body">
+                        <form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
+
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Name" formControlName="name" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-select matInput placeholder="Level" formControlName="level" required>
+                                            <mat-option *ngFor="let lev of levels" [value]="lev" required>
+                                                {{ lev }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <!-- <mat-error *ngIf="animalControl.hasError('required')">Please choose an animal</mat-error>
+                                            <mat-hint>{{animalControl.value?.sound}}</mat-hint>   -->
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <textarea matInput placeholder="Additional information" formControlName="description"
+                                            rows="2"></textarea>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <button mat-raised-button type="submit" class="btn btn-warning pull-right">Create new Group</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
             </div>
-  
+
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-info">
-                        <h4 class="card-title ">Groups Table</h4>
-                        <p class="card-category"> Here is a details for all groups</p>
+                        <h4 class="card-title ">All Groups</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -44,29 +57,26 @@
                                         Name
                                     </th>
                                     <th>
-                                        Description
+                                        Group Level
                                     </th>
                                     <th>
                                         Student Number
                                     </th>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let group of groups" >
-  
+                                    <tr *ngFor="let group of groups">
                                         <td>
-                                              
-                                              <a routerLink="/group-detail/{{ group.id }}" >{{ group.id }}</a> 
+                                            <a routerLink="/group-detail/{{ group.id }}">{{ group.id }}</a>
                                         </td>
                                         <td class="text-primary">
-                                              <a>{{ group.name }}</a>
+                                            <a>{{ group.name }}</a>
                                         </td>
-                                      <td>
-                                        <a>{{ group.description }}</a>
-                                  </td>
-                                  <td>
-                                    <a>{{ group.students.length }}</a>
-                              </td>
-                                       
+                                        <td>
+                                            <a>{{ group.level }}</a>
+                                        </td>
+                                        <td>
+                                            <a>{{ group.students.length }}</a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
