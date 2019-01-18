@@ -59,9 +59,6 @@
                                     <th>
                                         Group Level
                                     </th>
-                                    <th>
-                                        Student Number
-                                    </th>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let group of groups">
@@ -69,13 +66,10 @@
                                             <a routerLink="/group-detail/{{ group.id }}">{{ group.id }}</a>
                                         </td>
                                         <td class="text-primary">
-                                            <a>{{ group.name }}</a>
+                                            <p>{{ group.name }}</p>
                                         </td>
                                         <td>
-                                            <a>{{ group.level }}</a>
-                                        </td>
-                                        <td>
-                                            <a>{{ group.students.length }}</a>
+                                            <p>{{ group.level }}</p>
                                         </td>
                                     </tr>
                                 </tbody>

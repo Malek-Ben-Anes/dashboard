@@ -10,6 +10,7 @@ import { Student } from 'app/models/Student';
 //const url: string = 'http://localhost:8090/api/teachers';
 
 const STUDENT_URL: string = 'https://infinite-sands-30212.herokuapp.com/api/students';
+const GROUP_URL: string = 'https://infinite-sands-30212.herokuapp.com/api/groups/';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +25,12 @@ export class StudentService {
     return this.http.get<Student[]>(STUDENT_URL);
   }
 
+  getGroupStudents(id: number): Observable<Student[]> {
+    return this.http.get<Student[]>(GROUP_URL + id + '/students/');
+  }
+
   getSingleStudent(id: number): Observable<Student>  {
-    return this.http.get<Student>(STUDENT_URL + '/' + id);
+    return this.http.get<Student>(STUDENT_URL + id);
   }
 
   saveStudent(teacher: Student) : Observable<Student>  {

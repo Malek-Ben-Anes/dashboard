@@ -8,7 +8,7 @@ export class Group{
     name: string;
     level: Level;
     description?: string;
-    students?: Student[];
+    students: Student[];
 
     constructor(_id?:number, _name?: string,_description?: string, _students?: Student[] ){
         this.id = _id;

@@ -17,8 +17,14 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a mat-button class="nav-link" href="#messages" data-toggle="tab">
+                    <a mat-button class="nav-link" href="#students" data-toggle="tab">
                       <i class="material-icons">code</i> Students
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a mat-button class="nav-link" href="#timetable" data-toggle="tab">
+                      <i class="material-icons">code</i> TimeTable
                       <div class="ripple-container"></div>
                     </a>
                   </li>
@@ -115,7 +121,10 @@
               </div>
 
               <!-- STUDENT ASSIGN COMPONENT-->
-              <app-student-assign class="tab-pane" id="messages" [group]="group"></app-student-assign>
+              <app-student-assign class="tab-pane" id="students" [group]="group"></app-student-assign>
+              <!-- END STUDENT ASSIGN COMPONENT-->
+              <!-- STUDENT ASSIGN COMPONENT-->
+              <app-group-timetable class="tab-pane" id="timetable"></app-group-timetable>
               <!-- END STUDENT ASSIGN COMPONENT-->
 
             </div>

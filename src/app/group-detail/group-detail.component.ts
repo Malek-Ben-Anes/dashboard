@@ -2,12 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Group } from 'app/models/Group';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TeacherService } from 'app/services/teacher.service';
 import { GroupService } from 'app/services/group.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Student } from 'app/models/Student';
-import { StudentService } from 'app/services/student.service';
 import { Level } from 'app/models/Level';
+import { StudentService } from 'app/services/student.service';
 
 @Component({
   selector: 'app-group-detail',
@@ -26,7 +24,7 @@ export class GroupDetailComponent implements OnInit {
 
   groupStudentsForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private groupService: GroupService, 
+  constructor(private formBuilder: FormBuilder, private groupService: GroupService, private studentService: StudentService,
     private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -99,6 +97,9 @@ export class GroupDetailComponent implements OnInit {
     this.groupService.getSingleGroup(id)
       .subscribe(group => {
         this.group = group;
+        this.group.students = [];
+        console.log(this.group);
+        this.getGroupStudents(this.group.id);
         this.updateForm(this.group);
       },
         (err: HttpErrorResponse) => {
@@ -112,6 +113,11 @@ export class GroupDetailComponent implements OnInit {
 
   }
 
+
+  private getGroupStudents(id: number) {
+    this.studentService.getGroupStudents(id)
+      .subscribe(students => { this.group.students = students; });
+  }
 
   checked = false;
   indeterminate = false;
