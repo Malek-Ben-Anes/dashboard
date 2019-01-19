@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
 import { Group } from 'app/models/Group';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -6,6 +7,8 @@ import { GroupService } from 'app/services/group.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Level } from 'app/models/Level';
 import { StudentService } from 'app/services/student.service';
+import { Observable } from 'rxjs';
+import { Student } from 'app/models/Student';
 
 @Component({
   selector: 'app-group-detail',
@@ -14,9 +17,11 @@ import { StudentService } from 'app/services/student.service';
 })
 export class GroupDetailComponent implements OnInit {
 
+  ready: boolean = false;
+
   group: Group = new Group();
 
-  
+  groupToChild: Observable<Group>;
 
   groupForm: FormGroup;
 
@@ -116,7 +121,10 @@ export class GroupDetailComponent implements OnInit {
 
   private getGroupStudents(id: number) {
     this.studentService.getGroupStudents(id)
-      .subscribe(students => { this.group.students = students; });
+      .subscribe(students => { this.group.students = students; 
+                      //this.groupToChild = new Observable<Group>(observer => observer.next(this.group));
+                      this.ready = true;
+                    });
   }
 
   checked = false;

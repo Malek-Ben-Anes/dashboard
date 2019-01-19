@@ -8,6 +8,7 @@ import { Group } from 'app/models/Group';
 })
 export class GroupTimetableComponent implements OnInit {
 
+  @Input('group') group: Group;
 
 
   constructor() { }

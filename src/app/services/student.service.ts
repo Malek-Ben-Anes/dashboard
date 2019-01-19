@@ -37,8 +37,8 @@ export class StudentService {
     return this.http.post<Student>(STUDENT_URL, teacher);
   }
 
-  updateStudent(teacher: Student) : Observable<Student>  {
-    return this.http.put<Student>(STUDENT_URL  + '/' + teacher.id, teacher);
+  updateStudent(student: Student) : Observable<Student>  {
+    return this.http.put<Student>(STUDENT_URL  + '/' + student.id, student);
   }
 
 

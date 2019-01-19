@@ -1,32 +1,48 @@
-<div cdkDropListGroup>
-  <div class="example-container">
-    <h2>All Students At {{group.level}}</h2>
+<div>
+  <div cdkDropListGroup>
+    <div class="example-container">
+      <h2>All Students At {{group.level}}</h2>
+      <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList]" class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let student of todo" cdkDrag>
+          <mat-card-header>
+            <div class="row">
+              <div class="col-md-3">
+                <img src="../../../assets/img/faces/marc.jpg" alt="Smile face" height="39" width="39" />
+                <!-- <div mat-card-avatar class="example-header-image"><img src="../../../assets/img/faces/marc.jpg" alt="Smile face"
+                        height="49" width="49" /></div> -->
+              </div>
+              <div class="col-md-9">
+                <mat-card-title class="black-name">{{student.firstname}} {{student.lastname}}</mat-card-title><br />
+                <mat-card-subtitle>{{student.email}}</mat-card-subtitle>
+              </div>
+            </div>
+          </mat-card-header>
+        </div>
+      </div>
+    </div>
 
-    <div
-    cdkDropList
-    #todoList="cdkDropList"
-    [cdkDropListData]="todo"
-    [cdkDropListConnectedTo]="[doneList]"
-    class="example-list"
-    (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let student of todo" cdkDrag>{{student.id}} {{student.firstname}} {{student.lastname}} {{student.email}}</div>
+    <div class="example-container">
+      <h2>{{group.name}}</h2>
+      <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[todoList]" class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let student of done" cdkDrag>
+          <mat-card-header>
+            <div class="row">
+              <div class="col-md-3">
+                <img src="../../../assets/img/faces/marc.jpg" alt="Smile face" height="39" width="39" />
+                <!-- <div mat-card-avatar class="example-header-image"><img src="../../../assets/img/faces/marc.jpg" alt="Smile face"
+                    height="49" width="49" /></div> -->
+              </div>
+              <div class="col-md-9">
+                <mat-card-title class="black-name">{{student.firstname}} {{student.lastname}}</mat-card-title><br />
+                <mat-card-subtitle>{{student.email}}</mat-card-subtitle>
+              </div>
+            </div>
+          </mat-card-header>
+        </div>
+      </div>
+    </div>
   </div>
-    
-  </div>
-
-  <div class="example-container">
-    <h2>Students In {{group.name}}</h2>
-
-    <div
-    cdkDropList
-    #doneList="cdkDropList"
-    [cdkDropListData]="done"
-    [cdkDropListConnectedTo]="[todoList]"
-    class="example-list"
-    (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let student of done" cdkDrag>
-      
-        {{student.id}} {{student.firstname}} {{student.lastname}} {{student.email}}</div>
-  </div>
-  </div>
+  <button mat-raised-button (click)="onSaveStudents()" class="btn btn-warning pull-right">Save Changes</button>
 </div>
