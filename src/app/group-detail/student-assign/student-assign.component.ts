@@ -27,24 +27,10 @@ export class StudentAssignComponent implements OnInit {
   constructor(private studentService: StudentService, private groupService: GroupService) { }
 
   ngOnInit() {
-
-    // this.groupToChild.subscribe(data => {
-    //   console.log('data');
-    console.log('********');
-    console.log(this.group);
-      
-    // })
     this.getAllStudents();
 
     this.initDoneArray();
   }
-
-//   ngOnChanges(changes: SimpleChanges) {
-//     // only run when property "data" changed
-//     if (changes['group']) {
-//       this.initDoneArray();
-//     }
-// }
 
   private getAllStudents() {
     this.studentService.getStudents()
@@ -56,19 +42,41 @@ export class StudentAssignComponent implements OnInit {
 
   onSaveStudents(): void {
 
-    let studentsToUpdate = this.arrayDifference(this.initial, this.done);
-    
-    console.log(studentsToUpdate);
+    let added = this.arrayDifferenceByOrder(this.done, this.initial);
+    let eliminated = this.arrayDifferenceByOrder(this.initial, this.done);
 
-    //save all students from differences
-    studentsToUpdate.forEach(student => {
-      this.studentService.updateStudent(student);
+    console.log(eliminated);
+    console.log(added);
+    
+    //save all students ADDED to group
+    added.forEach(student => {
+      let entity = this.Allstudents.find(x => x.id === student.id);
+      entity.group = this.group;
+      this.updateStudent(entity);
     });
+
+    //save all students ELIMINATED from group
+    eliminated.forEach(student => {
+      let entity = this.Allstudents.find(x => x.id === student.id);
+      entity.group = undefined;
+      this.updateStudent(entity);
+    });
+
+  }
+
+  private arrayDifferenceByOrder(arrA: Student[], arrB: Student[]) {
+
+    if (arrA === undefined || arrB === undefined) {
+      return [];
+    }
+
+    //let difference = arrA.filter(item => arrB.indexOf(item) < 0);
+    let difference = arrA.filter( obj =>  !arrB.some( obj2 => obj.id == obj2.id)  );
+    return difference
   }
 
 
   private initTodoArray() {
-
     //push the different students in the pushTodo array
     this.arrayDifference(this.Allstudents, this.group.students)
       // <-   return the difference betwenn two arrays
@@ -76,9 +84,10 @@ export class StudentAssignComponent implements OnInit {
   }
 
   private initDoneArray() {
-    console.log(this.group);
-    this.group.students.forEach(student => { this.pushInArray(student, this.initial); 
-                                            this.pushInArray(student, this.done) });
+    this.group.students.forEach(student => {
+      this.pushInArray(student, this.initial);
+      this.pushInArray(student, this.done)
+    });
   }
 
 
@@ -104,36 +113,34 @@ export class StudentAssignComponent implements OnInit {
     }
 
     let difference;
-    if (arrA !== []) {
-      difference = arrA.filter(x => !arrB.includes(x));
-    } else if (arrB == []) {
-      difference = arrB.filter(x => !arrA.includes(x));
-    } else {
-      return [];
+    if (arrA.length >= arrB.length) {
+
+      difference = arrA.filter(item => !arrB.some(other => item.id === other.id));
+
+    } else if (arrA.length < arrB.length) {
+      difference = arrB.filter(item => !arrA.some(other => item.id === other.id));
     }
     return difference
   }
 
-  // private arrayDifference(arrA: any[], arrB: any []) {
-
-  //   let difference = arrA.filter(x => !arrB.includes(x));
-  //   return difference
-  // }
-
   drop(event: CdkDragDrop<Todo[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      console.log(this.todo);
-      console.log(this.done);
     } else {
       transferArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex);
-      console.log(this.todo);
-      console.log(this.done);
     }
   }
+
+  private updateStudent(student: Student) {
+    this.studentService.updateStudent(student)
+      .subscribe(student => {
+        console.log(student);
+      }, err => console.log(err.error));
+  }
+
 }
 
 interface Todo {

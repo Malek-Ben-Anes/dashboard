@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Gender } from 'app/models/User';
-import { FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DataService } from 'app/services/data.service';
@@ -40,31 +40,24 @@ export class StudentProfileComponent implements OnInit {
     this.initForm();
     let id = this.route.snapshot.params['id'];
 
-    this.studentService.getSingleStudent(id)
-      .subscribe(student => {
-        this.student = student;
-        console.log(this.student);
-        this.isNew = false;
-        this.updateForm(this.student);
-      },
-        (err: HttpErrorResponse) => {
-          if (err.error instanceof Error) {
-            console.log("Client-side error occured.");
-          } else {
-            console.log("Server-side error occured.");
-          }
-        });
+    if (id !== undefined) {
+      console.log(id);
+      this.getSingleStudent(id);
+      
+    } else {
+      this.isNew = true;
+    }
   }
 
   initForm() {
     this.groupService.getGroups().subscribe(groups => { this.groups = groups; console.log(this.groups); });
     this.studentForm = this.formBuilder.group({
       firstname: ['', [Validators.required,
-                Validators.minLength(3),
-                Validators.maxLength(50)]],
+      Validators.minLength(3),
+      Validators.maxLength(50)]],
       lastname: ['', [Validators.required,
-                Validators.minLength(3),
-                Validators.maxLength(50)]],
+      Validators.minLength(3),
+      Validators.maxLength(50)]],
       email: ['', [Validators.required, Validators.pattern(EMAIL_PATTERN)]],
       birthDate: [null, Validators.required],
       phone: ['', Validators.required],
@@ -89,28 +82,45 @@ export class StudentProfileComponent implements OnInit {
       parentName: student.parentName,
       parentPhone: student.parentPhone,
       description: student.description,
-      });
+    });
 
-      this.studentForm.get('birthDate').setValue(new Date(this.student.birthDate));
-      const toSelect1 = this.groups.find(group => group.id == this.student.group.id);
+    this.studentForm.get('birthDate').setValue(new Date(this.student.birthDate));
+    const toSelect1 = this.groups.find(group => group.id == this.student.group.id);
 
-      this.studentForm.get('group').setValue(toSelect1);
+    this.studentForm.get('group').setValue(toSelect1);
 
-      const toSelect2 = this.levels.find(level => level == this.student.level);
-      this.studentForm.get('level').setValue(toSelect2);
+    const toSelect2 = this.levels.find(level => level == this.student.level);
+    this.studentForm.get('level').setValue(toSelect2);
   }
 
   onSubmit() {
     this.extractFormData();
     console.log(this.student);
     if (this.student.id !== undefined) {
-      this.updateStudent(this.student);     
+      this.updateStudent(this.student);
     }
-    else{
+    else {
       this.createStudent(this.student);
     }
   }
-  
+
+  private getSingleStudent(id): void {
+    this.studentService.getSingleStudent(id)
+      .subscribe(student => {
+        this.student = student;
+        this.isNew = false;
+        console.log(this.student);
+        this.updateForm(this.student);
+      },
+        (err: HttpErrorResponse) => {
+          if (err.error instanceof Error) {
+            console.log("Client-side error occured.");
+          } else {
+            console.log("Server-side error occured.");
+          }
+        });
+  }
+
   private extractFormData(): void {
     this.student.firstname = this.extractFieldData('firstname');
     this.student.lastname = this.extractFieldData('lastname');
@@ -127,35 +137,35 @@ export class StudentProfileComponent implements OnInit {
     this.student.parentPhone = this.extractFieldData('parentPhone');
     this.student.description = this.extractFieldData('description');
   }
-  
+
   private extractFieldData(property: string): any {
     return this.studentForm.get(property).value;
   }
-  
+
   private updateStudent(studentRequest: Student): void {
     this.studentService.updateStudent(studentRequest)
-        .subscribe(student => { this.student = student; console.log("student updated") },
-          (err: HttpErrorResponse) => {
-            if (err.error instanceof Error) {
-              console.log(err.error);
-              console.log("Client-side error occured.");
-            } else {
-              console.log(err.error);
-              console.log("Server-side error occured.");
-            }
-          });
+      .subscribe(student => { this.student = student; console.log("student updated") },
+        (err: HttpErrorResponse) => {
+          if (err.error instanceof Error) {
+            console.log(err.error);
+            console.log("Client-side error occured.");
+          } else {
+            console.log(err.error);
+            console.log("Server-side error occured.");
+          }
+        });
   }
 
   private createStudent(studentRequest: Student): void {
     this.studentService.saveStudent(studentRequest)
-        .subscribe(student => { this.student = student; console.log("student created") },
-          (err: HttpErrorResponse) => {
-            if (err.error instanceof Error) {
-              console.log("Client-side error occured.");
-            } else {
-              console.log("Server-side error occured.");
-            }
-          });
+      .subscribe(student => { this.student = student; console.log("student created") },
+        (err: HttpErrorResponse) => {
+          if (err.error instanceof Error) {
+            console.log("Client-side error occured.");
+          } else {
+            console.log("Server-side error occured.");
+          }
+        });
   }
   /*
   onBack() {

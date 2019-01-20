@@ -1,7 +1,9 @@
 <div>
   <div cdkDropListGroup>
     <div class="example-container">
-      <h2>All Students At {{group.level}}</h2>
+      <h2>All Students<!-- At {{group.level}} --></h2>
+        <p class="grey">That are not in {{group.name}}</p>
+      
       <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList]" class="example-list"
         (cdkDropListDropped)="drop($event)">
         <div class="example-box" *ngFor="let student of todo" cdkDrag>
@@ -24,6 +26,7 @@
 
     <div class="example-container">
       <h2>{{group.name}}</h2>
+      <p class="grey">Assigned students</p>
       <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[todoList]" class="example-list"
         (cdkDropListDropped)="drop($event)">
         <div class="example-box" *ngFor="let student of done" cdkDrag>

@@ -30,7 +30,7 @@ export class StudentService {
   }
 
   getSingleStudent(id: number): Observable<Student>  {
-    return this.http.get<Student>(STUDENT_URL + id);
+    return this.http.get<Student>(STUDENT_URL + '/' + id);
   }
 
   saveStudent(teacher: Student) : Observable<Student>  {

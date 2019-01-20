@@ -57,7 +57,8 @@
                                             {{ student.email }}
                                         </td>
                                         <td>
-                                            {{ student.group }}
+                                            <div *ngIf="student.group">{{ student.group.name }}</div>
+                                            <div *ngIf="!student.group">Not Assigned</div>
                                         </td>
                                     </tr>
                                 </tbody>
