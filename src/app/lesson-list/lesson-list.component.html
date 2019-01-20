@@ -1,77 +1,118 @@
 <div class="main-content">
-        <div class="container-fluid">
-            <div class="row">
-      
-                <div class="col-md-12">
-                      <div class="card">
-                      <div class="card-body">
-                                      <form [formGroup]="lessonForm" (ngSubmit)="onSubmit()">
-                                              <div class="row">
-                                                  <div class="col-md-8">
-                                                      <mat-form-field class="example-full-width">
-                                                          <input matInput placeholder="Name" formControlName="name" required>
-                                                      </mat-form-field>
-                                                  </div>
-                                              </div>
-                                              <div class="row">
-                                                <div class="col-md-8">
-                                                    <mat-form-field class="example-full-width">
-                                                        <input matInput placeholder="Description" formControlName="description" required>
-                                                    </mat-form-field>
-                                                </div>
-                                            </div>
-                                              <button mat-raised-button type="submit" class="btn btn-warning pull-right">Create new Group</button>
-                                              <div class="clearfix"></div>
-                                          </form>
-                          </div>
-                      </div>
-                </div>
-      
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header card-header-info">
-                            <h4 class="card-title ">Groups Table</h4>
-                            <p class="card-category"> Here is a details for all lessons</p>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead class=" text-primary">
-                                        <th>
-                                            Name
-                                        </th>
-                                        <th>
-                                            Teacher Id
-                                        </th>
-                                        <th>
-                                                Subject Id
-                                            </th>
-                                            <th>
-                                                    Group Id
-                                                </th>
-                                        
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let lesson of lessons" >
-                                                <td class="text-primary">
-                                                        <a>{{ lesson.name }}</a>
-                                                  </td>
-      
-                                            <td>
-                                                  <a routerLink="/lesson-detail/{{ lesson.id.teacherId }}" >{{ lesson.id.teacherId }}</a> 
-                                            </td>
-                                            <td>
-                                                    <a routerLink="/lesson-detail/{{ lesson.id.subjectId }}" >{{ lesson.id.subjectId }}</a> 
-                                              </td>
-                                              <td>
-                                                    <a routerLink="/lesson-detail/{{ lesson.id.groupId }}" >{{ lesson.id.groupId }}</a> 
-                                              </td>
-                                            
-                                         
-                                        </tr>
-                                    </tbody>
-                                </table>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form [formGroup]="lessonForm" (ngSubmit)="onSubmit()">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Name" formControlName="name" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-select matInput placeholder="Level" formControlName="level" required>
+                                            <mat-option *ngFor="let lev of levels" [value]="lev" required>
+                                                {{ lev }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
                             </div>
-                        </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-select matInput placeholder="Subject" formControlName="level" required>
+                                            <mat-option *ngFor="let lev of levels" [value]="lev" required>
+                                                {{ lev }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-select matInput placeholder="Teacher" formControlName="level" required>
+                                            <mat-option *ngFor="let lev of levels" [value]="lev" required>
+                                                {{ lev }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-select matInput placeholder="Group" formControlName="level" required>
+                                            <mat-option *ngFor="let lev of levels" [value]="lev" required>
+                                                {{ lev }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Description" formControlName="description"
+                                            required>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <button mat-raised-button type="submit" class="btn btn-warning pull-right">Create Lesson</button>
+                            <div class="clearfix"></div>
+                        </form>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-info">
+                    <h4 class="card-title ">Lessons Table</h4>
+                    <p class="card-category"> Here is a details for all lessons</p>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class=" text-primary">
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Teacher Id
+                                </th>
+                                <th>
+                                    Subject Id
+                                </th>
+                                <th>
+                                    Group Id
+                                </th>
+
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let lesson of lessons">
+                                    <td class="text-primary">
+                                        <a>{{ lesson.name }}</a>
+                                    </td>
+
+                                    <td>
+                                        <a routerLink="/lesson-detail/{{ lesson.id.teacherId }}">{{
+                                            lesson.id.teacherId }}</a>
+                                    </td>
+                                    <td>
+                                        <a routerLink="/lesson-detail/{{ lesson.id.subjectId }}">{{
+                                            lesson.id.subjectId }}</a>
+                                    </td>
+                                    <td>
+                                        <a routerLink="/lesson-detail/{{ lesson.id.groupId }}">{{ lesson.id.groupId
+                                            }}</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>

@@ -1,68 +1,104 @@
 <div class="main-content">
-  <div class="container-fluid">
-      <div class="row">
+    <div class="container-fluid">
+        <div class="row">
 
-          <div class="col-md-12">
+            <div class="col-md-12">
                 <div class="card">
-                <div class="card-body">
-                                <form [formGroup]="subjectForm" (ngSubmit)="onSubmit()">
-                                        <div class="row">
-                                            <div class="col-md-8">
-                                                <mat-form-field class="example-full-width">
-                                                    <input matInput placeholder="Name" formControlName="name" required>
-                                                </mat-form-field>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <mat-form-field class="example-full-width">
-                                                    <input matInput placeholder="Description" formControlName="description" required>
-                                                </mat-form-field>
-                                            </div>
+                    <div class="card-body">
+                        <form [formGroup]="subjectForm" (ngSubmit)="onSubmit()">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Name" formControlName="name" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Level" formControlName="description" required>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Coefficient" formControlName="description"
+                                            required>
+                                    </mat-form-field>
+                                </div>
+                               
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Hourly volume" required>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Session Numbers" required>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Description" formControlName="description"
+                                                required>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                        <div class="col-md-10">
+                                            <mat-form-field class="example-full-width">
+                                                <input matInput placeholder="Attach Documents" formControlName="description"
+                                                    required>
+                                            </mat-form-field>
                                         </div>
-                                        <button mat-raised-button type="submit" class="btn btn-info pull-right">Create Subject</button>
-                                        <div class="clearfix"></div>
-                                    </form>
+                                </div>
+                            
+                            <button mat-raised-button type="submit" class="btn btn-info pull-right">Create Subject</button>
+                            <div class="clearfix"></div>
+                        </form>
                     </div>
                 </div>
-          </div>
+            </div>
 
-          <div class="col-md-12">
-              <div class="card">
-                  <div class="card-header card-header-warning">
-                      <h4 class="card-title ">Subjects Table</h4>
-                      <p class="card-category"> Here is a details for all groups</p>
-                  </div>
-                  <div class="card-body">
-                      <div class="table-responsive">
-                          <table class="table">
-                              <thead class=" text-primary">
-                                  <th>
-                                      ID
-                                  </th>
-                                  <th>
-                                      Name
-                                  </th>
-                                  <th>
-                                      Description
-                                  </th>
-                                  
-                              </thead>
-                              <tbody>
-                                  <tr *ngFor="let subject of subjects" >
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-warning">
+                        <h4 class="card-title ">Subjects Table</h4>
+                        <p class="card-category"> Here is a details for all groups</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Description
+                                    </th>
 
-                                      <td>
-                                            <p >{{ subject.id }}</p> 
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let subject of subjects">
+
+                                        <td>
+                                            <p>{{ subject.id }}</p>
                                             <!-- <a routerLink="/subjects/{{ subject.id }}">{{ subject.id }}</a>  -->
-                                      </td>
-                                      <td class="text-primary">
+                                        </td>
+                                        <td class="text-primary">
                                             <a>{{ subject.name }}</a>
-                                      </td>
-                                      <td>
-                                          {{ subject.description }}
-                                      </td>
-                                  </tr>
-                              </tbody>
-                          </table>
-                      </div>
-                  </div>
-              </div>
-          </div>
+                                        </td>
+                                        <td>
+                                            {{ subject.description }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>

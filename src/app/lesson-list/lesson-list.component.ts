@@ -3,6 +3,7 @@ import { Lesson } from 'app/models/Lesson';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LessonService } from 'app/services/lesson.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Level } from 'app/models/Level';
 
 @Component({
   selector: 'app-lesson-list',
@@ -17,19 +18,23 @@ export class LessonListComponent implements OnInit {
 
   lessonForm: FormGroup;
 
+  levels = Object.keys(Level);
+
   constructor(private formBuilder: FormBuilder, private lessonService: LessonService) { }
 
   ngOnInit() {
     this.initForm();
-    this.getLessons();
+    //this.getLessons();
   }
 
   initForm() {
     this.lessonForm = this.formBuilder.group({
       name: ['', Validators.required],
+      level: ['', Validators.required],
       description: ['', Validators.required],
     });
   }
+
 
   getLessons(): void {
     this.lessonService.getLessons()
