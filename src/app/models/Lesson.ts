@@ -1,9 +1,12 @@
 import { User, Gender } from './User';
+import { Level } from './Level';
 
 export class Lesson{
 
     id?: LessonId;
     name?: string;
+    level?: Level;
+    description?: string;
     createdAt?: Date;
     updatedAt?: Date;
 
@@ -16,11 +19,11 @@ export class Lesson{
 }
 
 class LessonId {
-        teacherId: number;
-        subjectId: number;
-        groupId: number;
+        teacherId?: number;
+        subjectId?: number;
+        groupId?: number;
 
-        constructor(_teacherId: number, _subjectId: number, _groupId: number) {
+        constructor(_teacherId?: number, _subjectId?: number, _groupId?: number) {
             this.teacherId = _teacherId;
             this.subjectId = _subjectId;
             this.groupId = _groupId;

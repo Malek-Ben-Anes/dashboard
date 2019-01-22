@@ -24,27 +24,27 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
-                                        <mat-select matInput placeholder="Subject" formControlName="level" required>
-                                            <mat-option *ngFor="let lev of levels" [value]="lev" required>
-                                                {{ lev }}
+                                        <mat-select matInput placeholder="Subject" formControlName="subject" required>
+                                            <mat-option *ngFor="let subj of subjects" [value]="subj" required>
+                                                {{ subj.name }}
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
-                                        <mat-select matInput placeholder="Teacher" formControlName="level" required>
-                                            <mat-option *ngFor="let lev of levels" [value]="lev" required>
-                                                {{ lev }}
+                                        <mat-select matInput placeholder="Teacher" formControlName="teacher" required>
+                                            <mat-option *ngFor="let teach of teachers" [value]="teach" required>
+                                                {{ teach.firstname + ' ' + teach.lastname }}
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
-                                        <mat-select matInput placeholder="Group" formControlName="level" required>
-                                            <mat-option *ngFor="let lev of levels" [value]="lev" required>
-                                                {{ lev }}
+                                        <mat-select matInput placeholder="Group" formControlName="group" required>
+                                            <mat-option *ngFor="let grp of groups" [value]="grp" required>
+                                                {{ grp.name }}
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>

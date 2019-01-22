@@ -9,7 +9,7 @@ import { reject } from 'q';
 
 //const url: string = 'http://localhost:8090/api/teachers';
 
-const SUBJECT_URL: string = 'https://infinite-sands-30212.herokuapp.com/subjects';
+const SUBJECT_URL: string = 'https://infinite-sands-30212.herokuapp.com/api/subjects';
 
 @Injectable({
   providedIn: 'root'

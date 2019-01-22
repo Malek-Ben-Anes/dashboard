@@ -5,7 +5,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Group } from 'app/models/Group';
 import { Lesson } from 'app/models/Lesson';
 
-const LESSON_URL: string = 'https://infinite-sands-30212.herokuapp.com/lessons';
+const LESSON_URL: string = 'https://infinite-sands-30212.herokuapp.com/api/lessons';
 
 @Injectable({
   providedIn: 'root'
