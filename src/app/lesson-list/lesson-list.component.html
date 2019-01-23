@@ -60,6 +60,7 @@
                             </div>
 
                             <button mat-raised-button type="submit" class="btn btn-warning pull-right">Create Lesson</button>
+                            <button mat-raised-button class="btn btn-info pull-right">Time Table</button>
                             <div class="clearfix"></div>
                         </form>
                     </div>
@@ -71,7 +72,6 @@
             <div class="card">
                 <div class="card-header card-header-info">
                     <h4 class="card-title ">Lessons Table</h4>
-                    <p class="card-category"> Here is a details for all lessons</p>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -81,34 +81,25 @@
                                     Name
                                 </th>
                                 <th>
-                                    Teacher Id
+                                    Level
                                 </th>
                                 <th>
-                                    Subject Id
+                                    Description
                                 </th>
-                                <th>
-                                    Group Id
-                                </th>
-
                             </thead>
                             <tbody>
                                 <tr *ngFor="let lesson of lessons">
                                     <td class="text-primary">
-                                        <a>{{ lesson.name }}</a>
+                                        <a>{{lesson.name}}</a>
                                     </td>
 
                                     <td>
-                                        <a routerLink="/lesson-detail/{{ lesson.id.teacherId }}">{{
-                                            lesson.id.teacherId }}</a>
+                                        <a>{{ lesson.level }}</a>
                                     </td>
+
                                     <td>
-                                        <a routerLink="/lesson-detail/{{ lesson.id.subjectId }}">{{
-                                            lesson.id.subjectId }}</a>
-                                    </td>
-                                    <td>
-                                        <a routerLink="/lesson-detail/{{ lesson.id.groupId }}">{{ lesson.id.groupId
-                                            }}</a>
-                                    </td>
+                                        <a>{{ lesson.description }}</a>
+                                    </td>  
                                 </tr>
                             </tbody>
                         </table>

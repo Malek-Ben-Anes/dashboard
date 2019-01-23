@@ -7,17 +7,16 @@ import { Mark } from 'app/models/Mark';
 
 
 
-const URL: string = `https://infinite-sands-30212.herokuapp.com`;
+const MARK_URL: string = 'https://infinite-sands-30212.herokuapp.com/students/';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class Markervice {
+export class MarkService {
 
   studentId: number;
   
-  //MARK_URL: string = URL + '/students/${studentId}/marks/`;
 
   subjects: Group[] = [];
   teachers: Group[] = [];
@@ -25,11 +24,21 @@ export class Markervice {
   constructor(private http: HttpClient) {}
   
   getStudentMarks(studentId: number): Observable<Mark[]> {
-    console.log(URL);
-    return this.http.get<Mark[]>(URL + '/students/' + studentId + '/marks/');
+    console.log(MARK_URL);
+    return this.http.get<Mark[]>(MARK_URL + studentId + '/marks/');
   }
 
+  getMarkById(studentId: number, groupId: number): Observable<Mark> {
+    return this.http.get<Mark>(MARK_URL + studentId + '/marks/' + groupId);
+  }
 
+  saveMark(mark: Mark) : Observable<Mark>  {
+    return this.http.post<Mark>(MARK_URL + mark.student.id, mark);
+  }
+
+  deleteMark(studentId: number, groupId: number) {
+    return this.http.delete(MARK_URL + studentId + '/marks/' + groupId);
+  }
   /*
   
   saveGroup(studentId: number, mark: Mark) : Observable<Mark>  {

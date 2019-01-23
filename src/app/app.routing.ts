@@ -22,6 +22,7 @@ import { LessonListComponent } from './lesson-list/lesson-list.component';
 import { StudentComponent } from './student/student/student.component';
 import { StudentListComponent } from './student/student-list/student-list.component';
 import { LessonDetailComponent } from './lesson-detail/lesson-detail.component';
+import { MarkComponent } from './marks/marks.component';
 
 const routes: Routes = [
     {
@@ -101,6 +102,10 @@ const routes: Routes = [
     {
         path: 'lesson-detail/:id',
         component: LessonDetailComponent
+    },
+    {
+        path: 'marks',
+        component: MarkComponent
     },
     {
         path: '',

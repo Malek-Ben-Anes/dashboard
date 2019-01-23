@@ -9,5 +9,4 @@ export class Mark{
     mark?: string;
     student: Student;
     lesson: Lesson;
-    constructor(){}
 }
