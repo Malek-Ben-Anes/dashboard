@@ -1,0 +1,15 @@
+.navbar-nav-horiz {
+    display: flex;
+    flex-direction: row;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.horiz {
+    flex-direction: row;
+}
+
+.background-white {
+    background-color: #fff;
+}

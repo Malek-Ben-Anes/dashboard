@@ -1,45 +1,105 @@
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <!-- <a class="navbar-brand" routerLink="dashboard">La Plume D'Or</a> -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <!-- <a class="navbar-brand" routerLink="dashboard">La Plume D'Or</a> -->
 
-        <div class="logo">
-          <a routerLink="dashboard" class="simple-text">
-              <div class="logo-img">
-                  <img src="/assets/img/plumedor-logo.png"/>
-              </div>
-          </a>
-          <a routerLink="/" class="simple-text">La Plume D'or&nbsp;</a>
+      <div class="logo">
+        <a routerLink="dashboard" class="simple-text">
+          <div class="logo-img">
+            <img src="/assets/img/plumedor-logo.png" />
+          </div>
+        </a>
+        <!-- <a routerLink="/" class="simple-text">La Plume D'or&nbsp;</a> -->
       </div>
 
-      </div>
-      <ul class="nav navbar-nav" routerLinkActive="active">
-        <!-- <li class="nav-item"><a class="nav-link" routerLink="home">Home</a></li> -->
+    </div>
 
+    <div *ngIf="authority === 'admin'">
+      <ul class="nav navbar-nav horiz navbar-right" routerLinkActive="active">
         <li class="nav-item">
-            <a routerLink="/teachers" class="simple-text">teachers&nbsp;</a>
-            <a routerLink="/students" class="simple-text">students&nbsp;</a>
-            <a routerLink="/subjects" class="simple-text">Subjects&nbsp;</a>
-            <a routerLink="/groups" class="simple-text">groups&nbsp;</a>
-            <a routerLink="/lessons" class="simple-text">lessons&nbsp;</a>
-            <a routerLink="/marks" class="simple-text">marks&nbsp;</a>
-          </li>
+          <a class="nav-link" routerLink="/teachers">teachers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/students">students</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/subjects">Subjects</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/groups">groups</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/lessons">lessons</a>
+        </li>
 
-        <li *ngIf="authority === 'user'" class="nav-item">
-          <a class="nav-link" routerLink="user">Student Board</a>
+          <li class="nav-item dropdown">
+              <a class="dropdown-toggle nav-link background-white" data-toggle="dropdown">Admin {{ username }}
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a routerLink="admin">Dashboard</a></li>
+                <li><a href="#">Message</a></li>
+                <li><a href="#">Notifications</a></li>
+                <li><a (click)="logout()">Logout</a></li>
+              </ul>
+            </li>
+      </ul>
+    </div>
+
+
+
+
+
+
+
+    <div *ngIf="authority === 'pm'">
+      <ul class="nav navbar-nav horiz navbar-right" routerLinkActive="active">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/lessons">lessons</a>
         </li>
-        <li *ngIf="authority === 'admin'" class="nav-item">
-          <a class="nav-link" routerLink="admin">Admin Board</a>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/marks">marks</a>
         </li>
-        <li *ngIf="authority === 'pm'" class="nav-item">
-          <a class="nav-link" routerLink="pm">Teacher Board</a>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" routerLink="admin" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Prof. {{ username }}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item">Dashboard</a>
+              <a class="dropdown-item">Message</a>
+              <a class="dropdown-item">Notifications</a>
+              <a (click)="logout()">Logout</a>
+            </div>
+          </li>
+      </ul>
+    </div>
+    <div *ngIf="authority === 'user'">
+      <ul class="nav navbar-nav horiz navbar-right" routerLinkActive="active">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/marks">marks</a>
         </li>
-        <li *ngIf="!authority" class="nav-item">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" routerLink="admin" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ username }}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item">Dashboard</a>
+              <a class="dropdown-item">Message</a>
+              <a class="dropdown-item">Notifications</a>
+              <a (click)="logout()">Logout</a>
+            </div>
+          </li>
+      </ul>
+    </div>
+
+    <div *ngIf="!authority">
+      <ul class="nav navbar-nav horiz navbar-right" routerLinkActive="active">
+        <li class="nav-item">
           <a class="nav-link" routerLink="auth/login">Login</a>
         </li>
       </ul>
     </div>
-  </nav>
-  <div class="container">
-    <router-outlet></router-outlet>
   </div>
+</nav>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

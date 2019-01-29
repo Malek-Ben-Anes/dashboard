@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import * as jwt_decode from "jwt-decode";
+
 import { AuthService } from '../auth/auth.service';
 import { TokenStorageService } from '../auth/token-storage.service';
 import { AuthLoginInfo } from '../auth/login-info';
@@ -35,15 +37,22 @@ export class LoginComponent implements OnInit {
 
     this.authService.attemptAuth(this.loginInfo).subscribe(
       data => {
-        console.log(data);
+
+        let tokenInfo = this.getDecodedAccessToken(data.accessToken); // decode token
+        // console.log(data);
         this.tokenStorage.saveToken(data.accessToken);
-        this.tokenStorage.saveUsername(data.username);
-        this.tokenStorage.saveAuthorities(data.authorities);
+        this.tokenStorage.saveUsername(tokenInfo.name);
+        this.tokenStorage.saveAuthorities(tokenInfo.authorities);
+
+
+        let expireDate = tokenInfo.exp; // get token expiration dateTime
+        console.log(tokenInfo); // show decoded token object in console
+
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getAuthorities();
-        //this.reloadPage();
+        this.reloadPage();
       },
       error => {
         console.log(error);
@@ -60,5 +69,16 @@ export class LoginComponent implements OnInit {
 
   reloadPage() {
     window.location.reload();
+  }
+
+  // Decode JWT token
+  private getDecodedAccessToken(token: string): any {
+    try{
+        return jwt_decode(token);
+    }
+    catch(Error){
+      console.log(Error.message);
+        return null;
+    }
   }
 }
