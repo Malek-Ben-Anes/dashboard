@@ -31,6 +31,7 @@ export class AppComponent implements OnInit {
         return true;
       });
     }
+    console.log(this.authority);
   }
 
   logout() {

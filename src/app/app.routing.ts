@@ -42,6 +42,10 @@ const routes: Routes = [
         component: AdminComponent
     },
     {
+        path: 'dashboard',
+        component: AdminComponent
+    },
+    {
         path: 'auth/login',
         component: LoginComponent
     },
