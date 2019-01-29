@@ -11,10 +11,12 @@
       </div>
     
     <div class="col-md-5" style="max-width:350px;">
-        <h2>Enter your credentials!</h2>
+      <br>
+        <h3>Enter your credentials!</h3>
+        <br>
       <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
         <div class="form-group">
-          <label for="username">Username</label>
+          <label for="username">Email</label>
           <input type="text" class="form-control" name="email" [(ngModel)]="form.username" #username="ngModel"
             required />
           <div *ngIf="f.submitted && username.invalid">

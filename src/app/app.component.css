@@ -13,3 +13,10 @@
 .background-white {
     background-color: #fff;
 }
+
+.radius-image {
+    border-radius: 50%;
+    width: 29px;
+    height: 29px;
+    margin-right: 5px;
+}
