@@ -15,8 +15,8 @@ const httpOptions = {
 })
 export class AuthService {
 
-  private loginUrl = 'https://infinite-sands-30212.herokuapp.com/api/auth/signin';
-  private signupUrl = 'https://infinite-sands-30212.herokuapp.com/api/auth/signup';
+  private loginUrl = 'https://spring-boot-demo-app-cloud.cfapps.io/api/auth/signin';
+  private signupUrl = 'https://spring-boot-demo-app-cloud.cfapps.io/api/auth/signup';
 
 
   constructor(private http: HttpClient) {

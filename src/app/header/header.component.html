@@ -1,0 +1,148 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <!-- <a class="navbar-brand" routerLink="dashboard">La Plume D'Or</a> -->
+
+      <div class="logo">
+        <a routerLink="dashboard" class="simple-text">
+          <div class="logo-img">
+            <img src="/assets/img/plumedor-logo.png" />
+          </div>
+        </a>
+        <!-- <a routerLink="/" class="simple-text">La Plume D'or&nbsp;</a> -->
+      </div>
+
+    </div>
+
+    <div *ngIf="authority === 'admin'">
+
+      <ul class="nav navbar-nav" routerLinkActive="active">
+          <li class="nav-item">
+              <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+            </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/teachers">teachers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/students">students</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/subjects">Subjects</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/groups">groups</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/lessons">lessons</a>
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="authority === 'admin'">
+
+      <ul class="nav navbar-nav horiz navbar-right" routerLinkActive="active">
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="#pablo" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <i class="material-icons">messages</i>
+            <span class="notification">2</span>
+            <p>
+              <span class="d-lg-none d-md-block">Some Actions</span>
+            </p>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">Mike John responded to your email</a>
+            <a class="dropdown-item" href="#">You have 5 new tasks</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="#pablo" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <i class="material-icons">notifications</i>
+            <span class="notification">5</span>
+            <p>
+              <span class="d-lg-none d-md-block">Some Actions</span>
+            </p>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">Mike John responded to your email</a>
+            <a class="dropdown-item" href="#">You have 5 new tasks</a>
+            <a class="dropdown-item" href="#">You're now friend with Andrew</a>
+            <a class="dropdown-item" href="#">Another Notification</a>
+            <a class="dropdown-item" href="#">Another One</a>
+          </div>
+        </li>
+
+
+
+
+        <li class="nav-item dropdown">
+          <a class="dropdown-toggle nav-link background-white" data-toggle="dropdown">
+            <img src="../assets/img/faces/marc.jpg" alt="Smile face" class="radius-image" /> Admin {{ username }}
+            <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Message</a></li>
+            <li><a href="#">Notifications</a></li>
+            <li><a (click)="logout()">Logout</a></li>
+          </ul>
+        </li>
+
+
+      </ul>
+      <!-- <ul class="nav navbar-nav nav-mobile-menu">
+    </ul> -->
+    </div>
+
+    <div *ngIf="authority === 'pm'">
+      <ul class="nav navbar-nav horiz navbar-right" routerLinkActive="active">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/lessons">lessons</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/marks">marks</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" routerLink="admin" id="navbarDropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Prof. {{ username }}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item">Dashboard</a>
+            <a class="dropdown-item">Message</a>
+            <a class="dropdown-item">Notifications</a>
+            <a (click)="logout()">Logout</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="authority === 'user'">
+      <ul class="nav navbar-nav horiz navbar-right" routerLinkActive="active">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/marks">marks</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" routerLink="admin" id="navbarDropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {{ username }}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item">Dashboard</a>
+            <a class="dropdown-item">Message</a>
+            <a class="dropdown-item">Notifications</a>
+            <a (click)="logout()">Logout</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="!authority">
+      <ul class="nav navbar-nav horiz navbar-right" routerLinkActive="active">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="auth/login">Login</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

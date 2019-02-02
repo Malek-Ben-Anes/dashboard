@@ -5,10 +5,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import {CdkTableModule} from '@angular/cdk/table';
-import {DragDropModule} from '@angular/cdk/drag-drop';
-import {DemoMaterialModule} from './material.module';
-import {ScrollDispatchModule} from '@angular/cdk/scrolling';
+import { CdkTableModule } from '@angular/cdk/table';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { DemoMaterialModule } from './material.module';
+import { ScrollDispatchModule } from '@angular/cdk/scrolling';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
@@ -69,6 +70,9 @@ import { StudentAssignComponent } from './group-detail/student-assign/student-as
 import { GroupTimetableComponent } from './group-detail/group-timetable/group-timetable.component';
 import { MarkComponent } from './marks/marks.component';
 import { MarkService } from './services/mark.service';
+import { HeaderComponent } from './header/header.component';
+import { AvatarComponent } from './avatar/avatar.component';
+import { FileUploadService } from './services/file-upload.service';
 
 @NgModule({
   imports: [
@@ -82,10 +86,11 @@ import { MarkService } from './services/mark.service';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
-    
-    DemoMaterialModule,  
+
+    DemoMaterialModule,
     DragDropModule,
     ScrollDispatchModule,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     AppComponent,
@@ -119,11 +124,13 @@ import { MarkService } from './services/mark.service';
     StudentAssignComponent,
     GroupTimetableComponent,
     MarkComponent,
+    HeaderComponent,
+    AvatarComponent,
   ],
   exports: [
     StepperComponent,
   ],
-  providers: [TeacherService,StudentService, DataService, SubjectService, GroupService, LessonService, MarkService/*, ImageService, FileUploadService*/],
+  providers: [TeacherService, StudentService, DataService, SubjectService, GroupService, LessonService, MarkService, FileUploadService/*, ImageService, FileUploadService*/],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

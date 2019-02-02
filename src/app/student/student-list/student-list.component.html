@@ -1,14 +1,15 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-                
+
 
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-info">
                         <h4 class="card-title ">Students Table</h4>
                         <p class="card-category"> Here is a details for all students</p>
-                        <button mat-raised-button type="button" class="btn btn-warning pull-right" routerLink="/student-profile">Add Student</button>
+                        <button mat-raised-button type="button" class="btn btn-warning pull-right" routerLink="/student-profile">Add
+                            Student</button>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -16,9 +17,6 @@
                                 <thead class=" text-primary">
                                     <th>
                                         Image
-                                    </th>
-                                    <th>
-                                        ID
                                     </th>
                                     <th>
                                         Firstname
@@ -36,16 +34,18 @@
                                 <tbody>
                                     <tr *ngFor="let student of students">
                                         <td>
-                                            <div class="card-profile" >
+                                            <div class="card-profile">
                                                 <div class="card-avatar">
                                                     <a routerLink="/{{ 'student-profile/' + student.id }}">
-                                                        <img class="img" src="./assets/img/faces/marc.jpg" alt="Smiley face" width="42" height="42" />
+                                                        <div *ngIf="(student.photo !== undefined && student.photo !== null); else defaultPhoto">
+                                                            <img class="img profile-image" src="{{ 'https://spring-boot-demo-app-cloud.cfapps.io' + student.photo.substr(1) }}" alt="Smiley face"/>
+                                                        </div>
+                                                        <ng-template #defaultPhoto>
+                                                                <img class="img profile-image" src="./assets/images/profile-logo.png" alt="Smiley face"/>
+                                                          </ng-template>
                                                     </a>
                                                 </div>
                                             </div>
-                                        </td>
-                                        <td>
-                                            {{ student.id }}
                                         </td>
                                         <td>
                                             {{ student.firstname }}
@@ -58,7 +58,9 @@
                                         </td>
                                         <td>
                                             <div *ngIf="student.group">{{ student.group.name }}</div>
-                                            <div *ngIf="!student.group">Not Assigned</div>
+                                            <div *ngIf="!student.group">
+                                                <p class="not-assigned"><b>Not Assigned</b></p>
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>

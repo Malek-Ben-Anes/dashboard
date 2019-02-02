@@ -2,23 +2,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4">
-                <div class="card card-profile">
-                    <div class="card-avatar">
-                        <a>
-                            <img class="img" src="./assets/img/faces/marc.jpg" alt="Smiley face" height="42" width="42" />
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <h6 class="card-category text-gray">Student Profile</h6>
-                        <h4 class="card-title">{{student.firstname}} {{student.lastname}}</h4>
-                        <p class="card-description">
-                            {{ student.email }}
-                        </p>
-                        <p class="card-description">
-                            Registred: {{ student.createdAt | date }}
-                        </p>
-
-                    </div>
+                <div *ngIf="student">
+                    <app-avatar [student]="student"></app-avatar>
                 </div>
             </div>
             <div class="col-md-8">

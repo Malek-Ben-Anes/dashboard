@@ -1,11 +1,27 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Student } from 'app/models/Student';
+
+const FILE_UPLOAD_URL: string = 'https://spring-boot-demo-app-cloud.cfapps.io/api/profile/';
 
 @Injectable()
 export class FileUploadService {
-/*
+
   constructor(private http: HttpClient) { }
+
+
+  uploadFile(userId, file:File): Observable<HttpEvent<{}>> {
+
+    const formdata: FormData = new FormData();
+    formdata.append('file', file);
+
+    return this.http.post<Student>(FILE_UPLOAD_URL + userId + '/upload-picture', formdata, {
+      reportProgress: true,
+      observe: 'events'
+    });
+  }
+
   pushFileToStorage(file: File): Observable<HttpEvent<{}>> {
     const formdata: FormData = new FormData();
     formdata.append('file', file);
@@ -15,53 +31,41 @@ export class FileUploadService {
     }
     );
     return this.http.request(req);
-  }*/
+  }
+
 }
 
-/* upload file compnent
+// selectedFile: ImageSnippet;
 
+// private onSuccess() {
+//   this.selectedFile.pending = false;
+//   this.selectedFile.status = 'ok';
+// }
 
-  onUploadFile(file: File) {
-    this.fileIsUploading = true;
-    this.teachersService.uploadFile(file).then(
-      (url: string) => {
-        this.fileUrl = url;
-        this.fileIsUploading = false;
-        this.fileUploaded = true;
-      }
-    );
-  }
+// private onError() {
+//   this.selectedFile.pending = false;
+//   this.selectedFile.status = 'fail';
+//   this.selectedFile.src = '';
+// }
 
-  detectFiles(event) {
-    this.onUploadFile(event.target.files[0]);
-  }
+// processFile(imageInput: any) {
+//   const file: File = imageInput.files[0];
+//   const reader = new FileReader();
 
+//   reader.addEventListener('load', (event: any) => {
 
-  selectedFiles: FileList;
-   currentFileUpload: File;
+//     this.selectedFile = new ImageSnippet(event.target.result, file);
 
-  selectFile(event) {
-    this.selectedFiles = event.target.files;
-  }
-  upload() {
-    this.currentFileUpload = this.selectedFiles.item(0);
-    this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(event => {
-     if (event instanceof HttpResponse) {
-        console.log('File is completely uploaded!');
-      }
-    });
-    this.selectedFiles = undefined;
-  }
+//     this.selectedFile.pending = true;
+//     this.imageService.uploadImage(this.selectedFile.file).subscribe(
+//       (res) => {
+//         this.onSuccess();
+//       },
+//       (err) => {
+//         this.onError();
+//       })
+//   });
 
+//   reader.readAsDataURL(file);
+// }
 
-  <div style="text-align:center">
-    <label>
-      <input type="file" (change)="selectFile($event)">
-      </label>
-      <button [disabled]="!selectedFiles"
-  (click)="upload()">Upload</button>
-    </div>
-
-
-    
-  */
