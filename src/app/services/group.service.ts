@@ -5,7 +5,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Group } from 'app/models/Group';
 import { group } from '@angular/animations';
 
-const GROUP_URL: string = 'https://infinite-sands-30212.herokuapp.com/api/groups';
+const GROUP_URL: string = 'https://spring-boot-demo-app-cloud.cfapps.io/api/groups';
 
 @Injectable({
   providedIn: 'root'

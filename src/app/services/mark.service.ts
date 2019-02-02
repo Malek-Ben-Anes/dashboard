@@ -7,7 +7,7 @@ import { Mark } from 'app/models/Mark';
 
 
 
-const MARK_URL: string = 'https://infinite-sands-30212.herokuapp.com/students/';
+const MARK_URL: string = 'https://spring-boot-demo-app-cloud.cfapps.io/api/students/';
 
 
 @Injectable({

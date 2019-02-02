@@ -8,7 +8,7 @@ import { reject } from 'q';
 
 //const url: string = 'http://localhost:8090/api/teachers';
 
-const TEACHER_URL: string = 'https://infinite-sands-30212.herokuapp.com/api/teachers';
+const TEACHER_URL: string = 'https://spring-boot-demo-app-cloud.cfapps.io/api/teachers';
 
 @Injectable({
   providedIn: 'root'

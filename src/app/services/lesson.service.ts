@@ -5,7 +5,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Group } from 'app/models/Group';
 import { Lesson } from 'app/models/Lesson';
 
-const LESSON_URL: string = 'https://infinite-sands-30212.herokuapp.com/api/lessons';
+const LESSON_URL: string = 'https://spring-boot-demo-app-cloud.cfapps.io/api/lessons';
 
 @Injectable({
   providedIn: 'root'

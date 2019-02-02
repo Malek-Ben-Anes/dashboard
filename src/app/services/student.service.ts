@@ -9,8 +9,8 @@ import { Student } from 'app/models/Student';
 
 //const url: string = 'http://localhost:8090/api/teachers';
 
-const STUDENT_URL: string = 'https://infinite-sands-30212.herokuapp.com/api/students';
-const GROUP_URL: string = 'https://infinite-sands-30212.herokuapp.com/api/groups/';
+const STUDENT_URL: string = 'https://spring-boot-demo-app-cloud.cfapps.io/api/students';
+const GROUP_URL: string = 'https://spring-boot-demo-app-cloud.cfapps.io/api/groups/';
 
 @Injectable({
   providedIn: 'root'
