@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
 export class DialogflowService {
 
   private baseURL: string = "https://api.dialogflow.com/v1/query?v=20150910";
-  private token: string = environment.token;
+  //private token: string = environment.token;
 
   constructor(private http: Http){}
 
@@ -27,7 +27,7 @@ export class DialogflowService {
 
   public getHeaders(){
     let headers = new Headers();
-    headers.append('Authorization', `Bearer ${this.token}`);
+    //headers.append('Authorization', `Bearer ${this.token}`);
     return headers;
   }
 }
