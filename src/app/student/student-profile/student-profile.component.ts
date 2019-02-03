@@ -158,7 +158,7 @@ export class StudentProfileComponent implements OnInit {
 
   private createStudent(studentRequest: Student): void {
     this.studentService.saveStudent(studentRequest)
-      .subscribe(student => { this.student = student; console.log("student created") },
+      .subscribe(student => { this.student = student; console.log("student created"); console.log(student) },
         (err: HttpErrorResponse) => {
           if (err.error instanceof Error) {
             console.log("Client-side error occured.");

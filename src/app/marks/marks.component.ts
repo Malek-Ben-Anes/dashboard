@@ -14,121 +14,33 @@ import { Level } from 'app/models/Level';
   styleUrls: ['./marks.component.scss']
 })
 export class MarkComponent implements OnInit {
-
-  groups: Group[];
+//https://hackernoon.com/chatbot-with-angular-5-dialogflow-fdac97fef681
+  
   students: Student[];
 
-  levels = Object.keys(Level);
-  level: Level;
-
   selectedGroup: Group;
-  selectedStudent: Student;
 
   marks: Mark[]; // by student Id
 
-  markForm: FormGroup;
-
-  constructor(private formBuilder: FormBuilder, private markService: MarkService, private groupService: GroupService, private studentService: StudentService) {
+  constructor(private markService: MarkService,  private studentService: StudentService) {
   }
+
+  ngOnInit() {}
+
+
+  onGroupSelected(group: Group) {
+    this.selectedGroup = group;
+    
+    // get all group students 
+    this.getStudents(this.selectedGroup.id);
+  }
+
+  private getStudents(id: number):void {
+    this.studentService.getGroupStudents(id)
+                        .subscribe(students => {this.students = students; console.log(this.students);}, 
+                        err => console.log(err.error ) );
+                        }
+
   
-  ngOnInit() {
-    this.getgroups();
-    this.initForm();
-  }
-
-  initForm() {
-    this.markForm = this.formBuilder.group({
-      level: [null, Validators.required],
-      group: [null, Validators.required],
-    });
-  }
-
-  private getgroups() {
-    this.groupService.getGroups().subscribe(groups => this.groups = groups, err => console.log(err) );
-  }
-
-
-  onSubmit() {
-    this.level = this.markForm.get('level').value;
-    this.selectedGroup = this.markForm.get('group').value;
-    console.log(this.selectedGroup);
-    this.studentService.getGroupStudents(this.selectedGroup.id).subscribe(students => this.students = students);
-  }
-
-  states = [
-    {name: 'Alabama', capital: 'Montgomery'},
-    {name: 'Alaska', capital: 'Juneau'},
-    {name: 'Arizona', capital: 'Phoenix'},
-    {name: 'Arkansas', capital: 'Little Rock'},
-    {name: 'California', capital: 'Sacramento'},
-    {name: 'Colorado', capital: 'Denver'},
-    {name: 'Connecticut', capital: 'Hartford'},
-    {name: 'Delaware', capital: 'Dover'},
-    {name: 'Florida', capital: 'Tallahassee'},
-    {name: 'Georgia', capital: 'Atlanta'},
-    {name: 'Hawaii', capital: 'Honolulu'},
-    {name: 'Idaho', capital: 'Boise'},
-    {name: 'Illinois', capital: 'Springfield'},
-    {name: 'Indiana', capital: 'Indianapolis'},
-    {name: 'Iowa', capital: 'Des Moines'},
-    {name: 'Kansas', capital: 'Topeka'},
-    {name: 'Kentucky', capital: 'Frankfort'},
-    {name: 'Louisiana', capital: 'Baton Rouge'},
-    {name: 'Maine', capital: 'Augusta'},
-    {name: 'Maryland', capital: 'Annapolis'},
-    {name: 'Massachusetts', capital: 'Boston'},
-    {name: 'Michigan', capital: 'Lansing'},
-    {name: 'Minnesota', capital: 'St. Paul'},
-    {name: 'Mississippi', capital: 'Jackson'},
-    {name: 'Missouri', capital: 'Jefferson City'},
-    {name: 'Montana', capital: 'Helena'},
-    {name: 'Nebraska', capital: 'Lincoln'},
-    {name: 'Nevada', capital: 'Carson City'},
-    {name: 'New Hampshire', capital: 'Concord'},
-    {name: 'New Jersey', capital: 'Trenton'},
-    {name: 'New Mexico', capital: 'Santa Fe'},
-    {name: 'New York', capital: 'Albany'},
-    {name: 'North Carolina', capital: 'Raleigh'},
-    {name: 'North Dakota', capital: 'Bismarck'},
-    {name: 'Ohio', capital: 'Columbus'},
-    {name: 'Oklahoma', capital: 'Oklahoma City'},
-    {name: 'Oregon', capital: 'Salem'},
-    {name: 'Pennsylvania', capital: 'Harrisburg'},
-    {name: 'Rhode Island', capital: 'Providence'},
-    {name: 'South Carolina', capital: 'Columbia'},
-    {name: 'South Dakota', capital: 'Pierre'},
-    {name: 'Tennessee', capital: 'Nashville'},
-    {name: 'Texas', capital: 'Austin'},
-    {name: 'Utah', capital: 'Salt Lake City'},
-    {name: 'Vermont', capital: 'Montpelier'},
-    {name: 'Virginia', capital: 'Richmond'},
-    {name: 'Washington', capital: 'Olympia'},
-    {name: 'West Virginia', capital: 'Charleston'},
-    {name: 'Wisconsin', capital: 'Madison'},
-    {name: 'Wyoming', capital: 'Cheyenne'},
-  ];
-
-  displayedColumns = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
 }
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
 

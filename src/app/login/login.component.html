@@ -33,7 +33,18 @@
           </div>
         </div>
         <div class="form-group">
-          <button class="btn btn-primary">Login</button>
+
+            <div *ngIf="isLogging; else isNotLogging">
+                <button mat-raised-button class="btn btn-primary">
+                    Logging...<i class="fa fa-circle-o-notch fa-spin"></i>
+                </button>
+            </div>
+            <ng-template  #isNotLogging>
+                <button mat-raised-button class="btn btn-primary">
+                        <span class="glyphicon glyphicon-cloud-upload"></span>Login 
+                </button>
+            </ng-template>
+
           <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger">
             Login failed: {{errorMessage}}
           </div>

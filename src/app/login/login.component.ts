@@ -20,6 +20,8 @@ export class LoginComponent implements OnInit {
   roles: string[] = [];
   private loginInfo: AuthLoginInfo;
 
+  isLogging: boolean = false;
+
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private router: Router) { }
 
   ngOnInit() {
@@ -31,6 +33,8 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     console.log(this.form);
+
+    this.isLogging = true;
 
     this.loginInfo = new AuthLoginInfo(
       this.form.username,
@@ -49,6 +53,7 @@ export class LoginComponent implements OnInit {
         let expireDate = tokenInfo.exp; // get token expiration dateTime
         console.log(tokenInfo); // show decoded token object in console
 
+        this.isLogging = false;
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;

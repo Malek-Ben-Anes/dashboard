@@ -23,6 +23,8 @@ import { StudentComponent } from './student/student/student.component';
 import { StudentListComponent } from './student/student-list/student-list.component';
 import { LessonDetailComponent } from './lesson-detail/lesson-detail.component';
 import { MarkComponent } from './marks/marks.component';
+import { MessageListComponent } from './messages/message-list/message-list.component';
+import { MessagesComponent } from './messages/messages.component';
 
 const routes: Routes = [
     {
@@ -110,6 +112,10 @@ const routes: Routes = [
     {
         path: 'marks',
         component: MarkComponent
+    },
+    {
+        path: 'messages',
+        component: MessagesComponent
     },
     {
         path: '',

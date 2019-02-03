@@ -45,6 +45,7 @@ import { StudentService } from './services/student.service';
 import { SubjectService } from './services/subject.service';
 import { GroupService } from './services/group.service';
 import { DataService } from './services/data.service';
+import { DialogflowService } from './services/dialogflow.service';
 
 
 import { TeacherComponent } from './teacher/teacher/teacher.component';
@@ -73,6 +74,12 @@ import { MarkService } from './services/mark.service';
 import { HeaderComponent } from './header/header.component';
 import { AvatarComponent } from './avatar/avatar.component';
 import { FileUploadService } from './services/file-upload.service';
+import { MessageListComponent } from './messages/message-list/message-list.component';
+import { MessageItemComponent } from './messages/message-item/message-item.component';
+import { MessageFormComponent } from './messages/message-form/message-form.component';
+import { MessagesComponent } from './messages/messages.component';
+import { FilterComponent } from './marks/filter/filter.component';
+import { GroupStudentListComponent } from './marks/group-student-list/group-student-list.component';
 
 @NgModule({
   imports: [
@@ -91,6 +98,7 @@ import { FileUploadService } from './services/file-upload.service';
     DragDropModule,
     ScrollDispatchModule,
     MatProgressSpinnerModule,
+
   ],
   declarations: [
     AppComponent,
@@ -126,11 +134,18 @@ import { FileUploadService } from './services/file-upload.service';
     MarkComponent,
     HeaderComponent,
     AvatarComponent,
+    MessageListComponent,
+    MessageItemComponent,
+    MessageFormComponent,
+    MessagesComponent,
+    FilterComponent,
+    GroupStudentListComponent,
   ],
   exports: [
     StepperComponent,
   ],
-  providers: [TeacherService, StudentService, DataService, SubjectService, GroupService, LessonService, MarkService, FileUploadService/*, ImageService, FileUploadService*/],
+  providers: [TeacherService, StudentService, DataService, SubjectService, GroupService, LessonService, 
+    MarkService, FileUploadService, DialogflowService/*, ImageService, FileUploadService*/],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
