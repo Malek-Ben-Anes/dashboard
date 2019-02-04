@@ -1,6 +1,6 @@
 .example-viewport {
-    height: 200px;
-    width: 200px;
+    height: 250px;
+    width: 350px;
     border: 1px solid black;
   }
   
@@ -57,3 +57,28 @@
     height: 600px;
     overflow-y: scroll;
   }
+
+  .example-container {
+    height: 400px;
+    overflow: auto;
+  }
+  
+  table {
+    width: 100%;
+  }
+
+  .student-item {
+    border-bottom: 1px solid rgb(209, 209, 209);
+    padding: 3px;
+}
+
+.student-hover:hover {  background-color: rgb(209, 209, 209); }
+
+.button-no-style {
+  all: unset;
+  width: 300px;
+}
+
+.width-350  {
+  width: 350px;
+}

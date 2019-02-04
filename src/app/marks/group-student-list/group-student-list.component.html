@@ -1,25 +1,21 @@
-<div class="chatform">
-  <div class="chatlist">
-    <ul class="list-group">
-      <div>
-        <li class="list-group-item" *ngFor="let student of students">
+<cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="example-viewport width-350">
+  <div *cdkVirtualFor="let student of students" class="example-item">
+    <button class="button-no-style"><span>
+        <div class="block  student-item student-hover" (click)="onDetailMarks(student)">
           <div *ngIf="(student.photo !== undefined && student.photo !== null); else defaultPhoto">
             <img [src]="'https://spring-boot-demo-app-cloud.cfapps.io' + student.photo.substr(1)" alt="Smiley face"
-              class="avatar" />
+              class="avatar" (click)="onDetailMarks(student)" />
           </div>
+
           <ng-template #defaultPhoto>
-            <img src="./assets/images/profile-logo.png" alt="Smiley face" class="avatar" />
+            <img src="./assets/images/profile-logo.png" alt="Smiley face" class="avatar" (click)="onDetailMarks(student)" />
           </ng-template>
-          
+
           <div class="message">
             {{student.firstname}} {{student.lastname}}
           </div>
-          <!-- <div class="timeform">
-            <i class="fa fa-clock-o" aria-hidden="true"></i> <span class="timestamp">at {{student.createdAt | date :
-              'dd/MM/yyyy' }}</span>
-          </div> -->
-        </li>
-      </div>
-    </ul>
+        </div>
+      </span>
+    </button>
   </div>
-</div>
+</cdk-virtual-scroll-viewport>

@@ -20,7 +20,7 @@ export class FilterComponent implements OnInit {
   levels = Object.keys(Level);
   level: Level;
 
-  @Output() selectedGroup = new EventEmitter<Group>();
+  @Output() groupSelected = new EventEmitter<Group>();
   
   
   //group: Group;
@@ -48,10 +48,9 @@ export class FilterComponent implements OnInit {
   onSubmit() {
     this.level = this.markForm.get('level').value;
     const group: Group = this.markForm.get('group').value;
-    this.selectedGroup.emit(group);
+    this.groupSelected.emit(group);
 
-    console.log(this.selectedGroup);
-    console.log(group);
+    console.log(this.groupSelected);
 
 
     // to call service by authenticated user role 

@@ -80,6 +80,7 @@ import { MessageFormComponent } from './messages/message-form/message-form.compo
 import { MessagesComponent } from './messages/messages.component';
 import { FilterComponent } from './marks/filter/filter.component';
 import { GroupStudentListComponent } from './marks/group-student-list/group-student-list.component';
+import { StudentMarksDetailComponent } from './marks/student-marks-detail/student-marks-detail.component';
 
 @NgModule({
   imports: [
@@ -140,6 +141,7 @@ import { GroupStudentListComponent } from './marks/group-student-list/group-stud
     MessagesComponent,
     FilterComponent,
     GroupStudentListComponent,
+    StudentMarksDetailComponent,
   ],
   exports: [
     StepperComponent,

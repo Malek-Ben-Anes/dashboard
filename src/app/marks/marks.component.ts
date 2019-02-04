@@ -18,7 +18,8 @@ export class MarkComponent implements OnInit {
   
   students: Student[];
 
-  selectedGroup: Group;
+  groupSelected: Group;
+  studentSelected: Student;
 
   marks: Mark[]; // by student Id
 
@@ -29,18 +30,22 @@ export class MarkComponent implements OnInit {
 
 
   onGroupSelected(group: Group) {
-    this.selectedGroup = group;
+    this.groupSelected = group;
     
     // get all group students 
-    this.getStudents(this.selectedGroup.id);
+    this.getStudents(this.groupSelected.id);
+  }
+
+  onStudentSelected(student: Student) {
+    console.log("studnet selected");
+    this.studentSelected = student;
+    console.log(this.studentSelected);
   }
 
   private getStudents(id: number):void {
     this.studentService.getGroupStudents(id)
                         .subscribe(students => {this.students = students; console.log(this.students);}, 
                         err => console.log(err.error ) );
-                        }
-
-  
+                        }  
 }
 
