@@ -84,6 +84,7 @@ import { GroupStudentListComponent } from './marks/group-student-list/group-stud
 import { StudentMarksDetailComponent } from './marks/student-marks-detail/student-marks-detail.component';
 import { LessonTimeTableComponent } from './lesson-list/lesson-time-table/lesson-time-table.component';
 import { MarkFormComponent } from './marks/mark-form/mark-form.component';
+import { MarkDetailComponent } from './marks/student-view/mark-detail/mark-detail.component';
 
 
 @NgModule({
@@ -147,6 +148,7 @@ import { MarkFormComponent } from './marks/mark-form/mark-form.component';
     StudentMarksDetailComponent,
     LessonTimeTableComponent,
     MarkFormComponent,
+    MarkDetailComponent,
   ],
   exports: [
     StepperComponent,

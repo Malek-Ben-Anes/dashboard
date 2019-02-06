@@ -7,6 +7,7 @@ import { GroupService } from 'app/services/group.service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { StudentService } from 'app/services/student.service';
 import { Level } from 'app/models/Level';
+import { TokenStorageService } from 'app/auth/token-storage.service';
 
 @Component({
   selector: 'app-marks',
@@ -21,9 +22,16 @@ export class MarkComponent implements OnInit {
   studentSelected: Student;
   marks: Mark[]; // by student Id
 
-  constructor(private markService: MarkService, private studentService: StudentService) {}  
+  loggedStudent: Student;
 
-  ngOnInit() { }
+  authority: string;
+  private roles: string[];
+
+  constructor(private tokenStorage: TokenStorageService, private markService: MarkService, private studentService: StudentService) {}  
+
+  ngOnInit() {
+    this.getAuthority();
+   }
 
   onGroupSelected(group: Group) {
     this.groupSelected = group;
@@ -39,6 +47,27 @@ export class MarkComponent implements OnInit {
     this.studentService.getGroupStudents(id)
       .subscribe(students => this.students = students,
         err => console.log(err.error));
+  }
+
+  private getAuthority() {
+    if (this.tokenStorage.getToken()) {
+      this.roles = this.tokenStorage.getAuthorities();
+      console.log(this.roles);
+      this.roles.every(role => {
+        if (role === 'ROLE_ADMIN') {
+          this.authority = 'admin';
+          return false;
+        } else if (role === 'ROLE_PM') {
+          this.authority = 'pm';
+          return false;
+        }
+        this.authority = 'user';
+        this.studentService.getSingleStudent(11).subscribe(student => this.loggedStudent = student, err => console.log(err));
+        return true;
+      });
+    
+      console.log("user role");}
+    console.log(this.authority);
   }
 }
 
