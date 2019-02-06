@@ -22,7 +22,7 @@ export class Lesson{
     }
 }
 
-class LessonId {
+export class LessonId {
         teacherId?: number;
         subjectId?: number;
         groupId?: number;

@@ -1,0 +1,23 @@
+<div class="chatcontrol">
+  <h3>Weekly evaluation </h3>
+  <ul class="list-group">
+    <li *ngFor="let newMark of newMarks">
+      <div class="row">
+
+        <div class="col-3">
+          <p>{{newMark.lesson.name}} :</p>
+        </div>
+
+        <div class="col-7">
+          <input type="text" class="form-control chatinput" [(ngModel)]="newMark.note" placeholder="Enter your observation" />
+        </div>
+        
+        <div class="col-2">
+          <input type="text" class="form-control chatinput" [(ngModel)]="newMark.mark" placeholder="Mark" type="number" max="20" min="0"/>
+        </div>
+
+      </div>
+    </li>
+  </ul>
+  <button class="btn btn-success sendbtn" (click)="sendMessage()">Send</button>
+</div>

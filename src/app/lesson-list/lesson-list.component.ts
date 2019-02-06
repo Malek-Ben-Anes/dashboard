@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Lesson } from 'app/models/Lesson';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { LessonService } from 'app/services/lesson.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+
+
+import { Lesson, LessonId } from 'app/models/Lesson';
+import { LessonService } from 'app/services/lesson.service';
 import { Level } from 'app/models/Level';
 import { Teacher } from 'app/models/Teacher';
 import { Group } from 'app/models/Group';
@@ -10,6 +13,11 @@ import { Subject } from 'app/models/Subject';
 import { GroupService } from 'app/services/group.service';
 import { TeacherService } from 'app/services/teacher.service';
 import { SubjectService } from 'app/services/subject.service';
+import { LessonTimeTableComponent } from './lesson-time-table/lesson-time-table.component';
+
+export interface DialogData {
+  animal: 'panda' | 'unicorn' | 'lion';
+}
 
 @Component({
   selector: 'app-lesson-list',
@@ -29,8 +37,17 @@ export class LessonListComponent implements OnInit {
 
   lessonForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private lessonService: LessonService,
+  constructor(private formBuilder: FormBuilder, public dialog: MatDialog, private lessonService: LessonService,
     private groupService: GroupService, private teacherService: TeacherService, private subjectService: SubjectService) { }
+
+
+  openDialog() {
+    this.dialog.open(LessonTimeTableComponent, {
+      data: {
+        animal: 'panda'
+      }
+    });
+  }
 
   ngOnInit() {
     this.initForm();
@@ -101,7 +118,7 @@ export class LessonListComponent implements OnInit {
     this.newLesson.name = this.extractFieldData('name');
     this.newLesson.level = this.extractFieldData('level');
     this.newLesson.description = this.extractFieldData('description');
-    this.newLesson.id = {};
+    this.newLesson.id = new LessonId();
 
     // Complement Data
     const teacher = this.extractFieldData('teacher');
@@ -114,7 +131,7 @@ export class LessonListComponent implements OnInit {
 
     const group = this.extractFieldData('group');
     this.newLesson.id.groupId = group.id;
-    this.newLesson.groupName = group.name;    
+    this.newLesson.groupName = group.name;
   }
 
   private extractFieldData(property: string): any {

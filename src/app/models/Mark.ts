@@ -9,4 +9,11 @@ export class Mark{
     mark?: string;
     student: Student;
     lesson: Lesson;
+
+    constructor(student?: Student, lesson?: Lesson, note?: number, mark?: string) {
+        this.student = student;
+        this.lesson = lesson;
+        this.note = note;
+        this.mark = mark;
+    }
 }

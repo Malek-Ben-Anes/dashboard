@@ -21,7 +21,7 @@ import { GroupDetailComponent } from './group-detail/group-detail.component';
 import { LessonListComponent } from './lesson-list/lesson-list.component';
 import { StudentComponent } from './student/student/student.component';
 import { StudentListComponent } from './student/student-list/student-list.component';
-import { LessonDetailComponent } from './lesson-detail/lesson-detail.component';
+import { LessonDetailComponent } from './lesson-list/lesson-detail/lesson-detail.component';
 import { MarkComponent } from './marks/marks.component';
 import { MessageListComponent } from './messages/message-list/message-list.component';
 import { MessagesComponent } from './messages/messages.component';

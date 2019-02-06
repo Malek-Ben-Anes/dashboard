@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { Student } from 'app/models/Student';
 import { Mark } from 'app/models/Mark';
 import { MarkService } from 'app/services/mark.service';
@@ -8,18 +8,27 @@ import { MarkService } from 'app/services/mark.service';
   templateUrl: './student-marks-detail.component.html',
   styleUrls: ['./student-marks-detail.component.scss']
 })
-export class StudentMarksDetailComponent implements OnInit {
+export class StudentMarksDetailComponent implements OnInit, OnChanges {
 
 
   @Input('student') student: Student;
 
   // student marks to be retrieved from markService
-  marks: Mark[] = []; 
+  marks: Mark[] = [];
 
   constructor(private markService: MarkService) { }
 
   ngOnInit() {
-    this.markService.getStudentMarks(this.student.id).subscribe(marks => { this.marks = marks; console.log(this.marks); });
+    this.getStudentsMarks();
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    // changes.prop contains the old and the new value...
+    this.student = changes.student.currentValue;
+    this.getStudentsMarks();
+  }
+
+  private getStudentsMarks() {
+    this.markService.getStudentMarks(this.student.id).subscribe(marks => { this.marks = marks; console.log(this.marks); });
+  }
 }

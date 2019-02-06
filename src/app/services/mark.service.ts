@@ -33,8 +33,12 @@ export class MarkService {
     return this.http.get<Mark>(MARK_URL + studentId + '/marks/' + groupId);
   }
 
-  saveMark(mark: Mark) : Observable<Mark>  {
-    return this.http.post<Mark>(MARK_URL + mark.student.id, mark);
+  saveMark(studentId: number, mark: Mark) : Observable<Mark>  {
+    return this.http.post<Mark>(MARK_URL+ studentId + '/marks/', mark);
+  }
+
+  updateMark(mark: Mark) : Observable<Mark>  {
+    return this.http.put<Mark>(MARK_URL + mark.student.id, mark);
   }
 
   deleteMark(studentId: number, groupId: number) {

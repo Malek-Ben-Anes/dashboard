@@ -10,6 +10,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DemoMaterialModule } from './material.module';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatDialog } from '@angular/material';
 
 
 
@@ -63,7 +64,7 @@ import { ImageService } from './services/image.service';*/
 import { StudentComponent } from './student/student/student.component';
 import { StudentListComponent } from './student/student-list/student-list.component';
 import { StudentProfileComponent } from './student/student-profile/student-profile.component';
-import { LessonDetailComponent } from './lesson-detail/lesson-detail.component';
+import { LessonDetailComponent } from './lesson-list/lesson-detail/lesson-detail.component';
 import { LessonService } from './services/lesson.service';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 
@@ -81,6 +82,9 @@ import { MessagesComponent } from './messages/messages.component';
 import { FilterComponent } from './marks/filter/filter.component';
 import { GroupStudentListComponent } from './marks/group-student-list/group-student-list.component';
 import { StudentMarksDetailComponent } from './marks/student-marks-detail/student-marks-detail.component';
+import { LessonTimeTableComponent } from './lesson-list/lesson-time-table/lesson-time-table.component';
+import { MarkFormComponent } from './marks/mark-form/mark-form.component';
+
 
 @NgModule({
   imports: [
@@ -98,8 +102,7 @@ import { StudentMarksDetailComponent } from './marks/student-marks-detail/studen
     DemoMaterialModule,
     DragDropModule,
     ScrollDispatchModule,
-    MatProgressSpinnerModule,
-
+    MatProgressSpinnerModule
   ],
   declarations: [
     AppComponent,
@@ -142,11 +145,16 @@ import { StudentMarksDetailComponent } from './marks/student-marks-detail/studen
     FilterComponent,
     GroupStudentListComponent,
     StudentMarksDetailComponent,
+    LessonTimeTableComponent,
+    MarkFormComponent,
   ],
   exports: [
     StepperComponent,
   ],
-  providers: [TeacherService, StudentService, DataService, SubjectService, GroupService, LessonService, 
+  entryComponents: [
+    LessonTimeTableComponent
+  ],
+  providers: [MatDialog, TeacherService, StudentService, DataService, SubjectService, GroupService, LessonService, 
     MarkService, FileUploadService, DialogflowService/*, ImageService, FileUploadService*/],
   bootstrap: [AppComponent]
 })

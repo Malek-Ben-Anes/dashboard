@@ -34,6 +34,10 @@ export class LessonService {
     return this.http.put<Lesson>(LESSON_URL, lesson);
   }
 
+  getLessonsByGroupId(groupId: number) : Observable<Lesson[]> {
+    return this.http.get<Lesson[]>(LESSON_URL);
+  }
+
   uploadFile(file: File) {
     return new Promise(
       (resolve, reject) => {
