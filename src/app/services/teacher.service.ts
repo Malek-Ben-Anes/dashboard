@@ -8,8 +8,8 @@ import { reject } from 'q';
 
 //const url: string = 'http://localhost:8090/api/teachers';
 
-//const TEACHER_URL: string = 'https://spring-boot-demo-app-cloud.cfapps.io/api/teachers';
-const TEACHER_URL: string = 'http://localhost:8090/api/teachers';
+const TEACHER_URL: string = 'https://spring-boot-demo-app-cloud.cfapps.io/api/teachers';
+//const TEACHER_URL: string = 'http://localhost:8090/api/teachers';
 
 @Injectable({
   providedIn: 'root'

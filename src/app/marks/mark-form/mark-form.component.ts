@@ -46,13 +46,6 @@ export class MarkFormComponent implements OnInit, OnChanges {
     });
   }
 
-  // initForm() {
-  //   this.markForm = this.formBuilder.group({
-  //     name: ['', Validators.required],
-  //     level: [null, Validators.required],
-  //   });
-  // }
-
   public sendMessage(): void {
     console.log(this.newMarks);
 

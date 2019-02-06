@@ -14,38 +14,31 @@ import { Level } from 'app/models/Level';
   styleUrls: ['./marks.component.scss']
 })
 export class MarkComponent implements OnInit {
-//https://hackernoon.com/chatbot-with-angular-5-dialogflow-fdac97fef681
-  
-  students: Student[];
 
+  //https://hackernoon.com/chatbot-with-angular-5-dialogflow-fdac97fef681
+  students: Student[];
   groupSelected: Group;
   studentSelected: Student;
-
   marks: Mark[]; // by student Id
 
-  constructor(private markService: MarkService,  private studentService: StudentService) {
-  }
+  constructor(private markService: MarkService, private studentService: StudentService) {}  
 
-  ngOnInit() {}
-
+  ngOnInit() { }
 
   onGroupSelected(group: Group) {
     this.groupSelected = group;
-    
     // get all group students 
     this.getStudents(this.groupSelected.id);
   }
 
   onStudentSelected(student: Student) {
     this.studentSelected = student;
-    console.log("studnet selected");
-    console.log(this.studentSelected);
   }
 
-  private getStudents(id: number):void {
+  private getStudents(id: number): void {
     this.studentService.getGroupStudents(id)
-                        .subscribe(students => this.students = students, 
-                        err => console.log(err.error ) );
-                        }  
+      .subscribe(students => this.students = students,
+        err => console.log(err.error));
+  }
 }
 

@@ -5,8 +5,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Group } from 'app/models/Group';
 import { group } from '@angular/animations';
 
-//const GROUP_URL: string = 'https://spring-boot-demo-app-cloud.cfapps.io/api/groups';
-const GROUP_URL: string = 'http://localhost:8090/api/groups';
+const GROUP_URL: string = 'https://spring-boot-demo-app-cloud.cfapps.io/api/groups';
+//const GROUP_URL: string = 'http://localhost:8090/api/groups';
 
 @Injectable({
   providedIn: 'root'

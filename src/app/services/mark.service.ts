@@ -7,8 +7,8 @@ import { Mark } from 'app/models/Mark';
 
 
 
-//const MARK_URL: string = 'https://spring-boot-demo-app-cloud.cfapps.io/api/students/';
-const MARK_URL: string = 'http://localhost:8090/api/students/';
+const MARK_URL: string = 'https://spring-boot-demo-app-cloud.cfapps.io/api/students/';
+//const MARK_URL: string = 'http://localhost:8090/api/students/';
 
 
 @Injectable({
@@ -25,7 +25,7 @@ export class MarkService {
   constructor(private http: HttpClient) {}
   
   getStudentMarks(studentId: number): Observable<Mark[]> {
-    console.log(MARK_URL);
+    console.log(MARK_URL + studentId + '/marks/');
     return this.http.get<Mark[]>(MARK_URL + studentId + '/marks/');
   }
 

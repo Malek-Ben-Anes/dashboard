@@ -25,6 +25,8 @@ export class StudentMarksDetailComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     // changes.prop contains the old and the new value...
     this.student = changes.student.currentValue;
+    console.log("student in child value changed");
+    console.log(this.student);
     this.getStudentsMarks();
   }
 
