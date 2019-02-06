@@ -37,14 +37,14 @@ export class MarkComponent implements OnInit {
   }
 
   onStudentSelected(student: Student) {
-    console.log("studnet selected");
     this.studentSelected = student;
+    console.log("studnet selected");
     console.log(this.studentSelected);
   }
 
   private getStudents(id: number):void {
     this.studentService.getGroupStudents(id)
-                        .subscribe(students => {this.students = students; console.log(this.students);}, 
+                        .subscribe(students => this.students = students, 
                         err => console.log(err.error ) );
                         }  
 }

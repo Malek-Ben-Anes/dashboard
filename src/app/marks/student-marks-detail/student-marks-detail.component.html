@@ -1,31 +1,22 @@
-<div class="example-container mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource">
-
-      <!-- Position Column -->
-      <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef> No. </th>
-        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-      </ng-container>
-
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-      </ng-container>
-
-      <!-- Weight Column -->
-      <ng-container matColumnDef="weight">
-        <th mat-header-cell *matHeaderCellDef> Weight </th>
-        <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-      </ng-container>
-
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="symbol">
-        <th mat-header-cell *matHeaderCellDef> Symbol </th>
-        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-  </div>
+<cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="example-viewport width-350">
+    <div *cdkVirtualFor="let student of students" class="example-item">
+      <button class="button-no-style"><span>
+          <div class="block  student-item student-hover" (click)="onDetailMarks(student)">
+            <div *ngIf="(student.photo !== undefined && student.photo !== null); else defaultPhoto">
+              <!-- <img [src]="'https://spring-boot-demo-app-cloud.cfapps.io' + student.photo.substr(1)" alt="Smiley face"
+                class="avatar" (click)="onDetailMarks(student)" /> -->
+                <img src="./assets/images/profile-logo.png" alt="Smiley face" class="avatar"/>
+            </div>
+  
+            <ng-template #defaultPhoto>
+              <img src="./assets/images/profile-logo.png" alt="Smiley face" class="avatar"/>
+            </ng-template>
+  
+            <div class="message">
+              <p class="message">{{student.firstname}} {{student.lastname}}</p>
+            </div>
+          </div>
+        </span>
+      </button>
+    </div>
+  </cdk-virtual-scroll-viewport>

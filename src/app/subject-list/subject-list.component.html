@@ -14,46 +14,51 @@
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Level" formControlName="description" required>
+                                        <mat-select matInput placeholder="Level" formControlName="level" required>
+                                            <mat-option *ngFor="let lev of levels" [value]="lev" required>
+                                                {{ lev }}
+                                            </mat-option>
+                                        </mat-select>
                                     </mat-form-field>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Coefficient" formControlName="description"
+                                        <input matInput placeholder="Coefficient" formControlName="coefficient"
                                             required>
                                     </mat-form-field>
                                 </div>
-                               
-                                    <div class="col-md-4">
-                                        <mat-form-field class="example-full-width">
-                                            <input matInput placeholder="Hourly volume" required>
-                                        </mat-form-field>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <mat-form-field class="example-full-width">
-                                            <input matInput placeholder="Session Numbers" required>
-                                        </mat-form-field>
-                                    </div>
+
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Hourly volume" formControlName="hourlyVolume"
+                                            required>
+                                    </mat-form-field>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-10">
-                                        <mat-form-field class="example-full-width">
-                                            <input matInput placeholder="Description" formControlName="description"
-                                                required>
-                                        </mat-form-field>
-                                    </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Session Numbers" formControlName="sessionNumber"
+                                            required>
+                                    </mat-form-field>
                                 </div>
-                                <div class="row">
-                                        <div class="col-md-10">
-                                            <mat-form-field class="example-full-width">
-                                                <input matInput placeholder="Attach Documents" formControlName="description"
-                                                    required>
-                                            </mat-form-field>
-                                        </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Description" formControlName="description"
+                                            required>
+                                    </mat-form-field>
                                 </div>
-                                <button mat-raised-button type="submit" class="btn btn-warning pull-right">Timetable</button>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Attach Documents" formControlName="description">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <button mat-raised-button type="submit" class="btn btn-warning pull-right">Timetable</button>
                             <button mat-raised-button type="submit" class="btn btn-info pull-right">Create Subject</button>
                             <div class="clearfix"></div>
                         </form>

@@ -84,7 +84,13 @@
                                     Level
                                 </th>
                                 <th>
-                                    Description
+                                    Subject
+                                </th>
+                                <th>
+                                    Teacher
+                                </th>
+                                <th>
+                                    Group
                                 </th>
                             </thead>
                             <tbody>
@@ -92,14 +98,18 @@
                                     <td class="text-primary">
                                         <a>{{lesson.name}}</a>
                                     </td>
-
                                     <td>
                                         <a>{{ lesson.level }}</a>
                                     </td>
-
                                     <td>
-                                        <a>{{ lesson.description }}</a>
-                                    </td>  
+                                        <a>{{ lesson.subjectName }}</a>
+                                    </td>
+                                    <td>
+                                        <a>{{ lesson.teacherName }}</a>
+                                    </td>
+                                    <td>
+                                        <a>{{ lesson.groupName }}</a>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

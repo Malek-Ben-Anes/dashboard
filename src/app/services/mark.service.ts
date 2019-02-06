@@ -7,7 +7,8 @@ import { Mark } from 'app/models/Mark';
 
 
 
-const MARK_URL: string = 'https://spring-boot-demo-app-cloud.cfapps.io/api/students/';
+//const MARK_URL: string = 'https://spring-boot-demo-app-cloud.cfapps.io/api/students/';
+const MARK_URL: string = 'http://localhost:8090/api/students/';
 
 
 @Injectable({

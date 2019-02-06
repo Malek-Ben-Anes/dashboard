@@ -9,7 +9,10 @@ import { reject } from 'q';
 
 //const url: string = 'http://localhost:8090/api/teachers';
 
-const SUBJECT_URL: string = 'https://spring-boot-demo-app-cloud.cfapps.io/api/subjects';
+//const SUBJECT_URL: string = 'https://spring-boot-demo-app-cloud.cfapps.io/api/subjects';
+const SUBJECT_URL: string = 'http://localhost:8090/api/subjects';
+
+
 
 @Injectable({
   providedIn: 'root'

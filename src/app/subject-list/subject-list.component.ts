@@ -3,6 +3,7 @@ import { Subject } from 'app/models/Subject';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SubjectService } from 'app/services/subject.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Level } from 'app/models/Level';
 
 @Component({
   selector: 'app-subject-list',
@@ -18,6 +19,8 @@ export class SubjectListComponent implements OnInit {
 
   subjectForm: FormGroup;
 
+  levels = Object.keys(Level);
+
   constructor(private formBuilder: FormBuilder, private subjectService: SubjectService) { }
 
   ngOnInit() {
@@ -28,7 +31,12 @@ export class SubjectListComponent implements OnInit {
   initForm() {
     this.subjectForm = this.formBuilder.group({
       name: ['', Validators.required],
+      level: [null, Validators.required],
+      coefficient: ['', Validators.required],
+      hourlyVolume: ['', Validators.required],
+      sessionNumber: ['', Validators.required],
       description: ['', Validators.required],
+      //attachedFile: ['', Validators.required],
     });
   }
 
@@ -87,20 +95,21 @@ export class SubjectListComponent implements OnInit {
   }
 
   getSubmitedData() {
-    this.newSubject.name = this.subjectForm.get('name').value;
-    this.newSubject.description = this.subjectForm.get('description').value;
-   
+    this.newSubject.name = this.extractFieldData('name');
+    this.newSubject.level = this.extractFieldData('level');
+    this.newSubject.coefficient = this.extractFieldData('coefficient');
+    this.newSubject.hourlyVolume = this.extractFieldData('hourlyVolume');
+    this.newSubject.sessionNumber = this.extractFieldData('sessionNumber');
+    this.newSubject.description = this.extractFieldData('description');
+  }
+
+  private extractFieldData(property: string): any {
+    return this.subjectForm.get(property).value;
   }
 
   onClick(subject: Subject) {
     console.log(subject);
     this.newSubject = subject;
     this.updateForm(this.newSubject);
-  }
-
-  clickMessage = '';
- 
-  public onClickMe() {
-    this.clickMessage = 'You are my hero!';
   }
 }

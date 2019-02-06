@@ -3,16 +3,17 @@
     <button class="button-no-style"><span>
         <div class="block  student-item student-hover" (click)="onDetailMarks(student)">
           <div *ngIf="(student.photo !== undefined && student.photo !== null); else defaultPhoto">
-            <img [src]="'https://spring-boot-demo-app-cloud.cfapps.io' + student.photo.substr(1)" alt="Smiley face"
-              class="avatar" (click)="onDetailMarks(student)" />
+            <!-- <img [src]="'https://spring-boot-demo-app-cloud.cfapps.io' + student.photo.substr(1)" alt="Smiley face"
+              class="avatar" (click)="onDetailMarks(student)" /> -->
+              <img src="./assets/images/profile-logo.png" alt="Smiley face" class="avatar"/>
           </div>
 
           <ng-template #defaultPhoto>
-            <img src="./assets/images/profile-logo.png" alt="Smiley face" class="avatar" (click)="onDetailMarks(student)" />
+            <img src="./assets/images/profile-logo.png" alt="Smiley face" class="avatar"/>
           </ng-template>
 
           <div class="message">
-            {{student.firstname}} {{student.lastname}}
+            <p class="message">{{student.firstname}} {{student.lastname}}</p>
           </div>
         </div>
       </span>

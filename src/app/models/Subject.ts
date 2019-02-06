@@ -1,14 +1,15 @@
 import { User, Gender } from './User';
+import { Level } from './Level';
 
 export class Subject{
 
-    id?: number;
-    name?: string;
+    id: number;
+    name: string;
+    level?: Level;
+    coefficient?: string;
+    hourlyVolume?: string;
+    sessionNumber?: string;
     description?: string;
 
-    constructor(_id?:number, _name?: string, _description?: string ){
-        this.id = _id;
-        this.name = _name;
-        this.description = _description;
-    }
+    constructor(){}
 }

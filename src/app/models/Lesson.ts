@@ -9,6 +9,10 @@ export class Lesson{
     description?: string;
     createdAt?: Date;
     updatedAt?: Date;
+    subjectName: string;
+    teacherName: string;
+    groupName: string;
+
 
     constructor(_id?:LessonId, _name?: string, _description?: string ){
         this.id = _id;

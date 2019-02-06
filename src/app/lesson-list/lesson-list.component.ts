@@ -76,20 +76,22 @@ export class LessonListComponent implements OnInit {
   onSubmit() {
     this.extractFormData();
     console.log(this.newLesson);
-    if (this.newLesson.id !== undefined) {
-      this.updateLesson(this.newLesson);
-    }
-    else {
-      this.createLesson(this.newLesson);
-    }
+    this.createLesson(this.newLesson);
+    // if (this.newLesson.id !== undefined) {
+    //   this.updateLesson(this.newLesson);
+    // }
+    // else {
+    // }
   }
   private updateLesson(lessonRequest: Lesson): void {
+    console.log(lessonRequest);
     this.lessonService.updateLesson(lessonRequest)
       .subscribe(lesson => { this.newLesson = lesson; console.log("lesson updated"); this.getLessons(); },
         err => this.errorHandler(err));
   }
 
   private createLesson(lessonRequest: Lesson): void {
+    console.log(lessonRequest);
     this.lessonService.saveLesson(lessonRequest)
       .subscribe(lesson => { this.newLesson = lesson; console.log("lesson created"); this.getLessons(); },
         err => this.errorHandler(err));
@@ -98,11 +100,21 @@ export class LessonListComponent implements OnInit {
   private extractFormData(): void {
     this.newLesson.name = this.extractFieldData('name');
     this.newLesson.level = this.extractFieldData('level');
-    this.newLesson.id = {};
-    this.newLesson.id.subjectId = this.extractFieldData('subject').id;
-    this.newLesson.id.teacherId = this.extractFieldData('teacher').id;
-    this.newLesson.id.groupId = this.extractFieldData('group').id;
     this.newLesson.description = this.extractFieldData('description');
+    this.newLesson.id = {};
+
+    // Complement Data
+    const teacher = this.extractFieldData('teacher');
+    this.newLesson.id.teacherId = teacher.id;
+    this.newLesson.teacherName = teacher.name;
+
+    const subject = this.extractFieldData('subject');
+    this.newLesson.id.subjectId = subject.id;
+    this.newLesson.subjectName = subject.name;
+
+    const group = this.extractFieldData('group');
+    this.newLesson.id.groupId = group.id;
+    this.newLesson.groupName = group.name;    
   }
 
   private extractFieldData(property: string): any {
