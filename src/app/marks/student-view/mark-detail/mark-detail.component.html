@@ -1,16 +1,21 @@
 <mat-tab-group>
-    <mat-tab [label]="My Marks">
+    <mat-tab [label]="'My Marks'">
         <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="example-viewport">
             <div *cdkVirtualFor="let mark of marks" class="example-item">
                 <div class="message">
-                    <div *ngIf="mark.mark <= 10 ">
+                    <div *ngIf="mark.mark <= 10">
+                            
                         <p><b>{{mark.lesson.name}}:</b> {{mark.note}}
                             <span class="red-color">{{mark.mark}}</span></p>
                     </div>
-                    <div *ngIf="mark.mark > 10">
+                    <div *ngIf="mark.mark > 10 && mark.mark <= 15">
                         <p><b>{{mark.lesson.name}}:</b> {{mark.note}}
-                            <span class="green-color">{{mark.mark}}</span></p>
+                            <span class="blue-color">{{mark.mark}}</span></p>
                     </div>
+                    <div *ngIf="mark.mark > 15">
+                            <p><b>{{mark.lesson.name}}:</b> {{mark.note}}
+                                <span class="green-color">{{mark.mark}}</span></p>
+                        </div>
                 </div>
                 <div class="timeform">
                     <i class="fa fa-clock-o" aria-hidden="true"></i> <span class="timestamp">{{mark.createdAt | date
