@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Group } from 'app/models/Group';
 import { group } from '@angular/animations';
 
-const GROUP_URL: string = 'https://spring-boot-demo-app-cloud.cfapps.io/api/groups';
+const GROUP_URL: string = 'https://laplumedor.cfapps.io/api/groups';
 //const GROUP_URL: string = 'http://localhost:8090/api/groups';
 
 @Injectable({
@@ -26,8 +26,14 @@ export class GroupService {
   // getGroup(): Group[] {
   //   return this.groups;
   // }
-  getGroups(): Observable<Group[]> {
-    return this.http.get<Group[]>(GROUP_URL);
+  getGroups(teacherId?: string): Observable<Group[]> {
+    
+    if(teacherId !== undefined) {
+      let params = new HttpParams().set('teacherId', teacherId);
+      return this.http.get<Group[]>(GROUP_URL, { params: params });
+    } else {
+      return this.http.get<Group[]>(GROUP_URL);
+    }
   }
 
   getSingleGroup(id: number): Observable<Group>  {

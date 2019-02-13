@@ -5,7 +5,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Group } from 'app/models/Group';
 import { Lesson } from 'app/models/Lesson';
 
-const LESSON_URL: string = 'https://spring-boot-demo-app-cloud.cfapps.io/api/lessons';
+const LESSON_URL: string = 'https://laplumedor.cfapps.io/api/lessons';
 //const LESSON_URL: string = 'http://localhost:8090/api/lessons';
 
 @Injectable({

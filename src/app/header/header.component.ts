@@ -10,14 +10,18 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   private roles: string[];
+  id: string;
   username: string;
   authority: string;
+  photo: string;
   constructor(private tokenStorage: TokenStorageService, private router: Router) { }
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {
       this.roles = this.tokenStorage.getAuthorities();
+      this.id = this.tokenStorage.getId();
       this.username = this.tokenStorage.getUsername();
+      this.photo = this.tokenStorage.getUserPhoto();
       console.log(this.roles);
       this.roles.every(role => {
         if (role === 'ROLE_ADMIN') {
@@ -35,7 +39,6 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    console.log("ok");
     this.tokenStorage.signOut();
     window.location.reload();
     this.router.navigate(['auth/login'])

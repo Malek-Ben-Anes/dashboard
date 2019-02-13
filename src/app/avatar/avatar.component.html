@@ -2,7 +2,7 @@
     <div class="card-avatar">
         <a>
             <div *ngIf="(student.photo !== undefined && student.photo !== null); else defaultPhoto">
-                <img class="img profile-image" src="{{ 'https://spring-boot-demo-app-cloud.cfapps.io' + student.photo.substr(1) }}"
+                <img class="img profile-image" src="{{ 'https://laplumedor.cfapps.io' + student.photo.substr(1) }}"
                     alt="Smiley face" height="42" width="42" />
             </div>
             <ng-template #defaultPhoto>

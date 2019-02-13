@@ -11,9 +11,9 @@ export class UserService {
   // private pmUrl = 'http://localhost:8090/api/test/pm';
   // private adminUrl = 'http://localhost:8090/api/test/admin';
 
-  private userUrl = 'https://spring-boot-demo-app-cloud.cfapps.io/api/test/user';
-  private pmUrl = 'https://spring-boot-demo-app-cloud.cfapps.io/api/test/pm';
-  private adminUrl = 'https://spring-boot-demo-app-cloud.cfapps.io/api/test/admin';
+  private userUrl = 'https://laplumedor.cfapps.io/api/test/user';
+  private pmUrl = 'https://laplumedor.cfapps.io/api/test/pm';
+  private adminUrl = 'https://laplumedor.cfapps.io/api/test/admin';
 
   constructor(private http: HttpClient) { }
 

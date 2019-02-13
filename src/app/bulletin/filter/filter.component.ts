@@ -1,20 +1,17 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { GroupService } from 'app/services/group.service';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Group } from 'app/models/Group';
-import { Student } from 'app/models/Student';
-import { Level } from 'app/models/Level';
-import { StudentService } from 'app/services/student.service';
 import { TokenStorageService } from 'app/auth/token-storage.service';
-
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Level } from 'app/models/Level';
+import { GroupService } from 'app/services/group.service';
+import { StudentService } from 'app/services/student.service';
 
 @Component({
-  selector: 'app-filter',
+  selector: 'app-filter-bulletin',
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss']
 })
-export class FilterComponent implements OnInit {
-
+export class FilterBulletinComponent implements OnInit {
   allGroups: Group[];
   groups: Group[];
 

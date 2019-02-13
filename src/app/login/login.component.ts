@@ -48,10 +48,9 @@ export class LoginComponent implements OnInit {
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUsername(tokenInfo.name);
         this.tokenStorage.saveAuthorities(tokenInfo.authorities);
-
-
-        let expireDate = tokenInfo.exp; // get token expiration dateTime
-        console.log(tokenInfo); // show decoded token object in console
+        this.tokenStorage.saveId(tokenInfo.user.id);
+        this.tokenStorage.saveGender(tokenInfo.user.gender);
+        this.tokenStorage.saveUserPhoto(tokenInfo.user.photo);
 
         this.isLogging = false;
 

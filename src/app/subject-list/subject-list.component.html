@@ -58,7 +58,6 @@
                                     </mat-form-field>
                                 </div>
                             </div>
-                            <button mat-raised-button type="submit" class="btn btn-warning pull-right">Timetable</button>
                             <button mat-raised-button type="submit" class="btn btn-info pull-right">Create Subject</button>
                             <div class="clearfix"></div>
                         </form>
@@ -77,9 +76,6 @@
                             <table class="table">
                                 <thead class=" text-primary">
                                     <th>
-                                        ID
-                                    </th>
-                                    <th>
                                         Name
                                     </th>
                                     <th>
@@ -89,11 +85,6 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let subject of subjects">
-
-                                        <td>
-                                            <p>{{ subject.id }}</p>
-                                            <!-- <a routerLink="/subjects/{{ subject.id }}">{{ subject.id }}</a>  -->
-                                        </td>
                                         <td class="text-primary">
                                             <a>{{ subject.name }}</a>
                                         </td>

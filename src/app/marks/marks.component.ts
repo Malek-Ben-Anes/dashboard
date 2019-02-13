@@ -25,6 +25,7 @@ export class MarkComponent implements OnInit {
   loggedStudent: Student;
 
   authority: string;
+  authId: string;
   private roles: string[];
 
   constructor(private tokenStorage: TokenStorageService, private markService: MarkService, private studentService: StudentService) {}  
@@ -52,6 +53,7 @@ export class MarkComponent implements OnInit {
   private getAuthority() {
     if (this.tokenStorage.getToken()) {
       this.roles = this.tokenStorage.getAuthorities();
+      this.authId = this.tokenStorage.getId();
       console.log(this.roles);
       this.roles.every(role => {
         if (role === 'ROLE_ADMIN') {
@@ -62,7 +64,7 @@ export class MarkComponent implements OnInit {
           return false;
         }
         this.authority = 'user';
-        this.studentService.getSingleStudent(11).subscribe(student => this.loggedStudent = student, err => console.log(err));
+        this.studentService.getSingleStudent(+this.authId).subscribe(student => this.loggedStudent = student, err => console.log(err));
         return true;
       });
     

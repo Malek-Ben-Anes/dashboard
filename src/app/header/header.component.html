@@ -42,7 +42,7 @@
           <a class="nav-link" routerLink="/bulletin">Bulletin</a>
         </li>
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="/messages">Messages</a>
+          <a class="nav-link" routerLink="/notifications">notifications</a>
         </li>
       </ul>
     </div>
@@ -85,7 +85,12 @@
         </li>
         <li class="nav-item dropdown">
           <a class="dropdown-toggle nav-link background-white" data-toggle="dropdown">
-            <img src="../assets/img/faces/marc.jpg" alt="Smile face" class="radius-image" /> Admin {{ username }}
+              <img *ngIf="(photo === 'null' || photo === 'undefined' || photo === null || photo === undefined ); else UserImage"
+              src="../assets/images/profile-logo.png" alt="Smile face" class="radius-image" />
+            <ng-template #UserImage>
+              <img [src]="photo" alt="smile face" class="radius-image" />
+            </ng-template>
+             Admin {{ username }}
             <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">Profile</a></li>
@@ -99,44 +104,50 @@
     </div>
 
     <div *ngIf="authority === 'pm'">
-        <ul class="nav navbar-nav horiz navbar-right" routerLinkActive="active">
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/marks">Marks</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/marks">Lessons</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" routerLink="/notifications">Notifications</a>
-                </li>
-            <li class="nav-item"></li>
-            <li class="nav-item dropdown">
-              <a class="nav-link" href="#pablo" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-                <i class="material-icons">notifications</i>
-                <span class="notification">5</span>
-                <p>
-                  <span class="d-lg-none d-md-block">Some Actions</span>
-                </p>
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Mike John responded to your email</a>
-                <a class="dropdown-item" href="#">You have 5 new tasks</a>
-                <a class="dropdown-item" href="#">You're now friend with Andrew</a>
-                <a class="dropdown-item" href="#">Another Notification</a>
-                <a class="dropdown-item" href="#">Another One</a>
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="dropdown-toggle nav-link background-white" data-toggle="dropdown">
-                <img src="../assets/img/faces/marc.jpg" alt="Smile face" class="radius-image" /> Prof. {{ username }}
-                <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Profile</a></li>
-                <li><a (click)="logout()">Logout</a></li>
-              </ul>
-            </li>
+      <ul class="nav navbar-nav horiz navbar-right" routerLinkActive="active">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/marks">Marks</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/marks">Lessons</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/notifications">Notifications</a>
+        </li>
+        <li class="nav-item"></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="#pablo" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <i class="material-icons">notifications</i>
+            <span class="notification">5</span>
+            <p>
+              <span class="d-lg-none d-md-block">Some Actions</span>
+            </p>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">Mike John responded to your email</a>
+            <a class="dropdown-item" href="#">You have 5 new tasks</a>
+            <a class="dropdown-item" href="#">You're now friend with Andrew</a>
+            <a class="dropdown-item" href="#">Another Notification</a>
+            <a class="dropdown-item" href="#">Another One</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="dropdown-toggle nav-link background-white" data-toggle="dropdown">
+            <img *ngIf="(photo === 'null' || photo === 'undefined' || photo === null || photo === undefined ); else UserImage"
+              src="../assets/images/profile-logo.png" alt="Smile face" class="radius-image" />
+            <ng-template #UserImage>
+              <img [src]="photo" alt="smile face" class="radius-image" />
+            </ng-template>
+            Prof. {{ username }}
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Profile</a></li>
+            <li><a (click)="logout()">Logout</a></li>
           </ul>
+        </li>
+      </ul>
     </div>
 
     <div *ngIf="authority === 'user'">
@@ -167,7 +178,12 @@
         </li>
         <li class="nav-item dropdown">
           <a class="dropdown-toggle nav-link background-white" data-toggle="dropdown">
-            <img src="../assets/img/faces/marc.jpg" alt="Smile face" class="radius-image" /> {{ username }}
+              <img *ngIf="(photo === 'null' || photo === 'undefined' || photo === null || photo === undefined ); else UserImage"
+              src="../assets/images/profile-logo.png" alt="Smile face" class="radius-image" />
+            <ng-template #UserImage>
+              <img [src]="photo" alt="smile face" class="radius-image" />
+            </ng-template>
+             {{ username }}
             <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">Profile</a></li>

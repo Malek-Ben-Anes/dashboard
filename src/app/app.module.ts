@@ -79,12 +79,17 @@ import { MessageListComponent } from './messages/message-list/message-list.compo
 import { MessageItemComponent } from './messages/message-item/message-item.component';
 import { MessageFormComponent } from './messages/message-form/message-form.component';
 import { MessagesComponent } from './messages/messages.component';
-import { FilterComponent } from './marks/filter/filter.component';
+
 import { GroupStudentListComponent } from './marks/group-student-list/group-student-list.component';
 import { StudentMarksDetailComponent } from './marks/student-marks-detail/student-marks-detail.component';
 import { LessonTimeTableComponent } from './lesson-list/lesson-time-table/lesson-time-table.component';
 import { MarkFormComponent } from './marks/mark-form/mark-form.component';
+import { FilterComponent } from './marks/filter/filter.component';
 import { MarkDetailComponent } from './marks/student-view/mark-detail/mark-detail.component';
+import { BulletinComponent } from './bulletin/bulletin.component';
+import { FilterBulletinComponent } from './bulletin/filter/filter.component';
+import { BulletinUploadComponent } from './bulletin/bulletin-upload/bulletin-upload.component';
+import { BulletinListComponent } from './bulletin/student-view/bulletin-list/bulletin-list.component';
 
 
 @NgModule({
@@ -143,12 +148,17 @@ import { MarkDetailComponent } from './marks/student-view/mark-detail/mark-detai
     MessageItemComponent,
     MessageFormComponent,
     MessagesComponent,
-    FilterComponent,
     GroupStudentListComponent,
     StudentMarksDetailComponent,
     LessonTimeTableComponent,
     MarkFormComponent,
+    FilterComponent,
     MarkDetailComponent,
+
+    BulletinComponent,
+    FilterBulletinComponent,
+    BulletinUploadComponent,
+    BulletinListComponent,
   ],
   exports: [
     StepperComponent,

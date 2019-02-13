@@ -51,9 +51,6 @@
                             <table class="table">
                                 <thead class=" text-primary">
                                     <th>
-                                        ID
-                                    </th>
-                                    <th>
                                         Name
                                     </th>
                                     <th>
@@ -62,11 +59,9 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let group of groups">
-                                        <td>
-                                            <a routerLink="/group-detail/{{ group.id }}">{{ group.id }}</a>
-                                        </td>
                                         <td class="text-primary">
-                                            <p>{{ group.name }}</p>
+                                                <b><a routerLink="/group-detail/{{ group.id }}">{{ group.name }}</a></b>
+                                            <p></p>
                                         </td>
                                         <td>
                                             <p>{{ group.level }}</p>

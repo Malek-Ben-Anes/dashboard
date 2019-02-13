@@ -24,7 +24,7 @@
         </cdk-virtual-scroll-viewport>
     </mat-tab>
 
-    <mat-tab label="Send Evaluation">
+    <mat-tab *ngIf="authority === 'pm'" label="Send Evaluation">
         <app-mark-form [student]="student"></app-mark-form>
     </mat-tab>
 </mat-tab-group>

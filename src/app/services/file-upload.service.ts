@@ -3,7 +3,7 @@ import { HttpClient, HttpRequest, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Student } from 'app/models/Student';
 
-const FILE_UPLOAD_URL: string = 'https://spring-boot-demo-app-cloud.cfapps.io/api/profile/';
+const FILE_UPLOAD_URL: string = 'https://laplumedor.cfapps.io/api/profile/';
 
 @Injectable()
 export class FileUploadService {
@@ -25,7 +25,7 @@ export class FileUploadService {
   pushFileToStorage(file: File): Observable<HttpEvent<{}>> {
     const formdata: FormData = new FormData();
     formdata.append('file', file);
-    const req = new HttpRequest('POST', 'http://localhost:8090/profile/uploadpicture', formdata, {
+    const req = new HttpRequest('POST', 'https://laplumedor.cfapps.io/api/profile/', formdata, {
       reportProgress: true,
       responseType: 'text'
     }

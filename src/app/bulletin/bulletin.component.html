@@ -1,0 +1,32 @@
+<div class="main-content">
+    <div class="container-fluid">
+  
+      <div *ngIf="authority === 'admin'">
+        <app-filter-bulletin></app-filter-bulletin>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div *ngIf="authority === 'user'">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+                <app-bulletin-list></app-bulletin-list>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </div>
