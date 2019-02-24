@@ -8,7 +8,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Level } from 'app/models/Level';
 import { StudentService } from 'app/services/student.service';
 import { Observable } from 'rxjs';
-import { Student } from 'app/models/Student';
+import { BASE_URL } from 'app/app.component';
 
 @Component({
   selector: 'app-group-detail',
@@ -16,6 +16,8 @@ import { Student } from 'app/models/Student';
   styleUrls: ['./group-detail.component.scss']
 })
 export class GroupDetailComponent implements OnInit {
+
+  BASE_URL: string = BASE_URL;
 
   ready: boolean = false;
 

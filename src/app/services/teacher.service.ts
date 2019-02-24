@@ -4,12 +4,10 @@ import { Teacher } from '../models/Teacher';
 import { Gender } from '../models/User';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { reject } from 'q';
+import { BASE_API_URL } from 'app/app.component';
 
 
-//const url: string = 'http://localhost:8090/api/teachers';
-
-const TEACHER_URL: string = 'https://laplumedor.cfapps.io/api/teachers';
-//const TEACHER_URL: string = 'http://localhost:8090/api/teachers';
+const TEACHER_URL: string = BASE_API_URL + 'teachers';
 
 @Injectable({
   providedIn: 'root'

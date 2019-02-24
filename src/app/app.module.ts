@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { CdkTableModule } from '@angular/cdk/table';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DemoMaterialModule } from './material.module';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
@@ -63,7 +62,7 @@ import { FileUploadService } from './services/file-upload.service';
 import { ImageService } from './services/image.service';*/
 import { StudentComponent } from './student/student/student.component';
 import { StudentListComponent } from './student/student-list/student-list.component';
-import { StudentProfileComponent } from './student/student-profile/student-profile.component';
+import { StudentProfileComponent } from './student/student/student-profile/student-profile.component';
 import { LessonDetailComponent } from './lesson-list/lesson-detail/lesson-detail.component';
 import { LessonService } from './services/lesson.service';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';

@@ -5,14 +5,10 @@ import { Subject } from '../models/Subject';
 import { Gender } from '../models/User';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { reject } from 'q';
+import { BASE_API_URL } from 'app/app.component';
 
 
-//const url: string = 'http://localhost:8090/api/teachers';
-
-const SUBJECT_URL: string = 'https://laplumedor.cfapps.io/api/subjects';
-//const SUBJECT_URL: string = 'http://localhost:8090/api/subjects';
-
-
+const SUBJECT_URL: string = BASE_API_URL + 'subjects';
 
 @Injectable({
   providedIn: 'root'

@@ -9,9 +9,15 @@ import { DialogflowService } from './services/dialogflow.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor() { }
+  constructor() {}
   
-  ngOnInit() { }
-
-
+  ngOnInit() {}
 }
+
+export const BASE_URL: string = 'https://laplumedor.cfapps.io/';
+export const BASE_API_URL: string = 'https://laplumedor.cfapps.io/api/';
+
+export const GlobalVariable = Object.freeze({
+  BASE_API_URL: 'https://laplumedor.cfapps.io/api/',
+  //... more of your variables
+});

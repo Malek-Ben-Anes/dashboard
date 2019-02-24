@@ -3,10 +3,8 @@ import { Group } from 'app/models/Group';
 import { MarkService } from 'app/services/mark.service';
 import { Student } from 'app/models/Student';
 import { Mark } from 'app/models/Mark';
-import { GroupService } from 'app/services/group.service';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { StudentService } from 'app/services/student.service';
-import { Level } from 'app/models/Level';
+
 import { TokenStorageService } from 'app/auth/token-storage.service';
 
 @Component({

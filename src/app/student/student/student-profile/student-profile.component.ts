@@ -22,7 +22,7 @@ export class StudentProfileComponent implements OnInit {
 
   isNew: boolean = true;
 
-  student: Student = new Student;
+  student: Student = new Student();
 
   studentForm: FormGroup;
 

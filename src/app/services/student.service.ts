@@ -3,18 +3,11 @@ import { Subject, Observable } from 'rxjs';
 import { Teacher } from '../models/Teacher';
 import { Gender } from '../models/User';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { reject } from 'q';
 import { Student } from 'app/models/Student';
+import { BASE_API_URL } from '../app.component';
 
-
-//const url: string = 'http://localhost:8090/api/teachers';
-
-const STUDENT_URL: string = 'https://laplumedor.cfapps.io/api/students';
-const GROUP_URL: string = 'https://laplumedor.cfapps.io/api/groups/';
-
-// const STUDENT_URL: string = 'http://localhost:8090/api/students';
-// const GROUP_URL: string = 'http://localhost:8090/api/groups/';
-
+const STUDENT_URL: string = BASE_API_URL + 'students';
+const GROUP_URL: string = BASE_API_URL + 'groups/';
 
 @Injectable({
   providedIn: 'root'

@@ -1,19 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { BASE_API_URL } from 'app/app.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  // private userUrl = 'http://localhost:8090/api/test/user';
-  // private pmUrl = 'http://localhost:8090/api/test/pm';
-  // private adminUrl = 'http://localhost:8090/api/test/admin';
-
-  private userUrl = 'https://laplumedor.cfapps.io/api/test/user';
-  private pmUrl = 'https://laplumedor.cfapps.io/api/test/pm';
-  private adminUrl = 'https://laplumedor.cfapps.io/api/test/admin';
+  private userUrl = BASE_API_URL + 'test/user';
+  private pmUrl = BASE_API_URL + 'test/pm';
+  private adminUrl = BASE_API_URL + 'test/admin';
 
   constructor(private http: HttpClient) { }
 

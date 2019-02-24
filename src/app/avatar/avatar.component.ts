@@ -4,6 +4,7 @@ import { Student } from 'app/models/Student';
 import { FileUploadService } from 'app/services/file-upload.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpResponse } from 'selenium-webdriver/http';
+import { BASE_URL } from 'app/app.component';
 
 @Component({
   selector: 'app-avatar',
@@ -11,6 +12,8 @@ import { HttpResponse } from 'selenium-webdriver/http';
   styleUrls: ['./avatar.component.scss']
 })
 export class AvatarComponent implements OnInit {
+
+  BASE_URL: string = BASE_URL;
 
   @Input() student: Student;
   selectedFile: File

@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Student } from 'app/models/Student';
+import { BASE_API_URL } from 'app/app.component';
 
-const FILE_UPLOAD_URL: string = 'https://laplumedor.cfapps.io/api/profile/';
+const FILE_UPLOAD_URL: string = BASE_API_URL + 'profile/';
 
 @Injectable()
 export class FileUploadService {

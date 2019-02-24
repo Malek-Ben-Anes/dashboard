@@ -8,6 +8,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { Student } from 'app/models/Student';
 import { StudentService } from 'app/services/student.service';
+import { BASE_URL } from 'app/app.component';
 
 @Component({
   selector: 'app-student-list',
@@ -16,10 +17,11 @@ import { StudentService } from 'app/services/student.service';
 })
 export class StudentListComponent implements OnInit {
 
+  BASE_URL: string = BASE_URL;
 
   students: Student[] = [];
 
-  constructor(private studentsService: StudentService, private router: Router, private http: HttpClient) { }
+  constructor(private studentsService: StudentService, private router: Router, private http: HttpClient) {}
 
   ngOnInit() {
     this.getStudents();

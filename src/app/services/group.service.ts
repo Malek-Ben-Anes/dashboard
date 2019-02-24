@@ -4,9 +4,9 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Group } from 'app/models/Group';
 import { group } from '@angular/animations';
+import { BASE_API_URL } from 'app/app.component';
 
-const GROUP_URL: string = 'https://laplumedor.cfapps.io/api/groups';
-//const GROUP_URL: string = 'http://localhost:8090/api/groups';
+const GROUP_URL: string = BASE_API_URL + 'groups';
 
 @Injectable({
   providedIn: 'root'

@@ -1,14 +1,24 @@
+<div class="card card-profile">
+    <div class="card-body">
+        <mat-tab-group animationDuration="0ms">
+            <mat-tab label="First">Content 1</mat-tab>
+            <mat-tab label="Second">Content 2</mat-tab>
+            <mat-tab label="Third">Content 3</mat-tab>
+        </mat-tab-group>
+    </div>
+</div>
+
 <!-- <button mat-raised-button (click)="isEditable = !isEditable">
     {{!isEditable ? 'Enable edit mode' : 'Disable edit mode'}}
-  </button> -->
+  </button>
   
   <mat-horizontal-stepper linear #stepper>
     <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
       <form [formGroup]="firstFormGroup">
         <ng-template matStepLabel>Fill Teacher Data</ng-template>
-      <!--         <mat-form-field>
+         <mat-form-field>
           <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-        </mat-form-field> -->
+        </mat-form-field>
         <div>
           <button mat-button matStepperNext>Next</button>
         </div>
@@ -18,9 +28,9 @@
     <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
       <form [formGroup]="secondFormGroup">
         <ng-template matStepLabel>Fill related Data</ng-template>
-        <!-- <mat-form-field>
+        <mat-form-field>
           <input matInput placeholder="Address" formControlName="secondCtrl" required>
-        </mat-form-field> -->
+        </mat-form-field>
         <div>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button matStepperNext>Next</button>
@@ -31,9 +41,9 @@
     <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
         <form [formGroup]="secondFormGroup">
           <ng-template matStepLabel>Fill lessons</ng-template>
-          <!-- <mat-form-field>
+          <mat-form-field>
             <input matInput placeholder="Address" formControlName="secondCtrl" required>
-          </mat-form-field> -->
+          </mat-form-field>
           <div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button matStepperNext>Next</button>
@@ -49,4 +59,7 @@
         <button mat-button (click)="stepper.reset()">Reset</button>
       </div>
     </mat-step>
-  </mat-horizontal-stepper>
+  </mat-horizontal-stepper> -->
+
+
+

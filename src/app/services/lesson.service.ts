@@ -4,9 +4,9 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Group } from 'app/models/Group';
 import { Lesson } from 'app/models/Lesson';
+import { BASE_API_URL } from 'app/app.component';
 
-const LESSON_URL: string = 'https://laplumedor.cfapps.io/api/lessons';
-//const LESSON_URL: string = 'http://localhost:8090/api/lessons';
+const LESSON_URL: string = BASE_API_URL + 'lessons';
 
 @Injectable({
   providedIn: 'root'
