@@ -8,9 +8,27 @@
 
 <app-student-profile *ngIf="selected.value === 0"></app-student-profile>
 
-<div  *ngIf="selected.value === 2" class="card card-profile">
+<div *ngIf="selected.value === 2" class="card card-profile">
         <div class="card-body">
                 <app-student-view-mark-detail [student]="student"></app-student-view-mark-detail>
         </div>
 </div>
-<!-- <app-marks *ngIf="selected.value === 3"></app-marks> -->
+
+<div *ngIf="selected.value === 3">
+        <div class="card card-profile">
+                <div class="card-body">
+                        <app-bulletin-upload [student]="student"></app-bulletin-upload>
+                </div>
+        </div>
+        <div class="card card-profile">
+                <div class="card-body">
+                        <app-bulletin-list [student]="student"></app-bulletin-list>
+                </div>
+        </div>
+</div>
+
+<div *ngIf="selected.value === 4" class="card card-profile">
+        <div class="card-body">
+                <app-group-timetable></app-group-timetable>
+        </div>
+</div>

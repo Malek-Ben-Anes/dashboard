@@ -5,6 +5,8 @@ import { Student } from 'app/models/Student';
 import { BASE_API_URL } from 'app/app.component';
 
 const FILE_UPLOAD_URL: string = BASE_API_URL + 'profile/';
+const BULLETIN_UPLOAD_URL: string = BASE_API_URL + 'bulletins/';
+
 
 @Injectable()
 export class FileUploadService {
@@ -23,19 +25,34 @@ export class FileUploadService {
     });
   }
 
-  pushFileToStorage(file: File): Observable<HttpEvent<{}>> {
+  uploadBulletin(studentId: number, trimester: string, file:File): Observable<HttpEvent<{}>> {
+
+    const BULLETIN_UPLOAD_URL: string = BASE_API_URL + `students/${studentId}/bulletins`;
     const formdata: FormData = new FormData();
     formdata.append('file', file);
-    const req = new HttpRequest('POST', 'https://laplumedor.cfapps.io/api/profile/', formdata, {
-      reportProgress: true,
-      responseType: 'text'
-    }
-    );
-    return this.http.request(req);
-  }
+    formdata.append('trimester', 'TRIMESTER2');
 
+    return this.http.post<Student>(BULLETIN_UPLOAD_URL, formdata, {
+      reportProgress: true,
+      observe: 'events'
+    });
+  }
+  
+  deleteBulletin(bulletinId: number): Observable<any> {
+    return this.http.delete(BULLETIN_UPLOAD_URL + bulletinId);
+  }
 }
 
+// pushFileToStorage(file: File): Observable<HttpEvent<{}>> {
+//   const formdata: FormData = new FormData();
+//   formdata.append('file', file);
+//   const req = new HttpRequest('POST', 'https://laplumedor.cfapps.io/api/profile/', formdata, {
+//     reportProgress: true,
+//     responseType: 'text'
+//   }
+//   );
+//   return this.http.request(req);
+// }
 // selectedFile: ImageSnippet;
 
 // private onSuccess() {

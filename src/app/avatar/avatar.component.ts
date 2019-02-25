@@ -19,7 +19,7 @@ export class AvatarComponent implements OnInit {
   selectedFile: File
   isUploading: boolean=false;
 
-  constructor(private fileUploadService: FileUploadService, private http: HttpClient) { }
+  constructor(private fileUploadService: FileUploadService) { }
 
   ngOnInit() {}
 

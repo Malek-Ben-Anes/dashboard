@@ -1,7 +1,7 @@
 <div class="main-content">
     <div class="container-fluid">
   
-      <div *ngIf="authority === 'admin'">
+      <!-- <div>
         <app-filter-bulletin></app-filter-bulletin>
         <div class="row">
           <div class="col-md-12">
@@ -14,14 +14,14 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
   
-      <div *ngIf="authority === 'user'">
+      <div>
         <div class="row">
           <div class="col-md-12">
             <div class="card">
               <div class="card-body">
-                <app-bulletin-list></app-bulletin-list>
+                <app-bulletin-list [student]="student"></app-bulletin-list>
               </div>
             </div>
           </div>

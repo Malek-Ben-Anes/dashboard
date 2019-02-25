@@ -1,0 +1,5 @@
+export enum Trimester {
+    TRIMESTER1 = "TRIMESTER 1",
+    TRIMESTER2 = "TRIMESTER 2",
+    TRIMESTER3 = "TRIMESTER 3",
+}

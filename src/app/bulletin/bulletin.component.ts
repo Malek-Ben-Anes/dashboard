@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { TokenStorageService } from 'app/auth/token-storage.service';
+import { Student } from 'app/models/Student';
+
 
 @Component({
   selector: 'app-bulletin',
@@ -7,6 +9,10 @@ import { TokenStorageService } from 'app/auth/token-storage.service';
   styleUrls: ['./bulletin.component.scss']
 })
 export class BulletinComponent implements OnInit {
+
+  @Input('student') student: Student;
+
+  
 
   authority: string;
   authId: string;
