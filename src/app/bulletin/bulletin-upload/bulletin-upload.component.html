@@ -1,4 +1,4 @@
-<form>
+<form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
     <div class="row">
         <div class="col-md-3">
             <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
@@ -13,15 +13,15 @@
 
         <div class="col-md-3">
             <mat-form-field class="example-full-width">
-                <mat-select matInput placeholder="Trimester" required>
-                    <mat-option *ngFor="let tri of trimesters" [value]="tri" required>
-                        {{ tri }}
+                <mat-select matInput placeholder="Trimester" [(value)]="selectedTrimester" required>
+                    <mat-option *ngFor="let trimester of trimesters" [value]="trimester" required>
+                        {{ trimester }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div *ngIf="!isUploading">
                 <button mat-raised-button class="btn btn-warning" (click)="onUpload()">
                     <span class="glyphicon glyphicon-cloud-upload"></span>Upload

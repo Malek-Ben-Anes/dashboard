@@ -8,6 +8,12 @@
 
 <app-student-profile *ngIf="selected.value === 0"></app-student-profile>
 
+<div *ngIf="selected.value === 1" class="card card-profile">
+        <div class="card-body">
+                <app-update-password [student]="student"></app-update-password>
+        </div>
+</div>
+
 <div *ngIf="selected.value === 2" class="card card-profile">
         <div class="card-body">
                 <app-student-view-mark-detail [student]="student"></app-student-view-mark-detail>

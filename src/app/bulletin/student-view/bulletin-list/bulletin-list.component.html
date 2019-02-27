@@ -8,9 +8,9 @@
       <th>
         Date de délibération
       </th>
-      <th>
-        Supprimer
-      </th>
+        <th *ngIf="authority === 'admin'">
+          Supprimer
+        </th>
     </thead>
     <tbody>
       <tr *ngFor="let bulletin of student.bulletins">
@@ -27,12 +27,9 @@
           <td>
             {{ bulletin.createdAt | date }}
           </td>
-          <td class="td-actions text-right">
-              <!-- <button (click)="onDeleteBulletin(bulletin.id)"  type="button" matTooltip="Remove" class="btn btn-danger btn-link btn-sm btn-just-icon">
-                  <i class="material-icons">close</i>Remove
-              </button> -->
-              <button (click)="onDeleteBulletin(bulletin.id)"  type="button" class="btn btn-danger btn-link btn-sm">Supprimer X</button>              
-          </td>
+            <td *ngIf="authority === 'admin'" class="td-actions text-right" >
+              <button (click)="onDeleteBulletin($event, bulletin.id)"  type="button" class="btn btn-danger btn-sm" [disabled]="false">Supprimer X</button>              
+            </td>
       </tr>
     </tbody>
   </table>

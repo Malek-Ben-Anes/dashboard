@@ -89,6 +89,7 @@ import { BulletinComponent } from './bulletin/bulletin.component';
 import { FilterBulletinComponent } from './bulletin/filter/filter.component';
 import { BulletinUploadComponent } from './bulletin/bulletin-upload/bulletin-upload.component';
 import { BulletinListComponent } from './bulletin/student-view/bulletin-list/bulletin-list.component';
+import { UpdatePasswordComponent } from './student/student/update-password/update-password.component';
 
 
 @NgModule({
@@ -158,6 +159,7 @@ import { BulletinListComponent } from './bulletin/student-view/bulletin-list/bul
     FilterBulletinComponent,
     BulletinUploadComponent,
     BulletinListComponent,
+    UpdatePasswordComponent,
   ],
   exports: [
     StepperComponent,

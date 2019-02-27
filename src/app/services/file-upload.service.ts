@@ -3,6 +3,7 @@ import { HttpClient, HttpRequest, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Student } from 'app/models/Student';
 import { BASE_API_URL } from 'app/app.component';
+import { Trimester } from 'app/models/Trimester';
 
 const FILE_UPLOAD_URL: string = BASE_API_URL + 'profile/';
 const BULLETIN_UPLOAD_URL: string = BASE_API_URL + 'bulletins/';
@@ -25,12 +26,12 @@ export class FileUploadService {
     });
   }
 
-  uploadBulletin(studentId: number, trimester: string, file:File): Observable<HttpEvent<{}>> {
+  uploadBulletin(studentId: number, trimester: Trimester, file:File): Observable<HttpEvent<{}>> {
 
     const BULLETIN_UPLOAD_URL: string = BASE_API_URL + `students/${studentId}/bulletins`;
     const formdata: FormData = new FormData();
     formdata.append('file', file);
-    formdata.append('trimester', 'TRIMESTER2');
+    formdata.append('trimester', trimester);
 
     return this.http.post<Student>(BULLETIN_UPLOAD_URL, formdata, {
       reportProgress: true,

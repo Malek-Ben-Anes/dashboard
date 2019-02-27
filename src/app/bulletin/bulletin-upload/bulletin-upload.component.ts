@@ -15,7 +15,8 @@ export class BulletinUploadComponent implements OnInit {
   selectedFile: File
   isUploading: boolean=false;
   trimesters = Object.keys(Trimester);
-  
+
+  selectedTrimester: Trimester = Trimester.TRIMESTER1;
 
   constructor(private fileUploadService: FileUploadService) { }
 
@@ -27,20 +28,19 @@ export class BulletinUploadComponent implements OnInit {
   }
 
   onUpload() {
-    this.fileUploadService.uploadFile(this.student.id, this.selectedFile).subscribe(HttpResponse => {
+    this.fileUploadService.uploadBulletin(this.student.id, this.selectedTrimester, this.selectedFile).subscribe(HttpResponse => {
       this.isUploading = true;
 
       console.log(HttpResponse);
 
       if (HttpResponse.type === 4) {
-        if (HttpResponse['body'] !== undefined) {
-          if (HttpResponse['body']['photo'] !== undefined) {
-            console.log('photo updated');
-            this.student.photo = HttpResponse['body']['photo'];
-            this.isUploading=false;
-          }
-        }
+       this.isUploading=false;
+       alert('bulletin uploaded');
+       setTimeout(()=> (window.location.reload()), 1000);
       }
+    }, err => {
+      alert('bulletin uploaded est echoué');
+      this.isUploading = false;
     });
   }
 }
