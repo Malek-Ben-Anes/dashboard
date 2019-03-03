@@ -10,6 +10,7 @@ export class Student extends User {
     parentPhone?:string;
     description: string;
     password?: string;
+    bulletins?: {};
 
     //subjects = new HashSet<>();
 

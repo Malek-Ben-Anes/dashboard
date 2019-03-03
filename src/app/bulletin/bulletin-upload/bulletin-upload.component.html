@@ -1,4 +1,4 @@
-<form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+<form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
     <div class="row">
         <div class="col-md-3">
             <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
