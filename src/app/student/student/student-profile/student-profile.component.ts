@@ -105,20 +105,13 @@ export class StudentProfileComponent implements OnInit {
   }
 
   private getSingleStudent(id): void {
-    this.studentService.getSingleStudent(id)
-      .subscribe(student => {
-        this.student = student;
-        this.isNew = false;
-        console.log(this.student);
-        this.updateForm(this.student);
-      },
-        (err: HttpErrorResponse) => {
-          if (err.error instanceof Error) {
-            console.log("Client-side error occured.");
-          } else {
-            console.log("Server-side error occured.");
-          }
-        });
+    const student = this.studentService.getSingleStudent(id);
+    if (student != null) {
+      this.student = student;
+      this.isNew = false;
+      this.updateForm(this.student);
+      console.log(this.student);
+    }
   }
 
   private extractFormData(): void {
@@ -143,29 +136,11 @@ export class StudentProfileComponent implements OnInit {
   }
 
   private updateStudent(studentRequest: Student): void {
-    this.studentService.updateStudent(studentRequest)
-      .subscribe(student => { this.student = student; console.log("student updated") },
-        (err: HttpErrorResponse) => {
-          if (err.error instanceof Error) {
-            console.log(err.error);
-            console.log("Client-side error occured.");
-          } else {
-            console.log(err.error);
-            console.log("Server-side error occured.");
-          }
-        });
+    this.student = this.studentService.updateStudent(studentRequest);
   }
 
   private createStudent(studentRequest: Student): void {
-    this.studentService.saveStudent(studentRequest)
-      .subscribe(student => { this.student = student; console.log("student created"); console.log(student) },
-        (err: HttpErrorResponse) => {
-          if (err.error instanceof Error) {
-            console.log("Client-side error occured.");
-          } else {
-            console.log("Server-side error occured.");
-          }
-        });
+    this.studentService.saveStudent(studentRequest);
   }
   /*
   onBack() {

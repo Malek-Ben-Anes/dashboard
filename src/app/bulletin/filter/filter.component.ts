@@ -82,7 +82,7 @@ export class FilterBulletinComponent implements OnInit {
 
   selectLevel(levelSelected) {
     if (levelSelected !== undefined) {
-      this.groups = this.allGroups.filter(group => levelSelected == group.level);
+      this.groups = this.allGroups.filter(group => levelSelected === group.level);
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 
 
@@ -15,28 +15,26 @@ import { BASE_URL } from 'app/app.component';
   templateUrl: './student-list.component.html',
   styleUrls: ['./student-list.component.css']
 })
-export class StudentListComponent implements OnInit {
+export class StudentListComponent implements OnInit, OnDestroy {
 
   BASE_URL: string = BASE_URL;
 
+  studentsSubscription: Subscription;
   students: Student[] = [];
 
-  constructor(private studentsService: StudentService, private router: Router, private http: HttpClient) {}
+  constructor(private studentsService: StudentService, private router: Router) {}
 
   ngOnInit() {
-    this.getStudents();
+    this.studentsSubscription = this.studentsService.studentsSubject.subscribe(
+      (students: any[]) => {
+        this.students = students;
+        console.log(this.students);
+      }
+    );
+    this.studentsService.emitStudentSubject();
   }
-  
-  getStudents(): void {
-    this.studentsService.getStudents()
-        .subscribe(students => this.students = students, 
-          (err: HttpErrorResponse) => {
-              if (err.error instanceof Error) {
-                console.log("Client-side error occured.");
-              } else {
-                console.log("Server-side error occured.");
-              }
-            }
-          );
+
+  ngOnDestroy() {
+    this.studentsSubscription.unsubscribe();
   }
 }

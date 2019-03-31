@@ -1,0 +1,37 @@
+<div class="card card-profile">
+  <div class="card-body">
+          <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+                  <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab"></mat-tab>
+          </mat-tab-group>
+  </div>
+</div>
+
+<div *ngIf="selected.value === 0" class="card card-profile">
+  <div class="card-body">
+          <app-accueil></app-accueil>
+  </div>
+</div>
+
+<div *ngIf="selected.value === 1" class="card card-profile">
+  <div class="card-body">
+          <app-about-us></app-about-us>
+  </div>
+</div>
+
+<div *ngIf="selected.value === 2" class="card card-profile">
+  <div class="card-body">
+          <app-news></app-news>
+  </div>
+</div>
+
+<div *ngIf="selected.value === 3" class="card card-profile">
+  <div class="card-body">
+          <app-clubs></app-clubs>
+  </div>
+</div>
+
+<div *ngIf="selected.value === 4" class="card card-profile">
+  <div class="card-body">
+          <app-contact></app-contact>
+  </div>
+</div>

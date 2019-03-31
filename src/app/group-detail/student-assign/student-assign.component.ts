@@ -135,12 +135,8 @@ export class StudentAssignComponent implements OnInit {
   }
 
   private updateStudent(student: Student) {
-    this.studentService.updateStudent(student)
-      .subscribe(student => {
-        console.log(student);
-      }, err => console.log(err.error));
+    this.studentService.updateStudent(student);
   }
-
 }
 
 interface Todo {

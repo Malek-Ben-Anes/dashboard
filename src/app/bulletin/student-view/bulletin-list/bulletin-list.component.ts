@@ -3,6 +3,7 @@ import { Student } from 'app/models/Student';
 import { BASE_URL } from 'app/app.component';
 import { FileUploadService } from 'app/services/file-upload.service';
 import { TokenStorageService } from 'app/auth/token-storage.service';
+import { BulletinService } from 'app/services/bulletin.service';
 
 
 
@@ -19,11 +20,10 @@ export class BulletinListComponent implements OnInit {
   private roles: string[];
   authority: string;
 
-  constructor(private tokenStorage: TokenStorageService, private fileUploadService: FileUploadService) { }
+  constructor(private tokenStorage: TokenStorageService, private bulletinService: BulletinService) { }
 
   ngOnInit() {
     this.roles = this.tokenStorage.getAuthorities();
-
     this.roles.every(role => {
       if (role === 'ROLE_ADMIN') {
         this.authority = 'admin';
@@ -37,9 +37,8 @@ export class BulletinListComponent implements OnInit {
     });
   }
 
-  onDeleteBulletin(event, bulletinId: number) {    
-
+  onDeleteBulletin(event, bulletinId: number) {
     event.currentTarget.disabled = true;
-    this.fileUploadService.deleteBulletin(bulletinId).subscribe();
+    this.bulletinService.deleteBulletin(bulletinId).subscribe();
   }
 }

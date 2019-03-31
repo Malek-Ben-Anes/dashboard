@@ -62,7 +62,10 @@ export class MarkComponent implements OnInit {
           return false;
         }
         this.authority = 'user';
-        this.studentService.getSingleStudent(+this.authId).subscribe(student => this.loggedStudent = student, err => console.log(err));
+        const studentById: Student = this.studentService.getSingleStudent(+this.authId);
+        if (studentById != null) {
+          this.loggedStudent = studentById;
+        }
         return true;
       });
     

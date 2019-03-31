@@ -6,16 +6,12 @@ import { BASE_API_URL } from 'app/app.component';
 import { Trimester } from 'app/models/Trimester';
 
 const FILE_UPLOAD_URL: string = BASE_API_URL + 'profile/';
-const BULLETIN_UPLOAD_URL: string = BASE_API_URL + 'bulletins/';
 
-
-@Injectable()
 export class FileUploadService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-
-  uploadFile(userId, file:File): Observable<HttpEvent<{}>> {
+  uploadFile(userId, file: File): Observable<HttpEvent<{}>> {
 
     const formdata: FormData = new FormData();
     formdata.append('file', file);
@@ -24,23 +20,6 @@ export class FileUploadService {
       reportProgress: true,
       observe: 'events'
     });
-  }
-
-  uploadBulletin(studentId: number, trimester: Trimester, file:File): Observable<HttpEvent<{}>> {
-
-    const BULLETIN_UPLOAD_URL: string = BASE_API_URL + `students/${studentId}/bulletins`;
-    const formdata: FormData = new FormData();
-    formdata.append('file', file);
-    formdata.append('trimester', trimester);
-
-    return this.http.post<Student>(BULLETIN_UPLOAD_URL, formdata, {
-      reportProgress: true,
-      observe: 'events'
-    });
-  }
-  
-  deleteBulletin(bulletinId: number): Observable<any> {
-    return this.http.delete(BULLETIN_UPLOAD_URL + bulletinId);
   }
 }
 

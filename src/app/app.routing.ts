@@ -26,6 +26,7 @@ import { MarkComponent } from './marks/marks.component';
 import { MessageListComponent } from './messages/message-list/message-list.component';
 import { MessagesComponent } from './messages/messages.component';
 import { BulletinComponent } from './bulletin/bulletin.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 const routes: Routes = [
     {
@@ -123,11 +124,14 @@ const routes: Routes = [
         component: MessagesComponent
     },
     {
+        path: 'site-vitrine',
+        component: LandingPageComponent
+    },
+    {
         path: '',
         component: HomeComponent
     },
 
-    
 
     // {
     //     path: 'user-profile',

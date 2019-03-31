@@ -90,6 +90,13 @@ import { FilterBulletinComponent } from './bulletin/filter/filter.component';
 import { BulletinUploadComponent } from './bulletin/bulletin-upload/bulletin-upload.component';
 import { BulletinListComponent } from './bulletin/student-view/bulletin-list/bulletin-list.component';
 import { UpdatePasswordComponent } from './student/student/update-password/update-password.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { AccueilComponent } from './landing-page/accueil/accueil.component';
+import { AboutUsComponent } from './landing-page/about-us/about-us.component';
+import { NewsComponent } from './landing-page/news/news.component';
+import { ClubsComponent } from './landing-page/clubs/clubs.component';
+import { ContactComponent } from './landing-page/contact/contact.component';
+import { StudentFilterComponent } from './student/student-list/student-filter/student-filter.component';
 
 
 @NgModule({
@@ -160,6 +167,13 @@ import { UpdatePasswordComponent } from './student/student/update-password/updat
     BulletinUploadComponent,
     BulletinListComponent,
     UpdatePasswordComponent,
+    LandingPageComponent,
+    AccueilComponent,
+    AboutUsComponent,
+    NewsComponent,
+    ClubsComponent,
+    ContactComponent,
+    StudentFilterComponent,
   ],
   exports: [
     StepperComponent,

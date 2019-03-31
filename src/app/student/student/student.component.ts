@@ -11,7 +11,6 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./student.component.scss']
 })
 export class StudentComponent implements OnInit {
-  
     tabs = ['Edit Profile', 'Password', 'Marks', 'Bulletin', 'Time Table'];
     selected = new FormControl(0);
 
@@ -34,18 +33,11 @@ export class StudentComponent implements OnInit {
   }
 
   private getSingleStudent(id): void {
-    this.studentService.getSingleStudent(id)
-      .subscribe(student => {
-        this.student = student;
+    const student = this.studentService.getSingleStudent(id);
+    if (student != null) {
+      this.student = student;
         this.isNew = false;
         console.log(this.student);
-      },
-        (err: HttpErrorResponse) => {
-          if (err.error instanceof Error) {
-            console.log("Client-side error occured.");
-          } else {
-            console.log("Server-side error occured.");
-          }
-        });
+    }
   }
 }

@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="studentFilterForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-3">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="First Name" formControlName="firstName">
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Last Name" formControlName="lastName">
+                </mat-form-field>
+            </div>
+            <div class="col-md-2">
+              <mat-form-field class="example-full-width">
+                <mat-select matInput placeholder="Level" formControlName="level">
+                  <mat-option [value]="null">Undifférent</mat-option>
+                  <mat-option *ngFor="let lev of levels" [value]="lev">
+                    {{ lev }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-2">
+              <mat-form-field class="example-full-width">
+                <mat-select matInput placeholder="Group" formControlName="group">
+                    <mat-option [value]="null">Undifférent</mat-option>
+                  <mat-option *ngFor="let grp of groups" [value]="grp">
+                    {{ grp.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-2">
+              <button mat-raised-button type="submit" class="btn btn-warning pull-right">Search</button>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
