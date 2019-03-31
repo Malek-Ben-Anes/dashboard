@@ -46,6 +46,7 @@ import { SubjectService } from './services/subject.service';
 import { GroupService } from './services/group.service';
 import { DataService } from './services/data.service';
 import { DialogflowService } from './services/dialogflow.service';
+import { BulletinService } from 'app/services/bulletin.service';
 
 
 import { TeacherComponent } from './teacher/teacher/teacher.component';
@@ -182,7 +183,7 @@ import { StudentFilterComponent } from './student/student-list/student-filter/st
     LessonTimeTableComponent
   ],
   providers: [MatDialog, TeacherService, StudentService, DataService, SubjectService, GroupService, LessonService, 
-    MarkService, FileUploadService, DialogflowService/*, ImageService, FileUploadService*/],
+    MarkService, FileUploadService, DialogflowService, BulletinService/*, ImageService*/],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

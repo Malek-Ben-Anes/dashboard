@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Student } from 'app/models/Student';
 import { BASE_URL } from 'app/app.component';
-import { FileUploadService } from 'app/services/file-upload.service';
 import { TokenStorageService } from 'app/auth/token-storage.service';
 import { BulletinService } from 'app/services/bulletin.service';
 
