@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 import { TokenStorageService } from '../auth/token-storage.service';
 
 @Component({
@@ -10,7 +10,13 @@ import { TokenStorageService } from '../auth/token-storage.service';
 export class HomeComponent implements OnInit {
   info: any;
 
-  constructor(private token: TokenStorageService) { }
+  constructor(private token: TokenStorageService, private router: Router) {
+    if (this.token.getToken()) {
+      this.router.navigate(['marks']);
+    } else {
+      this.router.navigate(['auth', 'login']);
+    }
+  }
 
   ngOnInit() {
     this.info = {

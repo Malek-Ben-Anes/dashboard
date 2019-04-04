@@ -137,11 +137,11 @@ const routes: Routes = [
     //     path: 'user-profile',
     //     component: UserProfileComponent
     // },
-    {
+    /*{
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full',
-    },
+    },*/
      
     //{ path: 'dashboard',      component: DashboardComponent },
         /*{
@@ -158,7 +158,6 @@ const routes: Routes = [
     // { path: 'maps',           component: MapsComponent },
     // { path: 'notifications',  component: NotificationsComponent },
     // { path: 'upgrade',        component: UpgradeComponent },
-    { path: '',               redirectTo: 'dashboard', pathMatch: 'full' }
 ];
 
 @NgModule({

@@ -5,6 +5,9 @@ import { User } from '../models/User';
 
 
 //https://aberezkin.github.io/ng2-image-upload/#/demo
+@Injectable({
+  providedIn: 'root',
+})
 export class ImageService {
 /*
   constructor(private http: HttpClient) {}

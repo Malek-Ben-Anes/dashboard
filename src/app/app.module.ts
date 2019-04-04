@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DemoMaterialModule } from './material.module';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialog } from '@angular/material';
 
 
@@ -182,8 +182,7 @@ import { StudentFilterComponent } from './student/student-list/student-filter/st
   entryComponents: [
     LessonTimeTableComponent
   ],
-  providers: [MatDialog, TeacherService, StudentService, DataService, SubjectService, GroupService, LessonService, 
-    MarkService, FileUploadService, DialogflowService, BulletinService/*, ImageService*/],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

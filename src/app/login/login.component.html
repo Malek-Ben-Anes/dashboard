@@ -6,11 +6,11 @@
 <ng-template #loggedOut>
   <div class="row">
     
-      <div class="col-md-7">
+      <div class="col-md-5">
         <img src="../../assets/images/connexion.jpg" class="img-fluid" alt="Responsive image" style="width: 100%;">
       </div>
     
-    <div class="col-md-5" style="max-width:350px;">
+    <div class="col-md-7">
       <br>
         <h3>Enter your credentials!</h3>
         <br>
@@ -32,7 +32,7 @@
             <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group center">
 
             <div *ngIf="isLogging; else isNotLogging">
                 <button mat-raised-button class="btn btn-primary">
