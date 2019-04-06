@@ -4,7 +4,9 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import { environment } from '../../environments/environment';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class DialogflowService {
 
   private baseURL: string = "https://api.dialogflow.com/v1/query?v=20150910";

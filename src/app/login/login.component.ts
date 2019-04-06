@@ -22,7 +22,13 @@ export class LoginComponent implements OnInit {
 
   isLogging: boolean = false;
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private router: Router) { }
+  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private router: Router) {
+    if (this.tokenStorage.getToken()) {
+      this.router.navigate(['marks']);
+    } else {
+      this.router.navigate(['auth', 'login']);
+    }
+  }
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {
@@ -58,7 +64,7 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getAuthorities();
         this.reloadPage();  
-        this.router.navigate(['dashboard']);
+        //this.router.navigate(['marks']);
       },
       error => {
         console.log(error);
