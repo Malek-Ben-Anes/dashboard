@@ -5,10 +5,11 @@ import { Observable } from 'rxjs';
 import { HttpEvent, HttpClient } from '@angular/common/http';
 import { Student } from 'app/models/Student';
 
-
-
 const BULLETIN_UPLOAD_URL: string = BASE_API_URL + 'bulletins/';
 
+@Injectable({
+  providedIn: 'root'
+})
 export class BulletinService {
 
   constructor(private http: HttpClient) { }

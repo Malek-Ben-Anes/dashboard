@@ -1,9 +1,8 @@
 import * as _ from "lodash";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Subject, Observable } from "rxjs";
-import { Teacher } from "../models/Teacher";
-import { Gender } from "../models/User";
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+
 import { Student } from "app/models/Student";
 import { BASE_API_URL } from "../app.component";
 import { Level } from "app/models/Level";
@@ -73,7 +72,6 @@ export class StudentService {
     this.emitStudentSubject();
     return studentInStudentsArray;
   }*/
-
 
   /*getSingleStudent(id: number): Observable<Student> {
     return this.http.get<Student>(STUDENT_URL + "/" + id);

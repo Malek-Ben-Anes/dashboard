@@ -59,7 +59,6 @@ import { LessonListComponent } from './lesson-list/lesson-list.component';
 
 
 /*import { DataService } from './services/teacher.service';
-import { FileUploadService } from './services/file-upload.service';
 import { ImageService } from './services/image.service';*/
 import { StudentComponent } from './student/student/student.component';
 import { StudentListComponent } from './student/student-list/student-list.component';

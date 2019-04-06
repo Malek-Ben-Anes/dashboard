@@ -4,8 +4,6 @@ import { BASE_URL } from 'app/app.component';
 import { TokenStorageService } from 'app/auth/token-storage.service';
 import { BulletinService } from 'app/services/bulletin.service';
 
-
-
 @Component({
   selector: 'app-bulletin-list',
   templateUrl: './bulletin-list.component.html',

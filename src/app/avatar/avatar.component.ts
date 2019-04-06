@@ -1,10 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { User } from 'app/models/User';
-import { Student } from 'app/models/Student';
-import { FileUploadService } from 'app/services/file-upload.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpResponse } from 'selenium-webdriver/http';
+
 import { BASE_URL } from 'app/app.component';
+import { FileUploadService } from 'app/services/file-upload.service';
+import { User } from 'app/models/User';
+import { Student } from 'app/models/Student';
 
 @Component({
   selector: 'app-avatar',

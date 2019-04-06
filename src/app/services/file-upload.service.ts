@@ -7,6 +7,10 @@ import { Trimester } from 'app/models/Trimester';
 
 const FILE_UPLOAD_URL: string = BASE_API_URL + 'profile/';
 
+
+@Injectable({
+  providedIn: "root"
+})
 export class FileUploadService {
 
   constructor(private http: HttpClient) {}
