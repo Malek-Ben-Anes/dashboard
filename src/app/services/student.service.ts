@@ -2,11 +2,7 @@ import * as _ from "lodash";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Subject, Observable } from "rxjs";
-<<<<<<< HEAD
 
-=======
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
->>>>>>> 4f28b1d5dd36a53feae4f6b9ce26d6d246557657
 import { Student } from "app/models/Student";
 import { BASE_API_URL } from "../app.component";
 import { Level } from "app/models/Level";
@@ -54,19 +50,9 @@ export class StudentService {
     return _.find(this.students, { id: studentId });
   }
 
-<<<<<<< HEAD
-  /*refreshStudent(studentRequest: Student): Student {
-    let studentInStudentsArray: Student = _.find(this.students, { id: studentRequest.id });
-    studentInStudentsArray = studentRequest;
-    this.emitStudentSubject();
-    return studentInStudentsArray;
-  }*/
 
-  /*getSingleStudent(id: number): Observable<Student> {
-=======
 
   /*getSingleStudent(id: string): Observable<Student> {
->>>>>>> 4f28b1d5dd36a53feae4f6b9ce26d6d246557657
     return this.http.get<Student>(STUDENT_URL + "/" + id);
   }*/
   updateStudentPassword(studentRequest: Student): Observable<Student> {
