@@ -45,21 +45,9 @@ export class StudentService {
     return this.http.put<Student>(STUDENT_URL  + '/' + student.id, student);
   }
 
-  SearchForStudent(studentSearched: SearchStudent): Student[] {
-    const studentsFound: Student[] = _.filter(this.students, studentSearched);
-    return studentsFound;
-  }
-
   getSingleStudent(studentId: string): Student {
-    return _.find(this.students, { id: +studentId });
+    return _.find(this.students, { id: studentId });
   }
-
-  /*refreshStudent(studentRequest: Student): Student {
-    let studentInStudentsArray: Student = _.find(this.students, { id: studentRequest.id });
-    studentInStudentsArray = studentRequest;
-    this.emitStudentSubject();
-    return studentInStudentsArray;
-  }*/
 
 
   /*getSingleStudent(id: string): Observable<Student> {

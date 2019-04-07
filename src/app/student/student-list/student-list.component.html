@@ -8,7 +8,7 @@
                             routerLink="/student-profile">Add New Student</button>
                     </div>
                 </div>
-                <app-student-filter></app-student-filter>
+                <app-student-filter [students]="students" (studentsFound)="refreshStudents($event)"></app-student-filter>
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
@@ -31,7 +31,7 @@
                                     </th>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let student of students">
+                                    <tr *ngFor="let student of studentsTmp">
                                         <td>
                                             <div class="card-profile">
                                                 <div class="card-avatar">

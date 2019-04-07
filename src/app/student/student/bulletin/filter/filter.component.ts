@@ -25,7 +25,8 @@ export class FilterBulletinComponent implements OnInit {
 
   @Output() groupSelected = new EventEmitter<Group>();
 
-  constructor(private tokenStorage: TokenStorageService, private formBuilder: FormBuilder, private groupService: GroupService, private studentService: StudentService) { }
+  constructor(private tokenStorage: TokenStorageService, private formBuilder: FormBuilder, private groupService: GroupService,
+     private studentService: StudentService) { }
 
   ngOnInit() {
     this.getAuthority();

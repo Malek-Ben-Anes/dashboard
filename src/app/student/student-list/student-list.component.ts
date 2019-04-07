@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -11,7 +12,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class StudentListComponent implements OnInit {
 
+  // This variable is needed retrieving data from server
   students: Student[] = [];
+  // This variable is needed for filter functionnality
+  studentsTmp: Student[] = [];
 
   constructor(private studentsService: StudentService, private router: Router) { }
 
@@ -19,6 +23,7 @@ export class StudentListComponent implements OnInit {
     this.studentsService.getStudents().subscribe(
       (students: any[]) => {
         this.students = students;
+        this.studentsTmp = students;
         console.log(this.students);
       }, (err: HttpErrorResponse) => {
         if (err.error instanceof Error) {
@@ -28,4 +33,13 @@ export class StudentListComponent implements OnInit {
         }
       });
   }
+
+  refreshStudents(students: Student[] | undefined) {
+    if (students === undefined) {
+      this.studentsTmp = this.students;
+    } else {
+      this.studentsTmp = students;
+    }
+  }
+
 }
