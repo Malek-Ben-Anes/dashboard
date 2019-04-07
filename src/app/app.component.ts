@@ -16,8 +16,4 @@ export class AppComponent implements OnInit {
 
 export const BASE_URL: string = 'https://laplumedor.cfapps.io/';
 export const BASE_API_URL: string = 'https://laplumedor.cfapps.io/api/';
-
-export const GlobalVariable = Object.freeze({
-  BASE_API_URL: 'https://laplumedor.cfapps.io/api/',
-  //... more of your variables
-});
+export const ASSET_URL: string = 'https://laplumedor.cfapps.io/uploads';

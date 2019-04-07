@@ -1,0 +1,76 @@
+<div class="card card-profile">
+  <div class="card-body">
+    <form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+      <div class="row">
+        <div class="col-md-3">
+          <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+          <img class="img profile-image" src="assets/images/upload-pdf-icon.png" alt="upload bulletin" height="39"
+            width="39" />
+          <button mat-raised-button class="btn btn-default" (click)="fileInput.click()">Sélectionner Bulletin</button>
+          <div *ngIf="isUploading">
+            <button mat-raised-button class="btn btn-warning buttonload">
+              Uploading...<i class="fa fa-circle-o-notch fa-spin"></i>
+            </button>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field class="example-full-width">
+            <mat-select matInput placeholder="Trimester" [(value)]="selectedTrimester" required>
+              <mat-option *ngFor="let trimester of trimesters" [value]="trimester" required>
+                {{ trimester }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-5">
+          <div *ngIf="!isUploading">
+            <button mat-raised-button class="btn btn-warning" (click)="onUpload()">
+              <span class="glyphicon glyphicon-cloud-upload"></span>Upload
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="card card-profile">
+  <div class="card-body">
+    <div *ngIf="student">
+      <table class="table">
+        <thead class=" text-primary">
+          <th></th>
+          <th>
+            Trimester
+          </th>
+          <th>
+            Date de délibération
+          </th>
+          <th *ngIf="authority === 'admin'">
+            Supprimer
+          </th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let bulletin of student.bulletins">
+            <td class="text-primary">
+              <a *ngIf="bulletin.fileUrl != null" [href]="BASE_URL + bulletin.fileUrl" target="_blank">
+                <img class="img profile-image" src="assets/images/pdf-icon.png" alt="Smiley face" height="42"
+                  width="42" />
+              </a>
+            </td>
+            <td>
+              <strong>{{ bulletin.trimester }}</strong>
+            </td>
+            <td>
+              {{ bulletin.createdAt | date }}
+            </td>
+            <td *ngIf="authority === 'admin'" class="td-actions text-right">
+              <button (click)="onDeleteBulletin($event, bulletin.id)" type="button" class="btn btn-danger btn-sm"
+                [disabled]="false">Supprimer X</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

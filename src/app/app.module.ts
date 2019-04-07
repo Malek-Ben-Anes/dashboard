@@ -86,10 +86,10 @@ import { LessonTimeTableComponent } from './lesson-list/lesson-time-table/lesson
 import { MarkFormComponent } from './marks/mark-form/mark-form.component';
 import { FilterComponent } from './marks/filter/filter.component';
 import { MarkDetailComponent } from './marks/student-view/mark-detail/mark-detail.component';
-import { BulletinComponent } from './bulletin/bulletin.component';
-import { FilterBulletinComponent } from './bulletin/filter/filter.component';
-import { BulletinUploadComponent } from './bulletin/bulletin-upload/bulletin-upload.component';
-import { BulletinListComponent } from './bulletin/student-view/bulletin-list/bulletin-list.component';
+import { BulletinComponent } from './student/student/bulletin/bulletin.component';
+import { FilterBulletinComponent } from './student/student/bulletin/filter/filter.component';
+
+import { BulletinListComponent } from './student/student/bulletin/student-view/bulletin-list/bulletin-list.component';
 import { UpdatePasswordComponent } from './student/student/update-password/update-password.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { AccueilComponent } from './landing-page/accueil/accueil.component';
@@ -166,7 +166,6 @@ import { NavTabComponent } from './commons/nav-tab/nav-tab.component';
 
     BulletinComponent,
     FilterBulletinComponent,
-    BulletinUploadComponent,
     BulletinListComponent,
     UpdatePasswordComponent,
     LandingPageComponent,

@@ -1,7 +1,9 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { Student } from "app/models/Student";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+
+import { Student } from "app/models/Student";
 import { StudentService } from "app/services/student.service";
+import { BASE_URL } from "app/app.component";
 
 @Component({
   selector: "app-update-password",
@@ -9,19 +11,24 @@ import { StudentService } from "app/services/student.service";
   styleUrls: ["./update-password.component.scss"]
 })
 export class UpdatePasswordComponent implements OnInit {
-  @Input("student") student: Student;
+
+  @Input("student")
+  student: Student;
+
+  @Output()
+  modifiedStudent = new EventEmitter<Student>();
+
+  BASE_URL: string = BASE_URL;
 
   passwordForm: FormGroup;
-
   submitted = false;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private studentService: StudentService
-  ) {}
+  constructor(private formBuilder: FormBuilder, private studentService: StudentService) { }
 
   ngOnInit() {
     this.initForm();
+    console.log(this.student);
+    console.log(this.student.registerUrl);
   }
 
   get f() {
@@ -32,7 +39,7 @@ export class UpdatePasswordComponent implements OnInit {
     this.passwordForm = this.formBuilder.group(
       {
         password: [
-          "",
+          '',
           [
             Validators.required,
             Validators.minLength(6),
@@ -40,7 +47,7 @@ export class UpdatePasswordComponent implements OnInit {
           ]
         ],
         passwordConfirm: [
-          "",
+          '',
           [
             Validators.required,
             Validators.minLength(6),
@@ -63,12 +70,14 @@ export class UpdatePasswordComponent implements OnInit {
     if (this.passwordForm.invalid) {
       return;
     }
-
     this.student.password = this.passwordForm.get("password").value;
     this.studentService
       .updateStudentPassword(this.student)
       .subscribe(
-        data => alert("password updated successfully!"),
+        (student) => {
+        alert("password updated successfully!");
+        this.student = student;
+        this.modifiedStudent.emit(this.student);},
         err => console.log("password update failed!")
       );
   }

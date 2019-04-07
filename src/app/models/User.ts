@@ -14,6 +14,7 @@ export class User {
     createdAt?: string;
     updatedAt?: string;
     role: string[];
+    registerUrl: string;
 
     constructor(_id: string, _firstname?: string, _lastname?: string, _gender?: Gender,
         _email?: string, _photo?: string, _birthDate?: Date, _phone?: string) {

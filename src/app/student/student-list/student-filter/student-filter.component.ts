@@ -19,12 +19,14 @@ export class StudentFilterComponent implements OnInit {
   levels = Object.keys(Level);
   groups: Group[] = [];
 
-  searchForStudent: SearchStudent = { firstname: undefined,
+  searchForStudent: SearchStudent = {
+    firstname: undefined,
     lastname: undefined,
     level: undefined,
-    group: undefined};
+    group: undefined
+  };
 
-  constructor(private studentsService: StudentService, private formBuilder: FormBuilder, private groupService: GroupService) {}
+  constructor(private studentsService: StudentService, private formBuilder: FormBuilder, private groupService: GroupService) { }
 
   ngOnInit() {
     this.initForm();
@@ -50,17 +52,15 @@ export class StudentFilterComponent implements OnInit {
     const emptyFields = searchResult === {};
 
     if (!emptyFields) {
-        this.studentsService.SearchForStudent(searchResult);
-    } else {
-      this.studentsService.emitStudentSubject();
+      this.studentsService.SearchForStudent(searchResult);
     }
   }
-/*
-  selectLevel(levelSelected) {
-    if (levelSelected !== undefined) {
-      this.groups = this.allGroups.filter(group => levelSelected == group.level);
-    }
-  }*/
+  /*
+    selectLevel(levelSelected) {
+      if (levelSelected !== undefined) {
+        this.groups = this.allGroups.filter(group => levelSelected == group.level);
+      }
+    }*/
 }
 
 interface SearchStudent {

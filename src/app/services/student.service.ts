@@ -1,8 +1,6 @@
 import * as _ from "lodash";
 import { Injectable } from "@angular/core";
 import { Subject, Observable } from "rxjs";
-import { Teacher } from "../models/Teacher";
-import { Gender } from "../models/User";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Student } from "app/models/Student";
 import { BASE_API_URL } from "../app.component";
@@ -20,47 +18,36 @@ interface SearchStudent {
 }
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class StudentService {
-  studentsSubject = new Subject<Student[]>();
-  private students: Student[] = [];
+  students: Student[] = [];
 
-  constructor(private http: HttpClient) {
-    this.getSubjectsStudents();
-  }
-
-  emitStudentSubject() {
-    this.studentsSubject.next(this.students.slice());
-  }
-
-  getSubjectsStudents() {
-    return this.http.get<Student[]>(STUDENT_URL).subscribe(
-      students => {
-        this.students = students;
-        this.emitStudentSubject();
-      },
-      (err: HttpErrorResponse) => {
-        if (err.error instanceof Error) {
-          console.log("Client-side error occured.");
-        } else {
-          console.log("Server-side error occured.");
-        }
-      }
-    );
-  }
-
-  SearchForStudent(studentSearched: SearchStudent) {
-    const studentsFound: Student[] = _.filter(this.students, studentSearched);
-    this.studentsSubject.next(studentsFound);
-  }
+  constructor(private http: HttpClient) {}
 
   getStudents(): Observable<Student[]> {
     return this.http.get<Student[]>(STUDENT_URL);
   }
 
   getGroupStudents(id: string): Observable<Student[]> {
-    return this.http.get<Student[]>(GROUP_URL + id + "/students/");
+    return this.http.get<Student[]>(GROUP_URL + id + '/students/');
+  }
+
+  getStudentById(id: string): Observable<Student>  {
+    return this.http.get<Student>(STUDENT_URL + '/' + id);
+  }
+
+  saveStudent(teacher: Student): Observable<Student>  {
+    return this.http.post<Student>(STUDENT_URL, teacher);
+  }
+
+  updateStudent(student: Student): Observable<Student>  {
+    return this.http.put<Student>(STUDENT_URL  + '/' + student.id, student);
+  }
+
+  SearchForStudent(studentSearched: SearchStudent): Student[] {
+    const studentsFound: Student[] = _.filter(this.students, studentSearched);
+    return studentsFound;
   }
 
   getSingleStudent(studentId: string): Student {
@@ -78,47 +65,6 @@ export class StudentService {
   /*getSingleStudent(id: string): Observable<Student> {
     return this.http.get<Student>(STUDENT_URL + "/" + id);
   }*/
-
-  saveStudent(studentRequest: Student) {
-    this.http.post<Student>(STUDENT_URL, studentRequest).subscribe(
-      student => {
-        this.students.push(student);
-        console.log("student created", student);
-        this.emitStudentSubject();
-      },
-      (err: HttpErrorResponse) => {
-        if (err.error instanceof Error) {
-          console.log("Client-side error occured.");
-        } else {
-          console.log("Server-side error occured.");
-        }
-      }
-    );
-  }
-
-  updateStudent(studentRequest: Student): Student {
-    let result: Student = studentRequest;
-    this.http
-      .put<Student>(STUDENT_URL + '/' + studentRequest.id, studentRequest)
-      .subscribe(
-        (student: Student) => {
-          let studentToUpdate =  _.find(this.students, { id: student.id }) ;
-          studentToUpdate = student;
-          console.log("student updated");
-        },
-        (err: HttpErrorResponse) => {
-          if (err.error instanceof Error) {
-            console.log(err.error);
-            console.log("Client-side error occured.");
-          } else {
-            console.log(err.error);
-            console.log("Server-side error occured.");
-          }
-        }
-      );
-      return result;
-  }
-
   updateStudentPassword(studentRequest: Student): Observable<Student> {
     return this.http
       .put<Student>(STUDENT_URL + '/' + studentRequest.id, studentRequest);
@@ -143,31 +89,4 @@ export class StudentService {
         );*/
     });
   }
-
-  /*
-  
-  removeBook(book: Book) {
-      if(book.photo) {
-        const storageRef = firebase.storage().refFromURL(book.photo);
-        storageRef.delete().then(
-          () => {
-            console.log('Photo removed!');
-          },
-          (error) => {
-            console.log('Could not remove photo! : ' + error);
-          }
-        );
-      }
-      const bookIndexToRemove = this.books.findIndex(
-        (bookEl) => {
-          if(bookEl === book) {
-            return true;
-          }
-        }
-      );
-      this.books.splice(bookIndexToRemove, 1);
-      this.saveBooks();
-      this.emitBooks();
-  }
-  */
 }
