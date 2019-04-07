@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Student } from 'app/models/Student';
 import { StudentService } from 'app/services/student.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { BASE_URL } from 'app/app.component';
 @Component({
   selector: 'app-student-list',
   templateUrl: './student-list.component.html',
@@ -12,6 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class StudentListComponent implements OnInit {
 
+  BASE_URL = BASE_URL;
   // This variable is needed retrieving data from server
   students: Student[] = [];
   // This variable is needed for filter functionnality
