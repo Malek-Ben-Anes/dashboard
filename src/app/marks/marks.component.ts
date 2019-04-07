@@ -42,7 +42,7 @@ export class MarkComponent implements OnInit {
     this.studentSelected = student;
   }
 
-  private getStudents(id: number): void {
+  private getStudents(id: string): void {
     this.studentService.getGroupStudents(id)
       .subscribe(students => this.students = students,
         err => console.log(err.error));
@@ -62,7 +62,7 @@ export class MarkComponent implements OnInit {
           return false;
         }
         this.authority = 'user';
-        const studentById: Student = this.studentService.getSingleStudent(+this.authId);
+        const studentById: Student = this.studentService.getSingleStudent(this.authId);
         if (studentById != null) {
           this.loggedStudent = studentById;
         }

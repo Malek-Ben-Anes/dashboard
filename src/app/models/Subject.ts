@@ -3,7 +3,7 @@ import { Level } from './Level';
 
 export class Subject{
 
-    id: number;
+    id: string;
     name: string;
     level?: Level;
     coefficient?: string;

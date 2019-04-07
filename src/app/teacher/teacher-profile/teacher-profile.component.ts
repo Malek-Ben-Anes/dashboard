@@ -126,7 +126,7 @@ export class TeacherProfileComponent implements OnInit {
                            Validators.minLength(3),
                            Validators.maxLength(50)]],
         productCode: ['', Validators.required],
-        starRating: ['', NumberValidators.range(1, 5)],
+        starRating: ['', stringValidators.range(1, 5)],
         description: ''
     });
 }

@@ -52,9 +52,9 @@ import { BulletinService } from 'app/services/bulletin.service';
 import { TeacherComponent } from './teacher/teacher/teacher.component';
 import { TeacherSubjectComponent } from './teacher/teacher-subject/teacher-subject.component';
 import { StepperComponent } from './stepper/stepper.component';
-import { GroupListComponent } from './group-list/group-list.component';
+import { GroupListComponent } from './group/group-list/group-list.component';
 import { SubjectListComponent } from './subject-list/subject-list.component';
-import { GroupDetailComponent } from './group-detail/group-detail.component';
+import { GroupComponent } from './group/group/group.component';
 import { LessonListComponent } from './lesson-list/lesson-list.component';
 
 
@@ -67,8 +67,8 @@ import { LessonDetailComponent } from './lesson-list/lesson-detail/lesson-detail
 import { LessonService } from './services/lesson.service';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 
-import { StudentAssignComponent } from './group-detail/student-assign/student-assign.component';
-import { GroupTimetableComponent } from './group-detail/group-timetable/group-timetable.component';
+import { StudentAssignComponent } from './group/group/student-assign/student-assign.component';
+import { GroupTimetableComponent } from './group/group/group-timetable/group-timetable.component';
 import { MarkComponent } from './marks/marks.component';
 import { MarkService } from './services/mark.service';
 import { HeaderComponent } from './header/header.component';
@@ -85,10 +85,10 @@ import { LessonTimeTableComponent } from './lesson-list/lesson-time-table/lesson
 import { MarkFormComponent } from './marks/mark-form/mark-form.component';
 import { FilterComponent } from './marks/filter/filter.component';
 import { MarkDetailComponent } from './marks/student-view/mark-detail/mark-detail.component';
-import { BulletinComponent } from './bulletin/bulletin.component';
-import { FilterBulletinComponent } from './bulletin/filter/filter.component';
-import { BulletinUploadComponent } from './bulletin/bulletin-upload/bulletin-upload.component';
-import { BulletinListComponent } from './bulletin/student-view/bulletin-list/bulletin-list.component';
+import { BulletinComponent } from './student/student/bulletin/bulletin.component';
+import { FilterBulletinComponent } from './student/student/bulletin/filter/filter.component';
+
+import { BulletinListComponent } from './student/student/bulletin/student-view/bulletin-list/bulletin-list.component';
 import { UpdatePasswordComponent } from './student/student/update-password/update-password.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { AccueilComponent } from './landing-page/accueil/accueil.component';
@@ -97,6 +97,9 @@ import { NewsComponent } from './landing-page/news/news.component';
 import { ClubsComponent } from './landing-page/clubs/clubs.component';
 import { ContactComponent } from './landing-page/contact/contact.component';
 import { StudentFilterComponent } from './student/student-list/student-filter/student-filter.component';
+import { NavTabComponent } from './commons/nav-tab/nav-tab.component';
+import { TimeTableComponent } from './student/student/time-table/time-table.component';
+import { GroupDetailComponent } from './group/group/group-detail/group-detail.component';
 
 
 @NgModule({
@@ -142,6 +145,7 @@ import { StudentFilterComponent } from './student/student-list/student-filter/st
     StepperComponent,
     SubjectListComponent,
     GroupListComponent,
+    GroupComponent,
     GroupDetailComponent,
     LessonListComponent,
     LessonDetailComponent,
@@ -164,7 +168,6 @@ import { StudentFilterComponent } from './student/student-list/student-filter/st
 
     BulletinComponent,
     FilterBulletinComponent,
-    BulletinUploadComponent,
     BulletinListComponent,
     UpdatePasswordComponent,
     LandingPageComponent,
@@ -174,6 +177,8 @@ import { StudentFilterComponent } from './student/student-list/student-filter/st
     ClubsComponent,
     ContactComponent,
     StudentFilterComponent,
+    NavTabComponent,
+    TimeTableComponent,
   ],
   exports: [
     StepperComponent,

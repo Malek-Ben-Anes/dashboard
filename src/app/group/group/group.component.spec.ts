@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BulletinUploadComponent } from './bulletin-upload.component';
+import { GroupComponent } from './group.component';
 
-describe('BulletinUploadComponent', () => {
-  let component: BulletinUploadComponent;
-  let fixture: ComponentFixture<BulletinUploadComponent>;
+describe('GroupDetailComponent', () => {
+  let component: GroupComponent;
+  let fixture: ComponentFixture<GroupComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BulletinUploadComponent ]
+      declarations: [ GroupComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BulletinUploadComponent);
+    fixture = TestBed.createComponent(GroupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -17,7 +17,7 @@ export class GroupStudentListComponent implements OnInit {
 
   ngOnInit() {}
 
-  onDetailMarks(student: Student):void {
+  onDetailMarks(student: Student): void {
     this.studentSelected.emit(student);
     console.log(student);
   }

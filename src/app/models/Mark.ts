@@ -4,13 +4,13 @@ import { Lesson } from './Lesson';
 
 export class Mark{
 
-    id?: number;
-    note?: number;
+    id?: string;
+    note?: string;
     mark?: string;
     student: Student;
     lesson: Lesson;
 
-    constructor(student?: Student, lesson?: Lesson, note?: number, mark?: string) {
+    constructor(student?: Student, lesson?: Lesson, note?: string, mark?: string) {
         this.student = student;
         this.lesson = lesson;
         this.note = note;

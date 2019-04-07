@@ -1,6 +1,6 @@
 export class User {
 
-    id?: number;
+    id?: string;
     username?: string;
     name?: string;
     firstname?: string;
@@ -14,8 +14,9 @@ export class User {
     createdAt?: string;
     updatedAt?: string;
     role: string[];
+    registerUrl: string;
 
-    constructor(_id: number, _firstname?: string, _lastname?: string, _gender?: Gender,
+    constructor(_id: string, _firstname?: string, _lastname?: string, _gender?: Gender,
         _email?: string, _photo?: string, _birthDate?: Date, _phone?: string) {
         this.id = _id;
         this.firstname = _firstname;

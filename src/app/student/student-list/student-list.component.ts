@@ -1,40 +1,45 @@
+import * as _ from 'lodash';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-
-
-
 import { Router } from '@angular/router';
-import { Subscription, of, Subject } from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { Student } from 'app/models/Student';
 import { StudentService } from 'app/services/student.service';
-import { BASE_URL } from 'app/app.component';
-
+import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-student-list',
   templateUrl: './student-list.component.html',
   styleUrls: ['./student-list.component.css']
 })
-export class StudentListComponent implements OnInit, OnDestroy {
+export class StudentListComponent implements OnInit {
 
-  BASE_URL: string = BASE_URL;
-
-  studentsSubscription: Subscription;
+  // This variable is needed retrieving data from server
   students: Student[] = [];
+  // This variable is needed for filter functionnality
+  studentsTmp: Student[] = [];
 
-  constructor(private studentsService: StudentService, private router: Router) {}
+  constructor(private studentsService: StudentService, private router: Router) { }
 
   ngOnInit() {
-    this.studentsSubscription = this.studentsService.studentsSubject.subscribe(
+    this.studentsService.getStudents().subscribe(
       (students: any[]) => {
         this.students = students;
+        this.studentsTmp = students;
         console.log(this.students);
-      }
-    );
-    this.studentsService.emitStudentSubject();
+      }, (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          console.log('Client-side error occured.');
+        } else {
+          console.log('Server-side error occured.');
+        }
+      });
   }
 
-  ngOnDestroy() {
-    this.studentsSubscription.unsubscribe();
+  refreshStudents(students: Student[] | undefined) {
+    if (students === undefined) {
+      this.studentsTmp = this.students;
+    } else {
+      this.studentsTmp = students;
+    }
   }
+
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Student } from 'app/models/Student';
 import { StudentService } from 'app/services/student.service';
@@ -10,34 +10,92 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './student.component.html',
   styleUrls: ['./student.component.scss']
 })
-export class StudentComponent implements OnInit {
-    tabs = ['Edit Profile', 'Password', 'Marks', 'Bulletin', 'Time Table'];
-    selected = new FormControl(0);
+export class StudentComponent implements OnInit, OnChanges {
+  isNew = true;
+  tabIndex = {'PROFILE': 0, 'PASSWORD': 1, 'MARKS': 2, 'BULLETIN': 3, 'TIME_TABLE': 4};
+  tabs = this.tabs = this.updateTabs();
 
-    isNew: boolean = true;
-
-  student: Student = new Student();
+  selected = new FormControl(0);
+  student: Student;
 
   constructor(private studentService: StudentService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    let id = this.route.snapshot.params['id'];
-
-    if (id !== undefined) {
-      console.log(id);
-      this.getSingleStudent(id);
-      
+    const id: string = this.route.snapshot.params['id'];
+    this.tabs = this.updateTabs();
+    if (id != null && this.isNew) {
+      this.getStudent(id);
     } else {
-      this.isNew = true;
+      this.student = new Student();
     }
   }
 
-  private getSingleStudent(id): void {
-    const student = this.studentService.getSingleStudent(id);
-    if (student != null) {
-      this.student = student;
+  ngOnChanges(changes: SimpleChanges) {
+    // changes.prop contains the old and the new value...
+    this.student = changes.student.currentValue;
+    console.log('***********----', this.student);
+  }
+
+  private getStudent(id: string): void {
+    this.studentService.getStudentById(id).subscribe(
+      (studentData: Student) => {
+        this.student = studentData;
         this.isNew = false;
-        console.log(this.student);
+        this.tabs = this.updateTabs();
+        console.log(studentData);
+      },
+      (err: HttpErrorResponse) => {
+        this.student = new Student();
+        this.isNew = true;
+      }
+    );
+  }
+
+  /**
+   * Get event from child Component and update student
+   * @param studentToPersist 
+   */
+  onUpdateStudent(student: Student) {
+    if ( this.isNew ) {
+      this.createStudent(student);
+    } else {
+      this.updateStudent(student);
     }
+  }
+
+  /**
+ * Get event from child Component and refersh student
+ * @param studentToPersist 
+ */
+  refreshStudent(student: Student) {
+    this.student = student;
+    console.log('student refreshed');
+  }
+
+  private updateStudent(studentRequest: Student): void {
+    this.studentService.updateStudent(studentRequest).subscribe((StudentData) => {
+      this.student = StudentData;
+      this.tabs = this.updateTabs();
+      console.log('student updated', this.student);
+    }, (err) => {
+      console.log(err)
+    });
+  }
+
+  private createStudent (studentRequest: Student): void {
+    this.studentService.saveStudent(studentRequest).subscribe((StudentData) => {
+      this.student = StudentData;
+      this.isNew = false;
+      this.tabs = this.updateTabs();
+      console.log('student created', this.student);
+    }, (err) => {
+      console.log(err)
+    });
+  }
+
+  updateTabs() {
+    return [{'label': 'Edit Profile', 'disabled': false}, {'label': 'Password', 'disabled': this.isNew},
+            {'label': 'Marks', 'disabled': this.isNew}, {'label': 'Bulletin', 'disabled': this.isNew},
+            {'label': 'Time Table', 'disabled': this.isNew}];
   }
 }

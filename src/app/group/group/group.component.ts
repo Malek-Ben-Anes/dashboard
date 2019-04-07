@@ -11,17 +11,17 @@ import { Observable } from 'rxjs';
 import { BASE_URL } from 'app/app.component';
 
 @Component({
-  selector: 'app-group-detail',
-  templateUrl: './group-detail.component.html',
-  styleUrls: ['./group-detail.component.scss']
+  selector: 'app-group',
+  templateUrl: './group.component.html',
+  styleUrls: ['./group.component.scss']
 })
-export class GroupDetailComponent implements OnInit {
+export class GroupComponent implements OnInit {
 
   BASE_URL: string = BASE_URL;
 
-  ready: boolean = false;
+  ready = false;
 
-  group: Group = new Group();
+  group: Group;
 
   groupToChild: Observable<Group>;
 
@@ -31,53 +31,20 @@ export class GroupDetailComponent implements OnInit {
 
   groupStudentsForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private groupService: GroupService, private studentService: StudentService,
-    private router: Router, private route: ActivatedRoute) { }
+  constructor(private groupService: GroupService, private studentService: StudentService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
-    
-    this.initGroupForm();
-    this.initStudentsForm();
-
-    let id = this.route.snapshot.params['id'];
+    const id = this.route.snapshot.params['id'];
     if (id !== undefined) {
       this.getGroup(id);
     }
-
-  }
-
-  initGroupForm() {
-    this.groupForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      level: ['', Validators.required],
-      description: ['', Validators.required],
-    });
-  }
-
-  updateForm(group: Group): void {
-    this.groupForm.patchValue({
-      name: group.name,
-      description: group.description,
-      studentsNumber: group.students.length,
-    });
-
-    const toSelect = this.levels.find(level => level == this.group.level);
-    this.groupForm.get('level').setValue(toSelect);
-  }
-
-  initStudentsForm() {
-    this.groupStudentsForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      description: ['', Validators.required],
-    });
   }
 
   onSubmit() {
-    this.getSubmitedData();
+    //this.getSubmitedData();
     console.log(this.group);
     if (this.group.id !== undefined) {
-
-
       this.groupService.updateGroup(this.group)
         .subscribe(subject => { this.group = subject; console.log("subject updated") },
           (err: HttpErrorResponse) => {
@@ -92,14 +59,7 @@ export class GroupDetailComponent implements OnInit {
     }
   }
 
-  getSubmitedData() {
-    this.group.name = this.groupForm.get('name').value;
-    this.group.description = this.groupForm.get('description').value;
-    //this.group.students = this.gr
-  }
-
-
-  private getGroup(id: number) {
+  private getGroup(id: string) {
 
     this.groupService.getSingleGroup(id)
       .subscribe(group => {
@@ -107,7 +67,9 @@ export class GroupDetailComponent implements OnInit {
         this.group.students = [];
         console.log(this.group);
         this.getGroupStudents(this.group.id);
-        this.updateForm(this.group);
+        
+        // this.ready = true;
+        //this.updateForm(this.group);
       },
         (err: HttpErrorResponse) => {
           this.group = new Group();
@@ -117,13 +79,17 @@ export class GroupDetailComponent implements OnInit {
             console.log("Server-side error occured.");
           }
         });
-
   }
 
+  refreshGroup(group: Group) {
+    this.group = group;
+    console.log('******', group);
+  }
 
-  private getGroupStudents(id: number) {
+  private getGroupStudents(id: string) {
     this.studentService.getGroupStudents(id)
       .subscribe(students => { this.group.students = students; 
+        console.log(this.group);
                       //this.groupToChild = new Observable<Group>(observer => observer.next(this.group));
                       this.ready = true;
                     });

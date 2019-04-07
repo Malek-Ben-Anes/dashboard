@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import * as _ from 'lodash';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+
 import { Gender } from 'app/models/User';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,7 +13,7 @@ import { Group } from 'app/models/Group';
 import { GroupService } from 'app/services/group.service';
 
 
-const EMAIL_PATTERN = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
+const EMAIL_PATTERN = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
 
 @Component({
   selector: 'app-student-profile',
@@ -20,37 +22,41 @@ const EMAIL_PATTERN = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
 })
 export class StudentProfileComponent implements OnInit {
 
-  isNew: boolean = true;
+  @Input('student')
+  student: Student;
 
-  student: Student = new Student();
+  @Input('isNew')
+  isNew: boolean;
 
-  studentForm: FormGroup;
+  @Output()
+  modifiedStudent = new EventEmitter<Student>();
 
   genders = Object.keys(Gender);
   levels = Object.keys(Level);
 
+  studentForm: FormGroup;
   groups: Group[] = [];
 
-  constructor(private formBuilder: FormBuilder, private studentService: StudentService, private groupService: GroupService,
-    private router: Router, private route: ActivatedRoute, private dataService: DataService) {
-  }
+  constructor(private formBuilder: FormBuilder, private studentService: StudentService, private groupService: GroupService) { }
 
   ngOnInit() {
-
     this.initForm();
-    let id = this.route.snapshot.params['id'];
-
-    if (id !== undefined) {
-      console.log(id);
-      this.getSingleStudent(id);
-      
-    } else {
-      this.isNew = true;
-    }
+    this.getGroup();
   }
 
-  initForm() {
-    this.groupService.getGroups().subscribe(groups => { this.groups = groups; console.log(this.groups); });
+  onSubmit() {
+    this.extractFormData();
+    this.modifiedStudent.emit(this.student);
+  }
+
+  private getGroup() {
+    this.groupService.getGroups().subscribe(groups => {this.groups = groups;
+      this.updateForm(this.student);
+    });
+  }
+
+  private initForm() {
+
     this.studentForm = this.formBuilder.group({
       firstname: ['', [Validators.required,
       Validators.minLength(3),
@@ -71,13 +77,13 @@ export class StudentProfileComponent implements OnInit {
     });
   }
 
-  updateForm(student: Student): void {
+  private updateForm(student: Student): void {
     this.studentForm.patchValue({
       firstname: student.firstname,
       lastname: student.lastname,
       phone: student.phone,
       email: student.email,
-      gender: <Gender>student.gender,
+      gender: <Gender> student.gender,
       adress: student.adress,
       parentName: student.parentName,
       parentPhone: student.parentPhone,
@@ -85,32 +91,11 @@ export class StudentProfileComponent implements OnInit {
     });
 
     this.studentForm.get('birthDate').setValue(new Date(this.student.birthDate));
-    const toSelect1 = this.groups.find(group => group.id == this.student.group.id);
-
-    this.studentForm.get('group').setValue(toSelect1);
-
-    const toSelect2 = this.levels.find(level => level == this.student.level);
+    const toSelect2 = this.levels.find(level => level === this.student.level);
     this.studentForm.get('level').setValue(toSelect2);
-  }
-
-  onSubmit() {
-    this.extractFormData();
-    console.log(this.student);
-    if (this.student.id !== undefined) {
-      this.updateStudent(this.student);
-    }
-    else {
-      this.createStudent(this.student);
-    }
-  }
-
-  private getSingleStudent(id): void {
-    const student = this.studentService.getSingleStudent(id);
-    if (student != null) {
-      this.student = student;
-      this.isNew = false;
-      this.updateForm(this.student);
-      console.log(this.student);
+    if (this.student.group != null) {
+      const toSelect1 = _.find(this.groups, (group) => group.id === this.student.group.id);
+      this.studentForm.get('group').setValue(toSelect1);
     }
   }
 
@@ -134,17 +119,4 @@ export class StudentProfileComponent implements OnInit {
   private extractFieldData(property: string): any {
     return this.studentForm.get(property).value;
   }
-
-  private updateStudent(studentRequest: Student): void {
-    this.student = this.studentService.updateStudent(studentRequest);
-  }
-
-  private createStudent(studentRequest: Student): void {
-    this.studentService.saveStudent(studentRequest);
-  }
-  /*
-  onBack() {
-    this.router.navigate(['table-list']);
-  }
-*/
 }
