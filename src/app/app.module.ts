@@ -52,9 +52,9 @@ import { BulletinService } from 'app/services/bulletin.service';
 import { TeacherComponent } from './teacher/teacher/teacher.component';
 import { TeacherSubjectComponent } from './teacher/teacher-subject/teacher-subject.component';
 import { StepperComponent } from './stepper/stepper.component';
-import { GroupListComponent } from './group-list/group-list.component';
+import { GroupListComponent } from './group/group-list/group-list.component';
 import { SubjectListComponent } from './subject-list/subject-list.component';
-import { GroupDetailComponent } from './group-detail/group-detail.component';
+import { GroupComponent } from './group/group/group.component';
 import { LessonListComponent } from './lesson-list/lesson-list.component';
 
 
@@ -68,8 +68,8 @@ import { LessonDetailComponent } from './lesson-list/lesson-detail/lesson-detail
 import { LessonService } from './services/lesson.service';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 
-import { StudentAssignComponent } from './group-detail/student-assign/student-assign.component';
-import { GroupTimetableComponent } from './group-detail/group-timetable/group-timetable.component';
+import { StudentAssignComponent } from './group/group/student-assign/student-assign.component';
+import { GroupTimetableComponent } from './group/group/group-timetable/group-timetable.component';
 import { MarkComponent } from './marks/marks.component';
 import { MarkService } from './services/mark.service';
 import { HeaderComponent } from './header/header.component';
@@ -100,6 +100,7 @@ import { ContactComponent } from './landing-page/contact/contact.component';
 import { StudentFilterComponent } from './student/student-list/student-filter/student-filter.component';
 import { NavTabComponent } from './commons/nav-tab/nav-tab.component';
 import { TimeTableComponent } from './student/student/time-table/time-table.component';
+import { GroupDetailComponent } from './group/group/group-detail/group-detail.component';
 
 
 @NgModule({
@@ -145,6 +146,7 @@ import { TimeTableComponent } from './student/student/time-table/time-table.comp
     StepperComponent,
     SubjectListComponent,
     GroupListComponent,
+    GroupComponent,
     GroupDetailComponent,
     LessonListComponent,
     LessonDetailComponent,

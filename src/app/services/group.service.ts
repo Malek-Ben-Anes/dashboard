@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams, HttpEvent } from '@angular/common/http';
 import { Group } from 'app/models/Group';
 import { group } from '@angular/animations';
 import { BASE_API_URL } from 'app/app.component';
@@ -16,16 +16,8 @@ export class GroupService {
   private groups: Group[] = [];
   private teachers: Group[] = [];
 
-  
   constructor(private http: HttpClient) {}
-  
-  // setGroup(groups: Group[]) {
-  //   this.groups = groups;
-  // }
-  
-  // getGroup(): Group[] {
-  //   return this.groups;
-  // }
+
   getGroups(teacherId?: string): Observable<Group[]> {
     
     if(teacherId !== undefined) {
@@ -46,6 +38,16 @@ export class GroupService {
 
   updateGroup(group: Group) : Observable<Group>  {
     return this.http.put<Group>(GROUP_URL  + '/' + group.id, group);
+  }
+
+  uploadTimeTable(groupId: string, file: File): Observable<HttpEvent<{}>> {
+    const TIMETABLE_UPLOAD_URL: string = BASE_API_URL + `groups/${groupId}/timetables`;
+    const formdata: FormData = new FormData();
+    formdata.append('file', file);
+    return this.http.post<Group>(TIMETABLE_UPLOAD_URL, formdata, {
+      reportProgress: true,
+      observe: 'events'
+    });
   }
 
   uploadFile(file: File) {

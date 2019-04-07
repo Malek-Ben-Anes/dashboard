@@ -16,8 +16,8 @@ import { TeacherProfileComponent } from './teacher/teacher-profile/teacher-profi
 import { TeacherListComponent } from './teacher/teacher-list/teacher-list.component';
 import { TeacherComponent } from './teacher/teacher/teacher.component';
 import { SubjectListComponent } from './subject-list/subject-list.component';
-import { GroupListComponent } from './group-list/group-list.component';
-import { GroupDetailComponent } from './group-detail/group-detail.component';
+import { GroupListComponent } from './group/group-list/group-list.component';
+import { GroupComponent } from './group/group/group.component';
 import { LessonListComponent } from './lesson-list/lesson-list.component';
 import { StudentComponent } from './student/student/student.component';
 import { StudentListComponent } from './student/student-list/student-list.component';
@@ -93,11 +93,11 @@ const routes: Routes = [
     },
     {
         path: 'group-detail',
-        component: GroupDetailComponent
+        component: GroupComponent
     },
     {
         path: 'group-detail/:id',
-        component: GroupDetailComponent
+        component: GroupComponent
     },
     {
         path: 'lessons',
