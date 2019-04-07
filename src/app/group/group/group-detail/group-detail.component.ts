@@ -45,6 +45,10 @@ export class GroupDetailComponent implements OnInit {
     });
   }
 
+  onSubmit() {
+    
+  }
+
   initStudentsForm() {
     this.groupStudentsForm = this.formBuilder.group({
       name: ['', Validators.required],

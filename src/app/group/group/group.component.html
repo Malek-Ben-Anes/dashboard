@@ -35,13 +35,13 @@
 
                             <!-- GROUP COMPONENT-->
               <div *ngIf="ready && group != null" class="tab-pane active" id="profile" >
-                <app-group-detail [group]="group"></app-group-detail>
+                <app-group-detail [group]="group" (Updatedgroup)="refreshGroup($event)"></app-group-detail>
               </div>
                             <!-- GROUP COMPONENT-->
 
               <!-- STUDENT ASSIGN COMPONENT-->
               <div *ngIf="ready && group != null" class="tab-pane" id="students" >
-                <app-student-assign [group]="group"></app-student-assign>
+                <app-student-assign [group]="group" (Updatedgroup)="refreshGroup($event)"></app-student-assign>
               </div>
               <!-- END STUDENT ASSIGN COMPONENT-->
               
