@@ -98,6 +98,7 @@ import { NewsComponent } from './landing-page/news/news.component';
 import { ClubsComponent } from './landing-page/clubs/clubs.component';
 import { ContactComponent } from './landing-page/contact/contact.component';
 import { StudentFilterComponent } from './student/student-list/student-filter/student-filter.component';
+import { NavTabComponent } from './commons/nav-tab/nav-tab.component';
 
 
 @NgModule({
@@ -175,6 +176,7 @@ import { StudentFilterComponent } from './student/student-list/student-filter/st
     ClubsComponent,
     ContactComponent,
     StudentFilterComponent,
+    NavTabComponent,
   ],
   exports: [
     StepperComponent,

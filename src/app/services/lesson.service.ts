@@ -22,7 +22,7 @@ export class LessonService {
     return this.http.get<Lesson[]>(LESSON_URL);
   }
 
-  getSingleLesson(id: number): Observable<Lesson>  {
+  getSingleLesson(id: string): Observable<Lesson>  {
     return this.http.get<Lesson>(LESSON_URL + '/' + id);
   }
 
@@ -34,7 +34,7 @@ export class LessonService {
     return this.http.put<Lesson>(LESSON_URL, lesson);
   }
 
-  getLessonsByGroupId(groupId: number) : Observable<Lesson[]> {
+  getLessonsByGroupId(groupId: string) : Observable<Lesson[]> {
     return this.http.get<Lesson[]>(LESSON_URL);
   }
 

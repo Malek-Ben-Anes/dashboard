@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 declare const google: any;
 
 interface Marker {
-lat: number;
-lng: number;
+lat: string;
+lng: string;
 label?: string;
 draggable?: boolean;
 }

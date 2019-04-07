@@ -55,7 +55,7 @@ export class TeacherService {
         );*/
   
 
-  getSingleTeacher(id: number): Observable<Teacher>  {
+  getSingleTeacher(id: string): Observable<Teacher>  {
     return this.http.get<Teacher>(TEACHER_URL + '/' + id);
   }
   

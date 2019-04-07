@@ -14,7 +14,7 @@ export class Lesson{
     groupName: string;
 
 
-    constructor(_id?:LessonId, _name?: string, _description?: string ){
+    constructor(_id?: LessonId, _name?: string, _description?: string) {
         this.id = _id;
         this.name = _name;
         this.createdAt = new Date();
@@ -23,11 +23,11 @@ export class Lesson{
 }
 
 export class LessonId {
-        teacherId?: number;
-        subjectId?: number;
-        groupId?: number;
+        teacherId?: string;
+        subjectId?: string;
+        groupId?: string;
 
-        constructor(_teacherId?: number, _subjectId?: number, _groupId?: number) {
+        constructor(_teacherId?: string, _subjectId?: string, _groupId?: string) {
             this.teacherId = _teacherId;
             this.subjectId = _subjectId;
             this.groupId = _groupId;

@@ -1,0 +1,40 @@
+<div class="card card-profile">
+  <div class="card-body">
+          <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+                  <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab"></mat-tab>
+          </mat-tab-group>
+  </div>
+</div>
+
+<app-student-profile *ngIf="selected.value === 0"></app-student-profile>
+
+<div *ngIf="selected.value === 1" class="card card-profile">
+  <div class="card-body">
+          <app-update-password [student]="student"></app-update-password>
+  </div>
+</div>
+
+<div *ngIf="selected.value === 2" class="card card-profile">
+  <div class="card-body">
+          <app-student-view-mark-detail [student]="student"></app-student-view-mark-detail>
+  </div>
+</div>
+
+<div *ngIf="selected.value === 3">
+  <div class="card card-profile">
+          <div class="card-body">
+                  <app-bulletin-upload [student]="student"></app-bulletin-upload>
+          </div>
+  </div>
+  <div class="card card-profile">
+          <div class="card-body">
+                  <app-bulletin-list [student]="student"></app-bulletin-list>
+          </div>
+  </div>
+</div>
+
+<div *ngIf="selected.value === 4" class="card card-profile">
+  <div class="card-body">
+          <app-group-timetable></app-group-timetable>
+  </div>
+</div>

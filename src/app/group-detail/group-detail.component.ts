@@ -99,7 +99,7 @@ export class GroupDetailComponent implements OnInit {
   }
 
 
-  private getGroup(id: number) {
+  private getGroup(id: string) {
 
     this.groupService.getSingleGroup(id)
       .subscribe(group => {
@@ -121,7 +121,7 @@ export class GroupDetailComponent implements OnInit {
   }
 
 
-  private getGroupStudents(id: number) {
+  private getGroupStudents(id: string) {
     this.studentService.getGroupStudents(id)
       .subscribe(students => { this.group.students = students; 
                       //this.groupToChild = new Observable<Group>(observer => observer.next(this.group));

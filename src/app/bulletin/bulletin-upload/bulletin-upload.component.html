@@ -1,33 +1,37 @@
-<form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
-    <div class="row">
-        <div class="col-md-3">
-            <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
-            <img class="img profile-image" src="assets/images/upload-pdf-icon.png" alt="upload bulletin" height="39" width="39"/>
-            <button mat-raised-button class="btn btn-default" (click)="fileInput.click()">Sélectionner Bulletin</button>
-            <div *ngIf="isUploading">
-                <button mat-raised-button class="btn btn-warning buttonload">
-                    Uploading...<i class="fa fa-circle-o-notch fa-spin"></i>
-                </button>
+<div class="card card-profile">
+    <div class="card-body">
+        <form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+            <div class="row">
+                <div class="col-md-3">
+                    <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+                    <img class="img profile-image" src="assets/images/upload-pdf-icon.png" alt="upload bulletin" height="39" width="39"/>
+                    <button mat-raised-button class="btn btn-default" (click)="fileInput.click()">Sélectionner Bulletin</button>
+                    <div *ngIf="isUploading">
+                        <button mat-raised-button class="btn btn-warning buttonload">
+                            Uploading...<i class="fa fa-circle-o-notch fa-spin"></i>
+                        </button>
+                    </div>
+                </div>
+        
+                <div class="col-md-3">
+                    <mat-form-field class="example-full-width">
+                        <mat-select matInput placeholder="Trimester" [(value)]="selectedTrimester" required>
+                            <mat-option *ngFor="let trimester of trimesters" [value]="trimester" required>
+                                {{ trimester }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+        
+                <div class="col-md-5">
+                    <div *ngIf="!isUploading">
+                        <button mat-raised-button class="btn btn-warning" (click)="onUpload()">
+                            <span class="glyphicon glyphicon-cloud-upload"></span>Upload
+                        </button>
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="col-md-3">
-            <mat-form-field class="example-full-width">
-                <mat-select matInput placeholder="Trimester" [(value)]="selectedTrimester" required>
-                    <mat-option *ngFor="let trimester of trimesters" [value]="trimester" required>
-                        {{ trimester }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-
-        <div class="col-md-5">
-            <div *ngIf="!isUploading">
-                <button mat-raised-button class="btn btn-warning" (click)="onUpload()">
-                    <span class="glyphicon glyphicon-cloud-upload"></span>Upload
-                </button>
-            </div>
-        </div>
+        
+        </form> 
     </div>
-
-</form>
+</div>

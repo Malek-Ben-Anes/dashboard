@@ -3,7 +3,7 @@ import { Gender } from "app/models/User";
 export class JwtResponse {
     accessToken: string;
     type: string;
-    id: number;
+    id: string;
     username: string;
     name: string;
     email: string;

@@ -13,7 +13,7 @@ const MARK_URL: string = BASE_API_URL + 'students/';
 })
 export class MarkService {
 
-  studentId: number;
+  studentId: string;
   
 
   subjects: Group[] = [];
@@ -21,16 +21,16 @@ export class MarkService {
 
   constructor(private http: HttpClient) {}
   
-  getStudentMarks(studentId: number): Observable<Mark[]> {
+  getStudentMarks(studentId: string): Observable<Mark[]> {
     console.log(MARK_URL + studentId + '/marks/');
     return this.http.get<Mark[]>(MARK_URL + studentId + '/marks/');
   }
 
-  getMarkById(studentId: number, groupId: number): Observable<Mark> {
+  getMarkById(studentId: string, groupId: string): Observable<Mark> {
     return this.http.get<Mark>(MARK_URL + studentId + '/marks/' + groupId);
   }
 
-  saveMark(studentId: number, mark: Mark) : Observable<Mark>  {
+  saveMark(studentId: string, mark: Mark) : Observable<Mark>  {
     return this.http.post<Mark>(MARK_URL+ studentId + '/marks/', mark);
   }
 
@@ -38,12 +38,12 @@ export class MarkService {
     return this.http.put<Mark>(MARK_URL + mark.student.id, mark);
   }
 
-  deleteMark(studentId: number, groupId: number) {
+  deleteMark(studentId: string, groupId: string) {
     return this.http.delete(MARK_URL + studentId + '/marks/' + groupId);
   }
   /*
   
-  saveGroup(studentId: number, mark: Mark) : Observable<Mark>  {
+  saveGroup(studentId: string, mark: Mark) : Observable<Mark>  {
     return this.http.post<Mark>(MARK_URL, mark);
   }
 

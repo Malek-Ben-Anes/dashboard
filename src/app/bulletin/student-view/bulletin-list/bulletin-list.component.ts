@@ -36,7 +36,7 @@ export class BulletinListComponent implements OnInit {
     });
   }
 
-  onDeleteBulletin(event, bulletinId: number) {
+  onDeleteBulletin(event, bulletinId: string) {
     event.currentTarget.disabled = true;
     this.bulletinService.deleteBulletin(bulletinId).subscribe();
   }

@@ -52,7 +52,7 @@ export class SubjectService {
         );*/
   
 
-  getSingleSubject(id: number): Observable<Subject>  {
+  getSingleSubject(id: string): Observable<Subject>  {
     return this.http.get<Subject>(SUBJECT_URL + '/' + id);
   }
   

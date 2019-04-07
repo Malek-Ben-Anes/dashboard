@@ -12,6 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class StudentComponent implements OnInit {
     tabs = ['Edit Profile', 'Password', 'Marks', 'Bulletin', 'Time Table'];
+    tabIndex = {'PROFILE': 0, 'PASSWORD': 1, 'MARKS': 2, 'BULLETIN': 3, 'TIME_TABLE': 4};
     selected = new FormControl(0);
 
     isNew: boolean = true;

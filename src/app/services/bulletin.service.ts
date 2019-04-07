@@ -16,7 +16,7 @@ export class BulletinService {
 
   constructor(private http: HttpClient) { }
 
-  uploadBulletin(studentId: number, trimester: Trimester, file: File): Observable<HttpEvent<{}>> {
+  uploadBulletin(studentId: string, trimester: Trimester, file: File): Observable<HttpEvent<{}>> {
     const BULLETIN_UPLOAD_URL: string = BASE_API_URL + `students/${studentId}/bulletins`;
     const formdata: FormData = new FormData();
     formdata.append('file', file);
@@ -28,7 +28,7 @@ export class BulletinService {
     });
   }
 
-  deleteBulletin(bulletinId: number): Observable<any> {
+  deleteBulletin(bulletinId: string): Observable<any> {
     return this.http.delete(BULLETIN_UPLOAD_URL + bulletinId);
   }
 }

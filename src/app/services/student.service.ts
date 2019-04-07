@@ -59,11 +59,11 @@ export class StudentService {
     return this.http.get<Student[]>(STUDENT_URL);
   }
 
-  getGroupStudents(id: number): Observable<Student[]> {
+  getGroupStudents(id: string): Observable<Student[]> {
     return this.http.get<Student[]>(GROUP_URL + id + "/students/");
   }
 
-  getSingleStudent(studentId: number): Student {
+  getSingleStudent(studentId: string): Student {
     return _.find(this.students, { id: +studentId });
   }
 
@@ -75,7 +75,7 @@ export class StudentService {
   }*/
 
 
-  /*getSingleStudent(id: number): Observable<Student> {
+  /*getSingleStudent(id: string): Observable<Student> {
     return this.http.get<Student>(STUDENT_URL + "/" + id);
   }*/
 

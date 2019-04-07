@@ -36,7 +36,7 @@ export class GroupService {
     }
   }
 
-  getSingleGroup(id: number): Observable<Group>  {
+  getSingleGroup(id: string): Observable<Group>  {
     return this.http.get<Group>(GROUP_URL + '/' + id);
   }
 
