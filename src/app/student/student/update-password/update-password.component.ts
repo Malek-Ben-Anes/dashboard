@@ -12,7 +12,7 @@ import { BASE_URL } from "app/app.component";
 })
 export class UpdatePasswordComponent implements OnInit {
 
-  @Input("student")
+  @Input('student')
   student: Student;
 
   @Output()

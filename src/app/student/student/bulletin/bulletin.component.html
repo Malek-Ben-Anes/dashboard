@@ -5,7 +5,7 @@
         <div class="col-md-3">
           <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
           <img class="img profile-image" src="assets/images/upload-pdf-icon.png" alt="upload bulletin" height="39"
-            width="39" />
+            width="39"/>
           <button mat-raised-button class="btn btn-default" (click)="fileInput.click()">Sélectionner Bulletin</button>
           <div *ngIf="isUploading">
             <button mat-raised-button class="btn btn-warning buttonload">

@@ -99,6 +99,7 @@ import { ClubsComponent } from './landing-page/clubs/clubs.component';
 import { ContactComponent } from './landing-page/contact/contact.component';
 import { StudentFilterComponent } from './student/student-list/student-filter/student-filter.component';
 import { NavTabComponent } from './commons/nav-tab/nav-tab.component';
+import { TimeTableComponent } from './student/student/time-table/time-table.component';
 
 
 @NgModule({
@@ -176,6 +177,7 @@ import { NavTabComponent } from './commons/nav-tab/nav-tab.component';
     ContactComponent,
     StudentFilterComponent,
     NavTabComponent,
+    TimeTableComponent,
   ],
   exports: [
     StepperComponent,
