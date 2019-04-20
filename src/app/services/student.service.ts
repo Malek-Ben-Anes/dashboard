@@ -55,7 +55,7 @@ export class StudentService {
   /*getSingleStudent(id: string): Observable<Student> {
     return this.http.get<Student>(STUDENT_URL + "/" + id);
   }*/
-  updateStudentPassword(studentRequest: Student): Observable<Student> {
+  updatePassword(studentRequest: Student): Observable<Student> {
     return this.http
       .put<Student>(STUDENT_URL + '/' + studentRequest.id, studentRequest);
   }

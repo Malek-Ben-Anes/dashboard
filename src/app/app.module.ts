@@ -24,8 +24,7 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
 import { PmComponent } from './pm/pm.component';
-import { TeacherProfileComponent } from './teacher/teacher-profile/teacher-profile.component';
-import { TableListComponent } from './teacher/table-list/table-list.component';
+import { TeacherProfileComponent } from './teacher/teacher/teacher-profile/teacher-profile.component';
 import { TeacherListComponent } from './teacher/teacher-list/teacher-list.component';
 import { TypographyComponent } from './typography/typography.component';
 import { IconsComponent } from './icons/icons.component';
@@ -50,10 +49,9 @@ import { BulletinService } from 'app/services/bulletin.service';
 
 
 import { TeacherComponent } from './teacher/teacher/teacher.component';
-import { TeacherSubjectComponent } from './teacher/teacher-subject/teacher-subject.component';
-import { StepperComponent } from './stepper/stepper.component';
+import { UpdateTeacherPasswordComponent } from './teacher/teacher/update-teacher-password/update-teacher-password.component';
 import { GroupListComponent } from './group/group-list/group-list.component';
-import { SubjectListComponent } from './subject-list/subject-list.component';
+import { SubjectListComponent } from './subject/subject-list/subject-list.component';
 import { GroupComponent } from './group/group/group.component';
 import { LessonListComponent } from './lesson-list/lesson-list.component';
 
@@ -100,6 +98,10 @@ import { StudentFilterComponent } from './student/student-list/student-filter/st
 import { NavTabComponent } from './commons/nav-tab/nav-tab.component';
 import { TimeTableComponent } from './student/student/time-table/time-table.component';
 import { GroupDetailComponent } from './group/group/group-detail/group-detail.component';
+import { SubjectFormComponent } from './subject/subject-form/subject-form.component';
+import { SubjectComponent } from './subject/subject.component';
+import { TeacherTimetableComponent } from './teacher/teacher/teacher-timetable/teacher-timetable.component';
+import { TeacherManageGroupsComponent } from './teacher/teacher/teacher-manage-groups/teacher-manage-groups.component';
 
 
 @NgModule({
@@ -132,24 +134,21 @@ import { GroupDetailComponent } from './group/group/group-detail/group-detail.co
     MapsComponent,
 
     TeacherComponent,
-    TeacherSubjectComponent,
-    TableListComponent,
     TeacherListComponent,
     TeacherProfileComponent,
     FourOhFourComponent,
+    UpdateTeacherPasswordComponent,
 
     StudentComponent,
     StudentListComponent,
     StudentProfileComponent,
 
-    StepperComponent,
     SubjectListComponent,
     GroupListComponent,
     GroupComponent,
     GroupDetailComponent,
     LessonListComponent,
     LessonDetailComponent,
-    TableListComponent,
     StudentAssignComponent,
     GroupTimetableComponent,
     MarkComponent,
@@ -179,10 +178,12 @@ import { GroupDetailComponent } from './group/group/group-detail/group-detail.co
     StudentFilterComponent,
     NavTabComponent,
     TimeTableComponent,
+    SubjectFormComponent,
+    SubjectComponent,
+    TeacherTimetableComponent,
+    TeacherManageGroupsComponent,
   ],
-  exports: [
-    StepperComponent,
-  ],
+  exports: [],
   entryComponents: [
     LessonTimeTableComponent
   ],

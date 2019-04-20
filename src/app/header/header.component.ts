@@ -19,13 +19,14 @@ export class HeaderComponent implements OnInit {
   // To be displayed in navbar
   role: string;
 
-AdminNavBar = [{'router': '/teachers', 'label': 'Teachers' },
-{'router': '/students', 'label': 'Students' },
-{'router': '/subjects', 'label': 'Subjects' },
-{'router': '/groups', 'label': 'Groups' },
-{'router': '/lessons', 'label': 'Lessons' },
-{'router': '/marks', 'label': 'Marks' },
-{'router': '/site-vitrine', 'label': 'Landing page' }];
+AdminNavBar = [
+  {'router': '/students', 'label': 'Eleves' },
+  {'router': '/teachers', 'label': 'Enseignants' },
+  {'router': '/subjects', 'label': 'Programme' },
+{'router': '/groups', 'label': 'Classes' },
+// {'router': '/lessons', 'label': 'Lessons' },
+{'router': '/marks', 'label': 'Notes' },
+{'router': '/site-vitrine', 'label': 'Page Vitrine' }];
 
 teacherNavBar = [{'router': '/marks', 'label': 'Marks' },
 {'router': '/lessons', 'label': 'Lessons' },

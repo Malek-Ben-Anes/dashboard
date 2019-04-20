@@ -7,9 +7,9 @@
         </div>
 </div>
 <app-student-profile *ngIf="selected.value === tabIndex.PROFILE && student != null" [student]="student" [isNew]="isNew"
-        (modifiedStudent)="onUpdateStudent($event)"></app-student-profile>
+        (modifiedStudent)="onUpdate($event)"></app-student-profile>
 <app-update-password *ngIf="selected.value === tabIndex.PASSWORD && student != null" [student]="student"
-        (modifiedStudent)="refreshStudent($event)"></app-update-password>
+        (modifiedStudent)="refresh($event)"></app-update-password>
 <div *ngIf="selected.value === tabIndex.MARKS && student != null" class="card card-profile">
         <div class="card-body">
                 <app-student-view-mark-detail [student]="student"></app-student-view-mark-detail>

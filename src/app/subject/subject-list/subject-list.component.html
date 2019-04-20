@@ -1,0 +1,49 @@
+<div class="card card-profile">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table">
+                <thead class=" text-primary">
+                    <th>
+                        Matiere
+                    </th>
+                    <th>
+                        coefficient
+                    </th>
+                    <th>
+                        Volume Horaire
+                    </th>
+                    <th>
+                        Seance
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <!-- <th>
+                        Supprimer
+                    </th> -->
+                </thead>
+                <tbody>
+                    <tr *ngFor="let subject of subjects">
+                        <td class="text-primary">
+                            <a>{{ subject.name }}</a>
+                        </td>
+                        <td>
+                            {{ subject.coefficient }}
+                        </td>
+                        <td>
+                            {{ subject.hourlyVolume }}
+                        </td>
+                        <td>
+                            {{ subject.sessionNumber }}
+                        </td>
+                        <td>
+                            {{ subject.description }}
+                        </td>
+                        <!-- <td>
+                        </td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

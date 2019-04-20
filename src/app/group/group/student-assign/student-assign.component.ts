@@ -16,7 +16,7 @@ export class StudentAssignComponent implements OnInit {
 
   //@Input('groupToChild') groupToChild: Observable<Group>;
 
-  @Input('group') group: Group;;
+  @Input('group') group: Group;
 
   Allstudents: Student[];
 

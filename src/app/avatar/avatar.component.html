@@ -1,8 +1,8 @@
 <div class="card card-profile">
     <div class="card-avatar">
         <a>
-            <div *ngIf="(student.photo !== undefined && student.photo !== null); else defaultPhoto">
-                <img class="img profile-image" [src]="BASE_URL + student.photo"
+            <div *ngIf="(user.photo !== undefined && user.photo !== null); else defaultPhoto">
+                <img class="img profile-image" [src]="BASE_URL + user.photo"
                     alt="Smiley face" height="42" width="42" />
             </div>
             <ng-template #defaultPhoto>
@@ -45,13 +45,13 @@
               </label> -->
 
     <div class="card-body">
-        <h6 class="card-category text-gray">Student Profile</h6>
-        <h4 class="card-title">{{student.firstname}} {{student.lastname}}</h4>
+        <h6 class="card-category text-gray">{{ getProfile() }}</h6>
+        <h4 class="card-title">{{user.firstname}} {{user.lastname}}</h4>
         <p class="card-description">
-            {{ student.email }}
+            {{ user.email }}
         </p>
         <p class="card-description">
-            Registred: {{ student.createdAt | date }}
+            Registred: {{ user.createdAt | date }}
         </p>
 
     </div>

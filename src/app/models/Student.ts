@@ -9,7 +9,6 @@ export class Student extends User {
     parentName?: string;
     parentPhone?: string;
     description: string;
-    password?: string;
     bulletins?: {};
 
     constructor(_id?: string, _firstname?: string, _lastname?: string, _gender?: Gender,

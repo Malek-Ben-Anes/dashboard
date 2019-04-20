@@ -6,6 +6,7 @@ import { BASE_URL } from 'app/app.component';
 import { FileUploadService } from 'app/services/file-upload.service';
 import { User } from 'app/models/User';
 import { Student } from 'app/models/Student';
+import { Teacher } from 'app/models/Teacher';
 
 @Component({
   selector: 'app-avatar',
@@ -16,9 +17,10 @@ export class AvatarComponent implements OnInit {
 
   BASE_URL: string = BASE_URL;
 
-  @Input() student: Student;
+  @Input('user') user: Teacher | Student;
+
   selectedFile: File
-  isUploading: boolean=false;
+  isUploading = false;
 
   constructor(private fileUploadService: FileUploadService) { }
 
@@ -30,20 +32,36 @@ export class AvatarComponent implements OnInit {
   }
 
   onUpload() {
-    this.fileUploadService.uploadFile(this.student.id, this.selectedFile).subscribe(HttpResponse => {
+    if ( this.user.discriminatorValue === 'STUDENT') {
+      this.uploadStudentImage(this.user.id, this.selectedFile);
+    } else if (this.user.discriminatorValue === 'TEACHER') {
+      // TODO modify to teacher
+      this.uploadStudentImage(this.user.id, this.selectedFile);
+    }
+  }
+
+  private uploadStudentImage (id: string, file: File) {
+    this.fileUploadService.uploadFile(id, this.selectedFile).subscribe(HttpResponse => {
       this.isUploading = true;
-
       console.log(HttpResponse);
-
       if (HttpResponse.type === 4) {
         if (HttpResponse['body'] !== undefined) {
           if (HttpResponse['body']['photo'] !== undefined) {
             console.log('photo updated');
-            this.student.photo = HttpResponse['body']['photo'];
-            this.isUploading=false;
+            this.user.photo = HttpResponse['body']['photo'];
+            this.isUploading = false;
           }
         }
       }
     });
+  }
+
+  getProfile(): string {
+    if ( this.user.discriminatorValue === 'STUDENT') {
+      return 'Student Profile';
+    } else if ( this.user.discriminatorValue === 'TEACHER') {
+      return 'Teacher Profile';
+    }
+    return 'Student Profile';
   }
 }

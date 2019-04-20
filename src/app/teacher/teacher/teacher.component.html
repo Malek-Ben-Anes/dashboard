@@ -1,3 +1,16 @@
-<app-stepper></app-stepper>
-<app-teacher-profile></app-teacher-profile>
-<!-- <app-teacher-subject></app-teacher-subject> -->
+<div class="card card-profile">
+        <div class="card-body">
+                <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+                        <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab.label"
+                                [disabled]="tab.disabled"></mat-tab>
+                </mat-tab-group>
+        </div>
+</div>
+<app-teacher-profile *ngIf="selected.value === tabIndex.PROFILE && teacher != null" [teacher]="teacher" [isNew]="isNew"
+        (modifiedTeacher)="onUpdate($event)"></app-teacher-profile>
+<app-update-teacher-password *ngIf="selected.value === tabIndex.PASSWORD && teacher != null" [teacher]="teacher"
+        (modifiedTeacher)="refresh($event)"></app-update-teacher-password>
+<app-teacher-manage-groups *ngIf="selected.value === tabIndex.GROUPS && teacher != null" [teacher]="teacher"
+        (modifiedTeacher)="refresh($event)"></app-teacher-manage-groups>
+<app-teacher-timetable *ngIf="selected.value === tabIndex.TIME_TABLE && teacher != null" [teacher]="teacher"
+        (modifiedTeacher)="refresh($event)"></app-teacher-timetable>

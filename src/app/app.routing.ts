@@ -11,11 +11,11 @@ import { UserComponent } from './user/user.component';
 import { PmComponent } from './pm/pm.component';
 import { AdminComponent } from './admin/admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { TableListComponent } from './teacher/table-list/table-list.component';
-import { TeacherProfileComponent } from './teacher/teacher-profile/teacher-profile.component';
+import { TableListComponent } from './teacher/teacher/table-list/table-list.component';
+import { TeacherProfileComponent } from './teacher/teacher/teacher-profile/teacher-profile.component';
 import { TeacherListComponent } from './teacher/teacher-list/teacher-list.component';
 import { TeacherComponent } from './teacher/teacher/teacher.component';
-import { SubjectListComponent } from './subject-list/subject-list.component';
+import { SubjectListComponent } from './subject/subject-list/subject-list.component';
 import { GroupListComponent } from './group/group-list/group-list.component';
 import { GroupComponent } from './group/group/group.component';
 import { LessonListComponent } from './lesson-list/lesson-list.component';
@@ -27,6 +27,7 @@ import { MessageListComponent } from './messages/message-list/message-list.compo
 import { MessagesComponent } from './messages/messages.component';
 import { BulletinComponent } from './student/student/bulletin/bulletin.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { SubjectComponent } from './subject/subject.component';
 
 const routes: Routes = [
     {
@@ -82,10 +83,9 @@ const routes: Routes = [
         path: 'student-profile',
         component: StudentComponent
     },
-    
     {
         path: 'subjects',
-        component: SubjectListComponent
+        component: SubjectComponent
     },
     {
         path: 'groups',

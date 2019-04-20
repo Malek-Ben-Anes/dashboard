@@ -13,8 +13,10 @@ export class User {
     adress?: string;
     createdAt?: string;
     updatedAt?: string;
+    password?: string;
     role: string[];
     registerUrl: string;
+    discriminatorValue: string;
 
     constructor(_id: string, _firstname?: string, _lastname?: string, _gender?: Gender,
         _email?: string, _photo?: string, _birthDate?: Date, _phone?: string) {

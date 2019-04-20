@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { Teacher } from '../models/Teacher';
 import { Gender } from '../models/User';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEvent } from '@angular/common/http';
 import { reject } from 'q';
 import { BASE_API_URL } from 'app/app.component';
 
@@ -13,52 +13,35 @@ const TEACHER_URL: string = BASE_API_URL + 'teachers';
   providedIn: 'root'
 })
 export class TeacherService {
-  
-  teachers: Teacher[] = [];
-  teacherSubject = new Subject<Teacher[]>();
 
-  constructor(private http: HttpClient) {
-    console.log("constructor");
-    this.getTeachers();
-  }
+  constructor(private http: HttpClient) {}
 
-  emitTeachers() {
-    this.teacherSubject.next(this.teachers);
-  }
-
-  // getTeachers(){
-  //   return this.http.get<Teacher[]>(TEACHER_URL).subscribe(
-  //     teachers => { 
-  //       this.teachers = teachers; 
-  //       this.emitTeachers();
-  //       console.log(this.teachers);
-  //     }, (err: HttpErrorResponse) => {
-  //       if (err.error instanceof Error) {
-  //         console.log("Client-side error occured.");
-  //       } else {
-  //         console.log("Server-side error occured.");
-  //       }
-  //     }
-  //   );
-  // }
-  
   getTeachers(): Observable<Teacher[]> {
     return this.http.get<Teacher[]>(TEACHER_URL);
   }
-    /*.subscribe(
-      // return of(HEROES);
-          teachers => { 
-            this.teachers = teachers; 
-            this.emitTeachers();
-            console.log(this.teachers);
-          }
-        );*/
-  
 
-  getSingleTeacher(id: string): Observable<Teacher>  {
+  findTeacherById(id: string): Observable<Teacher>  {
     return this.http.get<Teacher>(TEACHER_URL + '/' + id);
   }
-  
+
+  saveTeacher(teacher: Teacher): Observable<Teacher>  {
+    return this.http.post<Teacher>(TEACHER_URL, teacher);
+  }
+
+  updatePassword(studentRequest: Teacher): Observable<Teacher> {
+    return this.http
+      .put<Teacher>(TEACHER_URL + '/' + studentRequest.id, studentRequest);
+  }
+
+  uploadTimeTable(teacherId: string, file: File): Observable<HttpEvent<{}>> {
+    const TIMETABLE_UPLOAD_URL: string = BASE_API_URL + `teachers/${teacherId}/timetables`;
+    const formdata: FormData = new FormData();
+    formdata.append('file', file);
+    return this.http.post<Teacher>(TIMETABLE_UPLOAD_URL, formdata, {
+      reportProgress: true,
+      observe: 'events'
+    });
+  }
     /*return new Promise((resolve, reject) => {
         let singleTeacher = this.teachers.find((el) => {
             return el.id == id
@@ -73,21 +56,7 @@ export class TeacherService {
         SingleTeacher = teacher;
         resolve(SingleTeacher); }*/
 
-  saveTeacher(teacher: Teacher) : Observable<Teacher>  {
-    return this.http.post<Teacher>(TEACHER_URL, teacher);
-    
-    /*.subscribe(teacherAdded => {
-      this.teachers.push(<Teacher>teacherAdded);
-      this.emitTeachers();
-    }, (err: HttpErrorResponse) => {
-      if (err.error instanceof Error) {
-        console.log("Client-side error occured.");
-      } else {
-        console.log("Server-side error occured.");
-      }
-    }
-    )*/
-  }
+
   updateTeacher(teacher: Teacher) : Observable<Teacher>  {
 
     return this.http.put<Teacher>(TEACHER_URL  + '/' + teacher.id, teacher);
@@ -108,26 +77,7 @@ export class TeacherService {
     // )
   }
 
-
-
-
-  createNewTeacher(newTeacher: Teacher) {
-    this.teachers.push(newTeacher);
-    this.saveTeacher(newTeacher);
-    this.emitTeachers();
-  }
-
   removeTeacher(teacher: Teacher) {
-    const teacherIndexToRemove = this.teachers.findIndex(
-      (teacherElement) => {
-        if (teacherElement === teacher) {
-          return true;
-        }
-      }
-    );
-    this.teachers.splice(teacherIndexToRemove, 1);
-    //this.saveTeacher(newTeacher);
-    this.emitTeachers();
   }
 
   uploadFile(file: File) {

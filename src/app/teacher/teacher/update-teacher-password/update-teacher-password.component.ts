@@ -1,34 +1,29 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-
-import { Student } from "app/models/Student";
-import { StudentService } from "app/services/student.service";
-import { BASE_URL } from "app/app.component";
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Teacher } from 'app/models/Teacher';
+import { BASE_URL } from 'app/app.component';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { TeacherService } from 'app/services/teacher.service';
 
 @Component({
-  selector: "app-update-password",
-  templateUrl: "./update-password.component.html",
-  styleUrls: ["./update-password.component.scss"]
+  selector: 'app-update-teacher-password',
+  templateUrl: './update-teacher-password.component.html',
+  styleUrls: ['./update-teacher-password.component.scss']
 })
-export class UpdatePasswordComponent implements OnInit {
+export class UpdateTeacherPasswordComponent implements OnInit {
 
-  @Input('student')
-  student: Student;
+  @Input('teacher') teacher: Teacher;
 
-  @Output()
-  modifiedStudent = new EventEmitter<Student>();
+  @Output() modifiedTeacher = new EventEmitter<Teacher>();
 
   BASE_URL: string = BASE_URL;
 
   passwordForm: FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder, private studentService: StudentService) { }
+  constructor(private formBuilder: FormBuilder, private teacherService: TeacherService) { }
 
   ngOnInit() {
     this.initForm();
-    console.log(this.student);
-    console.log(this.student.registerUrl);
   }
 
   get f() {
@@ -70,14 +65,14 @@ export class UpdatePasswordComponent implements OnInit {
     if (this.passwordForm.invalid) {
       return;
     }
-    this.student.password = this.passwordForm.get("password").value;
-    this.studentService
-      .updatePassword(this.student)
+    this.teacher.password = this.passwordForm.get("password").value;
+    this.teacherService
+      .updatePassword(this.teacher)
       .subscribe(
-        (student) => {
+        (teacher: Teacher) => {
         alert("password updated successfully!");
-        this.student = student;
-        this.modifiedStudent.emit(this.student);},
+        this.teacher = teacher;
+        this.modifiedTeacher.emit(this.teacher);},
         err => console.log("password update failed!")
       );
   }
