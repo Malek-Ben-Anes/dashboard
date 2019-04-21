@@ -1,12 +1,12 @@
 <div class="card card-profile">
   <div class="card-body">
           <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event);onNavigate()">
-                  <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab.label" (click)="onNavigate()"></mat-tab>
+                  <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab.label"></mat-tab>
           </mat-tab-group>
   </div>
 </div>
-<app-subject-form></app-subject-form>
-<app-subject-list *ngIf="selectedSubjects != null" [subjects]="selectedSubjects"></app-subject-list>
+<app-subject-form  [level]="level" [subjectToSave]="subjectToSave" (refershEvent)="onRefresh($event)"></app-subject-form>
+<app-subject-list *ngIf="selectedSubjects != null" [subjects]="selectedSubjects" (subjectSelected)="onSelectSubject($event)"></app-subject-list>
 
 <!-- <app-student-profile *ngIf="selected.value === tabIndex.levelIndex && student != null" [student]="student" [isNew]="isNew"
   (modifiedStudent)="onUpdateStudent($event)"></app-student-profile>

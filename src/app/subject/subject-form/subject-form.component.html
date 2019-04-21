@@ -24,14 +24,23 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-7">
+                <div class="col-md-8">
                     <mat-form-field class="example-full-width">
                         <input matInput placeholder="Description" formControlName="description" required>
                     </mat-form-field>
                 </div>
-                <div class="col-md-3"></div>
-                <button mat-raised-button type="submit" class="btn btn-info pull-right">Create Subject</button>
-                <div class="clearfix"></div>
+
+                <div *ngIf="(!isNew); else newSubject">
+                    <div class="col-md-1"></div>
+                        <button mat-raised-button type="submit" class="btn btn-warning pull-right">Update Subject</button>
+                        <button mat-raised-button class="btn btn-info" (click)="onCreateNewSubject()">New</button>
+                        <div class="clearfix"></div>
+                </div>
+                <ng-template #newSubject>
+                    <div class="col-md-2"></div>
+                        <button mat-raised-button type="submit" class="btn btn-info pull-right">Create Subject</button>
+                        <div class="clearfix"></div>
+                </ng-template>
             </div>
         </form>
     </div>

@@ -18,13 +18,10 @@
                     <th>
                         Description
                     </th>
-                    <!-- <th>
-                        Supprimer
-                    </th> -->
                 </thead>
                 <tbody>
                     <tr *ngFor="let subject of subjects">
-                        <td class="text-primary">
+                        <td class="text-primary" (click)="onSelectSubject(subject)">
                             <a>{{ subject.name }}</a>
                         </td>
                         <td>
@@ -39,8 +36,6 @@
                         <td>
                             {{ subject.description }}
                         </td>
-                        <!-- <td>
-                        </td> -->
                     </tr>
                 </tbody>
             </table>

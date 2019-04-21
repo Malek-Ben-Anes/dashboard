@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SubjectService } from 'app/services/subject.service';
 import { Subject } from 'app/models/Subject';
@@ -10,11 +10,20 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './subject-form.component.html',
   styleUrls: ['./subject-form.component.scss']
 })
-export class SubjectFormComponent implements OnInit {
+export class SubjectFormComponent implements OnInit, OnChanges {
 
   subjects: Subject[] = [];
 
-  newSubject: Subject = new Subject();
+  @Input('level')
+  level: Level;
+
+  @Input('subjectToSave')
+  subjectToSave: Subject;
+
+  @Output()
+  refershEvent = new EventEmitter<string>();
+
+  isNew: boolean;
 
   subjectForm: FormGroup;
 
@@ -24,10 +33,48 @@ export class SubjectFormComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    this.getSubjects();
+    if (this.subjectToSave == null) {
+      this.isNew = true;
+      this.subjectToSave = new Subject();
+    } else {
+      this.isNew = false;
+      this.updateForm(this.subjectToSave);
+    }
   }
 
-  initForm() {
+  ngOnChanges(changes: SimpleChanges) {
+
+    if (changes.level != null) {
+      this.level = changes.level.currentValue;
+      this.onCreateNewSubject();
+    }
+    if (changes.subjectToSave != null) {
+      this.subjectToSave = changes.subjectToSave.currentValue;
+      this.isNew = false;
+    }
+
+    if (this.subjectForm != null) {
+      this.updateForm(this.subjectToSave);
+    }
+  }
+
+  onCreateNewSubject() {
+    this.isNew = true;
+    this.subjectToSave = new Subject();
+  }
+
+  onSubmit() {
+    this.getSubmitedData();
+    console.log(this.subjectToSave, this.subjectToSave.id != null);
+    if (this.subjectToSave.id == null) {
+      this.save(this.subjectToSave);
+    } else {
+      this.update(this.subjectToSave);
+    }
+    
+  }
+
+  private initForm() {
     this.subjectForm = this.formBuilder.group({
       name: ['', Validators.required],
       coefficient: ['', Validators.required],
@@ -37,79 +84,50 @@ export class SubjectFormComponent implements OnInit {
     });
   }
 
-  updateForm(subject: Subject): void {
+  private updateForm(subject: Subject): void {
     this.subjectForm.patchValue({
       name: subject.name,
+      coefficient: subject.coefficient,
+      hourlyVolume: subject.hourlyVolume,
+      sessionNumber: subject.sessionNumber,
       description: subject.description,
     });
   }
 
-  getSubjects(): void {
-    this.subjectService.findAll()
-      .subscribe(subjects => this.subjects = subjects,
-        (err: HttpErrorResponse) => {
-          if (err.error instanceof Error) {
-            console.log("Client-side error occured.");
-          } else {
-            console.log("Server-side error occured.");
-          }
-        }
-      );
+  private save(subject: Subject) {
+    this.subjectService.save(subject)
+      .subscribe(subject => {
+        this.subjectToSave = subject;
+        this.onCreateNewSubject();
+        this.updateForm(this.subjectToSave);
+        console.log("Subject created");
+        this.refershEvent.emit(null);
+      },
+        (err) => console.log(err.error));
   }
 
-  onSubmit() {
-    this.getSubmitedData();
-    console.log(this.newSubject);
-    if (this.newSubject.id !== undefined) {
-
-
-      this.subjectService.update(this.newSubject)
-        .subscribe(subject => { this.newSubject = subject; console.log("subject updated") },
-          (err: HttpErrorResponse) => {
-            if (err.error instanceof Error) {
-              console.log(err.error);
-              console.log("Client-side error occured.");
-            } else {
-              console.log(err.error);
-              console.log("Server-side error occured.");
-            }
-          });
-    }
-    else
-      this.subjectService.save(this.newSubject)
-        .subscribe(subject => {
-          this.initForm();
-          console.log("Subject created");
-          this.newSubject = new Subject();
-          this.getSubjects();
-        },
-          (err: HttpErrorResponse) => {
-            if (err.error instanceof Error) {
-              console.log("Client-side error occured.");
-            } else {
-              console.log("Server-side error occured.");
-            }
-          });
+  private update(subject: Subject) {
+    this.subjectService.update(subject)
+      .subscribe(subject => { this.subjectToSave = subject; console.log("subject updated"); this.refershEvent.emit(null);},
+        (err) => console.log(err.error));
   }
 
-
-  getSubmitedData() {
-    this.newSubject.name = this.extractFieldData('name');
-    this.newSubject.level = this.extractFieldData('level');
-    this.newSubject.coefficient = this.extractFieldData('coefficient');
-    this.newSubject.hourlyVolume = this.extractFieldData('hourlyVolume');
-    this.newSubject.sessionNumber = this.extractFieldData('sessionNumber');
-    this.newSubject.description = this.extractFieldData('description');
+  private getSubmitedData() {
+    this.subjectToSave.name = this.extractFieldData('name');
+    this.subjectToSave.coefficient = this.extractFieldData('coefficient');
+    this.subjectToSave.hourlyVolume = this.extractFieldData('hourlyVolume');
+    this.subjectToSave.sessionNumber = this.extractFieldData('sessionNumber');
+    this.subjectToSave.description = this.extractFieldData('description');
+    this.subjectToSave.level = this.level;
   }
 
   private extractFieldData(property: string): any {
     return this.subjectForm.get(property).value;
   }
 
-  onClick(subject: Subject) {
+  /*onClick(subject: Subject) {
     console.log(subject);
-    this.newSubject = subject;
-    this.updateForm(this.newSubject);
-  }
-
+    this.subjectToSave = subject;
+    this.updateForm(this.subjectToSave);
+  }*/
 }

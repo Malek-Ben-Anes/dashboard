@@ -12,7 +12,7 @@ import { Level } from 'app/models/Level';
   templateUrl: './subject.component.html',
   styleUrls: ['./subject.component.scss']
 })
-export class SubjectComponent implements OnInit, OnChanges {
+export class SubjectComponent implements OnInit {
 
   levelIndex = { 'Niveau 1': 0, 'Niveau 2': 1, 'Niveau 3': 2, 'Niveau 4': 3, 'Niveau 5': 4, 'Niveau 6': 5 };
   tabs = [{ 'label': 'Niveau 1', 'level': Level.LEVEL1 }, { 'label': 'Niveau 2', 'level': Level.LEVEL2 },
@@ -24,26 +24,32 @@ export class SubjectComponent implements OnInit, OnChanges {
   subjects: Subject[];
   selectedSubjects: Subject[];
 
-  selected = new FormControl(5);
+  subjectToSave: Subject;
+
+  selected = new FormControl(0);
   levels = Object.keys(Level);
+  level: Level;
 
-  constructor(private formBuilder: FormBuilder, private subjectService: SubjectService) { }
-
-  selectedIndexChange() {
-    console.log(5646546);
-  }
+  constructor(private formBuilder: FormBuilder, private subjectService: SubjectService) {}
 
   ngOnInit() {
     this.getSubjects();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.selected.value, this.selectedSubjects);
     this.findSubjectsByLevel(this.selected.value);
+    this.level = <Level> this.levels[this.selected.value];
   }
 
   onNavigate() {
+    this.level = <Level> this.levels[this.selected.value];
     this.findSubjectsByLevel(this.selected.value);
+  }
+
+  onSelectSubject(subject: Subject) {
+    this.subjectToSave = subject;
+  }
+
+  onRefresh() {
+    console.log("refresh");
+    this.getSubjects();
   }
 
   private findSubjectsByLevel(indexLevel: number) {
@@ -54,7 +60,7 @@ export class SubjectComponent implements OnInit, OnChanges {
     this.subjectService.findAll()
       .subscribe(subjects => {
       this.subjects = subjects;
-        this.findSubjectsByLevel(this.selected.value);
+      this.findSubjectsByLevel(this.selected.value);
       },
         (err: HttpErrorResponse) => {
           if (err.error instanceof Error) {
