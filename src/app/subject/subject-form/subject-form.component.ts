@@ -45,7 +45,7 @@ export class SubjectFormComponent implements OnInit {
   }
 
   getSubjects(): void {
-    this.subjectService.getSubjects()
+    this.subjectService.findAll()
       .subscribe(subjects => this.subjects = subjects,
         (err: HttpErrorResponse) => {
           if (err.error instanceof Error) {
@@ -63,7 +63,7 @@ export class SubjectFormComponent implements OnInit {
     if (this.newSubject.id !== undefined) {
 
 
-      this.subjectService.updateSubject(this.newSubject)
+      this.subjectService.update(this.newSubject)
         .subscribe(subject => { this.newSubject = subject; console.log("subject updated") },
           (err: HttpErrorResponse) => {
             if (err.error instanceof Error) {
@@ -76,7 +76,7 @@ export class SubjectFormComponent implements OnInit {
           });
     }
     else
-      this.subjectService.saveSubject(this.newSubject)
+      this.subjectService.save(this.newSubject)
         .subscribe(subject => {
           this.initForm();
           console.log("Subject created");

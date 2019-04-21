@@ -50,7 +50,7 @@ export class StudentProfileComponent implements OnInit {
   }
 
   private getGroup() {
-    this.groupService.getGroups().subscribe(groups => {this.groups = groups;
+    this.groupService.findAll().subscribe(groups => {this.groups = groups;
       this.updateForm(this.student);
     });
   }

@@ -80,11 +80,11 @@ export class LessonListComponent implements OnInit {
 
   private initData() {
     this.getLessons();
-    this.subjectService.getSubjects().subscribe(subjects => this.subjects = subjects,
+    this.subjectService.findAll().subscribe(subjects => this.subjects = subjects,
       err => this.errorHandler(err));
     this.teacherService.getTeachers().subscribe(teachers => this.teachers = teachers,
       err => this.errorHandler(err));
-    this.groupService.getGroups().subscribe(groups => this.groups = groups,
+    this.groupService.findAll().subscribe(groups => this.groups = groups,
       err => this.errorHandler(err));
   }
 

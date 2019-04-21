@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Teacher } from '../models/Teacher';
@@ -6,6 +7,7 @@ import { Gender } from '../models/User';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { reject } from 'q';
 import { BASE_API_URL } from 'app/app.component';
+import { Level } from 'app/models/Level';
 
 
 const SUBJECT_URL: string = BASE_API_URL + 'subjects';
@@ -18,94 +20,33 @@ export class SubjectService {
   subjects: Subject[] = [];
   teachers: Subject[] = [];
 
-  constructor(private http: HttpClient) {
-    console.log("constructor");
-    //this.getTeachers();
-  }
+  constructor(private http: HttpClient) {}
 
-  // getTeachers(){
-  //   return this.http.get<Teacher[]>(TEACHER_URL).subscribe(
-  //     teachers => { 
-  //       this.teachers = teachers; 
-  //       this.emitTeachers();
-  //       console.log(this.teachers);
-  //     }, (err: HttpErrorResponse) => {
-  //       if (err.error instanceof Error) {
-  //         console.log("Client-side error occured.");
-  //       } else {
-  //         console.log("Server-side error occured.");
-  //       }
-  //     }
-  //   );
-  // }
-  
-  getSubjects(): Observable<Subject[]> {
+  findAll(): Observable<Subject[]> {
     return this.http.get<Subject[]>(SUBJECT_URL);
   }
-    /*.subscribe(
-      // return of(HEROES);
-          teachers => { 
-            this.teachers = teachers; 
-            this.emitTeachers();
-            console.log(this.teachers);
-          }
-        );*/
-  
 
-  getSingleSubject(id: string): Observable<Subject>  {
+  findById(id: string): Observable<Subject>  {
     return this.http.get<Subject>(SUBJECT_URL + '/' + id);
   }
-  
-    /*return new Promise((resolve, reject) => {
-        let singleTeacher = this.teachers.find((el) => {
-            return el.id == id
-        })
-        if (singleTeacher )
-          resolve(singleTeacher);
-        else 
-          reject("can't find this teacher");
-      })
-      let SingleTeacher: Teacher = new Teacher();
-      this.http.get<Teacher>(url + '/' + id).subscribe( teacher => { 
-        SingleTeacher = teacher;
-        resolve(SingleTeacher); }*/
 
-  saveSubject(subject: Subject) : Observable<Subject>  {
+  save(subject: Subject): Observable<Subject>  {
     return this.http.post<Subject>(SUBJECT_URL, subject);
-    
-    /*.subscribe(teacherAdded => {
-      this.teachers.push(<Teacher>teacherAdded);
-      this.emitTeachers();
-    }, (err: HttpErrorResponse) => {
-      if (err.error instanceof Error) {
-        console.log("Client-side error occured.");
-      } else {
-        console.log("Server-side error occured.");
-      }
-    }
-    )*/
   }
-  updateSubject(subject: Subject) : Observable<Subject>  {
 
+  update(subject: Subject): Observable<Subject>  {
     return this.http.put<Subject>(SUBJECT_URL  + '/' + subject.id, subject);
-    // const req = this.http.put<Teacher>(TEACHER_URL, teacher).subscribe( (teacherUpdated: Teacher) => {
-    //   let singleTeacher = this.teachers.find((el) => {
-    //     return el.id == teacherUpdated.id
-    // })
-    //   singleTeacher = teacherUpdated;
-    //   console.log(singleTeacher);
-    //   this.emitTeachers();
-    // }, (err: HttpErrorResponse) => {
-    //   if (err.error instanceof Error) {
-    //     console.log("Client-side error occured.");
-    //   } else {
-    //     console.log("Server-side error occured.");
-    //   }
-    // }
-    // )
   }
 
+  findAllSubjectByLevel(level: Level, subjects: Subject[]): Promise<Subject[]> {
 
+    return new Promise((resolve, reject) => {
+      resolve( _.filter(subjects, subject => subject.level === level));
+      reject(new Error('Error has ocured'));
+      return;
+  });
+
+  }
 
 
   // createNewTeacher(newTeacher: Teacher) {

@@ -102,7 +102,8 @@ import { SubjectFormComponent } from './subject/subject-form/subject-form.compon
 import { SubjectComponent } from './subject/subject.component';
 import { TeacherTimetableComponent } from './teacher/teacher/teacher-timetable/teacher-timetable.component';
 import { TeacherManageGroupsComponent } from './teacher/teacher/teacher-manage-groups/teacher-manage-groups.component';
-
+import { TeacherGroupListComponent } from './teacher/teacher/teacher-manage-groups/teacher-group-list/teacher-group-list.component';
+import { TeacherSubjectListComponent } from './teacher/teacher/teacher-manage-groups/teacher-subject-list/teacher-subject-list.component';
 
 @NgModule({
   imports: [
@@ -182,6 +183,8 @@ import { TeacherManageGroupsComponent } from './teacher/teacher/teacher-manage-g
     SubjectComponent,
     TeacherTimetableComponent,
     TeacherManageGroupsComponent,
+    TeacherGroupListComponent,
+    TeacherSubjectListComponent,
   ],
   exports: [],
   entryComponents: [

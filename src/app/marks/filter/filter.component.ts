@@ -45,9 +45,9 @@ export class FilterComponent implements OnInit {
 
   private getGroupsByRole() {
     if (this.authority = 'admin') {
-      this.groupService.getGroups().subscribe(groups => { this.allGroups = groups; console.log(this.allGroups); }, err => console.log(err));
+      this.groupService.findAll().subscribe(groups => { this.allGroups = groups; console.log(this.allGroups); }, err => console.log(err));
     } else if (this.authority = 'pm') {
-      this.groupService.getGroups(this.authId).subscribe(groups => this.allGroups = groups, err => console.log(err));
+      this.groupService.findAll(this.authId).subscribe(groups => this.allGroups = groups, err => console.log(err));
     }
   }
 

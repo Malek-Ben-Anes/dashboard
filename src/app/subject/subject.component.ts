@@ -51,7 +51,7 @@ export class SubjectComponent implements OnInit, OnChanges {
   }
 
   private getSubjects(): void {
-    this.subjectService.getSubjects()
+    this.subjectService.findAll()
       .subscribe(subjects => {
       this.subjects = subjects;
         this.findSubjectsByLevel(this.selected.value);

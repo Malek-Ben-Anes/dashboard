@@ -1,0 +1,84 @@
+.example-viewport {
+    height: 390px;
+    width: 300px;
+    border: 2px solid gray;
+  }
+  
+  .example-dt {
+    height: 30px;
+    font-weight: bold;
+  }
+  
+  .example-dd {
+    height: 30px;
+  }
+
+  .example-container {
+    height: 400px;
+    overflow: auto;
+  }
+  
+  table {
+    width: 100%;
+  }
+
+  .message {
+    font-size: 1em;
+    font-style: italic;
+    font-weight: 400;
+  }
+  
+  .timeform {
+    float: left;
+    width: 100%;
+  
+    i {
+      margin-left: 20px;
+    }
+  
+    .timestamp{
+      font-size: 0.6em;
+    }
+  }
+  
+  .avatar{
+    width: 39px;
+    margin-right: 20px;
+    border-radius: 50%;
+  }
+
+  .chatform{
+    width: 600px;
+    margin: 0 auto;
+    margin-top: 50px;
+  }
+
+  .chatlist{
+    height: 600px;
+    overflow-y: scroll;
+  }
+
+  .example-container {
+    height: 400px;
+    overflow: auto;
+  }
+  
+  table {
+    width: 100%;
+  }
+
+  .student-item {
+    border-bottom: 1px solid rgb(209, 209, 209);
+    padding: 3px;
+}
+
+.student-hover:hover {  background-color: rgb(209, 209, 209); }
+
+.button-no-style {
+  all: unset;
+  width: 100%;
+}
+
+.width-parent  {
+  width: 100%;
+}

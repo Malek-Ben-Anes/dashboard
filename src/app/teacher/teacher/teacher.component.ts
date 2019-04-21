@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit, SimpleChanges, OnChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Teacher } from 'app/models/Teacher';
 import { TeacherService } from 'app/services/teacher.service';
@@ -11,7 +11,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './teacher.component.html',
   styleUrls: ['./teacher.component.scss']
 })
-export class TeacherComponent implements OnInit {
+export class TeacherComponent implements OnInit, OnChanges {
 
   isNew = true;
   tabIndex = {'PROFILE': 0, 'PASSWORD': 1, 'GROUPS': 2, 'TIME_TABLE': 3};

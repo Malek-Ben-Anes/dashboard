@@ -1,0 +1,16 @@
+<div class="card">
+  <div class="card-body">
+    <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="example-viewport width-parent">
+      <div *cdkVirtualFor="let group of groups" class="example-item">
+        <button class="button-no-style"><span>
+            <div class="block  student-item student-hover" (click)="onSelectGroup(group)">
+              <div class="message">
+                <p class="message">{{group.name}}</p>
+              </div>
+            </div>
+          </span>
+        </button>
+      </div>
+    </cdk-virtual-scroll-viewport>
+  </div>
+</div>

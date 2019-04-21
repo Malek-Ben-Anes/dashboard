@@ -10,8 +10,6 @@ import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user/user.component';
 import { PmComponent } from './pm/pm.component';
 import { AdminComponent } from './admin/admin.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { TableListComponent } from './teacher/teacher/table-list/table-list.component';
 import { TeacherProfileComponent } from './teacher/teacher/teacher-profile/teacher-profile.component';
 import { TeacherListComponent } from './teacher/teacher-list/teacher-list.component';
 import { TeacherComponent } from './teacher/teacher/teacher.component';

@@ -60,7 +60,7 @@ export class GroupListComponent implements OnInit {
   }
 
   private getGroups(): void {
-    this.groupService.getGroups()
+    this.groupService.findAll()
       .subscribe(groups => this.groups = groups,
         (err: HttpErrorResponse) => {
           if (err.error instanceof Error) {
