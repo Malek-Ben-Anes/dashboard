@@ -47,7 +47,7 @@ export class SubjectComponent implements OnInit {
     this.subjectToSave = subject;
   }
 
-  onRefresh() {
+  onRefresh(refresh: string) {
     console.log("refresh");
     this.getSubjects();
   }
