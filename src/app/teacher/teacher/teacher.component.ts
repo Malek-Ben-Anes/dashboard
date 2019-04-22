@@ -35,7 +35,6 @@ export class TeacherComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     // changes.prop contains the old and the new value...
     this.teacher = changes.teacher.currentValue;
-    console.log('***********----', this.teacher);
   }
 
   private getStudent(id: string): void {

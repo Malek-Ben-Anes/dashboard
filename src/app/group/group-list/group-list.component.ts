@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Group } from 'app/models/Group';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { GroupService } from 'app/services/group.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Level } from 'app/models/Level';
+import { GroupService } from 'app/services/group.service';
 
 @Component({
   selector: 'app-group-list',
@@ -12,20 +10,26 @@ import { Level } from 'app/models/Level';
 })
 export class GroupListComponent implements OnInit {
 
-  groups: Group[] = [];
-
-  newGroup: Group = new Group();
-
-  groupForm: FormGroup;
-
+  groups: Group[];
   levels = Object.keys(Level);
 
-  constructor(private formBuilder: FormBuilder, private groupService: GroupService) { }
+  constructor(private groupService: GroupService) { }
 
   ngOnInit() {
-    this.initForm();
-    this.getGroups();
+    this.findAll();
   }
+
+  private findAll(): void {
+    this.groupService.findAll()
+      .subscribe(groups => this.groups = groups, err => console.log(err));
+  }
+}
+
+/*
+
+    newGroup: Group = new Group();
+
+  groupForm: FormGroup;
 
   initForm() {
     this.groupForm = this.formBuilder.group({
@@ -59,18 +63,7 @@ export class GroupListComponent implements OnInit {
     return this.groupForm.get(property).value;
   }
 
-  private getGroups(): void {
-    this.groupService.findAll()
-      .subscribe(groups => this.groups = groups,
-        (err: HttpErrorResponse) => {
-          if (err.error instanceof Error) {
-            console.log("Client-side error occured.");
-          } else {
-            console.log("Server-side error occured.");
-          }
-        }
-      );
-  }
+
 
   private saveGroup(groupRequest: Group): void {
     this.groupService.saveGroup(groupRequest)
@@ -100,7 +93,7 @@ export class GroupListComponent implements OnInit {
             console.log("Server-side error occured.");
           }
         });
-  }
+  }*/
   // onClick(subject: Subject) {
   //   console.log(subject);
   //   this.newSubject = subject;
@@ -112,4 +105,3 @@ export class GroupListComponent implements OnInit {
   // public onClickMe() {
   //   this.clickMessage = 'You are my hero!';
   // }
-}

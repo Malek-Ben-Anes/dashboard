@@ -1,57 +1,15 @@
-<div class="main-content">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-lg-12 col-md-12">
-        <div class="card">
-          <div class="card-header card-header-tabs card-header-primary">
-            <div class="nav-tabs-navigation">
-              <div class="nav-tabs-wrapper">
-                <span class="nav-tabs-title">Group:</span>
-                <ul class="nav nav-tabs" data-tabs="tabs">
-                  <li class="nav-item">
-                    <a mat-button class="nav-link active" href="#profile" data-toggle="tab">
-                      <i class="material-icons">bug_report</i> Group Details
-                      <div class="ripple-container"></div>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a mat-button class="nav-link" href="#students" data-toggle="tab">
-                      <i class="material-icons">code</i> Students
-                      <div class="ripple-container"></div>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a mat-button class="nav-link" href="#timetable" data-toggle="tab">
-                      <i class="material-icons">code</i> TimeTable
-                      <div class="ripple-container"></div>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="tab-content">
-
-                            <!-- GROUP COMPONENT-->
-              <div *ngIf="ready && group != null" class="tab-pane active" id="profile" >
-                <app-group-detail [group]="group" (Updatedgroup)="refreshGroup($event)"></app-group-detail>
-              </div>
-                            <!-- GROUP COMPONENT-->
-
-              <!-- STUDENT ASSIGN COMPONENT-->
-              <div *ngIf="ready && group != null" class="tab-pane" id="students" >
-                <app-student-assign [group]="group" (Updatedgroup)="refreshGroup($event)"></app-student-assign>
-              </div>
-              <!-- END STUDENT ASSIGN COMPONENT-->
-              
-              <!-- STUDENT ASSIGN COMPONENT-->
-              <app-group-timetable class="tab-pane" *ngIf="ready && group != null" id="timetable" [group]="group"  (Updatedgroup)="refreshGroup($event)"></app-group-timetable>
-              <!-- END STUDENT ASSIGN COMPONENT-->
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<div class="card card-profile">
+  <div class="card-body">
+    <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+      <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab.label" [disabled]="tab.disabled"></mat-tab>
+    </mat-tab-group>
   </div>
 </div>
+<app-group-detail *ngIf="selected.value === tabIndex.EDIT_CLASS && group != null" [group]="group" (Updatedgroup)="refreshGroup($event)">
+</app-group-detail>
+
+<app-student-assign *ngIf="selected.value === tabIndex.STUDENTS && group != null" [group]="group" (Updatedgroup)="refreshGroup($event)">
+</app-student-assign>
+
+<app-group-timetable *ngIf="selected.value === tabIndex.TIMETABLE && group != null" id="timetable" [group]="group"
+  (Updatedgroup)="refreshGroup($event)"></app-group-timetable>

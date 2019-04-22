@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { Group } from 'app/models/Group';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { GroupService } from 'app/services/group.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Level } from 'app/models/Level';
 import { StudentService } from 'app/services/student.service';
 import { Observable } from 'rxjs';
 import { BASE_URL } from 'app/app.component';
+import { Teacher } from 'app/models/Teacher';
 
 @Component({
   selector: 'app-group',
@@ -17,9 +18,13 @@ import { BASE_URL } from 'app/app.component';
 })
 export class GroupComponent implements OnInit {
 
+  isNew = true;
   BASE_URL: string = BASE_URL;
+  tabIndex = {'EDIT_CLASS': 0, 'STUDENTS': 1, 'TIMETABLE': 2};
+  tabs = this.tabs = this.updateTabs();
 
-  ready = false;
+  selected = new FormControl(0);
+  teacher: Teacher;
 
   group: Group;
 
@@ -36,10 +41,14 @@ export class GroupComponent implements OnInit {
 
   ngOnInit() {
     const id = this.route.snapshot.params['id'];
-    if (id !== undefined) {
-      this.getGroup(id);
+    if (id != null && this.isNew) {
+      this.findById(id);
+    } else {
+      this.group = new Group();
     }
   }
+
+
 
   onSubmit() {
     //this.getSubmitedData();
@@ -59,31 +68,16 @@ export class GroupComponent implements OnInit {
     }
   }
 
-  private getGroup(id: string) {
-
-    this.groupService.getSingleGroup(id)
-      .subscribe(group => {
-        this.group = group;
-        this.group.students = [];
-        console.log(this.group);
-        this.getGroupStudents(this.group.id);
-        
-        // this.ready = true;
-        //this.updateForm(this.group);
-      },
-        (err: HttpErrorResponse) => {
-          this.group = new Group();
-          if (err.error instanceof Error) {
-            console.log("Client-side error occured.");
-          } else {
-            console.log("Server-side error occured.");
-          }
-        });
+  private findById(id: string) {
+    this.groupService.find(id).then(group => this.group = group)
+    .then(group => {this.group.students = []; this.isNew = false; this.tabs = this.updateTabs(); })
+    .then(group => this.getGroupStudents(this.group.id))
+    .catch(err => {this.group = new Group(); this.isNew = true; })
   }
+
 
   refreshGroup(group: Group) {
     this.group = group;
-    console.log('******', group);
   }
 
   private getGroupStudents(id: string) {
@@ -91,8 +85,13 @@ export class GroupComponent implements OnInit {
       .subscribe(students => { this.group.students = students; 
         console.log(this.group);
                       //this.groupToChild = new Observable<Group>(observer => observer.next(this.group));
-                      this.ready = true;
+                      this.isNew = true;
                     });
+  }
+
+  private updateTabs() {
+    return [{'label': 'Editer classe', 'disabled': false}, {'label': 'Eleves', 'disabled': this.isNew},
+            {'label': 'Emploi du temps', 'disabled': this.isNew}];
   }
 
   checked = false;

@@ -5,6 +5,7 @@ import { HttpClient, HttpErrorResponse, HttpParams, HttpEvent } from '@angular/c
 import { Group } from 'app/models/Group';
 import { group } from '@angular/animations';
 import { BASE_API_URL } from 'app/app.component';
+import { resolve, reject } from 'q';
 
 const GROUP_URL: string = BASE_API_URL + 'groups';
 
@@ -12,24 +13,22 @@ const GROUP_URL: string = BASE_API_URL + 'groups';
   providedIn: 'root'
 })
 export class GroupService {
-  
-  private groups: Group[] = [];
-  private teachers: Group[] = [];
 
   constructor(private http: HttpClient) {}
 
   findAll(teacherId?: string): Observable<Group[]> {
-
     if (teacherId !== undefined) {
-      let params = new HttpParams().set('teacherId', teacherId);
+      const params = new HttpParams().set('teacherId', teacherId);
       return this.http.get<Group[]>(GROUP_URL, { params: params });
     } else {
       return this.http.get<Group[]>(GROUP_URL);
     }
   }
 
-  getSingleGroup(id: string): Observable<Group>  {
-    return this.http.get<Group>(GROUP_URL + '/' + id);
+  find(groupId: string): Promise<Group> {
+    const URL = `${GROUP_URL}/${groupId}`;
+    return new Promise((resolve, reject) => this.http.get<Group>(URL)
+              .subscribe( group =>  resolve(group), err => reject(err)));
   }
 
   saveGroup(group: Group) : Observable<Group>  {
