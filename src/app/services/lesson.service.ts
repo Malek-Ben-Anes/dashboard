@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Group } from 'app/models/Group';
 import { Lesson } from 'app/models/Lesson';
 import { BASE_API_URL } from 'app/app.component';
@@ -23,18 +23,26 @@ export class LessonService {
   }
 
   getSingleLesson(id: string): Observable<Lesson>  {
-    return this.http.get<Lesson>(LESSON_URL + '/' + id);
+    const URL = `${LESSON_URL}/${id}`;
+    return this.http.get<Lesson>(URL);
   }
 
-  saveLesson(lesson: Lesson) : Observable<Lesson>  {
+  saveLesson(lesson: Lesson): Observable<Lesson>  {
     return this.http.post<Lesson>(LESSON_URL, lesson);
   }
 
-  updateLesson(lesson: Lesson) : Observable<Lesson>  {
+  delete(lesson: Lesson): Observable<Lesson> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: lesson
+    };
+    return this.http.delete<Lesson>(LESSON_URL, httpOptions);
+  }
+
+  updateLesson(lesson: Lesson): Observable<Lesson>  {
     return this.http.put<Lesson>(LESSON_URL, lesson);
   }
 
-  getLessonsByGroupId(groupId: string) : Observable<Lesson[]> {
+  getLessonsByGroupId(groupId: string): Observable<Lesson[]> {
     return this.http.get<Lesson[]>(LESSON_URL);
   }
 
@@ -46,32 +54,35 @@ export class LessonService {
     );
   }
 
-  /*
-  
-  removeBook(book: Book) {
-      if(book.photo) {
-        const storageRef = firebase.storage().refFromURL(book.photo);
-        storageRef.delete().then(
-          () => {
-            console.log('Photo removed!');
-          },
-          (error) => {
-            console.log('Could not remove photo! : ' + error);
-          }
-        );
+  findAll(teacherId?: string): Promise<Lesson[]> {
+    return new Promise((resolve, reject) => {
+      if (teacherId != null) {
+        const params = new HttpParams().set('teacherId', teacherId);
+        this.http.get<Lesson[]>(LESSON_URL, { params: params })
+                 .subscribe(lessons => resolve(lessons), err => reject(err));
+      } else {
+        this.http.get<Lesson[]>(LESSON_URL)
+                 .subscribe(lessons => resolve(lessons), err => reject(err));
       }
-      const bookIndexToRemove = this.books.findIndex(
-        (bookEl) => {
-          if(bookEl === book) {
-            return true;
-          }
-        }
-      );
-      this.books.splice(bookIndexToRemove, 1);
-      this.saveBooks();
-      this.emitBooks();
+    });
+  }
+
+}
+  /*
+const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: your body data
+};
+
+return new Promise(resolve => {
+    this.httpClient.delete(URL, httpOptions)       
+                   .subscribe(res => {     
+                       resolve(res);
+                   }, err => {               
+                       resolve(err);
+                   });
+    });
   }
   */
 
 
-}
+

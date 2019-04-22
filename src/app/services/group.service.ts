@@ -19,8 +19,8 @@ export class GroupService {
   constructor(private http: HttpClient) {}
 
   findAll(teacherId?: string): Observable<Group[]> {
-    
-    if(teacherId !== undefined) {
+
+    if (teacherId !== undefined) {
       let params = new HttpParams().set('teacherId', teacherId);
       return this.http.get<Group[]>(GROUP_URL, { params: params });
     } else {

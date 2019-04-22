@@ -3,6 +3,8 @@ import { Teacher } from 'app/models/Teacher';
 import { Group } from 'app/models/Group';
 import { GroupService } from 'app/services/group.service';
 import { SubjectService } from 'app/services/subject.service';
+import { Lesson } from 'app/models/Lesson';
+import { LessonService } from 'app/services/lesson.service';
 
 @Component({
   selector: 'app-teacher-manage-groups',
@@ -18,12 +20,14 @@ export class TeacherManageGroupsComponent implements OnInit {
   groups: Group[];
   selectedGroup: Group;
 
-  subjectsPerGroup
+  lessonsAssignedToTeacher: Lesson[];
 
-  constructor(private groupService: GroupService) { }
+
+  constructor(private groupService: GroupService, private lessonService: LessonService) { }
 
   ngOnInit() {
     this.groupService.findAll().subscribe(groups =>{ this.groups = groups; console.log(this.groups)}, err => console.log(err));
+    this.lessonService.findAll(this.teacher.id).then(lessons => this.lessonsAssignedToTeacher = lessons);
   }
 
   onSelectGroup(group: Group) {

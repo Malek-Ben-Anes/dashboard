@@ -4,6 +4,8 @@
     </app-teacher-group-list>
         </div>
         <div class="col-md-8">
-    <app-teacher-subject-list *ngIf="selectedGroup != null" [selectedGroup]="selectedGroup"></app-teacher-subject-list>
+    <app-teacher-subject-list *ngIf="selectedGroup != null && lessonsAssignedToTeacher != null && teacher != null"
+        [teacher]="teacher" [lessons]="lessonsAssignedToTeacher" [selectedGroup]="selectedGroup">
+    </app-teacher-subject-list>
 </div>
 </div>

@@ -2,15 +2,15 @@
   <div class="card-body">
     <form [formGroup]="subjectsForm" (ngSubmit)="submit()">
       <div class="row">
-        <div  *ngIf="subjectsForm.controls.subjectsPreferences != null">
-          <div formArrayName="subjectsPreferences"
-            *ngFor="let genre of subjectsForm.controls.subjectsPreferences.controls; let i = index">
-            <div class="col-md-4">
-              <mat-label>
-                <mat-checkbox class="checkbox-color" matInput [formControlName]="i">{{subjectsPreferences[i].genre}}
+        <div  *ngIf="subjectsForm.controls.checkedOptions != null">
+          <div formArrayName="checkedOptions"
+            *ngFor="let name of subjectsForm.controls.checkedOptions.controls; let i = index">
+            <mat-label>
+              <div class="col-md-4">
+                <mat-checkbox class="checkbox-color" matInput [formControlName]="i">{{checkedOptions[i].name}}
                 </mat-checkbox>
+              </div>
               </mat-label>
-            </div>
           </div>
         </div>
       </div>

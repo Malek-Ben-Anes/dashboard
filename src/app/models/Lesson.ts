@@ -14,9 +14,8 @@ export class Lesson{
     groupName: string;
 
 
-    constructor(_id?: LessonId, _name?: string, _description?: string) {
-        this.id = _id;
-        this.name = _name;
+    constructor() {
+        this.id = {};
         this.createdAt = new Date();
         this.updatedAt = new Date();
     }

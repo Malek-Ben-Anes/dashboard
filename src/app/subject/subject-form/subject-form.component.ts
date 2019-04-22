@@ -46,7 +46,7 @@ export class SubjectFormComponent implements OnInit, OnChanges {
 
     if (changes.level != null) {
       this.level = changes.level.currentValue;
-      this.onCreateNewSubject();
+      this.CreateNewSubject();
     }
     if (changes.subjectToSave != null) {
       this.subjectToSave = changes.subjectToSave.currentValue;
@@ -58,9 +58,9 @@ export class SubjectFormComponent implements OnInit, OnChanges {
     }
   }
 
-  onCreateNewSubject() {
-    this.isNew = true;
-    this.subjectToSave = new Subject();
+  private onCreateNewSubject() {
+    this.CreateNewSubject();
+    this.updateForm(this.subjectToSave);
   }
 
   onSubmit() {
@@ -71,7 +71,11 @@ export class SubjectFormComponent implements OnInit, OnChanges {
     } else {
       this.update(this.subjectToSave);
     }
-    
+  }
+
+  private CreateNewSubject() {
+    this.isNew = true;
+    this.subjectToSave = new Subject();
   }
 
   private initForm() {
