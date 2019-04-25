@@ -20,7 +20,7 @@ export class GroupComponent implements OnInit {
 
   isNew = true;
   BASE_URL: string = BASE_URL;
-  tabIndex = {'EDIT_CLASS': 0, 'STUDENTS': 1, 'TIMETABLE': 2};
+  tabIndex = {'EDIT_CLASS': 0, 'STUDENTS': 1, 'TIMETABLE': 2, 'MARKS': 3};
   tabs = this.tabs = this.updateTabs();
 
   selected = new FormControl(0);
@@ -48,26 +48,6 @@ export class GroupComponent implements OnInit {
     }
   }
 
-
-
-  onSubmit() {
-    //this.getSubmitedData();
-    console.log(this.group);
-    if (this.group.id !== undefined) {
-      this.groupService.updateGroup(this.group)
-        .subscribe(subject => { this.group = subject; console.log("subject updated") },
-          (err: HttpErrorResponse) => {
-            if (err.error instanceof Error) {
-              console.log(err.error);
-              console.log("Client-side error occured.");
-            } else {
-              console.log(err.error);
-              console.log("Server-side error occured.");
-            }
-          });
-    }
-  }
-
   private findById(id: string) {
     this.groupService.find(id).then(group => this.group = group)
     .then(group => {this.group.students = []; this.isNew = false; this.tabs = this.updateTabs(); })
@@ -91,7 +71,7 @@ export class GroupComponent implements OnInit {
 
   private updateTabs() {
     return [{'label': 'Editer classe', 'disabled': false}, {'label': 'Eleves', 'disabled': this.isNew},
-            {'label': 'Emploi du temps', 'disabled': this.isNew}];
+            {'label': 'Emploi du temps', 'disabled': this.isNew}, {'label': 'Notes & Stats', 'disabled': this.isNew}];
   }
 
   checked = false;

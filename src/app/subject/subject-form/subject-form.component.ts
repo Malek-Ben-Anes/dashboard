@@ -128,10 +128,4 @@ export class SubjectFormComponent implements OnInit, OnChanges {
   private extractFieldData(property: string): any {
     return this.subjectForm.get(property).value;
   }
-
-  /*onClick(subject: Subject) {
-    console.log(subject);
-    this.subjectToSave = subject;
-    this.updateForm(this.subjectToSave);
-  }*/
 }

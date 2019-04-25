@@ -31,12 +31,15 @@ export class GroupService {
               .subscribe( group =>  resolve(group), err => reject(err)));
   }
 
-  saveGroup(group: Group) : Observable<Group>  {
-    return this.http.post<Group>(GROUP_URL, group);
+  save(group: Group): Promise<Group>  {
+    return new Promise((resolve, reject) => this.http.post<Group>(GROUP_URL, group)
+      .subscribe( group =>  resolve(group), err => reject(err)));
   }
 
-  updateGroup(group: Group) : Observable<Group>  {
-    return this.http.put<Group>(GROUP_URL  + '/' + group.id, group);
+  update(group: Group): Promise<Group>  {
+    const URL = `${GROUP_URL}/${group.id}`;
+    return new Promise((resolve, reject) => this.http.put<Group>(URL, group)
+            .subscribe( group =>  resolve(group), err => reject(err)) );
   }
 
   uploadTimeTable(groupId: string, file: File): Observable<HttpEvent<{}>> {
@@ -56,33 +59,4 @@ export class GroupService {
       }
     );
   }
-
-  /*
-  
-  removeBook(book: Book) {
-      if(book.photo) {
-        const storageRef = firebase.storage().refFromURL(book.photo);
-        storageRef.delete().then(
-          () => {
-            console.log('Photo removed!');
-          },
-          (error) => {
-            console.log('Could not remove photo! : ' + error);
-          }
-        );
-      }
-      const bookIndexToRemove = this.books.findIndex(
-        (bookEl) => {
-          if(bookEl === book) {
-            return true;
-          }
-        }
-      );
-      this.books.splice(bookIndexToRemove, 1);
-      this.saveBooks();
-      this.emitBooks();
-  }
-  */
-
-
 }

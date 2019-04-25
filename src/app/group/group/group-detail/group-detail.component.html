@@ -26,53 +26,16 @@
           </mat-form-field>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="col-md-6">
-            <label>Others details...</label>
-          </div>
-        </div>
+      <div *ngIf="(!isNew); else newSubject">
+        <button mat-raised-button type="submit" class="btn btn-warning pull-right">Update Group</button>
+        <div class="clearfix"></div>
       </div>
-      <button mat-raised-button type="submit" class="btn btn-warning pull-right">Update Group</button>
-      <div class="clearfix"></div>
+      <ng-template #newSubject>
+        <button mat-raised-button type="submit" class="btn btn-info pull-right">Create Group</button>
+        <div class="clearfix"></div>
+      </ng-template>
     </form>
   </div>
 </div>
 
-<div class="card card-profile">
-  <div class="card-body">
-    <p>Students Number: {{ group.students.length}}</p>
-    <table class="table">
-      <thead class=" text-primary">
-        <th>
-          Photo
-        </th>
-        <th>
-          First Name
-        </th>
-        <th>
-          Last Name
-        </th>
-        <th>
-          Email
-        </th>
-      </thead>
-      <tbody>
-        <tr *ngFor="let student of group.students">
-          <td>
-            <a routerLink="/{{ 'student-profile/' + student.id }}">
-              <img [src]="BASE_URL + student.photo" alt="Smiley student face" height="49" width="49" />
-            </a>
-          </td>
-          <td>{{ student.firstname }}
-          </td>
-          <td>{{ student.lastname }}
-          </td>
-          <td>
-            <a routerLink="/{{ 'student-profile/' + student.id }}">{{ student.email }}</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+<app-group-detail-student-list *ngIf="group != null && group.students != null" [students]="group.students"></app-group-detail-student-list>
