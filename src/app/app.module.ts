@@ -105,6 +105,7 @@ import { TeacherManageGroupsComponent } from './teacher/teacher/teacher-manage-g
 import { TeacherGroupListComponent } from './teacher/teacher/teacher-manage-groups/teacher-group-list/teacher-group-list.component';
 import { TeacherSubjectListComponent } from './teacher/teacher/teacher-manage-groups/teacher-subject-list/teacher-subject-list.component';
 import { GroupDetailStudentListComponent } from './group/group/group-detail/group-detail-student-list/group-detail-student-list.component';
+import { StudentAssignFilterComponent } from './group/group/student-assign/student-assign-filter/student-assign-filter.component';
 
 @NgModule({
   imports: [
@@ -186,7 +187,8 @@ import { GroupDetailStudentListComponent } from './group/group/group-detail/grou
     TeacherManageGroupsComponent,
     TeacherGroupListComponent,
     TeacherSubjectListComponent,
-    GroupDetailStudentListComponent
+    GroupDetailStudentListComponent,
+    StudentAssignFilterComponent
   ],
   exports: [],
   entryComponents: [

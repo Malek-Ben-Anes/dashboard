@@ -20,7 +20,7 @@ export class GroupComponent implements OnInit {
 
   isNew = true;
   BASE_URL: string = BASE_URL;
-  tabIndex = {'EDIT_CLASS': 0, 'STUDENTS': 1, 'TIMETABLE': 2, 'MARKS': 3};
+  tabIndex = {'EDIT_CLASS': 0,  'TIMETABLE': 1, 'STUDENTS': 2, 'MARKS': 3};
   tabs = this.tabs = this.updateTabs();
 
   selected = new FormControl(0);
@@ -48,30 +48,26 @@ export class GroupComponent implements OnInit {
     }
   }
 
-  private findById(id: string) {
-    this.groupService.find(id).then(group => this.group = group)
-    .then(group => {this.group.students = []; this.isNew = false; this.tabs = this.updateTabs(); })
-    .then(group => this.getGroupStudents(this.group.id))
-    .catch(err => {this.group = new Group(); this.isNew = true; })
-  }
-
-
   refreshGroup(group: Group) {
     this.group = group;
   }
 
-  private getGroupStudents(id: string) {
-    this.studentService.getGroupStudents(id)
-      .subscribe(students => { this.group.students = students; 
-        console.log(this.group);
-                      //this.groupToChild = new Observable<Group>(observer => observer.next(this.group));
-                      this.isNew = true;
-                    });
+  private findById(id: string) {
+    this.groupService.find(id).then(group => this.group = group)
+        .then(group => {this.group.students = []; this.isNew = false; this.tabs = this.updateTabs(); })
+        .then(group => this.findStudentsByGroupId(this.group.id))
+        .catch(err => {this.group = new Group(); this.isNew = true; })
+  }
+
+  private findStudentsByGroupId(groupId: string) {
+    this.studentService.findStudentsByGroupId(groupId)
+        .then(students => this.group.students = students)
+        .catch(err => console.log(err));
   }
 
   private updateTabs() {
-    return [{'label': 'Editer classe', 'disabled': false}, {'label': 'Eleves', 'disabled': this.isNew},
-            {'label': 'Emploi du temps', 'disabled': this.isNew}, {'label': 'Notes & Stats', 'disabled': this.isNew}];
+    return [{'label': 'Editer classe', 'disabled': false}, {'label': 'Emploi du temps', 'disabled': this.isNew},
+            {'label': 'Eleves', 'disabled': this.isNew}, {'label': 'Notes & Stats', 'disabled': this.isNew}];
   }
 
   checked = false;

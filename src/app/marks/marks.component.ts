@@ -43,9 +43,9 @@ export class MarkComponent implements OnInit {
   }
 
   private getStudents(id: string): void {
-    this.studentService.getGroupStudents(id)
-      .subscribe(students => this.students = students,
-        err => console.log(err.error));
+    this.studentService.findStudentsByGroupId(id)
+        .then (students => this.students = students)
+        .catch (err => console.log(err));
   }
 
   private getAuthority() {

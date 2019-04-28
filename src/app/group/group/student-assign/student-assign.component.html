@@ -1,51 +1,76 @@
-<div>
-  <div cdkDropListGroup>
-    <div class="example-container">
-      <h2>All Students<!-- At {{group.level}} --></h2>
-        <p class="grey">That are not in {{group.name}}</p>
-      
-      <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList]" class="example-list"
-        (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let student of todo" cdkDrag>
-          <mat-card-header>
-            <div class="row">
-              <div class="col-md-3">
-                <img src="../../../assets/img/faces/marc.jpg" alt="Smile face" height="39" width="39" />
-                <!-- <div mat-card-avatar class="example-header-image"><img src="../../../assets/img/faces/marc.jpg" alt="Smile face"
-                        height="49" width="49" /></div> -->
-              </div>
-              <div class="col-md-9">
-                <mat-card-title class="black-name">{{student.firstname}} {{student.lastname}}</mat-card-title><br />
-                <mat-card-subtitle>{{student.email}}</mat-card-subtitle>
+<div class="card card-profile">
+  <div class="card-body">
+    <div class="row">
+
+      <div class="col-md-2">
+        <p class="grey">Filter</p>
+        <app-student-assign-filter ></app-student-assign-filter>
+      </div>
+
+      <div class="col-md-10">
+        <div cdkDropListGroup>
+          <div class="example-container">
+            <p class="grey">Eleves non affectes a {{group.name}}</p>
+            <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList]"
+              class="example-list" (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let student of todo" cdkDrag>
+                <mat-card-header>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div *ngIf="student.photo != null; else defaultPhoto">
+                        <img class="img profile-image" [src]="BASE_URL + student.photo" alt="Smiley face" height="39"
+                          width="39" />
+                      </div>
+                      <ng-template #defaultPhoto>
+                        <img class="img profile-image" src="./assets/images/profile-logo.png" alt="Smiley face"
+                          height="39" width="39" />
+                      </ng-template>
+                    </div>
+                    <div class="col-md-9">
+                      <mat-card-title class="black-name">{{student.firstname}} {{student.lastname}}</mat-card-title>
+                      <br />
+                      <mat-card-subtitle>{{student.email}}</mat-card-subtitle>
+                    </div>
+                  </div>
+                </mat-card-header>
               </div>
             </div>
-          </mat-card-header>
+          </div>
+
+          <div class="example-container">
+            <p class="grey">Eleves affectes a {{group.name}}</p>
+            <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[todoList]"
+              class="example-list" (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let student of done" cdkDrag>
+                <mat-card-header>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div *ngIf="student.photo != null; else defaultPhoto">
+                        <img class="img profile-image" [src]="BASE_URL + student.photo" alt="Smiley face" height="39"
+                          width="39" />
+                      </div>
+                      <ng-template #defaultPhoto>
+                        <img class="img profile-image" src="./assets/images/profile-logo.png" alt="Smiley face"
+                          height="39" width="39" />
+                      </ng-template>
+                    </div>
+                    <div class="col-md-9">
+                      <mat-card-title class="black-name">{{student.firstname}} {{student.lastname}}</mat-card-title>
+                      <br />
+                      <mat-card-subtitle>{{student.email}}</mat-card-subtitle>
+                    </div>
+                  </div>
+                </mat-card-header>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="example-container">
-      <h2>{{group.name}}</h2>
-      <p class="grey">Assigned students</p>
-      <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[todoList]" class="example-list"
-        (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let student of done" cdkDrag>
-          <mat-card-header>
-            <div class="row">
-              <div class="col-md-3">
-                <img src="../../../assets/img/faces/marc.jpg" alt="Smile face" height="39" width="39" />
-                <!-- <div mat-card-avatar class="example-header-image"><img src="../../../assets/img/faces/marc.jpg" alt="Smile face"
-                    height="49" width="49" /></div> -->
-              </div>
-              <div class="col-md-9">
-                <mat-card-title class="black-name">{{student.firstname}} {{student.lastname}}</mat-card-title><br />
-                <mat-card-subtitle>{{student.email}}</mat-card-subtitle>
-              </div>
-            </div>
-          </mat-card-header>
-        </div>
-      </div>
+    <div class="row">
+      <button mat-raised-button (click)="onSaveStudents()" class="btn btn-warning pull-right">Save Changes</button>
     </div>
+
   </div>
-  <button mat-raised-button (click)="onSaveStudents()" class="btn btn-warning pull-right">Save Changes</button>
 </div>

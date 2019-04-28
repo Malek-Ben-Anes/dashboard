@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Student } from 'app/models/Student';
+import { BASE_URL } from 'app/app.component';
 
 @Component({
   selector: 'app-group-detail-student-list',
@@ -9,6 +10,7 @@ import { Student } from 'app/models/Student';
 export class GroupDetailStudentListComponent implements OnInit {
 
   @Input('students') students: Student[];
+  BASE_URL: string = BASE_URL;
 
   constructor() { }
 

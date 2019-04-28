@@ -30,8 +30,15 @@ export class StudentService {
     return this.http.get<Student[]>(STUDENT_URL);
   }
 
-  getGroupStudents(id: string): Observable<Student[]> {
-    return this.http.get<Student[]>(GROUP_URL + id + '/students/');
+  findAll(): Promise<Student[]> {
+    return new Promise((resolve, reject) => this.http.get<Student[]>(STUDENT_URL)
+    .subscribe(students => resolve(students), err => reject(err)));
+  }
+
+  findStudentsByGroupId(groupId: string): Promise<Student[]> {
+    const URL = `${GROUP_URL}${groupId}/students/`;
+    return new Promise((resolve, reject) => this.http.get<Student[]>(URL)
+    .subscribe(students => resolve(students), err => reject(err)));
   }
 
   getStudentById(id: string): Observable<Student>  {

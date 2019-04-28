@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
@@ -6,6 +7,7 @@ import { Student } from 'app/models/Student';
 import { StudentService } from 'app/services/student.service';
 import { GroupService } from 'app/services/group.service';
 import { Observable } from 'rxjs';
+import { BASE_URL } from 'app/app.component';
 
 @Component({
   selector: 'app-student-assign',
@@ -17,7 +19,9 @@ export class StudentAssignComponent implements OnInit {
   //@Input('groupToChild') groupToChild: Observable<Group>;
 
   @Input('group') group: Group;
+  BASE_URL: string = BASE_URL;
 
+  // All available students in all groups.
   Allstudents: Student[];
 
   initial: any = [];
@@ -27,18 +31,11 @@ export class StudentAssignComponent implements OnInit {
   constructor(private studentService: StudentService, private groupService: GroupService) { }
 
   ngOnInit() {
-    this.getAllStudents();
-
     this.initDoneArray();
+    this.findAllStudents();
   }
 
-  private getAllStudents() {
-    this.studentService.getStudents()
-      .subscribe(students => {
-        this.Allstudents = students;
-        this.initTodoArray();
-      });
-  }
+
 
   onSaveStudents(): void {
 
@@ -77,10 +74,9 @@ export class StudentAssignComponent implements OnInit {
 
 
   private initTodoArray() {
-    //push the different students in the pushTodo array
-    this.arrayDifference(this.Allstudents, this.group.students)
-      // <-   return the difference betwenn two arrays
-      .forEach(student => this.pushInArray(student, this.todo));
+    _.differenceBy(this.Allstudents, this.group.students, 'id')
+     .map((student: Student) => this.pushInArray(student, this.todo));
+    console.log(this.todo, this.Allstudents, this.group.students);
   }
 
   private initDoneArray() {
@@ -90,6 +86,12 @@ export class StudentAssignComponent implements OnInit {
     });
   }
 
+  private findAllStudents() {
+    this.studentService.findAll()
+        .then(students => this.Allstudents = students)
+        .then(students => this.initTodoArray())
+        .catch(err => console.log(err));
+  }
 
   /**
    * THIS FUNCTION IS TO FULL TODO AND DONE ARRAY OF DATA FROM ALLSTUDENTS AND GROUP.STUDENTS
