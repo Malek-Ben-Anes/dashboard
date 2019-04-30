@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import { Component, OnInit, Input, SimpleChanges, EventEmitter, Output, OnChanges } from '@angular/core';
 import { Group } from 'app/models/Group';
 import { BASE_URL } from 'app/app.component';
@@ -20,7 +21,7 @@ export class GroupDetailComponent implements OnInit, OnChanges {
   @Input('isNew') isNew: boolean;
 
   @Output()
-  refershEvent = new EventEmitter<Group>();
+  refreshEvent = new EventEmitter<Group>();
 
   levels = Object.keys(Level);
 
@@ -77,15 +78,15 @@ export class GroupDetailComponent implements OnInit, OnChanges {
 
   private save(groupRequest: Group) {
     this.groupService.save(groupRequest)
-        .then(groupData => this.group = groupData)
-        .then(groupData => { this.updateForm(this.group); this.refershEvent.emit(this.group); })
+        .then(groupData => {groupData.students = this.group.students; this.group = groupData})
+        .then(groupData => { this.updateForm(this.group); this.refreshEvent.emit(this.group); })
         .catch(err => console.log(err));
   }
 
   private update(groupRequest: Group) {
     this.groupService.update(groupRequest)
-        .then(groupData => this.group = groupData)
-        .then(groupData => { this.updateForm(this.group); this.refershEvent.emit(this.group); })
+        .then(groupData => {groupData.students = this.group.students; this.group = groupData})
+        .then(groupData => { this.updateForm(this.group); this.refreshEvent.emit(this.group); })
         .catch(err => console.log(err));
   }
 

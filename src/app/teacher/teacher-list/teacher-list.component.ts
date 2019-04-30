@@ -8,6 +8,7 @@ import { TeacherService } from 'app/services/teacher.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { Teacher } from 'app/models/Teacher';
+import { BASE_URL } from 'app/app.component';
 
 @Component({
   selector: 'app-teacher-list',
@@ -16,6 +17,7 @@ import { Teacher } from 'app/models/Teacher';
 })
 export class TeacherListComponent implements OnInit {
 
+  BASE_URL: string = BASE_URL;
 
   teachers: Teacher[] = [];
   teachersSubscription: Subscription;

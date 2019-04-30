@@ -7,13 +7,13 @@
 </div>
 
 <app-group-detail *ngIf="selected.value === tabIndex.EDIT_CLASS && group != null" [group]="group" [isNew]="isNew"
-(Updatedgroup)="refreshGroup($event)"></app-group-detail>
+(group)="refresh($event)"></app-group-detail>
 
-<app-student-assign *ngIf="selected.value === tabIndex.STUDENTS && group != null" [group]="group" (Updatedgroup)="refreshGroup($event)">
+<app-student-assign *ngIf="selected.value === tabIndex.STUDENTS && group != null" [group]="group" (group)="refresh($event)">
 </app-student-assign>
 
 <app-group-timetable *ngIf="selected.value === tabIndex.TIMETABLE && group != null" id="timetable" [group]="group"
-  (Updatedgroup)="refreshGroup($event)"></app-group-timetable>
+  (group)="refresh($event)"></app-group-timetable>
 
 <app-group-timetable *ngIf="selected.value === tabIndex.MARKS && group != null" id="timetable" [group]="group"
-(Updatedgroup)="refreshGroup($event)"></app-group-timetable>
+(group)="refresh($event)"></app-group-timetable>

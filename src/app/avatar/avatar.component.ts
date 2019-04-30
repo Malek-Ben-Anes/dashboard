@@ -32,18 +32,12 @@ export class AvatarComponent implements OnInit {
   }
 
   onUpload() {
-    if ( this.user.discriminatorValue === 'STUDENT') {
-      this.uploadStudentImage(this.user.id, this.selectedFile);
-    } else if (this.user.discriminatorValue === 'TEACHER') {
-      // TODO modify to teacher
-      this.uploadStudentImage(this.user.id, this.selectedFile);
-    }
+    this.uploadStudentImage(this.user, this.selectedFile);
   }
 
-  private uploadStudentImage (id: string, file: File) {
-    this.fileUploadService.uploadFile(id, this.selectedFile).subscribe(HttpResponse => {
+  private uploadStudentImage (user: Student| Teacher, file: File) {
+    this.fileUploadService.uploadUserPhoto(user, this.selectedFile).subscribe(HttpResponse => {
       this.isUploading = true;
-      console.log(HttpResponse);
       if (HttpResponse.type === 4) {
         if (HttpResponse['body'] !== undefined) {
           if (HttpResponse['body']['photo'] !== undefined) {

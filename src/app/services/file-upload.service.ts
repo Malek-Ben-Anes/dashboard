@@ -4,8 +4,10 @@ import { Observable } from 'rxjs';
 import { Student } from 'app/models/Student';
 import { BASE_API_URL } from 'app/app.component';
 import { Trimester } from 'app/models/Trimester';
+import { Teacher } from 'app/models/Teacher';
 
-const FILE_UPLOAD_URL: string = BASE_API_URL + 'profile/';
+const STUDENTS_URL: string = BASE_API_URL + 'students/';
+const TEACHERS_URL: string = BASE_API_URL + 'teachers/';
 
 @Injectable({
   providedIn: "root"
@@ -15,59 +17,18 @@ export class FileUploadService {
 
   constructor(private http: HttpClient) {}
 
-  uploadFile(userId, file: File): Observable<HttpEvent<{}>> {
-
+  uploadUserPhoto(user: Student| Teacher, file: File): Observable<HttpEvent<{}>> {
+    let PHOTO_UPLOAD_URL = `${STUDENTS_URL}${user.id}/photos`;
+    if (user.discriminatorValue === 'TEACHER') {
+      PHOTO_UPLOAD_URL = `${TEACHERS_URL}${user.id}/photos`;
+    }
+    console.log(PHOTO_UPLOAD_URL);
     const formdata: FormData = new FormData();
     formdata.append('file', file);
-
-    return this.http.post<Student>(FILE_UPLOAD_URL + userId + '/upload-picture', formdata, {
+    return this.http.post<Student>(PHOTO_UPLOAD_URL, formdata, {
       reportProgress: true,
       observe: 'events'
     });
   }
+
 }
-
-// pushFileToStorage(file: File): Observable<HttpEvent<{}>> {
-//   const formdata: FormData = new FormData();
-//   formdata.append('file', file);
-//   const req = new HttpRequest('POST', 'https://laplumedor.cfapps.io/api/profile/', formdata, {
-//     reportProgress: true,
-//     responseType: 'text'
-//   }
-//   );
-//   return this.http.request(req);
-// }
-// selectedFile: ImageSnippet;
-
-// private onSuccess() {
-//   this.selectedFile.pending = false;
-//   this.selectedFile.status = 'ok';
-// }
-
-// private onError() {
-//   this.selectedFile.pending = false;
-//   this.selectedFile.status = 'fail';
-//   this.selectedFile.src = '';
-// }
-
-// processFile(imageInput: any) {
-//   const file: File = imageInput.files[0];
-//   const reader = new FileReader();
-
-//   reader.addEventListener('load', (event: any) => {
-
-//     this.selectedFile = new ImageSnippet(event.target.result, file);
-
-//     this.selectedFile.pending = true;
-//     this.imageService.uploadImage(this.selectedFile.file).subscribe(
-//       (res) => {
-//         this.onSuccess();
-//       },
-//       (err) => {
-//         this.onError();
-//       })
-//   });
-
-//   reader.readAsDataURL(file);
-// }
-

@@ -70,7 +70,6 @@ export class TeacherComponent implements OnInit, OnChanges {
  */
   refresh(teacher: Teacher) {
     this.teacher = teacher;
-    console.log('teacher refreshed');
   }
 
   private update(studentRequest: Teacher): void {

@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import { Component, OnInit } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { Group } from 'app/models/Group';
@@ -28,8 +29,6 @@ export class GroupComponent implements OnInit {
 
   group: Group;
 
-  groupToChild: Observable<Group>;
-
   groupForm: FormGroup;
 
   levels = Object.keys(Level);
@@ -48,8 +47,8 @@ export class GroupComponent implements OnInit {
     }
   }
 
-  refreshGroup(group: Group) {
-    this.group = group;
+  refresh(group: Group) {
+      this.group = group;
   }
 
   private findById(id: string) {
