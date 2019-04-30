@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { HttpClient, HttpErrorResponse, HttpParams, HttpEvent } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Group } from 'app/models/Group';
 import { group } from '@angular/animations';
 import { BASE_API_URL } from 'app/app.component';
 import { resolve, reject } from 'q';
+import { Student } from 'app/models/Student';
 
 const GROUP_URL: string = BASE_API_URL + 'groups';
 
@@ -52,11 +53,28 @@ export class GroupService {
     });
   }
 
-  uploadFile(file: File) {
+  addStudentsToGroup(groupId: string, students: Student[]): Promise<Student[]>  {
+    const URL = `${GROUP_URL}/${groupId}/students/`;
+    return new Promise((resolve, reject) => this.http.post<Student[]>(URL, students)
+            .subscribe( students =>  resolve(students), err => reject(err)) );
+  }
+
+  deleteStudentsFromGroup(groupId: string, students: Student[]): Promise<Student[]>  {
+    const URL = `${GROUP_URL}/${groupId}/students/`;
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: students
+    };
+    return new Promise((resolve, reject) => this.http.delete<Student[]>(URL, httpOptions)
+            .subscribe( students =>  resolve(students), err => reject(err)) );
+  }
+
+
+
+  /*uploadFile(file: File) {
     return new Promise(
       (resolve, reject) => {
         const almostUniqueFileName = Date.now().toString();
       }
     );
-  }
+  }*/
 }

@@ -14,7 +14,7 @@ export class GroupTimetableComponent implements OnInit {
   @Input('group') group: Group;
 
   @Output()
-  Updatedgroup = new EventEmitter<Group>();
+  refreshEvent = new EventEmitter<Group>();
 
   BASE_URL = BASE_URL;
   response;
@@ -38,7 +38,7 @@ export class GroupTimetableComponent implements OnInit {
       if (response.type === 4) {
         this.isUploading = false;
         this.group.timetabeUrl = response.body.timetabeUrl + '?random+\=' + Math.random();
-        this.Updatedgroup.emit(this.group);
+        this.refreshEvent.emit(this.group);
         console.log(this.group);
       }
     }, err => {

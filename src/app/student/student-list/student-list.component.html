@@ -41,7 +41,7 @@
                                                 <div class="card-avatar">
                                                     <a routerLink="/{{ 'student-profile/' + student.id }}">
                                                         <div
-                                                            *ngIf="(student.photo !== undefined && student.photo !== null); else defaultPhoto">
+                                                            *ngIf="(student.photo != null); else defaultPhoto">
                                                             <img class="img profile-image"
                                                                 [src]="BASE_URL + student.photo"
                                                                 alt="Smiley student face" />

@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 import { Group } from 'app/models/Group';
@@ -21,8 +21,11 @@ export class StudentAssignComponent implements OnInit {
   @Input('group') group: Group;
   BASE_URL: string = BASE_URL;
 
+  @Output()
+  refreshEvent = new EventEmitter<Group>();
+
   // All available students in all groups.
-  Allstudents: Student[];
+  allStudents: Student[];
 
   initial: any = [];
   todo: any = [];
@@ -35,30 +38,35 @@ export class StudentAssignComponent implements OnInit {
     this.findAllStudents();
   }
 
-
-
   onSaveStudents(): void {
+    const added = this.arrayDifferenceByOrder(this.done, this.initial);
+    const eliminated = this.arrayDifferenceByOrder(this.initial, this.done);
+    // Add some students to current group
+    const addedStudentToGroup: Student[] = _.intersectionBy(this.allStudents, added, 'id');
+    this.addStudentsToGroup(addedStudentToGroup);
+    // Delete some students from current group
+    const deletedStudentFromGroup: Student[] = _.intersectionBy(this.allStudents, eliminated, 'id');
+    this.deletedStudentFromGroup(deletedStudentFromGroup);
+  }
 
-    let added = this.arrayDifferenceByOrder(this.done, this.initial);
-    let eliminated = this.arrayDifferenceByOrder(this.initial, this.done);
+  private addStudentsToGroup(addedStudentToGroup: Student[]) {
+    if (_.isEmpty(addedStudentToGroup)) {
+      return;
+    }
+    this.groupService.addStudentsToGroup(this.group.id, addedStudentToGroup)
+        .then(students => this.group.students = students)
+        .then(students => this.refreshEvent.emit(this.group))
+        .catch(err => console.log(err));
+  }
 
-    console.log(eliminated);
-    console.log(added);
-    
-    //save all students ADDED to group
-    added.forEach(student => {
-      let entity = this.Allstudents.find(x => x.id === student.id);
-      entity.group = this.group;
-      this.updateStudent(entity);
-    });
-
-    //save all students ELIMINATED from group
-    eliminated.forEach(student => {
-      let entity = this.Allstudents.find(x => x.id === student.id);
-      entity.group = undefined;
-      this.updateStudent(entity);
-    });
-
+  private deletedStudentFromGroup(deletedStudentFromGroup: Student[]) {
+    if (_.isEmpty(deletedStudentFromGroup)) {
+      return;
+    }
+    this.groupService.deleteStudentsFromGroup(this.group.id, deletedStudentFromGroup)
+        .then(students => this.group.students = students)
+        .then(students => this.refreshEvent.emit(this.group))
+        .catch(err => console.log(err));
   }
 
   private arrayDifferenceByOrder(arrA: Student[], arrB: Student[]) {
@@ -74,9 +82,8 @@ export class StudentAssignComponent implements OnInit {
 
 
   private initTodoArray() {
-    _.differenceBy(this.Allstudents, this.group.students, 'id')
+    _.differenceBy(this.allStudents, this.group.students, 'id')
      .map((student: Student) => this.pushInArray(student, this.todo));
-    console.log(this.todo, this.Allstudents, this.group.students);
   }
 
   private initDoneArray() {
@@ -88,14 +95,14 @@ export class StudentAssignComponent implements OnInit {
 
   private findAllStudents() {
     this.studentService.findAll()
-        .then(students => this.Allstudents = students)
+        .then(students => this.allStudents = students)
         .then(students => this.initTodoArray())
         .catch(err => console.log(err));
   }
 
   /**
    * THIS FUNCTION IS TO FULL TODO AND DONE ARRAY OF DATA FROM ALLSTUDENTS AND GROUP.STUDENTS
-   * @param student 
+   * @param student
    * 
    */
   private pushInArray(student: Student, arr: any) {
@@ -103,27 +110,12 @@ export class StudentAssignComponent implements OnInit {
       id: student.id, firstname: student.firstname,
       lastname: student.lastname,
       email: student.email,
-      photo: student.photo
+      photo: student.photo,
+      group: student.group && student.group.name
     }
     arr.push(studentI);
   }
 
-  private arrayDifference(arrA: Student[], arrB: Student[]) {
-
-    if (arrA === undefined || arrB === undefined) {
-      return [];
-    }
-
-    let difference;
-    if (arrA.length >= arrB.length) {
-
-      difference = arrA.filter(item => !arrB.some(other => item.id === other.id));
-
-    } else if (arrA.length < arrB.length) {
-      difference = arrB.filter(item => !arrA.some(other => item.id === other.id));
-    }
-    return difference
-  }
 
   drop(event: CdkDragDrop<Todo[]>) {
     if (event.previousContainer === event.container) {
@@ -135,10 +127,6 @@ export class StudentAssignComponent implements OnInit {
         event.currentIndex);
     }
   }
-
-  private updateStudent(student: Student) {
-    this.studentService.updateStudent(student);
-  }
 }
 
 interface Todo {
@@ -147,4 +135,5 @@ interface Todo {
   lastname?: string,
   email?: string,
   photo?: string,
+  group?: string,
 }
