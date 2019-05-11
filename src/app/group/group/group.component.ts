@@ -49,7 +49,6 @@ export class GroupComponent implements OnInit {
 
   refresh(group: Group) {
       this.group = group;
-      console.log("sdfdsf", this.group);
   }
 
   private findById(id: string) {

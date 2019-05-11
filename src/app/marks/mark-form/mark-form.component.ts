@@ -36,13 +36,11 @@ export class MarkFormComponent implements OnInit, OnChanges {
   }
 
   private getLessons() {
-    this.lessonService.getLessons().subscribe(lessons => { 
+    this.lessonService.findAll().then(lessons => { 
       this.lessons = lessons.filter(lesson => lesson.id.groupId === this.student.group.id); 
       this.newMarks = []; 
       this.lessons.forEach(lesson => { 
         this.newMarks.push(new Mark(this.student, lesson)) });
-      console.log(this.lessons); 
-      console.log(this.newMarks); 
     });
   }
 

@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -12,14 +13,22 @@ const LESSON_URL: string = BASE_API_URL + 'lessons';
   providedIn: 'root'
 })
 export class LessonService {
-  
-  subjects: Group[] = [];
-  teachers: Group[] = [];
+
+  lessons: Lesson[];
 
   constructor(private http: HttpClient) {}
 
-  getLessons(): Observable<Lesson[]> {
-    return this.http.get<Lesson[]>(LESSON_URL);
+  findAll(teacherId?: string): Promise<Lesson[]> {
+    return new Promise((resolve, reject) => {
+      if (teacherId != null) {
+        const params = new HttpParams().set('teacherId', teacherId);
+        this.http.get<Lesson[]>(LESSON_URL, { params: params })
+                 .subscribe(lessons => { this.lessons = lessons; resolve(lessons); }, err => reject(err));
+      } else {
+        this.http.get<Lesson[]>(LESSON_URL)
+                 .subscribe(lessons => resolve(lessons), err => reject(err));
+      }
+    });
   }
 
   getSingleLesson(id: string): Observable<Lesson>  {
@@ -54,35 +63,8 @@ export class LessonService {
     );
   }
 
-  findAll(teacherId?: string): Promise<Lesson[]> {
-    return new Promise((resolve, reject) => {
-      if (teacherId != null) {
-        const params = new HttpParams().set('teacherId', teacherId);
-        this.http.get<Lesson[]>(LESSON_URL, { params: params })
-                 .subscribe(lessons => resolve(lessons), err => reject(err));
-      } else {
-        this.http.get<Lesson[]>(LESSON_URL)
-                 .subscribe(lessons => resolve(lessons), err => reject(err));
-      }
-    });
-  }
-
 }
-  /*
-const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: your body data
-};
 
-return new Promise(resolve => {
-    this.httpClient.delete(URL, httpOptions)       
-                   .subscribe(res => {     
-                       resolve(res);
-                   }, err => {               
-                       resolve(err);
-                   });
-    });
-  }
-  */
 
 
 

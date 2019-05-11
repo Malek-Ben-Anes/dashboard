@@ -25,8 +25,8 @@ AdminNavBar = [
   {'router': '/subjects', 'label': 'Programme' },
 {'router': '/groups', 'label': 'Classes' },
 // {'router': '/lessons', 'label': 'Lessons' },
-{'router': '/marks', 'label': 'Notes' },
-{'router': '/site-vitrine', 'label': 'Page Vitrine' }];
+{'router': '/marks', 'label': 'Notes' }];
+// {'router': '/site-vitrine', 'label': 'Page Vitrine' }
 
 teacherNavBar = [{'router': '/marks', 'label': 'Marks' },
 {'router': '/lessons', 'label': 'Lessons' },

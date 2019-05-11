@@ -106,6 +106,10 @@ import { TeacherGroupListComponent } from './teacher/teacher/teacher-manage-grou
 import { TeacherSubjectListComponent } from './teacher/teacher/teacher-manage-groups/teacher-subject-list/teacher-subject-list.component';
 import { GroupDetailStudentListComponent } from './group/group/group-detail/group-detail-student-list/group-detail-student-list.component';
 import { StudentAssignFilterComponent } from './group/group/student-assign/student-assign-filter/student-assign-filter.component';
+import { GroupMarksComponent } from './group/group/group-marks/group-marks.component';
+import { GroupMarksStudentListComponent } from './group/group/group-marks/group-marks-student-list/group-marks-student-list.component';
+import { GroupMarksStudentDetailComponent } from './group/group/group-marks/group-marks-student-detail/group-marks-student-detail.component';
+import { GroupMarksFormComponent } from './group/group/group-marks/group-marks-student-detail/group-marks-form/group-marks-form.component';
 
 @NgModule({
   imports: [
@@ -188,7 +192,11 @@ import { StudentAssignFilterComponent } from './group/group/student-assign/stude
     TeacherGroupListComponent,
     TeacherSubjectListComponent,
     GroupDetailStudentListComponent,
-    StudentAssignFilterComponent
+    StudentAssignFilterComponent,
+    GroupMarksComponent,
+    GroupMarksStudentListComponent,
+    GroupMarksStudentDetailComponent,
+    GroupMarksFormComponent
   ],
   exports: [],
   entryComponents: [

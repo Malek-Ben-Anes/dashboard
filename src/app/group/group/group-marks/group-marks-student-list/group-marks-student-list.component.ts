@@ -3,12 +3,11 @@ import { Student } from 'app/models/Student';
 import { BASE_URL } from 'app/app.component';
 
 @Component({
-  selector: 'app-group-student-list',
-  templateUrl: './group-student-list.component.html',
-  styleUrls: ['./group-student-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'app-group-marks-student-list',
+  templateUrl: './group-marks-student-list.component.html',
+  styleUrls: ['./group-marks-student-list.component.scss']
 })
-export class GroupStudentListComponent implements OnInit {
+export class GroupMarksStudentListComponent implements OnInit {
 
   @Input('students') students: Student[];
 

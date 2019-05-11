@@ -66,16 +66,10 @@ export class LessonListComponent implements OnInit {
   }
 
   getLessons(): void {
-    this.lessonService.getLessons()
-      .subscribe(lessons => { this.lessons = lessons; console.log(this.lessons); },
-        (err: HttpErrorResponse) => {
-          if (err.error instanceof Error) {
-            console.log("Client-side error occured.");
-          } else {
-            console.log("Server-side error occured.");
-          }
-        }
-      );
+    this.lessonService.findAll()
+      .then(lessons => this.lessons = lessons)
+      .catch(err => console.log(err));
+
   }
 
   private initData() {
