@@ -16,9 +16,11 @@ export class GroupMarksStudentDetailComponent implements OnInit, OnChanges {
 
   @Input('student') student: Student;
 
-  lessonsToDisplay: Lesson[];
-  marksToDisplay: Mark[];
+  // All lessons of the current group to be displayed in filter buttons.
   lessonsOfCurrentGroup: Lesson[];
+
+  // marks to be displayed after filtering action.
+  marksToDisplay: Mark[];
 
   constructor(private markService: MarkService, private lessonService: LessonService) { }
 
@@ -35,6 +37,19 @@ export class GroupMarksStudentDetailComponent implements OnInit, OnChanges {
     }
   }
 
+  refresh(student: Student) {
+    this.student = student;
+    this.onFilterByLesson(null);
+  }
+
+  onFilterByLesson(lesson: Lesson) {
+    if (lesson == null) {
+      this.marksToDisplay = [...this.student.marks];
+    } else {
+      this.marksToDisplay = [..._.filter<Mark[]>(this.student.marks, mark => _.isEqual(mark.lesson, lesson))];
+    }
+  }
+
   private findLessonsByGroupId(groupId: string) {
     this.lessonService.findAll()
         .then(lessons => this.lessonsOfCurrentGroup = _.filter(lessons, (lesson: Lesson) => lesson.id.groupId === groupId))
@@ -46,20 +61,6 @@ export class GroupMarksStudentDetailComponent implements OnInit, OnChanges {
       .then(marks => this.student.marks = _.sortBy(marks, ['createdAt', 'updatedAt']).reverse())
       .then(marks => this.marksToDisplay = this.student.marks)
       .catch(err => console.log(err));
-  }
-
-  filterByLesson(lesson: Lesson) {
-    if (lesson == null) {
-      this.marksToDisplay = this.student.marks;
-    } else {
-      console.log(this.student.marks, lesson);
-      this.marksToDisplay = _.filter<Mark[]>(this.student.marks, mark => _.isEqual(mark.lesson, lesson));
-    }
-  }
-
-  refresh(student: Student) {
-    console.log("*********" , student);
-    this.student = student;
   }
 
   /*displayLessons(): string[] {

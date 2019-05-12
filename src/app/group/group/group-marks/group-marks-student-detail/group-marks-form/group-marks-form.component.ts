@@ -2,9 +2,7 @@ import * as _ from 'lodash';
 import { Component, OnInit, Input, SimpleChanges, OnChanges, EventEmitter, Output } from '@angular/core';
 import { Student } from 'app/models/Student';
 import { Lesson } from 'app/models/Lesson';
-import { LessonService } from 'app/services/lesson.service';
 import { Message } from 'app/models/message';
-import { FormGroup, FormBuilder } from '@angular/forms';
 import { Mark } from 'app/models/Mark';
 import { MarkService } from 'app/services/mark.service';
 
@@ -22,7 +20,7 @@ export class GroupMarksFormComponent implements OnInit, OnChanges {
   @Input('lessons') lessons: Lesson[];
 
   @Output()
-  refreshEvent = new EventEmitter<Student>();
+  refreshStudent = new EventEmitter<Student>();
 
   message: Message = new Message();
   newEvaluationMarks: Mark[];
@@ -44,17 +42,18 @@ export class GroupMarksFormComponent implements OnInit, OnChanges {
   }
 
   public onSendEvaluation(): void {
-    const evalutionMarksToBePersisted: Mark[] = _.filter(this.newEvaluationMarks, mark => mark.note != null && mark.mark != null);
-    _.forEach(evalutionMarksToBePersisted, (markRequest: Mark) => this.markService.save(this.student.id, markRequest)
-        .then((mark: Mark) => this.student.marks.push(mark))
-        .then(data => this.refreshEvent.emit(this.student))
-        .catch(err => console.log(err)));
+    const marksToBePersisted: Mark[] = _.filter(this.newEvaluationMarks, mark => mark.id == null && mark.note != null && mark.mark != null);
+    this.markService.save(this.student.id, marksToBePersisted)
+        .then((marksAdded: Mark[]) => Array.prototype.push.apply(this.student.marks, marksAdded) )
+        .then(data => this.refreshStudent.emit(this.student))
+        .catch(err => console.log(err));
   }
 
   onDeleteMark(event, mark: Mark) {
     event.currentTarget.disabled = true;
     this.markService.delete(this.student.id, mark.id)
-                    .then(data => mark = new Mark(this.student, mark.lesson))
+                    .then(data => this.deleteMarkFromStudent(mark))
+                    .then(data => this.refreshStudent.emit(this.student))
                     .then(data => this.generateMarksForm(this.lessons))
                     .catch(err => console.log(err));
   }
@@ -69,9 +68,7 @@ export class GroupMarksFormComponent implements OnInit, OnChanges {
       const lastestMarkDate = new Date(lastestMarkAssignedToSudent.updatedAt);
       const isDisabled: boolean = this.isNextWeek(lastestMarkDate);
       if (isDisabled) {
-        newEvaluationMark.id = lastestMarkAssignedToSudent.id;
-        newEvaluationMark.note = lastestMarkAssignedToSudent.note;
-        newEvaluationMark.mark = lastestMarkAssignedToSudent.mark;
+        this.markDataMapping(lastestMarkAssignedToSudent, newEvaluationMark);
       }
       return isDisabled;
     }
@@ -86,6 +83,17 @@ export class GroupMarksFormComponent implements OnInit, OnChanges {
   private isNextWeek(eventDate: Date): boolean {
     return _.now() < eventDate || new Date(_.now()).getDay() < eventDate.getDay()
       || _.now() < eventDate.setDate(eventDate.getDate() + WEEK_DAYS_NUMBER);
+  }
+
+  private markDataMapping(markSource: Mark, markDestination: Mark): void {
+    markDestination.id = markSource.id;
+    markDestination.lesson = markSource.lesson;
+    markDestination.note = markSource.note;
+    markDestination.mark = markSource.mark;
+  }
+
+  private deleteMarkFromStudent(mark: Mark) {
+    _.remove(this.student.marks, {id: mark.id});
   }
 
 }

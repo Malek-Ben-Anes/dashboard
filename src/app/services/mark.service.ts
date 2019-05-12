@@ -29,11 +29,11 @@ export class MarkService {
       });
   }
 
-  save (studentId: string, markRequest: Mark): Promise<Mark> {
+  save(studentId: string, marksRequest: Mark[]): Promise<Mark[]> {
     const MARK_URL = `${STUDENT_URL}${studentId}/marks/`;
     return new Promise((resolve, reject) => {
-      this.http.post<Mark>(MARK_URL, markRequest)
-               .subscribe(mark => resolve(mark), err => reject(err));
+      this.http.post<Mark[]>(MARK_URL, marksRequest)
+               .subscribe(marks => resolve(marks), err => reject(err));
     });
   }
 
