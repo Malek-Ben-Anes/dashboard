@@ -42,7 +42,7 @@ export class GroupService {
   update(group: Group): Promise<Group>  {
     const URL = `${GROUP_URL}/${group.id}`;
     return new Promise((resolve, reject) => this.http.put<Group>(URL, group)
-            .subscribe( group =>  resolve(group), err => reject(err)) );
+            .subscribe( group => resolve(group), err => reject(err)) );
   }
 
   uploadTimeTable(groupId: string, file: File): Observable<HttpEvent<{}>> {

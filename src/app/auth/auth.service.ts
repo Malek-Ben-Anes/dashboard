@@ -35,7 +35,7 @@ export class AuthService {
         .subscribe(jwtToken => {
           const accessToken = jwtToken.accessToken;
           this.saveLoggedUserIntoStorage(accessToken);
-          this.saveLoggedUserIntoAuthService(this.jwtResponse);
+
           resolve(this.jwtResponse);
         }, err => reject(err));
     });
@@ -45,8 +45,11 @@ export class AuthService {
     return this.http.post<string>(SIGN_UP_URL, info, httpOptions);
   }
 
-  public getLoggedUser(): User {
-    return this.loggedUser;
+  public getLoggedUser(): Promise<User> {
+    if (this.loggedUser == null) {
+      this.loggedUser = this.tokenStorage.getLoggedUser();
+    }
+    return new Promise( (resolve, reject) => this.loggedUser ? resolve(this.loggedUser) : reject(this.loggedUser));
   }
 
   public saveLoggedUser(loggedUser: User) {
@@ -76,9 +79,7 @@ export class AuthService {
     this.tokenStorage.saveGender(JwtTokenInfo.user.gender);
     this.tokenStorage.saveUserPhoto(JwtTokenInfo.user.photo);
     this.tokenStorage.saveUserNewNotifications(String(JwtTokenInfo.user.newNotifications));
-  }
-
-  private saveLoggedUserIntoAuthService(JwtTokenInfo: JwtResponse): void {
+    this.tokenStorage.saveLoggedUser(JwtTokenInfo.user);
     this.saveLoggedUser(JwtTokenInfo.user);
     this.saveIsLoggedUser(true);
   }

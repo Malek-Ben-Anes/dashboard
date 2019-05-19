@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { User, Gender } from 'app/models/User';
 
-const IS_LOGGED_USER_KEY = 'IsLoggedUser';
 const TOKEN_KEY = 'AuthToken';
+const IS_LOGGED_USER_KEY = 'IsLoggedUser';
+const LOGGED_USER_KEY = 'loggedUser';
 const ID_KEY = 'AuthId';
 const USERNAME_KEY = 'AuthUsername';
 const AUTHORITIES_KEY = 'AuthAuthorities';
@@ -61,7 +62,7 @@ export class TokenStorageService {
 
   public saveGender(gender: Gender) {
     window.sessionStorage.removeItem(GENDER_KEY);
-    window.sessionStorage.setItem(GENDER_KEY, gender);
+    window.sessionStorage.setItem(GENDER_KEY, String(gender));
   }
 
   public getGender(): string {
@@ -101,5 +102,17 @@ export class TokenStorageService {
     }
 
     return this.roles;
+  }
+
+  public saveLoggedUser(authUser: User) {
+    window.sessionStorage.removeItem(LOGGED_USER_KEY);
+    window.sessionStorage.setItem(LOGGED_USER_KEY, JSON.stringify(authUser));
+  }
+
+  public getLoggedUser(): User {
+    if (sessionStorage.getItem(LOGGED_USER_KEY)) {
+      return JSON.parse(sessionStorage.getItem(LOGGED_USER_KEY));
+    }
+    return;
   }
 }

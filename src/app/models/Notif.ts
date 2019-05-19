@@ -1,9 +1,9 @@
-export enum Notif {
-    Notif1 = "Excercice a faire",
-    Notif2 = "Convocation parentale a l'ecole",
-    Notif3 = "Sortie scolaire",
-    Notif4 = "Evenemts organise par l'ecole",
-    Notif5 = "Preparation Examen",
-    Notif6 = "Frais a payer",
-    NotifN = "Autres...",
+export enum NOTIF {
+    NOTIF1 = "Excercice a faire",
+    NOTIF2 = "Convocation parentale a l'ecole",
+    NOTIF3 = "Sortie scolaire",
+    NOTIF4 = "Evenemts organise par l'ecole",
+    NOTIF5 = "Preparation Examen",
+    NOTIF6 = "Frais a payer",
+    NOTIFN = "Autres...",
 }
