@@ -26,7 +26,7 @@ export class TeacherManageGroupsComponent implements OnInit {
   constructor(private groupService: GroupService, private lessonService: LessonService) { }
 
   ngOnInit() {
-    this.groupService.findAll().subscribe(groups =>{ this.groups = groups; console.log(this.groups)}, err => console.log(err));
+    this.groupService.findAll().then(groups => this.groups = groups).catch(err => console.log(err));
     this.lessonService.findAll(this.teacher.id).then(lessons => this.lessonsAssignedToTeacher = lessons);
   }
 

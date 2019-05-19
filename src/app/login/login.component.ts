@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
-import * as jwt_decode from "jwt-decode";
+
 
 import { AuthService } from '../auth/auth.service';
 import { TokenStorageService } from '../auth/token-storage.service';
 import { AuthLoginInfo } from '../auth/login-info';
 import { Router } from '@angular/router';
+import { JwtResponse } from 'app/auth/jwt-response';
 
 @Component({
   selector: 'app-login',
@@ -16,15 +17,16 @@ export class LoginComponent implements OnInit {
   form: any = {};
   isLoggedIn = false;
   isLoginFailed = false;
-  errorMessage = ''; 
+  errorMessage = '';
   roles: string[] = [];
   private loginInfo: AuthLoginInfo;
 
   isLogging: boolean = false;
 
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private router: Router) {
-    if (this.tokenStorage.getToken()) {
-      this.router.navigate(['marks']);
+    this.isLoggedIn = this.tokenStorage.getIsLoggedUser();
+    if (this.isLoggedIn) {
+      this.router.navigate(['students']);
     } else {
       this.router.navigate(['auth', 'login']);
     }
@@ -38,61 +40,38 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form);
-
     this.isLogging = true;
-
     this.loginInfo = new AuthLoginInfo(
       this.form.username,
       this.form.password);
 
-    this.authService.attemptAuth(this.loginInfo).subscribe(
-      data => {
-
-        let tokenInfo = this.getDecodedAccessToken(data.accessToken); // decode token
-        // console.log(data);
-        this.tokenStorage.saveToken(data.accessToken);
-        this.tokenStorage.saveUsername(tokenInfo.name);
-        this.tokenStorage.saveAuthorities(tokenInfo.authorities);
-        this.tokenStorage.saveId(tokenInfo.user.id);
-        this.tokenStorage.saveGender(tokenInfo.user.gender);
-        this.tokenStorage.saveUserPhoto(tokenInfo.user.photo);
-
+    this.authService.attemptAuth(this.loginInfo).then(
+      (jwtResponseInfo: JwtResponse) => {
         this.isLogging = false;
-
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getAuthorities();
-        this.reloadPage();  
-        //this.router.navigate(['marks']);
-      },
-      error => {
-        console.log(error);
-        this.errorMessage = error.error.message;
+        this.reloadPage();
+      })
+      .catch(err => {
+        this.errorMessage = err.error.message;
         this.isLoginFailed = true;
         this.isLogging = false;
-      }
-    );
+      });
   }
 
   logout() {
     window.location.reload();
     this.tokenStorage.signOut();
+    this.LogoutUserInAuthService();
+  }
+
+  private LogoutUserInAuthService(): void {
+    this.authService.saveLoggedUser(null);
+    this.authService.saveIsLoggedUser(false);
   }
 
   reloadPage() {
     window.location.reload();
-    
-  }
-
-  // Decode JWT token
-  private getDecodedAccessToken(token: string): any {
-    try{
-        return jwt_decode(token);
-    }
-    catch(Error){
-      console.log(Error.message);
-        return null;
-    }
   }
 }

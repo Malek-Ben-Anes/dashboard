@@ -1,7 +1,7 @@
+import * as _ from 'lodash';
 import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from 'app/auth/token-storage.service';
 import { Router } from '@angular/router';
-import { AdminLayoutRoutes } from 'app/layouts/admin-layout/admin-layout.routing';
 
 @Component({
   selector: 'app-header',
@@ -18,19 +18,19 @@ export class HeaderComponent implements OnInit {
   navBar = [];
   // To be displayed in navbar
   role: string;
+  newNotifications: number;
 
 AdminNavBar = [
   {'router': '/students', 'label': 'Eleves' },
   {'router': '/teachers', 'label': 'Enseignants' },
   {'router': '/subjects', 'label': 'Programme' },
-{'router': '/groups', 'label': 'Classes' },
+  {'router': '/groups', 'label': 'Classes' }];
 // {'router': '/lessons', 'label': 'Lessons' },
-{'router': '/marks', 'label': 'Notes' }];
+// {'router': '/marks', 'label': 'Notes' }
 // {'router': '/site-vitrine', 'label': 'Page Vitrine' }
 
 teacherNavBar = [{'router': '/marks', 'label': 'Marks' },
-{'router': '/lessons', 'label': 'Lessons' },
-{'router': '/notifications', 'label': 'Notifications' }];
+{'router': '/lessons', 'label': 'Lessons' }];
 
 studentNavBar = [{'router': '/marks', 'label': 'Marks' },
 {'router': '/bulletin', 'label': 'Bulletin' }];
@@ -40,11 +40,15 @@ studentNavBar = [{'router': '/marks', 'label': 'Marks' },
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {
-      this.roles = this.tokenStorage.getAuthorities();
       this.id = this.tokenStorage.getId();
       this.username = this.tokenStorage.getUsername();
       this.photo = this.tokenStorage.getUserPhoto();
-      console.log(this.roles);
+      const userNotif: string = this.tokenStorage.getUserNewNotifications();
+      this.newNotifications = _.isNil(userNotif) || _.isNaN(userNotif) ? 0 : parseInt(userNotif);
+      console.log(this.newNotifications, userNotif);      
+      this.roles = this.tokenStorage.getAuthorities();
+
+
       this.roles.every(role => {
         if (role === 'ROLE_ADMIN') {
           this.authority = 'Admin';

@@ -1,0 +1,92 @@
+<div class="col-md-12">
+  <div class="row">
+    <button (click)="onToggleButton('TEACHER')" class="btn margin-30"
+      [ngClass]="selected !== 'TEACHER' ? 'btn-light' : 'btn-info'">Enseignants</button>
+    <button (click)="onToggleButton('GROUP')" class="btn margin-30"
+      [ngClass]="selected !== 'GROUP' ? 'btn-light' : 'btn-info'">Groupes</button>
+    <button (click)="onToggleButton('STUDENT')" class="btn margin-30"
+      [ngClass]="selected !== 'STUDENT' ? 'btn-light' : 'btn-info'">Eleves</button>
+    <!-- <mat-form-field class="example-full-width">
+     <mat-select matInput placeholder="Group" formControlName="group">
+        <mat-option *ngFor="let grp of groups" [value]="grp">
+          <mat-option [value]="null" [disabled]="true">Select Category</mat-option> -->
+    <!-- <mat-option *ngFor="let grp of groups" [value]="grp" [selected]="grp.name == student.group.name"> 
+          {{ grp.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>-->
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="notifForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-5">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Titre" formControlName="title" required>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Notifier" formControlName="notifier" disabled>
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">
+              <mat-form-field class="example-full-width">
+                <mat-select matInput placeholder="Type" formControlName="type" required>
+                  <mat-option *ngFor="let notif of NOTIFS" [value]="notif" required>{{notif}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-10">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Contenu" type="text" formControlName="content" required>
+              </mat-form-field>
+            </div>
+            <div class="col-md-2">
+              <button mat-raised-button type="submit" class="btn btn-warning pull-right"
+                (click)="onSubmit()">Notifier</button>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card card-profile">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div *ngIf="selected == 'GROUP'; else teacherList">
+          <mat-selection-list #selections>
+            <mat-list-option *ngFor="let group of allGroups" selected>
+              {{group.name}}
+            </mat-list-option>
+          </mat-selection-list>
+        </div>
+        <ng-template #teacherList>
+          <div class="col-md-12">
+            <mat-selection-list #teachers>
+              <mat-list-option *ngFor="let teacher of allTeachers" selected>
+                {{teacher.name}}
+              </mat-list-option>
+            </mat-selection-list>
+          </div>
+        </ng-template>
+        <p>
+          Options selected: {{selections && selections.selectedOptions.selected.length}}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- https://angular.io/api/common/NgSwitch 
+https://codecraft.tv/courses/angular/built-in-directives/ngif-and-ngswitch/
+-->

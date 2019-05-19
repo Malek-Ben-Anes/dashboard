@@ -45,9 +45,11 @@ export class FilterComponent implements OnInit {
 
   private getGroupsByRole() {
     if (this.authority = 'admin') {
-      this.groupService.findAll().subscribe(groups => { this.allGroups = groups; console.log(this.allGroups); }, err => console.log(err));
+      this.groupService.findAll().then(groups => this.allGroups = groups)
+      .then(err => console.log(err));
     } else if (this.authority = 'pm') {
-      this.groupService.findAll(this.authId).subscribe(groups => this.allGroups = groups, err => console.log(err));
+      this.groupService.findAll(this.authId).then(groups => this.allGroups = groups)
+      .then(err => console.log(err));
     }
   }
 
@@ -55,13 +57,6 @@ export class FilterComponent implements OnInit {
     this.level = this.markForm.get('level').value;
     const group: Group = this.markForm.get('group').value;
     this.groupSelected.emit(group);
-
-    console.log(this.groupSelected);
-
-
-    // to call service by authenticated user role 
-
-    //this.studentService.getGroupStudents(this.selectedGroup.id).subscribe(students => this.students = students);
   }
 
   private getAuthority() {

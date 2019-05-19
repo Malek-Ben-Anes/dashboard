@@ -22,22 +22,14 @@ export class TeacherListComponent implements OnInit {
   teachers: Teacher[] = [];
   teachersSubscription: Subscription;
 
-  constructor(private teachersService: TeacherService, private router: Router, private http: HttpClient) { }
+  constructor(private teachersService: TeacherService) { }
 
   ngOnInit() {
-    this.getTeachers();
+    this.findAllTeachers();
   }
   
-  getTeachers(): void {
-    this.teachersService.getTeachers()
-        .subscribe(teachers => this.teachers = teachers, 
-          (err: HttpErrorResponse) => {
-              if (err.error instanceof Error) {
-                console.log("Client-side error occured.");
-              } else {
-                console.log("Server-side error occured.");
-              }
-            }
-          );
+  findAllTeachers(): void {
+    this.teachersService.findAll().then(teachers => this.teachers = teachers)
+    .catch(err => console.log(err));
   }
 }

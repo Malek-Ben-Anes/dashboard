@@ -17,13 +17,15 @@ export class GroupService {
 
   constructor(private http: HttpClient) {}
 
-  findAll(teacherId?: string): Observable<Group[]> {
+  findAll(teacherId?: string): Promise<Group[]> {
+    let httpCall: Observable<Group[]>;
     if (teacherId !== undefined) {
       const params = new HttpParams().set('teacherId', teacherId);
-      return this.http.get<Group[]>(GROUP_URL, { params: params });
+      httpCall = this.http.get<Group[]>(GROUP_URL, { params: params });
     } else {
-      return this.http.get<Group[]>(GROUP_URL);
+      httpCall =  this.http.get<Group[]>(GROUP_URL);
     }
+    return new Promise((resolve, reject) => httpCall.subscribe( group =>  resolve(group), err => reject(err)));
   }
 
   find(groupId: string): Promise<Group> {

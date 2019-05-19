@@ -1,10 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Group } from 'app/models/Group';
 import { Student } from 'app/models/Student';
-import { TokenStorageService } from 'app/auth/token-storage.service';
-import { MarkService } from 'app/services/mark.service';
-import { StudentService } from 'app/services/student.service';
-import { Mark } from 'app/models/Mark';
 
 @Component({
   selector: 'app-group-marks',

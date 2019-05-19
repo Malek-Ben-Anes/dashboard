@@ -17,6 +17,7 @@ export class User {
     role: string[];
     registerUrl: string;
     discriminatorValue: string;
+    newNotifications: number;
 
     constructor(_id: string, _firstname?: string, _lastname?: string, _gender?: Gender,
         _email?: string, _photo?: string, _birthDate?: Date, _phone?: string) {

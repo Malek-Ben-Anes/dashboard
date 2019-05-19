@@ -37,7 +37,7 @@ export class StudentProfileComponent implements OnInit {
   studentForm: FormGroup;
   groups: Group[] = [];
 
-  constructor(private formBuilder: FormBuilder, private studentService: StudentService, private groupService: GroupService) { }
+  constructor(private formBuilder: FormBuilder, private groupService: GroupService) { }
 
   ngOnInit() {
     this.initForm();
@@ -50,9 +50,9 @@ export class StudentProfileComponent implements OnInit {
   }
 
   private getGroup() {
-    this.groupService.findAll().subscribe(groups => {this.groups = groups;
+    this.groupService.findAll().then(groups => {this.groups = groups;
       this.updateForm(this.student);
-    });
+    }).then(err => console.log(err));
   }
 
   private initForm() {

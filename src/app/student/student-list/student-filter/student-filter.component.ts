@@ -33,7 +33,7 @@ export class StudentFilterComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    this.groupService.findAll().subscribe(groups => this.groups = groups);
+    this.groupService.findAll().then(groups => this.groups = groups).catch(err => console.log(err));
   }
 
   initForm() {

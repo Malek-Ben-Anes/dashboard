@@ -16,8 +16,9 @@ export class TeacherService {
 
   constructor(private http: HttpClient) {}
 
-  getTeachers(): Observable<Teacher[]> {
-    return this.http.get<Teacher[]>(TEACHER_URL);
+  findAll(): Promise<Teacher[]> {
+    return new Promise((resolve, reject) => this.http.get<Teacher[]>(TEACHER_URL)
+          .subscribe( group =>  resolve(group), err => reject(err)));
   }
 
   findTeacherById(id: string): Observable<Teacher>  {
@@ -58,23 +59,7 @@ export class TeacherService {
 
 
   updateTeacher(teacher: Teacher) : Observable<Teacher>  {
-
     return this.http.put<Teacher>(TEACHER_URL  + '/' + teacher.id, teacher);
-    // const req = this.http.put<Teacher>(TEACHER_URL, teacher).subscribe( (teacherUpdated: Teacher) => {
-    //   let singleTeacher = this.teachers.find((el) => {
-    //     return el.id == teacherUpdated.id
-    // })
-    //   singleTeacher = teacherUpdated;
-    //   console.log(singleTeacher);
-    //   this.emitTeachers();
-    // }, (err: HttpErrorResponse) => {
-    //   if (err.error instanceof Error) {
-    //     console.log("Client-side error occured.");
-    //   } else {
-    //     console.log("Server-side error occured.");
-    //   }
-    // }
-    // )
   }
 
   removeTeacher(teacher: Teacher) {

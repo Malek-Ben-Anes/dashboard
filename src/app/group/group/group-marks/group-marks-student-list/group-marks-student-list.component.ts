@@ -21,6 +21,5 @@ export class GroupMarksStudentListComponent implements OnInit {
 
   onDetailMarks(student: Student): void {
     this.studentSelected.emit(student);
-    console.log(student);
   }
 }

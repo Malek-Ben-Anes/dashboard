@@ -26,6 +26,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { BulletinComponent } from './student/student/bulletin/bulletin.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SubjectComponent } from './subject/subject.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 const routes: Routes = [
     {
@@ -122,40 +123,17 @@ const routes: Routes = [
         component: MessagesComponent
     },
     {
+        path: 'notifications',
+        component: NotificationsComponent
+    },
+    {
         path: 'site-vitrine',
         component: LandingPageComponent
     },
     {
         path: '',
         component: HomeComponent
-    },
-
-
-    // {
-    //     path: 'user-profile',
-    //     component: UserProfileComponent
-    // },
-    /*{
-        path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full',
-    },*/
-     
-    //{ path: 'dashboard',      component: DashboardComponent },
-        /*{
-        path: '',
-        redirectTo: 'home',
-        pathMatch: 'full'
-    },
-    
-     { path: 'dashboard',      component: DashboardComponent },
-     { path: 'user-profile/:id',   component: UserProfileComponent },*/
-    // { path: 'table-list',     component: TableListComponent },
-    // { path: 'typography',     component: TypographyComponent },
-    // { path: 'icons',          component: IconsComponent },
-    // { path: 'maps',           component: MapsComponent },
-    // { path: 'notifications',  component: NotificationsComponent },
-    // { path: 'upgrade',        component: UpgradeComponent },
+    }
 ];
 
 @NgModule({
@@ -168,3 +146,31 @@ const routes: Routes = [
     ],
 })
 export class AppRoutingModule { }
+
+
+
+
+    /*{
+        path: 'user-profile',
+        component: UserProfileComponent
+    },
+    {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full',
+    },
+     
+    { path: 'dashboard',      component: DashboardComponent },
+        {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
+    },
+     { path: 'dashboard',      component: DashboardComponent },
+     { path: 'user-profile/:id',   component: UserProfileComponent },
+    { path: 'table-list',     component: TableListComponent },
+    { path: 'typography',     component: TypographyComponent },
+    { path: 'icons',          component: IconsComponent },
+    { path: 'maps',           component: MapsComponent },
+    { path: 'notifications',  component: NotificationsComponent },
+    { path: 'upgrade',        component: UpgradeComponent },*/

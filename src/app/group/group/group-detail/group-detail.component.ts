@@ -47,7 +47,6 @@ export class GroupDetailComponent implements OnInit, OnChanges {
 
   onSubmit() {
     this.getSubmitedData();
-    console.log(this.group);
     if (this.group.id == null) {
       this.save(this.group);
     } else {

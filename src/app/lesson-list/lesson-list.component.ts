@@ -54,6 +54,11 @@ export class LessonListComponent implements OnInit {
     this.initData();
   }
 
+  onSubmit() {
+    this.extractFormData();
+    this.createLesson(this.newLesson);
+  }
+
   initForm() {
     this.lessonForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -76,30 +81,16 @@ export class LessonListComponent implements OnInit {
     this.getLessons();
     this.subjectService.findAll().subscribe(subjects => this.subjects = subjects,
       err => this.errorHandler(err));
-    this.teacherService.getTeachers().subscribe(teachers => this.teachers = teachers,
-      err => this.errorHandler(err));
-    this.groupService.findAll().subscribe(groups => this.groups = groups,
-      err => this.errorHandler(err));
+    this.teacherService.findAll().then(teachers => this.teachers = teachers)
+      .catch(err => this.errorHandler(err));
+    this.groupService.findAll().then(groups => this.groups = groups)
+      .catch(err => this.errorHandler(err));
   }
 
 
 
-  onSubmit() {
-    this.extractFormData();
-    console.log(this.newLesson);
-    this.createLesson(this.newLesson);
-    // if (this.newLesson.id !== undefined) {
-    //   this.updateLesson(this.newLesson);
-    // }
-    // else {
-    // }
-  }
-  private updateLesson(lessonRequest: Lesson): void {
-    console.log(lessonRequest);
-    this.lessonService.updateLesson(lessonRequest)
-      .subscribe(lesson => { this.newLesson = lesson; console.log("lesson updated"); this.getLessons(); },
-        err => this.errorHandler(err));
-  }
+
+
 
   private createLesson(lessonRequest: Lesson): void {
     console.log(lessonRequest);

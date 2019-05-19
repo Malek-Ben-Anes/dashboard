@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { User, Gender } from 'app/models/User';
 
+const IS_LOGGED_USER_KEY = 'IsLoggedUser';
 const TOKEN_KEY = 'AuthToken';
 const ID_KEY = 'AuthId';
 const USERNAME_KEY = 'AuthUsername';
 const AUTHORITIES_KEY = 'AuthAuthorities';
 const GENDER_KEY = 'AuthGender';
 const PHOTO_KEY = 'AuthPhoto';
+const NOTIFICATION_KEY = 'NewNotifications';
+
+const TRUE = 'true';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +21,15 @@ export class TokenStorageService {
 
   signOut() {
     window.sessionStorage.clear();
+  }
+
+  public saveIsLoggedUser(isLoggedUser: boolean) {
+    window.sessionStorage.removeItem(IS_LOGGED_USER_KEY);
+    window.sessionStorage.setItem(IS_LOGGED_USER_KEY, String(isLoggedUser));
+  }
+
+  public getIsLoggedUser(): boolean {
+    return sessionStorage.getItem(IS_LOGGED_USER_KEY) === TRUE;
   }
 
   public saveToken(token: string) {
@@ -62,6 +75,15 @@ export class TokenStorageService {
 
   public getUserPhoto(): string {
     return sessionStorage.getItem(PHOTO_KEY);
+  }
+
+  public saveUserNewNotifications(newNotifications: string) {
+    window.sessionStorage.removeItem(PHOTO_KEY);
+    window.sessionStorage.setItem(NOTIFICATION_KEY, newNotifications);
+  }
+
+  public getUserNewNotifications(): string {
+    return sessionStorage.getItem(NOTIFICATION_KEY);
   }
 
   public saveAuthorities(authorities: string[]) {
