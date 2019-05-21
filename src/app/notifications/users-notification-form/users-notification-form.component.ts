@@ -6,7 +6,7 @@ import { Student } from 'app/models/Student';
 import { GroupService } from 'app/services/group.service';
 import { StudentService } from 'app/services/student.service';
 import { TeacherService } from 'app/services/teacher.service';
-import { NOTIF } from 'app/models/NOTIF';
+import { Notif } from 'app/models/Notif';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Notification } from 'app/models/Notification';
 import { TokenStorageService } from 'app/auth/token-storage.service';
@@ -23,7 +23,7 @@ export class UsersNotificationFormComponent implements OnInit {
 
   @Input('notifications') notifications: Notification[];
 
-  NOTIFS = Object.keys(NOTIF);
+  NOTIFS = Object.keys(Notif);
   selected: string = 'TEACHER';
   notifForm: FormGroup;
 
