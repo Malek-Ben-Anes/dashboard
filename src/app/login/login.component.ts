@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
-
-
-import { AuthService } from '../auth/auth.service';
-import { TokenStorageService } from '../auth/token-storage.service';
-import { AuthLoginInfo } from '../auth/login-info';
 import { Router } from '@angular/router';
-import { JwtResponse } from 'app/auth/jwt-response';
+
+import { AuthService } from 'app/services/auth/auth.service';
+import { TokenStorageService } from 'app/services/auth/token-storage.service';
+import { AuthLoginInfo } from 'app/services/auth/login-info';
+import { JwtResponse } from 'app/services/auth/jwt-response';
 
 @Component({
   selector: 'app-login',

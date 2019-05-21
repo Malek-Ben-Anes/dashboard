@@ -2,10 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GroupService } from 'app/services/group.service';
 import { Group } from 'app/models/Group';
-import { Student } from 'app/models/Student';
 import { Level } from 'app/models/Level';
 import { StudentService } from 'app/services/student.service';
-import { TokenStorageService } from 'app/auth/token-storage.service';
+import { TokenStorageService } from 'app/services/auth/token-storage.service';
 
 
 @Component({

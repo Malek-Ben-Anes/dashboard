@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import { Component, OnInit } from '@angular/core';
-import { TokenStorageService } from 'app/auth/token-storage.service';
+import { TokenStorageService } from 'app/services/auth/token-storage.service';
 import { Router } from '@angular/router';
 
 @Component({

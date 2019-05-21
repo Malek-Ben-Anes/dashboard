@@ -112,6 +112,7 @@ import { GroupMarksStudentDetailComponent } from './group/group/group-marks/grou
 import { GroupMarksFormComponent } from './group/group/group-marks/group-marks-student-detail/group-marks-form/group-marks-form.component';
 import { NotifcationListComponent } from './notifications/notifcation-list/notifcation-list.component';
 import { UsersNotificationFormComponent } from './notifications/users-notification-form/users-notification-form.component';
+import { DialogContentExampleDialogComponent } from './commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
 
 @NgModule({
   imports: [
@@ -201,11 +202,13 @@ import { UsersNotificationFormComponent } from './notifications/users-notificati
     GroupMarksFormComponent,
     NotificationsComponent,
     NotifcationListComponent,
-    UsersNotificationFormComponent
+    UsersNotificationFormComponent,
+    DialogContentExampleDialogComponent
   ],
   exports: [],
   entryComponents: [
-    LessonTimeTableComponent
+    LessonTimeTableComponent,
+    DialogContentExampleDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

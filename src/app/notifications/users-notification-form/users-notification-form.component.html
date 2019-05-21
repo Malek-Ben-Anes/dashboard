@@ -6,6 +6,7 @@
       [ngClass]="selected !== 'GROUP' ? 'btn-light' : 'btn-info'">Groupes</button>
     <button (click)="onToggleButton('STUDENT')" class="btn margin-30"
       [ngClass]="selected !== 'STUDENT' ? 'btn-light' : 'btn-info'">Eleves</button>
+        <div class="clearfix"></div>
     <!-- <mat-form-field class="example-full-width">
      <mat-select matInput placeholder="Group" formControlName="group">
         <mat-option *ngFor="let grp of groups" [value]="grp">
@@ -15,14 +16,18 @@
         </mat-option>
       </mat-select>
     </mat-form-field>-->
+
   </div>
 </div>
+<div class="row">    <button mat-button (click)="openDialog()">Open dialog</button>
+  <button mat-button tabindex="-1">Not Tabbable</button>
 
+</div>
 <div class="row">
   <div class="col-md-12">
     <div class="card">
       <div class="card-body">
-        <form [formGroup]="notifForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="notifForm">
           <div class="row">
             <div class="col-md-5">
               <mat-form-field class="example-full-width">
@@ -47,7 +52,9 @@
               </mat-form-field>
             </div>
             <div class="col-md-2">
-              <button mat-raised-button type="submit" class="btn btn-warning pull-right">Notifier</button>
+              <button mat-raised-button type="submit" (click)="onSubmit()" class="btn btn-warning pull-right">Notifier</button>
+              <button mat-button type="button" (click)="openDialog()" class="btn btn-info pull-right">Time
+                Table</button>
               <div class="clearfix"></div>
             </div>
           </div>

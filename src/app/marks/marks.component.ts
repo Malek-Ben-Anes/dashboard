@@ -5,7 +5,7 @@ import { Student } from 'app/models/Student';
 import { Mark } from 'app/models/Mark';
 import { StudentService } from 'app/services/student.service';
 
-import { TokenStorageService } from 'app/auth/token-storage.service';
+import { TokenStorageService } from 'app/services/auth/token-storage.service';
 
 @Component({
   selector: 'app-marks',

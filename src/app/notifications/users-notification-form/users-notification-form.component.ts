@@ -1,5 +1,9 @@
-import * as _ from 'lodash';
 import { Component, OnInit, Input } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material';
+
+import * as _ from 'lodash';
+
 import { Teacher } from 'app/models/Teacher';
 import { Group } from 'app/models/Group';
 import { Student } from 'app/models/Student';
@@ -7,12 +11,11 @@ import { GroupService } from 'app/services/group.service';
 import { StudentService } from 'app/services/student.service';
 import { TeacherService } from 'app/services/teacher.service';
 import { NOTIF } from 'app/models/NOTIF';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Notification } from 'app/models/Notification';
-import { TokenStorageService } from 'app/auth/token-storage.service';
 import { NotificationService } from 'app/services/notification.service';
-import { AuthService } from 'app/auth/auth.service';
+import { AuthService } from 'app/services/auth/auth.service';
 import { User } from 'app/models/User';
+import { DialogContentExampleDialogComponent } from 'app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
 
 @Component({
   selector: 'app-users-notification-form',
@@ -34,7 +37,7 @@ export class UsersNotificationFormComponent implements OnInit {
   StudentsOfSelectedGroup: Student[];
   selectedOptions: Teacher[] | Group[] | Student[];
 
-  constructor(private formBuilder: FormBuilder, private tokenStorage: TokenStorageService, private authService: AuthService, private notificationService: NotificationService,
+  constructor(public dialog: MatDialog, private formBuilder: FormBuilder, private authService: AuthService, private notificationService: NotificationService,
     private teacherService: TeacherService, private groupService: GroupService, private studentService: StudentService) { }
 
   ngOnInit() {
@@ -52,6 +55,30 @@ export class UsersNotificationFormComponent implements OnInit {
     } else if (this.selected == 'GROUP') {
       _.map(this.selectedOptions, (selectedOption: Group) => this.executeQuery(selectedOption));
     } 
+  }
+
+  /*openDialog() {
+    const dialogRef = this.dialog.open(DialogContentExampleDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+
+    openDialog() {
+    const dialogRef = this.dialog.open(DialogContentExampleDialog);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+  }*/
+
+  openDialog() {
+    this.dialog.open(DialogContentExampleDialogComponent, {
+      data: {
+        animal: 'panda'
+      }
+    });
   }
 
   onToggleButton(choice: string) {

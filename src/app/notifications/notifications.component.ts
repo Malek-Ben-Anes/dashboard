@@ -3,9 +3,9 @@ import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { NotificationService } from 'app/services/notification.service';
 import { Notification } from 'app/models/Notification';
-import { AuthService } from 'app/auth/auth.service';
-import { TokenStorageService } from 'app/auth/token-storage.service';
-declare var $: any;
+import { AuthService } from 'app/services/auth/auth.service';
+import { User } from 'app/models/User';
+
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.component.html',
@@ -16,23 +16,32 @@ export class NotificationsComponent implements OnInit {
   TABS = [{ 'NOTIFICATIONS_LIST': 0, 'label': 'Notifications' }, { 'NOTIFY_USERS': 1, 'label': 'Notifier utilisateurs' }];
   selected = new FormControl(0);
 
-  loggedUSerId: string;
+  loggedUser: User;
   newNotifications: number;
   notifications: Notification[];
 
-  constructor(private tokenStorage: TokenStorageService, private notificationService: NotificationService) { }
+  constructor(private authService: AuthService, private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.RestoreSomeDate();
-    this.notificationService.find(this.loggedUSerId)
-        .then(notifications => { this.notifications = notifications; console.log(this.notifications); })
-        .catch(err => console.log(err));
+
   }
 
   private RestoreSomeDate() {
-    this.loggedUSerId = this.tokenStorage.getId();
-    const userNotif: string = this.tokenStorage.getUserNewNotifications();
-    this.newNotifications = _.isNil(userNotif) || _.isNaN(userNotif) ? 0 : parseInt(userNotif);
+    let userNotif: number;
+    this.authService.getLoggedUser()
+                    .then((user: User) => 
+                    { this.loggedUser = user;
+                      userNotif = user.newNotifications;
+                      this.retrieveLoggedUserNotifications(user.id);
+                    });
+    this.newNotifications = _.isNil(userNotif) || _.isNaN(userNotif) ? 0 : userNotif;
+  }
+
+  retrieveLoggedUserNotifications (userId: string) {
+    this.notificationService.find(userId)
+        .then(notifications => this.notifications = notifications)
+        .catch(err => console.log(err));
   }
 }
 

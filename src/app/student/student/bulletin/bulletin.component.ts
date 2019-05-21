@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import { TokenStorageService } from 'app/auth/token-storage.service';
+import { TokenStorageService } from 'app/services/auth/token-storage.service';
 import { HttpResponse } from '@angular/common/http';
 import { Student } from 'app/models/Student';
 import { Trimester } from 'app/models/Trimester';
