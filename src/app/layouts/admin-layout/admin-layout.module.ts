@@ -38,7 +38,7 @@ import {
     TypographyComponent,
     IconsComponent,
     // MapsComponent,
-    NotificationsComponent,
+    // NotificationsComponent,
     UpgradeComponent,
   ]
 })

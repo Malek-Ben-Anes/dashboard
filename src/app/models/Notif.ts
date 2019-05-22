@@ -1,4 +1,4 @@
-export enum NOTIF {
+export enum Notif {
     NOTIF1 = "Excercice a faire",
     NOTIF2 = "Convocation parentale a l'ecole",
     NOTIF3 = "Sortie scolaire",
