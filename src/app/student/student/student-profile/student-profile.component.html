@@ -65,14 +65,14 @@
                                         </mat-select>
                                         <!-- <mat-error *ngIf="animalControl.hasError('required')">Please choose an animal</mat-error>
                                         <mat-hint>{{animalControl.value?.sound}}</mat-hint>   -->
+                                                                                        <!-- <mat-option [value]="null" [disabled]="true">Select Category</mat-option> -->
+                                                <!-- <mat-option *ngFor="let grp of groups" [value]="grp" [selected]="grp.name == student.group.name"> -->
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
                                         <mat-select matInput placeholder="Group" formControlName="group">
                                             <mat-option *ngFor="let grp of groups" [value]="grp">
-                                                <!-- <mat-option [value]="null" [disabled]="true">Select Category</mat-option> -->
-                                                <!-- <mat-option *ngFor="let grp of groups" [value]="grp" [selected]="grp.name == student.group.name"> -->
                                                 {{ grp.name }}
                                             </mat-option>
                                         </mat-select>

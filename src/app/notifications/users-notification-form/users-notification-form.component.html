@@ -1,12 +1,20 @@
 <div class="col-md-12">
   <div class="row">
     <button (click)="onToggleButton('TEACHER')" class="btn margin-30"
-      [ngClass]="selected !== 'TEACHER' ? 'btn-light' : 'btn-info'">Enseignants</button>
+      [ngClass]="selected !== 'TEACHER' ? 'btn-outline-secondary' : 'btn-info'">Enseignants</button>
     <button (click)="onToggleButton('GROUP')" class="btn margin-30"
-      [ngClass]="selected !== 'GROUP' ? 'btn-light' : 'btn-info'">Groupes</button>
+      [ngClass]="selected !== 'GROUP' ? 'btn-outline-secondary' : 'btn-info'">Groupes</button>
     <button (click)="onToggleButton('STUDENT')" class="btn margin-30"
-      [ngClass]="selected !== 'STUDENT' ? 'btn-light' : 'btn-info'">Eleves</button>
-        <div class="clearfix"></div>
+      [ngClass]="selected !== 'STUDENT' ? 'btn-outline-secondary' : 'btn-info'">Eleves</button>
+
+    <mat-form-field class="example-full-width" *ngIf="selected === 'STUDENT'">
+      <mat-select matInput placeholder="group students" (selectionChange)="onSelectGroup($event.value)">
+        <mat-option *ngFor="let grp of allGroups" [value]="grp">
+          {{ grp.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="clearfix"></div>
     <!-- <mat-form-field class="example-full-width">
      <mat-select matInput placeholder="Group" formControlName="group">
         <mat-option *ngFor="let grp of groups" [value]="grp">
@@ -16,12 +24,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>-->
-
   </div>
-</div>
-<div class="row">    <button mat-button (click)="openDialog()">Open dialog</button>
-  <button mat-button tabindex="-1">Not Tabbable</button>
-
 </div>
 <div class="row">
   <div class="col-md-12">
@@ -52,9 +55,8 @@
               </mat-form-field>
             </div>
             <div class="col-md-2">
-              <button mat-raised-button type="submit" (click)="onSubmit()" class="btn btn-warning pull-right">Notifier</button>
-              <button mat-button type="button" (click)="openDialog()" class="btn btn-info pull-right">Time
-                Table</button>
+              <button mat-raised-button type="submit" (click)="openDialog()"
+                class="btn btn-warning pull-right">Notifier</button>
               <div class="clearfix"></div>
             </div>
           </div>
@@ -69,7 +71,7 @@
     <div class="row">
       <div class="col-md-12">
         <div *ngIf="selected == 'GROUP'; else teacherList">
-          <mat-selection-list #selections (selectionChange)="onSelection($event, selections.selectedOptions)">
+          <mat-selection-list #selections (selectionChange)="onSelectCheckBox($event, selections.selectedOptions)">
             <mat-list-option *ngFor="let group of allGroups" [value]="group" selected>
               {{group.name}}
             </mat-list-option>
@@ -78,9 +80,10 @@
             Options selected: {{selections && selections.selectedOptions.selected.length}}
           </p>
         </div>
-        <ng-template #teacherList>
+        <!-- <ng-template #teacherList> -->
+        <div *ngIf="selected == 'TEACHER'">
           <div class="col-md-12">
-            <mat-selection-list #selections (selectionChange)="onSelection($event, selections.selectedOptions)">
+            <mat-selection-list #selections (selectionChange)="onSelectCheckBox($event, selections.selectedOptions)">
               <mat-list-option *ngFor="let teacher of allTeachers" [value]="teacher" selected>
                 {{teacher.name}}
               </mat-list-option>
@@ -89,12 +92,26 @@
           <p>
             Elements selectionnes: {{selections && selections.selectedOptions.selected.length}}
           </p>
-        </ng-template>
+        </div>
+
+        <div *ngIf="selected == 'STUDENT'">
+          <div class="col-md-12">
+            <mat-selection-list #selections (selectionChange)="onSelectCheckBox($event, selections.selectedOptions)">
+              <mat-list-option *ngFor="let student of StudentsOfSelectedGroup" [value]="student" selected>
+                {{student.name}}
+              </mat-list-option>
+            </mat-selection-list>
+          </div>
+          <p>
+            Elements selectionnes: {{selections && selections.selectedOptions.selected.length}}
+          </p>
+        </div>
+
+
       </div>
     </div>
   </div>
 </div>
-
 
 <!-- https://angular.io/api/common/NgSwitch 
 https://codecraft.tv/courses/angular/built-in-directives/ngif-and-ngswitch/

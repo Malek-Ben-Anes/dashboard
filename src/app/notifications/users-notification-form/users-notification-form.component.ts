@@ -33,7 +33,6 @@ export class UsersNotificationFormComponent implements OnInit {
   loggedUser: User;
   allTeachers: Teacher[];
   allGroups: Group[];
-  allStudentsOfSelectedGroup: Student[];
   StudentsOfSelectedGroup: Student[];
   selectedOptions: Teacher[] | Group[] | Student[];
 
@@ -57,21 +56,12 @@ export class UsersNotificationFormComponent implements OnInit {
     } 
   }
 
-  /*openDialog() {
-    const dialogRef = this.dialog.open(DialogContentExampleDialogComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-
-    openDialog() {
-    const dialogRef = this.dialog.open(DialogContentExampleDialog);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+  private findStudentsByGroupId(groupId: string) {
+    this.studentService.findStudentsByGroupId(groupId)
+        .then(students => { this.StudentsOfSelectedGroup = students; console.log(students);
+        })
+        .catch(err => console.log(err));
   }
-  }*/
 
   openDialog() {
     this.dialog.open(DialogContentExampleDialogComponent, {
@@ -90,11 +80,17 @@ export class UsersNotificationFormComponent implements OnInit {
       this.selectedOptions = this.allGroups;
     } else {
       this.selected = 'STUDENT';
-      this.selectedOptions = this.allStudentsOfSelectedGroup;
     }
   }
 
-  onSelection(e, selectedOptions): void {
+  onSelectGroup(groupSelected: Group) {
+    if (this.selected = 'STUDENT') {
+      this.findStudentsByGroupId(groupSelected.id);
+      console.log(groupSelected);      
+    }  
+  }
+
+  onSelectCheckBox(e, selectedOptions): void {
     this.selectedOptions = _.map(selectedOptions.selected, selectedOption =>  selectedOption.value);
   }
 
@@ -156,3 +152,20 @@ export class UsersNotificationFormComponent implements OnInit {
     });
   }
 }
+
+
+  /*openDialog() {
+    const dialogRef = this.dialog.open(DialogContentExampleDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+
+    openDialog() {
+    const dialogRef = this.dialog.open(DialogContentExampleDialog);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+  }*/
