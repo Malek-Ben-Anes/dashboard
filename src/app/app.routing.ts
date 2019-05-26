@@ -22,10 +22,13 @@ import { BulletinComponent } from './student/student/bulletin/bulletin.component
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SubjectComponent } from './subject/subject.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { AuthGuardService } from './services/auth/auth-guard.service';
+import { Library } from './models/Library';
 
 const routes: Routes = [
     {
         path: 'home',
+        canActivate: [AuthGuardService],
         component: HomeComponent
     },
     {
@@ -50,81 +53,113 @@ const routes: Routes = [
     },
     {
         path: 'teachers',
-        component: TeacherListComponent
+        canActivate: [AuthGuardService],
+        component: TeacherListComponent,
+        data: {expectedRole: Library.ROLE_ADMIN} 
     },
     {
         path: 'teacher-profile/:id',
-        component: TeacherComponent
+        canActivate: [AuthGuardService],
+        component: TeacherComponent,
+        data: {expectedRole: Library.ROLE_ADMIN} 
     },
     {
         path: 'teacher-profile',
-        component: TeacherComponent
+        canActivate: [AuthGuardService],
+        component: TeacherComponent,
+        data: {expectedRole: Library.ROLE_ADMIN} 
     },
 
     {
         path: 'students',
-        component: StudentListComponent
+        canActivate: [AuthGuardService],
+        component: StudentListComponent,
+        data: {expectedRole: Library.ROLE_ADMIN} 
     },
     {
         path: 'student-profile/:id',
-        component: StudentComponent
+        canActivate: [AuthGuardService],
+        component: StudentComponent,
+        data: {expectedRole: Library.ROLE_ADMIN} 
     },
     {
         path: 'student-profile',
-        component: StudentComponent
+        canActivate: [AuthGuardService],
+        component: StudentComponent,
+        data: {expectedRole: Library.ROLE_ADMIN} 
     },
     {
         path: 'subjects',
-        component: SubjectComponent
+        canActivate: [AuthGuardService],
+        component: SubjectComponent,
+        data: {expectedRole: Library.ROLE_ADMIN} 
     },
     {
         path: 'groups',
-        component: GroupListComponent
+        canActivate: [AuthGuardService],
+        component: GroupListComponent,
+        data: {expectedRole: Library.ROLE_ADMIN} 
     },
     {
         path: 'group-detail',
-        component: GroupComponent
+        canActivate: [AuthGuardService],
+        component: GroupComponent,
+        data: {expectedRole: Library.ROLE_ADMIN} 
     },
     {
         path: 'group-detail/:id',
-        component: GroupComponent
+        canActivate: [AuthGuardService],
+        component: GroupComponent,
+        data: {expectedRole: Library.ROLE_ADMIN} 
     },
     {
         path: 'lessons',
-        component: LessonListComponent
+        canActivate: [AuthGuardService],
+        component: LessonListComponent,
+        data: {expectedRole: Library.ROLE_ADMIN} 
     },
     {
         path: 'lesson-detail',
-        component: LessonDetailComponent
+        canActivate: [AuthGuardService],
+        component: LessonDetailComponent,
+        data: {expectedRole: Library.ROLE_ADMIN} 
     },
     {
         path: 'lesson-detail/:id',
-        component: LessonDetailComponent
+        canActivate: [AuthGuardService],
+        component: LessonDetailComponent,
+        data: {expectedRole: Library.ROLE_ADMIN} 
     },
     {
         path: 'marks',
-        component: MarkComponent
+        canActivate: [AuthGuardService],
+        component: MarkComponent,
+        data: {expectedRole: Library.ROLE_ADMIN} 
     },
     {
         path: 'bulletin',
-        component: BulletinComponent
+        canActivate: [AuthGuardService],
+        component: BulletinComponent,
+        data: {expectedRole: Library.ROLE_ADMIN} 
     },
     {
         path: 'messages',
-        component: MessagesComponent
+        canActivate: [AuthGuardService],
+        component: MessagesComponent,
+        data: {expectedRole: Library.ROLE_ADMIN} 
     },
     {
         path: 'notifications',
+        canActivate: [AuthGuardService],
         component: NotificationsComponent
     },
     {
-        path: 'site-vitrine',
-        component: LandingPageComponent
-    },
-    {
         path: '',
+        canActivate: [AuthGuardService],
         component: HomeComponent
-    }
+    },
+    // { path: 'not-found', component: FourOhFourComponent },
+    { path: '**', redirectTo: 'not-found' }
 ];
 
 @NgModule({

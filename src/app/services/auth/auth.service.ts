@@ -24,6 +24,7 @@ export class AuthService {
 
   private isLoggedUser: boolean;
   private loggedUser: User;
+  private role: string[];
   private jwtResponse: JwtResponse;
 
   constructor(private http: HttpClient, private tokenStorage: TokenStorageService) { }
@@ -66,6 +67,18 @@ export class AuthService {
 
   public saveIsLoggedUser(isLoggedUser: boolean) {
     this.isLoggedUser = isLoggedUser;
+  }
+
+  public getUserRole(): string[] {
+    if (this.role) {
+      return this.role;
+    }
+    this.role = this.tokenStorage.getAuthorities();
+    return this.role;
+  }
+
+  public saveUserRole(role: string[]) {
+    this.role = role;
   }
 
   private saveLoggedUserIntoStorage(encodedJwtResponseAccessToken: any): void {
