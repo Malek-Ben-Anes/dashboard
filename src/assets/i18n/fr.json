@@ -1,0 +1,11 @@
+{
+    "header.students": "élèves",
+    "header.teachers": "Enseignants",
+    "header.program": "Programme",
+    "header.groups": "Classes",
+    "header.marks": "Notes",
+    "header.bulletins": "Bulletins",
+    "header.notifications": "Notifications",
+    "header.login": "se Connecter",
+    "header.logout": "Se deconnecter"
+}

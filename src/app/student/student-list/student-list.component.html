@@ -6,9 +6,9 @@
                     <div class="col-md-12">
                         <button mat-raised-button type="button" class="btn btn-warning pull-right"
                             routerLink="/student-profile">Add New Student</button>
-                        <button mat-raised-button type="button" class="btn btn-warning pull-right">
+                        <!-- <button mat-raised-button type="button" class="btn btn-warning pull-right">
                             <span class="material-icons">arrow_upward</span>
-                            Import File</button>
+                            Import File</button> -->
                     </div>
                 </div>
                 <app-student-filter [students]="students" (studentsFound)="refreshStudents($event)">

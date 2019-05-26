@@ -1,0 +1,11 @@
+{
+    "header.students": "الطلاب",
+    "header.teachers": "معلمون",
+    "header.program": "برنامج",
+    "header.groups": "فصول",
+    "header.marks": "ملاحظات",
+    "header.bulletins": "تقارير المدرسة",
+    "header.notifications": "Notifications",
+    "header.login": "Login",
+    "header.logout": "Logout"
+}

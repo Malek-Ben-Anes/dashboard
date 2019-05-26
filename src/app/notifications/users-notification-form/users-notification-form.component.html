@@ -70,7 +70,7 @@
   <div class="card-body">
     <div class="row">
       <div class="col-md-12">
-        <div *ngIf="selected == 'GROUP'; else teacherList">
+        <div *ngIf="selected == 'GROUP'">
           <mat-selection-list #selections (selectionChange)="onSelectCheckBox($event, selections.selectedOptions)">
             <mat-list-option *ngFor="let group of allGroups" [value]="group" selected>
               {{group.name}}
@@ -81,7 +81,7 @@
           </p>
         </div>
         <!-- <ng-template #teacherList> -->
-        <div *ngIf="selected == 'TEACHER'">
+        <div *ngIf="selected ==  'TEACHER'">
           <div class="col-md-12">
             <mat-selection-list #selections (selectionChange)="onSelectCheckBox($event, selections.selectedOptions)">
               <mat-list-option *ngFor="let teacher of allTeachers" [value]="teacher" selected>
@@ -93,7 +93,6 @@
             Elements selectionnes: {{selections && selections.selectedOptions.selected.length}}
           </p>
         </div>
-
         <div *ngIf="selected == 'STUDENT'">
           <div class="col-md-12">
             <mat-selection-list #selections (selectionChange)="onSelectCheckBox($event, selections.selectedOptions)">
@@ -106,8 +105,6 @@
             Elements selectionnes: {{selections && selections.selectedOptions.selected.length}}
           </p>
         </div>
-
-
       </div>
     </div>
   </div>

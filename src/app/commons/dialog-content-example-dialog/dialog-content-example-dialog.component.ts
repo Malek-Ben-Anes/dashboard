@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material';
-import { DialogData } from 'app/lesson-list/lesson-list.component';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-dialog-content-example-dialog',
@@ -10,11 +9,21 @@ import { DialogData } from 'app/lesson-list/lesson-list.component';
 export class DialogContentExampleDialogComponent implements OnInit {
 
   // https://blog.thoughtram.io/angular/2017/11/13/easy-dialogs-with-angular-material.html
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) { }
-  // constructor(public dialogRef: MdDialogRef<DialogContentExampleDialogComponent>) {}
+  constructor(
+    public dialogRef: MatDialogRef<DialogContentExampleDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+    }
 
   ngOnInit() {
   }
 
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+}
+
+export interface DialogData {
+  dialogTitle: string;
+  dialogMessage: string;
 }

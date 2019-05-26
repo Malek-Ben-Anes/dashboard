@@ -24,7 +24,7 @@ export class NotificationService {
       .subscribe(notification => resolve(notification), err => reject(err)));
   }
 
-  notifyGroup(notificationRequest: Notification[], groupId?: string): Promise<Notification[]> {
+  notifyGroup(notificationRequest: Notification, groupId?: string): Promise<Notification[]> {
     const GROUP_NOTIFICATION_URL = NOTIFICATION_URL + `${groupId}`;
     return new Promise((resolve, reject) => this.http.post<Notification[]>(GROUP_NOTIFICATION_URL, notificationRequest)
     .subscribe(notification => resolve(notification), err => reject(err)));

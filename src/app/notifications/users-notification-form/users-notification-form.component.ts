@@ -16,6 +16,7 @@ import { NotificationService } from 'app/services/notification.service';
 import { AuthService } from 'app/services/auth/auth.service';
 import { User } from 'app/models/User';
 import { DialogContentExampleDialogComponent } from 'app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
+import { Library } from 'app/models/Library';
 
 @Component({
   selector: 'app-users-notification-form',
@@ -25,9 +26,9 @@ import { DialogContentExampleDialogComponent } from 'app/commons/dialog-content-
 export class UsersNotificationFormComponent implements OnInit {
 
   @Input('notifications') notifications: Notification[];
-
+  public static Library: Library;
   NOTIFS = Object.keys(Notif);
-  selected: string = 'TEACHER';
+  selected: string = Library.TEACHER;
   notifForm: FormGroup;
 
   loggedUser: User;
@@ -41,94 +42,103 @@ export class UsersNotificationFormComponent implements OnInit {
 
   ngOnInit() {
     this.InitiateContext();
-    this.groupService.findAll().then(groups => this.allGroups = groups)
-      .then(groups => this.onToggleButton('GROUP')).catch(err => console.log(err));
+    this.groupService.findAll().then(groups => this.allGroups = groups).catch(err => console.log(err));
     this.teacherService.findAll().then(teachers => this.allTeachers = teachers)
-      .then(teachers => this.onToggleButton('TEACHER')).catch(err => console.log(err));
+      .then(teachers => this.onToggleButton(Library.TEACHER)).catch(err => console.log(err));
   }
 
-  onSubmit() {
-    console.log('submit');
-    if (this.selected == 'TEACHER') {
-      _.map(this.selectedOptions, (selectedOption: Teacher) => this.executeQuery(selectedOption));
-    } else if (this.selected == 'GROUP') {
-      _.map(this.selectedOptions, (selectedOption: Group) => this.executeQuery(selectedOption));
-    } 
+  onConfirmNotification() {
+    if (this.selected == Library.TEACHER || this.selected == Library.STUDENT) {
+      _.map(this.selectedOptions, (selectedOption: Teacher | Student) => this.executeQuery(selectedOption));
+    } else if (this.selected == Library.GROUP) {
+      console.log(this.selectedOptions);
+      _.map(this.selectedOptions, (selectedOption: Group) => this.executeQuerys(selectedOption));
+    }
   }
 
-  private findStudentsByGroupId(groupId: string) {
-    this.studentService.findStudentsByGroupId(groupId)
-        .then(students => { this.StudentsOfSelectedGroup = students; console.log(students);
-        })
-        .catch(err => console.log(err));
-  }
-
-  openDialog() {
-    this.dialog.open(DialogContentExampleDialogComponent, {
-      data: {
-        animal: 'panda'
+  openDialog(): void {
+    const selectedOptionNumber: number = this.selectedOptions.length;
+    const seletedChoice: string = this.selected.toLowerCase();
+    const dialogMessage = `Vous allez notifier ${selectedOptionNumber} ${seletedChoice}. s'il vous plaît, cliquez sur confirmer pour continuer?`;
+    const dialogTitle = "Confirmation d'envoi des notifications";
+    const dialogRef = this.dialog.open(DialogContentExampleDialogComponent, {
+      width: '450px',
+      height: '200px',
+      data: { dialogTitle: dialogTitle, dialogMessage: dialogMessage }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.onConfirmNotification();
       }
     });
   }
 
-  onToggleButton(choice: string) {
-    if (choice === 'TEACHER') {
-      this.selected = 'TEACHER';
+  onToggleButton(choice: string): void {
+    if (choice === Library.TEACHER) {
+      this.selected = Library.TEACHER;
       this.selectedOptions = this.allTeachers;
-    } else if (choice === 'GROUP') {
-      this.selected = 'GROUP';
+      return;
+    }
+    if (choice === Library.GROUP) {
+      this.selected = Library.GROUP;
       this.selectedOptions = this.allGroups;
-    } else {
-      this.selected = 'STUDENT';
+      return;
+    }
+    if (choice === Library.STUDENT) {
+      this.selected = Library.STUDENT;
+      return;
     }
   }
 
   onSelectGroup(groupSelected: Group) {
-    if (this.selected = 'STUDENT') {
+    if (this.selected = Library.STUDENT) {
       this.findStudentsByGroupId(groupSelected.id);
-      console.log(groupSelected);      
-    }  
-  }
-
-  onSelectCheckBox(e, selectedOptions): void {
-    this.selectedOptions = _.map(selectedOptions.selected, selectedOption =>  selectedOption.value);
-  }
-
-
-  private executeQuery(notified: User | Group): void {
-    if (notified instanceof User) {
-      const notification: Notification = this.prepareQuery(notified);
-      this.notificationService.notifyUser(notification).then(notification => console.log(notification))
-      .catch(err  => console.log(err));
-    } else if (notified instanceof Group) {
-      const notifications: Notification[] = this.prepareQuerys(this.loggedUser);
-      this.notificationService.notifyGroup(notifications, notified.id).then(notification => console.log(notification))
-      .catch(err  => console.log(err));
+      console.log(groupSelected);
     }
   }
 
-  private prepareQuery(user: User): Notification {
+  onSelectCheckBox(e, selectedOptions): void {
+    this.selectedOptions = _.map(selectedOptions.selected, selectedOption => selectedOption.value);
+  }
+
+  private findStudentsByGroupId(groupId: string) {
+    this.studentService.findStudentsByGroupId(groupId)
+      .then(students => {
+      this.StudentsOfSelectedGroup = students;
+      })
+      .catch(err => console.log(err));
+  }
+
+  private executeQuery(notified: Student | Teacher): void {
+      const notification: Notification = this.prepareQuery(notified);
+      this.notificationService.notifyUser(notification).then(notification => console.log(notification))
+        .catch(err => console.log(err));
+  }
+
+  private executeQuerys(notified: Group): void {
+      const notification: Notification = this.prepareQuerys();
+      this.notificationService.notifyGroup(notification, notified.id).then(notification => console.log(notification))
+        .catch(err => console.log(err));
+  }
+
+  private prepareQuery(notifiedUser?: User): Notification {
     const notification: Notification = new Notification();
-    // Extract data from Form Input fields
     notification.title = this.extractFieldData('title');
     notification.content = this.extractFieldData('content');
     notification.type = this.extractFieldData('type');
-    // Complete the notification object fields
     notification.notifier = this.loggedUser;
-    notification.notified = user;
+    notification.notified = notifiedUser;
     return notification;
   }
 
-  private prepareQuerys(user: User): Notification[] {
+  private prepareQuerys(group?: Group): Notification {
     const notification: Notification = new Notification();
-    // Extract data from Form Input fields
     notification.title = this.extractFieldData('title');
     notification.content = this.extractFieldData('content');
     notification.type = this.extractFieldData('type');
-    // Complete the notification object fields
     notification.notifier = this.loggedUser;
-    notification.notified = user;
-    return [notification];
+    notification.notified = this.loggedUser;
+    return notification;
   }
 
   private extractFieldData(property: string): any {
@@ -153,19 +163,18 @@ export class UsersNotificationFormComponent implements OnInit {
   }
 }
 
+/*openDialog() {
+  const dialogRef = this.dialog.open(DialogContentExampleDialogComponent);
 
-  /*openDialog() {
-    const dialogRef = this.dialog.open(DialogContentExampleDialogComponent);
+  dialogRef.afterClosed().subscribe(result => {
+    console.log(`Dialog result: ${result}`);
+  });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+  openDialog() {
+  const dialogRef = this.dialog.open(DialogContentExampleDialog);
 
-    openDialog() {
-    const dialogRef = this.dialog.open(DialogContentExampleDialog);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
-  }*/
+  dialogRef.afterClosed().subscribe(result => {
+    console.log(`Dialog result: ${result}`);
+  });
+}
+}*/
