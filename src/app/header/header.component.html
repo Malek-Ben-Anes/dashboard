@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
+  <div class="container container-fluid">
     <div class="navbar-header">
       <div class="logo">
-        <a routerLink="dashboard" class="simple-text">
+        <a href="index.html" class="simple-text">
           <div class="logo-img">
             <img src="/assets/img/plumedor-logo.png" alt="La plume-dor logo" />
           </div>
@@ -26,13 +26,13 @@
     <div *ngIf="authority != null">
       <ul class="nav navbar-nav horiz navbar-right" routerLinkActive="active">
         <li class="nav-item">
-        <a class="nav-link" (click)="switchLanguage('ar')">AR</a>
+          <a class="nav-link" (click)="switchLanguage('ar')">AR</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" (click)="switchLanguage('fr')">FR</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" (click)="switchLanguage('en')">EN</a>
+          <a class="nav-link" (click)="switchLanguage('en')">EN</a>
         </li>
         <li class="nav-item dropdown">
           <a class="dropdown-toggle nav-link background-white" data-toggle="dropdown">
@@ -50,11 +50,13 @@
         </li>
       </ul>
     </div>
-
-    <div *ngIf="!authority">
-      <ul class="nav navbar-nav horiz navbar-right" routerLinkActive="active">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="auth/login">{{'header.login' | translate}}</a>
+    <div class="main-navigation menu" *ngIf="!authority">
+      <ul class="nav navbar-nav horiz navbar-right main-navigation menu jet-menu">
+        <li class="nav-item"  *ngFor="let link of landingPageNavBar">
+          <a class="nav-link" [href]="link.href">{{link.label}}</a>
+        </li>
+        <li class="nav-item jet-current-menu-item">
+          <a class="nav-link jet-current-menu-item" routerLink="auth/login">Se connecter</a>
         </li>
       </ul>
     </div>

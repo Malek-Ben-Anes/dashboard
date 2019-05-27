@@ -19,7 +19,6 @@ import { LessonDetailComponent } from './lesson-list/lesson-detail/lesson-detail
 import { MarkComponent } from './marks/marks.component';
 import { MessagesComponent } from './messages/messages.component';
 import { BulletinComponent } from './student/student/bulletin/bulletin.component';
-import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SubjectComponent } from './subject/subject.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { AuthGuardService } from './services/auth/auth-guard.service';
@@ -40,12 +39,10 @@ const routes: Routes = [
         component: PmComponent
     },
     {
-        path: 'admin',
-        component: AdminComponent
-    },
-    {
         path: 'dashboard',
-        component: AdminComponent
+        canActivate: [AuthGuardService],
+        component: AdminComponent,
+        data: {expectedRole: Library.ROLE_ADMIN} 
     },
     {
         path: 'auth/login',

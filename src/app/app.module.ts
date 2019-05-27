@@ -174,7 +174,7 @@ import { DialogContentExampleDialogComponent } from './commons/dialog-content-ex
     NotificationsComponent,
     NotifcationListComponent,
     UsersNotificationFormComponent,
-    DialogContentExampleDialogComponent
+    DialogContentExampleDialogComponent,
   ],
   exports: [],
   entryComponents: [

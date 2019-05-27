@@ -33,6 +33,12 @@ export class HeaderComponent implements OnInit {
   studentNavBar = [{ 'router': '/marks', 'label': 'header.marks' },
   { 'router': '/bulletin', 'label': 'header.bulletins' }];
 
+  landingPageNavBar = [{ 'href': 'index.html', 'label': 'Accueil' },
+  { 'href': 'notre-ecole/index.html', 'label': 'Notre école' },
+  { 'href': 'actualites/index.html', 'label': 'Actualités' },
+  { 'href': 'clubs/index.html', 'label': 'Clubs' },
+  { 'href': 'contact/index.html', 'label': 'Contact' }];
+
   constructor(private tokenStorage: TokenStorageService, private router: Router, private translate: TranslateService) {
     // this language will be used as a fallback when a translation isn't found in the current language
     translate.setDefaultLang('fr');
