@@ -37,7 +37,7 @@
                                         <td>
                                             <div class="card-profile">
                                                 <div class="card-avatar">
-                                                    <a routerLink="/{{ 'teacher-profile/' + teacher.id }}">
+                                                    <a [routerLink]="'/app/teacher-profile/' + teacher.id">
                                                         <div
                                                             *ngIf="(teacher.photo != null); else defaultPhoto">
                                                             <img class="img profile-image"

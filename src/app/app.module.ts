@@ -83,6 +83,7 @@ import { GroupMarksFormComponent } from './group/group/group-marks/group-marks-s
 import { NotifcationListComponent } from './notifications/notifcation-list/notifcation-list.component';
 import { UsersNotificationFormComponent } from './notifications/users-notification-form/users-notification-form.component';
 import { DialogContentExampleDialogComponent } from './commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
+import { ContentComponent } from './content/content.component';
 
 
 @NgModule({
@@ -175,6 +176,7 @@ import { DialogContentExampleDialogComponent } from './commons/dialog-content-ex
     NotifcationListComponent,
     UsersNotificationFormComponent,
     DialogContentExampleDialogComponent,
+    ContentComponent,
   ],
   exports: [],
   entryComponents: [

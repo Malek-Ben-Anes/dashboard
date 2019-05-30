@@ -7,16 +7,3 @@
 </div>
 <app-subject-form  [level]="level" [subjectToSave]="subjectToSave" (refershEvent)="onRefresh($event)"></app-subject-form>
 <app-subject-list *ngIf="selectedSubjects != null" [subjects]="selectedSubjects" (subjectSelected)="onSelectSubject($event)"></app-subject-list>
-
-<!-- <app-student-profile *ngIf="selected.value === tabIndex.levelIndex && student != null" [student]="student" [isNew]="isNew"
-  (modifiedStudent)="onUpdateStudent($event)"></app-student-profile>
-<app-update-password *ngIf="selected.value === tabIndex.PASSWORD && student != null" [student]="student"
-  (modifiedStudent)="refreshStudent($event)"></app-update-password>
-<div *ngIf="selected.value === tabIndex.MARKS && student != null" class="card card-profile">
-  <div class="card-body">
-          <app-student-view-mark-detail [student]="student"></app-student-view-mark-detail>
-  </div>
-</div>
-<app-bulletin *ngIf="selected.value === tabIndex.BULLETIN && student != null" [student]="student"
-  (modifiedStudent)="refreshStudent($event)"></app-bulletin>
-<app-time-table *ngIf="selected.value === tabIndex.TIME_TABLE && student != null" [student]="student"></app-time-table> -->

@@ -24,9 +24,9 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private router: Router) {
     this.isLoggedIn = this.tokenStorage.getIsLoggedUser();
     if (this.isLoggedIn) {
-      this.router.navigate(['students']);
+      this.router.navigate(['app', 'students']);
     } else {
-      this.router.navigate(['auth', 'login']);
+      this.router.navigate(['app', 'auth', 'login']);
     }
   }
 

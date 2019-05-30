@@ -15,7 +15,7 @@
           <a class="nav-link" [routerLink]="route.router">{{route.label | translate}}</a>
         </li>
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="/notifications">
+          <a class="nav-link" routerLink="/app/notifications">
             <i class="material-icons margin-5">notifications</i>
             <span *ngIf="newNotifications !== 0" class="notification position">{{ newNotifications }}</span>
             {{'header.notifications' | translate}}
@@ -26,13 +26,10 @@
     <div *ngIf="authority != null">
       <ul class="nav navbar-nav horiz navbar-right" routerLinkActive="active">
         <li class="nav-item">
-          <a class="nav-link" (click)="switchLanguage('ar')">AR</a>
+          <a class="nav-link" (click)="switchLanguage('ar')">{{'header.language.AR' | translate}}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" (click)="switchLanguage('fr')">FR</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" (click)="switchLanguage('en')">EN</a>
+          <a class="nav-link" (click)="switchLanguage('fr')">{{'header.language.FR' | translate}}</a>
         </li>
         <li class="nav-item dropdown">
           <a class="dropdown-toggle nav-link background-white" data-toggle="dropdown">
@@ -56,7 +53,7 @@
           <a class="nav-link" [href]="link.href">{{link.label}}</a>
         </li>
         <li class="nav-item jet-current-menu-item">
-          <a class="nav-link jet-current-menu-item" routerLink="auth/login">Se connecter</a>
+          <a class="nav-link jet-current-menu-item" routerLink="app/auth/login">Se connecter</a>
         </li>
       </ul>
     </div>

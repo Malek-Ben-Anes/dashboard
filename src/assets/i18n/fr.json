@@ -7,5 +7,7 @@
     "header.bulletins": "Bulletins",
     "header.notifications": "Notifications",
     "header.login": "se Connecter",
-    "header.logout": "Se deconnecter"
+    "header.logout": "Se deconnecter",
+    "header.language.FR": "Francais",
+    "header.language.AR": "Arabe"
 }

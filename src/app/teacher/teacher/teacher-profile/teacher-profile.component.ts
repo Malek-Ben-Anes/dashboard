@@ -90,21 +90,4 @@ export class TeacherProfileComponent implements OnInit {
   private extractFieldData(property: string): any {
     return this.teacherForm.get(property).value;
   }
-
-  /*
-  onBack() {
-    this.router.navigate(['table-list']);
-  }
-*/
-
-
-// initTeacher() {
-//   this.teacher = new Teacher(12, "Alec", "Thompson", Gender.MALE, "high", 1200);
-//   this.teacher.email = "saifeddine@plumedor.tn";
-//   this.teacher.photo = "./assets/img/faces/marc.jpg";
-//   this.teacher.birthDate = new Date();
-//   this.teacher.phone = "saifeddine@plumedor.tn";
-
-// }
-
 }

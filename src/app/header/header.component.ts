@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { TokenStorageService } from 'app/services/auth/token-storage.service';
 import { Router } from '@angular/router';
+import { RouterLink } from 'app/app.routing';
 
 @Component({
   selector: 'app-header',
@@ -20,18 +21,19 @@ export class HeaderComponent implements OnInit {
   // To be displayed in navbar
   role: string;
   newNotifications: number;
+  ROUTER_LINK: RouterLink;
 
   AdminNavBar = [
-    { 'router': '/students', 'label': 'header.students' },
-    { 'router': '/teachers', 'label': 'header.teachers' },
-    { 'router': '/subjects', 'label': 'header.program' },
-    { 'router': '/groups', 'label': 'header.groups' }];
+    { 'router': '/app/students', 'label': 'header.students' },
+    { 'router': '/app/teachers', 'label': 'header.teachers' },
+    { 'router': '/app/subjects', 'label': 'header.program' },
+    { 'router': '/app/groups', 'label': 'header.groups' }];
 
-  teacherNavBar = [{ 'router': '/marks', 'label': 'header.marks' },
-  { 'router': '/lessons', 'label': 'Lessons' }];
+  teacherNavBar = [{ 'router': '/app/marks', 'label': 'header.marks' },
+  { 'router': '/app/lessons', 'label': 'Lessons' }];
 
-  studentNavBar = [{ 'router': '/marks', 'label': 'header.marks' },
-  { 'router': '/bulletin', 'label': 'header.bulletins' }];
+  studentNavBar = [{ 'router': '/app/marks', 'label': 'header.marks' },
+  { 'router': '/app/bulletin', 'label': 'header.bulletins' }];
 
   landingPageNavBar = [{ 'href': 'index.html', 'label': 'Accueil' },
   { 'href': 'notre-ecole/index.html', 'label': 'Notre école' },
@@ -52,7 +54,7 @@ export class HeaderComponent implements OnInit {
       this.username = this.tokenStorage.getUsername();
       this.photo = this.tokenStorage.getUserPhoto();
       const userNotif: string = this.tokenStorage.getUserNewNotifications();
-      this.newNotifications = _.isNil(userNotif) || _.isNaN(userNotif) ? 0 : parseInt(userNotif);
+      this.newNotifications = _.isNil(userNotif) || _.isNaN(userNotif) ? 0 : parseInt(userNotif, 10);
       console.log(this.newNotifications, userNotif);
       this.roles = this.tokenStorage.getAuthorities();
 
@@ -85,6 +87,6 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.tokenStorage.signOut();
     window.location.reload();
-    this.router.navigate(['auth/login'])
+    this.router.navigate(['/app/auth/login'])
   }
 }

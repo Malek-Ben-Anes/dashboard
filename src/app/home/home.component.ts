@@ -12,9 +12,9 @@ export class HomeComponent implements OnInit {
 
   constructor(private token: TokenStorageService, private router: Router) {
     if (this.token.getToken()) {
-      this.router.navigate(['marks']);
+      this.router.navigate(['app', 'marks']);
     } else {
-      this.router.navigate(['auth', 'login']);
+      this.router.navigate(['app', 'auth', 'login']);
     }
   }
 

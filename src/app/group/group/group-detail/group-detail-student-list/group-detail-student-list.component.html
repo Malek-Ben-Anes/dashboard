@@ -19,7 +19,7 @@
       <tbody>
         <tr *ngFor="let student of students">
           <td>
-            <a routerLink="/{{ 'student-profile/' + student.id }}">
+            <a [routerLink]="'/app/student-profile/' + student.id">
               <img [src]="BASE_URL + student.photo" alt="Smiley student face" height="49" width="49" />
             </a>
           </td>
@@ -28,7 +28,7 @@
           <td>{{ student.lastname }}
           </td>
           <td>
-            <a routerLink="/{{ 'student-profile/' + student.id }}">{{ student.email }}</a>
+            <a [routerLink]="'/app/student-profile/' + student.id">{{ student.email }}</a>
           </td>
         </tr>
       </tbody>
