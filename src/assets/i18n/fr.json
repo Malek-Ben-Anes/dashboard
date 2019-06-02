@@ -1,4 +1,12 @@
 {
+    "header.accueil": "Accueil",
+    "header.aboutUs": "Notre école ",
+    "header.clubs": "Clubs",
+    "header.contact": "Contact",
+    "header.login": "se Connecter",
+    "header.language.FR": "FR",
+    "header.language.AR": "AR",
+
     "header.students": "élèves",
     "header.teachers": "Enseignants",
     "header.program": "Programme",
@@ -6,8 +14,5 @@
     "header.marks": "Notes",
     "header.bulletins": "Bulletins",
     "header.notifications": "Notifications",
-    "header.login": "se Connecter",
-    "header.logout": "Se deconnecter",
-    "header.language.FR": "Francais",
-    "header.language.AR": "Arabe"
+    "header.logout": "Se deconnecter"
 }

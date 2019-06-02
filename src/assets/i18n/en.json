@@ -1,4 +1,13 @@
 {
+    "header.accueil": "Accueil",
+    "header.aboutUs": "Notre école ",
+    "header.clubs": "Clubs",
+    "header.contact": "Contact",
+    "header.login": "se Connecter",
+    "header.language.FR": "FR",
+    "header.language.AR": "AR",
+
+    
     "header.students": "Students",
     "header.teachers": "teachers",
     "header.program": "Program",

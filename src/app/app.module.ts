@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DemoMaterialModule } from './material.module';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
@@ -84,6 +84,8 @@ import { NotifcationListComponent } from './notifications/notifcation-list/notif
 import { UsersNotificationFormComponent } from './notifications/users-notification-form/users-notification-form.component';
 import { DialogContentExampleDialogComponent } from './commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
 import { ContentComponent } from './content/content.component';
+import { AuthInterceptor } from './services/auth/auth-interceptor';
+import { ImagePreloadDirective } from './commons/image-preload/image-preload.directive';
 
 
 @NgModule({
@@ -177,13 +179,20 @@ import { ContentComponent } from './content/content.component';
     UsersNotificationFormComponent,
     DialogContentExampleDialogComponent,
     ContentComponent,
+    ImagePreloadDirective,
   ],
   exports: [],
   entryComponents: [
     LessonTimeTableComponent,
     DialogContentExampleDialogComponent
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

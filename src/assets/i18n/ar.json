@@ -8,6 +8,6 @@
     "header.notifications": "Notifications",
     "header.login": "Login",
     "header.logout": "Logout",
-    "header.language.FR": "Francais",
-    "header.language.AR": "Arabe"
+    "header.language.FR": "FR",
+    "header.language.AR": "AR"
 }
