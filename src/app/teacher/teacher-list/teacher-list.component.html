@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <button mat-raised-button type="button" class="btn btn-warning pull-right"
-                            routerLink="/teacher-profile">Add Teacher</button>
+                            routerLink="/app/teacher-profile">Add Teacher</button>
                     </div>
                 </div>
                 <div class="card">
@@ -35,23 +35,10 @@
                                 <tbody>
                                     <tr *ngFor="let teacher of teachers">
                                         <td>
-                                            <div class="card-profile">
-                                                <div class="card-avatar">
-                                                    <a [routerLink]="'/app/teacher-profile/' + teacher.id">
-                                                        <div
-                                                            *ngIf="(teacher.photo != null); else defaultPhoto">
-                                                            <img class="img profile-image"
-                                                                [src]="BASE_URL + teacher.photo"
-                                                                alt="Smiley teacher face" />
-                                                        </div>
-                                                        <ng-template #defaultPhoto>
-                                                            <img class="img profile-image"
-                                                                src="./assets/images/profile-logo.png"
-                                                                alt="Smiley face" />
-                                                        </ng-template>
-                                                    </a>
-                                                </div>
-                                            </div>
+                                            <a [routerLink]="'/app/teacher-profile/' + teacher.id">
+                                            <img class="profile-image" [src]="BASE_URL + teacher.photo"
+                                                default="assets/images/profile-logo.png" alt="Smile face" />
+                                            </a>
                                         </td>
                                         <td>
                                             {{ teacher.firstname }}

@@ -20,7 +20,7 @@
         <tr *ngFor="let student of students">
           <td>
             <a [routerLink]="'/app/student-profile/' + student.id">
-              <img [src]="BASE_URL + student.photo" alt="Smiley student face" height="49" width="49" />
+              <img [src]="BASE_URL + student.photo" default="assets/images/profile-logo.png" alt="Smiley student face" height="49" width="49" />
             </a>
           </td>
           <td>{{ student.firstname }}

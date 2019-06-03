@@ -4,14 +4,8 @@
       <div *cdkVirtualFor="let student of students" class="example-item">
         <button class="button-no-style"><span>
             <div class="block  student-item student-hover" (click)="onDetailMarks(student)">
-              <div *ngIf="student.photo != null; else defaultPhoto">
                 <img class="img profile-image" [src]="BASE_URL + student.photo" alt="Smiley face" height="39"
                   width="39" />
-              </div>
-              <ng-template #defaultPhoto>
-                <img class="img profile-image" src="./assets/images/profile-logo.png" alt="Smiley face" height="39"
-                  width="39" />
-              </ng-template>
               <div class="message">
                 <p class="message">{{student.firstname}} {{student.lastname}}</p>
               </div>

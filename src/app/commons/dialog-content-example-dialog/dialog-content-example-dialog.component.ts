@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { DialogData } from 'app/models/DialogData';
 
 @Component({
   selector: 'app-dialog-content-example-dialog',
@@ -23,7 +24,3 @@ export class DialogContentExampleDialogComponent implements OnInit {
 
 }
 
-export interface DialogData {
-  dialogTitle: string;
-  dialogMessage: string;
-}

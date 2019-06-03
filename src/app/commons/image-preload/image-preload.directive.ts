@@ -1,7 +1,8 @@
 import { Directive, Input, HostBinding } from '@angular/core';
 
+// selector: '[appImagePreload]',
 @Directive({
-  selector: '[appImagePreload]',
+  selector: 'img[default]',
   host: {
     '(error)':'updateUrl()',
     '(load)': 'load()',
@@ -12,13 +13,13 @@ export class ImagePreloadDirective {
 
   @Input() src:string;
   @Input() default:string;
-  @HostBinding('class') className;
+  // @HostBinding('class') className;
 
   updateUrl() {
     this.src = this.default;
   }
   load(){
-    this.className = 'image-loaded';
+    // this.className = 'image-loaded';
   }
 
 }

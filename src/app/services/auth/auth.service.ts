@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as jwt_decode from "jwt-decode";
 
@@ -50,7 +50,7 @@ export class AuthService {
     if (this.loggedUser == null) {
       this.loggedUser = this.tokenStorage.getLoggedUser();
     }
-    return new Promise( (resolve, reject) => this.loggedUser ? resolve(this.loggedUser) : reject(this.loggedUser));
+    return new Promise((resolve, reject) => this.loggedUser ? resolve(this.loggedUser) : reject(this.loggedUser));
   }
 
   public saveLoggedUser(loggedUser: User) {
@@ -106,5 +106,14 @@ export class AuthService {
       console.log(Error.message);
       return null;
     }
+  }
+
+  cachedRequests: Array<HttpRequest<any>> = [];
+  public collectFailedRequest(request): void {
+    this.cachedRequests.push(request);
+  }
+  public retryFailedRequests(): void {
+    // retry the requests. this method can
+    // be called after the token is refreshed
   }
 }

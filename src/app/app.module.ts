@@ -14,14 +14,13 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppRoutingModule } from 'app/app.routing';
 import { ComponentsModule } from 'app/components/components.module';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from 'app/app.component';
 
 import { LoginComponent } from './login/login.component';
-import { UserComponent } from './user/user.component';
 import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
-import { PmComponent } from './pm/pm.component';
 import { TeacherProfileComponent } from './teacher/teacher/teacher-profile/teacher-profile.component';
 import { TeacherListComponent } from './teacher/teacher-list/teacher-list.component';
 import { MapsComponent } from './maps/maps.component';
@@ -86,6 +85,7 @@ import { DialogContentExampleDialogComponent } from './commons/dialog-content-ex
 import { ContentComponent } from './content/content.component';
 import { AuthInterceptor } from './services/auth/auth-interceptor';
 import { ImagePreloadDirective } from './commons/image-preload/image-preload.directive';
+import { ErrorDialogComponent } from './commons/error-dialog/error-dialog.component';
 
 
 @NgModule({
@@ -106,19 +106,18 @@ import { ImagePreloadDirective } from './commons/image-preload/image-preload.dir
         deps: [HttpClient]
       }
     }),
+    ToastrModule,
     DemoMaterialModule,
     DragDropModule,
     ScrollDispatchModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
-    UserComponent,
     HomeComponent,
     AdminComponent,
-    PmComponent,
     MapsComponent,
     TeacherComponent,
     TeacherListComponent,
@@ -180,11 +179,13 @@ import { ImagePreloadDirective } from './commons/image-preload/image-preload.dir
     DialogContentExampleDialogComponent,
     ContentComponent,
     ImagePreloadDirective,
+    ErrorDialogComponent,
   ],
   exports: [],
   entryComponents: [
     LessonTimeTableComponent,
-    DialogContentExampleDialogComponent
+    DialogContentExampleDialogComponent,
+    ErrorDialogComponent
   ],
   providers: [
     {

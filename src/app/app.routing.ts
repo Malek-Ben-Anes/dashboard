@@ -5,8 +5,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-import { UserComponent } from './user/user.component';
-import { PmComponent } from './pm/pm.component';
 import { AdminComponent } from './admin/admin.component';
 import { TeacherListComponent } from './teacher/teacher-list/teacher-list.component';
 import { TeacherComponent } from './teacher/teacher/teacher.component';
@@ -56,14 +54,6 @@ const routes: Routes = [
             path: 'home',
             canActivate: [AuthGuardService],
             component: HomeComponent
-        },
-        {
-            path: 'user',
-            component: UserComponent
-        },
-        {
-            path: 'pm',
-            component: PmComponent
         },
         {
             path: 'dashboard',

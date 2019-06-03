@@ -1,14 +1,8 @@
 <div class="card card-profile">
     <div class="card-avatar">
         <a>
-            <div *ngIf="(user.photo !== undefined && user.photo !== null); else defaultPhoto">
-                <img class="img profile-image" [src]="BASE_URL + user.photo"
-                    alt="Smiley face" height="42" width="42" />
-            </div>
-            <ng-template #defaultPhoto>
-                <img class="img profile-image" src="./assets/images/profile-logo.png" alt="Smiley face" height="42"
-                    width="42" />
-            </ng-template>
+            <img class="img profile-image" [src]="BASE_URL + user.photo" default="assets/images/profile-logo.png"
+                alt="Smiley face" height="42" width="42" />
         </a>
     </div>
 
@@ -22,7 +16,7 @@
         </div>
         <div *ngIf="!isUploading">
             <button mat-raised-button class="btn btn-warning" (click)="onUpload()">
-                    <span class="glyphicon glyphicon-cloud-upload"></span>Upload 
+                <span class="glyphicon glyphicon-cloud-upload"></span>Upload
             </button>
         </div>
     </form>

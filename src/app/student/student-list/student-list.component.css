@@ -3,6 +3,7 @@
 }
 
 .profile-image {
-    width: 92px; 
-    height: 92px;
+    width: 79px;
+    height: 79px;
+    border-radius: 50%;
 }
