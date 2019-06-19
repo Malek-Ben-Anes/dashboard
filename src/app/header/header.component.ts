@@ -80,6 +80,7 @@ export class HeaderComponent implements OnInit {
   }
 
   switchLanguage(language: string) {
+    console.log(language);    
     this.translate.use(language);
   }
 

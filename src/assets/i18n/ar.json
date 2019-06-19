@@ -1,13 +1,18 @@
 {
-    "header.students": "الطلاب",
-    "header.teachers": "معلمون",
-    "header.program": "برنامج",
-    "header.groups": "فصول",
-    "header.marks": "ملاحظات",
-    "header.bulletins": "تقارير المدرسة",
-    "header.notifications": "Notifications",
-    "header.login": "Login",
-    "header.logout": "Logout",
+    "header.accueil": "Accueil",
+    "header.aboutUs": "Notre école ",
+    "header.clubs": "Clubs",
+    "header.contact": "Contact",
+    "header.login": "se Connecter",
     "header.language.FR": "FR",
-    "header.language.AR": "AR"
+    "header.language.AR": "AR",
+
+    "header.students": "élèves",
+    "header.teachers": "Enseignants",
+    "header.program": "Programme",
+    "header.groups": "Classes",
+    "header.marks": "Notes",
+    "header.bulletins": "Bulletins",
+    "header.notifications": "Notifications",
+    "header.logout": "Se deconnecter"
 }

@@ -28,14 +28,7 @@ export class AuthInterceptor implements HttpInterceptor {
         request = request.clone({ headers: request.headers.set(ACCEPT_KEY, 'application/json') });
 
         return next.handle(request).pipe(
-            tap(evt => {
-                console.log("success");
-                if (evt instanceof HttpResponse) {
-                    if (evt.body && evt.body.success) {
-                        // this.toasterService.success(evt.body.success.message, evt.body.success.title, { positionClass: 'toast-bottom-center' });
-                    }
-                }
-            }),
+            tap(),
             retry(1),
             catchError((err: any) => {
                 if (err instanceof HttpErrorResponse) {
