@@ -5,6 +5,10 @@ import { TokenStorageService } from 'app/services/auth/token-storage.service';
 import { Router } from '@angular/router';
 import { RouterLink } from 'app/app.routing';
 
+const AR = 'ar';
+const EN = 'en';
+const FR = 'fr';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -42,19 +46,19 @@ export class HeaderComponent implements OnInit {
 
   constructor(private tokenStorage: TokenStorageService, private router: Router, private translate: TranslateService) {
     // this language will be used as a fallback when a translation isn't found in the current language
-    translate.setDefaultLang('fr');
+    translate.setDefaultLang(EN);
     // the lang to use, if the lang isn't available, it will use the current loader to get them
-    translate.use('fr');
+    translate.use(EN);
   }
 
   ngOnInit() {
+    this.translate.use(FR);
     if (this.tokenStorage.getToken()) {
       this.id = this.tokenStorage.getId();
       this.username = this.tokenStorage.getUsername();
       this.photo = this.tokenStorage.getUserPhoto();
       const userNotif: string = this.tokenStorage.getUserNewNotifications();
       this.newNotifications = _.isNil(userNotif) || _.isNaN(userNotif) ? 0 : parseInt(userNotif, 10);
-      console.log(this.newNotifications, userNotif);
       this.roles = this.tokenStorage.getAuthorities();
 
 
@@ -79,8 +83,7 @@ export class HeaderComponent implements OnInit {
     console.log(this.authority);
   }
 
-  switchLanguage(language: string) {
-    console.log(language);    
+  switchLanguage(language: string) {   
     this.translate.use(language);
   }
 

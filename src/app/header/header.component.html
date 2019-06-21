@@ -1,5 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container container-fluid">
+
     <div class="navbar-header">
       <div class="logo">
         <a href="index.html" class="simple-text">
@@ -9,15 +10,16 @@
         </a>
       </div>
     </div>
+    
     <div *ngIf="authority != null">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav jet-menu">
         <li class="nav-item" routerLinkActive="active" *ngFor="let route of navBar">
           <a class="nav-link" [routerLink]="route.router">{{route.label | translate}}</a>
         </li>
         <li class="nav-item" routerLinkActive="active">
           <a class="nav-link" routerLink="/app/notifications">
             <i class="material-icons margin-5">notifications</i>
-            <span *ngIf="newNotifications !== 0" class="notification position">{{ newNotifications }}</span>
+            <span *ngIf="newNotifications !== 0" class="notification position">{{newNotifications}}</span>
             {{'header.notifications' | translate}}
           </a>
         </li>
@@ -50,10 +52,10 @@
           <a class="nav-link jet-current-menu-item" routerLink="app/auth/login">{{'header.login' | translate}}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" (click)="switchLanguage('ar')"><img class="flag-icon" src="assets/img/ar-icon.png" alt="" />{{'header.language.AR' | translate}}</a>
+          <a class="nav-link" (click)="switchLanguage('ar')"><img class="flag-icon" src="assets/img/ar-icon.png" alt=""/>{{'header.language.AR' | translate}}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" (click)="switchLanguage('fr')"><img class="flag-icon" src="assets/img/fr-icon.png" alt="" />{{'header.language.FR' | translate}}</a>
+          <a class="nav-link" (click)="switchLanguage('fr')"><img class="flag-icon" src="assets/img/fr-icon.png" alt=""/>{{'header.language.FR' | translate}}</a>
         </li>
       </ul>
     </div>

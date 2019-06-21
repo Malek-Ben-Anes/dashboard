@@ -12,6 +12,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {}
 }
 
-export const BASE_URL = 'https://la-plume-dor.cfapps.io/';
-export const BASE_API_URL = 'https://la-plume-dor.cfapps.io/api/';
-export const ASSET_URL = 'https://la-plume-dor.cfapps.io/uploads';
+export const BASE_URL = 'https://laplumedor.cfapps.io/';
+export const BASE_API_URL = 'https://laplumedor.cfapps.io/api/';
+export const ASSET_URL = 'https://laplumedor.cfapps.io/uploads';

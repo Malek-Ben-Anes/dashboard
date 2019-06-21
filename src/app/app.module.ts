@@ -20,7 +20,6 @@ import { AppComponent } from 'app/app.component';
 
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-import { AdminComponent } from './admin/admin.component';
 import { TeacherProfileComponent } from './teacher/teacher/teacher-profile/teacher-profile.component';
 import { TeacherListComponent } from './teacher/teacher-list/teacher-list.component';
 import { MapsComponent } from './maps/maps.component';
@@ -117,7 +116,6 @@ import { ErrorDialogComponent } from './commons/error-dialog/error-dialog.compon
     AdminLayoutComponent,
     LoginComponent,
     HomeComponent,
-    AdminComponent,
     MapsComponent,
     TeacherComponent,
     TeacherListComponent,
