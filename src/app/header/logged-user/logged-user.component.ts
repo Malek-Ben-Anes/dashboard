@@ -55,11 +55,6 @@ export class LoggedUserComponent implements OnInit {
   constructor(private tokenStorage: TokenStorageService, private router: Router, private translate: TranslateService) { }
 
   ngOnInit() {
-    this.username = this.tokenStorage.getUsername();
-    this.photo = this.tokenStorage.getUserPhoto();
-    const userNotif: string = this.tokenStorage.getUserNewNotifications();
-    this.newNotifications = _.isNil(userNotif) || _.isNaN(userNotif) ? 0 : parseInt(userNotif, 10);
-    // notifications.notifsNumber = 6;
     _.every(this.roles, role => { this.getNavigationBarConfiguration(role) });
   }
 
