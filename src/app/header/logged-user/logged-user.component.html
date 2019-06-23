@@ -1,0 +1,30 @@
+<ul class="nav navbar-nav jet-menu">
+  <li class="nav-item" routerLinkActive="active" *ngFor="let route of navBar">
+    <a class="nav-link" [routerLink]="route.router">
+      <div *ngIf="route.icon !== 'bell' else bell"></div>
+      {{route.label | translate}}
+    </a>
+  </li>
+</ul>
+
+<ng-template #bell>
+  <i class="material-icons margin-5">notifications</i>
+  <span *ngIf="newNotifications && newNotifications !== 0" class="notification position">{{newNotifications}}</span>
+</ng-template>
+
+<ul class="nav navbar-nav horiz navbar-right" routerLinkActive="active">
+  <li class="nav-item dropdown">
+    <a class="dropdown-toggle nav-link background-white" data-toggle="dropdown">
+      <img *ngIf="photo != null && photo != 'null'; else noUserImage" [src]="photo" alt="Smile face"
+        class="radius-image" />
+      <ng-template #noUserImage>
+        <img src="assets/images/profile-logo.png" alt="smile face" class="radius-image" />
+      </ng-template>
+      {{username}}
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li><a (click)="logout()">{{'header.logout' | translate}}</a></li>
+    </ul>
+  </li>
+</ul>

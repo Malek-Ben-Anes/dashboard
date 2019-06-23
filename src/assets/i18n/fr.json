@@ -14,5 +14,11 @@
     "header.marks": "Notes",
     "header.bulletins": "Bulletins",
     "header.notifications": "Notifications",
-    "header.logout": "Se deconnecter"
+    "header.logout": "Se deconnecter",
+
+    "header.student.profile": "Mon Profile",
+    "header.student.marks": "Notes",
+    "header.student.timetable": "Emploi du temps",
+    "header.student.bulletins": "Bulletins",
+    "header.student.notifications": "Notifications"    
 }

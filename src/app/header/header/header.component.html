@@ -1,0 +1,17 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container container-fluid">
+    <div class="navbar-header">
+      <div class="logo">
+        <a href="index.html" class="simple-text">
+          <div class="logo-img">
+            <img src="assets/img/plumedor-logo.png" alt="La plume D'or logo" />
+          </div>
+        </a>
+      </div>
+    </div>
+    
+    <app-logged-user class="inline" *ngIf="isLogged && loggedUser !=null" [loggedUser]="loggedUser" [roles]="roles"></app-logged-user>
+    <app-landing-page *ngIf="!isLogged"></app-landing-page>
+
+  </div>
+</nav>

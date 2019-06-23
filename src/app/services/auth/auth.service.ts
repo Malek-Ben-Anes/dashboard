@@ -46,6 +46,7 @@ export class AuthService {
     return this.http.post<string>(SIGN_UP_URL, info, httpOptions);
   }
 
+  // TODO remove promise @Deprecated
   public getLoggedUser(): Promise<User> {
     if (this.loggedUser == null) {
       this.loggedUser = this.tokenStorage.getLoggedUser();
@@ -86,11 +87,11 @@ export class AuthService {
     const JwtTokenInfo: JwtResponse = this.getDecodedAccessToken(encodedJwtResponseAccessToken);
     this.jwtResponse = JwtTokenInfo;
     this.tokenStorage.saveIsLoggedUser(true);
-    this.tokenStorage.saveUsername(JwtTokenInfo.name);
+    this.tokenStorage.saveUsername(JwtTokenInfo.user && JwtTokenInfo.user.name);
     this.tokenStorage.saveAuthorities(JwtTokenInfo.authorities);
-    this.tokenStorage.saveId(JwtTokenInfo.user.id);
-    this.tokenStorage.saveGender(JwtTokenInfo.user.gender);
-    this.tokenStorage.saveUserPhoto(JwtTokenInfo.user.photo);
+    this.tokenStorage.saveId(JwtTokenInfo.user && JwtTokenInfo.user.id);
+    this.tokenStorage.saveGender(JwtTokenInfo.user && JwtTokenInfo.user.gender);
+    this.tokenStorage.saveUserPhoto(JwtTokenInfo.user && JwtTokenInfo.user.photo);
     this.tokenStorage.saveUserNewNotifications(String(JwtTokenInfo.user.newNotifications));
     this.tokenStorage.saveLoggedUser(JwtTokenInfo.user);
     this.saveLoggedUser(JwtTokenInfo.user);

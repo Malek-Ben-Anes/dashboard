@@ -1,0 +1,18 @@
+<div class="main-navigation menu">
+  <ul class="nav navbar-nav horiz navbar-right main-navigation menu jet-menu">
+    <li class="nav-item" *ngFor="let link of landingPageNavBar">
+      <a class="nav-link" [href]="link.href">{{link.label  | translate}}</a>
+    </li>
+    <li class="nav-item jet-current-menu-item">
+      <a class="nav-link jet-current-menu-item" routerLink="app/auth/login">{{'header.login' | translate}}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" (click)="switchLanguage('ar')"><img class="flag-icon" src="assets/img/ar-icon.png"
+          alt="" />{{'header.language.AR' | translate}}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" (click)="switchLanguage('fr')"><img class="flag-icon" src="assets/img/fr-icon.png"
+          alt="" />{{'header.language.FR' | translate}}</a>
+    </li>
+  </ul>
+</div>

@@ -6,12 +6,7 @@ export class JwtResponse {
     id: string;
     user: User;
     username: string;
-    name: string;
-    email: string;
     authorities: string[];
-    gender: Gender;
-    photo: string;
-    newNotifications: number;
 }
 
 export interface jwtToken {

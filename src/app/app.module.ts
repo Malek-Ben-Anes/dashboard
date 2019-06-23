@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, platformBrowser } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -40,7 +40,6 @@ import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 import { StudentAssignComponent } from './group/group/student-assign/student-assign.component';
 import { GroupTimetableComponent } from './group/group/group-timetable/group-timetable.component';
 import { MarkComponent } from './marks/marks.component';
-import { HeaderComponent } from './header/header.component';
 import { AvatarComponent } from './avatar/avatar.component';
 import { MessageListComponent } from './messages/message-list/message-list.component';
 import { MessageItemComponent } from './messages/message-item/message-item.component';
@@ -85,7 +84,10 @@ import { ContentComponent } from './content/content.component';
 import { AuthInterceptor } from './services/auth/auth-interceptor';
 import { ImagePreloadDirective } from './commons/image-preload/image-preload.directive';
 import { ErrorDialogComponent } from './commons/error-dialog/error-dialog.component';
-
+import { AdminComponent } from './admin/admin.component';
+import { StudentModuleModule } from './student-module/student-module.module';
+import { PlatformModule } from '@angular/cdk/platform';
+import { HeaderModule } from './header/header.module';
 
 @NgModule({
   imports: [
@@ -110,10 +112,13 @@ import { ErrorDialogComponent } from './commons/error-dialog/error-dialog.compon
     DragDropModule,
     ScrollDispatchModule,
     MatProgressSpinnerModule,
+    StudentModuleModule,
+    HeaderModule,
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
+    AdminComponent,
     LoginComponent,
     HomeComponent,
     MapsComponent,
@@ -134,7 +139,6 @@ import { ErrorDialogComponent } from './commons/error-dialog/error-dialog.compon
     StudentAssignComponent,
     GroupTimetableComponent,
     MarkComponent,
-    HeaderComponent,
     AvatarComponent,
     MessageListComponent,
     MessageItemComponent,
@@ -195,7 +199,6 @@ import { ErrorDialogComponent } from './commons/error-dialog/error-dialog.compon
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
