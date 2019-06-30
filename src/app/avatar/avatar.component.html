@@ -20,24 +20,6 @@
             </button>
         </div>
     </form>
-
-    <!-- <div style="text-align:center">
-        <label>
-          <input type="file" (change)="selectFile($event)">
-          </label>
-          <button [disabled]="!selectedFiles"
-      (click)="upload()">Upload</button>
-        </div>
-
-
-        <label class="image-upload-container btn btn-bwm">
-                <span>Select Image</span>
-                <input #imageInput
-                       type="file"
-                       accept="image/*"
-                       (change)="processFile(imageInput)">
-              </label> -->
-
     <div class="card-body">
         <h6 class="card-category text-gray">{{ getProfile() }}</h6>
         <h4 class="card-title">{{user.firstname}} {{user.lastname}}</h4>
@@ -47,6 +29,5 @@
         <p class="card-description">
             Registred: {{ user.createdAt | date }}
         </p>
-
     </div>
 </div>

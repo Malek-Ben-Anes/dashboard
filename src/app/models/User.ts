@@ -10,7 +10,7 @@ export class User {
     photo?: string;
     birthDate?: Date;
     phone?: string;
-    adress?: string;
+    address?: string;
     createdAt?: string;
     updatedAt?: string;
     password?: string;

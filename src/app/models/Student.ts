@@ -9,7 +9,7 @@ export class Student extends User {
     group?: Group;
     parentName?: string;
     parentPhone?: string;
-    description: string;
+    description?: string;
     bulletins?: {};
     marks?: Mark[];
 

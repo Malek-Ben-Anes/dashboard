@@ -19,7 +19,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from 'app/app.component';
 
 import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
 import { TeacherProfileComponent } from './teacher/teacher/teacher-profile/teacher-profile.component';
 import { TeacherListComponent } from './teacher/teacher-list/teacher-list.component';
 import { MapsComponent } from './maps/maps.component';
@@ -120,7 +119,6 @@ import { HeaderModule } from './header/header.module';
     AdminLayoutComponent,
     AdminComponent,
     LoginComponent,
-    HomeComponent,
     MapsComponent,
     TeacherComponent,
     TeacherListComponent,
@@ -183,7 +181,7 @@ import { HeaderModule } from './header/header.module';
     ImagePreloadDirective,
     ErrorDialogComponent,
   ],
-  exports: [],
+  exports: [AvatarComponent],
   entryComponents: [
     LessonTimeTableComponent,
     DialogContentExampleDialogComponent,

@@ -84,7 +84,7 @@ export class StudentProfileComponent implements OnInit {
       phone: student.phone,
       email: student.email,
       gender: <Gender> student.gender,
-      adress: student.adress,
+      adress: student.address,
       parentName: student.parentName,
       parentPhone: student.parentPhone,
       description: student.description,
@@ -110,7 +110,7 @@ export class StudentProfileComponent implements OnInit {
     this.student.gender = this.extractFieldData('gender');
     this.student.group = this.extractFieldData('group');
     this.student.level = this.extractFieldData('level');
-    this.student.adress = this.extractFieldData('adress');
+    this.student.address = this.extractFieldData('address');
     this.student.parentName = this.extractFieldData('parentName');
     this.student.parentPhone = this.extractFieldData('parentPhone');
     this.student.description = this.extractFieldData('description');

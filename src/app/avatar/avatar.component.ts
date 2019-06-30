@@ -1,10 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { HttpResponse } from 'selenium-webdriver/http';
 
 import { BASE_URL } from 'app/app.component';
 import { FileUploadService } from 'app/services/file-upload.service';
-import { User } from 'app/models/User';
 import { Student } from 'app/models/Student';
 import { Teacher } from 'app/models/Teacher';
 

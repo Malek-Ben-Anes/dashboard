@@ -63,7 +63,7 @@ export class TeacherProfileComponent implements OnInit {
       email: teacher.email,
       birthDate: teacher.birthDate,
       gender: <Gender> teacher.gender,
-      adress: teacher.adress,
+      adress: teacher.address,
       description: teacher.description,
     });
     this.teacherForm.get('birthDate').setValue(new Date(this.teacher.birthDate));
@@ -83,7 +83,7 @@ export class TeacherProfileComponent implements OnInit {
     this.teacher.phone = this.extractFieldData('phone');
     this.teacher.birthDate = new Date(this.extractFieldData('birthDate'));
     this.teacher.gender = this.extractFieldData('gender');
-    this.teacher.adress = this.extractFieldData('adress');
+    this.teacher.address = this.extractFieldData('address');
     this.teacher.description = this.extractFieldData('description');
   }
 

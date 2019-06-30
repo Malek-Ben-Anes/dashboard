@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
 import { AdminComponent } from './admin/admin.component';
 import { TeacherListComponent } from './teacher/teacher-list/teacher-list.component';
 import { TeacherComponent } from './teacher/teacher/teacher.component';
@@ -50,11 +49,6 @@ const routes: Routes = [
       path: 'app',
       component: ContentComponent,
       children: [
-        {
-            path: 'home',
-            canActivate: [AuthGuardService],
-            component: HomeComponent
-        },
         {
             path: 'dashboard',
             canActivate: [AuthGuardService],
@@ -169,7 +163,7 @@ const routes: Routes = [
         {
             path: '',
             canActivate: [AuthGuardService],
-            component: HomeComponent
+            component: AdminComponent
         },
         // { path: 'not-found', component: FourOhFourComponent },
         { path: '**', redirectTo: 'not-found' }
