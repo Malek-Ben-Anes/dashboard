@@ -1,3 +1,33 @@
-<p>
-  mark-list works!
-</p>
+<div class="card height-500 card-3">
+    <div class="card-body">
+
+        <div>
+            <button mat-raised-button (click)="onFilterByLesson(null)"> All </button>
+            <button *ngFor="let lesson of lessonsOfCurrentstudent" mat-raised-button (click)="onFilterByLesson(lesson)">
+                {{lesson.subjectName}} </button>
+        </div>
+
+        <cdk-virtual-scroll-viewport *ngIf="student.marks; else noMarks" itemSize="50" minBufferPx="200" maxBufferPx="400"
+            class="example-viewport">
+            <div *cdkVirtualFor="let mark of marksToDisplay" class="example-item">
+                <div class="message">
+                    <div *ngIf="mark.mark <= 10 ">
+                        <strong>{{mark.lesson.name}}:</strong> {{mark.note}}
+                            <span class="red-color">{{mark.mark}}</span>
+                    </div>
+                    <div *ngIf="mark.mark > 10">
+                        <p><strong>{{mark.lesson.name}}:</strong> {{mark.note}}
+                            <span class="green-color">{{mark.mark}}</span></p>
+                    </div>
+                </div>
+                <div class="timeform">
+                    <i class="fa fa-clock-o" aria-hidden="true"></i> <span class="timestamp">
+                        {{mark.createdAt | date:'dd/MM/yyyy' }}
+                    </span>
+                </div>
+                <hr />
+            </div>
+        </cdk-virtual-scroll-viewport>
+        <ng-template #noMarks>No content</ng-template>
+    </div>
+</div>

@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { DemoMaterialModule } from './material.module';
+import { MaterialModule } from './material.module';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -52,7 +52,6 @@ import { FilterComponent } from './marks/filter/filter.component';
 import { MarkDetailComponent } from './marks/student-view/mark-detail/mark-detail.component';
 import { BulletinComponent } from './student/student/bulletin/bulletin.component';
 import { FilterBulletinComponent } from './student/student/bulletin/filter/filter.component';
-import { BulletinListComponent } from './student/student/bulletin/student-view/bulletin-list/bulletin-list.component';
 import { UpdatePasswordComponent } from './student/student/update-password/update-password.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { AccueilComponent } from './landing-page/accueil/accueil.component';
@@ -107,7 +106,7 @@ import { HeaderModule } from './header/header.module';
       }
     }),
     ToastrModule,
-    DemoMaterialModule,
+    MaterialModule,
     DragDropModule,
     ScrollDispatchModule,
     MatProgressSpinnerModule,
@@ -150,7 +149,6 @@ import { HeaderModule } from './header/header.module';
     MarkDetailComponent,
     BulletinComponent,
     FilterBulletinComponent,
-    BulletinListComponent,
     UpdatePasswordComponent,
     LandingPageComponent,
     AccueilComponent,
@@ -181,7 +179,7 @@ import { HeaderModule } from './header/header.module';
     ImagePreloadDirective,
     ErrorDialogComponent,
   ],
-  exports: [AvatarComponent],
+  exports: [AvatarComponent, MaterialModule],
   entryComponents: [
     LessonTimeTableComponent,
     DialogContentExampleDialogComponent,

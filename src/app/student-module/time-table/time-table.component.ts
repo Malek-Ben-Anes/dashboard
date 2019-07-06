@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { TokenStorageService } from 'app/services/auth/token-storage.service';
+import { BASE_URL } from 'app/app.component';
+import { Student } from 'app/models/Student';
+import { AuthService } from 'app/services/auth/auth.service';
 
 @Component({
   selector: 'app-time-table',
@@ -7,9 +11,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TimeTableComponent implements OnInit {
 
-  constructor() { }
+  BASE_URL: string = BASE_URL;
+  student: Student;
+
+  constructor(private tokenStorage: TokenStorageService, private authService: AuthService) {
+  }
 
   ngOnInit() {
+    if (this.authService.getIsLoggedUser()) {
+      this.student = this.tokenStorage.getLoggedUser();
+    }
   }
 
 }

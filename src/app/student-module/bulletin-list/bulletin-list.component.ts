@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import * as _ from 'lodash';
+import { Component, OnInit, Input } from '@angular/core';
+import { Student } from 'app/models/Student';
+import { BASE_URL } from 'app/app.component';
+import { TokenStorageService } from 'app/services/auth/token-storage.service';
+import { BulletinService } from 'app/services/bulletin.service';
+import { AuthService } from 'app/services/auth/auth.service';
 
 @Component({
   selector: 'app-bulletin-list',
@@ -7,9 +13,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BulletinListComponent implements OnInit {
 
-  constructor() { }
+  BASE_URL: string = BASE_URL;
+  student: Student;
 
-  ngOnInit() {
+  constructor(private tokenStorage: TokenStorageService, private authService: AuthService) {
   }
 
+  ngOnInit() {
+    if (this.authService.getIsLoggedUser()) {
+      this.student = this.tokenStorage.getLoggedUser();
+    }
+  }
+
+  displayBulletins(): boolean {
+    return this.student &&  !_.isEmpty(this.student.bulletins);
+  }
 }

@@ -42,15 +42,13 @@ export const ROUTES: any | RouteInfo[][] =
 })
 export class LoggedUserComponent implements OnInit {
 
+  ROUTER_LINK: RouterLink;
+
   @Input('loggedUser') loggedUser: User;
   @Input('roles') roles: string[];
 
-  username: string;
   authority: string;
-  photo: string;
   navBar = [];
-  newNotifications: number;
-  ROUTER_LINK: RouterLink;
 
   constructor(private tokenStorage: TokenStorageService, private router: Router, private translate: TranslateService) { }
 

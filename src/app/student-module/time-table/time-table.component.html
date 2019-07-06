@@ -1,3 +1,23 @@
-<p>
-  time-table works!
-</p>
+<div class="card card-profile">
+  <div class="card-body">
+    <div *ngIf="student && student.group && student.group.timetabeUrl != null; else noContent">
+        <div class="row">
+            <div class="col-md-10"></div>
+            <div class="col-md-2">
+              <a mat-raised-button class="btn btn-link" [href]="BASE_URL + student.group.timetabeUrl" target="_blank" download="emploi-du-temps">
+                <span class="material-icons">arrow_downward</span>Telecharger
+              </a>
+            </div>
+          </div>
+          <div class="row">
+              <a mat-raised-button class="btn btn-link" [href]="BASE_URL + student.group.timetabeUrl" target="_blank" download="emploi-du-temps">
+                  <img class="img time-table" [src]="BASE_URL + student.group.timetabeUrl" [alt]="student.group.name + ' Time table'"
+                   default="assets/images/image-not-found-404.png"/>
+                </a>
+        </div>
+    </div>
+    <ng-template #noContent>L'emploi du temps n'est pas disponible.
+      <img class="img time-table" src="assets/images/image-not-found-404.png" [alt]="student + ' Time table'"/>
+    </ng-template>
+  </div>
+</div>

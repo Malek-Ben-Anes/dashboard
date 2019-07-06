@@ -80,6 +80,6 @@ import {
     MatTreeModule,
   ],
 })
-export class DemoMaterialModule {}
+export class MaterialModule {}
 
 

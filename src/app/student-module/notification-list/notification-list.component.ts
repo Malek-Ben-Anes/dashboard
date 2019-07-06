@@ -1,4 +1,11 @@
+import * as _ from 'lodash';
 import { Component, OnInit } from '@angular/core';
+import { NotificationService } from 'app/services/notification.service';
+import { TokenStorageService } from 'app/services/auth/token-storage.service';
+import { AuthService } from 'app/services/auth/auth.service';
+import { Student } from 'app/models/Student';
+import { User } from 'app/models/User';
+import { Notification } from 'app/models/Notification';
 
 @Component({
   selector: 'app-notification-list',
@@ -7,9 +14,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotificationListComponent implements OnInit {
 
-  constructor() { }
+  user: Student;
+  userNotificationsNumber: number;
+  notifications: Notification[];
 
-  ngOnInit() {
+  constructor(private tokenStorage: TokenStorageService, private authService: AuthService,
+              private notificationService: NotificationService) {
   }
 
+  ngOnInit() {
+    if (this.authService.getIsLoggedUser()) {
+      this.user = this.tokenStorage.getLoggedUser();
+      this.userNotificationsNumber = this.formatNotificationsNumber(this.user.newNotifications) ;
+      this.retrieveLoggedUserNotifications(this.user.id);
+    }
+  }
+
+  private formatNotificationsNumber(userNotif: any): number {
+    return _.isNil(userNotif) || _.isNaN(userNotif) ? 0 : userNotif;
+  }
+
+  retrieveLoggedUserNotifications (userId: string): void {
+    this.notificationService.find(userId)
+        .then(notifications => {this.notifications = notifications; console.log(this.notifications)})
+        .catch(err => console.log(err));
+  }
 }

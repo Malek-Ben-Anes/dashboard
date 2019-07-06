@@ -21,8 +21,7 @@
         </div>
         <div class="col-3">
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Enter your observation" type="number" [(ngModel)]="newEvaluationMark.mark" [disabled]="isDisabled(newEvaluationMark)" max="20"
-              min="0" required>
+            <input matInput placeholder="Enter your observation" type="text" [(ngModel)]="newEvaluationMark.mark" [disabled]="isDisabled(newEvaluationMark)" required>
           </mat-form-field>
         </div>
         <div class="col-1" *ngIf="isDisabled(newEvaluationMark)">

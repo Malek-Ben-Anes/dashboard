@@ -48,7 +48,7 @@ export class TeacherProfileComponent implements OnInit {
       birthDate: [new Date, Validators.required],
       phone: ['', Validators.required],
       gender: [Gender, Validators.required],
-      adress: ['', Validators.required],
+      address: ['', Validators.required],
       description: ['', Validators.required],
     });
     //this.dataService.setFirstForGroup(this.teacherForm);
@@ -63,7 +63,7 @@ export class TeacherProfileComponent implements OnInit {
       email: teacher.email,
       birthDate: teacher.birthDate,
       gender: <Gender> teacher.gender,
-      adress: teacher.address,
+      address: teacher.address,
       description: teacher.description,
     });
     this.teacherForm.get('birthDate').setValue(new Date(this.teacher.birthDate));

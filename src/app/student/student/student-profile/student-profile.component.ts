@@ -72,7 +72,7 @@ export class StudentProfileComponent implements OnInit {
       group: [null, Validators.required],
       parentName: ['', Validators.required],
       parentPhone: ['', Validators.required],
-      adress: ['', Validators.required],
+      address: ['', Validators.required],
       description: ['', Validators.required],
     });
   }
@@ -84,7 +84,7 @@ export class StudentProfileComponent implements OnInit {
       phone: student.phone,
       email: student.email,
       gender: <Gender> student.gender,
-      adress: student.address,
+      address: student.address,
       parentName: student.parentName,
       parentPhone: student.parentPhone,
       description: student.description,
