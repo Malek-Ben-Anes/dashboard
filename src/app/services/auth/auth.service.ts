@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import * as jwt_decode from "jwt-decode";
 
 import { JwtResponse, jwtToken } from './jwt-response';
@@ -22,8 +22,9 @@ const SIGN_UP_URL = BASE_API_URL + 'auth/signup';
 })
 export class AuthService {
 
+  private subject = new Subject<User>();
   private isLoggedUser: boolean;
-  private loggedUser: User;
+  private _loggedUser: User;
   private role: string[];
   private jwtResponse: JwtResponse;
 
@@ -48,14 +49,29 @@ export class AuthService {
 
   // TODO remove promise @Deprecated
   public getLoggedUser(): Promise<User> {
-    if (this.loggedUser == null) {
-      this.loggedUser = this.tokenStorage.getLoggedUser();
+    if (this._loggedUser == null) {
+      this._loggedUser = this.tokenStorage.getLoggedUser();
     }
-    return new Promise((resolve, reject) => this.loggedUser ? resolve(this.loggedUser) : reject(this.loggedUser));
+    return new Promise((resolve, reject) => this._loggedUser ? resolve(this._loggedUser) : reject(this._loggedUser));
   }
 
   public saveLoggedUser(loggedUser: User) {
-    this.loggedUser = loggedUser;
+    this._loggedUser = loggedUser;
+  }
+
+  public emitUserSubject() {
+    this._loggedUser = this.tokenStorage.getLoggedUser();
+    this.subject.next(this._loggedUser);
+  }
+
+  saveUser(user: User) {
+    this._loggedUser = user;
+    this.tokenStorage.saveLoggedUser(this._loggedUser)
+    this.subject.next(this._loggedUser);
+  }
+
+  getUser(): Observable<User> {
+    return this.subject.asObservable();
   }
 
   public getIsLoggedUser(): boolean {
@@ -94,7 +110,7 @@ export class AuthService {
     this.tokenStorage.saveUserPhoto(JwtTokenInfo.user && JwtTokenInfo.user.photo);
     this.tokenStorage.saveUserNewNotifications(String(JwtTokenInfo.user.newNotifications));
     this.tokenStorage.saveLoggedUser(JwtTokenInfo.user);
-    this.saveLoggedUser(JwtTokenInfo.user);
+    this.saveUser(JwtTokenInfo.user);
     this.saveIsLoggedUser(true);
   }
 

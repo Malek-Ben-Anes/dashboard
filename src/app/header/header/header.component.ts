@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { TokenStorageService } from 'app/services/auth/token-storage.service';
 import { User } from 'app/models/User';
 import { AuthService } from 'app/services/auth/auth.service';
+import { Subscription } from 'rxjs';
 
 var notifications = {'notifsNumber' : 0 };
 
@@ -11,9 +12,10 @@ var notifications = {'notifsNumber' : 0 };
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 
-  isLogged: boolean = false;
+  loggedUserSubscription: Subscription;
+  isLogged = false;
   loggedUser: User;
   roles: string[];
 
@@ -23,8 +25,13 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     if (this.authService.getIsLoggedUser()) {
       this.isLogged = true;
-      this.loggedUser = this.tokenStorage.getLoggedUser();
+      this.loggedUserSubscription = this.authService.getUser().subscribe(loggedUser => this.loggedUser = loggedUser);
+      this.authService.emitUserSubject();
       this.roles = this.tokenStorage.getAuthorities();
     }
+  }
+
+  ngOnDestroy() {
+    this.loggedUserSubscription.unsubscribe();
   }
 }

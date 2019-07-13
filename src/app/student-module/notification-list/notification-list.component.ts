@@ -24,9 +24,10 @@ export class NotificationListComponent implements OnInit {
 
   ngOnInit() {
     if (this.authService.getIsLoggedUser()) {
-      this.user = this.tokenStorage.getLoggedUser();
-      this.userNotificationsNumber = this.formatNotificationsNumber(this.user.newNotifications) ;
-      this.retrieveLoggedUserNotifications(this.user.id);
+      this.authService.getUser().subscribe(loggedUser => {this.user = loggedUser
+        this.userNotificationsNumber = this.formatNotificationsNumber(this.user.newNotifications) ;
+        this.retrieveLoggedUserNotifications(this.user.id);
+      });
     }
   }
 

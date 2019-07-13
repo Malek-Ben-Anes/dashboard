@@ -29,12 +29,8 @@ export class NotificationsComponent implements OnInit {
 
   private RestoreSomeDate() {
     let userNotif: number;
-    this.authService.getLoggedUser()
-                    .then((user: User) => 
-                    { this.loggedUser = user;
-                      userNotif = user.newNotifications;
-                      this.retrieveLoggedUserNotifications(user.id);
-                    });
+    this.authService.getUser().subscribe(user => { this.loggedUser = user; userNotif = user.newNotifications;
+                                                   this.retrieveLoggedUserNotifications(user.id); });
     this.newNotifications = _.isNil(userNotif) || _.isNaN(userNotif) ? 0 : userNotif;
   }
 

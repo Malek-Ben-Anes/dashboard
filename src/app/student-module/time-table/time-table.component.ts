@@ -19,7 +19,7 @@ export class TimeTableComponent implements OnInit {
 
   ngOnInit() {
     if (this.authService.getIsLoggedUser()) {
-      this.student = this.tokenStorage.getLoggedUser();
+      this.authService.getUser().subscribe(loggedUser => this.student = loggedUser);
     }
   }
 
