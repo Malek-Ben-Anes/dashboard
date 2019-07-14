@@ -7,10 +7,11 @@ import { RouterModule } from '@angular/router';
 import { LoggedUserComponent } from './logged-user/logged-user.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { HeaderComponent } from './header/header.component';
+import { NotificationBellComponent } from './notification-bell/notification-bell.component';
 import { HttpClient } from '@angular/common/http';
 
 @NgModule({
-  declarations: [LoggedUserComponent, LandingPageComponent, HeaderComponent],
+  declarations: [LoggedUserComponent, LandingPageComponent, HeaderComponent, NotificationBellComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -21,7 +22,7 @@ import { HttpClient } from '@angular/common/http';
         deps: [HttpClient]
       }
     }),
-  ],
+  ], 
   exports: [
     HeaderComponent,
     LoggedUserComponent,
