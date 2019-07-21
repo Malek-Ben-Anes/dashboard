@@ -20,5 +20,10 @@
     "header.student.marks": "Notes",
     "header.student.timetable": "Emploi du temps",
     "header.student.bulletins": "Bulletins",
-    "header.student.notifications": "Notifications"    
+    "header.student.notifications": "Notifications",
+    
+    "header.teacher.profile": "Mon Profile",
+    "header.teacher.timetable": "Emploi du temps",
+    "header.teacher.groups": "Groupes",
+    "header.teacher.marks": "Notes" 
 }

@@ -14,5 +14,10 @@
     "header.marks": "Notes",
     "header.bulletins": "Bulletins",
     "header.notifications": "Notifications",
-    "header.logout": "Se deconnecter"
+    "header.logout": "Se deconnecter",
+
+    "header.teacher.profile": "Mon Profile",
+    "header.teacher.timetable": "Emploi du temps",
+    "header.teacher.groups": "Groupes",
+    "header.teacher.marks": "Notes" 
 }

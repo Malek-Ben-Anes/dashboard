@@ -1,0 +1,71 @@
+import { NgModule } from '@angular/core';
+import { CommonModule, } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { Routes, RouterModule } from '@angular/router';
+import { ContentComponent } from 'app/content/content.component';
+import { Library } from 'app/models/Library';
+import { AuthGuardService } from 'app/services/auth/auth-guard.service';
+import { TeacherProfileComponent } from './teacher-profile/teacher-profile.component';
+import { TeacherTimeTableComponent } from './teacher-time-table/teacher-time-table.component';
+import { GroupListComponent } from './group-list/group-list.component';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { StudentsMarksComponent } from './students-marks/students-marks.component';
+
+export class TeacherRouterLink {
+    public static SHOW_PROFILE = 'show-teacher-profile';
+    public static SHOW_TIME_TABLE = 'show-teacher-time-table';
+    public static SHOW_GROUP_LIST = 'show-groups-list';
+    public static SHOW_MARK_LIST = 'assign-students-marks';
+    public static SHOW_NOTIFICATIONS = 'prof-notifications';
+}
+
+const routes: Routes = [
+    {
+        path: 'app',
+        component: ContentComponent,
+        children: [
+            {
+                path: TeacherRouterLink.SHOW_PROFILE,
+                canActivate: [AuthGuardService],
+                component: TeacherProfileComponent,
+                data: { expectedRole: Library.ROLE_TEACHER }
+            },
+            {
+                path: TeacherRouterLink.SHOW_TIME_TABLE,
+                canActivate: [AuthGuardService],
+                component: TeacherTimeTableComponent,
+                data: { expectedRole: Library.ROLE_TEACHER }
+            },
+            {
+                path: TeacherRouterLink.SHOW_GROUP_LIST,
+                canActivate: [AuthGuardService],
+                component: GroupListComponent,
+                data: { expectedRole: Library.ROLE_TEACHER }
+            },
+            {
+                path: TeacherRouterLink.SHOW_MARK_LIST,
+                canActivate: [AuthGuardService],
+                component: StudentsMarksComponent,
+                data: { expectedRole: Library.ROLE_TEACHER }
+            },
+            {
+                path: TeacherRouterLink.SHOW_NOTIFICATIONS,
+                canActivate: [AuthGuardService],
+                component: NotificationsComponent,
+                data: { expectedRole: Library.ROLE_TEACHER }
+            },
+        ]
+    }
+];
+
+@NgModule({
+    imports: [
+        CommonModule,
+        BrowserModule,
+        RouterModule.forRoot(routes)
+    ],
+    exports: [
+    ],
+})
+export class TeacherRoutingModule { }
+

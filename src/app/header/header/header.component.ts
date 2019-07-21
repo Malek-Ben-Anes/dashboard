@@ -4,9 +4,6 @@ import { User } from 'app/models/User';
 import { AuthService } from 'app/services/auth/auth.service';
 import { Subscription } from 'rxjs';
 
-var notifications = {'notifsNumber' : 0 };
-
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',

@@ -60,7 +60,6 @@ import { NewsComponent } from './landing-page/news/news.component';
 import { ClubsComponent } from './landing-page/clubs/clubs.component';
 import { ContactComponent } from './landing-page/contact/contact.component';
 import { StudentFilterComponent } from './student/student-list/student-filter/student-filter.component';
-import { NavTabComponent } from './commons/nav-tab/nav-tab.component';
 import { TimeTableComponent } from './student/student/time-table/time-table.component';
 import { GroupDetailComponent } from './group/group/group-detail/group-detail.component';
 import { SubjectFormComponent } from './subject/subject-form/subject-form.component';
@@ -84,8 +83,9 @@ import { ImagePreloadDirective } from './commons/image-preload/image-preload.dir
 import { ErrorDialogComponent } from './commons/error-dialog/error-dialog.component';
 import { AdminComponent } from './admin/admin.component';
 import { StudentModuleModule } from './student-module/student-module.module';
-import { PlatformModule } from '@angular/cdk/platform';
 import { HeaderModule } from './header/header.module';
+import { AdminModuleModule } from './admin-module/admin-module.module';
+import { TeacherModuleModule } from './teacher-module/teacher-module.module';
 
 @NgModule({
   imports: [
@@ -110,8 +110,10 @@ import { HeaderModule } from './header/header.module';
     DragDropModule,
     ScrollDispatchModule,
     MatProgressSpinnerModule,
-    StudentModuleModule,
     HeaderModule,
+    AdminModuleModule,
+    StudentModuleModule,
+    TeacherModuleModule
   ],
   declarations: [
     AppComponent,
@@ -157,7 +159,6 @@ import { HeaderModule } from './header/header.module';
     ClubsComponent,
     ContactComponent,
     StudentFilterComponent,
-    NavTabComponent,
     TimeTableComponent,
     SubjectFormComponent,
     SubjectComponent,

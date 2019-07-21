@@ -66,19 +66,19 @@ export class UpdatePasswordComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
     if (this.passwordForm.invalid) {
       return;
     }
-    this.student.password = this.passwordForm.get("password").value;
-    this.studentService
-      .updatePassword(this.student)
-      .subscribe(
-        (student) => {
-        alert("password updated successfully!");
+
+    this.submitted = true;
+    const updatePassword = true;
+    this.student.password = this.passwordForm.get('password').value;
+    this.studentService.update(this.student, updatePassword)
+      .then((student) => {
         this.student = student;
-        this.modifiedStudent.emit(this.student);},
-        err => console.log("password update failed!")
-      );
+        this.modifiedStudent.emit(this.student);
+        alert('password updated successfully!');
+      })
+      .catch(err => console.log('password update failed!'));
   }
 }

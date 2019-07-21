@@ -1,5 +1,5 @@
 import * as _ from "lodash";
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Subject, Observable } from "rxjs";
 
@@ -57,14 +57,20 @@ export class StudentService {
     return _.find(this.students, { id: studentId });
   }
 
-
-
-  /*getSingleStudent(id: string): Observable<Student> {
-    return this.http.get<Student>(STUDENT_URL + "/" + id);
-  }*/
-  updatePassword(studentRequest: Student): Observable<Student> {
-    return this.http
-      .put<Student>(STUDENT_URL + '/' + studentRequest.id, studentRequest);
+  update(student: Student, updatePassword?: boolean): Promise<Student> {
+    const Url = `${STUDENT_URL}/${student.id}`
+    return new Promise((resolve, reject) => {
+      if (updatePassword != null) {
+        const httpOptions = {
+          params: new HttpParams().set('updatePassword', String(updatePassword))
+        };
+        this.http.put<Student>(Url, student, httpOptions)
+        .subscribe(studentUpdated => resolve(studentUpdated), err => reject(err));
+      } else {
+        this.http.put<Student>(Url, student)
+            .subscribe(studentUpdated => resolve(studentUpdated), err => reject(err));
+      }
+    });
   }
 
   uploadFile(file: File) {

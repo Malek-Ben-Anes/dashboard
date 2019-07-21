@@ -65,7 +65,7 @@ export class StudentComponent implements OnInit, OnChanges {
 
   /**
  * Get event from child Component and refersh student
- * @param studentToPersist 
+ * @param studentToPersist
  */
   refresh(student: Student) {
     this.student = student;
@@ -73,13 +73,11 @@ export class StudentComponent implements OnInit, OnChanges {
   }
 
   private update(studentRequest: Student): void {
-    this.studentService.updateStudent(studentRequest).subscribe((StudentData) => {
+    this.studentService.update(studentRequest).then((StudentData) => {
       this.student = StudentData;
       this.tabs = this.updateTabs();
       console.log('student updated', this.student);
-    }, (err) => {
-      console.log(err)
-    });
+    }).catch((err) => console.log(err));
   }
 
   private create (studentRequest: Student): void {

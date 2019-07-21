@@ -21,6 +21,7 @@ export class BulletinService {
     formdata.append('trimester', trimester);
 
     return this.http.post<Student>(BULLETIN_UPLOAD_URL, formdata, {
+      headers: {'Content-Type': 'multipart/form-data; charset=utf-8'},
       reportProgress: true,
       observe: 'events'
     });

@@ -25,7 +25,6 @@ export class BulletinComponent implements OnInit {
   trimesters = Object.keys(Trimester);
   private roles: string[];
 
-
   constructor(private tokenStorage: TokenStorageService, private bulletinService: BulletinService) { }
 
   ngOnInit() {

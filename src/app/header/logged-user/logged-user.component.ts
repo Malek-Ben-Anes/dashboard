@@ -18,13 +18,16 @@ export const ROUTES: any | RouteInfo[][] =
 {
   ADMIN_NAVIGATION_BAR: [{ 'router': '/app/students', 'label': 'header.students' },
   { 'router': '/app/teachers', 'label': 'header.teachers' },
-  { 'router': '/app/subjects', 'label': 'header.program' },
   { 'router': '/app/groups', 'label': 'header.groups' },
+  { 'router': '/app/subjects', 'label': 'header.program' },
   { 'router': '/app/notifications', 'label': 'header.notifications', 'icon': 'bell' }],
 
-  TEACHER_NAVIGATION_BAR: [{ 'router': '/app/marks', 'label': 'header.marks' },
-  { 'router': '/app/lessons', 'label': 'Lessons' },
-  { 'router': '/app/notifications', 'label': 'header.notifications', 'icon': 'bell' }],
+  TEACHER_NAVIGATION_BAR: [
+  { 'router': '/app/show-teacher-profile', 'label': 'header.teacher.profile' },
+  { 'router': '/app/show-teacher-time-table', 'label': 'header.teacher.timetable' },
+  { 'router': '/app/show-groups-list', 'label': 'header.teacher.groups' },
+  { 'router': '/app/assign-students-marks', 'label': 'header.teacher.marks' },
+  { 'router': '/app/prof-notifications', 'label': 'header.notifications', 'icon': 'bell' }],
 
   STUDENT_NAVIGATION_BAR: [{ 'router': '/app/show-profile', 'label': 'header.student.profile' },
   { 'router': '/app/show-marks-list', 'label': 'header.student.marks' },
