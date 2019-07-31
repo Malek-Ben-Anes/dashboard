@@ -1,0 +1,101 @@
+<div class="col-md-12">
+  <div class="row">
+    <button (click)="onToggleButton('GROUP')" class="btn margin-30"
+      [ngClass]="selected !== 'GROUP' ? 'btn-outline-secondary' : 'btn-info'">Groupes</button>
+    <button (click)="onToggleButton('STUDENT')" class="btn margin-30"
+      [ngClass]="selected !== 'STUDENT' ? 'btn-outline-secondary' : 'btn-info'">Eleves</button>
+
+    <mat-form-field class="example-full-width" *ngIf="selected === 'STUDENT'">
+      <mat-select matInput placeholder="group students" (selectionChange)="onSelectGroup($event.value)">
+        <mat-option *ngFor="let grp of allGroups" [value]="grp">
+          {{ grp.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="clearfix"></div>
+    <!-- <mat-form-field class="example-full-width">
+     <mat-select matInput placeholder="Group" formControlName="group">
+        <mat-option *ngFor="let grp of groups" [value]="grp">
+          <mat-option [value]="null" [disabled]="true">Select Category</mat-option> -->
+    <!-- <mat-option *ngFor="let grp of groups" [value]="grp" [selected]="grp.name == student.group.name"> 
+          {{ grp.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>-->
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="notifForm">
+          <div class="row">
+            <div class="col-md-5">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Titre" formControlName="title" required>
+              </mat-form-field>
+            </div>
+            <div class="col-md-3">
+              <mat-form-field class="example-full-width">
+                <mat-select matInput placeholder="Type" formControlName="type" required>
+                  <mat-option *ngFor="let notif of NOTIFS" [value]="notif" required>{{notif}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Notifier" formControlName="notifier" [disabled]="'disabled'">
+              </mat-form-field>
+            </div>
+            <div class="col-md-10">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Contenu" type="text" formControlName="content" required>
+              </mat-form-field>
+            </div>
+            <div class="col-md-2">
+              <button mat-raised-button type="submit" (click)="openDialog()"
+                class="btn btn-warning pull-right">Notifier</button>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card card-profile">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div *ngIf="selected == 'GROUP'">
+          <mat-selection-list #selections (selectionChange)="onSelectCheckBox($event, selections.selectedOptions)">
+            <mat-list-option *ngFor="let group of allGroups" [value]="group" selected>
+              {{group.name}}
+            </mat-list-option>
+          </mat-selection-list>
+          <p>
+            Options selected: {{selections && selections.selectedOptions.selected.length}}
+          </p>
+        </div>
+        <!-- <ng-template #teacherList> -->
+        <div *ngIf="selected == 'STUDENT'">
+          <div class="col-md-12">
+            <mat-selection-list #selections (selectionChange)="onSelectCheckBox($event, selections.selectedOptions)">
+              <mat-list-option *ngFor="let student of StudentsOfSelectedGroup" [value]="student" selected>
+                {{student.name}}
+              </mat-list-option>
+            </mat-selection-list>
+          </div>
+          <p>
+            Elements selectionnes: {{selections && selections.selectedOptions.selected.length}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- https://angular.io/api/common/NgSwitch 
+https://codecraft.tv/courses/angular/built-in-directives/ngif-and-ngswitch/
+-->

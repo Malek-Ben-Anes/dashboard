@@ -4,7 +4,7 @@ import { BASE_API_URL } from 'app/app.component';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const NOTIFICATION_URL: string = BASE_API_URL + "notifications/";
+const NOTIFICATION_URL: string = BASE_API_URL + 'notifications/';
 
 @Injectable({
   providedIn: 'root'

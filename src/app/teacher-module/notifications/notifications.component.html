@@ -1,3 +1,12 @@
-<p>
-  notifications works!
-</p>
+<div class="card card-profile">
+  <div class="card-body">
+          <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+                  <mat-tab *ngFor="let tab of TABS; let i = index" [label]="TABS[i].label"></mat-tab>
+          </mat-tab-group>
+  </div>
+</div>
+<app-notifcation-list *ngIf="selected.value === TABS[0].NOTIFICATIONS_LIST" [notifications]="notifications"
+        [newNotifications]="newNotifications">
+</app-notifcation-list>
+
+<app-users-notification-form *ngIf="selected.value === TABS[1].NOTIFY_USERS && loggedUser != null" [loggedUser]="loggedUser"></app-users-notification-form>

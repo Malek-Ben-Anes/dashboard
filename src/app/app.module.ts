@@ -180,7 +180,11 @@ import { TeacherModuleModule } from './teacher-module/teacher-module.module';
     ImagePreloadDirective,
     ErrorDialogComponent,
   ],
-  exports: [AvatarComponent, MaterialModule],
+  exports: [
+    AvatarComponent,
+    MaterialModule,
+    ImagePreloadDirective
+  ],
   entryComponents: [
     LessonTimeTableComponent,
     DialogContentExampleDialogComponent,

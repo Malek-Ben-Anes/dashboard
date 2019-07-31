@@ -16,7 +16,7 @@ export class TeacherProfileComponent implements OnInit {
   BASE_URL: string = BASE_URL;
 
   form: FormGroup;
-  isLogged: boolean = false;
+  isLogged = false;
   user: Teacher;
 
   constructor(private tokenStorage: TokenStorageService, private authService: AuthService, private formBuilder: FormBuilder) {

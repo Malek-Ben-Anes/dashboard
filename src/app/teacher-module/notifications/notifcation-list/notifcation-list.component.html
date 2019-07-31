@@ -1,0 +1,41 @@
+<div class="card card-profile">
+  <div class="card-body">
+    <div *ngIf="notifications != null; else noContent">
+      <div class="table-responsive">
+        <table class="table">
+          <thead class=" text-primary">
+            <th>
+              Title
+            </th>
+            <th>
+              Content
+            </th>
+            <th>
+              Notifier
+            </th>
+            <th>
+              Date
+            </th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let notification of notifications; let i=index"  [ngClass]="i < newNotifications ? 'backgroud-ghost-white' : ''">
+              <td class="text-primary">
+                <strong>{{notification.title}}</strong>
+              </td>
+              <td>
+                <p>{{notification.content}}</p>
+              </td>
+              <td class="text-primary">
+                <strong>{{notification.notifier.firstname}} {{notification.notifier.lastname}}</strong>
+              </td>
+              <td>
+                <p>{{notification.createdAt | date:'d/M/yyyy'}} à {{notification.createdAt | date:'h:mm'}}</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <ng-template #noContent>Content to render when condition is false.</ng-template>
+  </div>
+</div>

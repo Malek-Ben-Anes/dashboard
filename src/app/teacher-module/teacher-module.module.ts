@@ -9,9 +9,18 @@ import { TeacherTimeTableComponent } from './teacher-time-table/teacher-time-tab
 import { GroupListComponent } from './group-list/group-list.component';
 import { StudentsMarksComponent } from './students-marks/students-marks.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { NotifcationListComponent } from './notifications/notifcation-list/notifcation-list.component';
+import { UsersNotificationFormComponent } from './notifications/users-notification-form/users-notification-form.component';
 
 @NgModule({
-  declarations: [TeacherProfileComponent, TeacherTimeTableComponent, GroupListComponent, StudentsMarksComponent, NotificationsComponent],
+  declarations: [
+    TeacherProfileComponent,
+    TeacherTimeTableComponent,
+    GroupListComponent,
+    StudentsMarksComponent,
+    NotificationsComponent,
+    NotifcationListComponent,
+    UsersNotificationFormComponent],
   imports: [
     CommonModule,
     TeacherRoutingModule,
