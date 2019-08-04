@@ -68,8 +68,9 @@ export class GroupMarksStudentDetailComponent implements OnInit, OnChanges {
 
   private findLessonsByGroupId(groupId: string, teacherId: string) {
     this.lessonService.findAll()
-        .then(lessons => this.lessonsOfCurrentGroup = _.filter(lessons, (lesson: Lesson) =>
-                                         lesson.id.groupId === groupId && lesson.id.groupId === teacherId))
+        .then(lessons => { console.log(lessons, teacherId);
+          this.lessonsOfCurrentGroup = _.filter(lessons, (lesson: Lesson) =>
+                                         lesson.id.groupId === groupId && lesson.id.teacherId === teacherId)})
         .catch(err => console.log(err));
   }
 
