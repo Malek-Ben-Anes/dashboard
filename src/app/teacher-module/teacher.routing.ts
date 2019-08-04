@@ -7,9 +7,8 @@ import { Library } from 'app/models/Library';
 import { AuthGuardService } from 'app/services/auth/auth-guard.service';
 import { TeacherProfileComponent } from './teacher-profile/teacher-profile.component';
 import { TeacherTimeTableComponent } from './teacher-time-table/teacher-time-table.component';
-import { GroupListComponent } from './group-list/group-list.component';
+import { GroupListComponent } from './group/group-list.component';
 import { NotificationsComponent } from './notifications/notifications.component';
-import { StudentsMarksComponent } from './students-marks/students-marks.component';
 
 export class TeacherRouterLink {
     public static SHOW_PROFILE = 'show-teacher-profile';
@@ -40,12 +39,6 @@ const routes: Routes = [
                 path: TeacherRouterLink.SHOW_GROUP_LIST,
                 canActivate: [AuthGuardService],
                 component: GroupListComponent,
-                data: { expectedRole: Library.ROLE_TEACHER }
-            },
-            {
-                path: TeacherRouterLink.SHOW_MARK_LIST,
-                canActivate: [AuthGuardService],
-                component: StudentsMarksComponent,
                 data: { expectedRole: Library.ROLE_TEACHER }
             },
             {

@@ -1,0 +1,41 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button mat-raised-button type="button" class="btn btn-warning pull-right"
+                            routerLink="/app/group-detail">Ajouter Classe</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Group Level
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let group of groups">
+                                        <td class="text-primary">
+                                            <a [routerLink]="'/app/group-detail/' + group.id"><strong>{{ group.name }}</strong></a>
+                                            <p></p>
+                                        </td>
+                                        <td>
+                                            <p>{{ group.level }}</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

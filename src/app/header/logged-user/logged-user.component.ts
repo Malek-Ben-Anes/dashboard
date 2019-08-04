@@ -26,7 +26,6 @@ export const ROUTES: any | RouteInfo[][] =
   { 'router': '/app/show-teacher-profile', 'label': 'header.teacher.profile' },
   { 'router': '/app/show-teacher-time-table', 'label': 'header.teacher.timetable' },
   { 'router': '/app/show-groups-list', 'label': 'header.teacher.groups' },
-  { 'router': '/app/assign-students-marks', 'label': 'header.teacher.marks' },
   { 'router': '/app/prof-notifications', 'label': 'header.notifications', 'icon': 'bell' }],
 
   STUDENT_NAVIGATION_BAR: [{ 'router': '/app/show-profile', 'label': 'header.student.profile' },

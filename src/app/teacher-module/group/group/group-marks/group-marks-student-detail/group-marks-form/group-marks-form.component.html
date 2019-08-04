@@ -1,0 +1,33 @@
+<div class="chatcontrol">
+  <div class="row margin-12">
+    <div class="col-4">
+      <h4>Weekly evaluation</h4>
+    </div>
+    <div class="col-5"></div>
+    <div class="col-3">
+        <button type="button" class="btn btn-warning btn-sm pull-right" (click)="onSendEvaluation()">Enregistrer</button>
+    </div>
+  </div>
+  <ul class="list-group">
+    <li *ngFor="let newEvaluationMark of newEvaluationMarks">
+      <div class="row">
+        <div class="col-2">
+          <strong>{{newEvaluationMark.lesson.name}} :</strong>
+        </div>
+        <div class="col-5">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Enter your observation" [(ngModel)]="newEvaluationMark.note" [disabled]="isDisabled(newEvaluationMark)" required>
+          </mat-form-field>
+        </div>
+        <div class="col-3">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Enter your observation" type="text" [(ngModel)]="newEvaluationMark.mark" [disabled]="isDisabled(newEvaluationMark)" required>
+          </mat-form-field>
+        </div>
+        <div class="col-1" *ngIf="isDisabled(newEvaluationMark)">
+          <button (click)="onDeleteMark($event, newEvaluationMark)"  type="button" class="btn btn-danger btn-sm">X</button>              
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

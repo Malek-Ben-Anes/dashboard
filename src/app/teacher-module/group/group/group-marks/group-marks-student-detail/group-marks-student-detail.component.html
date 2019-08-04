@@ -1,0 +1,40 @@
+<div class="card height-420 card-3">
+    <div class="card-body">
+        <mat-tab-group>
+            <mat-tab [label]="student.firstname + ' ' + student.lastname + ' Marks:'">
+                <div>
+                    <button mat-raised-button (click)="onFilterByLesson(null)"> All </button>
+                    <button *ngFor="let lesson of lessonsOfCurrentGroup" mat-raised-button
+                        (click)="onFilterByLesson(lesson)">
+                        {{lesson.subjectName}} </button>
+                </div>
+
+                <cdk-virtual-scroll-viewport *ngIf="student.marks" itemSize="50" minBufferPx="200" maxBufferPx="400"
+                    class="example-viewport">
+                    <div *cdkVirtualFor="let mark of marksToDisplay" class="example-item">
+                        <div class="message">
+                            <div *ngIf="mark.mark <= 10 ">
+                                <p><b>{{mark.lesson.name}}:</b> {{mark.note}}
+                                    <span class="red-color">{{mark.mark}}</span></p>
+                            </div>
+                            <div *ngIf="mark.mark > 10">
+                                <p><b>{{mark.lesson.name}}:</b> {{mark.note}}
+                                    <span class="green-color">{{mark.mark}}</span></p>
+                            </div>
+                        </div>
+                        <div class="timeform">
+                            <i class="fa fa-clock-o" aria-hidden="true"></i> <span class="timestamp">
+                                {{mark.createdAt | date:'dd/MM/yyyy' }}
+                            </span>
+                        </div>
+                        <hr />
+                    </div>
+                </cdk-virtual-scroll-viewport>
+            </mat-tab>
+            <mat-tab label="Send Evaluation">
+                <app-group-marks-form *ngIf="student != null" [student]="student" (refreshStudent)="refresh($event)" [lessons]="lessonsOfCurrentGroup">
+                </app-group-marks-form>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>

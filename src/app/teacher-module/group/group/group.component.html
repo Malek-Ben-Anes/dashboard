@@ -1,0 +1,18 @@
+<div class="card card-profile">
+  <div class="card-body">
+    <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
+      <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab.label" [disabled]="tab.disabled"></mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
+
+<app-group-detail *ngIf="selected.value === tabIndex.EDIT_CLASS && group != null" [group]="group" [isNew]="isNew"
+(group)="refresh($event)"></app-group-detail>
+
+<app-student-assign *ngIf="selected.value === tabIndex.STUDENTS && group != null" [group]="group" (group)="refresh($event)">
+</app-student-assign>
+
+<app-group-timetable *ngIf="selected.value === tabIndex.TIMETABLE && group != null" id="timetable" [group]="group"
+  (group)="refresh($event)"></app-group-timetable>
+
+<app-group-marks *ngIf="selected.value === tabIndex.MARKS && group != null" id="marks" [group]="group"></app-group-marks>
