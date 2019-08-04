@@ -21,8 +21,8 @@ export class GroupComponent implements OnInit {
 
   isNew = true;
   BASE_URL: string = BASE_URL;
-  tabIndex = {'EDIT_CLASS': 0,  'TIMETABLE': 1, 'STUDENTS': 2, 'MARKS': 3};
-  tabs = this.tabs = this.updateTabs();
+  tabIndex = {'STUDENTS': 0,  'TIME_TABLE': 1, 'MARKS': 2};
+  tabs = this.updateTabs();
 
   selected = new FormControl(0);
   teacher: Teacher;
@@ -65,8 +65,9 @@ export class GroupComponent implements OnInit {
   }
 
   private updateTabs() {
-    return [{'label': 'Editer classe', 'disabled': false}, {'label': 'Emploi du temps', 'disabled': this.isNew},
-            {'label': 'Eleves', 'disabled': this.isNew}, {'label': 'Notes & Stats', 'disabled': this.isNew}];
+    return [{'label': 'Eleves', 'disabled': false},
+            {'label': 'Emploi du temps', 'disabled': this.isNew},
+            {'label': 'Notes & Stats', 'disabled': this.isNew}];
   }
 
   checked = false;

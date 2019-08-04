@@ -6,13 +6,8 @@
   </div>
 </div>
 
-<app-group-detail *ngIf="selected.value === tabIndex.EDIT_CLASS && group != null" [group]="group" [isNew]="isNew"
-(group)="refresh($event)"></app-group-detail>
+<app-group-student-list *ngIf="selected.value === tabIndex.STUDENTS && group != null" [students]="group.students"></app-group-student-list>
 
-<app-student-assign *ngIf="selected.value === tabIndex.STUDENTS && group != null" [group]="group" (group)="refresh($event)">
-</app-student-assign>
-
-<app-group-timetable *ngIf="selected.value === tabIndex.TIMETABLE && group != null" id="timetable" [group]="group"
-  (group)="refresh($event)"></app-group-timetable>
+<app-group-timetable *ngIf="selected.value === tabIndex.TIME_TABLE && group != null" id="timetable" [group]="group"></app-group-timetable>
 
 <app-group-marks *ngIf="selected.value === tabIndex.MARKS && group != null" id="marks" [group]="group"></app-group-marks>

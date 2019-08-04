@@ -13,37 +13,13 @@ export class GroupTimetableComponent implements OnInit {
 
   @Input('group') group: Group;
 
-  @Output()
-  refreshEvent = new EventEmitter<Group>();
-
   BASE_URL = BASE_URL;
   response;
 
   selectedFile: File
-  isUploading = false;
 
   constructor(private groupService: GroupService) { }
 
   ngOnInit() {
-  }
-
-  onFileChanged(event) {
-    this.selectedFile = event.target.files[0]
-  }
-
-  onUpload() {
-    this.groupService.uploadTimeTable(this.group.id, this.selectedFile)
-    .subscribe((response: HttpResponse<Group>) => {
-      this.isUploading = true;
-      if (response.type === 4) {
-        this.isUploading = false;
-        this.group.timetabeUrl = response.body.timetabeUrl + '?random+\=' + Math.random();
-        this.refreshEvent.emit(this.group);
-        console.log(this.group);
-      }
-    }, err => {
-      alert('bulletin uploaded est echoué');
-      this.isUploading = false;
-    });
   }
 }

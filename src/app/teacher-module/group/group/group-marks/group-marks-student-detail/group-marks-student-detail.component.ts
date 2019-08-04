@@ -6,6 +6,10 @@ import { Mark } from 'app/models/Mark';
 import { Lesson } from 'app/models/Lesson';
 import { map } from 'rxjs-compat/operator/map';
 import { LessonService } from 'app/services/lesson.service';
+import { User } from 'app/models/User';
+import { TokenStorageService } from 'app/services/auth/token-storage.service';
+import { AuthService } from 'app/services/auth/auth.service';
+import { Teacher } from 'app/models/Teacher';
 
 @Component({
   selector: 'app-group-marks-student-detail',
@@ -16,24 +20,36 @@ export class GroupMarksStudentDetailComponent implements OnInit, OnChanges {
 
   @Input('student') student: Student;
 
+  loggedTeacher: User;
+  isLogged = false;
+
   // All lessons of the current group to be displayed in filter buttons.
   lessonsOfCurrentGroup: Lesson[];
 
   // marks to be displayed after filtering action.
   marksToDisplay: Mark[];
 
-  constructor(private markService: MarkService, private lessonService: LessonService) { }
+  constructor(private tokenStorage: TokenStorageService, private authService: AuthService,
+              private markService: MarkService, private lessonService: LessonService) { }
 
   ngOnInit() {
+    if (this.authService.getIsLoggedUser()) {
+      this.isLogged = true;
+      this.loggedTeacher =  this.tokenStorage.getLoggedUser() as Teacher;
+    }
     this.getAllMarksByStudentId(this.student.id);
-    this.findLessonsByGroupId(this.student.group.id);
+    this.findLessonsByGroupId(this.student.group.id, this.loggedTeacher.id);
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    if (this.authService.getIsLoggedUser()) {
+      this.isLogged = true;
+      this.loggedTeacher =  this.tokenStorage.getLoggedUser() as Teacher;
+    }
     if (changes.student != null) {
       this.student = changes.student.currentValue;
       this.getAllMarksByStudentId(this.student.id);
-      this.findLessonsByGroupId(this.student.group.id);
+      this.findLessonsByGroupId(this.student.group.id, this.loggedTeacher.id);
     }
   }
 
@@ -50,9 +66,10 @@ export class GroupMarksStudentDetailComponent implements OnInit, OnChanges {
     }
   }
 
-  private findLessonsByGroupId(groupId: string) {
+  private findLessonsByGroupId(groupId: string, teacherId: string) {
     this.lessonService.findAll()
-        .then(lessons => this.lessonsOfCurrentGroup = _.filter(lessons, (lesson: Lesson) => lesson.id.groupId === groupId))
+        .then(lessons => this.lessonsOfCurrentGroup = _.filter(lessons, (lesson: Lesson) =>
+                                         lesson.id.groupId === groupId && lesson.id.groupId === teacherId))
         .catch(err => console.log(err));
   }
 
