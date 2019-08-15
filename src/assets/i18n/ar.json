@@ -37,5 +37,28 @@
 
     "student.marks.all": "AR-Toutes les notes",
     "student.marks.noContent": "AR-Vous n'avew pas des notes!",
-    "student.marks.noMarks": "AR-No content"
+    "student.marks.noMarks": "AR-No content",
+
+    "GLBL.label.firstName": "La9eb",
+    "GLBL.label.lastName": "Nom de famille",
+    "GLBL.label.email": "E-mail",
+    "GLBL.label.gender": "Genre",
+    "GLBL.label.phoneNumber": "phoneNumber",
+    "GLBL.label.birthDate": "birthDate",
+    "GLBL.label.levelName": "levelName",
+    "GLBL.label.groupName": "groupName",
+    "GLBL.label.parentName": "parentName",
+    "GLBL.label.parentPhone": "parentPhone",
+    "GLBL.label.address": "address",
+    "GLBL.label.description": "description",
+
+    "LEVEL1": "kism 1",
+    "LEVEL2": "kism 2",
+    "LEVEL3": "kism 3",
+    "LEVEL4": "kism 4",
+    "LEVEL5": "kism 5",
+    "LEVEL6": "kism 6",
+
+    "MALE": "Masculin",
+    "FEMALE": "Femelle"
 }

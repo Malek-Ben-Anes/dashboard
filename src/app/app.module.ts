@@ -86,6 +86,7 @@ import { StudentModuleModule } from './student-module/student-module.module';
 import { HeaderModule } from './header/header.module';
 import { AdminModuleModule } from './admin-module/admin-module.module';
 import { TeacherModuleModule } from './teacher-module/teacher-module.module';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   imports: [
@@ -196,7 +197,8 @@ import { TeacherModuleModule } from './teacher-module/teacher-module.module';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

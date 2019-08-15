@@ -37,5 +37,34 @@
 
     "student.marks.all": "Toutes les notes",
     "student.marks.noContent": "Vous n'avew pas des notes!",
-    "student.marks.noMarks": "No content"
+    "student.marks.noMarks": "No content",
+
+    "GLBL.student": "Eleve",
+    "GLBL.teacher": "Enseignant",
+    "GLBL.admin": "Admin",
+
+    "GLBL.label.firstName": "Prenom",
+    "GLBL.label.lastName": "Nom de famille",
+    "GLBL.label.email": "E-mail",
+    "GLBL.label.gender": "Genre",
+    "GLBL.label.phoneNumber": "phoneNumber",
+    "GLBL.label.birthDate": "birthDate",
+    "GLBL.label.levelName": "levelName",
+    "GLBL.label.groupName": "groupName",
+    "GLBL.label.parentName": "parentName",
+    "GLBL.label.parentPhone": "parentPhone",
+    "GLBL.label.address": "address",
+    "GLBL.label.description": "description",
+
+    "GLBL.label.registered": "Inscrit(e)",
+    
+    "LEVEL1": "Niveau 1",
+    "LEVEL2": "Niveau 2",
+    "LEVEL3": "Niveau 3",
+    "LEVEL4": "Niveau 4",
+    "LEVEL5": "Niveau 5",
+    "LEVEL6": "Niveau 6",
+    
+    "GLBL.MALE": "Masculin",
+    "GLBL.FEMALE": "Femelle"
 }
