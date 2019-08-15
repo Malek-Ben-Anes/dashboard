@@ -2,7 +2,7 @@
     <div class="card-body">
 
         <div>
-            <button mat-raised-button (click)="onFilterByLesson(null)"> All </button>
+            <button mat-raised-button (click)="onFilterByLesson(null)">{{'student.marks.all' | translate}}</button>
             <button *ngFor="let lesson of lessonsOfCurrentstudent" mat-raised-button (click)="onFilterByLesson(lesson)">
                 {{lesson.subjectName}} </button>
         </div>
@@ -28,6 +28,6 @@
                 <hr />
             </div>
         </cdk-virtual-scroll-viewport>
-        <ng-template #noMarks>No content</ng-template>
+        <ng-template #noMarks>{{'student.marks.noContent' | translate}}</ng-template>
     </div>
 </div>

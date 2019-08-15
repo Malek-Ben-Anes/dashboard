@@ -183,7 +183,8 @@ import { TeacherModuleModule } from './teacher-module/teacher-module.module';
   exports: [
     AvatarComponent,
     MaterialModule,
-    ImagePreloadDirective
+    ImagePreloadDirective,
+    TranslateModule
   ],
   entryComponents: [
     LessonTimeTableComponent,

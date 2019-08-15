@@ -5,6 +5,7 @@ import { AuthService } from 'app/services/auth/auth.service';
 import { TokenStorageService } from 'app/services/auth/token-storage.service';
 import { AuthLoginInfo } from 'app/services/auth/login-info';
 import { JwtResponse } from 'app/services/auth/jwt-response';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
   isLogging: boolean = false;
 
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private router: Router) {
+
     this.isLoggedIn = this.tokenStorage.getIsLoggedUser();
     if (this.isLoggedIn) {
       this.router.navigate(['app', 'students']);

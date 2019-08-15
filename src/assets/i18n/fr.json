@@ -25,5 +25,17 @@
     "header.teacher.profile": "Mon Profile",
     "header.teacher.timetable": "Emploi du temps",
     "header.teacher.groups": "Groupes",
-    "header.teacher.marks": "Notes" 
+    "header.teacher.marks": "Notes",
+
+    "signIn.credentials.title": "Entrer votre coordonnes!",
+    "signIn.credentials.email": "E-mail",
+    "signIn.credentials.password": "Mot de passe",
+
+    "student.bulletins.trimester": "Trimestre",
+    "student.bulletins.deliberation": "Notifications",
+    "student.bulletins.noBulletin": "Vous ne disposez d'aucun bulletin.",
+
+    "student.marks.all": "Toutes les notes",
+    "student.marks.noContent": "Vous n'avew pas des notes!",
+    "student.marks.noMarks": "No content"
 }

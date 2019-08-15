@@ -5,6 +5,7 @@ import { User, Gender } from 'app/models/User';
 import { AuthService } from 'app/services/auth/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BASE_URL } from 'app/app.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-student-profile',
@@ -19,7 +20,8 @@ export class StudentProfileComponent implements OnInit {
   isLogged: boolean = false;
   user: Student;
 
-  constructor(private tokenStorage: TokenStorageService, private authService: AuthService, private formBuilder: FormBuilder) {
+  constructor(private tokenStorage: TokenStorageService, private authService: AuthService, private formBuilder: FormBuilder,
+              private translate: TranslateService) {
   }
 
   ngOnInit() {

@@ -6,6 +6,7 @@ import { AuthService } from 'app/services/auth/auth.service';
 import { Student } from 'app/models/Student';
 import { User } from 'app/models/User';
 import { Notification } from 'app/models/Notification';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-notification-list',
@@ -19,7 +20,7 @@ export class NotificationListComponent implements OnInit {
   notifications: Notification[];
 
   constructor(private tokenStorage: TokenStorageService, private authService: AuthService,
-              private notificationService: NotificationService) {
+              private notificationService: NotificationService, private translate: TranslateService) {
   }
 
   ngOnInit() {
