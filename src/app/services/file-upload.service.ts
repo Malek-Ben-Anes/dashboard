@@ -11,7 +11,6 @@ const TEACHERS_URL: string = BASE_API_URL + 'teachers/';
 
 @Injectable({
   providedIn: "root"
-
 })
 export class FileUploadService {
 
@@ -26,6 +25,7 @@ export class FileUploadService {
     const formdata: FormData = new FormData();
     formdata.append('file', file);
     return this.http.post<Student>(PHOTO_UPLOAD_URL, formdata, {
+      headers: {'Content-Type': 'multipart/form-data; charset=utf-8'},
       reportProgress: true,
       observe: 'events'
     });
