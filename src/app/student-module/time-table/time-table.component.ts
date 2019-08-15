@@ -3,6 +3,7 @@ import { TokenStorageService } from 'app/services/auth/token-storage.service';
 import { BASE_URL } from 'app/app.component';
 import { Student } from 'app/models/Student';
 import { AuthService } from 'app/services/auth/auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-time-table',
@@ -14,7 +15,7 @@ export class TimeTableComponent implements OnInit {
   BASE_URL: string = BASE_URL;
   student: Student;
 
-  constructor(private tokenStorage: TokenStorageService, private authService: AuthService) {
+  constructor(private tokenStorage: TokenStorageService, private authService: AuthService, private translate: TranslateService) {
   }
 
   ngOnInit() {

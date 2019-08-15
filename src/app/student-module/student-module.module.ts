@@ -11,6 +11,7 @@ import { StudentProfileComponent } from './student-profile/student-profile.compo
 import { StudentRoutingStudentModule } from './student.routing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MaterialModule } from 'app/material.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [StudentProfileComponent, BulletinListComponent, NotificationListComponent, MarkListComponent, TimeTableComponent],
@@ -20,6 +21,7 @@ import { MaterialModule } from 'app/material.module';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    TranslateModule,
     ScrollDispatchModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

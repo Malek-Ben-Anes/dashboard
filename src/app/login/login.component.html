@@ -12,11 +12,11 @@
     
     <div class="col-md-7">
       <br>
-        <h3>Enter your credentials!</h3>
+        <h3>{{'signIn.credentials.title' | translate}}</h3>
         <br>
       <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
         <div class="form-group">
-          <label for="username">Email</label>
+          <label for="username">{{'signIn.credentials.email' | translate}}</label>
           <input type="text" class="form-control" name="email" [(ngModel)]="form.username" #username="ngModel"
             required />
           <div *ngIf="f.submitted && username.invalid">
@@ -24,7 +24,7 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="password">Password</label>
+          <label for="password">{{'signIn.credentials.password' | translate}}</label>
           <input type="password" class="form-control" name="password" [(ngModel)]="form.password" #password="ngModel"
             required minlength="6" />
           <div *ngIf="f.submitted && password.invalid">

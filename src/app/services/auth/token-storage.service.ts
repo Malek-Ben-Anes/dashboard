@@ -11,6 +11,7 @@ const AUTHORITIES_KEY = 'AuthAuthorities';
 const GENDER_KEY = 'AuthGender';
 const PHOTO_KEY = 'AuthPhoto';
 const NOTIFICATION_KEY = 'NewNotifications';
+const LANGUAGE = 'language';
 
 const TRUE = 'true';
 
@@ -115,5 +116,14 @@ export class TokenStorageService {
       return JSON.parse(sessionStorage.getItem(LOGGED_USER_KEY));
     }
     return;
+  }
+
+  public saveLanguage(language: string) {
+    window.sessionStorage.removeItem(LANGUAGE);
+    window.sessionStorage.setItem(LANGUAGE, language);
+  }
+
+  public getLanguage(): string {
+    return sessionStorage.getItem(LANGUAGE);
   }
 }

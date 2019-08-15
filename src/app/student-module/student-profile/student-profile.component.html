@@ -11,13 +11,13 @@
                         </a>
                     </div>
                     <div class="card-body">
-                        <h6 class="card-category text-gray">Student</h6>
+                        <h6 class="card-category text-gray">{{'GLBL.student' | translate}}</h6>
                         <h4 class="card-title">{{user.firstname}} {{user.lastname}}</h4>
                         <p class="card-description">
                             {{ user.email }}
                         </p>
                         <p class="card-description">
-                            Registred: {{ user.createdAt | date }}
+                            {{'GLBL.label.registered' | translate}}: {{ user.createdAt | date }}
                         </p>
                     </div>
                 </div>
@@ -31,12 +31,12 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="First Name" formControlName="firstname">
+                                        <input matInput placeholder="{{'GLBL.label.firstName' | translate}}" formControlName="firstname">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Last Name" formControlName="lastname" required />
+                                        <input i18n matInput placeholder="{{'GLBL.label.lastName' | translate}}" formControlName="lastname" required />
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -44,18 +44,18 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Email address" type="email"
+                                        <input matInput placeholder="{{'GLBL.label.email' | translate}}" type="email"
                                             formControlName="email" />
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-3">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Genre" type="text" formControlName="gender">
+                                        <input matInput placeholder="{{'GLBL.label.gender' | translate}}" type="text" formControlName="gender">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-3">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Phone Number" type="text" formControlName="phone">
+                                        <input matInput placeholder="{{'GLBL.label.phoneNumber' | translate}}" type="text" formControlName="phone">
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -63,17 +63,17 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Choose Birth Date" formControlName="birthDate" required>
+                                        <input matInput placeholder="{{'GLBL.label.birthDate' | translate}}" formControlName="birthDate" required>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Level" type="text" formControlName="levelName">
+                                        <input matInput placeholder="{{'GLBL.label.levelName' | translate}}" type="text" formControlName="levelName">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Group name" type="text"
+                                        <input matInput placeholder="{{'GLBL.label.groupName' | translate}}" type="text"
                                             formControlName="groupName">
                                     </mat-form-field>
                                 </div>
@@ -82,13 +82,13 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Parent name" type="text"
+                                        <input matInput placeholder="{{'GLBL.label.parentName' | translate}}" type="text"
                                             formControlName="parentName">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Parent Phone" type="text"
+                                        <input matInput placeholder="{{'GLBL.label.parentPhone' | translate}}" type="text"
                                             formControlName="parentPhone">
                                     </mat-form-field>
                                 </div>
@@ -96,7 +96,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Address" type="text" formControlName="address"
+                                        <input matInput placeholder="{{'GLBL.label.address' | translate}}" type="text" formControlName="address"
                                             required>
                                     </mat-form-field>
                                 </div>
@@ -104,7 +104,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <mat-form-field class="example-full-width">
-                                        <textarea matInput placeholder="Additional information"
+                                        <textarea matInput placeholder="{{'GLBL.label.description' | translate}}"
                                             formControlName="description" rows="3"></textarea>
                                     </mat-form-field>
                                 </div>

@@ -7,22 +7,58 @@
     "header.language.FR": "FR",
     "header.language.AR": "AR",
 
-    "header.students": "élèves",
+    "header.students": "AR-élèves",
     "header.teachers": "Enseignants",
     "header.program": "Programme",
     "header.groups": "Classes",
     "header.marks": "Notes",
     "header.bulletins": "Bulletins",
     "header.notifications": "Notifications",
-    "header.logout": "Se deconnecter",
+    "header.logout": "AR-Se deconnecter",
 
-    "header.student.profile": "Mon Profile",
-    "header.student.marks": "Notes",
-    "header.student.timetable": "Emploi du temps",
+    "header.student.profile": "AR-Mon Profile",
+    "header.student.marks": "AR-Notes",
+    "header.student.timetable": "AR-Emploi du temps",
     "header.student.bulletins": "Bulletins",
+    "header.student.notifications": "AR-Notifications",
 
-    "header.teacher.profile": "Mon Profile",
+    "header.teacher.profile": "AR-Mon Profile",
     "header.teacher.timetable": "Emploi du temps",
     "header.teacher.groups": "Groupes",
-    "header.teacher.marks": "Notes" 
+    "header.teacher.marks": "Notes",
+
+    "signIn.credentials.title": "AR-Enter your credentials!",
+    "signIn.credentials.email": "AR-E-mail",
+    "signIn.credentials.password": "AR-Mot de passe",
+
+    "student.bulletins.trimester": "AR-Trimestre",
+    "student.bulletins.deliberation": "AR-Notifications",
+    "student.bulletins.noBulletin": "AR-Vous ne disposez d'aucun bulletin.",
+
+    "student.marks.all": "AR-Toutes les notes",
+    "student.marks.noContent": "AR-Vous n'avew pas des notes!",
+    "student.marks.noMarks": "AR-No content",
+
+    "GLBL.label.firstName": "La9eb",
+    "GLBL.label.lastName": "Nom de famille",
+    "GLBL.label.email": "E-mail",
+    "GLBL.label.gender": "Genre",
+    "GLBL.label.phoneNumber": "phoneNumber",
+    "GLBL.label.birthDate": "birthDate",
+    "GLBL.label.levelName": "levelName",
+    "GLBL.label.groupName": "groupName",
+    "GLBL.label.parentName": "parentName",
+    "GLBL.label.parentPhone": "parentPhone",
+    "GLBL.label.address": "address",
+    "GLBL.label.description": "description",
+
+    "LEVEL1": "kism 1",
+    "LEVEL2": "kism 2",
+    "LEVEL3": "kism 3",
+    "LEVEL4": "kism 4",
+    "LEVEL5": "kism 5",
+    "LEVEL6": "kism 6",
+
+    "MALE": "Masculin",
+    "FEMALE": "Femelle"
 }

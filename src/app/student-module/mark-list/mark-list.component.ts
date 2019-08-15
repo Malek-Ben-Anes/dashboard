@@ -8,6 +8,7 @@ import { MarkService } from 'app/services/mark.service';
 import { LessonService } from 'app/services/lesson.service';
 import { Lesson } from 'app/models/Lesson';
 import { Mark } from 'app/models/Mark';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-mark-list',
@@ -26,6 +27,7 @@ export class MarkListComponent implements OnInit {
   marksToDisplay: Mark[];
 
   constructor(private tokenStorage: TokenStorageService, private authService: AuthService,
+              private translate: TranslateService,
               private markService: MarkService, private lessonService: LessonService) { }
 
   ngOnInit() {

@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-
-const AR = 'ar';
-const EN = 'en';
-const FR = 'fr';
+import { TokenStorageService } from 'app/services/auth/token-storage.service';
 
 export const landingPageNavBar = [{ 'href': 'index.html', 'label': 'header.accueil' },
 { 'href': 'notre-ecole/index.html', 'label': 'header.aboutUs' },
@@ -19,14 +16,15 @@ export class LandingPageComponent implements OnInit {
 
   landingPageNavBar = landingPageNavBar;
 
-  constructor(private translate: TranslateService) {
+  constructor(private translate: TranslateService, private tokenStorage: TokenStorageService) {
   }
 
   ngOnInit() {
-    this.translate.use(FR);
+    // this.translate.use(this.tokenStorage.getLanguage());
   }
 
   switchLanguage(language: string) {
     this.translate.use(language);
+    this.tokenStorage.saveLanguage(language);
   }
 }
