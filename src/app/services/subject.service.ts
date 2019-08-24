@@ -16,18 +16,20 @@ const SUBJECT_URL: string = BASE_API_URL + 'subjects';
   providedIn: 'root'
 })
 export class SubjectService {
-  
+
   subjects: Subject[] = [];
   teachers: Subject[] = [];
 
   constructor(private http: HttpClient) {}
 
-  findAll(): Observable<Subject[]> {
-    return this.http.get<Subject[]>(SUBJECT_URL);
+  findAll(): Promise<Subject[]> {
+    return new Promise((resolve, reject) => this.http.get<Subject[]>(SUBJECT_URL)
+    .subscribe(subjects => resolve(subjects), err => reject(err)));
   }
 
-  findById(id: string): Observable<Subject>  {
-    return this.http.get<Subject>(SUBJECT_URL + '/' + id);
+  findById(subjectId: string): Promise<Subject> {
+    return new Promise((resolve, reject) => this.http.get<Subject>(`${SUBJECT_URL}/${subjectId}`)
+    .subscribe(subject => resolve(subject), err => reject(err)));
   }
 
   save(subject: Subject): Observable<Subject>  {
@@ -38,14 +40,8 @@ export class SubjectService {
     return this.http.put<Subject>(SUBJECT_URL  + '/' + subject.id, subject);
   }
 
-  findAllSubjectByLevel(level: Level, subjects: Subject[]): Promise<Subject[]> {
-
-    return new Promise((resolve, reject) => {
-      resolve( _.filter(subjects, subject => subject.level === level));
-      reject(new Error('Error has ocured'));
-      return;
-  });
-
+  public filter(subjects: Subject[], level: Level): Subject[] {
+    return  _.filter(subjects, subject => subject.level === level);
   }
 
 

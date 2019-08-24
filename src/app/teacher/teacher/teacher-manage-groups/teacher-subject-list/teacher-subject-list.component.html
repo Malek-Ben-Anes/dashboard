@@ -15,8 +15,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-10"></div>
-        <div class="col-md-2">
+        <div class="offset-md-9 col-md-3">
           <button mat-raised-button type="submit" class="btn btn-warning pull-right">Sauvegareder</button>
           <div class="clearfix"></div>
         </div>
@@ -24,71 +23,3 @@
     </form>
   </div>
 </div>
-
-<!-- <form [formGroup]="subjectsForm" (ngSubmit)="onSubmit()">
-      <div class="row">
-          
-        <div *ngFor="let subject of subjectsPerLevel; let i = index"> 
-          <div class="col-md-4">
-            <mat-form-field class="example-full-width">
-              <mat-checkbox (click)="">{{ subject.name }}</mat-checkbox>
-            </mat-form-field>
-          </div>
-        </div>
-
-
-        </div>
-        <div class="row">
-            <div class="col-md-10"></div>
-          <div class="col-md-2">
-            <button mat-raised-button type="submit" class="btn btn-warning pull-right">Save</button>
-            <div class="clearfix"></div>
-          </div>
-        </div>
-      </form> 
-    
-    <div *ngFor="let choice of checks; let i=index" class="col-md-2">
-      <label>
-        <input type="checkbox" [value]="choice.value" (change)="onCheckChange($event)">
-        {{choice.description}}
-      </label>
-    </div>
-  -->
-<!-- [attr.data-index]="i" -->
-
-
-
-
-
-<!-- 
-<div [formGroup]="subjectsForm">
-    <div formArrayName="items"
-    *ngFor="let item of subjectsForm.get('items').controls; let i = index;">
-    <div [formGroupName]="i">
-      <input formControlName="name" placeholder="Item name">
-      <input formControlName="description" placeholder="Item description">
-      <input formControlName="price" placeholder="Item price">
-    </div>
-  
-    Chosen name: {{ subjectsForm.controls.items.controls[i].controls.name.value }}
-  </div>
-  </div> -->
-
-<!-- <div formArrayName="items"
-  *ngFor="let item of subjectsForm.get('items').controls; let i = index;">
-  <div [formGroupName]="i">
-    <input formControlName="name" placeholder="Item name">
-    <input formControlName="description" placeholder="Item description">
-    <input formControlName="price" placeholder="Item price">
-  </div>
-
-  Chosen name: {{ subjectsForm.controls.items.controls[i].controls.name.value }}
-</div> -->
-
-<!-- <div [formGroup]="myGroup">
-    <div formArrayName="cities">
-      <div *ngFor="let city of cityArray.controls; index as i">
-        <input [formControlName]="i">
-      </div>
-    </div>
-  </div> -->

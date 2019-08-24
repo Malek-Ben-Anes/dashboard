@@ -4,6 +4,7 @@ import { BASE_URL } from 'app/app.component';
 import { FileUploadService } from 'app/services/file-upload.service';
 import { Student } from 'app/models/Student';
 import { Teacher } from 'app/models/Teacher';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-avatar',
@@ -19,7 +20,7 @@ export class AvatarComponent implements OnInit {
   selectedFile: File
   isUploading = false;
 
-  constructor(private fileUploadService: FileUploadService) { }
+  constructor(private fileUploadService: FileUploadService, private http: HttpClient) { }
 
   ngOnInit() {}
 
@@ -33,8 +34,26 @@ export class AvatarComponent implements OnInit {
   }
 
   private uploadStudentImage (user: Student| Teacher, file: File) {
-    this.fileUploadService.uploadUserPhoto(user, this.selectedFile).subscribe(HttpResponse => {
+
+
+    const formData = new FormData();
+        formData.append('file', this.selectedFile);
+        console.log('avatar');
+        const options =  {headers:       { 'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'
+        // 'Content-Type': 'multipart/form-data;  boundary=----WebKitFormBoundaryJ6Q2VG5TMUfGoSqg'
+      }};
+        this.http.post('http://localhost:8091/api/students/', formData, options)
+          .subscribe(res => {
+            console.log(res);
+            // this.uploadedFilePath = res.data.filePath;
+            alert('SUCCESS !!');
+          }, err => console.log('err'))
+
+
+    /*this.fileUploadService.uploadUserPhoto(user, file).subscribe(HttpResponse => {
       this.isUploading = true;
+      console.log('********', HttpResponse.type, file);
       if (HttpResponse.type === 4) {
         if (HttpResponse['body'] !== undefined) {
           if (HttpResponse['body']['photo'] !== undefined) {
@@ -44,7 +63,7 @@ export class AvatarComponent implements OnInit {
           }
         }
       }
-    });
+    }, err => console.log('err', err));*/
   }
 
   getProfile(): string {

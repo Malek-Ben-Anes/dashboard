@@ -33,19 +33,23 @@ export class TeacherSubjectListComponent implements OnInit, OnChanges {
   constructor(private fb: FormBuilder, private subjectService: SubjectService, private lessonService: LessonService) { }
 
   ngOnInit() {
-    this.subjectService.findAll().subscribe(subjects => this.subjects = subjects, err => console.log(err));
-    this.subjectService.findAllSubjectByLevel(this.selectedGroup.level, this.subjects)
-      .then(subjects => this.subjectsPerLevel = subjects)
-      .then(subjects => this.updateForm())
-      // .then(subjects => this.updateLastChoicesForm());
-    this.initForm();
+    this.constructView(this.selectedGroup);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     this.selectedGroup = changes.selectedGroup.currentValue;
-    this.subjectService.findAllSubjectByLevel(this.selectedGroup.level, this.subjects)
-      .then(subjects => this.subjectsPerLevel = subjects)
-      .then(subjects => this.updateForm())
+    this.constructView(this.selectedGroup);
+  }
+
+  private constructView(selectedGroup: Group) {
+    this.initForm();
+    this.subjectService.findAll()
+                       .then(subjects => {
+                         this.subjects = subjects;
+                         this.subjectsPerLevel = this.subjectService.filter( this.subjects, selectedGroup.level);
+                         this.updateForm();
+                        })
+      .catch(err => console.log('check error: ', err))
   }
 
   submit() {
@@ -111,21 +115,3 @@ export class TeacherSubjectListComponent implements OnInit, OnChanges {
     return _.find(this.subjects, {id: subjectId})
   }
 }
-
-/*
-this.cityArray = new FormArray([new FormControl(false), new FormControl(true)]);
-this.myGroup = new FormGroup({
-  cities: this.cityArray
-});
-    this.subjectsForm = this.formBuilder.group({
- items: this.formBuilder.array([ this.createItem() ])
-});
-addItem(): void {
- this.items = this.subjectsForm.get('items') as FormArray;
- this.items.push(this.createItem());
-}
-
-createItem(): FormGroup {
- return this.formBuilder.group({checked: false});
-}*/
-

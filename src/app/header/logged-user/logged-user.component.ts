@@ -18,8 +18,8 @@ export const ROUTES: any | RouteInfo[][] =
 {
   ADMIN_NAVIGATION_BAR: [{ 'router': '/app/students', 'label': 'header.students' },
   { 'router': '/app/teachers', 'label': 'header.teachers' },
-  { 'router': '/app/groups', 'label': 'header.groups' },
   { 'router': '/app/subjects', 'label': 'header.program' },
+  { 'router': '/app/groups', 'label': 'header.groups' },
   { 'router': '/app/notifications', 'label': 'header.notifications', 'icon': 'bell' }],
 
   TEACHER_NAVIGATION_BAR: [

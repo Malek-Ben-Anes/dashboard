@@ -14,7 +14,12 @@ export class TeacherGroupListComponent implements OnInit{
 
   constructor() {}
 
-  ngOnInit() {console.log(this.groups)}
+  ngOnInit() {
+    console.log(this.groups);
+    if (this.groups.length > 0) {
+      this.groupSelected.emit(this.groups[0]);
+    }
+  }
 
   onSelectGroup(group: Group): void {
     this.groupSelected.emit(group);

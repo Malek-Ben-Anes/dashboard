@@ -58,17 +58,9 @@ export class SubjectComponent implements OnInit {
 
   private getSubjects(): void {
     this.subjectService.findAll()
-      .subscribe(subjects => {
+      .then(subjects => {
       this.subjects = subjects;
       this.findSubjectsByLevel(this.selected.value);
-      },
-        (err: HttpErrorResponse) => {
-          if (err.error instanceof Error) {
-            console.log("Client-side error occured.");
-          } else {
-            console.log("Server-side error occured.");
-          }
-        }
-      );
+      }).catch(err => console.log(err));
   }
 }
