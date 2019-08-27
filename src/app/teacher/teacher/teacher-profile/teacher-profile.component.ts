@@ -4,8 +4,6 @@ import { Gender } from 'app/models/User';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TeacherService } from 'app/services/teacher.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
-import { DataService } from 'app/services/data.service';
 import { Level } from 'app/models/Level';
 
 @Component({
@@ -27,12 +25,12 @@ export class TeacherProfileComponent implements OnInit {
   teacherForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private teachersService: TeacherService,
-    private router: Router, private route: ActivatedRoute, private dataService: DataService) {
+    private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.initForm();
-    console.log(this.teacher);
+    console.log("teacher profile: ", this.teacher);
     if ( this.teacher === undefined ) {
       this.teacher = new Teacher();
     }
@@ -51,7 +49,6 @@ export class TeacherProfileComponent implements OnInit {
       address: ['', Validators.required],
       description: ['', Validators.required],
     });
-    //this.dataService.setFirstForGroup(this.teacherForm);
   }
 
   updateForm(teacher: Teacher): void {
@@ -67,6 +64,9 @@ export class TeacherProfileComponent implements OnInit {
       description: teacher.description,
     });
     this.teacherForm.get('birthDate').setValue(new Date(this.teacher.birthDate));
+    if (!this.isNew) {
+      this.teacherForm.controls['email'].disable();
+    }
   }
 
   onSubmit() {

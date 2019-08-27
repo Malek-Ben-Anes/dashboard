@@ -3,11 +3,7 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitte
 
 import { Gender } from 'app/models/User';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
-import { DataService } from 'app/services/data.service';
 import { Student } from 'app/models/Student';
-import { StudentService } from 'app/services/student.service';
 import { Level } from 'app/models/Level';
 import { Group } from 'app/models/Group';
 import { GroupService } from 'app/services/group.service';
@@ -90,6 +86,9 @@ export class StudentProfileComponent implements OnInit {
       description: student.description,
     });
 
+    if (!this.isNew) {
+      this.studentForm.controls['email'].disable();
+    }
     this.studentForm.get('birthDate').setValue(new Date(this.student.birthDate));
     const toSelect2 = this.levels.find(level => level === this.student.level);
     this.studentForm.get('level').setValue(toSelect2);

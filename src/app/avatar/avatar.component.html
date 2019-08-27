@@ -9,16 +9,16 @@
     <form>
         <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
         <button mat-raised-button class="btn btn-info" (click)="fileInput.click()">Select Image</button>
-        <div *ngIf="isUploading">
-            <button mat-raised-button class="btn btn-warning buttonload">
-                Uploading...<i class="fa fa-circle-o-notch fa-spin"></i>
-            </button>
-        </div>
-        <div *ngIf="!isUploading">
-            <button mat-raised-button class="btn btn-warning" (click)="onUpload()">
+        <div *ngIf="!isUploading; else IsCurrentlyUploading">
+            <button mat-raised-button [disabled]="selectedFile == null"  class="btn btn-warning" (click)="onUpload()">
                 <span class="glyphicon glyphicon-cloud-upload"></span>Upload
             </button>
         </div>
+        <ng-template #IsCurrentlyUploading>
+            <button mat-raised-button class="btn btn-warning buttonload">
+                Uploading...<i class="fa fa-circle-o-notch fa-spin"></i>
+            </button>
+        </ng-template>
     </form>
     <div class="card-body">
         <h6 class="card-category text-gray">{{ getProfile() }}</h6>

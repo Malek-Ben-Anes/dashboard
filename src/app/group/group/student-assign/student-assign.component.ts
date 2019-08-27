@@ -47,6 +47,7 @@ export class StudentAssignComponent implements OnInit {
     // Delete some students from current group
     const deletedStudentFromGroup: Student[] = _.intersectionBy(this.allStudents, eliminated, 'id');
     this.deletedStudentFromGroup(deletedStudentFromGroup);
+    console.log('add', addedStudentToGroup, 'delete', deletedStudentFromGroup);
   }
 
   private addStudentsToGroup(addedStudentToGroup: Student[]) {

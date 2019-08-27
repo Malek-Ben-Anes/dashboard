@@ -3,7 +3,7 @@ import { TokenStorageService } from 'app/services/auth/token-storage.service';
 import { HttpResponse } from '@angular/common/http';
 import { Student } from 'app/models/Student';
 import { Trimester } from 'app/models/Trimester';
-import { BulletinService } from 'app/services/bulletin.service';
+import { FileUploadService } from 'app/services/file-upload.service';
 
 @Component({
   selector: 'app-bulletin',
@@ -25,29 +25,9 @@ export class BulletinComponent implements OnInit {
   trimesters = Object.keys(Trimester);
   private roles: string[];
 
-  constructor(private tokenStorage: TokenStorageService, private bulletinService: BulletinService) { }
+  constructor(private tokenStorage: TokenStorageService, private fileService: FileUploadService) { }
 
   ngOnInit() {
-    this.getAuthority();
-  }
-
-  private getAuthority() {
-    if (this.tokenStorage.getToken()) {
-      this.roles = this.tokenStorage.getAuthorities();
-      this.authId = this.tokenStorage.getId();
-      console.log(this.roles);
-      this.roles.every(role => {
-        if (role === 'ROLE_ADMIN') {
-          this.authority = 'admin';
-          return false;
-        } else if (role === 'ROLE_TEACHER') {
-          this.authority = 'pm';
-          return false;
-        }
-        this.authority = 'user';
-        return true;
-      });
-    }
   }
 
   onFileChanged(event) {
@@ -55,7 +35,7 @@ export class BulletinComponent implements OnInit {
   }
 
   onUpload() {
-    this.bulletinService.uploadBulletin(this.student.id, this.selectedTrimester, this.selectedFile)
+    this.fileService.uploadBulletin(this.student.id, this.selectedTrimester, this.selectedFile)
     .subscribe((response: HttpResponse<Student>) => {
       this.isUploading = true;
       if (response.type === 4) {
@@ -71,6 +51,6 @@ export class BulletinComponent implements OnInit {
 
   onDeleteBulletin(event, bulletinId: string) {
     event.currentTarget.disabled = true;
-    this.bulletinService.deleteBulletin(bulletinId).subscribe();
+    this.fileService.deleteBulletin(bulletinId).subscribe();
   }
 }

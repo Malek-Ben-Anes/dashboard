@@ -67,17 +67,19 @@ table {
   width: 100%;
 }
 
-.student-item {
+.item {
   border-bottom: 1px solid rgb(209, 209, 209);
   padding: 3px;
 }
-
-.student-hover:hover {  background-color: rgb(209, 209, 209); }
 
 .button-no-style {
 all: unset;
 width: 100%;
 }
+
+.item-hover:hover {  background-color: rgb(150, 209, 209); }
+
+.item-active:active {  background-color: rgb(150, 209, 209); }
 
 .width-parent  {
 width: 100%;

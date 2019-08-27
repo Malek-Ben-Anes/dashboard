@@ -3,7 +3,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Student } from 'app/models/Student';
 import { BASE_URL } from 'app/app.component';
 import { TokenStorageService } from 'app/services/auth/token-storage.service';
-import { BulletinService } from 'app/services/bulletin.service';
 import { AuthService } from 'app/services/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 

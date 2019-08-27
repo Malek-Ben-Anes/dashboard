@@ -67,18 +67,22 @@
     width: 100%;
   }
 
-  .student-item {
+  .item {
     border-bottom: 1px solid rgb(209, 209, 209);
     padding: 3px;
-}
+  }
 
-.student-hover:hover {  background-color: rgb(209, 209, 209); }
+  .button-no-style {
+    all: unset;
+    width: 100%;
+  }
 
-.button-no-style {
-  all: unset;
-  width: 100%;
-}
+  .item-hover:hover {  background-color: rgb(209, 209, 209); }
 
-.width-parent  {
-  width: 100%;
-}
+  .item-active:active {  background-color: rgb(86, 169, 251); }
+
+  .item-focus:focus {  background-color: rgb(86, 169, 251); }
+
+  .width-parent  {
+    width: 100%;
+  }

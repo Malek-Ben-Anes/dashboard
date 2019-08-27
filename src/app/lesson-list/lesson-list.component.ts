@@ -79,12 +79,15 @@ export class LessonListComponent implements OnInit {
 
   private initData() {
     this.getLessons();
-    this.subjectService.findAll().subscribe(subjects => this.subjects = subjects,
-      err => this.errorHandler(err));
+    this.subjectService.findAll()
+                       .then(subjects => this.subjects = subjects)
+                       .catch(err => console.log(err))
+
+
     this.teacherService.findAll().then(teachers => this.teachers = teachers)
-      .catch(err => this.errorHandler(err));
+      .catch(err => console.log(err));
     this.groupService.findAll().then(groups => this.groups = groups)
-      .catch(err => this.errorHandler(err));
+      .catch(err => console.log(err));
   }
 
 
@@ -96,7 +99,7 @@ export class LessonListComponent implements OnInit {
     console.log(lessonRequest);
     this.lessonService.saveLesson(lessonRequest)
       .subscribe(lesson => { this.newLesson = lesson; console.log("lesson created"); this.getLessons(); },
-        err => this.errorHandler(err));
+        err => console.log(err));
   }
 
   private extractFormData(): void {
@@ -127,15 +130,5 @@ export class LessonListComponent implements OnInit {
     this.lessonForm.patchValue({
       name: lesson.name,
     });
-  }
-
-  private errorHandler(err: HttpErrorResponse) {
-    if (err.error instanceof Error) {
-      console.log(err.error);
-      console.log("Client-side error occured.");
-    } else {
-      console.log(err.error);
-      console.log("Server-side error occured.");
-    }
   }
 }
