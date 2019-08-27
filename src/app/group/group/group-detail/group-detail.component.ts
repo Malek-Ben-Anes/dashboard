@@ -84,8 +84,11 @@ export class GroupDetailComponent implements OnInit, OnChanges {
 
   private update(groupRequest: Group) {
     this.groupService.update(groupRequest)
-        .then(groupData => {groupData.students = this.group.students; this.group = groupData})
-        .then(groupData => { this.updateForm(this.group); this.refreshEvent.emit(this.group); })
+        .then(groupData => {groupData.students = this.group.students;
+                            this.group = groupData;
+                            this.updateForm(this.group);
+                            this.refreshEvent.emit(this.group);
+                          })
         .catch(err => console.log(err));
   }
 

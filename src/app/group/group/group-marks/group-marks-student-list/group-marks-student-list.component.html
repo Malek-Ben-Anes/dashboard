@@ -2,12 +2,12 @@
   <div class="card-body">
     <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="example-viewport width-350">
       <div *cdkVirtualFor="let student of students" class="example-item">
-        <button class="button-no-style"><span>
-            <div class="block  student-item student-hover" (click)="onDetailMarks(student)">
-                <img class="img profile-image" [src]="BASE_URL + student.photo" alt="Smiley face" height="39"
-                  width="39" />
+        <button class="button-no-style item item-hover item-active"><span>
+            <div class="block item item-hover item-active" (click)="onDetailMarks(student)">
+                <img class="img profile-image" [src]="BASE_URL + student.photo" default="assets/images/profile-logo.png"
+                 alt="Smiley face" height="39" width="39" />          
               <div class="message">
-                <p class="message">{{student.firstname}} {{student.lastname}}</p>
+                {{student.firstname}} {{student.lastname}}
               </div>
             </div>
           </span>

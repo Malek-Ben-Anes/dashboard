@@ -58,12 +58,12 @@
 
     "GLBL.label.registered": "Inscrit(e)",
     
-    "LEVEL1": "Niveau 1",
-    "LEVEL2": "Niveau 2",
-    "LEVEL3": "Niveau 3",
-    "LEVEL4": "Niveau 4",
-    "LEVEL5": "Niveau 5",
-    "LEVEL6": "Niveau 6",
+    "GLBL.label.LEVEL1": "Niveau 1",
+    "GLBL.label.LEVEL2": "Niveau 2",
+    "GLBL.label.LEVEL3": "Niveau 3",
+    "GLBL.label.LEVEL4": "Niveau 4",
+    "GLBL.label.LEVEL5": "Niveau 5",
+    "GLBL.label.LEVEL6": "Niveau 6",
     
     "GLBL.MALE": "Masculin",
     "GLBL.FEMALE": "Femelle"
