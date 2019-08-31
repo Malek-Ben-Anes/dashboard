@@ -11,19 +11,13 @@ import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
 import { AppRoutingModule } from 'app/app.routing';
-import { ComponentsModule } from 'app/components/components.module';
 import { ToastrModule } from 'ngx-toastr';
-
 import { AppComponent } from 'app/app.component';
-
 import { LoginComponent } from './login/login.component';
 import { TeacherProfileComponent } from './teacher/teacher/teacher-profile/teacher-profile.component';
 import { TeacherListComponent } from './teacher/teacher-list/teacher-list.component';
-import { MapsComponent } from './maps/maps.component';
 import { NotificationsComponent } from './notifications/notifications.component';
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { TeacherComponent } from './teacher/teacher/teacher.component';
 import { UpdateTeacherPasswordComponent } from './teacher/teacher/update-teacher-password/update-teacher-password.component';
 import { GroupListComponent } from './group/group-list/group-list.component';
@@ -34,16 +28,11 @@ import { StudentComponent } from './student/student/student.component';
 import { StudentListComponent } from './student/student-list/student-list.component';
 import { StudentProfileComponent } from './student/student/student-profile/student-profile.component';
 import { LessonDetailComponent } from './lesson-list/lesson-detail/lesson-detail.component';
-import { LessonService } from './services/lesson.service';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 import { StudentAssignComponent } from './group/group/student-assign/student-assign.component';
 import { GroupTimetableComponent } from './group/group/group-timetable/group-timetable.component';
 import { MarkComponent } from './marks/marks.component';
 import { AvatarComponent } from './avatar/avatar.component';
-import { MessageListComponent } from './messages/message-list/message-list.component';
-import { MessageItemComponent } from './messages/message-item/message-item.component';
-import { MessageFormComponent } from './messages/message-form/message-form.component';
-import { MessagesComponent } from './messages/messages.component';
 import { GroupStudentListComponent } from './marks/group-student-list/group-student-list.component';
 import { StudentMarksDetailComponent } from './marks/student-marks-detail/student-marks-detail.component';
 import { LessonTimeTableComponent } from './lesson-list/lesson-time-table/lesson-time-table.component';
@@ -53,12 +42,6 @@ import { MarkDetailComponent } from './marks/student-view/mark-detail/mark-detai
 import { BulletinComponent } from './student/student/bulletin/bulletin.component';
 import { FilterBulletinComponent } from './student/student/bulletin/filter/filter.component';
 import { UpdatePasswordComponent } from './student/student/update-password/update-password.component';
-import { LandingPageComponent } from './landing-page/landing-page.component';
-import { AccueilComponent } from './landing-page/accueil/accueil.component';
-import { AboutUsComponent } from './landing-page/about-us/about-us.component';
-import { NewsComponent } from './landing-page/news/news.component';
-import { ClubsComponent } from './landing-page/clubs/clubs.component';
-import { ContactComponent } from './landing-page/contact/contact.component';
 import { StudentFilterComponent } from './student/student-list/student-filter/student-filter.component';
 import { TimeTableComponent } from './student/student/time-table/time-table.component';
 import { GroupDetailComponent } from './group/group/group-detail/group-detail.component';
@@ -81,7 +64,6 @@ import { ContentComponent } from './content/content.component';
 import { AuthInterceptor } from './services/auth/auth-interceptor';
 import { ImagePreloadDirective } from './commons/image-preload/image-preload.directive';
 import { ErrorDialogComponent } from './commons/error-dialog/error-dialog.component';
-import { AdminComponent } from './admin/admin.component';
 import { StudentModuleModule } from './student-module/student-module.module';
 import { HeaderModule } from './header/header.module';
 import { AdminModuleModule } from './admin-module/admin-module.module';
@@ -97,7 +79,6 @@ import { DatePipe } from '@angular/common';
     HttpClientModule,
     BrowserAnimationsModule,
     HttpModule,
-    ComponentsModule,
     RouterModule,
     TranslateModule.forRoot({
       loader: {
@@ -118,10 +99,7 @@ import { DatePipe } from '@angular/common';
   ],
   declarations: [
     AppComponent,
-    AdminLayoutComponent,
-    AdminComponent,
     LoginComponent,
-    MapsComponent,
     TeacherComponent,
     TeacherListComponent,
     TeacherProfileComponent,
@@ -140,10 +118,6 @@ import { DatePipe } from '@angular/common';
     GroupTimetableComponent,
     MarkComponent,
     AvatarComponent,
-    MessageListComponent,
-    MessageItemComponent,
-    MessageFormComponent,
-    MessagesComponent,
     GroupStudentListComponent,
     StudentMarksDetailComponent,
     LessonTimeTableComponent,
@@ -153,12 +127,6 @@ import { DatePipe } from '@angular/common';
     BulletinComponent,
     FilterBulletinComponent,
     UpdatePasswordComponent,
-    LandingPageComponent,
-    AccueilComponent,
-    AboutUsComponent,
-    NewsComponent,
-    ClubsComponent,
-    ContactComponent,
     StudentFilterComponent,
     TimeTableComponent,
     SubjectFormComponent,

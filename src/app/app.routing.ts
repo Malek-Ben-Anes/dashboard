@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
-import { AdminComponent } from './admin/admin.component';
 import { TeacherListComponent } from './teacher/teacher-list/teacher-list.component';
 import { TeacherComponent } from './teacher/teacher/teacher.component';
 import { GroupListComponent } from './group/group-list/group-list.component';
@@ -14,7 +13,6 @@ import { StudentComponent } from './student/student/student.component';
 import { StudentListComponent } from './student/student-list/student-list.component';
 import { LessonDetailComponent } from './lesson-list/lesson-detail/lesson-detail.component';
 import { MarkComponent } from './marks/marks.component';
-import { MessagesComponent } from './messages/messages.component';
 import { BulletinComponent } from './student/student/bulletin/bulletin.component';
 import { SubjectComponent } from './subject/subject.component';
 import { NotificationsComponent } from './notifications/notifications.component';
@@ -49,12 +47,6 @@ const routes: Routes = [
       path: 'app',
       component: ContentComponent,
       children: [
-        {
-            path: 'dashboard',
-            canActivate: [AuthGuardService],
-            component: AdminComponent,
-            data: {expectedRole: Library.ROLE_ADMIN}
-        },
         {
             path: RouterLink.AUTH_LOGIN,
             component: LoginComponent
@@ -150,12 +142,6 @@ const routes: Routes = [
             data: {expectedRole: Library.ROLE_ADMIN}
         },
         {
-            path: RouterLink.MESSAGES,
-            canActivate: [AuthGuardService],
-            component: MessagesComponent,
-            data: {expectedRole: Library.ROLE_ADMIN}
-        },
-        {
             path: RouterLink.NOTIFICATIONS,
             canActivate: [AuthGuardService],
             component: NotificationsComponent
@@ -163,7 +149,8 @@ const routes: Routes = [
         {
             path: '',
             canActivate: [AuthGuardService],
-            component: AdminComponent
+            component: StudentListComponent,
+            data: {expectedRole: Library.ROLE_ADMIN}
         },
         // { path: 'not-found', component: FourOhFourComponent },
         { path: '**', redirectTo: 'not-found' }
