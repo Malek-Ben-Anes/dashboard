@@ -18,6 +18,7 @@ import { GroupMarksComponent } from './group/group/group-marks/group-marks.compo
 import { GroupMarksStudentListComponent } from './group/group/group-marks/group-marks-student-list/group-marks-student-list.component';
 import { GroupMarksStudentDetailComponent } from './group/group/group-marks/group-marks-student-detail/group-marks-student-detail.component';
 import { GroupMarksFormComponent } from './group/group/group-marks/group-marks-student-detail/group-marks-form/group-marks-form.component';
+import { SharedModule } from 'app/commons/shared.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,6 @@ import { GroupMarksFormComponent } from './group/group/group-marks/group-marks-s
     GroupMarksStudentListComponent,
     GroupMarksStudentDetailComponent,
     GroupMarksFormComponent
-  
   ],
   imports: [
     CommonModule,
@@ -43,7 +43,8 @@ import { GroupMarksFormComponent } from './group/group/group-marks/group-marks-s
     ReactiveFormsModule,
     MaterialModule,
     ScrollDispatchModule,
-    RouterModule
+    RouterModule,
+    SharedModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

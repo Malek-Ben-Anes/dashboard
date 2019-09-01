@@ -12,6 +12,7 @@ import { StudentRoutingStudentModule } from './student.routing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MaterialModule } from 'app/material.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from 'app/commons/shared.module';
 
 @NgModule({
   declarations: [StudentProfileComponent, BulletinListComponent, NotificationListComponent, MarkListComponent, TimeTableComponent],
@@ -22,7 +23,8 @@ import { TranslateModule } from '@ngx-translate/core';
     ReactiveFormsModule,
     MaterialModule,
     TranslateModule,
-    ScrollDispatchModule
+    ScrollDispatchModule,
+    SharedModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
