@@ -10,6 +10,7 @@ export class Group {
     description?: string;
     timetabeUrl: string;
     students: Student[];
+    studentsNumber: number;
 
     constructor(_id?: string, _name?: string,_description?: string, _students?: Student[]) {
         this.id = _id;

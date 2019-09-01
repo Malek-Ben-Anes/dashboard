@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <button mat-raised-button type="button" class="btn btn-warning pull-right"
-                            routerLink="/app/group-detail">Ajouter Classe</button>
+                            [routerLink]="GROUP_DETAIL">Ajouter Classe</button>
                     </div>
                 </div>
                 <div class="card">
@@ -13,21 +13,27 @@
                         <div class="table-responsive">
                             <table class="table">
                                 <thead class=" text-primary">
-                                    <th>
+                                    <th scope="col">
                                         Name
                                     </th>
                                     <th>
                                         Group Level
                                     </th>
+                                    <th>
+                                        Effectifs
+                                    </th>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let group of groups">
                                         <td class="text-primary">
-                                            <a [routerLink]="'/app/group-detail/' + group.id"><strong>{{ group.name }}</strong></a>
+                                            <a [routerLink]="GROUP_DETAIL + group.id"><strong>{{ group.name }}</strong></a>
                                             <p></p>
                                         </td>
                                         <td>
                                             <p>{{ group.level }}</p>
+                                        </td>
+                                        <td>
+                                            <p>{{ group.studentsNumber }}</p>
                                         </td>
                                     </tr>
                                 </tbody>

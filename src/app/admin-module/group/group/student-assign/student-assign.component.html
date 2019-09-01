@@ -12,21 +12,15 @@
             
               <div cdkDropListGroup>
                 <div class="example-container">
-                  <p class="grey">Eleves non affectes a {{group.name}}</p>
+                  <p class="grey"><strong>({{todo.length }})</strong> Eleves non affectes a {{group.name}}</p>
                   <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo"
                     [cdkDropListConnectedTo]="[doneList]" class="example-list" (cdkDropListDropped)="drop($event)">
                     <div class="example-box" *ngFor="let student of todo" cdkDrag>
                       <mat-card-header>
                         <div class="row">
                           <div class="col-md-3">
-                            <div *ngIf="(student.photo != null); else defaultPhoto">
-                              <img class="img profile-image" [src]="BASE_URL + student.photo" alt="Smiley face"
-                                height="39" width="39" />
-                            </div>
-                            <ng-template #defaultPhoto>
-                              <img class="img profile-image" src="./assets/images/profile-logo.png" alt="Smiley face"
-                                height="39" width="39" />
-                            </ng-template>
+                            <img class="img profile-icon" [src]="BASE_URL + student.photo" 
+                             default="assets/images/profile-logo.png" alt="smiley-student-face"/>
                           </div>
                           <div class="col-md-9">
                             <mat-card-title class="black-name">{{student.firstname}} {{student.lastname}}
@@ -41,21 +35,18 @@
                 </div>
 
                 <div class="example-container">
-                  <p class="grey">Eleves affectes a {{group.name}}</p>
+                  <p class="grey">
+                    <strong>({{done.length}})</strong> 
+                            Eleves affectes a {{group.name}}
+                  </p>
                   <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done"
                     [cdkDropListConnectedTo]="[todoList]" class="example-list" (cdkDropListDropped)="drop($event)">
                     <div class="example-box" *ngFor="let student of done" cdkDrag>
                       <mat-card-header>
                         <div class="row">
                           <div class="col-md-3">
-                            <div *ngIf="student.photo != null; else defaultPhoto">
-                              <img class="img profile-image" [src]="BASE_URL + student.photo" alt="Smiley face"
-                                height="39" width="39" />
-                            </div>
-                            <ng-template #defaultPhoto>
-                              <img class="img profile-image" src="./assets/images/profile-logo.png" alt="Smiley face"
-                                height="39" width="39" />
-                            </ng-template>
+                             <img class="img profile-icon" [src]="BASE_URL + student.photo" 
+                              default="assets/images/profile-logo.png" alt="smiley-student-face"/>
                           </div>
                           <div class="col-md-9">
                             <mat-card-title class="black-name">{{student.firstname}} {{student.lastname}}

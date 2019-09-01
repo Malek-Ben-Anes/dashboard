@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <button mat-raised-button type="button" class="btn btn-warning pull-right"
-                            routerLink="/app/student-profile">Add New Student</button>
+                            [routerLink]="STUDENT_PROFILE">Add New Student</button>
                         <!-- <button mat-raised-button type="button" class="btn btn-warning pull-right">
                             <span class="material-icons">arrow_upward</span>
                             Import File</button> -->
@@ -37,7 +37,7 @@
                                 <tbody>
                                     <tr *ngFor="let student of studentsTmp">
                                         <td>
-                                            <a [routerLink]="'/app/student-profile/' + student.id">
+                                            <a [routerLink]="STUDENT_PROFILE + student.id">
                                                 <img class="profile-image" [src]="BASE_URL + student.photo"
                                                     default="assets/images/profile-logo.png" alt="Smile face"/>
                                             </a>
