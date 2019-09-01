@@ -30,13 +30,6 @@ import { SharedModule } from './commons/shared.module';
 @NgModule({
   imports: [
     AppRoutingModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
     BrowserModule,
     TranslateModule,
     BrowserAnimationsModule,
@@ -81,8 +74,3 @@ import { SharedModule } from './commons/shared.module';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-// AoT requires an exported function for factories
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
-}

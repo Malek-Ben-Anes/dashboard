@@ -41,12 +41,6 @@ table {
   }
 }
 
-.avatar{
-  width: 39px;
-  margin-right: 20px;
-  border-radius: 50%;
-}
-
 .chatform{
   width: 600px;
   margin: 0 auto;
@@ -155,4 +149,11 @@ width: 100%;
 
 .grey {
   color: grey;
+}
+
+.profile-icon{
+  width: 39px;
+  height: 39px;
+  margin-right: 20px;
+  border-radius: 50%;
 }

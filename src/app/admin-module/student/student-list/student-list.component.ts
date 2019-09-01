@@ -6,7 +6,8 @@ import { Student } from 'app/models/Student';
 import { StudentService } from 'app/services/student.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BASE_URL } from 'app/app.component';
-import { RouterLink } from 'app/admin-module/admin.routing';
+import { Routers } from 'app/admin-module/routes/router-link';
+
 @Component({
   selector: 'app-student-list',
   templateUrl: './student-list.component.html',
@@ -15,7 +16,7 @@ import { RouterLink } from 'app/admin-module/admin.routing';
 export class StudentListComponent implements OnInit {
 
   BASE_URL = BASE_URL;
-  STUDENT_PROFILE: string = RouterLink.APP_STUDENT_PROFILE;
+  STUDENT_PROFILE: string = Routers.APP_STUDENT_PROFILE;
   // This variable is needed retrieving data from server
   students: Student[] = [];
   // This variable is needed for filter functionnality

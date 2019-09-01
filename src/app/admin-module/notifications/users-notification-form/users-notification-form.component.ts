@@ -17,6 +17,7 @@ import { AuthService } from 'app/services/auth/auth.service';
 import { User } from 'app/models/User';
 import { DialogContentExampleDialogComponent } from 'app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
 import { Library } from 'app/models/Library';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-users-notification-form',
@@ -37,7 +38,8 @@ export class UsersNotificationFormComponent implements OnInit {
   StudentsOfSelectedGroup: Student[];
   selectedOptions: Teacher[] | Group[] | Student[];
 
-  constructor(public dialog: MatDialog, private formBuilder: FormBuilder, private authService: AuthService, private notificationService: NotificationService,
+  constructor(public dialog: MatDialog, private formBuilder: FormBuilder, private authService: AuthService,
+              private notificationService: NotificationService, private translate: TranslateService,
     private teacherService: TeacherService, private groupService: GroupService, private studentService: StudentService) { }
 
   ngOnInit() {
@@ -59,8 +61,13 @@ export class UsersNotificationFormComponent implements OnInit {
   openDialog(): void {
     const selectedOptionNumber: number = this.selectedOptions.length;
     const seletedChoice: string = this.selected.toLowerCase();
-    const dialogMessage = `Vous allez notifier ${selectedOptionNumber} ${seletedChoice}. s'il vous plaît, cliquez sur confirmer pour continuer?`;
-    const dialogTitle = "Confirmation d'envoi des notifications";
+
+    const dialogMessagePattern: string = this.translate.instant('admin.notifications.notify.confirmation.message');
+    const compiled = _.template(dialogMessagePattern);
+    const dialogMessage: string = compiled({'selectedOptionNumber': selectedOptionNumber,
+                                            'seletedChoice': seletedChoice});
+
+    const dialogTitle = this.translate.instant('admin.notifications.notify.validation.message');
     const dialogRef = this.dialog.open(DialogContentExampleDialogComponent, {
       width: '450px',
       height: '200px',

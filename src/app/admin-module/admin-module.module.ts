@@ -1,6 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AdminRoutingStudentModule } from './admin.routing';
+import { AdminRoutingStudentModule } from './routes/admin.routing';
 import { RouterModule } from '@angular/router';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';

@@ -9,7 +9,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler/src/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from 'app/app.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
@@ -17,7 +17,8 @@ import { MatProgressSpinnerModule } from '@angular/material';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ToastrModule } from 'ngx-toastr';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 @NgModule({
   declarations: [
@@ -42,8 +43,13 @@ import { TranslateModule } from '@ngx-translate/core';
     ScrollDispatchModule,
     MatProgressSpinnerModule,
     MaterialModule,
-
-    TranslateModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
     ScrollDispatchModule,
   ],
   exports: [
@@ -55,3 +61,8 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
 })
 export class SharedModule { }
+
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
+}

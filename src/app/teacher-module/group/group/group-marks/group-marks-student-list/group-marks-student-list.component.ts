@@ -17,7 +17,12 @@ export class GroupMarksStudentListComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    const FIRST_ELEMENT = 0
+    if (this.students) {
+      this.studentSelected.emit(this.students[FIRST_ELEMENT]);
+    }
+  }
 
   onDetailMarks(student: Student): void {
     this.studentSelected.emit(student);

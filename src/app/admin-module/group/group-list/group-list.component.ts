@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Group } from 'app/models/Group';
 import { Level } from 'app/models/Level';
 import { GroupService } from 'app/services/group.service';
-import { RouterLink } from 'app/admin-module/admin.routing';
+import { Routers } from 'app/admin-module/routes/router-link';
 
 @Component({
   selector: 'app-group-list',
@@ -11,7 +11,7 @@ import { RouterLink } from 'app/admin-module/admin.routing';
 })
 export class GroupListComponent implements OnInit {
 
-  GROUP_DETAIL: string = RouterLink.APP_GROUP_DETAIL;
+  GROUP_DETAIL: string = Routers.APP_GROUP_DETAIL;
 
   groups: Group[];
   levels = Object.keys(Level);

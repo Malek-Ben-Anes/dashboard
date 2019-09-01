@@ -40,7 +40,7 @@
             <div class="col-md-3">
               <mat-form-field class="example-full-width">
                 <mat-select matInput placeholder="Type" formControlName="type" required>
-                  <mat-option *ngFor="let notif of NOTIFS" [value]="notif" required>{{notif}}</mat-option>
+                  <mat-option *ngFor="let NOTIF of NOTIFS" [value]="notif" required>{{'GLBL.label.' + NOTIF | translate}}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
@@ -76,9 +76,9 @@
               {{group.name}}
             </mat-list-option>
           </mat-selection-list>
-          <p>
+          <strong>
             Options selected: {{selections && selections.selectedOptions.selected.length}}
-          </p>
+          </strong>
         </div>
         <!-- <ng-template #teacherList> -->
         <div *ngIf="selected ==  'TEACHER'">
@@ -89,9 +89,9 @@
               </mat-list-option>
             </mat-selection-list>
           </div>
-          <p>
+          <strong>
             Elements selectionnes: {{selections && selections.selectedOptions.selected.length}}
-          </p>
+          </strong>
         </div>
         <div *ngIf="selected == 'STUDENT'">
           <div class="col-md-12">
@@ -101,9 +101,9 @@
               </mat-list-option>
             </mat-selection-list>
           </div>
-          <p>
+          <strong>
             Elements selectionnes: {{selections && selections.selectedOptions.selected.length}}
-          </p>
+          </strong>
         </div>
       </div>
     </div>
