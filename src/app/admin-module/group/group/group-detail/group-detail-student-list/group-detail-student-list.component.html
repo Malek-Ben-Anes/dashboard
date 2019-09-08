@@ -21,13 +21,15 @@
           <td>
             <a [routerLink]="STUDENT_PROFILE + student.id">
               <img class="profile-icon" [src]="BASE_URL + student.photo"
-              default="assets/images/profile-logo.png" alt="Smiley student face"/>
+               default="assets/images/profile-logo.png" alt="Smiley student face"/>
             </a>
           </td>
-          <td>{{student.firstname}}</td>
-          <td>{{student.lastname}}</td>
+          <td>{{ student.firstname }}
+          </td>
+          <td>{{ student.lastname }}
+          </td>
           <td>
-            <a [routerLink]="STUDENT_PROFILE + student.id">{{student.email}}</a>
+            <a [routerLink]="STUDENT_PROFILE + student.id">{{ student.email }}</a>
           </td>
         </tr>
       </tbody>

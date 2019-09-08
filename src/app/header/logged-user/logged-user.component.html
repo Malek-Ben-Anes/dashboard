@@ -9,18 +9,17 @@
 
 <ng-template #bell>
   <i class="material-icons margin-5">notifications</i>
-  <span *ngIf="loggedUser.newNotifications && loggedUser.newNotifications !== 0" class="notification position">{{loggedUser.newNotifications}}</span>
+  <span *ngIf="loggedUser.newNotifications && loggedUser.newNotifications !== 0" class="notification position">
+    {{loggedUser.newNotifications}}
+  </span>
 </ng-template>
 
 <ul class="nav navbar-nav horiz navbar-right" routerLinkActive="active">
   <li class="nav-item dropdown">
     <a class="dropdown-toggle nav-link background-white" data-toggle="dropdown">
-      <img *ngIf="loggedUser.photo != null && loggedUser.photo != 'null'; else noUserImage" 
-        [src]="loggedUser.photo" alt="Smile face" class="radius-image" />
-      <ng-template #noUserImage>
-        <img src="assets/images/profile-logo.png" alt="smile face" class="radius-image" />
-      </ng-template>
-      {{loggedUser.name || loggedUser.firstname}}
+      <img  class="radius-image" [src]="loggedUser && loggedUser.photo"
+       default="assets/images/profile-logo.png" alt="smile-face"/>
+        {{loggedUser.name || loggedUser.firstname}}
       <span class="caret"></span>
     </a>
     <ul class="dropdown-menu">

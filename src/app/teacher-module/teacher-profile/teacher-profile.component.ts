@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { BASE_URL } from 'app/app.component';
 import { Teacher } from 'app/models/Teacher';
 import { User } from 'app/models/User';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-teacher-profile',
@@ -19,7 +20,8 @@ export class TeacherProfileComponent implements OnInit {
   isLogged = false;
   user: Teacher;
 
-  constructor(private tokenStorage: TokenStorageService, private authService: AuthService, private formBuilder: FormBuilder) {
+  constructor(private tokenStorage: TokenStorageService, private authService: AuthService, private formBuilder: FormBuilder,
+              private translate: TranslateService) {
   }
 
   ngOnInit() {
@@ -32,12 +34,13 @@ export class TeacherProfileComponent implements OnInit {
   }
 
   private initializeForm(user: Teacher): void {
+    console.log(this.translate.instant(`GLBL.${user.gender}`));
     this.form = this.formBuilder.group({
       firstname: [{value: user.firstname, disabled: true}],
       lastname: [{value: user.lastname, disabled: true}],
       email: [{value: user.email, disabled: true}],
       phone: [{value: user.phone, disabled: true}],
-      gender: [{value: user.gender, disabled: true}],
+      gender: [{value: this.translate.instant(`GLBL.${user.gender}`), disabled: true}],
       birthDate: [{value: new Date(user.birthDate), disabled: true}],
       address: [{value: user.address, disabled: true}],
       description: [{value: user.description, disabled: true}],

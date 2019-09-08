@@ -1,0 +1,50 @@
+<div class="card card-profile">
+    <div class="card-body">
+        <form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+            <div class="row">
+                <div class="col-md-3">
+                    <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+                    <img class="img profile-image" src="assets/images/upload-pdf-icon.png" alt="upload bulletin"
+                        height="39" width="39" />
+                    <button mat-raised-button class="btn btn-default" (click)="fileInput.click()">Sélectionner
+                        Emploi</button>
+                    <div *ngIf="isUploading">
+                        <button mat-raised-button class="btn btn-warning buttonload">
+                            Uploading...<i class="fa fa-circle-o-notch fa-spin"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div *ngIf="!isUploading">
+                        <button mat-raised-button class="btn btn-warning" (click)="onUpload()">
+                            <span class="glyphicon glyphicon-cloud-upload"></span>Upload
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="card card-profile">
+    <div class="card-body">
+        <div *ngIf="group != null; else noContent">
+            <div class="row">
+                <div class="col-md-10"></div>
+                <div class="col-md-2">
+                    <a mat-raised-button class="btn btn-link" [href]="BASE_URL + group.timetabeUrl" target="_blank"
+                        download="emploi-du-temps">
+                        <span class="material-icons">arrow_downward</span>Telecharger
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <a mat-raised-button class="btn btn-link" [href]="BASE_URL + group.timetabeUrl" target="_blank"
+                    download="emploi-du-temps">
+                    <img class="img time-table" default="assets/images/image-not-found-404.png"
+                        [src]="BASE_URL + group.timetabeUrl" [alt]="group.name + ' Time table'" />
+                </a>
+            </div>
+        </div>
+        <ng-template #noContent>Emploi du temps n'est pas disponible.</ng-template>
+    </div>
+</div>

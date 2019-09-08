@@ -15,7 +15,7 @@ export class GroupMarksComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {console.log("start new component");}
+  ngOnInit() {}
 
   onStudentSelected(student: Student) {
     this.studentSelected = student;
