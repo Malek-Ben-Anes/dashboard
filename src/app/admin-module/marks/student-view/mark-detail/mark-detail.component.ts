@@ -29,6 +29,16 @@ export class MarkDetailComponent implements OnInit {
     this.getStudentsMarks();
   }
 
+  getMarkStyle(mark) {
+    if (mark <= 10) {
+      return 'red-color';
+    } else if (mark > 10 && mark <= 15) {
+      return 'blue-color';
+    } else {
+      return 'green-color';
+    }
+  }
+
   private getStudentsMarks() {
     this.markService.getStudentMarks(this.student.id).subscribe(marks => { this.marks = marks; console.log(this.marks); });
   }

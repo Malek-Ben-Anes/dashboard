@@ -17,4 +17,20 @@ export class TimeTableComponent implements OnInit {
   ngOnInit() {
   }
 
+  getTimetableLink() {
+    try {
+      return BASE_URL + this.student.group.timetabeUrl;
+    } catch(ex) {
+      return BASE_URL + undefined;
+    }
+  }
+
+  getGroupName() {
+    try {
+      return this.student.group.name + ' Time table';
+    } catch(ex) {
+      return 'Time table';
+    }
+  }
+
 }

@@ -1,29 +1,41 @@
 <mat-tab-group>
     <mat-tab [label]="'My Marks'">
-        <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="example-viewport">
-            <div *cdkVirtualFor="let mark of marks" class="example-item">
-                <div class="message">
-                    <div *ngIf="mark.mark <= 10">
-                            
-                        <p><b>{{mark.lesson.name}}:</b> {{mark.note}}
-                            <span class="red-color">{{mark.mark}}</span></p>
-                    </div>
-                    <div *ngIf="mark.mark > 10 && mark.mark <= 15">
-                        <p><b>{{mark.lesson.name}}:</b> {{mark.note}}
-                            <span class="blue-color">{{mark.mark}}</span></p>
-                    </div>
-                    <div *ngIf="mark.mark > 15">
-                            <p><b>{{mark.lesson.name}}:</b> {{mark.note}}
-                                <span class="green-color">{{mark.mark}}</span></p>
-                        </div>
-                </div>
-                <div class="timeform">
-                    <i class="fa fa-clock-o" aria-hidden="true"></i> <span class="timestamp">{{mark.createdAt | date
-                        :
-                        'dd/MM/yyyy' }}</span>
-                </div>
-                <hr />
+        <div class="card">
+            <div class="card-content table-responsive table-full-width">
+                <table class="table">
+                    <thead>
+                        <th>Date</th>
+                        <th>Matiére</th>
+                        <th>Remarque</th>
+                        <th>Note</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let mark of marks">
+                            <td><span class="timestamp">{{mark.createdAt | date:'dd/MM/yyyy' }}</span></td>
+                            <td>{{mark.lesson.name}}</td>
+                            <td>{{mark.note}}</td>
+                            <td><span [class]="getMarkStyle(mark.mark)">{{mark.mark}}</span></td>
+                        </tr>
+                        <!--<cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
+                                class="example-viewport">
+                               <div *cdkVirtualFor="let mark of marks" class="example-item">
+                                    <div class="message">
+                                        <div>
+                                            <p><b>{{mark.lesson.name}}:</b> {{mark.note}}
+                                                <span [class]="getMarkStyle(mark.mark)">{{mark.mark}}</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="timeform">
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i> <span class="timestamp">{{mark.createdAt | date
+                                                            :
+                                                            'dd/MM/yyyy' }}</span>
+                                    </div>
+                                    <hr />
+                                </div>
+                            </cdk-virtual-scroll-viewport>-->
+                    </tbody>
+                </table>
             </div>
-        </cdk-virtual-scroll-viewport>
+        </div>
     </mat-tab>
 </mat-tab-group>

@@ -51,6 +51,7 @@ export class StudentAssignComponent implements OnInit {
   }
 
   private addStudentsToGroup(addedStudentToGroup: Student[]) {
+    console.log('---->', addedStudentToGroup)
     if (_.isEmpty(addedStudentToGroup)) {
       return;
     }
