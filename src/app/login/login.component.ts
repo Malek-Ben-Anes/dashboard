@@ -12,7 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   form: any = {};
   isLoggedIn = false;
   isLoginFailed = false;
@@ -26,16 +26,16 @@ export class LoginComponent implements OnInit {
 
     this.isLoggedIn = this.tokenStorage.getIsLoggedUser();
     if (this.isLoggedIn) {
-      this.router.navigate(['app', 'students']);
+      this.roles = this.tokenStorage.getAuthorities();
+      if (this.roles.includes('ROLE_ADMIN')) {
+        this.router.navigate(['app', 'students']);
+      } else if (this.roles.includes('ROLE_TEACHER')) {
+        this.router.navigate(['app', 'show-teacher-profile']);
+      } else {
+        this.router.navigate(['app', 'show-profile']);
+      }
     } else {
       this.router.navigate(['app', 'auth', 'login']);
-    }
-  }
-
-  ngOnInit() {
-    if (this.tokenStorage.getToken()) {
-      this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getAuthorities();
     }
   }
 

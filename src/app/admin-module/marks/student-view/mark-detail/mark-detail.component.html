@@ -16,23 +16,6 @@
                             <td>{{mark.note}}</td>
                             <td><span [class]="getMarkStyle(mark.mark)">{{mark.mark}}</span></td>
                         </tr>
-                        <!--<cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400"
-                                class="example-viewport">
-                               <div *cdkVirtualFor="let mark of marks" class="example-item">
-                                    <div class="message">
-                                        <div>
-                                            <p><b>{{mark.lesson.name}}:</b> {{mark.note}}
-                                                <span [class]="getMarkStyle(mark.mark)">{{mark.mark}}</span></p>
-                                        </div>
-                                    </div>
-                                    <div class="timeform">
-                                        <i class="fa fa-clock-o" aria-hidden="true"></i> <span class="timestamp">{{mark.createdAt | date
-                                                            :
-                                                            'dd/MM/yyyy' }}</span>
-                                    </div>
-                                    <hr />
-                                </div>
-                            </cdk-virtual-scroll-viewport>-->
                     </tbody>
                 </table>
             </div>
