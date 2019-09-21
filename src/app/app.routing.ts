@@ -11,6 +11,11 @@ export class RouterLink  {
 
 const routes: Routes = [
     {
+        path: '',
+        redirectTo: `app/${RouterLink.AUTH_LOGIN}`,
+        pathMatch: 'full'
+    },
+    {
       path: 'app',
       component: ContentComponent,
       children: [
