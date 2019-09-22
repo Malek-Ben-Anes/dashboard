@@ -70,7 +70,6 @@
     "admin.notifications.notify.confirmation.message": "Vous allez notifier ${selectedOptionNumber} ${seletedChoice}. S'il vous plaît, cliquez sur confirmer pour continuer?",
     "admin.notifications.notify.validation.message": "Confirmation d'envoi des notifications",
 
-
     "label.firstName": "Prenom",
     "label.lastName": "Nom de famille",
     "label.email": "E-mail",
@@ -85,6 +84,4 @@
     "label.description": "description",
 
     "label.registered": "Inscrit(e)"
-
-
 }

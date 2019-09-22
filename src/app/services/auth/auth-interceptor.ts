@@ -45,7 +45,7 @@ export class AuthInterceptor implements HttpInterceptor {
                             dialogTitle: err && err.error.message ? err.error.message : '',
                             dialogMessage: '' + err.status
                         };
-                        this.errorDialogService.openDialog(data);
+                        //this.errorDialogService.openDialog(data);
                         return throwError(err);
                     }
                 }

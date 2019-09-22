@@ -14,7 +14,7 @@ import { User } from 'app/models/User';
 export class NotificationsComponent implements OnInit {
 
   TABS = [{ 'NOTIFICATIONS_LIST': 0, 'label': 'Notifications' }, { 'NOTIFY_USERS': 1, 'label': 'Notifier utilisateurs' }];
-  selected = new FormControl(0);
+  selected = new FormControl(1);
 
   loggedUser: User;
   newNotifications: number;

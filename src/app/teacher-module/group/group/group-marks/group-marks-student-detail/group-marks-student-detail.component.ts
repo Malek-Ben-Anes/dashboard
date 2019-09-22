@@ -75,10 +75,20 @@ export class GroupMarksStudentDetailComponent implements OnInit, OnChanges {
   }
 
   private getAllMarksByStudentId(studentId: string) {
-    this.markService.findAllByStudentId(studentId)
+    this.markService.findAll(studentId)
       .then(marks => this.student.marks = _.sortBy(marks, ['createdAt', 'updatedAt']).reverse())
       .then(marks => this.marksToDisplay = this.student.marks)
       .catch(err => console.log(err));
+  }
+
+  getMarkStyle(mark) {
+    if (mark <= 10) {
+      return 'red-color';
+    } else if (mark > 10 && mark <= 15) {
+      return 'blue-color';
+    } else {
+      return 'green-color';
+    }
   }
 
   /*displayLessons(): string[] {

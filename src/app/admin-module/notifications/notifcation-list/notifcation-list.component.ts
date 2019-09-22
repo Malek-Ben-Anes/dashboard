@@ -11,7 +11,7 @@ export class NotifcationListComponent implements OnInit {
 
   @Input('notifications') notifications: Notification[];
 
-  @Input('newNotifications') newNotifications: number;  
-  
+  @Input('newNotifications') newNotifications: number;
+
   ngOnInit() {}
 }

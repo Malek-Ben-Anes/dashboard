@@ -1,6 +1,6 @@
 <div class="card card-profile">
   <div class="card-body">
-    <div *ngIf="notifications != null; else noContent">
+    <div *ngIf="notifications; else noContent">
       <div class="table-responsive">
         <table class="table">
           <thead class=" text-primary">
@@ -18,7 +18,8 @@
             </th>
           </thead>
           <tbody>
-            <tr *ngFor="let notification of notifications; let i=index"  [ngClass]="i < user.newNotifications ? 'backgroud-ghost-white' : ''">
+            <tr *ngFor="let notification of notifications; let i=index"
+             [ngClass]="i < loggedUser.newNotifications ? 'backgroud-ghost-white' : ''">
               <td class="text-primary">
                 <strong>{{notification.title}}</strong>
               </td>
@@ -36,5 +37,5 @@
         </table>
       </div>
     </div>
-    <ng-template #noContent>Content to render when condition is false.</ng-template>
+    <ng-template #noContent>Vous n'avez pas des notifications</ng-template>
   </div>

@@ -4,9 +4,9 @@ import { NotificationService } from 'app/services/notification.service';
 import { TokenStorageService } from 'app/services/auth/token-storage.service';
 import { AuthService } from 'app/services/auth/auth.service';
 import { Student } from 'app/models/Student';
-import { User } from 'app/models/User';
 import { Notification } from 'app/models/Notification';
 import { TranslateService } from '@ngx-translate/core';
+import { User } from 'app/models/User';
 
 @Component({
   selector: 'app-notification-list',
@@ -15,7 +15,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class NotificationListComponent implements OnInit {
 
-  user: Student;
+  loggedUser: User;
   userNotificationsNumber: number;
   notifications: Notification[];
 
@@ -25,10 +25,11 @@ export class NotificationListComponent implements OnInit {
 
   ngOnInit() {
     if (this.authService.getIsLoggedUser()) {
-      this.authService.getUser().subscribe(loggedUser => {this.user = loggedUser
-        this.userNotificationsNumber = this.formatNotificationsNumber(this.user.newNotifications) ;
-        this.retrieveLoggedUserNotifications(this.user.id);
-      });
+      this.authService.getLoggedUser().then(loggedUser => {
+          this.loggedUser = loggedUser;
+          this.userNotificationsNumber = this.formatNotificationsNumber(this.loggedUser.newNotifications);
+          this.retrieveLoggedUserNotifications(this.loggedUser.id);
+        });
     }
   }
 
@@ -36,7 +37,7 @@ export class NotificationListComponent implements OnInit {
     return _.isNil(userNotif) || _.isNaN(userNotif) ? 0 : userNotif;
   }
 
-  retrieveLoggedUserNotifications (userId: string): void {
+  private retrieveLoggedUserNotifications (userId: string): void {
     this.notificationService.find(userId)
         .then(notifications => {this.notifications = notifications; console.log(this.notifications)})
         .catch(err => console.log(err));

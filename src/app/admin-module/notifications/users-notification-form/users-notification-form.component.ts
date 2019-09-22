@@ -11,7 +11,7 @@ import { GroupService } from 'app/services/group.service';
 import { StudentService } from 'app/services/student.service';
 import { TeacherService } from 'app/services/teacher.service';
 import { Notif } from 'app/models/Notif';
-import { Notification } from 'app/models/Notification';
+import { Notification, NotificationRequest } from 'app/models/Notification';
 import { NotificationService } from 'app/services/notification.service';
 import { AuthService } from 'app/services/auth/auth.service';
 import { User } from 'app/models/User';
@@ -26,13 +26,14 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class UsersNotificationFormComponent implements OnInit {
 
+  private static Library: Library;
   @Input('notifications') notifications: Notification[];
-  public static Library: Library;
+
   NOTIFS = Object.keys(Notif);
   selected: string = Library.TEACHER;
   notifForm: FormGroup;
 
-  loggedUser: User;
+  private _loggedUser: User;
   allTeachers: Teacher[];
   allGroups: Group[];
   StudentsOfSelectedGroup: Student[];
@@ -40,67 +41,80 @@ export class UsersNotificationFormComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private formBuilder: FormBuilder, private authService: AuthService,
               private notificationService: NotificationService, private translate: TranslateService,
-    private teacherService: TeacherService, private groupService: GroupService, private studentService: StudentService) { }
+              private teacherService: TeacherService, private groupService: GroupService, private studentService: StudentService) { }
 
   ngOnInit() {
-    this.InitiateContext();
-    this.groupService.findAll().then(groups => this.allGroups = groups).catch(err => console.log(err));
-    this.teacherService.findAll().then(teachers => this.allTeachers = teachers)
-      .then(teachers => this.onToggleButton(Library.TEACHER)).catch(err => console.log(err));
+    this.initializeNotificationForm();
+    this.groupService.findAll().then(groups => this.allGroups = groups)
+                     .catch(err => console.log(err));
+    this.teacherService.findAll()
+                       .then(teachers => { this.allTeachers = teachers; this.onToggleButton(Library.TEACHER)})
+                       .catch(err => console.log(err));
   }
 
-  onConfirmNotification() {
-    if (this.selected == Library.TEACHER || this.selected == Library.STUDENT) {
-      _.map(this.selectedOptions, (selectedOption: Teacher | Student) => this.executeQuery(selectedOption));
-    } else if (this.selected == Library.GROUP) {
-      console.log(this.selectedOptions);
-      _.map(this.selectedOptions, (selectedOption: Group) => this.executeQuerys(selectedOption));
-    }
+  private async initializeNotificationForm() {
+    await this.authService.getLoggedUser().then(loggedUser => this._loggedUser = loggedUser);
+    const loggedUserName = this._loggedUser ?  `${this._loggedUser.firstname} ${ this._loggedUser.lastname}` : '';
+    this.notifForm = this.formBuilder.group({
+      notifier: [loggedUserName, Validators.required],
+      notified: [null, Validators.required],
+      title: ['', Validators.required],
+      content: ['', Validators.required],
+      type: [null, Validators.required],
+    });
   }
 
   openDialog(): void {
-    const selectedOptionNumber: number = this.selectedOptions.length;
-    const seletedChoice: string = this.selected.toLowerCase();
-
-    const dialogMessagePattern: string = this.translate.instant('admin.notifications.notify.confirmation.message');
-    const compiled = _.template(dialogMessagePattern);
-    const dialogMessage: string = compiled({'selectedOptionNumber': selectedOptionNumber,
-                                            'seletedChoice': seletedChoice});
-
-    const dialogTitle = this.translate.instant('admin.notifications.notify.validation.message');
+    const modalDialog: { dialogTitle: string; dialogMessage: string; } = this.computeModalDialog();
     const dialogRef = this.dialog.open(DialogContentExampleDialogComponent, {
       width: '450px',
       height: '200px',
-      data: { dialogTitle: dialogTitle, dialogMessage: dialogMessage }
+      data: { dialogTitle: modalDialog.dialogTitle, dialogMessage: modalDialog.dialogMessage }
     });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.onConfirmNotification();
+    dialogRef.afterClosed().subscribe(confirmtion => {
+      if (confirmtion) {
+        this.onSubmitNotification();
       }
     });
   }
 
-  onToggleButton(choice: string): void {
+  private computeModalDialog():  {dialogTitle: string; dialogMessage: string;} {
+    const selectedOptionNumber: number = this.selectedOptions.length;
+    const seletedChoice: string = this.selected.toLowerCase();
+    const dialogMessagePattern: string = this.translate.instant('admin.notifications.notify.confirmation.message');
+    const compiled = _.template(dialogMessagePattern);
+    const dialogMessage: string = compiled({
+                                            'selectedOptionNumber': selectedOptionNumber,
+                                            'seletedChoice': seletedChoice
+                                          });
+    const dialogTitle = this.translate.instant('admin.notifications.notify.validation.message');
+    return {dialogMessage: dialogMessage, dialogTitle: dialogTitle};
+  }
+
+  onSubmitNotification() {
+    const notifiedIds: string[] = _.map(this.selectedOptions, 'id');
+    const notificationRequest: NotificationRequest = this.prepareQuery(notifiedIds);
+    const notifyUser: boolean = (this.selected === Library.STUDENT) || (this.selected === Library.TEACHER);
+    const notifyGroup: boolean = this.selected === Library.GROUP;
+    this.notificationService.save(notificationRequest, notifyUser, notifyGroup)
+            .then(notification => {console.log(notification); alert('notiication saved!!')})
+            .catch(err => alert('notiication filed!!'));
+  }
+
+  public onToggleButton(choice: string): void {
+    this.selected = choice;
     if (choice === Library.TEACHER) {
-      this.selected = Library.TEACHER;
       this.selectedOptions = this.allTeachers;
-      return;
-    }
-    if (choice === Library.GROUP) {
-      this.selected = Library.GROUP;
+    } else if (choice === Library.GROUP) {
       this.selectedOptions = this.allGroups;
-      return;
-    }
-    if (choice === Library.STUDENT) {
+    } else if (choice === Library.STUDENT) {
       this.selected = Library.STUDENT;
-      return;
     }
   }
 
   onSelectGroup(groupSelected: Group) {
     if (this.selected = Library.STUDENT) {
       this.findStudentsByGroupId(groupSelected.id);
-      console.log(groupSelected);
     }
   }
 
@@ -116,57 +130,17 @@ export class UsersNotificationFormComponent implements OnInit {
       .catch(err => console.log(err));
   }
 
-  private executeQuery(notified: Student | Teacher): void {
-      const notification: Notification = this.prepareQuery(notified);
-      this.notificationService.notifyUser(notification).then(notification => console.log(notification))
-        .catch(err => console.log(err));
-  }
-
-  private executeQuerys(notified: Group): void {
-      const notification: Notification = this.prepareQuerys();
-      this.notificationService.notifyGroup(notification, notified.id).then(notification => console.log(notification))
-        .catch(err => console.log(err));
-  }
-
-  private prepareQuery(notifiedUser?: User): Notification {
-    const notification: Notification = new Notification();
-    notification.title = this.extractFieldData('title');
-    notification.content = this.extractFieldData('content');
-    notification.type = this.extractFieldData('type');
-    notification.notifier = this.loggedUser;
-    notification.notified = notifiedUser;
-    return notification;
-  }
-
-  private prepareQuerys(group?: Group): Notification {
-    const notification: Notification = new Notification();
-    notification.title = this.extractFieldData('title');
-    notification.content = this.extractFieldData('content');
-    notification.type = this.extractFieldData('type');
-    notification.notifier = this.loggedUser;
-    notification.notified = this.loggedUser;
-    return notification;
+  private prepareQuery(notifiedIds: string[]): NotificationRequest {
+    return this.notificationService
+               .buildNotificationRequest(this._loggedUser.id,
+                notifiedIds,
+                this.extractFieldData('title'),
+                this.extractFieldData('content'),
+                this.extractFieldData('type'));
   }
 
   private extractFieldData(property: string): any {
     return this.notifForm.get(property).value;
-  }
-
-  private async InitiateContext() {
-    await this.authService.getLoggedUser().then(loggedUser => this.loggedUser = loggedUser)
-      .catch(err => console.log("retrieve user", err));
-    this.initializeNotifForm();
-  }
-
-  private initializeNotifForm() {
-    const loggedUserName = this.loggedUser ? this.loggedUser.firstname + ' ' + this.loggedUser.lastname : '';
-    this.notifForm = this.formBuilder.group({
-      notifier: [loggedUserName, Validators.required],
-      notified: [null, Validators.required],
-      title: ['', Validators.required],
-      content: ['', Validators.required],
-      type: [null, Validators.required],
-    });
   }
 }
 
@@ -176,12 +150,5 @@ export class UsersNotificationFormComponent implements OnInit {
   dialogRef.afterClosed().subscribe(result => {
     console.log(`Dialog result: ${result}`);
   });
-
-  openDialog() {
-  const dialogRef = this.dialog.open(DialogContentExampleDialog);
-
-  dialogRef.afterClosed().subscribe(result => {
-    console.log(`Dialog result: ${result}`);
-  });
-}
-}*/
+ }
+*/

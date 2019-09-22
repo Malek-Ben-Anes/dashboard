@@ -19,15 +19,13 @@
       <tbody>
         <tr *ngFor="let student of students">
           <td>
-            <a [routerLink]="STUDENT_PROFILE + student.id">
-              <img class="profile-icon" [src]="BASE_URL + student.photo"
+            <img class="profile-icon" [src]="BASE_URL + student.photo"
               default="assets/images/profile-logo.png" alt="Smiley student face"/>
-            </a>
           </td>
           <td>{{student.firstname}}</td>
           <td>{{student.lastname}}</td>
           <td>
-            <a [routerLink]="STUDENT_PROFILE + student.id">{{student.email}}</a>
+            {{student.email}}
           </td>
         </tr>
       </tbody>
