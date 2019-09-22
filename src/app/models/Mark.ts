@@ -3,7 +3,7 @@ import { Student } from './Student';
 import { Lesson } from './Lesson';
 import { Timestamp } from 'rxjs/Rx';
 
-export class Mark{
+export class Mark {
 
     id?: string;
     note?: string;

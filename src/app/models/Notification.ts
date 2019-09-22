@@ -1,13 +1,20 @@
-import { User, Gender } from './User';
-import { Student } from './Student';
-import { Level } from './Level';
+import { User } from './User';
 
 export class Notification {
-
     id: string;
     notifier: User;
     notified: User;
     title?: string;
+    content: string;
+    type: Notif;
+
+    constructor() {}
+}
+
+export class NotificationRequest {
+    notifierId: string;
+    notifiedIds: string[];
+    title: string;
     content: string;
     type: Notif;
 
@@ -21,3 +28,5 @@ enum Notif {
     Notif4,
     NotifN
 }
+
+

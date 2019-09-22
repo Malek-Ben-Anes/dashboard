@@ -21,7 +21,7 @@ export class MarkListComponent implements OnInit {
   student: Student;
 
   // All lessons of the current group to be displayed in filter buttons.
-  lessonsOfCurrentstudent: Lesson[];
+  lessonsOfCurrentstudent: Lesson[] = [];
 
   // marks to be displayed after filtering action.
   marksToDisplay: Mark[];
@@ -33,39 +33,30 @@ export class MarkListComponent implements OnInit {
   ngOnInit() {
     if (this.authService.getIsLoggedUser()) {
       this.student = this.tokenStorage.getLoggedUser();
-      this.getAllMarksByStudentId(this.student.id);
+      this.getAllMarks(this.student.id);
     }
   }
 
-  refresh(student: Student) {
-    this.student = student;
-    this.onFilterByLesson(null);
-  }
-
-  onFilterByLesson(lesson: Lesson) {
+  public onFilterByLesson(lesson: Lesson) {
     if (lesson == null) {
-      this.marksToDisplay = [...this.student.marks];
+      this.marksToDisplay = this.student.marks;
     } else {
-      this.marksToDisplay = [... _.filter<Mark[]>(this.student.marks, mark => _.isEqual(mark.lesson, lesson))];
+      this.marksToDisplay = this.markService.filterLessons(this.student.marks, lesson);
     }
   }
 
-  onFilterLesson(marks: Mark[]) {
-    if (!_.isEmpty(marks)) {
-      this.lessonsOfCurrentstudent = _.chain(marks).map(mark => mark.lesson).uniqWith(_.isEqual).merge().value();
-    } else {
-      this.lessonsOfCurrentstudent = [];
-    }
-  }
-
-  private getAllMarksByStudentId(studentId: string) {
-    this.markService.findAllByStudentId(studentId)
-      .then(marks => { this.student.marks = _.sortBy(marks, ['createdAt', 'updatedAt']).reverse()
-            this.marksToDisplay = this.student.marks; this.onFilterLesson(this.student.marks); })
+  private getAllMarks(studentId: string) {
+    this.markService.findAll(studentId)
+      .then(marks => { this.student.marks = marks
+                       this.marksToDisplay = marks;
+                       this.lessonsOfCurrentstudent = this.markService.extractLessonsFromMarks(marks);
+                     })
       .catch(err => console.log(err));
   }
 
-  /*displayLessons(): string[] {
-    return _.chain(this.lessonsOfCurrentGroup).map('subjectName').uniqBy().value();
-  }*/
+  public getMarkStyle(mark: number): string {
+    const markColor: string = mark > 15 ? 'green'
+                                        : mark >= 10 ? 'blue' : 'red';
+    return `${markColor}-color`;
+  }
 }

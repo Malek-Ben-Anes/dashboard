@@ -75,7 +75,7 @@ export class GroupMarksStudentDetailComponent implements OnInit, OnChanges {
   }
 
   private getAllMarksByStudentId(studentId: string) {
-    this.markService.findAllByStudentId(studentId)
+    this.markService.findAll(studentId)
       .then(marks => this.student.marks = _.sortBy(marks, ['createdAt', 'updatedAt']).reverse())
       .then(marks => this.marksToDisplay = this.student.marks)
       .catch(err => console.log(err));
