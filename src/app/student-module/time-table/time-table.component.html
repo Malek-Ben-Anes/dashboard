@@ -5,7 +5,8 @@
             <div class="col-md-10"></div>
             <div class="col-md-2">
               <a mat-raised-button class="btn btn-link" [href]="BASE_URL + student.group.timetabeUrl" target="_blank" download="emploi-du-temps">
-                <span class="material-icons">arrow_downward</span>Telecharger
+                <span class="material-icons">arrow_downward</span>
+                {{'student.bulletins.download'|translate}}
               </a>
             </div>
           </div>
@@ -16,7 +17,8 @@
                 </a>
         </div>
     </div>
-    <ng-template #noContent>L'emploi du temps n'est pas disponible.
+    <ng-template #noContent>
+      {{'student.timetable.noTimetable'|translate}}
       <img class="img time-table" src="assets/images/image-not-found-404.png" [alt]="student + ' Time table'"/>
     </ng-template>
   </div>
