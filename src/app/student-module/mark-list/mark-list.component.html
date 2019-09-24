@@ -1,6 +1,5 @@
 <div class="card height-500 card-3">
     <div class="card-body">
-
         <div>
             <button mat-raised-button (click)="onFilterByLesson(null)">{{'student.marks.all' | translate}}</button>
             <button *ngFor="let lesson of lessonsOfCurrentstudent" mat-raised-button (click)="onFilterByLesson(lesson)">
@@ -11,10 +10,10 @@
             maxBufferPx="400" class="example-viewport">
             <table class="table">
                 <thead>
-                    <th>Matiére</th>
-                    <th>Remarque</th>
-                    <th>Note</th>
-                    <th>Date</th>
+                    <th>{{'label.subject' | translate}}</th>
+                    <th>{{'label.observation' | translate}}</th>
+                    <th>{{'label.mark' | translate}}</th>
+                    <th>{{'label.date' | translate}}</th>
                 </thead>
                 <tbody>
                     <tr *cdkVirtualFor="let mark of marksToDisplay" class="example-item">

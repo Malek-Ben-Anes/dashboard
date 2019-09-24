@@ -58,13 +58,23 @@
     "signIn.credentials.title": "Entrer votre coordonnes!",
     "signIn.credentials.email": "E-mail",
     "signIn.credentials.password": "Mot de passe",
+    "signIn.credentials.login": "Se connecter",
+    "signIn.credentials.loading": "Chargement...",
+    "signIn.credentials.failure": "Login failed, Please try again",
+
+    "signIn.credentials.email.required": "Email is required",
+    "signIn.credentials.password.required": "Password is required",
+    "signIn.credentials.password.constraint.length": "Password must be at least 6 characters",
 
     "student.bulletins.trimester": "Trimestre",
     "student.bulletins.deliberation": "Notifications",
     "student.bulletins.noBulletin": "Vous ne disposez d'aucun bulletin.",
 
+    "student.timetable.noTimetable": "L'emploi du temps n'est pas disponible.",
+    "student.bulletins.download": "Telecharger",
+
     "student.marks.all": "Toutes les notes",
-    "student.marks.noContent": "Vous n'avew pas des notes!",
+    "student.marks.noContent": "Vous n'avez pas des notes!",
     "student.marks.noMarks": "No content",
 
     "admin.notifications.notify.confirmation.message": "Vous allez notifier ${selectedOptionNumber} ${seletedChoice}. S'il vous plaît, cliquez sur confirmer pour continuer?",
@@ -83,5 +93,10 @@
     "label.address": "Addresse",
     "label.description": "description",
 
-    "label.registered": "Inscrit(e)"
+    "label.registered": "Inscrit(e)",
+
+    "label.subject": "Matiére",
+    "label.observation": "Remarque",
+    "label.mark": "Note",
+    "label.date": "Date"
 }

@@ -20,7 +20,7 @@
           <input type="text" class="form-control" name="email" [(ngModel)]="form.username" #username="ngModel"
             required />
           <div *ngIf="f.submitted && username.invalid">
-            <div *ngIf="username.errors.required">Email is required</div>
+            <div *ngIf="username.errors.required">{{'signIn.credentials.email.required' | translate}}</div>
           </div>
         </div>
         <div class="form-group">
@@ -28,50 +28,29 @@
           <input type="password" class="form-control" name="password" [(ngModel)]="form.password" #password="ngModel"
             required minlength="6" />
           <div *ngIf="f.submitted && password.invalid">
-            <div *ngIf="password.errors.required">Password is required</div>
-            <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+            <div *ngIf="password.errors.required">{{'signIn.credentials.password.required' | translate}}</div>
+            <div *ngIf="password.errors.minlength">{{'signIn.credentials.password.constraint.length' | translate}}</div>
           </div>
         </div>
         <div class="form-group center">
 
           <div *ngIf="isLogging; else isNotLogging">
             <button mat-raised-button class="btn btn-primary">
-              Logging...<i class="fa fa-circle-o-notch fa-spin"></i>
+              {{'signIn.credentials.loading' | translate}}<i class="fa fa-circle-o-notch fa-spin"></i>
             </button>
           </div>
           <ng-template #isNotLogging>
             <button mat-raised-button class="btn btn-primary">
-              <span class="glyphicon glyphicon-cloud-upload"></span>Login
+              <span class="glyphicon glyphicon-cloud-upload">{{'signIn.credentials.login' | translate}}</span>
             </button>
           </ng-template>
         </div>
         <div class="form-group center">
           <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger">
-            Login failed, Please try again
+            {{'signIn.credentials.failure' | translate}}
           </div>
         </div>
       </form>
-      <!-- <hr /> 
-      <p>Don't have an account?</p>
-      <a routerLink="/signup" class="btn btn-success">Sign Up</a>-->
     </div>
   </div>
 </ng-template>
-<!-- 
-<form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
-    <p class="text-danger">{{ errorMessage }}</p>
-    <div class="form-group">
-      <label for="email">Adresse mail</label>
-      <input type="text" id="email" class="form-control" formControlName="email">
-    </div>
-    <div class="form-group">
-      <label for="password">Mot de passe</label>
-      <input type="password" id="password" class="form-control" formControlName="password">
-    </div>
-    <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-      </div>
-    <button class="btn btn-success" type="submit" [disabled]="signinForm.invalid">Connexion</button>
-  </form> -->
