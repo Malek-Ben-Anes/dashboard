@@ -27,11 +27,25 @@
         </div>
       </div>
       <div *ngIf="(!isNew); else newSubject">
-        <button mat-raised-button type="submit" class="btn btn-warning pull-right">Update Group</button>
+        <button
+          mat-raised-button
+          [disabled]="groupForm.invalid"
+          type="submit"
+          class="btn btn-warning pull-right"
+        >
+          Update Group
+        </button>
         <div class="clearfix"></div>
       </div>
       <ng-template #newSubject>
-        <button mat-raised-button type="submit" class="btn btn-info pull-right">Create Group</button>
+        <button
+          mat-raised-button
+          [disabled]="groupForm.pristine || groupForm.invalid"
+          type="submit"
+          class="btn btn-info pull-right"
+        >
+          Create Group
+        </button>
         <div class="clearfix"></div>
       </ng-template>
     </form>

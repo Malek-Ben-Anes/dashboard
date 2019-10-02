@@ -72,8 +72,10 @@
                                 </div>
                             </div>
                             <button mat-raised-button type="submit" class="btn btn-info pull-right"
+                                [disabled]="teacherForm.pristine || teacherForm.invalid"
                                 *ngIf="teacher.id  == null">Create Profile</button>
                             <button mat-raised-button type="submit" class="btn btn-warning pull-right"
+                                [disabled]="teacherForm.invalid"
                                 *ngIf="teacher.id != null">Update Profile</button>
                             <div class="clearfix"></div>
                         </form>

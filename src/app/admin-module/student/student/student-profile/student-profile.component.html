@@ -109,10 +109,24 @@
                                     </mat-form-field>
                                 </div>
                             </div>
-                            <button mat-raised-button type="submit" class="btn btn-info pull-right" *ngIf="student.id  == null">Create
-                                Profile</button>
-                            <button mat-raised-button type="submit" class="btn btn-warning pull-right" *ngIf="student.id != null">Update
-                                Profile</button>
+                            <button
+                                mat-raised-button
+                                [disabled]="studentForm.pristine || studentForm.invalid"
+                                type="submit"
+                                class="btn btn-info pull-right"
+                                *ngIf="student.id  == null"
+                            >
+                                Create Profile
+                            </button>
+                            <button
+                                mat-raised-button
+                                [disabled]="studentForm.invalid"
+                                type="submit"
+                                class="btn btn-warning pull-right"
+                                *ngIf="student.id != null"
+                            >
+                                Update Profile
+                            </button>
                             <div class="clearfix"></div>
                         </form>
                     </div>

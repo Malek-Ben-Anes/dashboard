@@ -32,13 +32,34 @@
 
                 <div *ngIf="(!isNew); else newSubject">
                     <div class="col-md-1"></div>
-                        <button mat-raised-button type="submit" class="btn btn-warning pull-right">Update Subject</button>
-                        <button mat-raised-button class="btn btn-info" (click)="onCreateNewSubject()">New</button>
+                        <button
+                            mat-raised-button
+                            [disabled]="subjectForm.invalid"
+                            type="submit"
+                            class="btn btn-warning pull-right"
+                        >
+                            Update Subject
+                        </button>
+                        <button
+                            mat-raised-button
+                            [disabled]="subjectForm.pristine || subjectForm.invalid"
+                            class="btn btn-info"
+                            (click)="onCreateNewSubject()"
+                        >
+                            New
+                        </button>
                         <div class="clearfix"></div>
                 </div>
                 <ng-template #newSubject>
                     <div class="col-md-2"></div>
-                        <button mat-raised-button type="submit" class="btn btn-info pull-right">Create Subject</button>
+                        <button
+                            mat-raised-button
+                            [disabled]="subjectForm.pristine || subjectForm.invalid"
+                            type="submit"
+                            class="btn btn-info pull-right"
+                        >
+                            Create Subject
+                        </button>
                         <div class="clearfix"></div>
                 </ng-template>
             </div>

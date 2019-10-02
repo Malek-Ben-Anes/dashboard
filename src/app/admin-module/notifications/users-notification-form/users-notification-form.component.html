@@ -40,7 +40,7 @@
             <div class="col-md-3">
               <mat-form-field class="example-full-width">
                 <mat-select matInput placeholder="Type" formControlName="type" required>
-                  <mat-option *ngFor="let NOTIF of NOTIFS" [value]="notif" required>{{'GLBL.label.' + NOTIF | translate}}</mat-option>
+                  <mat-option *ngFor="let NOTIF of NOTIFS" [value]="NOTIF" required>{{'GLBL.label.' + NOTIF | translate}}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
@@ -56,6 +56,7 @@
             </div>
             <div class="col-md-2">
               <button mat-raised-button type="submit" (click)="openDialog()"
+                [disabled]="notifForm.pristine || notifForm.invalid"
                 class="btn btn-warning pull-right">Notifier</button>
               <div class="clearfix"></div>
             </div>

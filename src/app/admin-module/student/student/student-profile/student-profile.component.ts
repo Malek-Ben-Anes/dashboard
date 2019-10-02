@@ -69,7 +69,7 @@ export class StudentProfileComponent implements OnInit {
       parentName: ['', Validators.required],
       parentPhone: ['', Validators.required],
       address: ['', Validators.required],
-      description: ['', Validators.required],
+      description: [''],
     });
   }
 

@@ -55,7 +55,7 @@ export class UsersNotificationFormComponent implements OnInit {
     const loggedUserName = this.loggedUser ?  `${this.loggedUser.firstname} ${ this.loggedUser.lastname}` : '';
     this.notifForm = this.formBuilder.group({
       notifier: [loggedUserName, Validators.required],
-      notified: [null, Validators.required],
+      //notified: [null, Validators.required],
       title: ['', Validators.required],
       content: ['', Validators.required],
       type: [null, Validators.required],
