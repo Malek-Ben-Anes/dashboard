@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { Teacher } from '../models/Teacher';
 import { Gender } from '../models/User';
-import { HttpClient, HttpErrorResponse, HttpEvent } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpParams } from '@angular/common/http';
 import { reject } from 'q';
 import { BASE_API_URL } from 'app/app.component';
 
@@ -29,9 +29,20 @@ export class TeacherService {
     return this.http.post<Teacher>(TEACHER_URL, teacher);
   }
 
-  updatePassword(studentRequest: Teacher): Observable<Teacher> {
-    return this.http
-      .put<Teacher>(TEACHER_URL + '/' + studentRequest.id, studentRequest);
+  update(teacher: Teacher, updatePassword?: boolean): Promise<Teacher> {
+    const Url = `${TEACHER_URL}/${teacher.id}`
+    return new Promise((resolve, reject) => {
+      if (updatePassword != null) {
+        const httpOptions = {
+          params: new HttpParams().set('updatePassword', String(updatePassword))
+        };
+        this.http.put<Teacher>(Url, teacher, httpOptions)
+        .subscribe(studentUpdated => resolve(studentUpdated), err => reject(err));
+      } else {
+        this.http.put<Teacher>(Url, teacher)
+            .subscribe(studentUpdated => resolve(studentUpdated), err => reject(err));
+      }
+    });
   }
 
   uploadTimeTable(teacherId: string, file: File): Observable<HttpEvent<{}>> {

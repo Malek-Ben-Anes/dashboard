@@ -39,7 +39,6 @@ export class TeacherProfileComponent implements OnInit {
 
   initForm() {
     this.teacherForm = this.formBuilder.group({
-      username: ['', Validators.required],
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       email: ['', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]],
@@ -47,13 +46,12 @@ export class TeacherProfileComponent implements OnInit {
       phone: ['', Validators.required],
       gender: [Gender, Validators.required],
       address: ['', Validators.required],
-      description: ['', Validators.required],
+      description: [''],
     });
   }
 
   updateForm(teacher: Teacher): void {
     this.teacherForm.patchValue({
-      username: teacher.username,
       firstname: teacher.firstname,
       lastname: teacher.lastname,
       phone: teacher.phone,

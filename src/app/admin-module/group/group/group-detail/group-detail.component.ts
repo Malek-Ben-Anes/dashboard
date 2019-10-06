@@ -62,7 +62,7 @@ export class GroupDetailComponent implements OnInit, OnChanges {
     this.groupForm = this.formBuilder.group({
       name: ['', Validators.required],
       level: ['', Validators.required],
-      description: ['', Validators.required],
+      description: [''],
     });
   }
 

@@ -3,6 +3,8 @@ import { Teacher } from 'app/models/Teacher';
 import { BASE_URL } from 'app/app.component';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TeacherService } from 'app/services/teacher.service';
+import { DialogService } from 'app/commons/dialog/dialog.service';
+import { DialogData } from 'app/models/DialogData';
 
 @Component({
   selector: 'app-update-teacher-password',
@@ -18,9 +20,8 @@ export class UpdateTeacherPasswordComponent implements OnInit {
   BASE_URL: string = BASE_URL;
 
   passwordForm: FormGroup;
-  submitted = false;
 
-  constructor(private formBuilder: FormBuilder, private teacherService: TeacherService) { }
+  constructor(private formBuilder: FormBuilder, private teacherService: TeacherService, private dialogService: DialogService) { }
 
   ngOnInit() {
     this.initForm();
@@ -54,26 +55,36 @@ export class UpdateTeacherPasswordComponent implements OnInit {
     );
   }
 
-  private passwordMatchValidator(g: FormGroup) {
-    return g.get("password").value === g.get("passwordConfirm").value
-      ? null
-      : { mismatch: true };
+  private passwordMatchValidator(f: FormGroup) {
+    return f.get('password').value === f.get('passwordConfirm').value ? null : { mismatch: true };
   }
 
   onSubmit() {
-    this.submitted = true;
     if (this.passwordForm.invalid) {
       return;
     }
     this.teacher.password = this.passwordForm.get("password").value;
+    const updatePassword = true;
     this.teacherService
-      .updatePassword(this.teacher)
-      .subscribe(
+      .update(this.teacher, updatePassword)
+      .then(
         (teacher: Teacher) => {
-        alert("password updated successfully!");
         this.teacher = teacher;
-        this.modifiedTeacher.emit(this.teacher);},
-        err => console.log("password update failed!")
+        this.modifiedTeacher.emit(this.teacher);
+        const data: DialogData = {
+          dialogTitle: 'User password has been successfully updated!',
+          dialogMessage: ''
+        };
+        this.dialogService.openDialog(data);
+      })
+      .catch(
+        err => {
+          const data: DialogData = {
+            dialogTitle: 'User password update has failed :(',
+            dialogMessage: ''
+          };
+          this.dialogService.openDialog(data);
+        }
       );
   }
 }
