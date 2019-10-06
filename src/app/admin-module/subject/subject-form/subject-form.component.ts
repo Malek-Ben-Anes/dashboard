@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import { Component, OnInit, Input, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SubjectService } from 'app/services/subject.service';
@@ -33,7 +34,7 @@ export class SubjectFormComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.initForm();
-    if (this.subjectToSave == null) {
+    if (_.isNil(this.subjectToSave)) {
       this.isNew = true;
       this.subjectToSave = new Subject();
     } else {
@@ -44,28 +45,29 @@ export class SubjectFormComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
 
-    if (changes.level != null) {
+    if (!_.isNil(changes.level)) {
       this.level = changes.level.currentValue;
       this.CreateNewSubject();
     }
-    if (changes.subjectToSave != null) {
+    if (!_.isNil(changes.subjectToSave)) {
       this.subjectToSave = changes.subjectToSave.currentValue;
       this.isNew = false;
     }
 
-    if (this.subjectForm != null) {
+    if (!_.isNil(this.subjectForm)) {
       this.updateForm(this.subjectToSave);
     }
   }
 
-  private onCreateNewSubject() {
+  public onCreateNewSubject() {
+    this.initForm();
     this.CreateNewSubject();
-    this.updateForm(this.subjectToSave);
+    // this.updateForm(this.subjectToSave);
   }
 
   onSubmit() {
     this.getSubmitedData();
-    console.log(this.subjectToSave, this.subjectToSave.id != null);
+    console.log(this.subjectToSave);
     if (this.subjectToSave.id == null) {
       this.save(this.subjectToSave);
     } else {
@@ -102,21 +104,24 @@ export class SubjectFormComponent implements OnInit, OnChanges {
     this.subjectService.save(subject)
       .subscribe(subject => {
         this.subjectToSave = subject;
-        this.onCreateNewSubject();
-        this.updateForm(this.subjectToSave);
-        console.log("Subject created");
+        this.isNew = false;
         this.refershEvent.emit(null);
+        console.log('Subject created');
       },
         (err) => console.log(err.error));
   }
 
   private update(subject: Subject) {
     this.subjectService.update(subject)
-      .subscribe(subject => { this.subjectToSave = subject; console.log("subject updated"); this.refershEvent.emit(null);},
+      .subscribe(subject => {
+        this.subjectToSave = subject;
+        this.refershEvent.emit(null);
+        console.log('subject updated');
+       },
         (err) => console.log(err.error));
   }
 
-  private getSubmitedData() {
+  private getSubmitedData(): void {
     this.subjectToSave.name = this.extractFieldData('name');
     this.subjectToSave.coefficient = this.extractFieldData('coefficient');
     this.subjectToSave.hourlyVolume = this.extractFieldData('hourlyVolume');

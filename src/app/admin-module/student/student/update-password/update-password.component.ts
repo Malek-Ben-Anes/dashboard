@@ -4,6 +4,8 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Student } from "app/models/Student";
 import { StudentService } from "app/services/student.service";
 import { BASE_URL } from "app/app.component";
+import { DialogService } from "app/commons/dialog/dialog.service";
+import { DialogData } from "app/models/DialogData";
 
 @Component({
   selector: "app-update-password",
@@ -21,9 +23,8 @@ export class UpdatePasswordComponent implements OnInit {
   BASE_URL: string = BASE_URL;
 
   passwordForm: FormGroup;
-  submitted = false;
 
-  constructor(private formBuilder: FormBuilder, private studentService: StudentService) { }
+  constructor(private formBuilder: FormBuilder, private studentService: StudentService, private dialogService: DialogService) { }
 
   ngOnInit() {
     this.initForm();
@@ -43,7 +44,7 @@ export class UpdatePasswordComponent implements OnInit {
           [
             Validators.required,
             Validators.minLength(6),
-            Validators.maxLength(50)
+            Validators.maxLength(40)
           ]
         ],
         passwordConfirm: [
@@ -51,7 +52,7 @@ export class UpdatePasswordComponent implements OnInit {
           [
             Validators.required,
             Validators.minLength(6),
-            Validators.maxLength(50)
+            Validators.maxLength(40)
           ]
         ]
       },
@@ -59,10 +60,8 @@ export class UpdatePasswordComponent implements OnInit {
     );
   }
 
-  private passwordMatchValidator(g: FormGroup) {
-    return g.get("password").value === g.get("passwordConfirm").value
-      ? null
-      : { mismatch: true };
+  private passwordMatchValidator(form: FormGroup) {
+    return form.get('password').value === form.get('passwordConfirm').value ? null : { mismatch: true };
   }
 
   onSubmit() {
@@ -70,15 +69,24 @@ export class UpdatePasswordComponent implements OnInit {
       return;
     }
 
-    this.submitted = true;
     const updatePassword = true;
     this.student.password = this.passwordForm.get('password').value;
     this.studentService.update(this.student, updatePassword)
       .then((student) => {
         this.student = student;
         this.modifiedStudent.emit(this.student);
-        alert('password updated successfully!');
+        const data: DialogData = {
+          dialogTitle: 'User password has been successfully updated!',
+          dialogMessage: ''
+        };
+        this.dialogService.openDialog(data);
       })
-      .catch(err => console.log('password update failed!'));
+      .catch(err => {
+        const data: DialogData = {
+          dialogTitle: 'User password update has failed :(',
+          dialogMessage: ''
+        };
+        this.dialogService.openDialog(data);
+    });
   }
 }
