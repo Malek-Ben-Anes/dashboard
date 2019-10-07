@@ -81,13 +81,13 @@ export class UsersNotificationFormComponent implements OnInit {
   private computeModalDialog():  {dialogTitle: string; dialogMessage: string;} {
     const selectedOptionNumber: number = this.selectedOptions.length;
     const seletedChoice: string = this.selected.toLowerCase();
-    const dialogMessagePattern: string = this.translate.instant('admin.notifications.notify.confirmation.message');
+    const dialogMessagePattern: string = this.translate.instant('All.text.notifications.confirmation.modal.message');
     const compiled = _.template(dialogMessagePattern);
     const dialogMessage: string = compiled({
                                             'selectedOptionNumber': selectedOptionNumber,
                                             'seletedChoice': seletedChoice
                                           });
-    const dialogTitle = this.translate.instant('admin.notifications.notify.validation.message');
+    const dialogTitle = this.translate.instant('All.text.notifications.confirmation.modal.title');
     return {dialogMessage: dialogMessage, dialogTitle: dialogTitle};
   }
 

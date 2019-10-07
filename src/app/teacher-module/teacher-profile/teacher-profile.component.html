@@ -11,18 +11,18 @@
                         </a>
                     </div>
                     <div class="card-body">
-                        <h6 class="card-category text-gray">Teacher</h6>
+                        <h6 class="card-category text-gray">{{'All.text.teacher.profile'|translate}}</h6>
                         <h4 class="card-title">{{user.firstname}} {{user.lastname}}</h4>
                         <p class="card-description">
                             {{ user.email }}
                         </p>
                         <p class="card-description">
-                            Registred: {{ user.createdAt | date }}
+                            {{'All.text.teacher.registered'|translate}}: {{ user.createdAt | date }}
                         </p>
                     </div>
                     <button mat-raised-button type="button" class="btn btn-warning pull-right">
                         <span class="material-icons">arrow_upward</span>
-                        Import File</button>
+                        {{'All.text.teacher.photo.import'|translate}}</button>
                 </div>
 
             </div>
@@ -33,12 +33,12 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="First Name" formControlName="firstname">
+                                        <input matInput placeholder="{{'All.text.placeholder.FirstName'|translate}}" formControlName="firstname">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Last Name" formControlName="lastname" required />
+                                        <input matInput placeholder="{{'All.text.placeholder.LastName'|translate}}" formControlName="lastname" required />
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -46,18 +46,18 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Email address" type="email"
+                                        <input matInput placeholder="{{'All.text.placeholder.Email'|translate}}" type="email"
                                             formControlName="email" />
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-3">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Genre" type="text" formControlName="gender">
+                                        <input matInput placeholder="{{'All.text.placeholder.Gender'|translate}}" type="text" formControlName="gender">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-3">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Birth Date" formControlName="birthDate" required>
+                                        <input matInput placeholder="{{'All.text.placeholder.BirthDate'|translate}}" formControlName="birthDate" required>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -65,12 +65,12 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Phone number" type="text" formControlName="phone">
+                                        <input matInput placeholder="{{'All.text.placeholder.PhoneNumber'|translate}}" type="text" formControlName="phone">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-8">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Address" type="text" formControlName="address"
+                                        <input matInput placeholder="{{'All.text.placeholder.Address'|translate}}" type="text" formControlName="address"
                                             required>
                                     </mat-form-field>
                                 </div>
@@ -79,7 +79,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <mat-form-field class="example-full-width">
-                                        <textarea matInput placeholder="Additional information"
+                                        <textarea matInput placeholder="{{'All.text.placeholder.AdditionalInformation'|translate}}"
                                             formControlName="description" rows="3"></textarea>
                                     </mat-form-field>
                                 </div>

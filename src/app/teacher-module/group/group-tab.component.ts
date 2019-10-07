@@ -7,6 +7,7 @@ import { FormGroup } from '@angular/forms';
 import { Teacher } from 'app/models/Teacher';
 import { TokenStorageService } from 'app/services/auth/token-storage.service';
 import { AuthService } from 'app/services/auth/auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-group-tab',
@@ -24,7 +25,8 @@ export class GroupTabComponent implements OnInit {
   groups: Group[];
   levels = Object.keys(Level);
 
-  constructor(private groupService: GroupService, private tokenStorage: TokenStorageService, private authService: AuthService) { }
+  constructor(private groupService: GroupService, private tokenStorage: TokenStorageService, private authService: AuthService,
+              private translate: TranslateService) { }
 
   ngOnInit() {
     this.findAll();
@@ -35,7 +37,8 @@ export class GroupTabComponent implements OnInit {
       this.isLogged = true;
       this.user =  this.tokenStorage.getLoggedUser() as Teacher;
     }
-    this.groupService.findAll(this.user.id).then(groups => this.groups = groups)
+    this.groupService.findAll(this.user.id)
+        .then(groups => this.groups = groups)
         .catch(err => console.log(err));
   }
 }

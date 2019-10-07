@@ -35,7 +35,6 @@ export class TeacherProfileComponent implements OnInit {
   }
 
   private initializeForm(user: Teacher): void {
-    console.log(this.translate.instant(`GLBL.${user.gender}`));
     this.form = this.formBuilder.group({
       firstname: [{ value: user.firstname, disabled: true }],
       lastname: [{ value: user.lastname, disabled: true }],

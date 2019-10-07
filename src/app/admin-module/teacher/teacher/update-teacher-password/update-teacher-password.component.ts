@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TeacherService } from 'app/services/teacher.service';
 import { DialogService } from 'app/commons/dialog/dialog.service';
 import { DialogData } from 'app/models/DialogData';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-update-teacher-password',
@@ -21,7 +22,8 @@ export class UpdateTeacherPasswordComponent implements OnInit {
 
   passwordForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private teacherService: TeacherService, private dialogService: DialogService) { }
+  constructor(private formBuilder: FormBuilder, private teacherService: TeacherService, private dialogService: DialogService,
+              private translate: TranslateService) { }
 
   ngOnInit() {
     this.initForm();
@@ -72,7 +74,7 @@ export class UpdateTeacherPasswordComponent implements OnInit {
         this.teacher = teacher;
         this.modifiedTeacher.emit(this.teacher);
         const data: DialogData = {
-          dialogTitle: 'User password has been successfully updated!',
+          dialogTitle: this.translate.instant('All.Password.Message.update.success'),
           dialogMessage: ''
         };
         this.dialogService.openDialog(data);
@@ -80,7 +82,7 @@ export class UpdateTeacherPasswordComponent implements OnInit {
       .catch(
         err => {
           const data: DialogData = {
-            dialogTitle: 'User password update has failed :(',
+            dialogTitle: this.translate.instant('All.Password.Message.update.failed'),
             dialogMessage: ''
           };
           this.dialogService.openDialog(data);

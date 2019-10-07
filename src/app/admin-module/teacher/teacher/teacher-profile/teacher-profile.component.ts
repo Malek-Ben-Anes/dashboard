@@ -30,7 +30,6 @@ export class TeacherProfileComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    console.log("teacher profile: ", this.teacher);
     if ( this.teacher === undefined ) {
       this.teacher = new Teacher();
     }
