@@ -23,6 +23,9 @@
     "All.Password.ErrorMessage.MinLength": "Password must be at least 6 characters",
     "All.Password.ErrorMessage.NotMatch": "Time Table",
 
+    "All.Input.ErrorMessage.MinLength": "Input must be at least 6 characters",
+    "All.Input.ErrorMessage.Required": "Input is required",
+
     "All.Password.Message.update.success": "User password has been successfully updated!",
     "All.Password.Message.update.failed": "User password update has failed :(",
 
@@ -76,7 +79,12 @@
     "signIn.credentials.password.required": "Password is required",
     "signIn.credentials.password.constraint.length": "Password must be at least 6 characters",
 
-    "student.bulletins.trimester": "Trimestre",
+    "All.text.Trimester": "Trimestre",
+    "All.text.Trimesters": "Trimestres",
+    "All.text.Trimesters.TRIMESTER1": "Trimestre 1",
+    "All.text.Trimesters.TRIMESTER2": "Trimestre 2",
+    "All.text.Trimesters.TRIMESTER3": "Trimestre 3",
+
     "student.bulletins.deliberation": "Notifications",
     "student.bulletins.noBulletin": "Vous ne disposez d'aucun bulletin.",
 
@@ -151,6 +159,8 @@
     "All.text.notifications.confirmation.modal.message": "Vous allez notifier ${selectedOptionNumber} ${seletedChoice}. S'il vous plaît, cliquez sur confirmer pour continuer?",
     "All.text.notifications.confirmation.modal.title": "Confirmation d'envoi des notifications",
     "All.text.notifications.selectedElemetns": "Confirmation d'envoi des notifications",
+    "All.text.notifications.modal.send.success.title": "Les utilisaterus ont ete notifies",
+    "All.text.notifications.modal.send.fail.title": "la notification des utilisaterus a echoue!",
 
     "All.text.group.Name": "Nom du groupe",
     "All.text.group.Level": "Niveau",
@@ -163,6 +173,7 @@
     "All.text.groups.label": "Groupes",
 
 
+    "All.text.student.label": "Eleve",
     "All.text.students.label": "Eleves",
     "All.text.students.studentNumber": "Effectif",
     "All.text.students.tab.name": "Eleves",

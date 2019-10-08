@@ -28,6 +28,12 @@
             <div class="col-md-5">
               <mat-form-field class="example-full-width">
                 <input matInput placeholder="{{'All.text.notifications.Title'|translate}}" formControlName="title" required>
+                <mat-error *ngIf="notifForm && notifForm.controls.title.errors && notifForm.controls.title.errors.required">
+                  {{'All.Input.ErrorMessage.Required'|translate}}
+                </mat-error>
+                <mat-error *ngIf="notifForm && notifForm.controls.title.errors && notifForm.controls.title.errors.minlength">
+                  {{'All.Input.ErrorMessage.MinLength' | translate}}
+                </mat-error>
               </mat-form-field>
             </div>
             <div class="col-md-3">
@@ -41,12 +47,18 @@
             </div>
             <div class="col-md-4">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="{{'All.text.notifications.Notifier'|translate}}" formControlName="notifier" [disabled]="'disabled'">
+                <input matInput placeholder="{{'All.text.notifications.Notifier'|translate}}" formControlName="notifier" [disabled]="true">
               </mat-form-field>
             </div>
             <div class="col-md-10">
               <mat-form-field class="example-full-width">
                 <input matInput placeholder="{{'All.text.notifications.Content'|translate}}" type="text" formControlName="content" required>
+                <mat-error *ngIf="notifForm && notifForm.controls.content.errors && notifForm.controls.content.errors.required">
+                  {{'All.Input.ErrorMessage.Required'|translate}}
+                </mat-error>
+                <mat-error *ngIf="notifForm && notifForm.controls.content.errors && notifForm.controls.content.errors.minlength">
+                  {{'All.Input.ErrorMessage.MinLength' | translate}}
+                </mat-error>
               </mat-form-field>
             </div>
             <div class="col-md-2">

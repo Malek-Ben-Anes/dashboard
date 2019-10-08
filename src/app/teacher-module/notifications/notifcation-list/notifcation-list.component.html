@@ -18,7 +18,8 @@
             </th>
           </thead>
           <tbody>
-            <tr *ngFor="let notification of notifications; let i=index"  [ngClass]="i < newNotifications ? 'backgroud-ghost-white' : ''">
+            <tr *ngFor="let notification of notifications; let i=index"
+             [ngClass]="i < loggedUser.newNotifications ? 'backgroud-ghost-white' : ''">
               <td class="text-primary">
                 <strong>{{notification.title}}</strong>
               </td>
@@ -29,7 +30,7 @@
                 <strong>{{notification.notifier.firstname}} {{notification.notifier.lastname}}</strong>
               </td>
               <td>
-                <p>{{notification.createdAt | date:'d/M/yyyy'}} à {{notification.createdAt | date:'h:mm'}}</p>
+                {{notification.createdAt | date:'dd / MM / yyyy'}}
               </td>
             </tr>
           </tbody>
