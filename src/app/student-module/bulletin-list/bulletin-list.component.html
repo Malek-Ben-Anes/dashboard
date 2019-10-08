@@ -19,10 +19,10 @@
             </a>
           </td>
           <td>
-            <strong>{{ bulletin.trimester }}</strong>
+            <strong>{{getTrimester(bulletin) | translate}}</strong>
           </td>
           <td>
-            {{ bulletin.createdAt | date }}
+            {{ bulletin.createdAt | date:'dd / MM / yyyy'}}
           </td>
         </tr>
       </tbody>

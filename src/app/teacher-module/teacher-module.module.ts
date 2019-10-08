@@ -19,7 +19,9 @@ import { GroupMarksStudentListComponent } from './group/group/group-marks/group-
 import { GroupMarksStudentDetailComponent } from './group/group/group-marks/group-marks-student-detail/group-marks-student-detail.component';
 import { GroupMarksFormComponent } from './group/group/group-marks/group-marks-student-detail/group-marks-form/group-marks-form.component';
 import { SharedModule } from 'app/commons/shared.module';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
+import { HttpLoaderFactory } from 'app/header/header.module';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,14 @@ import { TranslateModule } from '@ngx-translate/core';
     MaterialModule,
     ScrollDispatchModule,
     RouterModule,
-    SharedModule
+    SharedModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

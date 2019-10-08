@@ -8,19 +8,25 @@
                           <table class="table">
                               <thead class=" text-primary">
                                   <th>
-                                      Name
+                                      {{'All.text.group.Name'|translate}}
                                   </th>
                                   <th>
-                                      Group Level
+                                    {{'All.text.group.Level'|translate}}
+                                  </th>
+                                  <th>
+                                    {{'All.text.group.Effectif'|translate}}
                                   </th>
                               </thead>
                               <tbody>
                                   <tr *ngFor="let group of groups">
                                       <td class="text-primary">
-                                          <a [routerLink]="'/app/show-groups-detail/' + group.id"><strong>{{ group.name }}</strong></a>
+                                         <a [routerLink]="'/app/show-groups-detail/' + group.id"><strong>{{group.name}}</strong></a>
                                       </td>
                                       <td>
-                                          <p>{{ group.level }}</p>
+                                         {{'GLBL.label.' + group.level|translate}}
+                                      </td>
+                                      <td>
+                                        {{group.studentsNumber}}
                                       </td>
                                   </tr>
                               </tbody>

@@ -3,6 +3,7 @@ import { Group } from 'app/models/Group';
 import { BASE_URL } from 'app/app.component';
 import { GroupService } from 'app/services/group.service';
 import { HttpResponse } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-group-timetable',
@@ -18,7 +19,7 @@ export class GroupTimetableComponent implements OnInit {
 
   selectedFile: File
 
-  constructor(private groupService: GroupService) { }
+  constructor(private groupService: GroupService, private translate: TranslateService) { }
 
   ngOnInit() {
   }

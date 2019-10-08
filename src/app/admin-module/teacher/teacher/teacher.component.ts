@@ -5,6 +5,7 @@ import { TeacherService } from 'app/services/teacher.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Student } from 'app/models/Student';
 import { HttpErrorResponse } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-teacher',
@@ -20,7 +21,8 @@ export class TeacherComponent implements OnInit, OnChanges {
   selected = new FormControl(0);
   teacher: Teacher;
 
-  constructor(private teacherService: TeacherService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private teacherService: TeacherService, private router: Router, private route: ActivatedRoute,
+              private translate: TranslateService) { }
 
   ngOnInit() {
     const id: string = this.route.snapshot.params['id'];
@@ -76,7 +78,6 @@ export class TeacherComponent implements OnInit, OnChanges {
     this.teacherService.updateTeacher(studentRequest).subscribe((StudentData) => {
       this.teacher = StudentData;
       this.tabs = this.updateTabs();
-      console.log('teacher updated', this.teacher);
     }, (err) => {
       console.log(err)
     });
@@ -87,15 +88,16 @@ export class TeacherComponent implements OnInit, OnChanges {
       this.teacher = StudentData;
       this.isNew = false;
       this.tabs = this.updateTabs();
-      console.log('teacher created', this.teacher);
     }, (err) => {
       console.log(err)
     });
   }
 
   updateTabs() {
-    return [{'label': 'Edit Profile', 'disabled': false}, {'label': 'Password', 'disabled': this.isNew},
-            {'label': 'Groups', 'disabled': this.isNew},
-            {'label': 'Time Table', 'disabled': this.isNew}];
+    return [
+      {'label': this.translate.instant('all.tab.EditProfile'), 'disabled': false},
+      {'label': this.translate.instant('all.tab.Password'), 'disabled': this.isNew},
+      {'label': this.translate.instant('all.tab.Groups'), 'disabled': this.isNew},
+      {'label': this.translate.instant('all.tab.TimeTable'), 'disabled': this.isNew}];
   }
 }

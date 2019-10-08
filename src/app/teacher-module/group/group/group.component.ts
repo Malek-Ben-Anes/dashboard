@@ -11,6 +11,7 @@ import { StudentService } from 'app/services/student.service';
 import { Observable } from 'rxjs';
 import { BASE_URL } from 'app/app.component';
 import { Teacher } from 'app/models/Teacher';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-group',
@@ -36,7 +37,7 @@ export class GroupComponent implements OnInit {
   groupStudentsForm: FormGroup;
 
   constructor(private groupService: GroupService, private studentService: StudentService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute, private translate: TranslateService) { }
 
   ngOnInit() {
     const id = this.route.snapshot.params['id'];
@@ -65,9 +66,9 @@ export class GroupComponent implements OnInit {
   }
 
   private updateTabs() {
-    return [{'label': 'Eleves', 'disabled': false},
-            {'label': 'Emploi du temps', 'disabled': this.isNew},
-            {'label': 'Notes & Stats', 'disabled': this.isNew}];
+    return [{'label': this.translate.instant('All.text.students.tab.name'), 'disabled': false},
+            {'label': this.translate.instant('All.text.timeTable.tab.name'), 'disabled': this.isNew},
+            {'label': this.translate.instant('All.text.marks.tab.name'), 'disabled': this.isNew}];
   }
 
   checked = false;

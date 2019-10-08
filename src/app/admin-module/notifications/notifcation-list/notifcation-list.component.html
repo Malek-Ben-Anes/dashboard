@@ -5,16 +5,16 @@
         <table class="table">
           <thead class=" text-primary">
             <th>
-              Title
+              {{'All.text.notifications.Title'|translate}}
             </th>
             <th>
-              Content
+              {{'All.text.notifications.Content'|translate}}
             </th>
             <th>
-              Notifier
+              {{'All.text.notifications.Notifier'|translate}}
             </th>
             <th>
-              Date
+              {{'All.text.notifications.Date'|translate}}
             </th>
           </thead>
           <tbody>
@@ -29,12 +29,12 @@
                 <strong>{{notification.notifier.firstname}} {{notification.notifier.lastname}}</strong>
               </td>
               <td>
-                <p>{{notification.createdAt | date:'d/M/yyyy'}} à {{notification.createdAt | date:'h:mm'}}</p>
+                <p>{{notification.createdAt | date:'dd / MM / yyyy'}}</p>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-    <ng-template #noContent>Content to render when condition is false.</ng-template>
+    <ng-template #noContent>{{'All.text.notifications.noContent'|translate}}</ng-template>
   </div>

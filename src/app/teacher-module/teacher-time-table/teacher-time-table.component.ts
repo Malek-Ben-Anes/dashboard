@@ -4,6 +4,7 @@ import { TokenStorageService } from 'app/services/auth/token-storage.service';
 import { AuthService } from 'app/services/auth/auth.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BASE_URL } from 'app/app.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-teacher-time-table',
@@ -17,7 +18,7 @@ export class TeacherTimeTableComponent implements OnInit {
   isLogged = false;
   user: Teacher;
 
-  constructor(private tokenStorage: TokenStorageService, private authService: AuthService) {
+  constructor(private tokenStorage: TokenStorageService, private authService: AuthService, private translate: TranslateService) {
   }
 
   ngOnInit() {

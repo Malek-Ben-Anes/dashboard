@@ -5,8 +5,6 @@
           </mat-tab-group>
   </div>
 </div>
-<app-notifcation-list *ngIf="selected.value === TABS[0].NOTIFICATIONS_LIST" [notifications]="notifications"
-        [newNotifications]="newNotifications">
-</app-notifcation-list>
+<app-notifcation-list *ngIf="selected.value === TABS[0].NOTIFICATIONS_LIST" [notifications]="notifications"></app-notifcation-list>
 
 <app-users-notification-form *ngIf="selected.value === TABS[1].NOTIFY_USERS && loggedUser != null" [loggedUser]="loggedUser"></app-users-notification-form>

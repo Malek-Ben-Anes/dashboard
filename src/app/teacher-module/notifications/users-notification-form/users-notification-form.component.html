@@ -1,12 +1,16 @@
 <div class="col-md-12">
   <div class="row">
     <button (click)="onToggleButton('GROUP')" class="btn margin-30"
-      [ngClass]="selected !== 'GROUP' ? 'btn-outline-secondary' : 'btn-info'">Groupes</button>
+      [ngClass]="selected !== 'GROUP' ? 'btn-outline-secondary' : 'btn-info'">
+        {{'All.text.groups.label'|translate}}
+     </button>
     <button (click)="onToggleButton('STUDENT')" class="btn margin-30"
-      [ngClass]="selected !== 'STUDENT' ? 'btn-outline-secondary' : 'btn-info'">Eleves</button>
+      [ngClass]="selected !== 'STUDENT' ? 'btn-outline-secondary' : 'btn-info'">
+        {{'All.text.students.label'|translate}}
+    </button>
 
     <mat-form-field class="example-full-width" *ngIf="selected === 'STUDENT'">
-      <mat-select matInput placeholder="group students" (selectionChange)="onSelectGroup($event.value)">
+      <mat-select matInput placeholder="{{'All.text.students.placeholder.SelectGroup'|translate}}" (selectionChange)="onSelectGroup($event.value)">
         <mat-option *ngFor="let grp of allGroups" [value]="grp">
           {{ grp.name }}
         </mat-option>
@@ -23,30 +27,44 @@
           <div class="row">
             <div class="col-md-5">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Titre" formControlName="title" required>
+                <input matInput placeholder="{{'All.text.notifications.Title'|translate}}" formControlName="title" required>
+                <mat-error *ngIf="notifForm && notifForm.controls.title.errors && notifForm.controls.title.errors.required">
+                  {{'All.Input.ErrorMessage.Required'|translate}}
+                </mat-error>
+                <mat-error *ngIf="notifForm && notifForm.controls.title.errors && notifForm.controls.title.errors.minlength">
+                  {{'All.Input.ErrorMessage.MinLength' | translate}}
+                </mat-error>
               </mat-form-field>
             </div>
             <div class="col-md-3">
               <mat-form-field class="example-full-width">
-                <mat-select matInput placeholder="Type" formControlName="type" required>
-                  <mat-option *ngFor="let notif of NOTIFS" [value]="notif" required>{{notif}}</mat-option>
+                <mat-select matInput placeholder="{{'All.text.notifications.Type'|translate}}" formControlName="type" required>
+                  <mat-option *ngFor="let notif of NOTIFS" [value]="notif" required>
+                    {{'All.text.notifications.Type.' + notif|translate}}
+                  </mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
             <div class="col-md-4">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Notifier" formControlName="notifier" [disabled]="'disabled'">
+                <input matInput placeholder="{{'All.text.notifications.Notifier'|translate}}" formControlName="notifier" [disabled]="true">
               </mat-form-field>
             </div>
             <div class="col-md-10">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Contenu" type="text" formControlName="content" required>
+                <input matInput placeholder="{{'All.text.notifications.Content'|translate}}" type="text" formControlName="content" required>
+                <mat-error *ngIf="notifForm && notifForm.controls.content.errors && notifForm.controls.content.errors.required">
+                  {{'All.Input.ErrorMessage.Required'|translate}}
+                </mat-error>
+                <mat-error *ngIf="notifForm && notifForm.controls.content.errors && notifForm.controls.content.errors.minlength">
+                  {{'All.Input.ErrorMessage.MinLength' | translate}}
+                </mat-error>
               </mat-form-field>
             </div>
             <div class="col-md-2">
               <button mat-raised-button type="submit" (click)="openDialog()"
                 [disabled]="notifForm.pristine || notifForm.invalid"
-                class="btn btn-warning pull-right">Notifier</button>
+                class="btn btn-warning pull-right">{{'All.text.notifications.send'|translate}}</button>
               <div class="clearfix"></div>
             </div>
           </div>
@@ -67,7 +85,7 @@
             </mat-list-option>
           </mat-selection-list>
           <p>
-            Options selected: {{selections && selections.selectedOptions.selected.length}}
+            {{'All.text.notifications.selectedElemetns'|translate}}: {{selections && selections.selectedOptions.selected.length}}
           </p>
         </div>
         <!-- <ng-template #teacherList> -->
@@ -80,7 +98,7 @@
             </mat-selection-list>
           </div>
           <p>
-            Elements selectionnes: {{selections && selections.selectedOptions.selected.length}}
+            {{'All.text.notifications.selectedElemetns'|translate}}: {{selections && selections.selectedOptions.selected.length}}
           </p>
         </div>
       </div>

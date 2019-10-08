@@ -5,20 +5,21 @@
         <table class="table">
           <thead class=" text-primary">
             <th>
-              Title
+              {{'All.text.notifications.Title'|translate}}
             </th>
             <th>
-              Content
+              {{'All.text.notifications.Content'|translate}}
             </th>
             <th>
-              Notifier
+              {{'All.text.notifications.Notifier'|translate}}
             </th>
             <th>
-              Date
+              {{'All.text.notifications.Date'|translate}}
             </th>
           </thead>
           <tbody>
-            <tr *ngFor="let notification of notifications; let i=index"  [ngClass]="i < newNotifications ? 'backgroud-ghost-white' : ''">
+            <tr *ngFor="let notification of notifications; let i=index"
+             [ngClass]="i < loggedUser.newNotifications ? 'backgroud-ghost-white' : ''">
               <td class="text-primary">
                 <strong>{{notification.title}}</strong>
               </td>
@@ -29,13 +30,13 @@
                 <strong>{{notification.notifier.firstname}} {{notification.notifier.lastname}}</strong>
               </td>
               <td>
-                <p>{{notification.createdAt | date:'d/M/yyyy'}} à {{notification.createdAt | date:'h:mm'}}</p>
+                {{notification.createdAt | date:'dd / MM / yyyy'}}
               </td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-    <ng-template #noContent>Content to render when condition is false.</ng-template>
+    <ng-template #noContent>{{'All.text.notifications.noContent'|translate}}</ng-template>
   </div>
 </div>

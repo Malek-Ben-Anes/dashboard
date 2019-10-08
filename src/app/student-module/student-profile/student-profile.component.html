@@ -11,7 +11,7 @@
                         </a>
                     </div>
                     <div class="card-body">
-                        <h6 class="card-category text-gray">{{'student'|translate}}</h6>
+                        <h6 class="card-category text-gray">{{'All.text.student.label'|translate}}</h6>
                         <h4 class="card-title">{{user.firstname}} {{user.lastname}}</h4>
                         <p class="card-description">
                             {{ user.email }}
@@ -49,7 +49,8 @@
                                 </div>
                                 <div class="col-md-3">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="{{'label.gender' | translate}}" type="text" formControlName="gender">
+                                        <input matInput type="text" placeholder="{{'label.gender' | translate}}" value="{{'GLBL.' + user.gender | translate}}"
+                                         formControlName="gender">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-3">
@@ -67,7 +68,8 @@
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="{{'label.levelName' | translate}}" type="text" formControlName="levelName">
+                                        <input matInput placeholder="{{'label.levelName' | translate}}" type="text" value="{{getLevel(user) | translate}}"
+                                         formControlName="levelName">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">

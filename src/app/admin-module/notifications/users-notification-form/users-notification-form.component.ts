@@ -18,6 +18,8 @@ import { User } from 'app/models/User';
 import { DialogContentExampleDialogComponent } from 'app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
 import { Library } from 'app/models/Library';
 import { TranslateService } from '@ngx-translate/core';
+import { DialogData } from 'app/models/DialogData';
+import { DialogService } from 'app/commons/dialog/dialog.service';
 
 @Component({
   selector: 'app-users-notification-form',
@@ -40,6 +42,7 @@ export class UsersNotificationFormComponent implements OnInit {
   selectedOptions: Teacher[] | Group[] | Student[];
 
   constructor(public dialog: MatDialog, private formBuilder: FormBuilder, private authService: AuthService,
+              private dialogService: DialogService,
               private notificationService: NotificationService, private translate: TranslateService,
               private teacherService: TeacherService, private groupService: GroupService, private studentService: StudentService) { }
 
@@ -81,13 +84,13 @@ export class UsersNotificationFormComponent implements OnInit {
   private computeModalDialog():  {dialogTitle: string; dialogMessage: string;} {
     const selectedOptionNumber: number = this.selectedOptions.length;
     const seletedChoice: string = this.selected.toLowerCase();
-    const dialogMessagePattern: string = this.translate.instant('admin.notifications.notify.confirmation.message');
+    const dialogMessagePattern: string = this.translate.instant('All.text.notifications.confirmation.modal.message');
     const compiled = _.template(dialogMessagePattern);
     const dialogMessage: string = compiled({
                                             'selectedOptionNumber': selectedOptionNumber,
                                             'seletedChoice': seletedChoice
                                           });
-    const dialogTitle = this.translate.instant('admin.notifications.notify.validation.message');
+    const dialogTitle = this.translate.instant('All.text.notifications.confirmation.modal.title');
     return {dialogMessage: dialogMessage, dialogTitle: dialogTitle};
   }
 
@@ -97,8 +100,19 @@ export class UsersNotificationFormComponent implements OnInit {
     const notifyUser: boolean = (this.selected === Library.STUDENT) || (this.selected === Library.TEACHER);
     const notifyGroup: boolean = this.selected === Library.GROUP;
     this.notificationService.save(notificationRequest, notifyUser, notifyGroup)
-            .then(notification => {console.log(notification); alert('notiication saved!!')})
-            .catch(err => alert('notiication filed!!'));
+            .then(notification => {console.log(notification);
+            const data: DialogData = {
+              dialogTitle: this.translate.instant('All.text.notifications.modal.send.success.title'),
+              dialogMessage: ''
+            };
+            this.dialogService.openDialog(data);
+          })
+          .catch(err => {
+            const data: DialogData = {
+              dialogTitle: this.translate.instant('All.text.notifications.modal.send.fail.title'),
+              dialogMessage: ''
+            };
+            this.dialogService.openDialog(data); });
   }
 
   public onToggleButton(choice: string): void {
@@ -126,6 +140,7 @@ export class UsersNotificationFormComponent implements OnInit {
     this.studentService.findStudentsByGroupId(groupId)
       .then(students => {
       this.StudentsOfSelectedGroup = students;
+      this.selectedOptions = students;
       })
       .catch(err => console.log(err));
   }

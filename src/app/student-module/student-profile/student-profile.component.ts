@@ -35,12 +35,13 @@ export class StudentProfileComponent implements OnInit {
   }
 
   private initializeForm(student: Student): void {
+    console.log(this.translate.instant('GLBL.' + student.gender));
     this.studentForm = this.formBuilder.group({
       firstname: [{value: student.firstname, disabled: true}],
       lastname: [{value: student.lastname, disabled: true}],
       email: [{value: student.email, disabled: true}],
       phone: [{value: student.phone, disabled: true}],
-      gender: [{value: this.translate.instant(student.gender), disabled: true}],
+      gender: [{value: this.translate.instant('GLBL.' + student.gender), disabled: true}],
       birthDate: [{value: this.datePipe.transform(new Date(student.birthDate), 'dd / MM / yyyy') , disabled: true}],
       levelName: [{value: this.translate.instant(student.level), disabled: true}],
       groupName: [{value: student.group && student.group.name, disabled: true}],
@@ -49,5 +50,9 @@ export class StudentProfileComponent implements OnInit {
       address: [{value: student.address, disabled: true}],
       description: [{value: student.description, disabled: true}],
     });
+  }
+
+  public getLevel(user: Student): string {
+    return user.level ? 'GLBL.label.' + user.level : '';
   }
 }
