@@ -18,10 +18,10 @@ export class LessonService {
 
   constructor(private http: HttpClient) {}
 
-  findAll(teacherId?: string): Promise<Lesson[]> {
+  findAll(teacherId?: string, groupId?: string): Promise<Lesson[]> {
     return new Promise((resolve, reject) => {
-      if (teacherId != null) {
-        const params = new HttpParams().set('teacherId', teacherId);
+      if (teacherId != null || groupId != null) {
+        const params = this.buildHttpParams(teacherId, groupId);
         this.http.get<Lesson[]>(LESSON_URL, { params: params })
                  .subscribe(lessons => { this.lessons = lessons; resolve(lessons); }, err => reject(err));
       } else {
@@ -29,6 +29,14 @@ export class LessonService {
                  .subscribe(lessons => resolve(lessons), err => reject(err));
       }
     });
+  }
+
+  private buildHttpParams(teacherId?: string, groupId?: string): HttpParams {
+    if (!_.isNil(teacherId)) {
+      return new HttpParams().set('teacherId', teacherId);
+    } else if(!_.isNil(groupId)) {
+      return new HttpParams().set('groupId', groupId)
+    }
   }
 
   getSingleLesson(id: string): Observable<Lesson>  {

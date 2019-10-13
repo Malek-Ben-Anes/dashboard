@@ -5,8 +5,7 @@ import { Lesson } from 'app/models/Lesson';
 import { Message } from 'app/models/message';
 import { Mark } from 'app/models/Mark';
 import { MarkService } from 'app/services/mark.service';
-
-const WEEK_DAYS_NUMBER = 7;
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-group-marks-form',
@@ -19,21 +18,30 @@ export class GroupMarksFormComponent implements OnInit, OnChanges {
 
   @Input('lessons') lessons: Lesson[];
 
+  @Input('selectedMarks')
+  selectedMarks: Mark[];  
+
   @Output()
   refreshStudent = new EventEmitter<Student>();
 
   message: Message = new Message();
   newEvaluationMarks: Mark[];
 
-  constructor(private markService: MarkService) { }
+  constructor(private markService: MarkService, private translate: TranslateService) { }
 
   ngOnInit() {
     this.generateMarksForm(this.lessons);
+    if (this.student.marks) {
+      this.student.marks = [];
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.student) {
       this.student = changes.student.currentValue;
+      if (this.student.marks) {
+        this.student.marks = [];
+      }
     }
     if (changes.lessons) {
       this.lessons = changes.lessons.currentValue;
@@ -42,54 +50,30 @@ export class GroupMarksFormComponent implements OnInit, OnChanges {
   }
 
   public onSendEvaluation(): void {
-    const marksToBePersisted: Mark[] = _.filter(this.newEvaluationMarks, mark => mark.id == null && mark.note != null && mark.mark != null);
+    const marksToBePersisted: Mark[] = _.filter(this.newEvaluationMarks, (mark: Mark) => mark.id == null && mark.mark != null && mark.observation != null);
     this.markService.save(this.student.id, marksToBePersisted)
-        .then((marksAdded: Mark[]) => Array.prototype.push.apply(this.student.marks, marksAdded) )
-        .then(data => this.refreshStudent.emit(this.student))
+        .then((marksAdded: Mark[]) => {this.refreshStudent.emit(this.student);})
         .catch(err => console.log(err));
   }
 
   onDeleteMark(event, mark: Mark) {
     event.currentTarget.disabled = true;
-    this.markService.delete(this.student.id, mark.id)
+    this.markService.delete(mark.id)
                     .then(data => this.deleteMarkFromStudent(mark))
                     .then(data => this.refreshStudent.emit(this.student))
                     .then(data => this.generateMarksForm(this.lessons))
                     .catch(err => console.log(err));
   }
 
-  /**
-   * Mark can be assigned to student (mark field is Enabled) every week.
-   */
-  isDisabled(newEvaluationMark: Mark): boolean {
-    const lastestMarkAssignedToSudent: Mark = _.chain(this.student.marks).filter(mark => _.isEqual(mark.lesson, newEvaluationMark.lesson))
-      .sortBy(['updatedAt']).last().value();
-    if (lastestMarkAssignedToSudent != null) {
-      const lastestMarkDate = new Date(lastestMarkAssignedToSudent.updatedAt);
-      const isDisabled: boolean = this.isNextWeek(lastestMarkDate);
-      if (isDisabled) {
-        this.markDataMapping(lastestMarkAssignedToSudent, newEvaluationMark);
-      }
-      return isDisabled;
-    }
-    return false;
-  }
-
   private generateMarksForm(lessons: Lesson[]) {
     this.newEvaluationMarks = [];
-    _.forEach(lessons, lesson => this.newEvaluationMarks.push(new Mark(this.student, lesson)));
+    const updatableMarks: Mark[] = _.filter(this.selectedMarks, (mark: Mark) => mark.updatable);
+    _.forEach(lessons, lesson => this.newEvaluationMarks.push(this.addNewMark(updatableMarks, lesson)));
   }
 
-  private isNextWeek(eventDate: Date): boolean {
-    return _.now() < eventDate || new Date(_.now()).getDay() < eventDate.getDay()
-      || _.now() < eventDate.setDate(eventDate.getDate() + WEEK_DAYS_NUMBER);
-  }
-
-  private markDataMapping(markSource: Mark, markDestination: Mark): void {
-    markDestination.id = markSource.id;
-    markDestination.lesson = markSource.lesson;
-    markDestination.note = markSource.note;
-    markDestination.mark = markSource.mark;
+  private addNewMark(updatableMarks: Mark[], lesson: Lesson) {
+    const updatableMark: Mark = _.find(updatableMarks, mark => _.isEqual(mark.lesson, lesson));
+    return updatableMark ? updatableMark : new Mark(this.student.id, lesson);
   }
 
   private deleteMarkFromStudent(mark: Mark) {

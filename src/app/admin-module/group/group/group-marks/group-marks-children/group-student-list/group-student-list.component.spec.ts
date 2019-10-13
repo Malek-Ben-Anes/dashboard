@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MarkFormComponent } from './mark-form.component';
+import { GroupStudentListComponent } from './group-student-list.component';
 
-describe('MarkFormComponent', () => {
-  let component: MarkFormComponent;
-  let fixture: ComponentFixture<MarkFormComponent>;
+describe('GroupMarksStudentListComponent', () => {
+  let component: GroupStudentListComponent;
+  let fixture: ComponentFixture<GroupStudentListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MarkFormComponent ]
+      declarations: [ GroupStudentListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MarkFormComponent);
+    fixture = TestBed.createComponent(GroupStudentListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

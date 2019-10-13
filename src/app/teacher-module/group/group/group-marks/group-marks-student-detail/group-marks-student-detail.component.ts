@@ -10,6 +10,7 @@ import { User } from 'app/models/User';
 import { TokenStorageService } from 'app/services/auth/token-storage.service';
 import { AuthService } from 'app/services/auth/auth.service';
 import { Teacher } from 'app/models/Teacher';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-group-marks-student-detail',
@@ -30,7 +31,8 @@ export class GroupMarksStudentDetailComponent implements OnInit, OnChanges {
   marksToDisplay: Mark[];
 
   constructor(private tokenStorage: TokenStorageService, private authService: AuthService,
-              private markService: MarkService, private lessonService: LessonService) { }
+              private markService: MarkService, private lessonService: LessonService,
+              private translate: TranslateService) { }
 
   ngOnInit() {
     if (this.authService.getIsLoggedUser()) {
@@ -90,8 +92,4 @@ export class GroupMarksStudentDetailComponent implements OnInit, OnChanges {
       return 'green-color';
     }
   }
-
-  /*displayLessons(): string[] {
-    return _.chain(this.lessonsOfCurrentGroup).map('subjectName').uniqBy().value();
-  }*/
 }

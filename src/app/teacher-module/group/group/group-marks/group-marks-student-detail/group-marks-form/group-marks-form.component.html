@@ -1,33 +1,39 @@
 <div class="chatcontrol">
-  <div class="row margin-12">
-    <div class="col-4">
-      <h4>Weekly evaluation</h4>
+  <div class="row">
+    <div class="col-md-4">
+      <h4>{{'All.text.marks.weekly'|translate}}</h4>
     </div>
-    <div class="col-5"></div>
-    <div class="col-3">
-        <button type="button" class="btn btn-warning btn-sm pull-right" (click)="onSendEvaluation()">Enregistrer</button>
+    <div class="offset-md-5 col-md-3">    
+        <button type="button" class="btn btn-warning btn-sm pull-right" (click)="onSendEvaluation()">
+          {{'All.text.marks.save'|translate}}
+        </button>
     </div>
   </div>
-  <ul class="list-group">
-    <li *ngFor="let newEvaluationMark of newEvaluationMarks">
-      <div class="row">
-        <div class="col-2">
-          <strong>{{newEvaluationMark.lesson.name}} :</strong>
+
+  <div class="row">
+    <ul class="list-group">
+      <li *ngFor="let newEvaluationMark of newEvaluationMarks">
+        <div class="row">
+          <div class="col-md-3">
+            <strong>{{newEvaluationMark.lesson.name}} :</strong>
+          </div>
+          <div class="col-md-2">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'All.text.marks.label.enter.mark'|translate}}" type="number" [(ngModel)]="newEvaluationMark.mark"
+              [disabled]="!newEvaluationMark.isUpdatable" required>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="{{'All.text.marks.label.enter.observation'|translate}}" type="text" [(ngModel)]="newEvaluationMark.observation"
+              [disabled]="!newEvaluationMark.isUpdatable" required>
+            </mat-form-field>
+          </div>
+          <div class="col-md-1" *ngIf="!newEvaluationMark.isUpdatable">
+            <button (click)="onDeleteMark($event, newEvaluationMark)"  type="button" class="btn btn-danger btn-sm">X</button>              
+          </div>
         </div>
-        <div class="col-5">
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Enter your observation" [(ngModel)]="newEvaluationMark.note" [disabled]="isDisabled(newEvaluationMark)" required>
-          </mat-form-field>
-        </div>
-        <div class="col-3">
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Enter your observation" type="text" [(ngModel)]="newEvaluationMark.mark" [disabled]="isDisabled(newEvaluationMark)" required>
-          </mat-form-field>
-        </div>
-        <div class="col-1" *ngIf="isDisabled(newEvaluationMark)">
-          <button (click)="onDeleteMark($event, newEvaluationMark)"  type="button" class="btn btn-danger btn-sm">X</button>              
-        </div>
-      </div>
-    </li>
-  </ul>
+      </li>
+    </ul>
+  </div>
 </div>

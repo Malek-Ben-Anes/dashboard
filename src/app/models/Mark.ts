@@ -5,18 +5,19 @@ import { Timestamp } from 'rxjs/Rx';
 
 export class Mark {
 
-    id?: string;
-    note?: string;
-    mark?: string;
-    student: Student;
+    id: string;
+    observation: string;
+    mark: number;
+    studentId: string;
     lesson: Lesson;
+    updatable: boolean;
     updatedAt: number| string;
     createdAt: number| string;
 
-    constructor(student?: Student, lesson?: Lesson, note?: string, mark?: string) {
-        this.student = student;
+    constructor(studentId?: string, lesson?: Lesson, observation?: string, mark?: number) {
+        this.studentId = studentId;
         this.lesson = lesson;
-        this.note = note;
+        this.observation = observation;
         this.mark = mark;
     }
 }

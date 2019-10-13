@@ -2,3 +2,5 @@ dist/
 node_modules/
 __MACOSX/
 documentation/
+
+src/app/app.component.ts
