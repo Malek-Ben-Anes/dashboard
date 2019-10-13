@@ -5,6 +5,7 @@ import { Lesson } from 'app/models/Lesson';
 import { Message } from 'app/models/message';
 import { Mark } from 'app/models/Mark';
 import { MarkService } from 'app/services/mark.service';
+import { TranslateService } from '@ngx-translate/core';
 
 const WEEK_DAYS_NUMBER = 7;
 
@@ -25,7 +26,7 @@ export class GroupMarksFormComponent implements OnInit, OnChanges {
   message: Message = new Message();
   newEvaluationMarks: Mark[];
 
-  constructor(private markService: MarkService) { }
+  constructor(private markService: MarkService, private translate: TranslateService) { }
 
   ngOnInit() {
     this.generateMarksForm(this.lessons);
@@ -42,16 +43,16 @@ export class GroupMarksFormComponent implements OnInit, OnChanges {
   }
 
   public onSendEvaluation(): void {
-    const marksToBePersisted: Mark[] = _.filter(this.newEvaluationMarks, mark => mark.id == null && mark.note != null && mark.mark != null);
+    const marksToBePersisted: Mark[] = _.filter(this.newEvaluationMarks, (mark: Mark) => mark.id == null && mark.mark != null && mark.observation != null);
     this.markService.save(this.student.id, marksToBePersisted)
         .then((marksAdded: Mark[]) => Array.prototype.push.apply(this.student.marks, marksAdded) )
-        .then(data => this.refreshStudent.emit(this.student))
+        /*.then(marksAdded => this.refreshStudent.emit(this.student))*/
         .catch(err => console.log(err));
   }
 
   onDeleteMark(event, mark: Mark) {
     event.currentTarget.disabled = true;
-    this.markService.delete(this.student.id, mark.id)
+    this.markService.delete(mark.id)
                     .then(data => this.deleteMarkFromStudent(mark))
                     .then(data => this.refreshStudent.emit(this.student))
                     .then(data => this.generateMarksForm(this.lessons))
@@ -77,7 +78,7 @@ export class GroupMarksFormComponent implements OnInit, OnChanges {
 
   private generateMarksForm(lessons: Lesson[]) {
     this.newEvaluationMarks = [];
-    _.forEach(lessons, lesson => this.newEvaluationMarks.push(new Mark(this.student, lesson)));
+    _.forEach(lessons, lesson => this.newEvaluationMarks.push(new Mark(this.student.id, lesson)));
   }
 
   private isNextWeek(eventDate: Date): boolean {
@@ -88,7 +89,7 @@ export class GroupMarksFormComponent implements OnInit, OnChanges {
   private markDataMapping(markSource: Mark, markDestination: Mark): void {
     markDestination.id = markSource.id;
     markDestination.lesson = markSource.lesson;
-    markDestination.note = markSource.note;
+    markDestination.observation = markSource.observation;
     markDestination.mark = markSource.mark;
   }
 

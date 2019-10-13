@@ -3,13 +3,12 @@
     <strong>Eleves {{students && students.length}}:</strong>
     <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="example-viewport">
       <div *cdkVirtualFor="let student of students" class="example-item">
-        <button class="button-no-style item item-hover item-active"><span>
+        <button class="button-no-style item item-hover item-active">
+          <span>
             <div class="block item item-hover item-active" (click)="onDetailMarks(student)">
                 <img class="img profile-icon" [src]="BASE_URL + student.photo"
-                 default="assets/images/profile-logo.png" alt="Smiley face"/>          
-              <div class="message">
-                {{student.firstname}} {{student.lastname}}
-              </div>
+                 default="assets/images/profile-logo.png" alt="Smiley face"/>
+                 <span class="message">{{student.firstname}} {{student.lastname}}</span>
             </div>
           </span>
         </button>

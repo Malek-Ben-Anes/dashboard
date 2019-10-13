@@ -24,7 +24,7 @@ export class StudentMarksDetailComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.getAuthority();
-    this.getStudentsMarks();
+    // this.getStudentsMarks();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -32,12 +32,12 @@ export class StudentMarksDetailComponent implements OnInit, OnChanges {
     this.student = changes.student.currentValue;
     console.log("student in child value changed");
     console.log(this.student);
-    this.getStudentsMarks();
+    // this.getStudentsMarks();
   }
 
-  private getStudentsMarks() {
+  /*private getStudentsMarks() {
     this.markService.getStudentMarks(this.student.id).subscribe(marks => { this.marks = marks; console.log(this.marks); });
-  }
+  }*/
 
   private getAuthority() {
     if (this.tokenStorage.getToken()) {

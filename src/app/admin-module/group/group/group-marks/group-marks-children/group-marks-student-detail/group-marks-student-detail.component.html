@@ -3,14 +3,15 @@
         <mat-tab-group>
             <mat-tab label="{{'All.text.marks.label'|translate}}">
                 <div>
-                    <button mat-raised-button (click)="onFilterByLesson(null)">{{'All.text.marks.all'|translate}}</button>
-                    <button *ngFor="let lesson of lessonsOfCurrentGroup" mat-raised-button
-                     (click)="onFilterByLesson(lesson)">
-                        {{lesson.subjectName}}
+                    <button mat-raised-button (click)="onFilterByLesson(null)">
+                        {{'All.text.marks.all'|translate}}
                     </button>
+                    <button *ngFor="let lesson of lessons" mat-raised-button
+                        (click)="onFilterByLesson(lesson)">
+                        {{lesson.subjectName}} </button>
                 </div>
 
-                <div class="card">
+                <div *ngIf="student" class="card">
                     <div class="card-content table-responsive table-full-width">
                         <table class="table">
                             <thead>
@@ -21,19 +22,20 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let mark of marksToDisplay">
-                                    <td><span class="timestamp">{{mark.createdAt | date:'dd/MM/yyyy' }}</span></td>
                                     <td>{{mark.lesson.name}}</td>
-                                    <td>{{mark.note}}</td>
+                                    <td>{{mark.observation}}</td>
                                     <td><span [class]="getMarkStyle(mark.mark)">{{mark.mark}}</span></td>
+                                    <td><span class="timestamp">{{mark.createdAt | date:'dd/MM/yyyy' }}</span></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
+
             </mat-tab>
             <mat-tab label="{{'All.text.marks.label.sendEvaluation'|translate}}">
-                <app-group-marks-form *ngIf="student != null" [student]="student" (refreshStudent)="refresh($event)"
-                    [lessons]="lessonsOfCurrentGroup">
+                <app-group-marks-form *ngIf="student != null" (refreshStudent)="refresh($event)"
+                 [student]="student" [lessons]="lessons" [selectedMarks]="selectedMarks">
                 </app-group-marks-form>
             </mat-tab>
         </mat-tab-group>

@@ -79,6 +79,10 @@ all: unset;
 width: 100%;
 }
 
+.button-no-style:focus {
+  background-color: grey;
+}
+
 .width-parent  {
 width: 100%;
 }

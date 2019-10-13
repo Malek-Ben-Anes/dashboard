@@ -1,13 +1,13 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, EventEmitter, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { Student } from 'app/models/Student';
 import { BASE_URL } from 'app/app.component';
 
 @Component({
-  selector: 'app-group-marks-student-list',
-  templateUrl: './group-marks-student-list.component.html',
-  styleUrls: ['./group-marks-student-list.component.scss']
+  selector: 'app-group-student-list',
+  templateUrl: './group-student-list.component.html',
+  styleUrls: ['./group-student-list.component.scss']
 })
-export class GroupMarksStudentListComponent implements OnInit {
+export class GroupStudentListComponent implements OnInit {
 
   @Input('students') students: Student[];
 

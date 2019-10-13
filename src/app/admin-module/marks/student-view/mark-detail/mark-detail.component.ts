@@ -40,6 +40,6 @@ export class MarkDetailComponent implements OnInit {
   }
 
   private getStudentsMarks() {
-    this.markService.getStudentMarks(this.student.id).subscribe(marks => { this.marks = marks; console.log(this.marks); });
+    // this.markService.getStudentMarks(this.student.id).subscribe(marks => { this.marks = marks; console.log(this.marks); });
   }
 }

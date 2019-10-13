@@ -40,15 +40,15 @@ export class MarkFormComponent implements OnInit, OnChanges {
       this.lessons = lessons.filter(lesson => lesson.id.groupId === this.student.group.id); 
       this.newMarks = []; 
       this.lessons.forEach(lesson => { 
-        this.newMarks.push(new Mark(this.student, lesson)) });
+        this.newMarks.push(new Mark(this.student.id, lesson)) });
     });
   }
 
   public sendMessage(): void {
     console.log(this.newMarks);
 
-    this.newMarks.filter(mark => mark.note!== undefined && mark.mark!== undefined)
+    /*this.newMarks.filter(mark => mark.observation!== undefined && mark.mark!== undefined)
                   .forEach(mark => this.markService.saveMark(this.student.id, mark)
-                  .subscribe(mark => console.log(mark))) ;
+                  .subscribe(mark => console.log(mark))) ;*/
   }
 }
