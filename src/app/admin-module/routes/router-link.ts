@@ -14,7 +14,6 @@ export class Routers {
     public static LESSONS = 'lessons';
     public static LESSON_DETAIL = 'lesson-detail';
     public static LESSON_DETAIL_ID = 'lesson-detail/:id';
-    public static MARKS = 'marks';
     public static BULLETIN = 'bulletin';
     public static MESSAGES = 'messages';
     public static NOTIFICATIONS = 'notifications';

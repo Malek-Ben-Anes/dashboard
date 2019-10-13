@@ -21,13 +21,7 @@ import { StudentProfileComponent } from './student/student/student-profile/stude
 import { LessonDetailComponent } from './lesson-list/lesson-detail/lesson-detail.component';
 import { StudentAssignComponent } from './group/group/student-assign/student-assign.component';
 import { GroupTimetableComponent } from './group/group/group-timetable/group-timetable.component';
-import { MarkComponent } from './marks/marks.component';
-import { GroupStudentListComponent } from './marks/group-student-list/group-student-list.component';
-import { StudentMarksDetailComponent } from './marks/student-marks-detail/student-marks-detail.component';
 import { LessonTimeTableComponent } from './lesson-list/lesson-time-table/lesson-time-table.component';
-import { MarkFormComponent } from './marks/mark-form/mark-form.component';
-import { FilterComponent } from './marks/filter/filter.component';
-import { MarkDetailComponent } from './marks/student-view/mark-detail/mark-detail.component';
 import { BulletinComponent } from './student/student/bulletin/bulletin.component';
 import { FilterBulletinComponent } from './student/student/bulletin/filter/filter.component';
 import { UpdatePasswordComponent } from './student/student/update-password/update-password.component';
@@ -58,6 +52,7 @@ import { HttpLoaderFactory } from 'app/header/header.module';
 import { DialogContentExampleDialogComponent } from 'app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
 import { SharedModule } from 'app/commons/shared.module';
 import { ErrorDialogComponent } from 'app/commons/error-dialog/error-dialog.component';
+import { GroupStudentListComponent } from './group/group/group-marks/group-marks-children/group-student-list/group-student-list.component';
 
 @NgModule({
   declarations: [
@@ -76,13 +71,8 @@ import { ErrorDialogComponent } from 'app/commons/error-dialog/error-dialog.comp
     LessonDetailComponent,
     StudentAssignComponent,
     GroupTimetableComponent,
-    MarkComponent,
-    GroupStudentListComponent,
-    StudentMarksDetailComponent,
     LessonTimeTableComponent,
-    MarkFormComponent,
-    FilterComponent,
-    MarkDetailComponent,
+    GroupStudentListComponent,
     BulletinComponent,
     FilterBulletinComponent,
     UpdatePasswordComponent,
