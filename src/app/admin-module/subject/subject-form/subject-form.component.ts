@@ -5,6 +5,7 @@ import { SubjectService } from 'app/services/subject.service';
 import { Subject } from 'app/models/Subject';
 import { Level } from 'app/models/Level';
 import { HttpErrorResponse } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-subject-form',
@@ -30,7 +31,7 @@ export class SubjectFormComponent implements OnInit, OnChanges {
 
   levels = Object.keys(Level);
 
-  constructor(private formBuilder: FormBuilder, private subjectService: SubjectService) { }
+  constructor(private formBuilder: FormBuilder, private subjectService: SubjectService, private translate: TranslateService) { }
 
   ngOnInit() {
     this.initForm();

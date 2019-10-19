@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Student } from 'app/models/Student';
 import { BASE_URL } from 'app/app.component';
 import { Routers } from 'app/admin-module/routes/router-link';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-group-detail-student-list',
@@ -15,7 +16,7 @@ export class GroupDetailStudentListComponent implements OnInit {
 
   @Input('students') students: Student[];
 
-  constructor() { }
+  constructor(private translate: TranslateService) { }
 
   ngOnInit() {
   }

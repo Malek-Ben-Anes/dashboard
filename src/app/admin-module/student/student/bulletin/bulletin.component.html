@@ -6,18 +6,20 @@
           <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
           <img class="img profile-image" src="assets/images/upload-pdf-icon.png" alt="upload bulletin" height="39"
             width="39"/>
-          <button mat-raised-button class="btn btn-default" (click)="fileInput.click()">Sélectionner Bulletin</button>
+          <button mat-raised-button class="btn btn-default" (click)="fileInput.click()">
+              {{'All.text.selectFile' | translate}}
+          </button>
           <div *ngIf="isUploading">
             <button mat-raised-button class="btn btn-warning buttonload">
-              Uploading...<i class="fa fa-circle-o-notch fa-spin"></i>
+                {{'All.text.uploading' | translate}}<i class="fa fa-circle-o-notch fa-spin"></i>
             </button>
           </div>
         </div>
         <div class="col-md-3">
           <mat-form-field class="example-full-width">
-            <mat-select matInput placeholder="Trimester" [(value)]="selectedTrimester" required>
+            <mat-select matInput [placeholder]="'All.text.Trimester' | translate" [(value)]="selectedTrimester" required>
               <mat-option *ngFor="let trimester of trimesters" [value]="trimester" required>
-                {{ trimester }}
+                {{'All.text.Trimesters.'+trimester | translate}}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -25,7 +27,7 @@
         <div class="col-md-6">
           <div *ngIf="!isUploading">
             <button mat-raised-button class="btn btn-warning" (click)="onUpload()">
-              <span class="glyphicon glyphicon-cloud-upload"></span>Upload
+              <span class="glyphicon glyphicon-cloud-upload"></span>{{'All.text.upload' | translate}}
             </button>
           </div>
         </div>
@@ -41,13 +43,13 @@
         <thead class=" text-primary">
           <th></th>
           <th>
-            Trimester
+              {{'All.text.Trimester' | translate}}
           </th>
           <th>
-            Date de délibération
+              {{'student.bulletins.deliberation' | translate}}
           </th>
-          <th *ngIf="authority === 'admin'">
-            Supprimer
+          <th>
+              {{'All.text.delete' | translate}}
           </th>
         </thead>
         <tbody>
@@ -66,7 +68,9 @@
             </td>
             <td *ngIf="authority === 'admin'" class="td-actions text-right">
               <button (click)="onDeleteBulletin($event, bulletin.id)" type="button" class="btn btn-danger btn-sm"
-                [disabled]="false">Supprimer X</button>
+                [disabled]="false">
+                {{'All.text.delete' | translate}} X
+              </button>
             </td>
           </tr>
         </tbody>

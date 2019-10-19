@@ -66,12 +66,10 @@ export class AvatarComponent implements OnInit {
     }, err => console.log('err', err));*/
   }
 
-  getProfile(): string {
-    if ( this.user.discriminatorValue === 'STUDENT') {
-      return 'Student Profile';
-    } else if ( this.user.discriminatorValue === 'TEACHER') {
-      return 'Teacher Profile';
+  get profile(): string {
+    if ( this.user.discriminatorValue === 'TEACHER') {
+      return 'teacher';
     }
-    return 'Student Profile';
+    return 'student';
   }
 }

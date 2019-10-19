@@ -158,12 +158,3 @@ export class UsersNotificationFormComponent implements OnInit {
     return this.notifForm.get(property).value;
   }
 }
-
-/*openDialog() {
-  const dialogRef = this.dialog.open(DialogContentExampleDialogComponent);
-
-  dialogRef.afterClosed().subscribe(result => {
-    console.log(`Dialog result: ${result}`);
-  });
- }
-*/

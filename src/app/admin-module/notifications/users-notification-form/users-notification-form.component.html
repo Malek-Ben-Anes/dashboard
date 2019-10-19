@@ -1,14 +1,20 @@
 <div class="col-md-12">
   <div class="row">
     <button (click)="onToggleButton('TEACHER')" class="btn margin-30"
-      [ngClass]="selected !== 'TEACHER' ? 'btn-outline-secondary' : 'btn-info'">Enseignants</button>
+      [ngClass]="selected !== 'TEACHER' ? 'btn-outline-secondary' : 'btn-info'">
+      {{'label.teacher' | translate}}
+    </button>
     <button (click)="onToggleButton('GROUP')" class="btn margin-30"
-      [ngClass]="selected !== 'GROUP' ? 'btn-outline-secondary' : 'btn-info'">Groupes</button>
+      [ngClass]="selected !== 'GROUP' ? 'btn-outline-secondary' : 'btn-info'">
+      {{'label.group' | translate}}
+    </button>
     <button (click)="onToggleButton('STUDENT')" class="btn margin-30"
-      [ngClass]="selected !== 'STUDENT' ? 'btn-outline-secondary' : 'btn-info'">Eleves</button>
+      [ngClass]="selected !== 'STUDENT' ? 'btn-outline-secondary' : 'btn-info'">
+      {{'label.student' | translate}}
+    </button>
 
     <mat-form-field class="example-full-width" *ngIf="selected === 'STUDENT'">
-      <mat-select matInput placeholder="group students" (selectionChange)="onSelectGroup($event.value)">
+      <mat-select matInput placeholder="{{'All.text.groups.select' | translate}}" (selectionChange)="onSelectGroup($event.value)">
         <mat-option *ngFor="let grp of allGroups" [value]="grp">
           {{ grp.name }}
         </mat-option>
@@ -34,30 +40,34 @@
           <div class="row">
             <div class="col-md-5">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Titre" formControlName="title" required>
+                <input matInput placeholder="{{'All.text.notifications.Title' | translate}}" formControlName="title" required>
               </mat-form-field>
             </div>
             <div class="col-md-3">
               <mat-form-field class="example-full-width">
-                <mat-select matInput placeholder="Type" formControlName="type" required>
-                  <mat-option *ngFor="let NOTIF of NOTIFS" [value]="NOTIF" required>{{'GLBL.label.' + NOTIF | translate}}</mat-option>
+                <mat-select matInput placeholder="{{'All.text.notifications.Type' | translate}}" formControlName="type" required>
+                  <mat-option *ngFor="let NOTIF of NOTIFS" [value]="NOTIF" required>
+                    {{'All.text.notifications.Type.' + NOTIF | translate}}
+                  </mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
             <div class="col-md-4">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Notifier" formControlName="notifier" [disabled]="'disabled'">
+                <input matInput placeholder="{{'All.text.notifications.Notifier' | translate}}" formControlName="notifier"
+                 [disabled]="true">
               </mat-form-field>
             </div>
             <div class="col-md-10">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Contenu" type="text" formControlName="content" required>
+                <input matInput placeholder="{{'All.text.notifications.Content' | translate}}"
+                 type="text" formControlName="content" required>
               </mat-form-field>
             </div>
             <div class="col-md-2">
               <button mat-raised-button type="submit" (click)="openDialog()"
                 [disabled]="notifForm.pristine || notifForm.invalid"
-                class="btn btn-warning pull-right">Notifier</button>
+                class="btn btn-warning pull-right">{{'All.text.notifications.NotifierAction' | translate}}</button>
               <div class="clearfix"></div>
             </div>
           </div>
@@ -78,7 +88,7 @@
             </mat-list-option>
           </mat-selection-list>
           <strong>
-            Options selected: {{selections && selections.selectedOptions.selected.length}}
+              {{'All.text.notifications.OptionSelected' | translate}}: {{selections && selections.selectedOptions.selected.length}}
           </strong>
         </div>
         <!-- <ng-template #teacherList> -->
@@ -91,7 +101,7 @@
             </mat-selection-list>
           </div>
           <strong>
-            Elements selectionnes: {{selections && selections.selectedOptions.selected.length}}
+              {{'All.text.notifications.OptionSelected' | translate}}: {{selections && selections.selectedOptions.selected.length}}
           </strong>
         </div>
         <div *ngIf="selected == 'STUDENT'">
@@ -103,7 +113,7 @@
             </mat-selection-list>
           </div>
           <strong>
-            Elements selectionnes: {{selections && selections.selectedOptions.selected.length}}
+              {{'All.text.notifications.OptionSelected' | translate}}: {{selections && selections.selectedOptions.selected.length}}
           </strong>
         </div>
       </div>

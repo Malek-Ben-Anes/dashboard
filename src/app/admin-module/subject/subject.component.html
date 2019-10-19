@@ -1,7 +1,7 @@
 <div class="card card-profile">
   <div class="card-body">
           <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event);onNavigate()">
-                  <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab.label"></mat-tab>
+                  <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab.label | translate"></mat-tab>
           </mat-tab-group>
   </div>
 </div>

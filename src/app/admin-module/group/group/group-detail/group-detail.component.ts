@@ -7,6 +7,7 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { group } from '@angular/animations';
 import { Level } from 'app/models/Level';
 import { GroupService } from 'app/services/group.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-group-detail',
@@ -27,7 +28,7 @@ export class GroupDetailComponent implements OnInit, OnChanges {
 
   groupForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private groupService: GroupService) { }
+  constructor(private formBuilder: FormBuilder, private groupService: GroupService, private translate: TranslateService) { }
 
   ngOnInit() {
     this.initGroupForm();

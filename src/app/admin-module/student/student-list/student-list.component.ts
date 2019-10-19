@@ -7,6 +7,7 @@ import { StudentService } from 'app/services/student.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BASE_URL } from 'app/app.component';
 import { Routers } from 'app/admin-module/routes/router-link';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-student-list',
@@ -22,7 +23,7 @@ export class StudentListComponent implements OnInit {
   // This variable is needed for filter functionnality
   studentsTmp: Student[] = [];
 
-  constructor(private studentsService: StudentService, private router: Router) { }
+  constructor(private studentsService: StudentService, private router: Router, private translate: TranslateService) { }
 
   ngOnInit() {
     console.log(this.STUDENT_PROFILE);

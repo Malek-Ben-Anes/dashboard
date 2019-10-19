@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Student } from 'app/models/Student';
 import { BASE_URL } from 'app/app.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-time-table',
@@ -12,7 +13,7 @@ export class TimeTableComponent implements OnInit {
   BASE_URL: string = BASE_URL;
   @Input('student') student: Student;
 
-  constructor() { }
+  constructor(private translate: TranslateService) { }
 
   ngOnInit() {
   }

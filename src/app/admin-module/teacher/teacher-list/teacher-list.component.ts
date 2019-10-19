@@ -1,15 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
-
-
-import { Router } from '@angular/router';
-import { Subscription, of, Subject } from 'rxjs';
 import { TeacherService } from 'app/services/teacher.service';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { Teacher } from 'app/models/Teacher';
 import { BASE_URL } from 'app/app.component';
 import { Gender } from 'app/models/User';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-teacher-list',
@@ -22,9 +17,8 @@ export class TeacherListComponent implements OnInit {
   errorMessage: string;
 
   teachers: Teacher[] = [];
-  teachersSubscription: Subscription;
 
-  constructor(private teachersService: TeacherService) { }
+  constructor(private teachersService: TeacherService, private translate: TranslateService) { }
 
   ngOnInit() {
     this.findAllTeachers();

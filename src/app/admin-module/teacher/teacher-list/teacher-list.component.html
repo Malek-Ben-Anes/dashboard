@@ -5,7 +5,9 @@
                 <div class="row">
                     <div class="col-md-12">
                         <button mat-raised-button type="button" class="btn btn-warning pull-right"
-                            routerLink="/app/teacher-profile">Add Teacher</button>
+                         routerLink="/app/teacher-profile">
+                            {{'All.text.create' | translate}}
+                        </button>
                     </div>
                 </div>
                 <div class="card">
@@ -14,30 +16,31 @@
                             <table class="table">
                                 <thead class=" text-primary">
                                     <th>
-                                        Image
+                                        {{'All.text.label.Photo' | translate}}
                                     </th>
                                     <th>
-                                        Firstname
+                                        {{'All.text.label.FirstName' | translate}}
                                     </th>
                                     <th>
-                                        Lastname
+                                        {{'All.text.label.LastName' | translate}}
                                     </th>
                                     <th>
-                                        Email
+                                        {{'All.text.label.Email' | translate}}
                                     </th>
                                     <th>
-                                        Phone
+                                        {{'All.text.label.PhoneNumber' | translate}}
                                     </th>
                                     <th>
-                                        Description
+                                        {{'All.text.label.Description' | translate}}
                                     </th>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let teacher of teachers">
                                         <td>
                                             <a [routerLink]="'/app/teacher-profile/' + teacher.id">
-                                            <img class="profile-image" [src]="BASE_URL + teacher.photo"
-                                                default="assets/images/profile-logo.png" alt="Smile face" />
+                                                <img class="profile-image" [src]="BASE_URL + teacher.photo"
+                                                default="assets/images/profile-logo.png"
+                                                [alt]="'All.text.timeTable.smileyFace' | translate"/>
                                             </a>
                                         </td>
                                         <td>

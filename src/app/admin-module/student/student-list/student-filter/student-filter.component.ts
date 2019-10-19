@@ -7,6 +7,7 @@ import { group } from '@angular/animations';
 import { Group } from 'app/models/Group';
 import { StudentService } from 'app/services/student.service';
 import { Student } from 'app/models/Student';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-student-filter',
@@ -29,7 +30,7 @@ export class StudentFilterComponent implements OnInit {
     group: undefined
   };
 
-  constructor(private formBuilder: FormBuilder, private groupService: GroupService) { }
+  constructor(private formBuilder: FormBuilder, private groupService: GroupService, private translate: TranslateService) { }
 
   ngOnInit() {
     this.initForm();

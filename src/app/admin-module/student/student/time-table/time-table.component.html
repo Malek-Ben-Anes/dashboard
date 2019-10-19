@@ -2,19 +2,19 @@
   <div class="card-body">
     <div *ngIf="student != null; else noContent">
         <div class="row">
-            <div class="col-md-10"></div>
-            <div class="col-md-2">
+            <div class="offset-md-10 col-md-2">
               <a mat-raised-button class="btn btn-link" [href]="getTimetableLink()" target="_blank" download="emploi-du-temps">
-                <span class="material-icons">arrow_downward</span>Telecharger
+                <span class="material-icons">arrow_downward</span>{{'All.text.download' | translate}}
               </a>
             </div>
           </div>
           <div class="row">
               <a mat-raised-button class="btn btn-link" [href]="getTimetableLink()" target="_blank" download="emploi-du-temps">
-                  <img class="img time-table" default="assets/images/image-not-found-404.png" [src]="getTimetableLink()" [alt]="getGroupName()"/>
+                  <img class="img time-table" default="assets/images/image-not-found-404.png"
+                   [src]="getTimetableLink()" [alt]="getGroupName()"/>
                 </a>
         </div>
     </div>
-    <ng-template #noContent>Content to render when condition is false.</ng-template>
+    <ng-template #noContent>{{'All.text.timeTable.noContent' | translate}}</ng-template>
   </div>
 </div>

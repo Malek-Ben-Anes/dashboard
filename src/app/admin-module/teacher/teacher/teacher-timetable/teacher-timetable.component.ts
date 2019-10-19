@@ -3,6 +3,7 @@ import { Teacher } from 'app/models/Teacher';
 import { BASE_URL } from 'app/app.component';
 import { TeacherService } from 'app/services/teacher.service';
 import { HttpResponse } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-teacher-timetable',
@@ -22,7 +23,7 @@ export class TeacherTimetableComponent implements OnInit {
   selectedFile: File
   isUploading = false;
 
-  constructor(private teacherService: TeacherService) { }
+  constructor(private teacherService: TeacherService, private translate: TranslateService) { }
 
   ngOnInit() {
   }

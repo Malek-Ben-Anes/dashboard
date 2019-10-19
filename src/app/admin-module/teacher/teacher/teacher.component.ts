@@ -3,7 +3,6 @@ import { FormControl } from '@angular/forms';
 import { Teacher } from 'app/models/Teacher';
 import { TeacherService } from 'app/services/teacher.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Student } from 'app/models/Student';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -95,9 +94,9 @@ export class TeacherComponent implements OnInit, OnChanges {
 
   updateTabs() {
     return [
-      {'label': this.translate.instant('all.tab.EditProfile'), 'disabled': false},
-      {'label': this.translate.instant('all.tab.Password'), 'disabled': this.isNew},
-      {'label': this.translate.instant('all.tab.Groups'), 'disabled': this.isNew},
-      {'label': this.translate.instant('all.tab.TimeTable'), 'disabled': this.isNew}];
+      {'label': 'All.tab.EditProfile', 'disabled': false},
+      {'label': 'All.tab.Password', 'disabled': this.isNew},
+      {'label': 'All.text.groups.label', 'disabled': this.isNew},
+      {'label': 'All.text.timeTable.tab.name', 'disabled': this.isNew}];
   }
 }

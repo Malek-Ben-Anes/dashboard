@@ -1,19 +1,19 @@
 <div class="card card-profile">
   <div class="card-body">
-    <p>Students Number: {{ students.length}}</p>
+    <p>{{'All.text.students.studentNumber' | translate}}: {{ students.length}}</p>
     <table class="table">
       <thead class=" text-primary">
         <th>
-          Photo
+          {{'All.text.label.Photo' | translate}}
         </th>
         <th>
-          First Name
+          {{'All.text.label.FirstName' | translate}}
         </th>
         <th>
-          Last Name
+          {{'All.text.label.LastName' | translate}}
         </th>
         <th>
-          Email
+          {{'All.text.label.Email' | translate}}
         </th>
       </thead>
       <tbody>
@@ -21,7 +21,7 @@
           <td>
             <a [routerLink]="STUDENT_PROFILE + student.id">
               <img class="profile-icon" [src]="BASE_URL + student.photo"
-               default="assets/images/profile-logo.png" alt="Smiley student face"/>
+               default="assets/images/profile-logo.png" [alt]="'All.text.timeTable.smileyFace' | translate"/>
             </a>
           </td>
           <td>{{ student.firstname }}

@@ -5,6 +5,7 @@ import { NotificationService } from 'app/services/notification.service';
 import { Notification } from 'app/models/Notification';
 import { AuthService } from 'app/services/auth/auth.service';
 import { User } from 'app/models/User';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-notifications',
@@ -13,14 +14,19 @@ import { User } from 'app/models/User';
 })
 export class NotificationsComponent implements OnInit {
 
-  TABS = [{ 'NOTIFICATIONS_LIST': 0, 'label': 'Notifications' }, { 'NOTIFY_USERS': 1, 'label': 'Notifier utilisateurs' }];
+  TABS = [
+          { 'NOTIFICATIONS_LIST': 0, 'label': 'All.text.notifications.notificationsList' },
+          { 'NOTIFY_USERS': 1, 'label': 'All.text.notifications.Notifier' }
+        ];
   selected = new FormControl(1);
 
   loggedUser: User;
   newNotifications: number;
   notifications: Notification[];
 
-  constructor(private authService: AuthService, private notificationService: NotificationService) { }
+  constructor(private authService: AuthService,
+              private notificationService: NotificationService,
+              private translate: TranslateService) { }
 
   ngOnInit() {
     this.RestoreSomeDate();

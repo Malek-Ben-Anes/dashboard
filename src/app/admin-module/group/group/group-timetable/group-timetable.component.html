@@ -6,18 +6,19 @@
                     <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
                     <img class="img profile-image" src="assets/images/upload-pdf-icon.png" alt="upload bulletin"
                         height="39" width="39" />
-                    <button mat-raised-button class="btn btn-default" (click)="fileInput.click()">Sélectionner
-                        Emploi</button>
+                    <button mat-raised-button class="btn btn-default" (click)="fileInput.click()">
+                        {{'All.text.timeTable.select.TimeTable' | translate}}
+                    </button>
                     <div *ngIf="isUploading">
                         <button mat-raised-button class="btn btn-warning buttonload">
-                            Uploading...<i class="fa fa-circle-o-notch fa-spin"></i>
+                            {{'All.text.uploading' | translate}}<i class="fa fa-circle-o-notch fa-spin"></i>
                         </button>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div *ngIf="!isUploading">
                         <button mat-raised-button class="btn btn-warning" (click)="onUpload()">
-                            <span class="glyphicon glyphicon-cloud-upload"></span>Upload
+                            <span class="glyphicon glyphicon-cloud-upload"></span>{{'All.text.upload' | translate}}
                         </button>
                     </div>
                 </div>
@@ -33,7 +34,7 @@
                 <div class="col-md-2">
                     <a mat-raised-button class="btn btn-link" [href]="BASE_URL + group.timetabeUrl" target="_blank"
                         download="emploi-du-temps">
-                        <span class="material-icons">arrow_downward</span>Telecharger
+                        <span class="material-icons">arrow_downward</span>{{'All.text.download' | translate}}
                     </a>
                 </div>
             </div>
@@ -45,6 +46,6 @@
                 </a>
             </div>
         </div>
-        <ng-template #noContent>Emploi du temps n'est pas disponible.</ng-template>
+        <ng-template #noContent>{{'All.text.timetable.noTimetable' | translate}}</ng-template>
     </div>
 </div>

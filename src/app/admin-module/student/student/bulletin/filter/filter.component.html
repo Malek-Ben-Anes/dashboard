@@ -7,9 +7,9 @@
 
               <div class="col-md-4">
                 <mat-form-field class="example-full-width">
-                  <mat-select matInput placeholder="Level" formControlName="level" (ngModelChange)="selectLevel($event)" required>
+                  <mat-select matInput [placeholder]="'All.text.label.LevelName' | translate" formControlName="level" (ngModelChange)="selectLevel($event)" required>
                     <mat-option *ngFor="let lev of levels" [value]="lev" required>
-                      {{ lev }}
+                      {{'GLBL.label.'+lev | translate}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -17,17 +17,24 @@
 
               <div class="col-md-4">
                 <mat-form-field class="example-full-width">
-                  <mat-select matInput placeholder="Group" formControlName="group" required>
+                  <mat-select matInput
+                   [placeholder]="'All.text.label.GroupName' | translate"
+                   formControlName="group"
+                   required>
                     <mat-option *ngFor="let grp of groups" [value]="grp" required>
                       {{ grp.name }}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
+
               <div class="col-md-2">
-                <button mat-raised-button type="submit" class="btn btn-warning pull-right">Search</button>
+                <button mat-raised-button type="submit" class="btn btn-warning pull-right">
+                    {{'All.text.search' | translate}}
+                </button>
                 <div class="clearfix"></div>
               </div>
+              
             </div>
           </form>
         </div>

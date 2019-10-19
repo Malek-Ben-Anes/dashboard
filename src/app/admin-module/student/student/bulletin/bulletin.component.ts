@@ -4,6 +4,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Student } from 'app/models/Student';
 import { Trimester } from 'app/models/Trimester';
 import { FileUploadService } from 'app/services/file-upload.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-bulletin',
@@ -25,7 +26,9 @@ export class BulletinComponent implements OnInit {
   trimesters = Object.keys(Trimester);
   private roles: string[];
 
-  constructor(private tokenStorage: TokenStorageService, private fileService: FileUploadService) { }
+  constructor(private fileService: FileUploadService,
+              private translate: TranslateService,
+              private tokenStorage: TokenStorageService) { }
 
   ngOnInit() {
   }

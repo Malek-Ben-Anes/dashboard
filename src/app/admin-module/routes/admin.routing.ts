@@ -9,10 +9,8 @@ import { TeacherListComponent } from '../teacher/teacher-list/teacher-list.compo
 import { TeacherComponent } from '../teacher/teacher/teacher.component';
 import { GroupListComponent } from '../group/group-list/group-list.component';
 import { GroupComponent } from '../group/group/group.component';
-import { LessonListComponent } from '../lesson-list/lesson-list.component';
 import { StudentComponent } from '../student/student/student.component';
 import { StudentListComponent } from '../student/student-list/student-list.component';
-import { LessonDetailComponent } from '../lesson-list/lesson-detail/lesson-detail.component';
 import { BulletinComponent } from '../student/student/bulletin/bulletin.component';
 import { SubjectComponent } from '../subject/subject.component';
 import { NotificationsComponent } from '../notifications/notifications.component';
@@ -81,24 +79,6 @@ const routes: Routes = [
                 path: Routers.GROUP_DETAIL_ID,
                 canActivate: [AuthGuardService],
                 component: GroupComponent,
-                data: { expectedRole: Library.ROLE_ADMIN }
-            },
-            {
-                path: Routers.LESSONS,
-                canActivate: [AuthGuardService],
-                component: LessonListComponent,
-                data: { expectedRole: Library.ROLE_ADMIN }
-            },
-            {
-                path: Routers.LESSON_DETAIL,
-                canActivate: [AuthGuardService],
-                component: LessonDetailComponent,
-                data: { expectedRole: Library.ROLE_ADMIN }
-            },
-            {
-                path: Routers.LESSON_DETAIL_ID,
-                canActivate: [AuthGuardService],
-                component: LessonDetailComponent,
                 data: { expectedRole: Library.ROLE_ADMIN }
             },
             {

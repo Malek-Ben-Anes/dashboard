@@ -8,26 +8,26 @@
 
     <form>
         <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
-        <button mat-raised-button class="btn btn-info" (click)="fileInput.click()">Select Image</button>
+        <button mat-raised-button class="btn btn-info" (click)="fileInput.click()">{{'All.text.selectImage' | translate}}</button>
         <div *ngIf="!isUploading; else IsCurrentlyUploading">
             <button mat-raised-button [disabled]="selectedFile == null"  class="btn btn-warning" (click)="onUpload()">
-                <span class="glyphicon glyphicon-cloud-upload"></span>Upload
+                <span class="glyphicon glyphicon-cloud-upload"></span>{{'All.text.upload' | translate}}
             </button>
         </div>
         <ng-template #IsCurrentlyUploading>
             <button mat-raised-button class="btn btn-warning buttonload">
-                Uploading...<i class="fa fa-circle-o-notch fa-spin"></i>
+                {{'All.text.uploading' | translate}}<i class="fa fa-circle-o-notch fa-spin"></i>
             </button>
         </ng-template>
     </form>
     <div class="card-body">
-        <h6 class="card-category text-gray">{{ getProfile() }}</h6>
+        <h6 class="card-category text-gray">{{'label.' + profile | translate}}</h6>
         <h4 class="card-title">{{user.firstname}} {{user.lastname}}</h4>
         <p class="card-description">
             {{ user.email }}
         </p>
         <p class="card-description">
-            Registred: {{ user.createdAt | date }}
+            {{'label.registered' | translate}}: {{ user.createdAt | date }}
         </p>
     </div>
 </div>

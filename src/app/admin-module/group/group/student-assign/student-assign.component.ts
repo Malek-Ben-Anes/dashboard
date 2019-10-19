@@ -6,8 +6,8 @@ import { Group } from 'app/models/Group';
 import { Student } from 'app/models/Student';
 import { StudentService } from 'app/services/student.service';
 import { GroupService } from 'app/services/group.service';
-import { Observable } from 'rxjs';
 import { BASE_URL } from 'app/app.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-student-assign',
@@ -31,7 +31,7 @@ export class StudentAssignComponent implements OnInit {
   todo: any = [];
   done: any = [];
 
-  constructor(private studentService: StudentService, private groupService: GroupService) { }
+  constructor(private studentService: StudentService, private groupService: GroupService, private translate: TranslateService) { }
 
   ngOnInit() {
     this.initDoneArray();
@@ -47,11 +47,9 @@ export class StudentAssignComponent implements OnInit {
     // Delete some students from current group
     const deletedStudentFromGroup: Student[] = _.intersectionBy(this.allStudents, eliminated, 'id');
     this.deletedStudentFromGroup(deletedStudentFromGroup);
-    console.log('add', addedStudentToGroup, 'delete', deletedStudentFromGroup);
   }
 
   private addStudentsToGroup(addedStudentToGroup: Student[]) {
-    console.log('---->', addedStudentToGroup)
     if (_.isEmpty(addedStudentToGroup)) {
       return;
     }
