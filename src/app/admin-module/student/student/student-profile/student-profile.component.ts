@@ -7,6 +7,7 @@ import { Student } from 'app/models/Student';
 import { Level } from 'app/models/Level';
 import { Group } from 'app/models/Group';
 import { GroupService } from 'app/services/group.service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 const EMAIL_PATTERN = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
@@ -33,7 +34,7 @@ export class StudentProfileComponent implements OnInit {
   studentForm: FormGroup;
   groups: Group[] = [];
 
-  constructor(private formBuilder: FormBuilder, private groupService: GroupService) { }
+  constructor(private formBuilder: FormBuilder, private groupService: GroupService, private translate: TranslateService) { }
 
   ngOnInit() {
     this.initForm();

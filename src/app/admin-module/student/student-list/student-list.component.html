@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <button mat-raised-button type="button" class="btn btn-warning pull-right"
-                            [routerLink]="STUDENT_PROFILE">Add New Student</button>
+                            [routerLink]="STUDENT_PROFILE">{{'All.text.create' | translate}}</button>
                         <!-- <button mat-raised-button type="button" class="btn btn-warning pull-right">
                             <span class="material-icons">arrow_upward</span>
                             Import File</button> -->
@@ -19,19 +19,19 @@
                             <table class="table">
                                 <thead class=" text-primary">
                                     <th>
-                                        Image
+                                        {{'All.text.label.Photo' | translate}}
                                     </th>
                                     <th>
-                                        Firstname
+                                        {{'All.text.label.FirstName' | translate}}
                                     </th>
                                     <th>
-                                        Lastname
+                                        {{'All.text.label.LastName' | translate}}
                                     </th>
                                     <th>
-                                        Email
+                                        {{'All.text.label.Email' | translate}}
                                     </th>
                                     <th>
-                                        Group
+                                        {{'All.text.label.GroupName' | translate}}
                                     </th>
                                 </thead>
                                 <tbody>
@@ -39,7 +39,8 @@
                                         <td>
                                             <a [routerLink]="STUDENT_PROFILE + student.id">
                                                 <img class="profile-image" [src]="BASE_URL + student.photo"
-                                                    default="assets/images/profile-logo.png" alt="Smile face"/>
+                                                 default="assets/images/profile-logo.png"
+                                                 [alt]="'All.text.timeTable.smileyFace' | translate"/>
                                             </a>
                                         </td>
                                         <td>
@@ -52,10 +53,14 @@
                                             {{ student.email }}
                                         </td>
                                         <td>
-                                            <div *ngIf="student.group">{{ student.group.name }}</div>
-                                            <div *ngIf="!student.group">
-                                                <p class="not-assigned"><b>Not Assigned</b></p>
+                                            <div *ngIf="student.group; else groupNotAssigned">
+                                                {{ student.group.name }}
                                             </div>
+                                            <ng-template #groupNotAssigned>
+                                                <strong class="not-assigned">
+                                                    {{'All.text.label.NotAssigned' | translate}}
+                                                </strong>
+                                            </ng-template>
                                         </td>
                                     </tr>
                                 </tbody>

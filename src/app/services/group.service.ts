@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { HttpClient, HttpErrorResponse, HttpParams, HttpEvent, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Group } from 'app/models/Group';
-import { group } from '@angular/animations';
 import { BASE_API_URL } from 'app/app.component';
-import { resolve, reject } from 'q';
 import { Student } from 'app/models/Student';
+import { FileUploadService } from './file-upload.service';
 
 const GROUP_URL: string = BASE_API_URL + 'groups';
 
@@ -15,7 +14,7 @@ const GROUP_URL: string = BASE_API_URL + 'groups';
 })
 export class GroupService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private fileService: FileUploadService) {}
 
   findAll(teacherId?: string): Promise<Group[]> {
     let httpCall: Observable<Group[]>;
@@ -45,14 +44,11 @@ export class GroupService {
             .subscribe( group => resolve(group), err => reject(err)) );
   }
 
-  uploadTimeTable(groupId: string, file: File): Observable<HttpEvent<{}>> {
+  uploadTimeTable(groupId: string, file: File): Promise<Group> {
     const TIMETABLE_UPLOAD_URL: string = BASE_API_URL + `groups/${groupId}/timetables`;
-    const formdata: FormData = new FormData();
-    formdata.append('file', file);
-    return this.http.post<Group>(TIMETABLE_UPLOAD_URL, formdata, {
-      reportProgress: true,
-      observe: 'events'
-    });
+    const body: FormData = new FormData();
+    body.append('file', file);
+    return this.fileService.executeCallForGroup(TIMETABLE_UPLOAD_URL, body);
   }
 
   addStudentsToGroup(groupId: string, students: Student[]): Promise<Student[]>  {

@@ -1,24 +1,23 @@
 <div class="card card-profile">
   <div class="card-body">
-    <div *ngIf="student && student.group && student.group.timetabeUrl != null; else noContent">
+    <div *ngIf="timeTableUrl; else noContent">
         <div class="row">
-            <div class="col-md-10"></div>
-            <div class="col-md-2">
-              <a mat-raised-button class="btn btn-link" [href]="BASE_URL + student.group.timetabeUrl" target="_blank" download="emploi-du-temps">
-                <span class="material-icons">arrow_downward</span>
-                {{'student.bulletins.download'|translate}}
-              </a>
-            </div>
+          <div class="offset-md-10 col-md-2">
+            <a mat-raised-button class="btn btn-link" [href]="BASE_URL + timeTableUrl" target="_blank" download="emploi-du-temps">
+              <span class="material-icons">arrow_downward</span>
+              {{'student.bulletins.download'|translate}}
+            </a>
           </div>
-          <div class="row">
-              <a mat-raised-button class="btn btn-link" [href]="BASE_URL + student.group.timetabeUrl" target="_blank" download="emploi-du-temps">
-                  <img class="img time-table" [src]="BASE_URL + student.group.timetabeUrl" [alt]="student.group.name + ' Time table'"
-                   default="assets/images/image-not-found-404.png"/>
-                </a>
         </div>
+        <div class="row">
+            <a mat-raised-button class="btn btn-link" [href]="BASE_URL + timeTableUrl" target="_blank" download="emploi-du-temps">
+                <img class="img time-table" [src]="BASE_URL + timeTableUrl" [alt]="student.group.name + ' Time table'"
+                  default="assets/images/image-not-found-404.png"/>
+              </a>
+      </div>
     </div>
     <ng-template #noContent>
-      {{'student.timetable.noTimetable'|translate}}
+      {{'All.text.timeTable.noContent' | translate}}
       <img class="img time-table" src="assets/images/image-not-found-404.png" [alt]="student + ' Time table'"/>
     </ng-template>
   </div>

@@ -4,6 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { SubjectService } from 'app/services/subject.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Level } from 'app/models/Level';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-subject-list',
@@ -19,7 +20,7 @@ export class SubjectListComponent implements OnInit, OnChanges {
 
   @Output() subjectSelected = new EventEmitter<Subject>();
 
-  constructor() { }
+  constructor(private translate: TranslateService) { }
 
   ngOnInit() {}
 

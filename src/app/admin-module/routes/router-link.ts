@@ -11,9 +11,6 @@ export class Routers {
     public static GROUP_DETAIL = 'group-detail';
     public static APP_GROUP_DETAIL = '/app/group-detail/';
     public static GROUP_DETAIL_ID = 'group-detail/:id';
-    public static LESSONS = 'lessons';
-    public static LESSON_DETAIL = 'lesson-detail';
-    public static LESSON_DETAIL_ID = 'lesson-detail/:id';
     public static BULLETIN = 'bulletin';
     public static MESSAGES = 'messages';
     public static NOTIFICATIONS = 'notifications';

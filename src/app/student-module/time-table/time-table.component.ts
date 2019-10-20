@@ -14,14 +14,19 @@ export class TimeTableComponent implements OnInit {
 
   BASE_URL: string = BASE_URL;
   student: Student;
+  timeTableUrl: string;
 
   constructor(private tokenStorage: TokenStorageService, private authService: AuthService, private translate: TranslateService) {
   }
 
   ngOnInit() {
     if (this.authService.getIsLoggedUser()) {
-      this.authService.getUser().subscribe(loggedUser => this.student = loggedUser);
+        this.student = this.tokenStorage.getLoggedUser();
+        this.timeTableUrl = this.retrieveTimeTableUrl();
     }
   }
 
+  private retrieveTimeTableUrl(): string {
+    return this.student && this.student.group && this.student.group.timeTableUrl;
+  }
 }

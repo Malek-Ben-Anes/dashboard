@@ -3,6 +3,7 @@
         <app-group-student-list *ngIf="group != null" [students]="group.students"
             (studentSelected)="onStudentSelected($event)"></app-group-student-list>
     </div>
+    
     <div class="col-md-8">
         <app-group-marks-student-detail *ngIf="selectedMarks != null" [selectedMarks]="selectedMarks"
          [student]="studentSelected">

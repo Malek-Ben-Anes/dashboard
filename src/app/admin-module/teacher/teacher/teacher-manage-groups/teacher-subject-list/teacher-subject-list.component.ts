@@ -3,12 +3,11 @@ import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/cor
 import { SubjectService } from 'app/services/subject.service';
 import { Group } from 'app/models/Group';
 import { Subject } from 'app/models/Subject';
-import { Level } from 'app/models/Level';
 import { LessonService } from 'app/services/lesson.service';
 import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { Lesson } from 'app/models/Lesson';
 import { Teacher } from 'app/models/Teacher';
-import { find } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-teacher-subject-list',
@@ -30,7 +29,8 @@ export class TeacherSubjectListComponent implements OnInit, OnChanges {
   subjectsForm: FormGroup;
   checkedOptions = [];
 
-  constructor(private fb: FormBuilder, private subjectService: SubjectService, private lessonService: LessonService) { }
+  constructor(private fb: FormBuilder, private subjectService: SubjectService, private lessonService: LessonService,
+              private translate: TranslateService) { }
 
   ngOnInit() {
     this.constructView(this.selectedGroup);

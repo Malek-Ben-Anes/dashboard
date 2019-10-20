@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Teacher } from 'app/models/Teacher';
 import { BASE_URL } from 'app/app.component';
 import { TeacherService } from 'app/services/teacher.service';
-import { HttpResponse } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-teacher-timetable',
@@ -22,7 +22,7 @@ export class TeacherTimetableComponent implements OnInit {
   selectedFile: File
   isUploading = false;
 
-  constructor(private teacherService: TeacherService) { }
+  constructor(private teacherService: TeacherService, private translate: TranslateService) { }
 
   ngOnInit() {
   }
@@ -32,17 +32,16 @@ export class TeacherTimetableComponent implements OnInit {
   }
 
   onUpload() {
+    this.isUploading = true;
     this.teacherService.uploadTimeTable(this.teacher.id, this.selectedFile)
-    .subscribe((response: HttpResponse<Teacher>) => {
-      this.isUploading = true;
-      if (response.type === 4) {
+    .then((teacher: Teacher) => {
         this.isUploading = false;
-        this.teacher.timetabeUrl = response.body.timetabeUrl + '?random+\=' + Math.random();
+        this.teacher = teacher;
+        this.teacher.timeTableUrl = `${teacher.timeTableUrl}?random+\=${Math.random()}`;
         this.modifiedTeacher.emit(this.teacher);
-        console.log(this.teacher);
-      }
-    }, err => {
-      alert('Emploi du temps upload est echoué');
+      })
+    .catch(err => {
+      alert('Emploi du temps upload est echoué' + err);
       this.isUploading = false;
     });
   }

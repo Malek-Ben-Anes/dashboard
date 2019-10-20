@@ -6,6 +6,7 @@ import { MarkService } from 'app/services/mark.service';
 import { Mark } from 'app/models/Mark';
 import { LessonService } from 'app/services/lesson.service';
 import { Lesson } from 'app/models/Lesson';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-group-marks',
@@ -24,7 +25,8 @@ export class GroupMarksComponent implements OnInit {
   lessons: Lesson[];
   lessonsOfCurrentGroup: Lesson[];
 
-  constructor(private markService: MarkService, private lessonService: LessonService) {}
+  constructor(private markService: MarkService, private lessonService: LessonService,
+              private translate: TranslateService) {}
 
   ngOnInit() {
     this.markService

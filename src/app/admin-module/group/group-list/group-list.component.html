@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <button mat-raised-button type="button" class="btn btn-warning pull-right"
-                            [routerLink]="GROUP_DETAIL">Ajouter Classe</button>
+                            [routerLink]="GROUP_DETAIL">{{'All.text.create' | translate}}</button>
                     </div>
                 </div>
                 <div class="card">
@@ -14,13 +14,13 @@
                             <table class="table">
                                 <thead class=" text-primary">
                                     <th scope="col">
-                                        Name
+                                        {{'All.text.group.Name' | translate}}
                                     </th>
                                     <th>
-                                        Group Level
+                                        {{'All.text.group.Level' | translate}}
                                     </th>
                                     <th>
-                                        Effectifs
+                                        {{'All.text.group.Effectif' | translate}}
                                     </th>
                                 </thead>
                                 <tbody>
@@ -30,10 +30,10 @@
                                             <p></p>
                                         </td>
                                         <td>
-                                            <p>{{ group.level }}</p>
+                                            {{ group.level }}
                                         </td>
                                         <td>
-                                            <p>{{ group.studentsNumber }}</p>
+                                            {{ group.studentsNumber }}
                                         </td>
                                     </tr>
                                 </tbody>

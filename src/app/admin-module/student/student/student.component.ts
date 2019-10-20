@@ -12,7 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class StudentComponent implements OnInit, OnChanges {
   isNew = true;
-  tabIndex = {'PROFILE': 0, 'PASSWORD': 1, 'MARKS': 2, 'BULLETIN': 3, 'TIME_TABLE': 4};
+  tabIndex = {'PROFILE': 0, 'PASSWORD': 1, 'BULLETIN': 2, 'TIME_TABLE': 3};
   tabs = this.tabs = this.updateTabs();
 
   selected = new FormControl(0);
@@ -33,7 +33,6 @@ export class StudentComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     // changes.prop contains the old and the new value...
     this.student = changes.student.currentValue;
-    console.log('***********----', this.student);
   }
 
   private getStudent(id: string): void {
@@ -76,7 +75,6 @@ export class StudentComponent implements OnInit, OnChanges {
     this.studentService.update(studentRequest).then((StudentData) => {
       this.student = StudentData;
       this.tabs = this.updateTabs();
-      console.log('student updated', this.student);
     }).catch((err) => console.log(err));
   }
 
@@ -85,15 +83,17 @@ export class StudentComponent implements OnInit, OnChanges {
       this.student = StudentData;
       this.isNew = false;
       this.tabs = this.updateTabs();
-      console.log('student created', this.student);
     }, (err) => {
       console.log(err)
     });
   }
 
   updateTabs() {
-    return [{'label': 'Edit Profile', 'disabled': false}, {'label': 'Password', 'disabled': this.isNew},
-            {'label': 'Marks', 'disabled': this.isNew}, {'label': 'Bulletin', 'disabled': this.isNew},
-            {'label': 'Time Table', 'disabled': this.isNew}];
+    return [
+      {'label': 'All.tab.EditProfile', 'disabled': false},
+      {'label': 'All.text.password', 'disabled': this.isNew},
+      {'label': 'All.text.bulletins', 'disabled': this.isNew},
+      {'label': 'All.text.timeTable.tab.name', 'disabled': this.isNew}
+    ];
   }
 }

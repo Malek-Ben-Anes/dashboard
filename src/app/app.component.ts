@@ -36,8 +36,6 @@ export class AppComponent implements OnInit {
 /*
 export const BASE_URL = 'http://localhost:8091/'; // 'https://laplumedor.cfapps.io/';  'http://localhost:8091/'
 export const BASE_API_URL = 'http://localhost:8091/api/';
-export const ASSET_URL = 'http://localhost:8091/uploads';
 */
 export const BASE_URL = 'https://laplumedor.cfapps.io/';
-export const BASE_API_URL = 'https://laplumedor.cfapps.io/api/';
-export const ASSET_URL = 'https://laplumedor.cfapps.io/uploads';
+export const BASE_API_URL = `${BASE_URL}api/`;

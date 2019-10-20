@@ -3,6 +3,7 @@ import { Group } from 'app/models/Group';
 import { Level } from 'app/models/Level';
 import { GroupService } from 'app/services/group.service';
 import { Routers } from 'app/admin-module/routes/router-link';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-group-list',
@@ -16,7 +17,7 @@ export class GroupListComponent implements OnInit {
   groups: Group[];
   levels = Object.keys(Level);
 
-  constructor(private groupService: GroupService) { }
+  constructor(private groupService: GroupService, private translate: TranslateService) { }
 
   ngOnInit() {
     this.findAll();

@@ -2,7 +2,7 @@
   <div class="container-fluid">
 
     <div class="row">
-      <button mat-raised-button (click)="onSaveStudents()" class="btn btn-warning pull-right">Save Changes</button>
+      <button mat-raised-button (click)="onSaveStudents()" class="btn btn-warning pull-right">{{'All.text.Profile.save' | translate}}</button>
     </div>
 
     <div class="row">
@@ -11,7 +11,7 @@
 
           <div cdkDropListGroup>
             <div class="example-container">
-              <p class="grey"><strong>({{todo.length }})</strong> Eleves non affectes a {{group.name}}</p>
+              <p class="grey"><strong>({{todo.length}})</strong> {{'All.text.group.assignedNotTo' | translate}} {{group.name}}</p>
               <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList]"
                 class="example-list" (cdkDropListDropped)="drop($event)">
                 <div class="example-box" *ngFor="let student of todo" cdkDrag>
@@ -19,7 +19,7 @@
                     <div class="row">
                       <div class="col-md-3">
                         <img class="img profile-icon" [src]="BASE_URL + student.photo"
-                          default="assets/images/profile-logo.png" alt="smiley-student-face" />
+                          default="assets/images/profile-logo.png" [alt]="'All.text.timeTable.smileyFace' | translate"/>
                       </div>
                       <div class="col-md-9">
                         <mat-card-title class="black-name">{{student.firstname}} {{student.lastname}}
@@ -36,7 +36,7 @@
             <div class="example-container">
               <p class="grey">
                 <strong>({{done.length}})</strong>
-                Eleves affectes a {{group.name}}
+                {{'All.text.group.assignedTo' | translate}} {{group.name}}
               </p>
               <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[todoList]"
                 class="example-list" (cdkDropListDropped)="drop($event)">
@@ -45,7 +45,8 @@
                     <div class="row">
                       <div class="col-md-3">
                         <img class="img profile-icon" [src]="BASE_URL + student.photo"
-                          default="assets/images/profile-logo.png" alt="smiley-student-face" />
+                          default="assets/images/profile-logo.png"
+                          [alt]="'All.text.timeTable.smileyFace' | translate"/>
                       </div>
                       <div class="col-md-9">
                         <mat-card-title class="black-name">{{student.firstname}} {{student.lastname}}

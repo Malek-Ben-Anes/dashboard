@@ -6,6 +6,7 @@ import { SubjectService } from 'app/services/subject.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subject } from 'app/models/Subject';
 import { Level } from 'app/models/Level';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-subject',
@@ -15,11 +16,14 @@ import { Level } from 'app/models/Level';
 export class SubjectComponent implements OnInit {
 
   levelIndex = { 'Niveau 1': 0, 'Niveau 2': 1, 'Niveau 3': 2, 'Niveau 4': 3, 'Niveau 5': 4, 'Niveau 6': 5 };
-  tabs = [{ 'label': 'Niveau 1', 'level': Level.LEVEL1 }, { 'label': 'Niveau 2', 'level': Level.LEVEL2 },
-  { 'label': 'Niveau 3', 'level': Level.LEVEL3 },
-  { 'label': 'Niveau 4', 'level': Level.LEVEL4 },
-  { 'label': 'Niveau 5', 'level': Level.LEVEL5 },
-  { 'label': 'Niveau 6', 'level': Level.LEVEL6 }];
+  tabs = [
+    { 'label': 'GLBL.label.LEVEL1', 'level': Level.LEVEL1 },
+    { 'label': 'GLBL.label.LEVEL2', 'level': Level.LEVEL2 },
+    { 'label': 'GLBL.label.LEVEL3', 'level': Level.LEVEL3 },
+    { 'label': 'GLBL.label.LEVEL4', 'level': Level.LEVEL4 },
+    { 'label': 'GLBL.label.LEVEL5', 'level': Level.LEVEL5 },
+    { 'label': 'GLBL.label.LEVEL6', 'level': Level.LEVEL6 }
+  ];
 
   subjects: Subject[];
   selectedSubjects: Subject[];
@@ -30,7 +34,7 @@ export class SubjectComponent implements OnInit {
   levels = Object.keys(Level);
   level: Level;
 
-  constructor(private formBuilder: FormBuilder, private subjectService: SubjectService) {}
+  constructor(private formBuilder: FormBuilder, private subjectService: SubjectService, private translate: TranslateService) {}
 
   ngOnInit() {
     this.getSubjects();

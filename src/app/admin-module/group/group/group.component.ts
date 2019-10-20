@@ -11,6 +11,7 @@ import { StudentService } from 'app/services/student.service';
 import { Observable } from 'rxjs';
 import { BASE_URL } from 'app/app.component';
 import { Teacher } from 'app/models/Teacher';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-group',
@@ -21,7 +22,7 @@ export class GroupComponent implements OnInit {
 
   isNew = true;
   BASE_URL: string = BASE_URL;
-  tabIndex = {'EDIT_CLASS': 0,  'TIMETABLE': 1, 'STUDENTS': 2, 'MARKS': 3};
+  tabIndex = {'EDIT_CLASS': 0,  'TIME_TABLE': 1, 'STUDENTS': 2, 'MARKS': 3};
   tabs = this.tabs = this.updateTabs();
 
   selected = new FormControl(0);
@@ -36,7 +37,7 @@ export class GroupComponent implements OnInit {
   groupStudentsForm: FormGroup;
 
   constructor(private groupService: GroupService, private studentService: StudentService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute, private translate: TranslateService) { }
 
   ngOnInit() {
     const id = this.route.snapshot.params['id'];
@@ -65,8 +66,12 @@ export class GroupComponent implements OnInit {
   }
 
   private updateTabs() {
-    return [{'label': 'Editer classe', 'disabled': false}, {'label': 'Emploi du temps', 'disabled': this.isNew},
-            {'label': 'Eleves', 'disabled': this.isNew}, {'label': 'Notes & Stats', 'disabled': this.isNew}];
+    return [
+            {'label': 'All.text.edit', 'disabled': false},
+            {'label': 'All.text.timeTable.tab.name', 'disabled': this.isNew},
+            {'label': 'All.text.students.label', 'disabled': this.isNew},
+            {'label': 'All.text.marks.tab.name', 'disabled': this.isNew}
+          ];
   }
 
   checked = false;

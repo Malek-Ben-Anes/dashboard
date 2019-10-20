@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Level } from 'app/models/Level';
 import { GroupService } from 'app/services/group.service';
 import { StudentService } from 'app/services/student.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-filter-bulletin',
@@ -25,8 +26,10 @@ export class FilterBulletinComponent implements OnInit {
 
   @Output() groupSelected = new EventEmitter<Group>();
 
-  constructor(private tokenStorage: TokenStorageService, private formBuilder: FormBuilder, private groupService: GroupService,
-     private studentService: StudentService) { }
+  constructor(private formBuilder: FormBuilder,
+              private groupService: GroupService,
+              private translate: TranslateService,
+              private tokenStorage: TokenStorageService,) { }
 
   ngOnInit() {
     this.getAuthority();
