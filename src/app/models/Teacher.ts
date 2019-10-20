@@ -4,7 +4,7 @@ export class Teacher extends User {
 
     description: string;
     salary: number;
-    timetabeUrl: string;
+    timeTableUrl: string;
 
     constructor(_id?: string, _firstname?: string, _lastname?: string, _gender?: Gender,
         _description?: string, _salary?: number) {

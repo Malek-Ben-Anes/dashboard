@@ -2,7 +2,7 @@
   <div class="card-body">
     <div *ngIf="student != null; else noContent">
         <div class="row">
-            <div class="offset-md-10 col-md-2">
+            <div *ngIf="student.group.timeTableUrl" class="offset-md-10 col-md-2">
               <a mat-raised-button class="btn btn-link" [href]="getTimetableLink()" target="_blank" download="emploi-du-temps">
                 <span class="material-icons">arrow_downward</span>{{'All.text.download' | translate}}
               </a>
@@ -12,7 +12,7 @@
               <a mat-raised-button class="btn btn-link" [href]="getTimetableLink()" target="_blank" download="emploi-du-temps">
                   <img class="img time-table" default="assets/images/image-not-found-404.png"
                    [src]="getTimetableLink()" [alt]="getGroupName()"/>
-                </a>
+              </a>
         </div>
     </div>
     <ng-template #noContent>{{'All.text.timeTable.noContent' | translate}}</ng-template>

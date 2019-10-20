@@ -20,7 +20,7 @@ export class TimeTableComponent implements OnInit {
 
   getTimetableLink() {
     try {
-      return BASE_URL + this.student.group.timetabeUrl;
+      return BASE_URL + this.student.group.timeTableUrl;
     } catch(ex) {
       return BASE_URL + undefined;
     }

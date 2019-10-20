@@ -7,7 +7,7 @@
                     <img class="img profile-image" src="assets/images/upload-pdf-icon.png" alt="upload bulletin"
                         height="39" width="39" />
                     <button mat-raised-button class="btn btn-default" (click)="fileInput.click()">
-                        {{'All.text.timeTable.select.TimeTable' | translate}}
+                        {{'All.text.selectFile' | translate}}
                     </button>
                     <div *ngIf="isUploading">
                         <button mat-raised-button class="btn btn-warning buttonload">
@@ -32,20 +32,20 @@
             <div class="row">
                 <div class="col-md-10"></div>
                 <div class="col-md-2">
-                    <a mat-raised-button class="btn btn-link" [href]="BASE_URL + group.timetabeUrl" target="_blank"
+                    <a mat-raised-button class="btn btn-link" [href]="BASE_URL + group.timeTableUrl" target="_blank"
                         download="emploi-du-temps">
                         <span class="material-icons">arrow_downward</span>{{'All.text.download' | translate}}
                     </a>
                 </div>
             </div>
             <div class="row">
-                <a mat-raised-button class="btn btn-link" [href]="BASE_URL + group.timetabeUrl" target="_blank"
+                <a mat-raised-button class="btn btn-link" [href]="BASE_URL + group.timeTableUrl" target="_blank"
                     download="emploi-du-temps">
                     <img class="img time-table" default="assets/images/image-not-found-404.png"
-                        [src]="BASE_URL + group.timetabeUrl" [alt]="group.name + ' Time table'" />
+                        [src]="BASE_URL + group.timeTableUrl" [alt]="group.name + ' Time table'" />
                 </a>
             </div>
         </div>
-        <ng-template #noContent>{{'All.text.timetable.noTimetable' | translate}}</ng-template>
+        <ng-template #noContent>{{'All.text.timeTable.noContent' | translate}}</ng-template>
     </div>
 </div>

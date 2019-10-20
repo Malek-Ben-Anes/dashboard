@@ -8,7 +8,7 @@ export class Group {
     name: string;
     level: Level;
     description?: string;
-    timetabeUrl: string;
+    timeTableUrl: string;
     students: Student[];
     studentsNumber: number;
 

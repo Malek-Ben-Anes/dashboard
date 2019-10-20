@@ -3,8 +3,12 @@
     <div class="row">
       <div class="card">
         <div class="card-body">
-            <img *ngIf=" user.timetabeUrl; else noTimeTable" class="img time-table" default="assets/images/image-not-found-404.png" [src]="BASE_URL + user.timetabeUrl"
-            [alt]="user.firstname + ' Time table'" />
+            <img *ngIf=" user.timeTableUrl; else noTimeTable"
+             class="img time-table"
+             default="assets/images/image-not-found-404.png"
+             [src]="BASE_URL + user.timeTableUrl"
+             [alt]="user.firstname + ' Time table'"
+             />
             <ng-template #noTimeTable>{{'All.text.timeTable.noContent'|translate}}</ng-template>
         </div>
       </div>

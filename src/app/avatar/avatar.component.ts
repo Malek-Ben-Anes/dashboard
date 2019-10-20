@@ -30,40 +30,10 @@ export class AvatarComponent implements OnInit {
   }
 
   onUpload() {
-    this.uploadStudentImage(this.user, this.selectedFile);
-  }
-
-  private uploadStudentImage (user: Student| Teacher, file: File) {
-
-
-    const formData = new FormData();
-        formData.append('file', this.selectedFile);
-        console.log('avatar');
-        const options =  {headers:       { 'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'
-        // 'Content-Type': 'multipart/form-data;  boundary=----WebKitFormBoundaryJ6Q2VG5TMUfGoSqg'
-      }};
-        this.http.post('http://localhost:8091/api/students/', formData, options)
-          .subscribe(res => {
-            console.log(res);
-            // this.uploadedFilePath = res.data.filePath;
-            alert('SUCCESS !!');
-          }, err => console.log('err'))
-
-
-    /*this.fileUploadService.uploadUserPhoto(user, file).subscribe(HttpResponse => {
-      this.isUploading = true;
-      console.log('********', HttpResponse.type, file);
-      if (HttpResponse.type === 4) {
-        if (HttpResponse['body'] !== undefined) {
-          if (HttpResponse['body']['photo'] !== undefined) {
-            console.log('photo updated');
-            this.user.photo = HttpResponse['body']['photo'];
-            this.isUploading = false;
-          }
-        }
-      }
-    }, err => console.log('err', err));*/
+    this.isUploading = true;
+    this.fileUploadService.uploadPhoto(this.user, this.selectedFile)
+    .then(user => {this.user = user; this.isUploading = false})
+    .catch(err =>  {alert(err); this.isUploading = false});
   }
 
   get profile(): string {

@@ -32,18 +32,17 @@ export class GroupTimetableComponent implements OnInit {
   }
 
   onUpload() {
+    this.isUploading = true;
     this.groupService.uploadTimeTable(this.group.id, this.selectedFile)
-    .subscribe((response: HttpResponse<Group>) => {
-      this.isUploading = true;
-      if (response.type === 4) {
+    .then((group: Group) => {
         this.isUploading = false;
-        this.group.timetabeUrl = response.body.timetabeUrl + '?random+\=' + Math.random();
+        this.group = group;
+        this.group.timeTableUrl = group.timeTableUrl + '?random+\=' + Math.random();
         this.refreshEvent.emit(this.group);
-        console.log(this.group);
-      }
-    }, err => {
-      alert('bulletin uploaded est echoué');
-      this.isUploading = false;
-    });
+      })
+      .catch(err => {
+        this.isUploading = false;
+        alert('Upload Emploi du temps a echoué');
+      });
   }
 }

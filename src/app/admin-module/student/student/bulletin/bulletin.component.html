@@ -41,7 +41,7 @@
     <div *ngIf="student">
       <table class="table">
         <thead class=" text-primary">
-          <th></th>
+          <th>{{'All.text.file' | translate}}</th>
           <th>
               {{'All.text.Trimester' | translate}}
           </th>
@@ -56,7 +56,7 @@
           <tr *ngFor="let bulletin of student.bulletins">
             <td class="text-primary">
               <a *ngIf="bulletin.fileUrl != null" [href]="BASE_URL + bulletin.fileUrl" target="_blank">
-                <img class="img profile-image" src="assets/images/pdf-icon.png" alt="Smiley face" height="42"
+                <img class="img profile-image" src="assets/images/pdf-icon.png" alt="bulletin icon" height="42"
                   width="42" />
               </a>
             </td>
@@ -66,7 +66,7 @@
             <td>
               {{ bulletin.createdAt | date }}
             </td>
-            <td *ngIf="authority === 'admin'" class="td-actions text-right">
+            <td class="td-actions text-right">
               <button (click)="onDeleteBulletin($event, bulletin.id)" type="button" class="btn btn-danger btn-sm"
                 [disabled]="false">
                 {{'All.text.delete' | translate}} X

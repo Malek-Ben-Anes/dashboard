@@ -2,7 +2,7 @@
     "GLBL.label.LEVEL1": "Première année",
     "GLBL.label.LEVEL2": "Deuxième année",
     "GLBL.label.LEVEL3": "Troisième année",
-    "GLBL.label.LEVEL4": "Quantième année",
+    "GLBL.label.LEVEL4": "Quatrième année",
     "GLBL.label.LEVEL5": "Cinquième année",
     "GLBL.label.LEVEL6": "Sixième année",
     "GLBL.MALE": "Masculin",
@@ -20,10 +20,10 @@
 
     "All.text.password": "Mettre à jour",
     "All.text.updatePassword": "Mettre à jour",
-    "All.text.Registration.File": "Registration File",
+    "All.text.Registration.File": "Dossier d'inscription",
 
-    "All.Password.placeholder": "Entrer password",
-    "All.Password.placeholder.confirm": "Confirm New Password",
+    "All.Password.placeholder": "Saisir le mot de passe",
+    "All.Password.placeholder.confirm": "Confirmer le nouveau mot de passe",
     "All.Password.Message.update.success": "Le mot de passe a été mis à jour avec succès!",
     "All.Password.Message.update.failed": "La mise à jour du mot de passe a échoué :(",
     "All.Password.ErrorMessage.Required": "Le mot de passe est requis",
@@ -40,7 +40,7 @@
 
     "label.student.profile": "Profile de l'élève",
     "label.teacher.profile": "Profile de l'enseignant",
-    "label.admin.profile": "Admin profile",
+    "label.admin.profile": "Profile de l'Admin",
 
     "label.import.file": "Profile de l'admin",
     "label.download.file": "Profile de l'admin",
@@ -79,7 +79,7 @@
     "signIn.credentials.password": "Mot de passe",
     "signIn.credentials.login": "Se connecter",
     "signIn.credentials.loading": "Chargement...",
-    "signIn.credentials.failure": "Login failed, Please try again",
+    "signIn.credentials.failure": "Échec de la connexion. Veuillez réessayer.",
 
     "signIn.credentials.email.required": "Email requis",
     "signIn.credentials.password.required": "Mot de passe requis",
@@ -96,7 +96,7 @@
     "All.text.subject.volumeHoraire": "Volume Horaire",
     "All.text.subject.sessionNumber": "seance...",
     "All.text.subject.description": "Description",
-    "All.text.subject.newSubject": "new subject",
+    "All.text.subject.newSubject": "nouvelle matière",
 
     "All.text.marks.label": "Les notes",
     "All.text.marks.label.sendEvaluation": "Evaluer",
@@ -110,7 +110,7 @@
     "All.text.marks.label.enter.mark": "Saisir une note",
     "All.text.marks.label.enter.observation": "Saisir une remarque",
 
-    "student.bulletins.deliberation": "Notifications",
+    "student.bulletins.deliberation": "Date de deliberation",
     "student.bulletins.noBulletin": "aucun bulletin n'est disponible.",
 
     "All.text.timetable.download": "Telecharger",
@@ -119,7 +119,7 @@
 
     "student.marks.all": "Toutes les notes",
     "student.marks.noContent": "Aucun message!",
-    "student.marks.noMarks": "No content",
+    "student.marks.noMarks": "Pas de contenu",
 
     
 
@@ -160,7 +160,7 @@
     "All.text.placeholder.BirthDate": "Date de naissance",
     "All.text.placeholder.LevelName": "Niveau",
     "All.text.placeholder.GroupName": "Nom du groupe",
-    "All.text.placeholder.ParentName": "parent Name",
+    "All.text.placeholder.ParentName": "Nom du parent",
     "All.text.placeholder.ParentPhone": "Nom du parent",
     "All.text.placeholder.Address": "Addresse",
     "All.text.placeholder.Description": "description",
@@ -176,13 +176,13 @@
     "All.text.notifications.Type.NOTIF5": "Reunion",
     "All.text.notifications.Type.NOTIF6": "Deces",
     "All.text.notifications.Type.NOTIFN": "Autres...",
-    "All.text.notifications.notificationsList": "Notifications list...",
+    "All.text.notifications.notificationsList": "Liste de notifications ...",
     "All.text.notifications.Notifier": "Notifier",
-    "All.text.notifications.NotifierAction": "Notifier users",
+    "All.text.notifications.NotifierAction": "Notifier les destinataires",
     "All.text.notifications.send": "Envoyer",
     "All.text.notifications.Date": "Date",
-    "All.text.notifications.OptionSelected": "Options Selected",
-    "All.text.notifications.noContent": "Aucune notifications à afficher!",
+    "All.text.notifications.OptionSelected": "Options sélectionnées",
+    "All.text.notifications.noContent": "Aucune notification à afficher!",
     "All.text.notifications.confirmation.modal.message": "Vous allez notifier ${selectedOptionNumber} ${seletedChoice}. S'il vous plaît, cliquez sur confirmer pour continuer?",
     "All.text.notifications.confirmation.modal.title": "Confirmation d'envoi des notifications",
     "All.text.notifications.selectedElemetns": "Confirmation d'envoi des notifications",
@@ -207,7 +207,7 @@
     "All.text.students.label": "Eleves",
     "All.text.students.studentNumber": "Effectif",
     "All.text.students.tab.name": "Eleves",
-    "All.text.marks.tab.name": "Notes & Stats",
+    "All.text.marks.tab.name": "Notes",
 
     "All.text.timeTable.tab.name": "Emploi du temps",
     "All.text.timeTable.noContent": "Emploi du temps n'est pas disponible.",
@@ -225,13 +225,16 @@
     "All.text.create": "creer",
     "All.text.update": "mettre a jour",
     "All.text.save": "Enregistrer",
-    "All.text.delete": "delete",
+    "All.text.delete": "Supprimer",
+    "All.text.cancel": "Annuler",
+    "All.text.confirm": "Confirmer",
     "All.text.download": "Telecharger",
+    "All.text.file": "fichier",
     "All.text.selectFile": "Selectionner fichier",
     "All.text.selectImage": "Selectionner Image",
     "All.text.upload": "Upload",
     "All.text.uploading": "Uploading...",
     "All.text.edit": "Editer",
-    "All.text.search": "Searxh",
-    "All.text.undefined": "Undifférent"
+    "All.text.search": "Recherche",
+    "All.text.undefined": "Indifférent"
 }

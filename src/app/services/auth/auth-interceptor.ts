@@ -1,7 +1,8 @@
+import * as _ from 'lodash';
 import { Injectable } from '@angular/core';
-import { HTTP_INTERCEPTORS, HttpInterceptor, HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { TokenStorageService } from './token-storage.service';
-import { map, catchError, tap, retry } from 'rxjs/operators';
+import { catchError, tap, retry } from 'rxjs/operators';
 import { Observable, throwError, of } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './auth.service';
@@ -12,6 +13,7 @@ const CROS_ORIGIN_KEY = 'Access-Control-Allow-Origin';
 const TOKEN_HEADER_KEY = 'Authorization';
 const CONTENT_TYPE_KEY = 'Content-Type';
 const ACCEPT_KEY = 'Accept';
+const MULTIPART_FILE = 'multipart/form-data'
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -26,13 +28,14 @@ export class AuthInterceptor implements HttpInterceptor {
         }
         if (!request.headers.has(CONTENT_TYPE_KEY)) {
             request = request.clone({ headers: request.headers.set(CONTENT_TYPE_KEY, 'application/json') });
+        } else if (request.headers.get(CONTENT_TYPE_KEY).includes(MULTIPART_FILE)) {
+            // 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'
+            // THIS IS A WORK AROUND FOR UPLOAD MULITPART REQUEST ISSUE
+            request = request.clone({ headers: request.headers.delete(CONTENT_TYPE_KEY)});
         }
         if (!request.headers.has(CROS_ORIGIN_KEY)) {
             request = request.clone({ headers: request.headers.set(CROS_ORIGIN_KEY, '*') });
         }
-        //         if (!request.headers.has(CONTENT_TYPE_KEY)) {
-        //     request = request.clone({ headers: request.headers.set(CONTENT_TYPE_KEY, 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW') });
-        // }
         request = request.clone({ headers: request.headers.set(ACCEPT_KEY, '*/*') });
         return next.handle(request).pipe(
             tap(),
@@ -41,7 +44,7 @@ export class AuthInterceptor implements HttpInterceptor {
                 if (err instanceof HttpErrorResponse) {
                     if (err.status === 401) {
                         // this.auth.collectFailedRequest(request);
-                        let data: DialogData = {
+                        const data: DialogData = {
                             dialogTitle: err && err.error.message ? err.error.message : '',
                             dialogMessage: '' + err.status
                         };
