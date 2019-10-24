@@ -11,22 +11,15 @@ export class RouterLink  {
 
 const routes: Routes = [
     {
-        path: '',
+        path: 'app',
         redirectTo: `app/${RouterLink.AUTH_LOGIN}`,
         pathMatch: 'full'
     },
     {
-      path: 'app',
-      component: ContentComponent,
-      children: [
-        {
-            path: RouterLink.AUTH_LOGIN,
-            component: LoginComponent
-        },
-        // { path: 'not-found', component: FourOhFourComponent },
-        { path: '**', redirectTo: 'not-found' }
-      ]
-    }
+        path: `app/${RouterLink.AUTH_LOGIN}`,
+        component: LoginComponent
+    },
+    { path: 'app/**', redirectTo: 'not-found' }
    ];
 
 @NgModule({
