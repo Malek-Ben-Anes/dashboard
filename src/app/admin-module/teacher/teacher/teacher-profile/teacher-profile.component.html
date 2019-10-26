@@ -34,7 +34,7 @@
                                     <mat-form-field class="example-full-width">
                                         <mat-select matInput placeholder="{{'All.text.placeholder.Gender'|translate}}" formControlName="gender">
                                             <mat-option *ngFor="let gen of genders" [value]="gen" required>
-                                                {{'GLBL' + gen|translate}}
+                                                {{'GLBL.' + gen|translate}}
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>

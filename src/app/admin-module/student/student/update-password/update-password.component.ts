@@ -6,6 +6,7 @@ import { StudentService } from "app/services/student.service";
 import { BASE_URL } from "app/app.component";
 import { DialogService } from "app/commons/dialog/dialog.service";
 import { DialogData } from "app/models/DialogData";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "app-update-password",
@@ -24,7 +25,8 @@ export class UpdatePasswordComponent implements OnInit {
 
   passwordForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private studentService: StudentService, private dialogService: DialogService) { }
+  constructor(private formBuilder: FormBuilder, private studentService: StudentService, private dialogService: DialogService,
+              private translate: TranslateService) { }
 
   ngOnInit() {
     this.initForm();
@@ -76,14 +78,14 @@ export class UpdatePasswordComponent implements OnInit {
         this.student = student;
         this.modifiedStudent.emit(this.student);
         const data: DialogData = {
-          dialogTitle: 'User password has been successfully updated!',
+          dialogTitle: this.translate.instant('All.Password.Message.update.success'),
           dialogMessage: ''
         };
         this.dialogService.openDialog(data);
       })
       .catch(err => {
         const data: DialogData = {
-          dialogTitle: 'User password update has failed :(',
+          dialogTitle: this.translate.instant('All.Password.Message.update.failed'),
           dialogMessage: ''
         };
         this.dialogService.openDialog(data);

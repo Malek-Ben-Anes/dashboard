@@ -11,7 +11,7 @@
     "label.student": "Eleve",
     "label.teacher": "Enseignant",
     "label.admin": "Admin",
-    "label.group": "Admin",
+    "label.group": "Classe",
 
     "All.tab.EditProfile": "Modifier profile",
     "All.tab.Password": "Mot de passe password",
@@ -159,7 +159,7 @@
     "All.text.placeholder.PhoneNumber": "Phone number",
     "All.text.placeholder.BirthDate": "Date de naissance",
     "All.text.placeholder.LevelName": "Niveau",
-    "All.text.placeholder.GroupName": "Nom du groupe",
+    "All.text.placeholder.groupName": "Nom de la classe",
     "All.text.placeholder.ParentName": "Nom du parent",
     "All.text.placeholder.ParentPhone": "Nom du parent",
     "All.text.placeholder.Address": "Addresse",
