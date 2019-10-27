@@ -9,7 +9,7 @@
 
 <ng-template #bell>
   <i class="material-icons margin-5">notifications</i>
-  <span *ngIf="loggedUser.newNotifications && loggedUser.newNotifications !== 0" class="notification position">
+  <span *ngIf="loggedUser.newNotifications && loggedUser.newNotifications!=0" class="notification position">
     {{loggedUser.newNotifications}}
   </span>
 </ng-template>

@@ -1,4 +1,6 @@
-<h2 mat-dialog-title>{{data.dialogTitle}}</h2>
-<mat-dialog-content>
-    <span [innerHtml]="data.dialogMessage"></span>
-</mat-dialog-content>
+<div [dir]="isRtl">
+    <h2 mat-dialog-title>{{data.dialogTitle}}</h2>
+    <mat-dialog-content>
+        <span [innerHtml]="data.dialogMessage"></span>
+    </mat-dialog-content>
+</div>

@@ -123,7 +123,7 @@
 
     
 
-    "label.firstName": "الأسم الأول",
+    "label.firstName": "الأسم",
     "label.lastName": "اللقب العائلي",
     "label.email": "البريد الإلكتروني",
     "label.gender": "الجنس",
@@ -136,7 +136,7 @@
     "label.address": "عنوان الاقامة",
     "label.description": "معلومات اضافية",
 
-    "All.text.label.FirstName": "الأسم الأول",
+    "All.text.label.FirstName": "الأسم",
     "All.text.label.LastName": "اللقب العائلي",
     "All.text.label.Email": "البريد الإلكتروني",
     "All.text.label.Photo": "الصورة",
@@ -152,7 +152,7 @@
     "All.text.label.AdditionalInformation": "معلومات اضافية",
     "All.text.label.NotAssigned": "معلومات اضافية",
 
-    "All.text.placeholder.FirstName": "الأسم الأول",
+    "All.text.placeholder.FirstName": "الأسم",
     "All.text.placeholder.LastName": "اللقب العائلي",
     "All.text.placeholder.Email": "البريد الإلكتروني",
     "All.text.placeholder.Gender": "الجنس",

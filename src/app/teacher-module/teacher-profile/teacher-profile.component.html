@@ -49,7 +49,9 @@
                                 </div>
                                 <div class="col-md-3">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="{{'All.text.placeholder.Gender'|translate}}" type="text" formControlName="gender">
+                                        <input matInput placeholder="{{'All.text.placeholder.Gender'|translate}}" type="text"
+                                         value="{{'GLBL.' + user.gender | translate}}"
+                                         formControlName="gender">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-3">
@@ -60,7 +62,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-4" dir="ltr">
                                     <mat-form-field class="example-full-width">
                                         <input matInput placeholder="{{'All.text.placeholder.PhoneNumber'|translate}}" type="text" formControlName="phone">
                                     </mat-form-field>

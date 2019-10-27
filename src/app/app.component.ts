@@ -13,6 +13,8 @@ const DEFAULT_LANGUAGE = FR;
 })
 export class AppComponent implements OnInit {
 
+  isRtl: string = 'ltr';
+
   constructor(private tokenStorage: TokenStorageService, private translate: TranslateService) {
     // this language will be used as a fallback when a translation isn't found in the current language
     this.translate.setDefaultLang(EN);
@@ -28,9 +30,15 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     if (this.tokenStorage && this.tokenStorage.getLanguage()) {
       this.translate.use(this.tokenStorage.getLanguage())
+      this.isRtl = this.direction;
     } else {
       this.tokenStorage.saveLanguage(DEFAULT_LANGUAGE);
+      this.isRtl = this.direction;
     }
+  }
+
+  private get direction(): string {
+    return this.tokenStorage.isRtl() ? 'rtl' : 'ltr';
   }
 }
 /*

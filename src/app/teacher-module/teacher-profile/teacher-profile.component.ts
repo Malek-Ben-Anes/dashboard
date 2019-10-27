@@ -40,7 +40,7 @@ export class TeacherProfileComponent implements OnInit {
       lastname: [{ value: user.lastname, disabled: true }],
       email: [{ value: user.email, disabled: true }],
       phone: [{ value: user.phone, disabled: true }],
-      gender: [{ value: this.translate.instant(`GLBL.${user.gender}`), disabled: true }],
+      gender: [{ value: user.gender, disabled: true }],
       birthDate: [{ value: this.datePipe.transform(new Date(user.birthDate), 'dd / MM / yyyy'), disabled: true }],
       address: [{ value: user.address, disabled: true }],
       description: [{ value: user.description, disabled: true }],
