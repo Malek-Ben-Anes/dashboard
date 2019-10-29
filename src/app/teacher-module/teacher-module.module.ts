@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TeacherProfileComponent } from './teacher-profile/teacher-profile.component';
-import { TeacherRoutingModule } from './teacher.routing';
+import { TeacherRoutingModule } from './routes/teacher.routing';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 import { MaterialModule } from 'app/material.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -22,6 +22,7 @@ import { SharedModule } from 'app/commons/shared.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpLoaderFactory } from 'app/header/header.module';
+import { StudentProfileComponent } from './group/group/student-profile/student-profile.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { HttpLoaderFactory } from 'app/header/header.module';
     NotifcationListComponent,
     UsersNotificationFormComponent,
     GroupStudentListComponent,
+    StudentProfileComponent,
     GroupTimetableComponent,
     GroupMarksComponent,
     GroupMarksStudentListComponent,

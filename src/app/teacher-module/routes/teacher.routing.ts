@@ -5,20 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { ContentComponent } from 'app/content/content.component';
 import { Library } from 'app/models/Library';
 import { AuthGuardService } from 'app/services/auth/auth-guard.service';
-import { TeacherProfileComponent } from './teacher-profile/teacher-profile.component';
-import { TeacherTimeTableComponent } from './teacher-time-table/teacher-time-table.component';
-import { NotificationsComponent } from './notifications/notifications.component';
-import { GroupTabComponent } from './group/group-tab.component';
-import { GroupComponent } from './group/group/group.component';
-
-export class TeacherRouterLink {
-    public static SHOW_PROFILE = 'show-teacher-profile';
-    public static SHOW_TIME_TABLE = 'show-teacher-time-table';
-    public static SHOW_GROUP_LIST = 'show-groups-list';
-    public static SHOW_GROUP_DETAIL = 'show-groups-detail/:id';
-    public static SHOW_MARK_LIST = 'assign-students-marks';
-    public static SHOW_NOTIFICATIONS = 'prof-notifications';
-}
+import { TeacherProfileComponent } from '../teacher-profile/teacher-profile.component';
+import { TeacherRouterLink } from './router-link';
+import { TeacherTimeTableComponent } from '../teacher-time-table/teacher-time-table.component';
+import { GroupTabComponent } from '../group/group-tab.component';
+import { GroupComponent } from '../group/group/group.component';
+import { NotificationsComponent } from '../notifications/notifications.component';
+import { StudentProfileComponent } from '../group/group/student-profile/student-profile.component';
 
 const routes: Routes = [
     {
@@ -41,6 +34,12 @@ const routes: Routes = [
                 path: TeacherRouterLink.SHOW_GROUP_LIST,
                 canActivate: [AuthGuardService],
                 component: GroupTabComponent,
+                data: { expectedRole: Library.ROLE_TEACHER }
+            },
+            {
+                path: TeacherRouterLink.STUDENT_PROFILE_ID,
+                canActivate: [AuthGuardService],
+                component: StudentProfileComponent,
                 data: { expectedRole: Library.ROLE_TEACHER }
             },
             {

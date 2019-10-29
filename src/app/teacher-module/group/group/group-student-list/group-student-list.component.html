@@ -19,8 +19,10 @@
       <tbody>
         <tr *ngFor="let student of students">
           <td>
-            <img class="profile-icon" [src]="BASE_URL + student.photo"
-              default="assets/images/profile-logo.png" alt="Smiley student face"/>
+            <a [routerLink]="APP_STUDENT_PROFILE + student.id">
+              <img class="profile-icon" [src]="BASE_URL + student.photo"
+                default="assets/images/profile-logo.png" alt="Smiley student face"/>
+            </a>
           </td>
           <td>
             {{student.firstname}}

@@ -1,9 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Student } from 'app/models/Student';
 import { BASE_URL } from 'app/app.component';
-import { Routers } from 'app/admin-module/routes/router-link';
-
-
+import { TeacherRouterLink } from '../../../routes/router-link';
 
 @Component({
   selector: 'app-group-student-list',
@@ -13,7 +11,7 @@ import { Routers } from 'app/admin-module/routes/router-link';
 export class GroupStudentListComponent implements OnInit {
 
   BASE_URL: string = BASE_URL;
-  STUDENT_PROFILE: string = Routers.APP_STUDENT_PROFILE;
+  APP_STUDENT_PROFILE: string = TeacherRouterLink.APP_STUDENT_PROFILE;
 
   @Input('students') students: Student[];
 
