@@ -177,7 +177,7 @@
     "All.text.notifications.Type.NOTIF6": "وفيات",
     "All.text.notifications.Type.NOTIFN": "...المزيد",
     "All.text.notifications.notificationsList": "...قائمة التنبيهات",
-    "All.text.notifications.Notifier": "إعلام",
+    "All.text.notifications.Notifier": "المنبه",
     "All.text.notifications.NotifierAction": "إعلام",
     "All.text.notifications.send": "ارسال",
     "All.text.notifications.Date": "التاريخ",
@@ -191,7 +191,7 @@
 
     "All.text.group.Name": "اسم القسم",
     "All.text.group.Level": "المستوى التعليمي",
-    "All.text.group.Effectif": "العدد",
+    "All.text.group.Effectif": "عدد التلاميذ",
     "All.text.group.assignedTo": "التلميذ مخصص ل",
     "All.text.group.assignedNotTo": "التلميذ غير مخصص ل",
 
@@ -205,7 +205,7 @@
 
     "All.text.student.label": "التلميذ",
     "All.text.students.label": "التلاميذ",
-    "All.text.students.studentNumber": "العدد",
+    "All.text.students.studentNumber": "عدد التلاميذ",
     "All.text.students.tab.name": "التلاميذ",
     "All.text.marks.tab.name": "الملاحظات",
 
