@@ -32,11 +32,15 @@ export class LessonService {
   }
 
   private buildHttpParams(teacherId?: string, groupId?: string): HttpParams {
+    let result = new HttpParams();
     if (!_.isNil(teacherId)) {
-      return new HttpParams().set('teacherId', teacherId);
-    } else if(!_.isNil(groupId)) {
-      return new HttpParams().set('groupId', groupId)
+      result = result.set('teacherId', teacherId);
+    } 
+    if(!_.isNil(groupId)) {
+      result = result.set('groupId', groupId)
     }
+
+    return result;
   }
 
   getSingleLesson(id: string): Observable<Lesson>  {

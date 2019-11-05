@@ -12,17 +12,14 @@ import { NotifcationListComponent } from './notifications/notifcation-list/notif
 import { UsersNotificationFormComponent } from './notifications/users-notification-form/users-notification-form.component';
 import { GroupComponent } from './group/group/group.component';
 import { RouterModule } from '@angular/router';
-import { GroupStudentListComponent } from './group/group/group-student-list/group-student-list.component';
+import { GroupStudentsComponent } from './group/group/group-students/group-students.component';
 import { GroupTimetableComponent } from './group/group/group-timetable/group-timetable.component';
-import { GroupMarksComponent } from './group/group/group-marks/group-marks.component';
-import { GroupMarksStudentListComponent } from './group/group/group-marks/group-marks-student-list/group-marks-student-list.component';
-import { GroupMarksStudentDetailComponent } from './group/group/group-marks/group-marks-student-detail/group-marks-student-detail.component';
-import { GroupMarksFormComponent } from './group/group/group-marks/group-marks-student-detail/group-marks-form/group-marks-form.component';
 import { SharedModule } from 'app/commons/shared.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpLoaderFactory } from 'app/header/header.module';
 import { StudentProfileComponent } from './group/group/student-profile/student-profile.component';
+import { MarksModuleModule } from 'app/marks-module/marks-module.module';
 
 @NgModule({
   declarations: [
@@ -33,13 +30,9 @@ import { StudentProfileComponent } from './group/group/student-profile/student-p
     NotificationsComponent,
     NotifcationListComponent,
     UsersNotificationFormComponent,
-    GroupStudentListComponent,
+    GroupStudentsComponent,
     StudentProfileComponent,
-    GroupTimetableComponent,
-    GroupMarksComponent,
-    GroupMarksStudentListComponent,
-    GroupMarksStudentDetailComponent,
-    GroupMarksFormComponent
+    GroupTimetableComponent
   ],
   imports: [
     CommonModule,
@@ -50,6 +43,7 @@ import { StudentProfileComponent } from './group/group/student-profile/student-p
     ScrollDispatchModule,
     RouterModule,
     SharedModule,
+    MarksModuleModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
