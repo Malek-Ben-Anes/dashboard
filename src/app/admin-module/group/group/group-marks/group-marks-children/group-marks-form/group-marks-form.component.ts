@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { Component, OnInit, Input, SimpleChanges, OnChanges, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, OnChanges, EventEmitter, Output, ChangeDetectorRef } from '@angular/core';
 import { Student } from 'app/models/Student';
 import { Lesson } from 'app/models/Lesson';
 import { Message } from 'app/models/message';
@@ -18,57 +18,61 @@ export class GroupMarksFormComponent implements OnInit, OnChanges {
 
   @Input('lessons') lessons: Lesson[];
 
-  @Input('selectedMarks')
-  selectedMarks: Mark[];  
-
   @Output()
-  refreshStudent = new EventEmitter<Student>();
+  refresh = new EventEmitter<Student>();
 
   message: Message = new Message();
   newEvaluationMarks: Mark[];
 
-  constructor(private markService: MarkService, private translate: TranslateService) { }
+  constructor(private markService: MarkService,
+              private translate: TranslateService) { }
 
   ngOnInit() {
-    this.generateMarksForm(this.lessons);
-    if (this.student.marks) {
-      this.student.marks = [];
-    }
+    this.generateMarksForm();
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.student) {
       this.student = changes.student.currentValue;
-      if (this.student.marks) {
-        this.student.marks = [];
-      }
     }
     if (changes.lessons) {
       this.lessons = changes.lessons.currentValue;
     }
-    this.generateMarksForm(this.lessons);
+    this.generateMarksForm();
   }
 
   public onSendEvaluation(): void {
-    const marksToBePersisted: Mark[] = _.filter(this.newEvaluationMarks, (mark: Mark) => mark.id == null && mark.mark != null && mark.observation != null);
+    const marksToBePersisted: Mark[] = _.filter(this.newEvaluationMarks, (mark: Mark) => this.isToPersist(mark));
     this.markService.save(this.student.id, marksToBePersisted)
-        .then((marksAdded: Mark[]) => {this.refreshStudent.emit(this.student);})
+        .then((marksAdded: Mark[]) =>
+         {
+           this.refresh.emit(this.student);
+           //this.student.marks = this.student.marks.concat(marksToBePersisted);;
+           //this.generateMarksForm();
+         })
         .catch(err => console.log(err));
+  }
+
+  private isToPersist(mark: Mark): boolean {
+    return _.isNil(mark.id) &&  !_.isNil(mark.mark) && !_.isNil(mark.observation);
   }
 
   onDeleteMark(event, mark: Mark) {
     event.currentTarget.disabled = true;
     this.markService.delete(mark.id)
-                    .then(data => this.deleteMarkFromStudent(mark))
-                    .then(data => this.refreshStudent.emit(this.student))
-                    .then(data => this.generateMarksForm(this.lessons))
-                    .catch(err => console.log(err));
+      .then(data =>
+       {
+         this.deleteMarkFromStudent(mark);
+         this.refresh.emit(this.student);
+         this.generateMarksForm();
+       })
+      .catch(err => console.log(err));
   }
 
-  private generateMarksForm(lessons: Lesson[]) {
+  private generateMarksForm() {
     this.newEvaluationMarks = [];
-    const updatableMarks: Mark[] = _.filter(this.selectedMarks, (mark: Mark) => mark.updatable);
-    _.forEach(lessons, lesson => this.newEvaluationMarks.push(this.addNewMark(updatableMarks, lesson)));
+    const updatableMarks: Mark[] = _.filter(this.student.marks, (mark: Mark) => mark.updatable);
+    _.forEach(this.lessons, lesson => this.newEvaluationMarks.push(this.addNewMark(updatableMarks, lesson)));
   }
 
   private addNewMark(updatableMarks: Mark[], lesson: Lesson) {
@@ -79,5 +83,4 @@ export class GroupMarksFormComponent implements OnInit, OnChanges {
   private deleteMarkFromStudent(mark: Mark) {
     _.remove(this.student.marks, {id: mark.id});
   }
-
 }

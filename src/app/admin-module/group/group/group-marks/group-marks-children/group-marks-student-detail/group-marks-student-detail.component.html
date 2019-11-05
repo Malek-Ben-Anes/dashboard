@@ -1,43 +1,25 @@
-<div class="card card-3">
-    <div class="card-body">
-        <mat-tab-group>
-            <mat-tab label="{{'All.text.marks.label'|translate}}">
-                <div>
-                    <button mat-raised-button (click)="onFilterByLesson(null)">
-                        {{'All.text.marks.all'|translate}}
-                    </button>
-                    <button *ngFor="let lesson of lessons" mat-raised-button
-                        (click)="onFilterByLesson(lesson)">
-                        {{lesson.subjectName}} </button>
-                </div>
+<button mat-raised-button (click)="onFilterByLesson(null)">
+    {{'All.text.marks.all'|translate}}
+</button>
+<button *ngFor="let lesson of lessons" mat-raised-button (click)="onFilterByLesson(lesson)">
+    {{lesson.subjectName}}
+</button>
 
-                <div *ngIf="student" class="card">
-                    <div class="card-content table-responsive table-full-width">
-                        <table class="table">
-                            <thead>
-                                <th>{{'All.text.marks.subject'|translate}}</th>
-                                <th>{{'All.text.marks.observation'|translate}}</th>
-                                <th>{{'All.text.marks.mark'|translate}}</th>
-                                <th>{{'All.text.marks.date'|translate}}</th>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let mark of marksToDisplay">
-                                    <td>{{mark.lesson.name}}</td>
-                                    <td>{{mark.observation}}</td>
-                                    <td><span [class]="getMarkStyle(mark.mark)">{{mark.mark}}</span></td>
-                                    <td><span class="timestamp">{{mark.createdAt | date:'dd/MM/yyyy'}}</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-            </mat-tab>
-            <mat-tab label="{{'All.text.marks.label.sendEvaluation'|translate}}">
-                <app-group-marks-form *ngIf="student != null" (refreshStudent)="refresh($event)"
-                 [student]="student" [lessons]="lessons" [selectedMarks]="selectedMarks">
-                </app-group-marks-form>
-            </mat-tab>
-        </mat-tab-group>
-    </div>
+<div *ngIf="student" class="card-content table-responsive table-full-width marks-list">
+    <table class="table">
+        <thead>
+            <th>{{'All.text.marks.subject'|translate}}</th>
+            <th>{{'All.text.marks.observation'|translate}}</th>
+            <th>{{'All.text.marks.mark'|translate}}</th>
+            <th>{{'All.text.marks.date'|translate}}</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let mark of marksToDisplay">
+                <td>{{mark.lesson.name}}</td>
+                <td>{{mark.observation}}</td>
+                <td><span [class]="getMarkStyle(mark.mark)">{{mark.mark}}</span></td>
+                <td><span class="timestamp">{{mark.createdAt | date:'dd/MM/yyyy'}}</span></td>
+            </tr>
+        </tbody>
+    </table>
 </div>

@@ -1,12 +1,24 @@
 <div class="row">
-    <div class="col-md-4">
-        <app-group-student-list *ngIf="group != null" [students]="group.students"
-            (studentSelected)="onStudentSelected($event)"></app-group-student-list>
+    <app-group-student-list *ngIf="group != null" [students]="group.students"
+        (studentSelected)="onStudentSelected($event)" class="col-md-4">
+    </app-group-student-list>
+
+    <div class="card col-md-8">
+        <mat-tab-group>
+            <mat-tab label="{{'All.text.marks.label'|translate}}">
+                <app-group-marks-student-detail [student]="student" [lessons]="lessons">
+                </app-group-marks-student-detail>
+            </mat-tab>
+
+            <mat-tab label="{{'All.text.marks.label.sendEvaluation'|translate}}">
+                <app-group-marks-form
+                    [student]="student"
+                    [lessons]="lessons"
+                    (refresh)="refresh($event)"
+                    class="marks-list">
+                </app-group-marks-form>
+            </mat-tab>
+        </mat-tab-group>
     </div>
-    
-    <div class="col-md-8">
-        <app-group-marks-student-detail *ngIf="selectedMarks != null" [selectedMarks]="selectedMarks"
-         [student]="studentSelected">
-        </app-group-marks-student-detail>
-    </div>
+
 </div>

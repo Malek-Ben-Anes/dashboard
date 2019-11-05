@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
-import { ContentComponent } from './content/content.component';
 export class RouterLink  {
     public static AUTH_LOGIN =  'auth/login';
 }
@@ -19,8 +18,15 @@ const routes: Routes = [
         path: `app/${RouterLink.AUTH_LOGIN}`,
         component: LoginComponent
     },
-    { path: 'app/**', redirectTo: 'not-found' }
-   ];
+    {
+        path: '',
+        component: LoginComponent
+    },
+    {
+        path: 'app/**',
+        redirectTo: 'not-found'
+    }
+];
 
 @NgModule({
     imports: [
