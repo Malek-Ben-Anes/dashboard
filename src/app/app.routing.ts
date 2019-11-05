@@ -4,30 +4,29 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
-import { ContentComponent } from './content/content.component';
 export class RouterLink  {
     public static AUTH_LOGIN =  'auth/login';
 }
 
 const routes: Routes = [
     {
-        path: '',
+        path: 'app',
         redirectTo: `app/${RouterLink.AUTH_LOGIN}`,
         pathMatch: 'full'
     },
     {
-      path: 'app',
-      component: ContentComponent,
-      children: [
-        {
-            path: RouterLink.AUTH_LOGIN,
-            component: LoginComponent
-        },
-        // { path: 'not-found', component: FourOhFourComponent },
-        { path: '**', redirectTo: 'not-found' }
-      ]
+        path: `app/${RouterLink.AUTH_LOGIN}`,
+        component: LoginComponent
+    },
+    {
+        path: '',
+        component: LoginComponent
+    },
+    {
+        path: 'app/**',
+        redirectTo: 'not-found'
     }
-   ];
+];
 
 @NgModule({
     imports: [

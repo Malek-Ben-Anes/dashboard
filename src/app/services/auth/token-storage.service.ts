@@ -15,6 +15,8 @@ const LANGUAGE = 'language';
 
 const TRUE = 'true';
 
+// Todo rename tokenStorageService to storageService
+
 @Injectable({
   providedIn: 'root'
 })
@@ -125,5 +127,9 @@ export class TokenStorageService {
 
   public getLanguage(): string {
     return sessionStorage.getItem(LANGUAGE);
+  }
+
+  public isRtl(): boolean {
+    return sessionStorage.getItem(LANGUAGE) === 'ar';
   }
 }

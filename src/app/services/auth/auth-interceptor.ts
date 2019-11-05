@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './auth.service';
 import { ErrorDialogService } from './error-dialog.service';
 import { DialogData } from 'app/models/DialogData';
+import { TranslateService } from '@ngx-translate/core';
 
 const CROS_ORIGIN_KEY = 'Access-Control-Allow-Origin';
 const TOKEN_HEADER_KEY = 'Authorization';
@@ -18,11 +19,12 @@ const MULTIPART_FILE = 'multipart/form-data'
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-    constructor(private token: TokenStorageService, private auth: AuthService, private errorDialogService: ErrorDialogService,
-                private toasterService: ToastrService) { }
+    constructor(private storage: TokenStorageService, private auth: AuthService, private errorDialogService: ErrorDialogService,
+                private toasterService: ToastrService,
+                private translate: TranslateService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const token = this.token.getToken();
+        const token = this.storage.getToken();
         if (token != null) {
             request = request.clone({ headers: request.headers.set(TOKEN_HEADER_KEY, `Bearer ${token}`) });
         }
@@ -45,10 +47,14 @@ export class AuthInterceptor implements HttpInterceptor {
                     if (err.status === 401) {
                         // this.auth.collectFailedRequest(request);
                         const data: DialogData = {
-                            dialogTitle: err && err.error.message ? err.error.message : '',
-                            dialogMessage: '' + err.status
+                            dialogTitle: err && err.error.message ? this.translate.instant('All.text.sessionExpired') : '',
+                            dialogMessage: ''
                         };
-                        //this.errorDialogService.openDialog(data);
+                        if (this.storage.getToken()) {
+                            this.errorDialogService.openDialog(data);
+                            this.storage.signOut();
+                            setTimeout(() => window.location.reload(), 3000);
+                        }
                         return throwError(err);
                     }
                 }

@@ -1,6 +1,8 @@
-<h2 mat-dialog-title>{{data.dialogTitle}}</h2>
-<mat-dialog-content>{{data.dialogMessage}}</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Annuler</button>
-  <button mat-button [mat-dialog-close]="true" color="primary" cdkFocusInitial>Confirmer</button>
-</mat-dialog-actions>
+<div [dir]="isRtl">
+  <h2 mat-dialog-title>{{data.dialogTitle}}</h2>
+  <mat-dialog-content>{{data.dialogMessage}}</mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">{{'All.text.cancel' | translate}}</button>
+    <button mat-button [mat-dialog-close]="true" color="primary" cdkFocusInitial>{{'All.text.confirm' | translate}}</button>
+  </mat-dialog-actions>
+</div>
