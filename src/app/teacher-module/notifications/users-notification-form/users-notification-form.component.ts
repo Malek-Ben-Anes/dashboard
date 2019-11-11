@@ -61,12 +61,12 @@ export class UsersNotificationFormComponent implements OnInit {
       title: ['', [
         Validators.required,
         Validators.minLength(6),
-        Validators.maxLength(200)
+        Validators.maxLength(500)
       ]],
       content: ['', [
         Validators.required,
         Validators.minLength(6),
-        Validators.maxLength(200)
+        Validators.maxLength(500)
       ]],
       type: [null, Validators.required],
     });

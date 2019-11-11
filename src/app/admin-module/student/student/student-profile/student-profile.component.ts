@@ -58,9 +58,7 @@ export class StudentProfileComponent implements OnInit {
       firstname: ['', [Validators.required,
       Validators.minLength(3),
       Validators.maxLength(50)]],
-      lastname: ['', [Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(50)]],
+      lastname: ['', [Validators.required,  Validators.minLength(3), Validators.maxLength(50)]],
       email: ['', [Validators.required, Validators.pattern(EMAIL_PATTERN)]],
       birthDate: [null, Validators.required],
       phone: ['', Validators.required],
@@ -70,7 +68,7 @@ export class StudentProfileComponent implements OnInit {
       parentName: ['', Validators.required],
       parentPhone: ['', Validators.required],
       address: ['', Validators.required],
-      description: [''],
+      description: ['', [Validators.minLength(3), Validators.maxLength(500)]],
     });
   }
 

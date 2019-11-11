@@ -45,7 +45,7 @@ export class TeacherProfileComponent implements OnInit {
       phone: ['', Validators.required],
       gender: [Gender, Validators.required],
       address: ['', Validators.required],
-      description: [''],
+      description: ['', [Validators.required,  Validators.minLength(3), Validators.maxLength(500)]],
     });
   }
 
