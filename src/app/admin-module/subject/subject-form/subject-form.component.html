@@ -1,3 +1,14 @@
+<div class="row">
+    <div class="col-md-12">
+        <button
+            mat-raised-button
+            class="btn btn-warning pull-right"
+            (click)="onCreateNewSubject()">
+            {{'All.text.subject.newSubject' | translate}}
+        </button>
+    </div>
+</div>
+
 <div class="card card-profile">
     <div class="card-body">
         <form [formGroup]="subjectForm" (ngSubmit)="onSubmit()">
@@ -39,37 +50,31 @@
                     </mat-form-field>
                 </div>
 
-                <div *ngIf="(!isNew); else newSubject">
-                    <div class="col-md-1"></div>
-                        <button
-                            mat-raised-button
-                            [disabled]="subjectForm.invalid"
-                            type="submit"
-                            class="btn btn-warning pull-right"
-                        >
-                             {{'All.text.update' | translate}}
-                        </button>
-                        <button
-                            mat-raised-button
-                            class="btn btn-info"
-                            (click)="onCreateNewSubject()"
-                        >
-                            {{'All.text.subject.newSubject' | translate}}
-                        </button>
-                        <div class="clearfix"></div>
+                <div class="col-md-4" *ngIf="!isNew">
+                    <button
+                        mat-raised-button
+                        [disabled]="subjectForm.invalid"
+                        type="submit"
+                        class="btn btn-warning pull-right">
+                            {{'All.text.update' | translate}}
+                    </button>
+                    <button
+                    mat-raised-button
+                    (click)="onDelete()"
+                    type="submit"
+                    class="btn btn-danger pull-right">
+                        {{'All.text.delete' | translate}}
+                    </button>
                 </div>
-                <ng-template #newSubject>
-                    <div class="col-md-2"></div>
-                        <button
-                            mat-raised-button
-                            [disabled]="subjectForm.pristine || subjectForm.invalid"
-                            type="submit"
-                            class="btn btn-info pull-right"
-                        >
-                            {{'All.text.create' | translate}}   
-                        </button>
-                        <div class="clearfix"></div>
-                </ng-template>
+                <div class="col-md-4" *ngIf="isNew">
+                    <button
+                        mat-raised-button
+                        [disabled]="subjectForm.invalid"
+                        type="submit"
+                        class="btn btn-info pull-right">
+                            {{'All.text.create' | translate}}
+                    </button>
+                </div>
             </div>
         </form>
     </div>

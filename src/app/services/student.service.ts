@@ -49,12 +49,17 @@ export class StudentService {
     return this.http.post<Student>(STUDENT_URL, teacher);
   }
 
-  updateStudent(student: Student): Observable<Student>  {
+  updateStudent(student: Student): Observable<Student> {
     return this.http.put<Student>(STUDENT_URL  + '/' + student.id, student);
   }
 
   getSingleStudent(studentId: string): Student {
     return _.find(this.students, { id: studentId });
+  }
+
+  delete(studentId: string): Observable<Student> {
+    const Url = `${STUDENT_URL}/${studentId}`;
+    return this.http.delete<Student>(Url);
   }
 
   update(student: Student, updatePassword?: boolean): Promise<Student> {

@@ -77,6 +77,12 @@
                             <button mat-raised-button type="submit" class="btn btn-warning pull-right"
                                 [disabled]="teacherForm.invalid"
                                 *ngIf="teacher.id != null">{{'All.text.Profile.Update'|translate}}</button>
+                            <button mat-raised-button
+                                class="btn btn-danger pull-right"
+                                (click)="onDelete(teacher.id)"
+                                *ngIf="teacher.id != null">
+                                {{'All.text.delete'|translate}}
+                            </button>
                             <div class="clearfix"></div>
                         </form>
                     </div>

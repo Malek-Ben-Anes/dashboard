@@ -8,6 +8,10 @@ import { Level } from 'app/models/Level';
 import { Group } from 'app/models/Group';
 import { GroupService } from 'app/services/group.service';
 import { TranslateService } from '@ngx-translate/core';
+import { StudentService } from 'app/services/student.service';
+import { Router } from '@angular/router';
+import { DialogContentExampleDialogComponent } from 'app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
+import { MatDialog } from '@angular/material';
 
 
 const EMAIL_PATTERN = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
@@ -34,7 +38,12 @@ export class StudentProfileComponent implements OnInit {
   studentForm: FormGroup;
   groups: Group[] = [];
 
-  constructor(private formBuilder: FormBuilder, private groupService: GroupService, private translate: TranslateService) { }
+  constructor(private formBuilder: FormBuilder,
+              private groupService: GroupService,
+              public dialog: MatDialog,
+              private router: Router,
+              private studentService: StudentService,
+              private translate: TranslateService) { }
 
   ngOnInit() {
     this.initForm();
@@ -44,6 +53,31 @@ export class StudentProfileComponent implements OnInit {
   onSubmit() {
     this.extractFormData();
     this.modifiedStudent.emit(this.student);
+  }
+
+  onConfirmationDelete(studentId: string ) {
+    this.studentService.delete(studentId).subscribe(student =>
+      { console.log("student deleted!");
+        this.router.navigate(['app', 'students']);
+      });
+  }
+
+  onDelete(studentId: string): void {
+    const modalDialog: { dialogTitle: string; dialogMessage: string; } =
+    {
+      dialogTitle: this.translate.instant('All.text.delete.title'),
+      dialogMessage: this.translate.instant('All.text.delete.Confirmation')
+    };
+    const dialogRef = this.dialog.open(DialogContentExampleDialogComponent, {
+      width: '450px',
+      height: '200px',
+      data: { dialogTitle: modalDialog.dialogTitle, dialogMessage: modalDialog.dialogMessage }
+    });
+    dialogRef.afterClosed().subscribe(confirmtion => {
+      if (confirmtion) {
+        this.onConfirmationDelete(studentId);
+      }
+    });
   }
 
   private getGroup() {

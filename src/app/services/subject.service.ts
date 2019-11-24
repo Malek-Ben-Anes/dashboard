@@ -40,29 +40,13 @@ export class SubjectService {
     return this.http.put<Subject>(SUBJECT_URL  + '/' + subject.id, subject);
   }
 
+  delete(subjectId: string): Observable<Subject>  {
+    return this.http.delete<Subject>(`${SUBJECT_URL}/${subjectId}`);
+  }
+
   public filter(subjects: Subject[], level: Level): Subject[] {
     return  _.filter(subjects, subject => subject.level === level);
   }
-
-
-  // createNewTeacher(newTeacher: Teacher) {
-  //   this.teachers.push(newTeacher);
-  //   this.saveTeacher(newTeacher);
-  //   this.emitTeachers();
-  // }
-
-  // removeTeacher(teacher: Teacher) {
-  //   const teacherIndexToRemove = this.teachers.findIndex(
-  //     (teacherElement) => {
-  //       if (teacherElement === teacher) {
-  //         return true;
-  //       }
-  //     }
-  //   );
-  //   this.teachers.splice(teacherIndexToRemove, 1);
-  //   //this.saveTeacher(newTeacher);
-  //   this.emitTeachers();
-  // }
 
   uploadFile(file: File) {
     return new Promise(

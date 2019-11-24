@@ -125,8 +125,7 @@
                                 [disabled]="studentForm.pristine || studentForm.invalid"
                                 type="submit"
                                 class="btn btn-info pull-right"
-                                *ngIf="student.id  == null"
-                            >
+                                *ngIf="student.id  == null">
                                 {{'All.text.save' | translate}}
                             </button>
                             <button
@@ -134,9 +133,15 @@
                                 [disabled]="studentForm.invalid"
                                 type="submit"
                                 class="btn btn-warning pull-right"
-                                *ngIf="student.id != null"
-                            >
+                                *ngIf="student.id != null">
                                 {{'All.text.update' | translate}}
+                            </button>
+                            <button
+                                mat-raised-button
+                                (click)="onDelete(student.id)"
+                                class="btn btn-danger pull-right"
+                                *ngIf="student.id != null">
+                                {{'All.text.delete' | translate}}
                             </button>
                             <div class="clearfix"></div>
                         </form>

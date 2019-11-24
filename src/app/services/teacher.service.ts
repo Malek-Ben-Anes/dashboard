@@ -58,6 +58,9 @@ export class TeacherService {
     return this.http.put<Teacher>(TEACHER_URL + '/' + teacher.id, teacher);
   }
 
-  removeTeacher(teacher: Teacher) {
+  delete(teacherId: string): Observable<Teacher> {
+    const Url = `${TEACHER_URL}/${teacherId}`;
+    return this.http.delete<Teacher>(Url);
   }
+
 }

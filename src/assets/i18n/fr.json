@@ -94,7 +94,7 @@
     "All.text.subject.label": "Matiere",
     "All.text.subject.coefficient": "coefficient",
     "All.text.subject.volumeHoraire": "Volume Horaire",
-    "All.text.subject.sessionNumber": "seance...",
+    "All.text.subject.sessionNumber": "seance",
     "All.text.subject.description": "Description",
     "All.text.subject.newSubject": "nouvelle matière",
 
@@ -176,7 +176,7 @@
     "All.text.notifications.Type.NOTIF5": "Reunion",
     "All.text.notifications.Type.NOTIF6": "Deces",
     "All.text.notifications.Type.NOTIFN": "Autres...",
-    "All.text.notifications.notificationsList": "Liste de notifications ...",
+    "All.text.notifications.notificationsList": "Liste de notifications",
     "All.text.notifications.Notifier": "Notifier",
     "All.text.notifications.NotifierAction": "Notifier les destinataires",
     "All.text.notifications.send": "Envoyer",
@@ -237,5 +237,7 @@
     "All.text.edit": "Editer",
     "All.text.search": "Recherche",
     "All.text.undefined": "Indifférent",
-    "All.text.sessionExpired": "Votre session est expiré!"
+    "All.text.sessionExpired": "Votre session est expiré!",
+    "All.text.delete.title": "Suppression",
+    "All.text.delete.Confirmation": "Veuillez confirmer la suppression s'il vous plait"
 }
