@@ -63,18 +63,10 @@ export class StudentService {
   }
 
   update(student: Student, updatePassword?: boolean): Promise<Student> {
-    const Url = `${STUDENT_URL}/${student.id}`
+    const Url = updatePassword ? `${STUDENT_URL}/${student.id}/password` : `${STUDENT_URL}/${student.id}`;
     return new Promise((resolve, reject) => {
-      if (updatePassword != null) {
-        const httpOptions = {
-          params: new HttpParams().set('updatePassword', String(updatePassword))
-        };
-        this.http.put<Student>(Url, student, httpOptions)
-        .subscribe(studentUpdated => resolve(studentUpdated), err => reject(err));
-      } else {
         this.http.put<Student>(Url, student)
             .subscribe(studentUpdated => resolve(studentUpdated), err => reject(err));
-      }
     });
   }
 

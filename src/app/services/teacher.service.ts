@@ -32,18 +32,10 @@ export class TeacherService {
   }
 
   update(teacher: Teacher, updatePassword?: boolean): Promise<Teacher> {
-    const Url = `${TEACHER_URL}/${teacher.id}`
+    const Url = updatePassword ? `${TEACHER_URL}/${teacher.id}/password` : `${TEACHER_URL}/${teacher.id}`;
     return new Promise((resolve, reject) => {
-      if (updatePassword != null) {
-        const httpOptions = {
-          params: new HttpParams().set('updatePassword', String(updatePassword))
-        };
-        this.http.put<Teacher>(Url, teacher, httpOptions)
-          .subscribe(studentUpdated => resolve(studentUpdated), err => reject(err));
-      } else {
         this.http.put<Teacher>(Url, teacher)
           .subscribe(studentUpdated => resolve(studentUpdated), err => reject(err));
-      }
     });
   }
 
