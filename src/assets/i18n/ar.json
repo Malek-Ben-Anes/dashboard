@@ -223,6 +223,7 @@
     "label.date": "التاريخ",
 
     "All.text.create": "إنشاء",
+    "All.text.create.failed.duplicated": "La creation a echoue car l'email est deja utilise",
     "All.text.update": "تحديث",
     "All.text.save": "تسجيل",
     "All.text.delete": "مسح",

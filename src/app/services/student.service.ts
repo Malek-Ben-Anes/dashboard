@@ -45,8 +45,11 @@ export class StudentService {
     return this.http.get<Student>(STUDENT_URL + '/' + id);
   }
 
-  saveStudent(teacher: Student): Observable<Student>  {
-    return this.http.post<Student>(STUDENT_URL, teacher);
+  save(student: Student): Promise<Student> {
+    return new Promise((resolve, reject) => {
+      this.http.post<Student>(STUDENT_URL, student)
+          .subscribe(student => resolve(student), err => reject(err));
+    });
   }
 
   updateStudent(student: Student): Observable<Student> {

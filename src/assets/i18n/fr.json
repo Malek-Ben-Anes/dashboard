@@ -6,7 +6,7 @@
     "GLBL.label.LEVEL5": "Cinquième année",
     "GLBL.label.LEVEL6": "Sixième année",
     "GLBL.MALE": "Masculin",
-    "GLBL.FEMALE": "Femelle",
+    "GLBL.FEMALE": "Féminin",
     
     "label.student": "Eleve",
     "label.teacher": "Enseignant",
@@ -223,6 +223,7 @@
     "label.date": "Date",
 
     "All.text.create": "creer",
+    "All.text.create.failed.duplicated": "La creation a echoue car l'email est deja utilise",
     "All.text.update": "mettre a jour",
     "All.text.save": "Enregistrer",
     "All.text.delete": "Supprimer",

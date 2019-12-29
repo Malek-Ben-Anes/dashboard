@@ -4,6 +4,7 @@ import { Student } from 'app/models/Student';
 import { StudentService } from 'app/services/student.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-student',
@@ -18,7 +19,10 @@ export class StudentComponent implements OnInit, OnChanges {
   selected = new FormControl(0);
   student: Student;
 
-  constructor(private studentService: StudentService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private studentService: StudentService,
+              private router: Router,
+              private route: ActivatedRoute,
+              private translate: TranslateService) { }
 
   ngOnInit() {
     const id: string = this.route.snapshot.params['id'];
@@ -79,13 +83,14 @@ export class StudentComponent implements OnInit, OnChanges {
   }
 
   private create (studentRequest: Student): void {
-    this.studentService.saveStudent(studentRequest).subscribe((StudentData) => {
-      this.student = StudentData;
-      this.isNew = false;
-      this.tabs = this.updateTabs();
-    }, (err) => {
-      console.log(err)
-    });
+    this.studentService.save(studentRequest).then((student) => {
+        this.student = student;
+        this.isNew = false;
+        this.tabs = this.updateTabs();
+      })
+      .catch((err) => {
+        alert(this.translate.instant('All.text.create.failed.duplicated'));
+      });
   }
 
   updateTabs() {
