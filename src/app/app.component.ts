@@ -42,10 +42,10 @@ export class AppComponent implements OnInit {
     }
 
     this.activatedRoute.queryParams
-    .filter(params => params.lang)
+    .filter(params => params.language)
     .subscribe(params => {
-      if(_.includes(LANGUAGE, params.lang)) {
-        this.lang = params.lang;
+      if(_.includes(LANGUAGE, params.language)) {
+        this.lang = params.language;
         this.tokenStorage.saveLanguage(this.lang);
         this.translate.use(this.lang)
         this.isRtl = this.direction;
