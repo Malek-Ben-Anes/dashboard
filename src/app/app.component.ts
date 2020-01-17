@@ -1,11 +1,15 @@
+import * as _ from 'lodash';
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { TokenStorageService } from './services/auth/token-storage.service';
+import { ActivatedRoute } from '@angular/router';
+import 'rxjs/add/operator/filter';
 
 const AR = 'ar';
 const EN = 'en';
 const FR = 'fr';
-const DEFAULT_LANGUAGE = FR;
+const DEFAULT_LANGUAGE = AR;
+const LANGUAGE = [AR, FR];
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,8 +18,9 @@ const DEFAULT_LANGUAGE = FR;
 export class AppComponent implements OnInit {
 
   isRtl: string = 'ltr';
+  lang: string;
 
-  constructor(private tokenStorage: TokenStorageService, private translate: TranslateService) {
+  constructor(private activatedRoute: ActivatedRoute, private tokenStorage: TokenStorageService, private translate: TranslateService) {
     // this language will be used as a fallback when a translation isn't found in the current language
     this.translate.setDefaultLang(EN);
     // the lang to use, if the lang isn't available, it will use the current loader to get them
@@ -35,6 +40,17 @@ export class AppComponent implements OnInit {
       this.tokenStorage.saveLanguage(DEFAULT_LANGUAGE);
       this.isRtl = this.direction;
     }
+
+    this.activatedRoute.queryParams
+    .filter(params => params.lang)
+    .subscribe(params => {
+      if(_.includes(LANGUAGE, params.lang)) {
+        this.lang = params.lang;
+        this.tokenStorage.saveLanguage(this.lang);
+        this.translate.use(this.lang)
+        this.isRtl = this.direction;
+      }
+    });
   }
 
   private get direction(): string {
