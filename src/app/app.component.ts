@@ -18,7 +18,7 @@ const LANGUAGE = [AR, FR];
 export class AppComponent implements OnInit {
 
   isRtl: string = 'ltr';
-  lang: string;
+  language: string;
 
   constructor(private activatedRoute: ActivatedRoute, private tokenStorage: TokenStorageService, private translate: TranslateService) {
     // this language will be used as a fallback when a translation isn't found in the current language
@@ -45,9 +45,9 @@ export class AppComponent implements OnInit {
     .filter(params => params.language)
     .subscribe(params => {
       if(_.includes(LANGUAGE, params.language)) {
-        this.lang = params.language;
-        this.tokenStorage.saveLanguage(this.lang);
-        this.translate.use(this.lang)
+        this.language = params.language;
+        this.tokenStorage.saveLanguage(this.language);
+        this.translate.use(this.language)
         this.isRtl = this.direction;
       }
     });
