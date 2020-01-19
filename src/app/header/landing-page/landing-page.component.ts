@@ -42,7 +42,7 @@ export class LandingPageComponent implements OnInit {
   }
 
   private links(): string {
-    return this.storage.isRtl() ? '' : '/fr/';
+    return this.storage.isRtl() ? '' : '/FR/';
   }
 
   switchLanguage(language: string) {
