@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  token: 'YOUR DIALOGFLOW TOKEN'
+  API_URL: 'http://localhost:8091/',
+  BASE_API_URL: 'http://localhost:8091/api/'
 };
