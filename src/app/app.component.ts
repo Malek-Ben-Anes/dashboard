@@ -63,5 +63,5 @@ export const BASE_URL = 'http://localhost:8091/';
 'https://laplumedor.cfapps.io/';
 export const BASE_API_URL = 'http://vps745280.ovh.net:8091';
 */
-export const BASE_URL = environment.API_URL;
+export const BASE_URL = environment.BASE_URL;
 export const BASE_API_URL = environment.BASE_API_URL;
