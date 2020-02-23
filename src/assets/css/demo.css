@@ -28,3 +28,7 @@
 * {
   font-family: "Roboto", "Tajawal", "Helvetica", "Arial", sans-serif
 }
+
+.table-responsive {
+  display: contents;
+}

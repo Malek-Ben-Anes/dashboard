@@ -9,8 +9,9 @@ export class Email {
     id: string;
     createdAt: Date;
     updatedAt: Date;
-    fileUrl: Group;
-    trimester: Trimester;
+    senderName: string;
+    senderEmail: string;
+    message: string;
 
     constructor() {
     }

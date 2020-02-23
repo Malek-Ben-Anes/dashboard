@@ -190,6 +190,10 @@
     "All.text.notifications.modal.send.success.title": "تم اعلام المستعملين",
     "All.text.notifications.modal.send.fail.title": "فشل إشعار المستخدم!",
 
+    "All.text.emails.senderName": "مرسل",
+    "All.text.emails.senderEmail": "البريد الإلكتروني",
+    "All.text.emails.emailBody": "المحتوى",
+
     "All.text.group.Name": "اسم القسم",
     "All.text.group.Level": "المستوى التعليمي",
     "All.text.group.Effectif": "عدد التلاميذ",

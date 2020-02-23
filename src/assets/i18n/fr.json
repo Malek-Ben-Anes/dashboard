@@ -190,6 +190,10 @@
     "All.text.notifications.modal.send.success.title": "Les utilisaterus ont ete notifies",
     "All.text.notifications.modal.send.fail.title": "la notification des utilisaterus a echoue!",
 
+    "All.text.emails.senderName": "Expéditeur",
+    "All.text.emails.senderEmail": "E-mail",
+    "All.text.emails.emailBody": "Contenu",
+
     "All.text.group.Name": "Nom du groupe",
     "All.text.group.Level": "Niveau",
     "All.text.group.Effectif": "Effectif",
