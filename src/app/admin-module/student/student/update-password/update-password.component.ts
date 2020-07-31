@@ -46,7 +46,7 @@ export class UpdatePasswordComponent implements OnInit {
           [
             Validators.required,
             Validators.minLength(6),
-            Validators.maxLength(40)
+            Validators.maxLength(50)
           ]
         ],
         passwordConfirm: [
@@ -54,7 +54,7 @@ export class UpdatePasswordComponent implements OnInit {
           [
             Validators.required,
             Validators.minLength(6),
-            Validators.maxLength(40)
+            Validators.maxLength(50)
           ]
         ]
       },
@@ -74,7 +74,7 @@ export class UpdatePasswordComponent implements OnInit {
     const updatePassword = true;
     this.student.password = this.passwordForm.get('password').value;
     this.studentService.update(this.student, updatePassword)
-      .then((student) => {
+      .subscribe((student) => {
         this.student = student;
         this.modifiedStudent.emit(this.student);
         const data: DialogData = {
@@ -82,8 +82,7 @@ export class UpdatePasswordComponent implements OnInit {
           dialogMessage: ''
         };
         this.dialogService.openDialog(data);
-      })
-      .catch(err => {
+      }, err => {
         const data: DialogData = {
           dialogTitle: this.translate.instant('All.Password.Message.update.failed'),
           dialogMessage: ''

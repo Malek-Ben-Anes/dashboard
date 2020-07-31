@@ -62,9 +62,9 @@ export class SubjectComponent implements OnInit {
 
   private getSubjects(): void {
     this.subjectService.findAll()
-      .then(subjects => {
+      .subscribe(subjects => {
       this.subjects = subjects;
       this.findSubjectsByLevel(this.selected.value);
-      }).catch(err => console.log(err));
+      }, err => console.log(err));
   }
 }

@@ -151,11 +151,10 @@ export class UsersNotificationFormComponent implements OnInit {
 
   private findStudentsByGroupId(groupId: string) {
     this.studentService.findStudentsByGroupId(groupId)
-      .then(students => {
+      .subscribe(students => {
       this.StudentsOfSelectedGroup = students;
       this.selectedOptions = students;
-      })
-      .catch(err => console.log(err));
+      },err => console.log(err));
   }
 
   private extractFieldData(property: string): any {

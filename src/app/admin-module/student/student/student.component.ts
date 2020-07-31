@@ -72,10 +72,10 @@ export class StudentComponent implements OnInit, OnChanges {
   }
 
   private update(studentRequest: Student): void {
-    this.studentService.update(studentRequest).then((StudentData) => {
+    this.studentService.update(studentRequest).subscribe((StudentData) => {
       this.student = StudentData;
-      this.tabs = this.updateTabs();
-    }).catch((err) => console.log(err));
+      this.tabs = this.updateTabs();},
+    (err) => console.log(err));
   }
 
   private create (studentRequest: Student): void {

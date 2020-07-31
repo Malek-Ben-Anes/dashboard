@@ -44,12 +44,11 @@ export class TeacherSubjectListComponent implements OnInit, OnChanges {
   private constructView(selectedGroup: Group) {
     this.initForm();
     this.subjectService.findAll()
-                       .then(subjects => {
+                       .subscribe(subjects => {
                          this.subjects = subjects;
                          this.subjectsPerLevel = this.subjectService.filter( this.subjects, selectedGroup.level);
                          this.updateForm();
-                        })
-      .catch(err => console.log('check error: ', err))
+                        }, err => console.log('check error: ', err));
   }
 
   submit() {

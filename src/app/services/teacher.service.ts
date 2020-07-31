@@ -18,9 +18,8 @@ export class TeacherService {
 
   constructor(private fileService: FileUploadService, private http: HttpClient) { }
 
-  findAll(): Promise<Teacher[]> {
-    return new Promise((resolve, reject) => this.http.get<Teacher[]>(TEACHER_URL)
-      .subscribe(group => resolve(group), err => reject(err)));
+  findAll(): Observable<Teacher[]> {
+    return this.http.get<Teacher[]>(TEACHER_URL);
   }
 
   findTeacherById(id: string): Observable<Teacher> {

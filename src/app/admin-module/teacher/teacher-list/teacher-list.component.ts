@@ -25,8 +25,8 @@ export class TeacherListComponent implements OnInit {
   }
   
   findAllTeachers(): void {
-    this.teachersService.findAll().then(teachers => this.teachers = teachers)
-    .catch(error => this.errorMessage = `${error.status}: ${error.error.message}`);
+    this.teachersService.findAll().subscribe(teachers => this.teachers = teachers,
+    error => this.errorMessage = `${error.status}: ${error.error.message}`);
     // .catch(error => this.errorMessage = `${error.status}: ${JSON.parse(error.error).message}`);
   }
 

@@ -95,9 +95,8 @@ export class StudentAssignComponent implements OnInit {
 
   private findAllStudents() {
     this.studentService.findAll()
-        .then(students => this.allStudents = students)
-        .then(students => this.initTodoArray())
-        .catch(err => console.log(err));
+        .subscribe(students => { this.allStudents = students;  this.initTodoArray();},
+        err => console.log(err));
   }
 
   /**

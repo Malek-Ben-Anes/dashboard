@@ -30,15 +30,13 @@ export class StudentService {
     return this.http.get<Student[]>(STUDENT_URL);
   }
 
-  findAll(): Promise<Student[]> {
-    return new Promise((resolve, reject) => this.http.get<Student[]>(STUDENT_URL)
-    .subscribe(students => resolve(students), err => reject(err)));
+  findAll(): Observable<Student[]> {
+    return this.http.get<Student[]>(STUDENT_URL);
   }
 
-  findStudentsByGroupId(groupId: string): Promise<Student[]> {
+  findStudentsByGroupId(groupId: string): Observable<Student[]> {
     const URL = `${GROUP_URL}${groupId}/students/`;
-    return new Promise((resolve, reject) => this.http.get<Student[]>(URL)
-    .subscribe(students => resolve(students), err => reject(err)));
+    return this.http.get<Student[]>(URL);
   }
 
   getStudentById(id: string): Observable<Student>  {
@@ -57,20 +55,19 @@ export class StudentService {
     return _.find(this.students, { id: studentId });
   }
 
-  update(student: Student, updatePassword?: boolean): Promise<Student> {
+  update(student: Student, updatePassword?: boolean): Observable<Student> {
     const Url = `${STUDENT_URL}/${student.id}`
-    return new Promise((resolve, reject) => {
+    
       if (updatePassword != null) {
         const httpOptions = {
           params: new HttpParams().set('updatePassword', String(updatePassword))
         };
-        this.http.put<Student>(Url, student, httpOptions)
-        .subscribe(studentUpdated => resolve(studentUpdated), err => reject(err));
+        return this.http.put<Student>(Url, student, httpOptions);
+        
       } else {
-        this.http.put<Student>(Url, student)
-            .subscribe(studentUpdated => resolve(studentUpdated), err => reject(err));
+        return this.http.put<Student>(Url, student);
+        
       }
-    });
   }
 
   uploadFile(file: File) {

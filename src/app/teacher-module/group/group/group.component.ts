@@ -61,8 +61,7 @@ export class GroupComponent implements OnInit {
 
   private findStudentsByGroupId(groupId: string) {
     this.studentService.findStudentsByGroupId(groupId)
-        .then(students => this.group.students = students)
-        .catch(err => console.log(err));
+        .subscribe(students => this.group.students = students,  err => console.log(err));
   }
 
   private updateTabs() {

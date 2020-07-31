@@ -51,8 +51,8 @@ export class UsersNotificationFormComponent implements OnInit {
     this.groupService.findAll().then(groups => this.allGroups = groups)
                      .catch(err => console.log(err));
     this.teacherService.findAll()
-                       .then(teachers => { this.allTeachers = teachers; this.onToggleButton(Library.TEACHER)})
-                       .catch(err => console.log(err));
+                       .subscribe(teachers => { this.allTeachers = teachers; this.onToggleButton(Library.TEACHER)},
+                       err => console.log(err));
   }
 
   private async initializeNotificationForm() {
@@ -138,11 +138,10 @@ export class UsersNotificationFormComponent implements OnInit {
 
   private findStudentsByGroupId(groupId: string) {
     this.studentService.findStudentsByGroupId(groupId)
-      .then(students => {
+      .subscribe(students => {
       this.StudentsOfSelectedGroup = students;
       this.selectedOptions = students;
-      })
-      .catch(err => console.log(err));
+      }, err => console.log(err));
   }
 
   private prepareQuery(notifiedIds: string[]): NotificationRequest {

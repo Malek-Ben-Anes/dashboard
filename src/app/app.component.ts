@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { TokenStorageService } from './services/auth/token-storage.service';
+import { environment } from 'environments/environment';
 
 const AR = 'ar';
 const EN = 'en';
@@ -46,5 +47,5 @@ export const BASE_URL = 'http://localhost:8091/';
 'https://laplumedor.cfapps.io/';
 export const BASE_API_URL = 'http://vps745280.ovh.net:8091';
 */
-export const BASE_URL = 'http://vps745280.ovh.net:8091/';
+export const BASE_URL = environment.apiEndpoint;
 export const BASE_API_URL = `${BASE_URL}api/`;
