@@ -6,6 +6,7 @@ import { Group } from 'app/models/Group';
 import { BASE_API_URL } from 'app/app.component';
 import { Student } from 'app/models/Student';
 import { FileUploadService } from './file-upload.service';
+import { map } from 'rxjs/operators';
 
 const GROUP_URL: string = BASE_API_URL + 'groups';
 
@@ -16,7 +17,7 @@ export class GroupService {
 
   constructor(private http: HttpClient, private fileService: FileUploadService) {}
 
-  findAll(teacherId?: string): Promise<Group[]> {
+  findAll(teacherId?: string): Observable<Group[]> {
     let httpCall: Observable<Group[]>;
     if (teacherId !== undefined) {
       const params = new HttpParams().set('teacherId', teacherId);
@@ -24,7 +25,7 @@ export class GroupService {
     } else {
       httpCall =  this.http.get<Group[]>(GROUP_URL);
     }
-    return new Promise((resolve, reject) => httpCall.subscribe( group =>  resolve(group), err => reject(err)));
+    return httpCall.pipe(map(students => students.sort((s1, s2) => s1.level.localeCompare(s2.level ))));
   }
 
   find(groupId: string): Promise<Group> {

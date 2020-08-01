@@ -47,9 +47,9 @@ export class StudentProfileComponent implements OnInit {
   }
 
   private getGroup() {
-    this.groupService.findAll().then(groups => {this.groups = groups;
+    this.groupService.findAll().subscribe(groups => {this.groups = groups;
       this.updateForm(this.student);
-    }).then(err => console.log(err));
+    }, err => console.log(err));
   }
 
   private initForm() {

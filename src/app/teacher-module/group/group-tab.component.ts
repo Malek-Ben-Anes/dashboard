@@ -38,7 +38,7 @@ export class GroupTabComponent implements OnInit {
       this.user =  this.tokenStorage.getLoggedUser() as Teacher;
     }
     this.groupService.findAll(this.user.id)
-        .then(groups => this.groups = groups)
-        .catch(err => console.log(err));
+        .subscribe(groups => this.groups = groups
+        , err => console.log(err));
   }
 }

@@ -48,9 +48,8 @@ export class UsersNotificationFormComponent implements OnInit {
   ngOnInit() {
     this.initializeNotificationForm();
     this.groupService.findAll(this.loggedUser.id)
-                     .then(groups => this.allGroups = groups)
-                     .then(groups => this.onToggleButton(Library.GROUP))
-                     .catch(err => console.log(err));
+                     .subscribe(groups => { this.allGroups = groups; this.onToggleButton(Library.GROUP)}
+                     , err => console.log(err) );
   }
 
   private initializeNotificationForm() {
