@@ -13,23 +13,25 @@
       <br>
 
       <form name="form" (ngSubmit)="f.form.valid && onSignIn()" #f="ngForm" novalidate>
-        <div class="form-group">
-          <label for="username">{{'signIn.credentials.email' | translate}}</label>
-          <input type="text" class="form-control" name="email" [(ngModel)]="form.username" #username="ngModel" required />
-          <div *ngIf="f.submitted && username.invalid">
-            <div *ngIf="username.errors.required">{{'signIn.credentials.email.required' | translate}}</div>
-          </div>
-        </div>
 
-        <div class="form-group">
-          <label for="password">{{'signIn.credentials.password' | translate}}</label>
-          <input type="password" class="form-control" name="password" [(ngModel)]="form.password" #password="ngModel" required minlength="6"/>
-            
-          <div *ngIf="f.submitted && password.invalid">
-            <div *ngIf="password.errors.required">{{'signIn.credentials.password.required' | translate}}</div>
-            <div *ngIf="password.errors.minlength">{{'signIn.credentials.password.constraint.length' | translate}}</div>
-          </div>
-        </div>
+        <mat-form-field class="example-full-width">
+            <input matInput [placeholder]="'signIn.credentials.email' | translate" name="username" [(ngModel)]="form.username"
+             #username="ngModel" type="email" required/>
+            <mat-error *ngIf="f.submitted && username.errors && username.errors.required">
+                {{'signIn.credentials.email.required' | translate}}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input matInput [placeholder]="'signIn.credentials.password' | translate" name="password" [(ngModel)]="form.password"
+             #password="ngModel" type="password" required minlength="6"/>
+            <mat-error *ngIf="password.errors && password.errors.required">
+                {{'signIn.credentials.password.required' | translate}}
+            </mat-error>
+            <mat-error *ngIf="password.errors && password.errors.minlength">
+                {{'signIn.credentials.password.constraint.length' | translate}}
+            </mat-error>
+        </mat-form-field>
 
         <div class="form-group center">
           <div *ngIf="isLogging; else isNotLogging">
@@ -38,11 +40,11 @@
             </button>
           </div>
 
-          <ng-template #isNotLogging>
+          <div *ngIf="!isLogging">
             <button mat-raised-button class="btn btn-primary" [disabled]="username && username.invalid ">
               <span class="glyphicon glyphicon-cloud-upload">{{'signIn.credentials.login' | translate}}</span>
             </button>
-          </ng-template>
+          </div>
 
         </div>
 

@@ -41,7 +41,7 @@ export class AuthInterceptor implements HttpInterceptor {
         request = request.clone({ headers: request.headers.set(ACCEPT_KEY, '*/*') });
         return next.handle(request).pipe(
             tap(),
-            retry(1),
+            retry(2),
             catchError((err: any) => {
                 if (err instanceof HttpErrorResponse) {
                     if (err.status === 401) {

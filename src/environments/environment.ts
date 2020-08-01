@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
   token: 'YOUR DIALOGFLOW TOKEN',
-  apiEndpoint: 'http://localhost:8091/'
+  apiEndpoint: 'http://vps745280.ovh.net:8091/'
 };
