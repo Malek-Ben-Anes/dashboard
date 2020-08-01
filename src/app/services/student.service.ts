@@ -8,6 +8,7 @@ import { BASE_API_URL } from "../app.component";
 import { Level } from "app/models/Level";
 import { Group } from "app/models/Group";
 import { StudentFilter } from "app/admin-module/student/student-list/student-filter/student-filter.component";
+import { map } from "rxjs-compat/operator/map";
 
 const STUDENT_URL: string = BASE_API_URL + "students";
 const GROUP_URL: string = BASE_API_URL + "groups/";

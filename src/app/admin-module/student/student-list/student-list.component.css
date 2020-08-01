@@ -3,8 +3,8 @@
 }
 
 .profile-image {
-    width: 79px;
-    height: 79px;
+    width: 69px;
+    height: 69px;
     border-radius: 50%;
 }
 
@@ -22,4 +22,4 @@ th {
     margin-left: auto;
     margin-right: auto;
     width: 50%;
-  }
+}
