@@ -6,6 +6,7 @@ import { TokenStorageService } from 'app/services/auth/token-storage.service';
 import { AuthLoginInfo } from 'app/services/auth/login-info';
 import { JwtResponse } from 'app/services/auth/jwt-response';
 import { TranslateService } from '@ngx-translate/core';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -18,46 +19,52 @@ export class LoginComponent {
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
-  private loginInfo: AuthLoginInfo;
-
   isLogging: boolean = false;
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private router: Router) {
+  private loginInfo: AuthLoginInfo;
 
+  constructor(private authService: AuthService, private translate: TranslateService, private tokenStorage: TokenStorageService, private router: Router) {
     this.isLoggedIn = this.tokenStorage.getIsLoggedUser();
     if (this.isLoggedIn) {
-      this.roles = this.tokenStorage.getAuthorities();
-      if (this.roles.includes('ROLE_ADMIN')) {
-        this.router.navigate(['app', 'students']);
-      } else if (this.roles.includes('ROLE_TEACHER')) {
-        this.router.navigate(['app', 'show-teacher-profile']);
-      } else {
-        this.router.navigate(['app', 'show-profile']);
-      }
+      this.navigateToLoggedUser();
     } else {
-      this.router.navigate(['app', 'auth', 'login']);
+      this.navigateToUnLoggedUser();
+    }  
+  }
+
+  private navigateToLoggedUser() {
+    this.roles = this.tokenStorage.getAuthorities();
+    if (this.roles.includes('ROLE_ADMIN')) {
+      this.router.navigate(['app', 'students']);
+    } else if (this.roles.includes('ROLE_TEACHER')) {
+      this.router.navigate(['app', 'show-teacher-profile']);
+    } else {
+      this.router.navigate(['app', 'show-profile']);
     }
   }
 
-  onSubmit() {
-    this.isLogging = true;
-    this.loginInfo = new AuthLoginInfo(
-      this.form.username,
-      this.form.password);
+  private navigateToUnLoggedUser() {
+    this.router.navigate(['app', 'auth', 'login']);
+  }
 
-    this.authService.attemptAuth(this.loginInfo).then(
-      (jwtResponseInfo: JwtResponse) => {
-        this.isLogging = false;
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
-        this.roles = this.tokenStorage.getAuthorities();
-        this.reloadPage();
-      })
-      .catch(err => {
-        this.errorMessage = err.error.message;
-        this.isLoginFailed = true;
-        this.isLogging = false;
-      });
+  onSignIn() {
+    this.isLogging = true;
+    this.loginInfo = new AuthLoginInfo(this.form.username, this.form.password);
+
+    this.authService.attemptAuth(this.loginInfo).subscribe(
+      data => {
+          this.isLogging = false;
+          this.isLoggedIn = true;
+          this.reloadPage();
+      }, err => {
+          this.displayErrorMessage(err);
+      }, () => { if(!this.isLoggedIn) this.displayErrorMessage();});
+  }
+
+  private displayErrorMessage(err?: HttpErrorResponse): void {
+    this.isLoginFailed = true;
+    this.isLogging = false;
+    this.errorMessage = err ? err.error.message : this.translate.instant("signIn.credentials.failure");
   }
 
   logout() {
@@ -71,7 +78,7 @@ export class LoginComponent {
     this.authService.saveIsLoggedUser(false);
   }
 
-  reloadPage() {
+  private reloadPage() {
     window.location.reload();
   }
 }

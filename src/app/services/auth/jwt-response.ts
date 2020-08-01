@@ -9,7 +9,7 @@ export class JwtResponse {
     authorities: string[];
 }
 
-export interface jwtToken {
+export interface JwtToken {
   accessToken: JwtResponse;
   tokenType: string;
 }

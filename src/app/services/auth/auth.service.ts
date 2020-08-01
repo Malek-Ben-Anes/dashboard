@@ -3,12 +3,13 @@ import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import * as jwt_decode from "jwt-decode";
 
-import { JwtResponse, jwtToken } from './jwt-response';
+import { JwtResponse, JwtToken } from './jwt-response';
 import { AuthLoginInfo } from './login-info';
 import { SignUpInfo } from './signup-info';
 import { BASE_API_URL } from 'app/app.component';
 import { User } from 'app/models/User';
 import { TokenStorageService } from './token-storage.service';
+import { map } from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -30,17 +31,13 @@ export class AuthService {
 
   constructor(private http: HttpClient, private tokenStorage: TokenStorageService) { }
 
-  attemptAuth(credentials: AuthLoginInfo): Promise<JwtResponse> {
-    return new Promise((resolve, reject) => {
-      // This query result is a JWT encoded response.
-      this.http.post<jwtToken>(LOGIN_URL, credentials, httpOptions)
-        .subscribe(jwtToken => {
-          const accessToken = jwtToken.accessToken;
-          this.saveLoggedUserIntoStorage(accessToken);
-
-          resolve(this.jwtResponse);
-        }, err => reject(err));
-    });
+  attemptAuth(credentials: AuthLoginInfo): Observable<JwtResponse> {
+    return this.http.post<JwtToken>(LOGIN_URL, credentials, httpOptions)
+            .pipe(map((jwtToken: JwtToken) =>
+            {
+              this.saveLoggedUserIntoStorage(jwtToken.accessToken);
+              return jwtToken.accessToken;
+            }));
   }
 
   signUp(info: SignUpInfo): Observable<string> {
