@@ -3,11 +3,8 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Level } from 'app/models/Level';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { GroupService } from 'app/services/group.service';
-import { group } from '@angular/animations';
 import { Group } from 'app/models/Group';
-import { StudentService } from 'app/services/student.service';
 import { Student } from 'app/models/Student';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-student-filter',
@@ -17,24 +14,26 @@ import { TranslateService } from '@ngx-translate/core';
 export class StudentFilterComponent implements OnInit {
 
   @Input() students: Student;
-  @Output() studentsFound = new EventEmitter<Student[] | undefined>();
+  @Output() studentsFilter = new EventEmitter<StudentFilter>();
 
   studentFilterForm: FormGroup;
   levels = Object.keys(Level);
   groups: Group[] = [];
 
-  searchForStudent: SearchStudent = {
+  studentFilter: StudentFilter = {
     firstname: undefined,
     lastname: undefined,
     level: undefined,
-    group: undefined
+    groupId: undefined
   };
 
-  constructor(private formBuilder: FormBuilder, private groupService: GroupService, private translate: TranslateService) { }
+  constructor(private formBuilder: FormBuilder, private groupService: GroupService) { }
 
   ngOnInit() {
     this.initForm();
-    this.groupService.findAll().then(groups => this.groups = groups).catch(err => console.log(err));
+    this.groupService.findAll()
+        .then(groups => this.groups = groups)
+        .catch(err => console.log(err));
   }
 
   initForm() {
@@ -46,39 +45,34 @@ export class StudentFilterComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    this.searchForStudent.firstname = this.studentFilterForm.get('firstName').value;
-    this.searchForStudent.lastname = this.studentFilterForm.get('lastName').value;
-    this.searchForStudent.level = this.studentFilterForm.get('level').value;
-    this.searchForStudent.group = this.studentFilterForm.get('group').value;
+  onSearch() {
+    this.extractFormValue();
 
-    const searchResult = _(this.searchForStudent).omitBy(_.isUndefined).omitBy(_.isNull).omitBy(_.isEmpty).value()
-    const emptyFields = _.isEmpty(searchResult);
+    const compactedFilter = _(this.studentFilter).omitBy(_.isNil).omitBy(_.isEmpty).value()
+    const emptyFields = _.isEmpty(compactedFilter);
 
     if (!emptyFields) {
-      const studentFound = this.SearchForStudent(searchResult);
-      this.studentsFound.emit(studentFound);
+      this.studentsFilter.emit(compactedFilter);
     } else {
-      this.studentsFound.emit(undefined);
+      // Display complete list, when no filter is selected
+      this.studentsFilter.emit(undefined);
     }
   }
 
-  private SearchForStudent(studentSearched: SearchStudent): Student[] {
-    console.log(studentSearched, this.students);
-    const studentsFound: Student[] = _.filter(this.students, studentSearched);
-    return studentsFound;
+  private extractFormValue()  {
+    this.studentFilter = {
+      firstname: _.trim(this.studentFilterForm.get('firstName').value),
+      lastname: _.trim(this.studentFilterForm.get('lastName').value),
+      level: this.studentFilterForm.get('level').value,
+      groupId: this.studentFilterForm.get('group').value
+    }
   }
-  /*
-    selectLevel(levelSelected) {
-      if (levelSelected !== undefined) {
-        this.groups = this.allGroups.filter(group => levelSelected == group.level);
-      }
-    }*/
+
 }
 
-interface SearchStudent {
+export interface StudentFilter {
   firstname: string,
   lastname: string,
   level: Level,
-  group: Group
+  groupId: string
 }

@@ -2,18 +2,21 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-body">
-        <form [formGroup]="studentFilterForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="studentFilterForm" (ngSubmit)="onSearch()">
           <div class="row">
+
             <div class="col-md-3">
                 <mat-form-field class="example-full-width">
                     <input matInput [placeholder]="'All.text.label.FirstName' | translate" formControlName="firstName">
                 </mat-form-field>
             </div>
+
             <div class="col-md-3">
                 <mat-form-field class="example-full-width">
                     <input matInput [placeholder]="'All.text.label.LastName' | translate" formControlName="lastName">
                 </mat-form-field>
             </div>
+
             <div class="col-md-2">
               <mat-form-field class="example-full-width">
                 <mat-select matInput [placeholder]="'All.text.label.LevelName' | translate" formControlName="level">
@@ -26,24 +29,27 @@
                 </mat-select>
               </mat-form-field>
             </div>
+
             <div class="col-md-2">
               <mat-form-field class="example-full-width">
                 <mat-select matInput [placeholder]="'All.text.label.GroupName' | translate" formControlName="group">
                     <mat-option [value]="null">
                       {{'All.text.undefined' | translate}}
                     </mat-option>
-                  <mat-option *ngFor="let grp of groups" [value]="grp">
+                  <mat-option *ngFor="let grp of groups" [value]="grp.id">
                     {{ grp.name }}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
+
             <div class="col-md-2">
               <button mat-raised-button type="submit" class="btn btn-warning pull-right">
                 {{'All.text.search' | translate}}
               </button>
               <div class="clearfix"></div>
             </div>
+
           </div>
         </form>
       </div>

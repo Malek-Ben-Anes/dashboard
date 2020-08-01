@@ -7,6 +7,7 @@ import { Student } from "app/models/Student";
 import { BASE_API_URL } from "../app.component";
 import { Level } from "app/models/Level";
 import { Group } from "app/models/Group";
+import { StudentFilter } from "app/admin-module/student/student-list/student-filter/student-filter.component";
 
 const STUDENT_URL: string = BASE_API_URL + "students";
 const GROUP_URL: string = BASE_API_URL + "groups/";
@@ -69,24 +70,25 @@ export class StudentService {
         
       }
   }
-
-  uploadFile(file: File) {
-    return new Promise((resolve, reject) => {
-      const almostUniqueFileName = Date.now().toString();
-      /*const upload = firebase.storage().ref()
-          .child('images/' + almostUniqueFileName + file.name).put(file);
-        upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
-          () => {
-            console.log('Chargement…');
-          },
-          (error) => {
-            console.log('Erreur de chargement ! : ' + error);
-            reject();
-          },
-          () => {
-            resolve(upload.snapshot.downloadURL);
-          }
-        );*/
-    });
+  
+  public filter(students: Student[], filter: StudentFilter): Student[] {
+    return _.filter(students, student => this.predicate(student, filter));
   }
+
+  private predicate(student: Student, filter: StudentFilter) {
+    if (filter.groupId && student.group && (student.group.id != filter.groupId)) {
+      return false;
+    }
+    if (filter.firstname && (student.firstname != filter.firstname)) {
+      return false;
+    }
+    if (filter.lastname && (student.lastname != filter.lastname)) {
+      return false;
+    }
+    if (filter.level  && (student.level != filter.level)) {
+      return false;
+    }
+    return true;
+  }
+
 }

@@ -8,6 +8,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { BASE_URL } from 'app/app.component';
 import { Routers } from 'app/admin-module/routes/router-link';
 import { TranslateService } from '@ngx-translate/core';
+import { StudentFilter } from './student-filter/student-filter.component';
 
 @Component({
   selector: 'app-student-list',
@@ -41,11 +42,11 @@ export class StudentListComponent implements OnInit {
       });
   }
 
-  refreshStudents(students: Student[] | undefined) {
-    if (students === undefined) {
-      this.studentsTmp = this.students;
+  refreshStudents(filter: StudentFilter) {
+    if (filter != null) {
+      this.studentsTmp = this.studentsService.filter(this.students, filter);
     } else {
-      this.studentsTmp = students;
+      this.studentsTmp = this.students;
     }
   }
 

@@ -11,7 +11,7 @@
                             Import File</button> -->
                     </div>
                 </div>
-                <app-student-filter [students]="students" (studentsFound)="refreshStudents($event)">
+                <app-student-filter [students]="students" (studentsFilter)="refreshStudents($event)">
                 </app-student-filter>
                 <div class="card">
                     <div class="card-body">
