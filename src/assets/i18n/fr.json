@@ -236,6 +236,6 @@
     "All.text.uploading": "Uploading...",
     "All.text.edit": "Editer",
     "All.text.search": "Recherche",
-    "All.text.undefined": "Indifférent",
+    "All.text.undefined": "Par défaut",
     "All.text.sessionExpired": "Votre session est expiré!"
 }

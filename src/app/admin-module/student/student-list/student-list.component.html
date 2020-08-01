@@ -2,70 +2,68 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
+
                 <div class="row">
                     <div class="col-md-12">
-                        <button mat-raised-button type="button" class="btn btn-warning pull-right"
-                            [routerLink]="STUDENT_PROFILE">{{'All.text.create' | translate}}</button>
+                        <button mat-raised-button type="button" class="btn btn-warning pull-right" [routerLink]="STUDENT_PROFILE">{{'All.text.create'
+                            | translate}}</button>
                         <!-- <button mat-raised-button type="button" class="btn btn-warning pull-right">
                             <span class="material-icons">arrow_upward</span>
                             Import File</button> -->
                     </div>
                 </div>
+
                 <app-student-filter [students]="students" (studentsFilter)="refreshStudents($event)">
                 </app-student-filter>
-                <div class="card">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead class=" text-primary">
-                                    <th>
-                                        {{'All.text.label.Photo' | translate}}
-                                    </th>
-                                    <th>
-                                        {{'All.text.label.FirstName' | translate}}
-                                    </th>
-                                    <th>
-                                        {{'All.text.label.LastName' | translate}}
-                                    </th>
-                                    <th>
-                                        {{'All.text.label.Email' | translate}}
-                                    </th>
-                                    <th>
-                                        {{'All.text.label.GroupName' | translate}}
-                                    </th>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let student of studentsTmp">
-                                        <td>
-                                            <a [routerLink]="STUDENT_PROFILE + student.id">
-                                                <img class="profile-image" [src]="BASE_URL + student.photo"
-                                                 default="assets/images/profile-logo.png"
-                                                 [alt]="'All.text.timeTable.smileyFace' | translate"/>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            {{ student.firstname }}
-                                        </td>
-                                        <td>
-                                            {{ student.lastname }}
-                                        </td>
-                                        <td class="text-primary">
-                                            {{ student.email }}
-                                        </td>
-                                        <td>
-                                            <div *ngIf="student.group; else groupNotAssigned">
-                                                {{ student.group.name }}
-                                            </div>
-                                            <ng-template #groupNotAssigned>
-                                                <strong class="not-assigned">
-                                                    {{'All.text.label.NotAssigned' | translate}}
-                                                </strong>
-                                            </ng-template>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+
+                <div class="mat-elevation-z8 table-responsive">
+
+                    <mat-spinner *ngIf="isLoading" [diameter]="180" class="center"></mat-spinner>
+                    <table mat-table *ngIf="!isLoading" [dataSource]="dataSource" class="table">
+
+                        <ng-container matColumnDef="photo">
+                            <th class="text-primary" mat-header-cell *matHeaderCellDef> {{'All.text.label.Photo' | translate}} </th>
+                            <td mat-cell *matCellDef="let student">  
+                                <a [routerLink]="STUDENT_PROFILE + student.id">
+                                    <img class="profile-image" 
+                                     [src]="BASE_URL + student.photo" 
+                                     default="assets/images/profile-logo.png"
+                                     [alt]="'All.text.timeTable.smileyFace' | translate"/>
+                                </a>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="firstname">
+                            <th mat-header-cell *matHeaderCellDef> {{'All.text.label.FirstName' | translate}} </th>
+                            <td mat-cell *matCellDef="let student"> {{student.firstname}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="lastname">
+                            <th mat-header-cell *matHeaderCellDef> {{'All.text.label.LastName' | translate}} </th>
+                            <td mat-cell *matCellDef="let student"> {{student.lastname}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="email">
+                            <th mat-header-cell *matHeaderCellDef> {{'All.text.label.Email' | translate}} </th>
+                            <td mat-cell *matCellDef="let student"> {{student.email}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="groupName">
+                                <th mat-header-cell *matHeaderCellDef> {{'All.text.label.GroupName' | translate}} </th>
+                                <td mat-cell *matCellDef="let student">
+                                    <div *ngIf="student.group">  {{student.group.name}} </div>
+                                    <div *ngIf="!student.group"> {{'All.text.label.NotAssigned' | translate}} </div>
+                                </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+
+                    <mat-paginator [pageSizeOptions]="[15, 10, 20, 25, 30]" showFirstLastButtons></mat-paginator>
                 </div>
+                <br/><br/>
             </div>
+        </div>
+    </div>
+</div>
