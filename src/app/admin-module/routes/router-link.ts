@@ -1,6 +1,7 @@
 export class Routers {
     public static TEACHERS = 'teachers';
     public static TEACHER_PROFILE = 'teacher-profile';
+    public static APP_TEACHER_PROFILE = '/app/teacher-profile/';
     public static TEACHER_PROFILE_ID = 'teacher-profile/:id';
     public static STUDENTS = 'students';
     public static STUDENT_PROFILE = 'student-profile';

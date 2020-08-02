@@ -21,7 +21,7 @@ export class StudentListComponent implements OnInit {
   BASE_URL = BASE_URL;
   STUDENT_PROFILE: string = Routers.APP_STUDENT_PROFILE;
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   
   // This variable is needed retrieving data from server
   students: Student[] = [];
@@ -34,7 +34,7 @@ export class StudentListComponent implements OnInit {
 
   isLoading = false;
 
-  constructor(private studentsService: StudentService, private router: Router, private translate: TranslateService) { }
+  constructor(private studentsService: StudentService) { }
 
   ngOnInit() {
     this.isLoading = true;

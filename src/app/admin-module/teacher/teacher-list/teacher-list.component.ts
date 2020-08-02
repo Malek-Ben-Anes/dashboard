@@ -4,8 +4,8 @@ import { TeacherService } from 'app/services/teacher.service';
 import { Teacher } from 'app/models/Teacher';
 import { BASE_URL } from 'app/app.component';
 import { Gender } from 'app/models/User';
-import { TranslateService } from '@ngx-translate/core';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { Routers } from 'app/admin-module/routes/router-link';
 
 @Component({
   selector: 'app-teacher-list',
@@ -15,7 +15,8 @@ import { MatTableDataSource, MatPaginator } from '@angular/material';
 export class TeacherListComponent implements OnInit {
 
   BASE_URL: string = BASE_URL;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  APP_TEACHER_PROFILE: string = Routers.APP_TEACHER_PROFILE;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   errorMessage: string;
 
   teachers: Teacher[] = [];
@@ -25,7 +26,7 @@ export class TeacherListComponent implements OnInit {
 
   isLoading = false;
 
-  constructor(private teachersService: TeacherService, private translate: TranslateService) { }
+  constructor(private teachersService: TeacherService) { }
 
   ngOnInit() {
     this.findAllTeachers();

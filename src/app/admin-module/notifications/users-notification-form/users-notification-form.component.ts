@@ -50,7 +50,7 @@ export class UsersNotificationFormComponent implements OnInit {
     this.initializeNotificationForm();
     this.groupService.findAll().subscribe(groups => this.allGroups = groups, err => console.log(err));
     this.teacherService.findAll()
-                       .subscribe(teachers => { this.allTeachers = teachers; this.onToggleButton(Library.TEACHER)},
+                       .subscribe(teachers => { this.allTeachers = teachers; this.selectedOptions = teachers; this.onToggleButton(Library.TEACHER)},
                        err => console.log(err));
   }
 
