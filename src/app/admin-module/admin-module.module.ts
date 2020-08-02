@@ -31,7 +31,6 @@ import { TeacherTimetableComponent } from './teacher/teacher/teacher-timetable/t
 import { TeacherManageGroupsComponent } from './teacher/teacher/teacher-manage-groups/teacher-manage-groups.component';
 import { TeacherGroupListComponent } from './teacher/teacher/teacher-manage-groups/teacher-group-list/teacher-group-list.component';
 import { TeacherSubjectListComponent } from './teacher/teacher/teacher-manage-groups/teacher-subject-list/teacher-subject-list.component';
-import { GroupDetailStudentListComponent } from './group/group/group-detail/group-detail-student-list/group-detail-student-list.component';
 import { NotifcationListComponent } from './notifications/notifcation-list/notifcation-list.component';
 import { UsersNotificationFormComponent } from './notifications/users-notification-form/users-notification-form.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -72,7 +71,6 @@ import { MarksModuleModule } from 'app/marks-module/marks-module.module';
     TeacherManageGroupsComponent,
     TeacherGroupListComponent,
     TeacherSubjectListComponent,
-    GroupDetailStudentListComponent,
     NotificationsComponent,
     NotifcationListComponent,
     UsersNotificationFormComponent,

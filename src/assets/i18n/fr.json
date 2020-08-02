@@ -5,8 +5,8 @@
     "GLBL.label.LEVEL4": "Quatrième année",
     "GLBL.label.LEVEL5": "Cinquième année",
     "GLBL.label.LEVEL6": "Sixième année",
-    "GLBL.MALE": "Masculin",
-    "GLBL.FEMALE": "Femelle",
+    "GLBL.MALE": "Homme",
+    "GLBL.FEMALE": "Femme",
     
     "label.student": "Eleve",
     "label.teacher": "Enseignant",
@@ -14,7 +14,7 @@
     "label.group": "Classe",
 
     "All.tab.EditProfile": "Modifier profile",
-    "All.tab.Password": "Mot de passe password",
+    "All.tab.Password": "Mot de passe",
     "All.tab.Notifications.Retrieve": "Notifications",
     "All.tab.Notifications.send": "Envoyer notification",
 
