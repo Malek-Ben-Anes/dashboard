@@ -1,12 +1,16 @@
+import * as _ from 'lodash';
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { TokenStorageService } from './services/auth/token-storage.service';
+import { ActivatedRoute } from '@angular/router';
+import 'rxjs/add/operator/filter';
 import { environment } from 'environments/environment';
 
 const AR = 'ar';
 const EN = 'en';
 const FR = 'fr';
-const DEFAULT_LANGUAGE = FR;
+const DEFAULT_LANGUAGE = AR;
+const LANGUAGE = [AR, FR];
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,8 +19,9 @@ const DEFAULT_LANGUAGE = FR;
 export class AppComponent implements OnInit {
 
   isRtl: string = 'ltr';
+  language: string;
 
-  constructor(private tokenStorage: TokenStorageService, private translate: TranslateService) {
+  constructor(private activatedRoute: ActivatedRoute, private tokenStorage: TokenStorageService, private translate: TranslateService) {
     // this language will be used as a fallback when a translation isn't found in the current language
     this.translate.setDefaultLang(EN);
     // the lang to use, if the lang isn't available, it will use the current loader to get them
@@ -36,6 +41,17 @@ export class AppComponent implements OnInit {
       this.tokenStorage.saveLanguage(DEFAULT_LANGUAGE);
       this.isRtl = this.direction;
     }
+
+    this.activatedRoute.queryParams
+    .filter(params => params.language)
+    .subscribe(params => {
+      if(_.includes(LANGUAGE, params.language)) {
+        this.language = params.language;
+        this.tokenStorage.saveLanguage(this.language);
+        this.translate.use(this.language)
+        this.isRtl = this.direction;
+      }
+    });
   }
 
   private get direction(): string {
@@ -48,4 +64,4 @@ export const BASE_URL = 'http://localhost:8091/';
 export const BASE_API_URL = 'http://vps745280.ovh.net:8091';
 */
 export const BASE_URL = environment.apiEndpoint;
-export const BASE_API_URL = `${BASE_URL}api/`;
+export const BASE_API_URL = environment.baseApiEndpoint;

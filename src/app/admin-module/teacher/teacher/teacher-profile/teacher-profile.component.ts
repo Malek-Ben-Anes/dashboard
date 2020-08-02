@@ -5,6 +5,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TeacherService } from 'app/services/teacher.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Level } from 'app/models/Level';
+import { MatDialog } from '@angular/material';
+import { TranslateService } from '@ngx-translate/core';
+import { DialogContentExampleDialogComponent } from 'app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
 
 @Component({
   selector: 'app-teacher-profile',
@@ -24,8 +27,11 @@ export class TeacherProfileComponent implements OnInit {
 
   teacherForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private teachersService: TeacherService,
-    private router: Router, private route: ActivatedRoute) {
+  constructor(private formBuilder: FormBuilder,
+              public dialog: MatDialog,
+              private teachersService: TeacherService,
+              private router: Router,
+              private translate: TranslateService) {
   }
 
   ngOnInit() {
@@ -45,7 +51,7 @@ export class TeacherProfileComponent implements OnInit {
       phone: ['', Validators.required],
       gender: [Gender, Validators.required],
       address: ['', Validators.required],
-      description: [''],
+      description: ['', [Validators.required,  Validators.minLength(3), Validators.maxLength(500)]],
     });
   }
 
@@ -69,6 +75,31 @@ export class TeacherProfileComponent implements OnInit {
   onSubmit() {
     this.extractFormData();
     this.modifiedTeacher.emit(this.teacher);
+  }
+
+  onConfirmationDelete(teacherId: string) {
+    this.teachersService.delete(teacherId).subscribe(teacher =>
+      { console.log("teacher deleted!");
+        this.router.navigate(['app', 'teachers']);
+      });
+  }
+
+  onDelete(teacherId: string): void {
+    const modalDialog: { dialogTitle: string; dialogMessage: string; } =
+    {
+      dialogTitle: this.translate.instant('All.text.delete.title'),
+      dialogMessage: this.translate.instant('All.text.delete.Confirmation')
+    };
+    const dialogRef = this.dialog.open(DialogContentExampleDialogComponent, {
+      width: '450px',
+      height: '200px',
+      data: { dialogTitle: modalDialog.dialogTitle, dialogMessage: modalDialog.dialogMessage }
+    });
+    dialogRef.afterClosed().subscribe(confirmtion => {
+      if (confirmtion) {
+        this.onConfirmationDelete(teacherId);
+      }
+    });
   }
 
   extractFormData() {

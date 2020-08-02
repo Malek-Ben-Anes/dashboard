@@ -60,8 +60,8 @@ export class UsersNotificationFormComponent implements OnInit {
     this.notifForm = this.formBuilder.group({
       notifier: [loggedUserName, Validators.required],
       //notified: [null, Validators.required],
-      title: ['', Validators.required],
-      content: ['', Validators.required],
+      title: ['', [Validators.required,  Validators.minLength(6), Validators.maxLength(255)]],
+      content: ['', [Validators.required,  Validators.minLength(6), Validators.maxLength(500)]],
       type: [null, Validators.required],
     });
   }

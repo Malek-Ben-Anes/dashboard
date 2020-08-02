@@ -16,25 +16,41 @@ export class LandingPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.landingPageNavBar = this.landingPageParameters();
+    this.landingPageNavBar = this.landingPageLinks();
+    this.switchLanguage(this.storage.getLanguage());
+    this.landingPageLinks();
   }
 
-  private landingPageParameters(): Header[] {
+  private landingPageLinks(): Header[] {
     return [
-      { href: `${this.links()}index.html`, label: 'header.accueil' },
-      { href: `${this.links()}notre-ecole/index.html`, label: 'header.aboutUs' },
-      { href: `${this.links()}clubs/index.html`, label: 'header.clubs' },
-      { href: `${this.links()}contact/index.html`, label: 'header.contact' }];
+      { 
+        href: `${this.links()}index.html`,
+        label: 'header.accueil'
+      },
+      { 
+        href: `${this.links()}notre-ecole/index.html`,
+        label: 'header.aboutUs'
+      },
+      { 
+        href: `${this.links()}clubs/index.html`,
+        label: 'header.clubs'
+      },
+      { href: `${this.links()}contact/index.html`,
+        label: 'header.contact'
+      }
+    ];
   }
 
   private links(): string {
-    return this.storage.isRtl() ? '/AR/' : '';
+    return this.storage.isRtl() ? '' : '/FR/';
   }
 
   switchLanguage(language: string) {
+    if (language == null) return;
+
     this.translate.use(language);
     this.storage.saveLanguage(language);
-    this.landingPageNavBar = this.landingPageParameters();
+    this.landingPageNavBar = this.landingPageLinks();
   }
 }
 

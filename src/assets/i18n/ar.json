@@ -61,6 +61,7 @@
     "header.marks": "الملاحظات",
     "header.bulletins": "دفاتر الأعداد",
     "header.notifications": "إشعارات",
+    "header.emails": "الرسائل",
     "header.logout": "تسجيل الخروج",
 
     "header.student.profile": "الملف الشخصي",
@@ -176,7 +177,7 @@
     "All.text.notifications.Type.NOTIF5": "الاجتماعات",
     "All.text.notifications.Type.NOTIF6": "وفيات",
     "All.text.notifications.Type.NOTIFN": "...المزيد",
-    "All.text.notifications.notificationsList": "...قائمة التنبيهات",
+    "All.text.notifications.notificationsList": "قائمة التنبيهات",
     "All.text.notifications.Notifier": "المنبه",
     "All.text.notifications.NotifierAction": "إعلام",
     "All.text.notifications.send": "ارسال",
@@ -188,6 +189,10 @@
     "All.text.notifications.selectedElemetns": "تأكيد إرسال الإشعارات",
     "All.text.notifications.modal.send.success.title": "تم اعلام المستعملين",
     "All.text.notifications.modal.send.fail.title": "فشل إشعار المستخدم!",
+
+    "All.text.emails.senderName": "مرسل",
+    "All.text.emails.senderEmail": "البريد الإلكتروني",
+    "All.text.emails.emailBody": "المحتوى",
 
     "All.text.group.Name": "اسم القسم",
     "All.text.group.Level": "المستوى التعليمي",
@@ -223,6 +228,7 @@
     "label.date": "التاريخ",
 
     "All.text.create": "إنشاء",
+    "All.text.create.failed.duplicated": "La creation a echoue car l'email est deja utilise",
     "All.text.update": "تحديث",
     "All.text.save": "تسجيل",
     "All.text.delete": "مسح",
@@ -237,5 +243,7 @@
     "All.text.edit": "تخيين",
     "All.text.search": "بحث",
     "All.text.undefined": "حيادي",
-    "All.text.sessionExpired": "انتهت صلاحية جلستك"
+    "All.text.sessionExpired": "انتهت صلاحية جلستك",
+    "All.text.delete.title": "إزالة",
+    "All.text.delete.Confirmation": "يرجى تأكيد الحذف من فضلك"
 }

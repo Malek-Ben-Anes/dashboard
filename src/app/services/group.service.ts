@@ -39,6 +39,12 @@ export class GroupService {
       .subscribe( group =>  resolve(group), err => reject(err)));
   }
 
+  delete(groupId: string): Promise<Group> {
+    const URL = `${GROUP_URL}/${groupId}`;
+    return new Promise((resolve, reject) => this.http.delete<Group>(URL)
+      .subscribe(group =>  resolve(group), err => reject(err)));
+  }
+
   update(group: Group): Promise<Group>  {
     const URL = `${GROUP_URL}/${group.id}`;
     return new Promise((resolve, reject) => this.http.put<Group>(URL, group)

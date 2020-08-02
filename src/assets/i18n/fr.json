@@ -61,6 +61,7 @@
     "header.marks": "Notes",
     "header.bulletins": "Bulletins",
     "header.notifications": "Notifications",
+    "header.emails": "E-mails",
     "header.logout": "Se deconnecter",
 
     "header.student.profile": "Mon Profile",
@@ -94,7 +95,7 @@
     "All.text.subject.label": "Matiere",
     "All.text.subject.coefficient": "coefficient",
     "All.text.subject.volumeHoraire": "Volume Horaire",
-    "All.text.subject.sessionNumber": "seance...",
+    "All.text.subject.sessionNumber": "seance",
     "All.text.subject.description": "Description",
     "All.text.subject.newSubject": "nouvelle matière",
 
@@ -176,7 +177,7 @@
     "All.text.notifications.Type.NOTIF5": "Reunion",
     "All.text.notifications.Type.NOTIF6": "Deces",
     "All.text.notifications.Type.NOTIFN": "Autres...",
-    "All.text.notifications.notificationsList": "Liste de notifications ...",
+    "All.text.notifications.notificationsList": "Liste de notifications",
     "All.text.notifications.Notifier": "Notifier",
     "All.text.notifications.NotifierAction": "Notifier les destinataires",
     "All.text.notifications.send": "Envoyer",
@@ -188,6 +189,10 @@
     "All.text.notifications.selectedElemetns": "Confirmation d'envoi des notifications",
     "All.text.notifications.modal.send.success.title": "Les utilisaterus ont ete notifies",
     "All.text.notifications.modal.send.fail.title": "la notification des utilisaterus a echoue!",
+
+    "All.text.emails.senderName": "Expéditeur",
+    "All.text.emails.senderEmail": "E-mail",
+    "All.text.emails.emailBody": "Contenu",
 
     "All.text.group.Name": "Nom du groupe",
     "All.text.group.Level": "Niveau",
@@ -223,6 +228,7 @@
     "label.date": "Date",
 
     "All.text.create": "creer",
+    "All.text.create.failed.duplicated": "La creation a echoue car l'email est deja utilise",
     "All.text.update": "mettre a jour",
     "All.text.save": "Enregistrer",
     "All.text.delete": "Supprimer",
@@ -237,5 +243,7 @@
     "All.text.edit": "Editer",
     "All.text.search": "Recherche",
     "All.text.undefined": "Par défaut",
-    "All.text.sessionExpired": "Votre session est expiré!"
+    "All.text.sessionExpired": "Votre session est expiré!",
+    "All.text.delete.title": "Suppression",
+    "All.text.delete.Confirmation": "Veuillez confirmer la suppression s'il vous plait"
 }

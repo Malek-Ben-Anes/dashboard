@@ -18,7 +18,7 @@
                 <tbody>
                     <tr *cdkVirtualFor="let mark of marksToDisplay" class="example-item">
                         <td>{{mark.lesson.name}}</td>
-                        <td>{{mark.note}}</td>
+                        <td>{{mark.observation}}</td>
                         <td><span [class]="getMarkStyle(mark.mark)">{{mark.mark}}</span></td>
                         <td>
                                 <span class="timestamp"> {{mark.createdAt | date:'dd / MM / yyyy'}}</span>

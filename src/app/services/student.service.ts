@@ -45,11 +45,14 @@ export class StudentService {
     return this.http.get<Student>(STUDENT_URL + '/' + id);
   }
 
-  saveStudent(teacher: Student): Observable<Student>  {
-    return this.http.post<Student>(STUDENT_URL, teacher);
+  save(student: Student): Promise<Student> {
+    return new Promise((resolve, reject) => {
+      this.http.post<Student>(STUDENT_URL, student)
+          .subscribe(student => resolve(student), err => reject(err));
+    });
   }
 
-  updateStudent(student: Student): Observable<Student>  {
+  updateStudent(student: Student): Observable<Student> {
     return this.http.put<Student>(STUDENT_URL  + '/' + student.id, student);
   }
 
@@ -58,20 +61,15 @@ export class StudentService {
   }
 
   update(student: Student, updatePassword?: boolean): Observable<Student> {
-    const Url = `${STUDENT_URL}/${student.id}`
-    
-      if (updatePassword != null) {
-        const httpOptions = {
-          params: new HttpParams().set('updatePassword', String(updatePassword))
-        };
-        return this.http.put<Student>(Url, student, httpOptions);
-        
-      } else {
-        return this.http.put<Student>(Url, student);
-        
-      }
+    const Url = updatePassword ? `${STUDENT_URL}/${student.id}/password` : `${STUDENT_URL}/${student.id}`;
+    return this.http.put<Student>(Url, student);
   }
-  
+
+  delete(studentId: string): Observable<Student> {
+    const Url = `${STUDENT_URL}/${studentId}`;
+    return this.http.delete<Student>(Url);
+  }
+
   public filter(students: Student[], filter: StudentFilter): Student[] {
     return _.filter(students, student => this.predicate(student, filter));
   }

@@ -6,6 +6,8 @@ import { Subject } from 'app/models/Subject';
 import { Level } from 'app/models/Level';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
+import { DialogContentExampleDialogComponent } from 'app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-subject-form',
@@ -31,7 +33,10 @@ export class SubjectFormComponent implements OnInit, OnChanges {
 
   levels = Object.keys(Level);
 
-  constructor(private formBuilder: FormBuilder, private subjectService: SubjectService, private translate: TranslateService) { }
+  constructor(private formBuilder: FormBuilder,
+              public dialog: MatDialog,
+              private subjectService: SubjectService,
+              private translate: TranslateService) { }
 
   ngOnInit() {
     this.initForm();
@@ -74,6 +79,33 @@ export class SubjectFormComponent implements OnInit, OnChanges {
     } else {
       this.update(this.subjectToSave);
     }
+  }
+
+  onConfirmationDelete() {
+    this.subjectService
+        .delete(this.subjectToSave.id)
+        .subscribe(subject => {
+          this.onCreateNewSubject();
+          this.refershEvent.emit(null);
+        });
+  }
+
+  onDelete(): void {
+    const modalDialog: { dialogTitle: string; dialogMessage: string; } =
+    {
+      dialogTitle: this.translate.instant('All.text.delete.title'),
+      dialogMessage: this.translate.instant('All.text.delete.Confirmation')
+    };
+    const dialogRef = this.dialog.open(DialogContentExampleDialogComponent, {
+      width: '450px',
+      height: '200px',
+      data: { dialogTitle: modalDialog.dialogTitle, dialogMessage: modalDialog.dialogMessage }
+    });
+    dialogRef.afterClosed().subscribe(confirmtion => {
+      if (confirmtion) {
+        this.onConfirmationDelete();
+      }
+    });
   }
 
   private CreateNewSubject() {

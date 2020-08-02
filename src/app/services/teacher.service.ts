@@ -31,18 +31,10 @@ export class TeacherService {
   }
 
   update(teacher: Teacher, updatePassword?: boolean): Promise<Teacher> {
-    const Url = `${TEACHER_URL}/${teacher.id}`
+    const Url = updatePassword ? `${TEACHER_URL}/${teacher.id}/password` : `${TEACHER_URL}/${teacher.id}`;
     return new Promise((resolve, reject) => {
-      if (updatePassword != null) {
-        const httpOptions = {
-          params: new HttpParams().set('updatePassword', String(updatePassword))
-        };
-        this.http.put<Teacher>(Url, teacher, httpOptions)
-          .subscribe(studentUpdated => resolve(studentUpdated), err => reject(err));
-      } else {
         this.http.put<Teacher>(Url, teacher)
           .subscribe(studentUpdated => resolve(studentUpdated), err => reject(err));
-      }
     });
   }
 
@@ -57,6 +49,9 @@ export class TeacherService {
     return this.http.put<Teacher>(TEACHER_URL + '/' + teacher.id, teacher);
   }
 
-  removeTeacher(teacher: Teacher) {
+  delete(teacherId: string): Observable<Teacher> {
+    const Url = `${TEACHER_URL}/${teacherId}`;
+    return this.http.delete<Teacher>(Url);
   }
+
 }

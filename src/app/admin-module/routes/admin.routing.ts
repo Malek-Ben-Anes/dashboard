@@ -15,6 +15,7 @@ import { BulletinComponent } from '../student/student/bulletin/bulletin.componen
 import { SubjectComponent } from '../subject/subject.component';
 import { NotificationsComponent } from '../notifications/notifications.component';
 import { Routers } from './router-link';
+import { EmailsListComponent } from '../emails/emails-list/emails-list.component';
 
 const routes: Routes = [
     {
@@ -91,6 +92,12 @@ const routes: Routes = [
                 path: Routers.NOTIFICATIONS,
                 canActivate: [AuthGuardService],
                 component: NotificationsComponent
+            },
+            {
+                path: Routers.EMAILS,
+                canActivate: [AuthGuardService],
+                component: EmailsListComponent,
+                data: { expectedRole: Library.ROLE_ADMIN }
             },
             {
                 path: '',

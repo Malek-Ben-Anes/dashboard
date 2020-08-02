@@ -88,7 +88,7 @@ export class TeacherComponent implements OnInit, OnChanges {
       this.isNew = false;
       this.tabs = this.updateTabs();
     }, (err) => {
-      console.log(err)
+      alert(this.translate.instant('All.text.create.failed.duplicated'));
     });
   }
 

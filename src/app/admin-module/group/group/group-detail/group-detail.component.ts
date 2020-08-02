@@ -8,6 +8,9 @@ import { group } from '@angular/animations';
 import { Level } from 'app/models/Level';
 import { GroupService } from 'app/services/group.service';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
+import { DialogContentExampleDialogComponent } from 'app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-group-detail',
@@ -28,7 +31,10 @@ export class GroupDetailComponent implements OnInit, OnChanges {
 
   groupForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private groupService: GroupService, private translate: TranslateService) { }
+  constructor(private formBuilder: FormBuilder, private groupService: GroupService,
+              public dialog: MatDialog,
+              private router: Router,
+              private translate: TranslateService) { }
 
   ngOnInit() {
     this.initGroupForm();
@@ -53,6 +59,33 @@ export class GroupDetailComponent implements OnInit, OnChanges {
     } else {
       this.update(this.group);
     }
+  }
+
+  onConfirmationDelete() {
+    this.groupService
+      .delete(this.group.id)
+      .then(group => {
+        console.log("delete group!");
+        this.router.navigate(['app', 'groups']);
+      });
+  }
+
+  onDelete(): void {
+    const modalDialog: { dialogTitle: string; dialogMessage: string; } =
+    {
+      dialogTitle: this.translate.instant('All.text.delete.title'),
+      dialogMessage: this.translate.instant('All.text.delete.Confirmation')
+    };
+    const dialogRef = this.dialog.open(DialogContentExampleDialogComponent, {
+      width: '450px',
+      height: '200px',
+      data: { dialogTitle: modalDialog.dialogTitle, dialogMessage: modalDialog.dialogMessage }
+    });
+    dialogRef.afterClosed().subscribe(confirmtion => {
+      if (confirmtion) {
+        this.onConfirmationDelete();
+      }
+    });
   }
 
   private initGroupForm() {

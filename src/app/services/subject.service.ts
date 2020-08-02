@@ -38,6 +38,10 @@ export class SubjectService {
     return this.http.put<Subject>(SUBJECT_URL  + '/' + subject.id, subject);
   }
 
+  delete(subjectId: string): Observable<Subject>  {
+    return this.http.delete<Subject>(`${SUBJECT_URL}/${subjectId}`);
+  }
+
   public filter(subjects: Subject[], level: Level): Subject[] {
     return  _.filter(subjects, subject => subject.level === level);
   }

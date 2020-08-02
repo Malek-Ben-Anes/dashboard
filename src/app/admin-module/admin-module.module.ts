@@ -44,6 +44,8 @@ import { DialogContentExampleDialogComponent } from 'app/commons/dialog-content-
 import { SharedModule } from 'app/commons/shared.module';
 import { ErrorDialogComponent } from 'app/commons/error-dialog/error-dialog.component';
 import { MarksModuleModule } from 'app/marks-module/marks-module.module';
+import { EmailsComponent } from './emails/emails/emails.component';
+import { EmailsListComponent } from './emails/emails-list/emails-list.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +76,8 @@ import { MarksModuleModule } from 'app/marks-module/marks-module.module';
     NotificationsComponent,
     NotifcationListComponent,
     UsersNotificationFormComponent,
+    EmailsComponent,
+    EmailsListComponent,
 
   ],
   entryComponents: [

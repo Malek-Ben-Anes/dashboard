@@ -20,7 +20,8 @@ export const ROUTES: any | RouteInfo[][] =
   { 'router': '/app/teachers', 'label': 'header.teachers' },
   { 'router': '/app/subjects', 'label': 'header.program' },
   { 'router': '/app/groups', 'label': 'header.groups' },
-  { 'router': '/app/notifications', 'label': 'header.notifications', 'icon': 'bell' }],
+  { 'router': '/app/notifications', 'label': 'header.notifications', 'icon': 'bell' },
+  { 'router': '/app/emails-list', 'label': 'header.emails'}],
 
   TEACHER_NAVIGATION_BAR: [
   { 'router': '/app/show-teacher-profile', 'label': 'header.teacher.profile' },
