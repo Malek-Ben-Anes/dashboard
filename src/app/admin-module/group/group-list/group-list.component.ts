@@ -26,4 +26,5 @@ export class GroupListComponent implements OnInit {
   private findAll(): void {
     this.groupService.findAll().subscribe(groups => this.groups = groups, err => console.log(err));
   }
+
 }

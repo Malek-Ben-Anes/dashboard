@@ -26,6 +26,7 @@ export class StudentAssignComponent implements OnInit {
 
   // All available students in all groups.
   allStudents: Student[];
+  unassignedStudents: Student[];
 
   initial: any = [];
   todo: any = [];
@@ -34,18 +35,18 @@ export class StudentAssignComponent implements OnInit {
   constructor(private studentService: StudentService, private groupService: GroupService, private translate: TranslateService) { }
 
   ngOnInit() {
+    this.findUnassignedStudents();
     this.initDoneArray();
-    this.findAllStudents();
   }
 
   onSaveStudents(): void {
     const added = this.arrayDifferenceByOrder(this.done, this.initial);
     const eliminated = this.arrayDifferenceByOrder(this.initial, this.done);
     // Add some students to current group
-    const addedStudentToGroup: Student[] = _.intersectionBy(this.allStudents, added, 'id');
+    const addedStudentToGroup: Student[] = _.intersectionBy(this.unassignedStudents, added, 'id');
     this.addStudentsToGroup(addedStudentToGroup);
     // Delete some students from current group
-    const deletedStudentFromGroup: Student[] = _.intersectionBy(this.allStudents, eliminated, 'id');
+    const deletedStudentFromGroup: Student[] = _.intersectionBy(this.unassignedStudents, eliminated, 'id');
     this.deletedStudentFromGroup(deletedStudentFromGroup);
   }
 
@@ -71,7 +72,7 @@ export class StudentAssignComponent implements OnInit {
 
   private arrayDifferenceByOrder(arrA: Student[], arrB: Student[]) {
 
-    if (arrA === undefined || arrB === undefined) {
+    if (arrA == undefined || arrB == undefined) {
       return [];
     }
 
@@ -82,21 +83,29 @@ export class StudentAssignComponent implements OnInit {
 
 
   private initTodoArray() {
-    _.differenceBy(this.allStudents, this.group.students, 'id')
+    _.differenceBy(this.unassignedStudents, this.group.students, 'id')
      .map((student: Student) => this.pushInArray(student, this.todo));
   }
 
   private initDoneArray() {
-    this.group.students.forEach(student => {
+    this.unassignedStudents.forEach(student => {
       this.pushInArray(student, this.initial);
       this.pushInArray(student, this.done)
     });
   }
 
-  private findAllStudents() {
+  private findUnassignedStudents() {
     this.studentService.findAll()
-        .subscribe(students => { this.allStudents = students;  this.initTodoArray();},
-        err => console.log(err));
+      .subscribe(students => { 
+        this.allStudents = students;
+        this.filterUnassignedStudents(students);
+        this.initTodoArray();
+      },
+      err => console.log(err));
+  }
+
+  private filterUnassignedStudents(students: Student[]): void {
+    this.unassignedStudents = _.filter(students, s => s.group == null);
   }
 
   /**

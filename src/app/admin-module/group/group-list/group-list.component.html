@@ -1,46 +1,38 @@
-<div class="main-content">
-    <div class="container-fluid">
+<div class="row">
+    <div class="col-md-12">
+
         <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <button mat-raised-button
-                     type="button"
-                     class="btn btn-warning pull-right"
-                     [routerLink]="GROUP_DETAIL"
-                    >{{'All.text.create' | translate}}
-                    </button>
-                </div>
-
-                <div class="card">
-                    <div class="row table-responsive">
-                        <table class="table">
-                            <th scope="col" class=" text-primary">
-                                {{'All.text.group.Name' | translate}}
-                            </th>
-                            <th class=" text-primary">
-                                {{'All.text.group.Level' | translate}}
-                            </th>
-                            <th class=" text-primary">
-                                {{'All.text.group.Effectif' | translate}}
-                            </th>
-                            <tbody>
-                                <tr *ngFor="let group of groups">
-                                    <td class="text-primary">
-                                        <a [routerLink]="GROUP_DETAIL + group.id"><strong>{{ group.name }}</strong></a>
-                                    </td>
-                                    <td>
-                                        {{'GLBL.label.'+group.level | translate}}
-                                    </td>
-                                    <td>
-                                        {{ group.studentsNumber }}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-            </div>
+            <button mat-raised-button type="button" class="btn btn-warning pull-right" [routerLink]="GROUP_DETAIL">
+                {{'All.text.create' | translate}}
+            </button>
         </div>
+
+        <div class="card">
+            <table class="table">
+                <th scope="col" class=" text-primary">
+                    {{'All.text.group.Name' | translate}}
+                </th>
+                <th class=" text-primary">
+                    {{'All.text.group.Level' | translate}}
+                </th>
+                <th class=" text-primary">
+                    {{'All.text.group.Effectif' | translate}}
+                </th>
+                <tbody>
+                    <tr *ngFor="let group of groups">
+                        <td class="text-primary">
+                            <a [routerLink]="GROUP_DETAIL + group.id"><strong>{{ group.name }}</strong></a>
+                        </td>
+                        <td>
+                            {{'GLBL.label.'+group.level | translate}}
+                        </td>
+                        <td>
+                            {{ group.studentsNumber }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
     </div>
 </div>
