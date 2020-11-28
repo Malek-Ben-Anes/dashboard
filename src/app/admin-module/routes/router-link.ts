@@ -15,5 +15,4 @@ export class Routers {
     public static BULLETIN = 'bulletin';
     public static MESSAGES = 'messages';
     public static NOTIFICATIONS = 'notifications';
-    public static EMAILS = 'emails-list';
 }
