@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiEndpoint: 'http://vps745280.ovh.net:8091/',
-  baseApiEndpoint: 'http://vps745280.ovh.net:8091/api/',
+  apiEndpoint: 'http://ec2-54-228-174-167.eu-west-1.compute.amazonaws.com:8091/',
+  baseApiEndpoint: 'http://ec2-54-228-174-167.eu-west-1.compute.amazonaws.com:8091/api/',
 };
