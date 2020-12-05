@@ -7,7 +7,7 @@ import { Observable, throwError, of } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './auth.service';
 import { ErrorDialogService } from './error-dialog.service';
-import { DialogData } from 'app/models/DialogData';
+import { DialogData } from '@app/models/DialogData';
 import { TranslateService } from '@ngx-translate/core';
 
 const CROS_ORIGIN_KEY = 'Access-Control-Allow-Origin';

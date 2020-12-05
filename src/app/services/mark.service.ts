@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { Group } from 'app/models/Group';
-import { Mark } from 'app/models/Mark';
-import { BASE_API_URL } from 'app/app.component';
-import { Lesson } from 'app/models/Lesson';
+import { Group } from '@app/models/Group';
+import { Mark } from '@app/models/Mark';
+import { BASE_API_URL } from '@app/app.component';
+import { Lesson } from '@app/models/Lesson';
 
 const STUDENT_URL: string = BASE_API_URL + 'students/';
 const MARK_URL: string = BASE_API_URL + 'marks/';

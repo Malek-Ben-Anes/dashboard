@@ -1,12 +1,12 @@
 import * as _ from 'lodash';
 import { Component, OnInit } from '@angular/core';
-import { NotificationService } from 'app/services/notification.service';
-import { TokenStorageService } from 'app/services/auth/token-storage.service';
-import { AuthService } from 'app/services/auth/auth.service';
-import { Student } from 'app/models/Student';
-import { Notification } from 'app/models/Notification';
+import { NotificationService } from '@app/services/notification.service';
+import { TokenStorageService } from '@app/services/auth/token-storage.service';
+import { AuthService } from '@app/services/auth/auth.service';
+import { Student } from '@app/models/Student';
+import { Notification } from '@app/models/Notification';
 import { TranslateService } from '@ngx-translate/core';
-import { User } from 'app/models/User';
+import { User } from '@app/models/User';
 
 @Component({
   selector: 'app-notification-list',

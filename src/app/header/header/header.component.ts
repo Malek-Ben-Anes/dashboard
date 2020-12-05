@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
-import { TokenStorageService } from 'app/services/auth/token-storage.service';
-import { User } from 'app/models/User';
-import { AuthService } from 'app/services/auth/auth.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { TokenStorageService } from '@app/services/auth/token-storage.service';
+import { User } from '@app/models/User';
+import { AuthService } from '@app/services/auth/auth.service';
 import { Subscription } from 'rxjs';
 
 @Component({

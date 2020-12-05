@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { DialogData } from 'app/models/DialogData';
-import { TokenStorageService } from 'app/services/auth/token-storage.service';
+import { DialogData } from '@app/models/DialogData';
+import { TokenStorageService } from '@app/services/auth/token-storage.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Teacher } from 'app/models/Teacher';
-import { Gender } from 'app/models/User';
+import { Teacher } from '@app/models/Teacher';
+import { Gender } from '@app/models/User';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { TeacherService } from 'app/services/teacher.service';
+import { TeacherService } from '@app/services/teacher.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Level } from 'app/models/Level';
+import { Level } from '@app/models/Level';
 import { MatDialog } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';
-import { DialogContentExampleDialogComponent } from 'app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
+import { DialogContentExampleDialogComponent } from '@app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
 
 @Component({
   selector: 'app-teacher-profile',

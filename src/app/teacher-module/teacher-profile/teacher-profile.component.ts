@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { TokenStorageService } from 'app/services/auth/token-storage.service';
-import { AuthService } from 'app/services/auth/auth.service';
+import { TokenStorageService } from '@app/services/auth/token-storage.service';
+import { AuthService } from '@app/services/auth/auth.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { BASE_URL } from 'app/app.component';
-import { Teacher } from 'app/models/Teacher';
-import { User } from 'app/models/User';
+import { BASE_URL } from '@app/app.component';
+import { Teacher } from '@app/models/Teacher';
+import { User } from '@app/models/User';
 import { DatePipe } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 

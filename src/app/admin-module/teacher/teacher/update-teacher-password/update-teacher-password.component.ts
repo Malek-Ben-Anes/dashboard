@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Teacher } from 'app/models/Teacher';
-import { BASE_URL } from 'app/app.component';
+import { Teacher } from '@app/models/Teacher';
+import { BASE_URL } from '@app/app.component';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { TeacherService } from 'app/services/teacher.service';
-import { DialogService } from 'app/commons/dialog/dialog.service';
-import { DialogData } from 'app/models/DialogData';
+import { TeacherService } from '@app/services/teacher.service';
+import { DialogService } from '@app/commons/dialog/dialog.service';
+import { DialogData } from '@app/models/DialogData';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

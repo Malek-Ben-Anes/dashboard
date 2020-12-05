@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Student } from 'app/models/Student';
-import { BASE_URL } from 'app/app.component';
+import { Student } from '@app/models/Student';
+import { BASE_URL } from '@app/app.component';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

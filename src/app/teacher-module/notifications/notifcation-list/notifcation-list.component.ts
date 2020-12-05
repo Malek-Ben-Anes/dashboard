@@ -1,8 +1,8 @@
 import * as _ from 'lodash';
 import { Component, OnInit, Input } from '@angular/core';
-import { Notification } from 'app/models/Notification';
-import { AuthService } from 'app/services/auth/auth.service';
-import { User } from 'app/models/User';
+import { Notification } from '@app/models/Notification';
+import { AuthService } from '@app/services/auth/auth.service';
+import { User } from '@app/models/User';
 
 @Component({
   selector: 'app-notifcation-list',

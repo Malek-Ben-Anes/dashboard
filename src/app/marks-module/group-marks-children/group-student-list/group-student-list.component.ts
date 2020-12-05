@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, EventEmitter, Output, OnChanges, SimpleChanges } from '@angular/core';
-import { Student } from 'app/models/Student';
-import { BASE_URL } from 'app/app.component';
+import { Student } from '@app/models/Student';
+import { BASE_URL } from '@app/app.component';
 
 @Component({
   selector: 'app-group-student-list',

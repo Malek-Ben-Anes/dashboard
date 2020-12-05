@@ -2,11 +2,11 @@ import * as _ from 'lodash';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Student } from 'app/models/Student';
-import { StudentService } from 'app/services/student.service';
+import { Student } from '@app/models/Student';
+import { StudentService } from '@app/services/student.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { BASE_URL } from 'app/app.component';
-import { Routers } from 'app/admin-module/routes/router-link';
+import { BASE_URL } from '@app/app.component';
+import { Routers } from '@app/admin-module/routes/router-link';
 import { TranslateService } from '@ngx-translate/core';
 import { StudentFilter } from './student-filter/student-filter.component';
 import { MatPaginator, MatTableDataSource } from '@angular/material';

@@ -1,12 +1,12 @@
 import * as _ from 'lodash';
 import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
-import { SubjectService } from 'app/services/subject.service';
-import { Group } from 'app/models/Group';
-import { Subject } from 'app/models/Subject';
-import { LessonService } from 'app/services/lesson.service';
+import { SubjectService } from '@app/services/subject.service';
+import { Group } from '@app/models/Group';
+import { Subject } from '@app/models/Subject';
+import { LessonService } from '@app/services/lesson.service';
 import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
-import { Lesson } from 'app/models/Lesson';
-import { Teacher } from 'app/models/Teacher';
+import { Lesson } from '@app/models/Lesson';
+import { Teacher } from '@app/models/Teacher';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

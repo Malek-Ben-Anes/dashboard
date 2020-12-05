@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { Notification } from 'app/models/Notification';
+import { Notification } from '@app/models/Notification';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';
 

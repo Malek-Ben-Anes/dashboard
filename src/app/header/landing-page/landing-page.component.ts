@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { TokenStorageService } from 'app/services/auth/token-storage.service';
+import { TokenStorageService } from '@app/services/auth/token-storage.service';
 
 @Component({
   selector: 'app-landing-page',

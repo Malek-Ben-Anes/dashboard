@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Group } from 'app/models/Group';
+import { Group } from '@app/models/Group';
 
 @Component({
   selector: 'app-teacher-group-list',

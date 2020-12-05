@@ -1,16 +1,16 @@
 import * as _ from 'lodash';
 import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 
-import { Gender } from 'app/models/User';
+import { Gender } from '@app/models/User';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Student } from 'app/models/Student';
-import { Level } from 'app/models/Level';
-import { Group } from 'app/models/Group';
-import { GroupService } from 'app/services/group.service';
+import { Student } from '@app/models/Student';
+import { Level } from '@app/models/Level';
+import { Group } from '@app/models/Group';
+import { GroupService } from '@app/services/group.service';
 import { TranslateService } from '@ngx-translate/core';
-import { StudentService } from 'app/services/student.service';
+import { StudentService } from '@app/services/student.service';
 import { Router } from '@angular/router';
-import { DialogContentExampleDialogComponent } from 'app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
+import { DialogContentExampleDialogComponent } from '@app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
 import { MatDialog } from '@angular/material';
 
 

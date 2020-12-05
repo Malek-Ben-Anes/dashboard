@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { TeacherService } from 'app/services/teacher.service';
+import { TeacherService } from '@app/services/teacher.service';
 
-import { Teacher } from 'app/models/Teacher';
-import { BASE_URL } from 'app/app.component';
-import { Gender } from 'app/models/User';
+import { Teacher } from '@app/models/Teacher';
+import { BASE_URL } from '@app/app.component';
+import { Gender } from '@app/models/User';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
-import { Routers } from 'app/admin-module/routes/router-link';
+import { Routers } from '@app/admin-module/routes/router-link';
 
 @Component({
   selector: 'app-teacher-list',

@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material';
-import { DialogData } from 'app/models/DialogData';
-import { TokenStorageService } from 'app/services/auth/token-storage.service';
+import { DialogData } from '@app/models/DialogData';
+import { TokenStorageService } from '@app/services/auth/token-storage.service';
 
 @Component({
   selector: 'app-error-dialog',

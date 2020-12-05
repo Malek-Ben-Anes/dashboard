@@ -6,8 +6,8 @@ import { Subject } from '../models/Subject';
 import { Gender } from '../models/User';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { reject } from 'q';
-import { BASE_API_URL } from 'app/app.component';
-import { Level } from 'app/models/Level';
+import { BASE_API_URL } from '@app/app.component';
+import { Level } from '@app/models/Level';
 
 
 const SUBJECT_URL: string = BASE_API_URL + 'subjects';

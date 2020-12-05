@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { Group } from 'app/models/Group';
-import { BASE_API_URL } from 'app/app.component';
-import { Student } from 'app/models/Student';
+import { Group } from '@app/models/Group';
+import { BASE_API_URL } from '@app/app.component';
+import { Student } from '@app/models/Student';
 import { FileUploadService } from './file-upload.service';
 import { map } from 'rxjs/operators';
 

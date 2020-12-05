@@ -1,16 +1,16 @@
 import * as _ from 'lodash';
 import { Component, OnInit } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { Group } from 'app/models/Group';
+import { Group } from '@app/models/Group';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { GroupService } from 'app/services/group.service';
+import { GroupService } from '@app/services/group.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Level } from 'app/models/Level';
-import { StudentService } from 'app/services/student.service';
+import { Level } from '@app/models/Level';
+import { StudentService } from '@app/services/student.service';
 import { Observable } from 'rxjs';
-import { BASE_URL } from 'app/app.component';
-import { Teacher } from 'app/models/Teacher';
+import { BASE_URL } from '@app/app.component';
+import { Teacher } from '@app/models/Teacher';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

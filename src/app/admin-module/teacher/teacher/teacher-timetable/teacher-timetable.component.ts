@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Teacher } from 'app/models/Teacher';
-import { BASE_URL } from 'app/app.component';
-import { TeacherService } from 'app/services/teacher.service';
+import { Teacher } from '@app/models/Teacher';
+import { BASE_URL } from '@app/app.component';
+import { TeacherService } from '@app/services/teacher.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

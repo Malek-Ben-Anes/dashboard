@@ -6,8 +6,8 @@ import * as jwt_decode from "jwt-decode";
 import { JwtResponse, JwtToken } from './jwt-response';
 import { AuthLoginInfo } from './login-info';
 import { SignUpInfo } from './signup-info';
-import { BASE_API_URL } from 'app/app.component';
-import { User } from 'app/models/User';
+import { BASE_API_URL } from '@app/app.component';
+import { User } from '@app/models/User';
 import { TokenStorageService } from './token-storage.service';
 import { map } from 'rxjs/operators';
 

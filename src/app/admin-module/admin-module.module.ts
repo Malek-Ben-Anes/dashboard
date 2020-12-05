@@ -4,7 +4,7 @@ import { AdminRoutingStudentModule } from './routes/admin.routing';
 import { RouterModule } from '@angular/router';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { MaterialModule } from 'app/material.module';
+import { MaterialModule } from '@app/material.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TeacherProfileComponent } from './teacher/teacher/teacher-profile/teacher-profile.component';
 import { TeacherListComponent } from './teacher/teacher-list/teacher-list.component';
@@ -39,11 +39,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material';
-import { HttpLoaderFactory } from 'app/header/header.module';
-import { DialogContentExampleDialogComponent } from 'app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
-import { SharedModule } from 'app/commons/shared.module';
-import { ErrorDialogComponent } from 'app/commons/error-dialog/error-dialog.component';
-import { MarksModuleModule } from 'app/marks-module/marks-module.module';
+import { HttpLoaderFactory } from '@app/header/header.module';
+import { DialogContentExampleDialogComponent } from '@app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
+import { SharedModule } from '@app/commons/shared.module';
+import { ErrorDialogComponent } from '@app/commons/error-dialog/error-dialog.component';
+import { MarksModuleModule } from '@app/marks-module/marks-module.module';
 
 @NgModule({
   declarations: [

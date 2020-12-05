@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Student } from 'app/models/Student';
-import { BASE_API_URL } from 'app/app.component';
-import { Trimester } from 'app/models/Trimester';
-import { Teacher } from 'app/models/Teacher';
-import { Group } from 'app/models/Group';
+import { Student } from '@app/models/Student';
+import { BASE_API_URL } from '@app/app.component';
+import { Trimester } from '@app/models/Trimester';
+import { Teacher } from '@app/models/Teacher';
+import { Group } from '@app/models/Group';
 
 const USERS_URL: string = BASE_API_URL + 'users/';
 const BULLETIN_URL: string = BASE_API_URL + 'bulletins/';

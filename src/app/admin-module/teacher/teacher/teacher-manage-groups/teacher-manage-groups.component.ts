@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Teacher } from 'app/models/Teacher';
-import { Group } from 'app/models/Group';
-import { GroupService } from 'app/services/group.service';
-import { SubjectService } from 'app/services/subject.service';
-import { Lesson } from 'app/models/Lesson';
-import { LessonService } from 'app/services/lesson.service';
+import { Teacher } from '@app/models/Teacher';
+import { Group } from '@app/models/Group';
+import { GroupService } from '@app/services/group.service';
+import { SubjectService } from '@app/services/subject.service';
+import { Lesson } from '@app/models/Lesson';
+import { LessonService } from '@app/services/lesson.service';
 
 @Component({
   selector: 'app-teacher-manage-groups',

@@ -1,12 +1,12 @@
 import * as _ from 'lodash';
 import { Component, OnInit, Input, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { SubjectService } from 'app/services/subject.service';
-import { Subject } from 'app/models/Subject';
-import { Level } from 'app/models/Level';
+import { SubjectService } from '@app/services/subject.service';
+import { Subject } from '@app/models/Subject';
+import { Level } from '@app/models/Level';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
-import { DialogContentExampleDialogComponent } from 'app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
+import { DialogContentExampleDialogComponent } from '@app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
 import { MatDialog } from '@angular/material';
 
 @Component({

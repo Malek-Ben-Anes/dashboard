@@ -1,10 +1,10 @@
 import * as _ from 'lodash';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { User } from 'app/models/User';
-import { Notification } from 'app/models/Notification';
-import { AuthService } from 'app/services/auth/auth.service';
-import { NotificationService } from 'app/services/notification.service';
+import { User } from '@app/models/User';
+import { Notification } from '@app/models/Notification';
+import { AuthService } from '@app/services/auth/auth.service';
+import { NotificationService } from '@app/services/notification.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

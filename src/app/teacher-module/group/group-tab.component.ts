@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Group } from 'app/models/Group';
-import { Level } from 'app/models/Level';
-import { GroupService } from 'app/services/group.service';
-import { BASE_URL } from 'app/app.component';
+import { Group } from '@app/models/Group';
+import { Level } from '@app/models/Level';
+import { GroupService } from '@app/services/group.service';
+import { BASE_URL } from '@app/app.component';
 import { FormGroup } from '@angular/forms';
-import { Teacher } from 'app/models/Teacher';
-import { TokenStorageService } from 'app/services/auth/token-storage.service';
-import { AuthService } from 'app/services/auth/auth.service';
+import { Teacher } from '@app/models/Teacher';
+import { TokenStorageService } from '@app/services/auth/token-storage.service';
+import { AuthService } from '@app/services/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

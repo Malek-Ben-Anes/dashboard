@@ -3,9 +3,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
-import { User } from 'app/models/User';
-import { RouterLink } from 'app/app.routing';
-import { TokenStorageService } from 'app/services/auth/token-storage.service';
+import { User } from '@app/models/User';
+import { RouterLink } from '@app/app.routing';
+import { TokenStorageService } from '@app/services/auth/token-storage.service';
 
 
 declare interface RouteInfo {

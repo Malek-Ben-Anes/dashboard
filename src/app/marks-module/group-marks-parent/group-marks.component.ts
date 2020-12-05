@@ -1,14 +1,14 @@
 import * as _ from 'lodash';
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
-import { Group } from 'app/models/Group';
-import { Student } from 'app/models/Student';
-import { MarkService } from 'app/services/mark.service';
-import { Mark } from 'app/models/Mark';
-import { LessonService } from 'app/services/lesson.service';
-import { Lesson } from 'app/models/Lesson';
+import { Group } from '@app/models/Group';
+import { Student } from '@app/models/Student';
+import { MarkService } from '@app/services/mark.service';
+import { Mark } from '@app/models/Mark';
+import { LessonService } from '@app/services/lesson.service';
+import { Lesson } from '@app/models/Lesson';
 import { TranslateService } from '@ngx-translate/core';
-import { TokenStorageService } from 'app/services/auth/token-storage.service';
-import { User } from 'app/models/User';
+import { TokenStorageService } from '@app/services/auth/token-storage.service';
+import { User } from '@app/models/User';
 
 @Component({
   selector: 'app-group-marks',

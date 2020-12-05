@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Student } from 'app/models/Student';
-import { TokenStorageService } from 'app/services/auth/token-storage.service';
-import { User, Gender } from 'app/models/User';
-import { AuthService } from 'app/services/auth/auth.service';
+import { Student } from '@app/models/Student';
+import { TokenStorageService } from '@app/services/auth/token-storage.service';
+import { User, Gender } from '@app/models/User';
+import { AuthService } from '@app/services/auth/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { BASE_URL } from 'app/app.component';
+import { BASE_URL } from '@app/app.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DatePipe } from '@angular/common';
 

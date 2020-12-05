@@ -1,11 +1,11 @@
 import * as _ from 'lodash';
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl, FormBuilder } from '@angular/forms';
-import { Student } from 'app/models/Student';
-import { SubjectService } from 'app/services/subject.service';
+import { Student } from '@app/models/Student';
+import { SubjectService } from '@app/services/subject.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Subject } from 'app/models/Subject';
-import { Level } from 'app/models/Level';
+import { Subject } from '@app/models/Subject';
+import { Level } from '@app/models/Level';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

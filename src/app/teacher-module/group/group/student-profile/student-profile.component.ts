@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Student } from 'app/models/Student';
-import { BASE_URL } from 'app/app.component';
+import { Student } from '@app/models/Student';
+import { BASE_URL } from '@app/app.component';
 import { TranslateService } from '@ngx-translate/core';
 import { DatePipe } from '@angular/common';
-import { StudentService } from 'app/services/student.service';
+import { StudentService } from '@app/services/student.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 

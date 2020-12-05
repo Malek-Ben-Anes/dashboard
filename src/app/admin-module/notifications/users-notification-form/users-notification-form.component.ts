@@ -4,22 +4,22 @@ import { MatDialog } from '@angular/material';
 
 import * as _ from 'lodash';
 
-import { Teacher } from 'app/models/Teacher';
-import { Group } from 'app/models/Group';
-import { Student } from 'app/models/Student';
-import { GroupService } from 'app/services/group.service';
-import { StudentService } from 'app/services/student.service';
-import { TeacherService } from 'app/services/teacher.service';
-import { Notif } from 'app/models/Notif';
-import { Notification, NotificationRequest } from 'app/models/Notification';
-import { NotificationService } from 'app/services/notification.service';
-import { AuthService } from 'app/services/auth/auth.service';
-import { User } from 'app/models/User';
-import { DialogContentExampleDialogComponent } from 'app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
-import { Library } from 'app/models/Library';
+import { Teacher } from '@app/models/Teacher';
+import { Group } from '@app/models/Group';
+import { Student } from '@app/models/Student';
+import { GroupService } from '@app/services/group.service';
+import { StudentService } from '@app/services/student.service';
+import { TeacherService } from '@app/services/teacher.service';
+import { Notif } from '@app/models/Notif';
+import { Notification, NotificationRequest } from '@app/models/Notification';
+import { NotificationService } from '@app/services/notification.service';
+import { AuthService } from '@app/services/auth/auth.service';
+import { User } from '@app/models/User';
+import { DialogContentExampleDialogComponent } from '@app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
+import { Library } from '@app/models/Library';
 import { TranslateService } from '@ngx-translate/core';
-import { DialogData } from 'app/models/DialogData';
-import { DialogService } from 'app/commons/dialog/dialog.service';
+import { DialogData } from '@app/models/DialogData';
+import { DialogService } from '@app/commons/dialog/dialog.service';
 
 @Component({
   selector: 'app-users-notification-form',

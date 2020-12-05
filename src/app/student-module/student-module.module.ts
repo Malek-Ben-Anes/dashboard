@@ -10,9 +10,9 @@ import { TimeTableComponent } from './time-table/time-table.component';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
 import { StudentRoutingStudentModule } from './student.routing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { MaterialModule } from 'app/material.module';
+import { MaterialModule } from '@app/material.module';
 import { TranslateModule } from '@ngx-translate/core';
-import { SharedModule } from 'app/commons/shared.module';
+import { SharedModule } from '@app/commons/shared.module';
 
 @NgModule({
   declarations: [StudentProfileComponent, BulletinListComponent, NotificationListComponent, MarkListComponent, TimeTableComponent],

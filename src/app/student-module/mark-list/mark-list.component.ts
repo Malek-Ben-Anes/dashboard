@@ -1,13 +1,13 @@
 import * as _ from 'lodash';
 import { Component, OnInit } from '@angular/core';
-import { Student } from 'app/models/Student';
-import { BASE_URL } from 'app/app.component';
-import { TokenStorageService } from 'app/services/auth/token-storage.service';
-import { AuthService } from 'app/services/auth/auth.service';
-import { MarkService } from 'app/services/mark.service';
-import { LessonService } from 'app/services/lesson.service';
-import { Lesson } from 'app/models/Lesson';
-import { Mark } from 'app/models/Mark';
+import { Student } from '@app/models/Student';
+import { BASE_URL } from '@app/app.component';
+import { TokenStorageService } from '@app/services/auth/token-storage.service';
+import { AuthService } from '@app/services/auth/auth.service';
+import { MarkService } from '@app/services/mark.service';
+import { LessonService } from '@app/services/lesson.service';
+import { Lesson } from '@app/models/Lesson';
+import { Mark } from '@app/models/Mark';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthService } from 'app/services/auth/auth.service';
-import { TokenStorageService } from 'app/services/auth/token-storage.service';
-import { AuthLoginInfo } from 'app/services/auth/login-info';
-import { JwtResponse } from 'app/services/auth/jwt-response';
+import { AuthService } from '@app/services/auth/auth.service';
+import { TokenStorageService } from '@app/services/auth/token-storage.service';
+import { AuthLoginInfo } from '@app/services/auth/login-info';
+import { JwtResponse } from '@app/services/auth/jwt-response';
 import { TranslateService } from '@ngx-translate/core';
 import { HttpErrorResponse } from '@angular/common/http';
 

@@ -1,7 +1,7 @@
 import { Component, OnInit, SimpleChanges, OnChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Teacher } from 'app/models/Teacher';
-import { TeacherService } from 'app/services/teacher.service';
+import { Teacher } from '@app/models/Teacher';
+import { TeacherService } from '@app/services/teacher.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';

@@ -4,9 +4,9 @@ import { Teacher } from '../models/Teacher';
 import { Gender } from '../models/User';
 import { HttpClient, HttpErrorResponse, HttpEvent, HttpParams } from '@angular/common/http';
 import { reject } from 'q';
-import { BASE_API_URL } from 'app/app.component';
+import { BASE_API_URL } from '@app/app.component';
 import { FileUploadService } from './file-upload.service';
-import { Student } from 'app/models/Student';
+import { Student } from '@app/models/Student';
 
 
 const TEACHER_URL: string = BASE_API_URL + 'teachers';

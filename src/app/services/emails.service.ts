@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Email } from 'app/models/email.modal';
+import { Email } from '@app/models/email.modal';
 import { Observable } from 'rxjs';
-import { BASE_API_URL } from 'app/app.component';
-import { Pageable } from 'app/models/pageable.modal';
+import { BASE_API_URL } from '@app/app.component';
+import { Pageable } from '@app/models/pageable.modal';
 
 const EMAILS_URL: string = BASE_API_URL + 'emails/';
 

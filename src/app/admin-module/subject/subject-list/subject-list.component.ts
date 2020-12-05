@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
-import { Subject } from 'app/models/Subject';
+import { Subject } from '@app/models/Subject';
 import { HttpErrorResponse } from '@angular/common/http';
-import { SubjectService } from 'app/services/subject.service';
+import { SubjectService } from '@app/services/subject.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Level } from 'app/models/Level';
+import { Level } from '@app/models/Level';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

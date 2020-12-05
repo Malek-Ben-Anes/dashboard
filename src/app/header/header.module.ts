@@ -8,7 +8,7 @@ import { LoggedUserComponent } from './logged-user/logged-user.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { HeaderComponent } from './header/header.component';
 import { HttpClient } from '@angular/common/http';
-import { SharedModule } from 'app/commons/shared.module';
+import { SharedModule } from '@app/commons/shared.module';
 
 @NgModule({
   declarations: [LoggedUserComponent, LandingPageComponent, HeaderComponent],

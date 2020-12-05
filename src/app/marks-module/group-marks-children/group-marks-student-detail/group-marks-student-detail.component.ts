@@ -1,10 +1,10 @@
 import * as _ from 'lodash';
 import { Component, OnInit, Input, SimpleChanges, OnChanges, ChangeDetectorRef } from '@angular/core';
-import { Student } from 'app/models/Student';
-import { MarkService } from 'app/services/mark.service';
-import { Mark } from 'app/models/Mark';
-import { Lesson } from 'app/models/Lesson';
-import { LessonService } from 'app/services/lesson.service';
+import { Student } from '@app/models/Student';
+import { MarkService } from '@app/services/mark.service';
+import { Mark } from '@app/models/Mark';
+import { Lesson } from '@app/models/Lesson';
+import { LessonService } from '@app/services/lesson.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

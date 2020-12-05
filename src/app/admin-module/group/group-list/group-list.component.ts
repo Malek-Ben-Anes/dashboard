@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Group } from 'app/models/Group';
-import { Level } from 'app/models/Level';
-import { GroupService } from 'app/services/group.service';
-import { Routers } from 'app/admin-module/routes/router-link';
+import { Group } from '@app/models/Group';
+import { Level } from '@app/models/Level';
+import { GroupService } from '@app/services/group.service';
+import { Routers } from '@app/admin-module/routes/router-link';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
