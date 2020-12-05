@@ -13,7 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   form: any = {};
   isLoggedIn = false;
   isLoginFailed = false;
@@ -21,14 +21,15 @@ export class LoginComponent {
   roles: string[] = [];
   isLogging: boolean = false;
 
-  private loginInfo: AuthLoginInfo;
-
   constructor(private authService: AuthService, private translate: TranslateService, private tokenStorage: TokenStorageService, private router: Router) {
+  }
+
+  ngOnInit() {
     this.isLoggedIn = this.tokenStorage.getIsLoggedUser();
     if (this.isLoggedIn) {
       this.navigateToLoggedUser();
     } else {
-      this.navigateToUnLoggedUser();
+      this.router.navigate(['app', 'auth', 'login']);
     }  
   }
 
@@ -43,15 +44,11 @@ export class LoginComponent {
     }
   }
 
-  private navigateToUnLoggedUser() {
-    this.router.navigate(['app', 'auth', 'login']);
-  }
-
   onSignIn() {
     this.isLogging = true;
-    this.loginInfo = new AuthLoginInfo(this.form.username, this.form.password);
+    const loginInfo = new AuthLoginInfo(this.form.username, this.form.password);
 
-    this.authService.attemptAuth(this.loginInfo).subscribe(
+    this.authService.signIn(loginInfo).subscribe(
       data => {
           this.isLogging = false;
           this.isLoggedIn = true;

@@ -9,11 +9,9 @@ import { Group } from '@app/models/Group';
 import { Student } from '@app/models/Student';
 import { GroupService } from '@app/services/group.service';
 import { StudentService } from '@app/services/student.service';
-import { TeacherService } from '@app/services/teacher.service';
 import { Notif } from '@app/models/Notif';
-import { Notification, NotificationRequest } from '@app/models/Notification';
+import { NotificationRequest } from '@app/models/Notification';
 import { NotificationService } from '@app/services/notification.service';
-import { AuthService } from '@app/services/auth/auth.service';
 import { User } from '@app/models/User';
 import { DialogContentExampleDialogComponent } from '@app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
 import { Library } from '@app/models/Library';
@@ -53,7 +51,7 @@ export class UsersNotificationFormComponent implements OnInit {
   }
 
   private initializeNotificationForm() {
-    const loggedUserName = this.loggedUser ?  `${this.loggedUser.firstname} ${ this.loggedUser.lastname}` : '';
+    const loggedUserName = this.loggedUser ?  `${this.loggedUser.firstName} ${ this.loggedUser.lastName}` : '';
     this.notifForm = this.formBuilder.group({
       notifier: [loggedUserName, Validators.required],
       //notified: [null, Validators.required],

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { User, Gender } from '@app/models/User';
-import { Teacher } from '@app/models/Teacher';
 
 const TOKEN_KEY = 'AuthToken';
 const IS_LOGGED_USER_KEY = 'IsLoggedUser';
@@ -12,7 +11,6 @@ const GENDER_KEY = 'AuthGender';
 const PHOTO_KEY = 'AuthPhoto';
 const NOTIFICATION_KEY = 'NewNotifications';
 const LANGUAGE = 'language';
-
 const TRUE = 'true';
 
 // Todo rename tokenStorageService to storageService
@@ -21,6 +19,7 @@ const TRUE = 'true';
   providedIn: 'root'
 })
 export class TokenStorageService {
+  
   private roles: Array<string> = [];
   constructor() { }
 

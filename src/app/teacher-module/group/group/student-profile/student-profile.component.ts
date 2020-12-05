@@ -36,8 +36,8 @@ export class StudentProfileComponent implements OnInit {
   private initializeForm(student: Student): void {
     console.log(this.translate.instant('GLBL.' + student.gender));
     this.studentForm = this.formBuilder.group({
-      firstname: [{value: student.firstname, disabled: true}],
-      lastname: [{value: student.lastname, disabled: true}],
+      firstname: [{value: student.firstName, disabled: true}],
+      lastname: [{value: student.lastName, disabled: true}],
       email: [{value: student.email, disabled: true}],
       phone: [{value: student.phone, disabled: true}],
       gender: [{value: this.translate.instant('GLBL.' + student.gender), disabled: true}],

@@ -115,8 +115,9 @@ export class StudentAssignComponent implements OnInit {
    */
   private pushInArray(student: Student, arr: any) {
     let studentI = {
-      id: student.id, firstname: student.firstname,
-      lastname: student.lastname,
+      id: student.id,
+      firstName: student.firstName,
+      lastName: student.lastName,
       email: student.email,
       photo: student.photo,
       group: student.group && student.group.name

@@ -78,10 +78,10 @@ export class StudentService {
     if (filter.groupId && student.group && (student.group.id != filter.groupId)) {
       return false;
     }
-    if (filter.firstname && (student.firstname != filter.firstname)) {
+    if (filter.firstname && (student.firstName != filter.firstname)) {
       return false;
     }
-    if (filter.lastname && (student.lastname != filter.lastname)) {
+    if (filter.lastname && (student.lastName != filter.lastname)) {
       return false;
     }
     if (filter.level  && (student.level != filter.level)) {

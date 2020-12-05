@@ -56,7 +56,7 @@ export class UsersNotificationFormComponent implements OnInit {
 
   private async initializeNotificationForm() {
     await this.authService.getLoggedUser().then(loggedUser => this._loggedUser = loggedUser);
-    const loggedUserName = this._loggedUser ?  `${this._loggedUser.firstname} ${ this._loggedUser.lastname}` : '';
+    const loggedUserName = this._loggedUser ?  `${this._loggedUser.firstName} ${ this._loggedUser.lastName}` : '';
     this.notifForm = this.formBuilder.group({
       notifier: [loggedUserName, Validators.required],
       //notified: [null, Validators.required],

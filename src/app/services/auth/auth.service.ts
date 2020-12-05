@@ -3,9 +3,8 @@ import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import * as jwt_decode from "jwt-decode";
 
-import { JwtResponse, JwtToken } from './jwt-response';
+import { JwtResponse, JwtTokenResponse } from './jwt-response';
 import { AuthLoginInfo } from './login-info';
-import { SignUpInfo } from './signup-info';
 import { BASE_API_URL } from '@app/app.component';
 import { User } from '@app/models/User';
 import { TokenStorageService } from './token-storage.service';
@@ -15,8 +14,7 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-const LOGIN_URL = BASE_API_URL + 'auth/signin';
-const SIGN_UP_URL = BASE_API_URL + 'auth/signup';
+const LOGIN_URL = BASE_API_URL + 'auth/sign_in';
 
 @Injectable({
   providedIn: 'root'
@@ -31,17 +29,13 @@ export class AuthService {
 
   constructor(private http: HttpClient, private tokenStorage: TokenStorageService) { }
 
-  attemptAuth(credentials: AuthLoginInfo): Observable<JwtResponse> {
-    return this.http.post<JwtToken>(LOGIN_URL, credentials, httpOptions)
-            .pipe(map((jwtToken: JwtToken) =>
+  signIn(credentials: AuthLoginInfo): Observable<JwtResponse> {
+    return this.http.post<JwtTokenResponse>(LOGIN_URL, credentials, httpOptions)
+            .pipe(map((jwtToken: JwtTokenResponse) =>
             {
-              this.saveLoggedUserIntoStorage(jwtToken.accessToken);
-              return jwtToken.accessToken;
+              this.saveLoggedUserIntoStorage(jwtToken.token);
+              return jwtToken.token;
             }));
-  }
-
-  signUp(info: SignUpInfo): Observable<string> {
-    return this.http.post<string>(SIGN_UP_URL, info, httpOptions);
   }
 
   // TODO remove promise @Deprecated
@@ -61,7 +55,7 @@ export class AuthService {
     this.subject.next(this._loggedUser);
   }
 
-  saveUser(user: User) {
+  save(user: User) {
     this._loggedUser = user;
     this.tokenStorage.saveLoggedUser(this._loggedUser)
     this.subject.next(this._loggedUser);
@@ -95,20 +89,21 @@ export class AuthService {
     this.role = role;
   }
 
-  private saveLoggedUserIntoStorage(encodedJwtResponseAccessToken: any): void {
+  private saveLoggedUserIntoStorage(encodedJwtResponseAccessToken: any): User {
     this.tokenStorage.saveToken(encodedJwtResponseAccessToken);
     const JwtTokenInfo: JwtResponse = this.getDecodedAccessToken(encodedJwtResponseAccessToken);
     this.jwtResponse = JwtTokenInfo;
     this.tokenStorage.saveIsLoggedUser(true);
-    this.tokenStorage.saveUsername(JwtTokenInfo.user && JwtTokenInfo.user.name);
+    this.tokenStorage.saveUsername(JwtTokenInfo.user.firstName);
     this.tokenStorage.saveAuthorities(JwtTokenInfo.authorities);
     this.tokenStorage.saveId(JwtTokenInfo.user && JwtTokenInfo.user.id);
     this.tokenStorage.saveGender(JwtTokenInfo.user && JwtTokenInfo.user.gender);
     this.tokenStorage.saveUserPhoto(JwtTokenInfo.user && JwtTokenInfo.user.photo);
     this.tokenStorage.saveUserNewNotifications(String(JwtTokenInfo.user.newNotifications));
     this.tokenStorage.saveLoggedUser(JwtTokenInfo.user);
-    this.saveUser(JwtTokenInfo.user);
+    this.save(JwtTokenInfo.user);
     this.saveIsLoggedUser(true);
+    return JwtTokenInfo.user;
   }
 
   // Decode JWT token

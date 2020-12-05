@@ -108,8 +108,8 @@ export class StudentProfileComponent implements OnInit {
 
   private updateForm(student: Student): void {
     this.studentForm.patchValue({
-      firstname: student.firstname,
-      lastname: student.lastname,
+      firstName: student.firstName,
+      lastName: student.lastName,
       phone: student.phone,
       email: student.email,
       gender: <Gender> student.gender,
@@ -132,11 +132,9 @@ export class StudentProfileComponent implements OnInit {
   }
 
   private extractFormData(): void {
-    this.student.firstname = this.extractFieldData('firstname');
-    this.student.lastname = this.extractFieldData('lastname');
-    this.student.name = this.student.firstname + ' ' + this.student.lastname;
+    this.student.firstName = this.extractFieldData('firstName');
+    this.student.lastName = this.extractFieldData('lastName');
     this.student.email = this.extractFieldData('email');
-    this.student.username = this.student.email;
     this.student.phone = this.extractFieldData('phone');
     this.student.birthDate = new Date(this.extractFieldData('birthDate'));
     this.student.gender = this.extractFieldData('gender');

@@ -30,8 +30,6 @@ export class UpdatePasswordComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    console.log(this.student);
-    console.log(this.student.registerUrl);
   }
 
   get f() {

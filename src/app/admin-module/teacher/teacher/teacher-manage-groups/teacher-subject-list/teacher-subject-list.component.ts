@@ -105,7 +105,7 @@ export class TeacherSubjectListComponent implements OnInit, OnChanges {
     lesson.id.groupId = group.id;
     lesson.name = subject.name;
     lesson.groupName = group.name;
-    lesson.teacherName = teacher.name;
+    lesson.teacherName = teacher.firstName;
     lesson.subjectName = subject.name;
     return  lesson;
   }
