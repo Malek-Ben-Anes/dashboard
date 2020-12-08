@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Group } from '@app/models/Group';
-import { Student } from '@app/models/Student';
+import { Student } from '@app/models/Student.model';
 import { MarkService } from '@app/services/mark.service';
 import { Mark } from '@app/models/Mark';
 import { LessonService } from '@app/services/lesson.service';

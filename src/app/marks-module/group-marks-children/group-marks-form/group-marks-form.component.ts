@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import { Component, OnInit, Input, SimpleChanges, OnChanges, EventEmitter, Output, ChangeDetectorRef } from '@angular/core';
-import { Student } from '@app/models/Student';
+import { Student } from '@app/models/Student.model';
 import { Lesson } from '@app/models/Lesson';
 import { Message } from '@app/models/message';
 import { Mark } from '@app/models/Mark';

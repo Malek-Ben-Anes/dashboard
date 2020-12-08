@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 
 import { Teacher } from '@app/models/Teacher';
 import { Group } from '@app/models/Group';
-import { Student } from '@app/models/Student';
+import { Student } from '@app/models/Student.model';
 import { GroupService } from '@app/services/group.service';
 import { StudentService } from '@app/services/student.service';
 import { Notif } from '@app/models/Notif';

@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { Student } from '@app/models/Student';
+import { Student } from '@app/models/Student.model';
 import { StudentService } from '@app/services/student.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { BASE_URL } from '@app/app.component';

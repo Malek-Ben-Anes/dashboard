@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from '@app/services/auth/token-storage.service';
 import { BASE_URL } from '@app/app.component';
-import { Student } from '@app/models/Student';
+import { Student } from '@app/models/Student.model';
 import { AuthService } from '@app/services/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 

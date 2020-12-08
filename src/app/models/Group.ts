@@ -1,5 +1,4 @@
-import { User, Gender } from './User';
-import { Student } from './Student';
+import { Student } from './Student.model';
 import { Level } from './Level';
 
 export class Group {

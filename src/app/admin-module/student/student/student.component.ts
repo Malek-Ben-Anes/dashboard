@@ -1,8 +1,8 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Student } from '@app/models/Student';
+import { Student } from '@app/models/Student.model';
 import { StudentService } from '@app/services/student.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -14,15 +14,13 @@ import { TranslateService } from '@ngx-translate/core';
 export class StudentComponent implements OnInit, OnChanges {
   isNew = true;
   tabIndex = {'PROFILE': 0, 'PASSWORD': 1, 'BULLETIN': 2, 'TIME_TABLE': 3};
-  tabs = this.tabs = this.updateTabs();
+  tabs = this.updateTabs();
 
   selected = new FormControl(0);
   student: Student;
 
-  constructor(private studentService: StudentService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private translate: TranslateService) { }
+  constructor(private studentService: StudentService, private route: ActivatedRoute, private translate: TranslateService) {
+  }
 
   ngOnInit() {
     const id: string = this.route.snapshot.params['id'];

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
-import { Student } from "app/models/Student";
+import { Student } from "@app/models/Student.model";
 import { StudentService } from "app/services/student.service";
 import { BASE_URL } from "app/app.component";
 import { DialogService } from "app/commons/dialog/dialog.service";

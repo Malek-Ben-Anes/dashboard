@@ -14,12 +14,12 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput [placeholder]="'All.text.label.FirstName' | translate" formControlName="firstname" required>
+                                        <input matInput [placeholder]="'All.text.label.FirstName' | translate" formControlName="firstName" required>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput [placeholder]="'All.text.label.LastName' | translate" formControlName="lastname" required>
+                                        <input matInput [placeholder]="'All.text.label.LastName' | translate" formControlName="lastName" required>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -50,8 +50,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput [matDatepicker]="picker"
-                                         [placeholder]="'All.text.label.BirthDate' | translate"
+                                        <input matInput [matDatepicker]="picker" [placeholder]="'All.text.label.BirthDate' | translate"
                                          formControlName="birthDate" required>
                                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                         <mat-datepicker touchUi #picker></mat-datepicker>
@@ -61,8 +60,7 @@
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
                                         <mat-select matInput
-                                         [placeholder]="'All.text.label.LevelName' | translate"
-                                         formControlName="level" required>
+                                         [placeholder]="'All.text.label.LevelName' | translate" formControlName="level" required>
                                             <mat-option *ngFor="let lev of levels" [value]="lev" required>
                                                 {{'GLBL.label.'+lev | translate}}
                                             </mat-option>
@@ -73,8 +71,7 @@
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
                                         <mat-select matInput 
-                                         [placeholder]="'All.text.label.GroupName' | translate"
-                                         formControlName="group">
+                                         [placeholder]="'All.text.label.GroupName' | translate" formControlName="group">
                                             <mat-option *ngFor="let grp of groups" [value]="grp">
                                                 {{ grp.name }}
                                             </mat-option>

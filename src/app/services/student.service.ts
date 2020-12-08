@@ -1,9 +1,9 @@
 import * as _ from "lodash";
-import { HttpClient, HttpErrorResponse, HttpParams } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Subject, Observable } from "rxjs";
+import { Observable } from "rxjs";
 
-import { Student } from "app/models/Student";
+import { Student } from "@app/models/Student.model";
 import { BASE_API_URL } from "../app.component";
 import { Level } from "app/models/Level";
 import { Group } from "app/models/Group";

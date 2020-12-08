@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Student } from '@app/models/Student';
+import { Student } from '@app/models/Student.model';
 import { BASE_API_URL } from '@app/app.component';
 import { Trimester } from '@app/models/Trimester';
 import { Teacher } from '@app/models/Teacher';

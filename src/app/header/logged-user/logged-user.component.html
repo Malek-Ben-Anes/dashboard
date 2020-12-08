@@ -19,7 +19,7 @@
     <a class="dropdown-toggle nav-link background-white" data-toggle="dropdown">
       <img  class="radius-image" [src]="loggedUser && loggedUser.photo"
        default="assets/images/profile-logo.png" alt="smile-face"/>
-        {{loggedUser.name || loggedUser.firstname}}
+        {{loggedUser.firstName || loggedUser.lastName}}
       <span class="caret"></span>
     </a>
     <ul class="dropdown-menu">

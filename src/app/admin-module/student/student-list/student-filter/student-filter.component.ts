@@ -4,7 +4,7 @@ import { Level } from '@app/models/Level';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { GroupService } from '@app/services/group.service';
 import { Group } from '@app/models/Group';
-import { Student } from '@app/models/Student';
+import { Student } from '@app/models/Student.model';
 
 @Component({
   selector: 'app-student-filter',

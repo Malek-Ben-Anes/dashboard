@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Student } from '@app/models/Student';
+import { Student } from '@app/models/Student.model';
 import { TokenStorageService } from '@app/services/auth/token-storage.service';
 import { User, Gender } from '@app/models/User';
 import { AuthService } from '@app/services/auth/auth.service';

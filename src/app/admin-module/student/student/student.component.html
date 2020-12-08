@@ -8,8 +8,10 @@
 </div>
 <app-student-profile *ngIf="selected.value === tabIndex.PROFILE && student != null" [student]="student" [isNew]="isNew"
         (modifiedStudent)="onUpdate($event)"></app-student-profile>
+
 <app-update-password *ngIf="selected.value === tabIndex.PASSWORD && student != null" [student]="student"
         (modifiedStudent)="refresh($event)"></app-update-password>
-<app-bulletin *ngIf="selected.value === tabIndex.BULLETIN && student != null" [student]="student"
-        (modifiedStudent)="refreshStudent($event)"></app-bulletin>
+
+<app-bulletin *ngIf="selected.value === tabIndex.BULLETIN && student != null" [student]="student"></app-bulletin>
+
 <app-time-table *ngIf="selected.value === tabIndex.TIME_TABLE && student != null" [student]="student"></app-time-table>

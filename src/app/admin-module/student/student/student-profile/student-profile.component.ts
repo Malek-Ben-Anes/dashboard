@@ -3,7 +3,7 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitte
 
 import { Gender } from '@app/models/User';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Student } from '@app/models/Student';
+import { Student } from '@app/models/Student.model';
 import { Level } from '@app/models/Level';
 import { Group } from '@app/models/Group';
 import { GroupService } from '@app/services/group.service';
@@ -56,10 +56,7 @@ export class StudentProfileComponent implements OnInit {
   }
 
   onConfirmationDelete(studentId: string ) {
-    this.studentService.delete(studentId).subscribe(student =>
-      { console.log("student deleted!");
-        this.router.navigate(['app', 'students']);
-      });
+    this.studentService.delete(studentId).subscribe(student => this.router.navigate(['app', 'students']));
   }
 
   onDelete(studentId: string): void {
@@ -81,27 +78,23 @@ export class StudentProfileComponent implements OnInit {
   }
 
   private getGroup() {
-    this.groupService.findAll().subscribe(groups => {this.groups = groups;
-      this.updateForm(this.student);
+    this.groupService.findAll().subscribe(groups => {this.groups = groups; this.updateForm(this.student);
     }, err => console.log(err));
   }
 
   private initForm() {
-
     this.studentForm = this.formBuilder.group({
-      firstname: ['', [Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(50)]],
-      lastname: ['', [Validators.required,  Validators.minLength(3), Validators.maxLength(50)]],
+      firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+      lastName: ['', [Validators.required,  Validators.minLength(3), Validators.maxLength(50)]],
       email: ['', [Validators.required, Validators.pattern(EMAIL_PATTERN)]],
       birthDate: [null, Validators.required],
       phone: ['', Validators.required],
       gender: ['', Validators.required],
       level: [null, Validators.required],
-      group: [null, Validators.required],
-      parentName: ['', Validators.required],
-      parentPhone: ['', Validators.required],
-      address: ['', Validators.required],
+      group: [null],
+      parentName: [''],
+      parentPhone: [''],
+      address: [''],
       description: ['', [Validators.minLength(3), Validators.maxLength(500)]],
     });
   }

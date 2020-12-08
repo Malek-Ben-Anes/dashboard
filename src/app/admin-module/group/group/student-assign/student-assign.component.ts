@@ -1,9 +1,9 @@
 import * as _ from 'lodash';
-import { Component, OnInit, Input, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 import { Group } from '@app/models/Group';
-import { Student } from '@app/models/Student';
+import { Student } from '@app/models/Student.model';
 import { StudentService } from '@app/services/student.service';
 import { GroupService } from '@app/services/group.service';
 import { BASE_URL } from '@app/app.component';

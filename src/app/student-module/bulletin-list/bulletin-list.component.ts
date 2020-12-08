@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
-import { Component, OnInit, Input } from '@angular/core';
-import { Student } from '@app/models/Student';
+import { Component, OnInit } from '@angular/core';
+import { Student } from '@app/models/Student.model';
 import { BASE_URL } from '@app/app.component';
 import { TokenStorageService } from '@app/services/auth/token-storage.service';
 import { AuthService } from '@app/services/auth/auth.service';

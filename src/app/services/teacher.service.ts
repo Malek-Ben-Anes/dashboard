@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Teacher } from '../models/Teacher';
-import { Gender } from '../models/User';
-import { HttpClient, HttpErrorResponse, HttpEvent, HttpParams } from '@angular/common/http';
-import { reject } from 'q';
+import { HttpClient } from '@angular/common/http';
 import { BASE_API_URL } from '@app/app.component';
 import { FileUploadService } from './file-upload.service';
-import { Student } from '@app/models/Student';
+import { Student } from '@app/models/Student.model';
 
 
 const TEACHER_URL: string = BASE_API_URL + 'teachers';

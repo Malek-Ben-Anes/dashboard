@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Student } from '@app/models/Student';
+import { Student } from '@app/models/Student.model';
 import { BASE_URL } from '@app/app.component';
 import { TranslateService } from '@ngx-translate/core';
 

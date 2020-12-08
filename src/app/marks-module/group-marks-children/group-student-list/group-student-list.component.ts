@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy, EventEmitter, Output, OnChanges, SimpleChanges } from '@angular/core';
-import { Student } from '@app/models/Student';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Student } from '@app/models/Student.model';
 import { BASE_URL } from '@app/app.component';
 
 @Component({

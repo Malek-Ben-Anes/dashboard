@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { BASE_URL } from '@app/app.component';
 import { FileUploadService } from '@app/services/file-upload.service';
-import { Student } from '@app/models/Student';
+import { Student } from '@app/models/Student.model';
 import { Teacher } from '@app/models/Teacher';
 import { HttpClient } from '@angular/common/http';
 
