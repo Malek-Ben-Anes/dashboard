@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Teacher } from '@app/models/Teacher';
+import { Teacher } from '@app/models/Teacher.model';
 import { BASE_URL } from '@app/app.component';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TeacherService } from '@app/services/teacher.service';
@@ -66,10 +66,9 @@ export class UpdateTeacherPasswordComponent implements OnInit {
       return;
     }
     /*this.teacher.password = this.passwordForm.get("password").value;*/
-    const updatePassword = true;
     this.teacherService
-      .update(this.teacher, updatePassword)
-      .then(
+      .updatePassword(this.teacher, "")
+      .subscribe(
         (teacher: Teacher) => {
         this.teacher = teacher;
         this.modifiedTeacher.emit(this.teacher);
@@ -78,9 +77,7 @@ export class UpdateTeacherPasswordComponent implements OnInit {
           dialogMessage: ''
         };
         this.dialogService.openDialog(data);
-      })
-      .catch(
-        err => {
+      }, err => {
           const data: DialogData = {
             dialogTitle: this.translate.instant('All.Password.Message.update.failed'),
             dialogMessage: ''

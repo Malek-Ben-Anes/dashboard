@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Teacher } from '@app/models/Teacher';
+import { Teacher } from '@app/models/Teacher.model';
 import { Gender } from "@app/models/enums/Gender";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TeacherService } from '@app/services/teacher.service';

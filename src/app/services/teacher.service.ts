@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Teacher } from '../models/Teacher';
+import { Teacher } from '../models/Teacher.model';
 import { HttpClient } from '@angular/common/http';
 import { BASE_API_URL } from '@app/app.component';
 import { FileUploadService } from './file-upload.service';
@@ -20,20 +20,22 @@ export class TeacherService {
     return this.http.get<Teacher[]>(TEACHER_URL);
   }
 
-  findTeacherById(id: string): Observable<Teacher> {
-    return this.http.get<Teacher>(TEACHER_URL + '/' + id);
+  getById(teacherId: string): Observable<Teacher> {
+    return this.http.get<Teacher>(TEACHER_URL + '/' + teacherId);
   }
 
-  saveTeacher(teacher: Teacher): Observable<Teacher> {
+  create(teacher: Teacher): Observable<Teacher> {
     return this.http.post<Teacher>(TEACHER_URL, teacher);
   }
 
-  update(teacher: Teacher, updatePassword?: boolean): Promise<Teacher> {
-    const Url = updatePassword ? `${TEACHER_URL}/${teacher.id}/password` : `${TEACHER_URL}/${teacher.id}`;
-    return new Promise((resolve, reject) => {
-        this.http.put<Teacher>(Url, teacher)
-          .subscribe(studentUpdated => resolve(studentUpdated), err => reject(err));
-    });
+  update(teacher: Teacher): Observable<Teacher> {
+    const Url = `${TEACHER_URL}/${teacher.id}`;
+    return this.http.put<Teacher>(Url, teacher);;
+  }
+
+  updatePassword(teacher: Teacher, other:any): Observable<Teacher> {
+    const Url = `${TEACHER_URL}/${teacher.id}/password`;
+    return this.http.put<Teacher>(Url, teacher);;
   }
 
   uploadTimeTable(teacherId: string, file: File): Promise<Student | Teacher> {
@@ -43,13 +45,9 @@ export class TeacherService {
     return this.fileService.executeCall(TIMETABLE_UPLOAD_URL, body);
   }
 
-  updateTeacher(teacher: Teacher): Observable<Teacher> {
-    return this.http.put<Teacher>(TEACHER_URL + '/' + teacher.id, teacher);
-  }
-
-  delete(teacherId: string): Observable<Teacher> {
+  delete(teacherId: string): Observable<any> {
     const Url = `${TEACHER_URL}/${teacherId}`;
-    return this.http.delete<Teacher>(Url);
+    return this.http.delete<any>(Url);
   }
 
 }

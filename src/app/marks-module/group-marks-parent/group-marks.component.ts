@@ -52,7 +52,7 @@ export class GroupMarksComponent implements OnInit {
 
   private get teacherId(): string {
     const user: User = this.storage.getLoggedUser();
-    return user.discriminatorValue == 'TEACHER' ? user.id : _.undefined;
+    return 'TEACHER';//user.discriminatorValue == 'TEACHER' ? user.id : _.undefined;
   }
 
   private findLessons(groupId: string, teacherId: string = _.undefined) {

@@ -10,15 +10,11 @@ export class Student extends User {
     parentPhone?: string;
     description?: string;
     bulletins?: {};
-    marks?: Mark[];
+    marks?: Mark[]; // TODO remove marks
 
-    constructor(_id?: string, _firstname?: string, _lastname?: string, _gender?: Gender,
-        _description?: string, _marks?: Mark[]) {
-        super(_id, _firstname, _lastname, _gender);
-        this.marks = _marks;
-    }
 }
 class Group {
     id: string;
     name: string;
+    timeTableUrl: string;
 }

@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material';
 
 import * as _ from 'lodash';
 
-import { Teacher } from '@app/models/Teacher';
+import { Teacher } from '@app/models/Teacher.model';
 import { Group } from '@app/models/Group';
 import { Student } from '@app/models/Student.model';
 import { GroupService } from '@app/services/group.service';

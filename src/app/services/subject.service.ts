@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Teacher } from '../models/Teacher';
+import { Teacher } from '../models/Teacher.model';
 import { Subject } from '../models/Subject';
 import { Gender } from "../models/enums/Gender";
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';

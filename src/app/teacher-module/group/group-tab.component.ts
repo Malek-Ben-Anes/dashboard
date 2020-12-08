@@ -4,7 +4,7 @@ import { Level } from '@app/models/enums/Level';
 import { GroupService } from '@app/services/group.service';
 import { BASE_URL } from '@app/app.component';
 import { FormGroup } from '@angular/forms';
-import { Teacher } from '@app/models/Teacher';
+import { Teacher } from '@app/models/Teacher.model';
 import { TokenStorageService } from '@app/services/auth/token-storage.service';
 import { AuthService } from '@app/services/auth/auth.service';
 import { TranslateService } from '@ngx-translate/core';

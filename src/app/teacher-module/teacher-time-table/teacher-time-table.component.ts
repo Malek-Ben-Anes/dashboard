@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Teacher } from '@app/models/Teacher';
+import { Teacher } from '@app/models/Teacher.model';
 import { TokenStorageService } from '@app/services/auth/token-storage.service';
 import { AuthService } from '@app/services/auth/auth.service';
 import { FormBuilder, FormGroup } from '@angular/forms';

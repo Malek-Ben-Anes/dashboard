@@ -10,7 +10,7 @@ import { Level } from '@app/models/enums/Level';
 import { StudentService } from '@app/services/student.service';
 import { Observable } from 'rxjs';
 import { BASE_URL } from '@app/app.component';
-import { Teacher } from '@app/models/Teacher';
+import { Teacher } from '@app/models/Teacher.model';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

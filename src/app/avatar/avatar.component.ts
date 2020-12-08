@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { BASE_URL } from '@app/app.component';
 import { FileUploadService } from '@app/services/file-upload.service';
 import { Student } from '@app/models/Student.model';
-import { Teacher } from '@app/models/Teacher';
+import { Teacher } from '@app/models/Teacher.model';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -20,7 +20,7 @@ export class AvatarComponent implements OnInit {
   selectedFile: File
   isUploading = false;
 
-  constructor(private fileUploadService: FileUploadService, private http: HttpClient) { }
+  constructor(private fileUploadService: FileUploadService) { }
 
   ngOnInit() {}
 
@@ -36,10 +36,4 @@ export class AvatarComponent implements OnInit {
     .catch(err =>  {alert(err); this.isUploading = false});
   }
 
-  get profile(): string {
-    if ( this.user.discriminatorValue === 'TEACHER') {
-      return 'teacher';
-    }
-    return 'student';
-  }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TeacherService } from '@app/services/teacher.service';
 
-import { Teacher } from '@app/models/Teacher';
+import { Teacher } from '@app/models/Teacher.model';
 import { BASE_URL } from '@app/app.component';
 import { Gender } from "@app/models/enums/Gender";
 import { MatTableDataSource, MatPaginator } from '@angular/material';
@@ -22,7 +22,7 @@ export class TeacherListComponent implements OnInit {
   teachers: Teacher[] = [];
 
   dataSource = new MatTableDataSource<Teacher>(this.teachers);
-  displayedColumns: string[] = ['photo', 'firstname', 'lastname', 'email', 'phone', 'description'];
+  displayedColumns: string[] = ['photo', 'firstName', 'lastName', 'phone', 'description'];
 
   isLoading = false;
 
