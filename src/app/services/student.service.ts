@@ -50,9 +50,9 @@ export class StudentService {
     return _.find(this.students, { id: studentId });
   }
 
-  updatePassword(studentId: string, updatePassword: UpdatePasswordRequest): Observable<File> {
-    const Url = `${this.STUDENT_URL}/${studentId}/password`;
-    return this.http.put<File>(Url, updatePassword);
+  updatePassword(studentId: string, updatePassword: UpdatePasswordRequest): Observable<any> {
+    const url = `${this.STUDENT_URL}/${studentId}/password`;
+    return this.http.put(url, updatePassword, { responseType: 'blob' })
   }
 
   delete(studentId: string): Observable<Student> {

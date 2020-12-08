@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { saveAs } from 'file-saver';
 
 import { Student } from "@app/models/Student.model";
 import { StudentService } from "app/services/student.service";
@@ -58,9 +59,12 @@ export class UpdatePasswordComponent implements OnInit {
     }
 
     const updatePassword: UpdatePasswordRequest = {password: this.passwordForm.get('password').value};
+    
     this.studentService.updatePassword(this.student.id, updatePassword)
-      .subscribe((registrationFile) => {
-        this.registrationFile = registrationFile;
+      .subscribe((response) => {
+        const blob = new Blob([response], { type: 'application/pdf' });
+        const registrationFileName = `${this.student.firstName}-${this.student.lastName}-registration.pdf`;
+        saveAs(blob, registrationFileName);
         const data: DialogData = {
           dialogTitle: this.translate.instant('All.Password.Message.update.success'),
           dialogMessage: ''
@@ -84,9 +88,9 @@ export class UpdatePasswordComponent implements OnInit {
   }
 
   private randomPassword(): string {
-    let result = '';
+    let result = 'PLUME';
     const characters = '0123456789';
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 5; i++) {
       result += characters.charAt(Math.floor(Math.random() * characters.length));
     }
     return result;
