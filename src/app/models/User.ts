@@ -1,5 +1,4 @@
-import { Gender } from "./enums/Gender";
-
+import { Gender } from "@app/models/enums/Gender";
 export class User {
 
     id?: string;

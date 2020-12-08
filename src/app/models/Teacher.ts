@@ -1,5 +1,5 @@
-import { User } from './User';
-import { Gender } from "./enums/Gender";
+import { User } from '@app/models/User';
+import { Gender } from "@app/models/enums/Gender";
 
 export class Teacher extends User {
 
@@ -12,8 +12,5 @@ export class Teacher extends User {
         super(_id, _firstname, _lastname, _gender);
         this.description = _description;
         this.salary = _salary;
-        this.role = ['pm'];
     }
-
-
 }

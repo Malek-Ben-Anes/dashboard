@@ -17,7 +17,6 @@ export class Student extends User {
         super(_id, _firstname, _lastname, _gender);
         this.marks = _marks;
     }
-
 }
 class Group {
     id: string;
