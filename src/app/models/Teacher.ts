@@ -1,4 +1,5 @@
-import { User, Gender } from './User';
+import { User } from './User';
+import { Gender } from "./enums/Gender";
 
 export class Teacher extends User {
 

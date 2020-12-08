@@ -2,7 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Group } from '@app/models/Group';
 import { TokenStorageService } from '@app/services/auth/token-storage.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Level } from '@app/models/Level';
+import { Level } from '@app/models/enums/Level';
 import { GroupService } from '@app/services/group.service';
 import { StudentService } from '@app/services/student.service';
 import { TranslateService } from '@ngx-translate/core';

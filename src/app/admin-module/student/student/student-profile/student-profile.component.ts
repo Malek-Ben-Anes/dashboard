@@ -1,10 +1,10 @@
 import * as _ from 'lodash';
 import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 
-import { Gender } from '@app/models/User';
+import { Gender } from "@app/models/enums/Gender";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Student } from '@app/models/Student.model';
-import { Level } from '@app/models/Level';
+import { Level } from '@app/models/enums/Level';
 import { Group } from '@app/models/Group';
 import { GroupService } from '@app/services/group.service';
 import { TranslateService } from '@ngx-translate/core';

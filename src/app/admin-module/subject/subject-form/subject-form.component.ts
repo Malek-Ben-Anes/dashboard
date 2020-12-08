@@ -3,7 +3,7 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, EventEmitter, Outpu
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SubjectService } from '@app/services/subject.service';
 import { Subject } from '@app/models/Subject';
-import { Level } from '@app/models/Level';
+import { Level } from '@app/models/enums/Level';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { DialogContentExampleDialogComponent } from '@app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';

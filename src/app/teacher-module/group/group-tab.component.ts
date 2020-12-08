@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Group } from '@app/models/Group';
-import { Level } from '@app/models/Level';
+import { Level } from '@app/models/enums/Level';
 import { GroupService } from '@app/services/group.service';
 import { BASE_URL } from '@app/app.component';
 import { FormGroup } from '@angular/forms';

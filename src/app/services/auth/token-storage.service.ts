@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { User, Gender } from '@app/models/User';
+import { User } from '@app/models/User';
+import { Gender } from "@app/models/enums/Gender";
 
 const TOKEN_KEY = 'AuthToken';
 const IS_LOGGED_USER_KEY = 'IsLoggedUser';

@@ -3,11 +3,11 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Teacher } from '../models/Teacher';
 import { Subject } from '../models/Subject';
-import { Gender } from '../models/User';
+import { Gender } from "../models/enums/Gender";
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { reject } from 'q';
 import { BASE_API_URL } from '@app/app.component';
-import { Level } from '@app/models/Level';
+import { Level } from '@app/models/enums/Level';
 
 
 const SUBJECT_URL: string = BASE_API_URL + 'subjects';

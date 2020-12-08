@@ -3,7 +3,7 @@ import { TeacherService } from '@app/services/teacher.service';
 
 import { Teacher } from '@app/models/Teacher';
 import { BASE_URL } from '@app/app.component';
-import { Gender } from '@app/models/User';
+import { Gender } from "@app/models/enums/Gender";
 import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { Routers } from '@app/admin-module/routes/router-link';
 

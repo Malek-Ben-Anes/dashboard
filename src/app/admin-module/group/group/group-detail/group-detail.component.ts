@@ -5,7 +5,7 @@ import { BASE_URL } from '@app/app.component';
 import { Student } from '@app/models/Student.model';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { group } from '@angular/animations';
-import { Level } from '@app/models/Level';
+import { Level } from '@app/models/enums/Level';
 import { GroupService } from '@app/services/group.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';

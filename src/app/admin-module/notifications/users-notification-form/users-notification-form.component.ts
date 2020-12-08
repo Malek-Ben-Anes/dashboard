@@ -10,7 +10,7 @@ import { Student } from '@app/models/Student.model';
 import { GroupService } from '@app/services/group.service';
 import { StudentService } from '@app/services/student.service';
 import { TeacherService } from '@app/services/teacher.service';
-import { Notif } from '@app/models/Notif';
+import { Notif } from '@app/models/enums/Notif';
 import { Notification, NotificationRequest } from '@app/models/Notification';
 import { NotificationService } from '@app/services/notification.service';
 import { AuthService } from '@app/services/auth/auth.service';

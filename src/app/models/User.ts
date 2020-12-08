@@ -1,3 +1,5 @@
+import { Gender } from "./enums/Gender";
+
 export class User {
 
     id?: string;
@@ -11,7 +13,6 @@ export class User {
     address?: string;
     createdAt?: string;
     updatedAt?: string;
-    password?: string;
     role: string[];
     discriminatorValue: string;
     newNotifications: number;
@@ -30,7 +31,3 @@ export class User {
     }
 }
 
-export enum Gender {
-    MALE = "MALE",
-    FEMALE = "FEMALE",
-}

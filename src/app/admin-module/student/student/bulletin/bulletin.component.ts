@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { TokenStorageService } from '@app/services/auth/token-storage.service';
 import { BASE_URL } from '@app/app.component';
 import { Student } from '@app/models/Student.model';
-import { Trimester } from '@app/models/Trimester';
+import { Trimester } from '@app/models/enums/Trimester';
 import { FileUploadService } from '@app/services/file-upload.service';
 import { TranslateService } from '@ngx-translate/core';
 

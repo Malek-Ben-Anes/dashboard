@@ -9,7 +9,7 @@ import { Group } from '@app/models/Group';
 import { Student } from '@app/models/Student.model';
 import { GroupService } from '@app/services/group.service';
 import { StudentService } from '@app/services/student.service';
-import { Notif } from '@app/models/Notif';
+import { Notif } from '@app/models/enums/Notif';
 import { NotificationRequest } from '@app/models/Notification';
 import { NotificationService } from '@app/services/notification.service';
 import { User } from '@app/models/User';

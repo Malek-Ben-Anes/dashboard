@@ -1,5 +1,6 @@
-import { User, Gender } from './User';
-import { Level } from './Level';
+import { User } from './User';
+import { Gender } from "./enums/Gender";
+import { Level } from './enums/Level';
 import { Group } from './Group';
 import { Mark } from './Mark';
 

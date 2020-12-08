@@ -1,5 +1,5 @@
 import { Student } from './Student.model';
-import { Level } from './Level';
+import { Level } from './enums/Level';
 
 export class Group {
 

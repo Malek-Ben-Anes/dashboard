@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Student } from '@app/models/Student.model';
 import { TokenStorageService } from '@app/services/auth/token-storage.service';
-import { User, Gender } from '@app/models/User';
+import { User } from '@app/models/User';
+import { Gender } from "@app/models/enums/Gender";
 import { AuthService } from '@app/services/auth/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BASE_URL } from '@app/app.component';

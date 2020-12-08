@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Notification, NotificationRequest } from '@app/models/Notification';
 import { BASE_API_URL } from '@app/app.component';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Notif } from '@app/models/Notif';
+import { Notif } from '@app/models/enums/Notif';
 
 const NOTIFICATION_URL: string = BASE_API_URL + 'notifications/';
 

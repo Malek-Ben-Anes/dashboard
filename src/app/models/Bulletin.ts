@@ -1,5 +1,5 @@
 import { Group } from './Group';
-import { Trimester } from './Trimester';
+import { Trimester } from './enums/Trimester';
 
 export class Bulletin {
 

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormBuilder } from '@angular/forms';
 import { SubjectService } from '@app/services/subject.service';
 import { Subject } from '@app/models/Subject';
-import { Level } from '@app/models/Level';
+import { Level } from '@app/models/enums/Level';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
