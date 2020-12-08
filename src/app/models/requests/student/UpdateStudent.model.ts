@@ -1,7 +1,7 @@
 import { Gender } from "@app/models/enums/Gender";
 import { Level } from '@app/models/enums/Level';
 
-export class UpdateStudent {
+export class UpdateStudentRequest {
     firstName: string;
     lastName: string;
     gender: Gender;

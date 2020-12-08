@@ -8,65 +8,54 @@ import { BASE_API_URL } from "../app.component";
 import { Level } from "@app/models/enums/Level";
 import { Group } from "app/models/Group";
 import { StudentFilter } from "app/admin-module/student/student-list/student-filter/student-filter.component";
-import { map } from "rxjs-compat/operator/map";
-
-const STUDENT_URL: string = BASE_API_URL + "students";
-const GROUP_URL: string = BASE_API_URL + "groups/";
-
-interface SearchStudent {
-  firstname: string;
-  lastname: string;
-  level: Level;
-  group: Group;
-}
+import { UpdateStudentRequest } from "@app/models/requests/student/UpdateStudent.model";
+import { createStudentRequest } from "@app/models/requests/student/CreateStudent.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentService {
+
+  readonly STUDENT_URL: string = BASE_API_URL + "students";
+  readonly GROUP_URL: string = BASE_API_URL + "groups/";
+
   students: Student[] = [];
 
   constructor(private http: HttpClient) {}
 
-  getStudents(): Observable<Student[]> {
-    return this.http.get<Student[]>(STUDENT_URL);
-  }
-
   findAll(): Observable<Student[]> {
-    return this.http.get<Student[]>(STUDENT_URL);
+    return this.http.get<Student[]>(this.STUDENT_URL);
   }
 
   findStudentsByGroupId(groupId: string): Observable<Student[]> {
-    const URL = `${GROUP_URL}${groupId}/students/`;
+    const URL = `${this.GROUP_URL}${groupId}/students/`;
     return this.http.get<Student[]>(URL);
   }
 
-  getStudentById(id: string): Observable<Student>  {
-    return this.http.get<Student>(STUDENT_URL + '/' + id);
+  getById(studentId: string): Observable<Student>  {
+    return this.http.get<Student>(this.STUDENT_URL + '/' + studentId);
   }
 
-  save(student: Student): Promise<Student> {
-    return new Promise((resolve, reject) => {
-      this.http.post<Student>(STUDENT_URL, student)
-          .subscribe(student => resolve(student), err => reject(err));
-    });
+  create(createRequest: createStudentRequest): Observable<Student> {
+    return this.http.post<Student>(this.STUDENT_URL, createRequest);
   }
 
-  updateStudent(student: Student): Observable<Student> {
-    return this.http.put<Student>(STUDENT_URL  + '/' + student.id, student);
+  update(studentId: string, updateRequest: UpdateStudentRequest): Observable<Student> {
+    const updateUrl = this.STUDENT_URL  + '/' + studentId;
+    return this.http.put<Student>(updateUrl, updateRequest);
   }
 
   getSingleStudent(studentId: string): Student {
     return _.find(this.students, { id: studentId });
   }
 
-  update(student: Student, updatePassword?: boolean): Observable<Student> {
-    const Url = updatePassword ? `${STUDENT_URL}/${student.id}/password` : `${STUDENT_URL}/${student.id}`;
-    return this.http.put<Student>(Url, student);
+  updatePassword(studentId: string, updatePassword: any): Observable<Student> {
+    const Url = `${this.STUDENT_URL}/${studentId}/password`;
+    return this.http.put<Student>(Url, updatePassword);
   }
 
   delete(studentId: string): Observable<Student> {
-    const Url = `${STUDENT_URL}/${studentId}`;
+    const Url = `${this.STUDENT_URL}/${studentId}`;
     return this.http.delete<Student>(Url);
   }
 
@@ -90,4 +79,10 @@ export class StudentService {
     return true;
   }
 
+}
+interface SearchStudent {
+  firstname: string;
+  lastname: string;
+  level: Level;
+  group: Group;
 }

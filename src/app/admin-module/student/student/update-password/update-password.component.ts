@@ -71,7 +71,7 @@ export class UpdatePasswordComponent implements OnInit {
 
     const updatePassword = true;
     /*this.student.password = this.passwordForm.get('password').value;*/
-    this.studentService.update(this.student, updatePassword)
+    this.studentService.updatePassword(this.student.id, updatePassword)
       .subscribe((student) => {
         this.student = student;
         this.modifiedStudent.emit(this.student);

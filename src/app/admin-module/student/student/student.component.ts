@@ -5,6 +5,8 @@ import { StudentService } from '@app/services/student.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
+import { createStudentRequest } from '@app/models/requests/student/CreateStudent.model';
+import { UpdateStudentRequest } from '@app/models/requests/student/UpdateStudent.model';
 
 @Component({
   selector: 'app-student',
@@ -12,8 +14,8 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./student.component.scss']
 })
 export class StudentComponent implements OnInit, OnChanges {
+  readonly tabIndex = {'PROFILE': 0, 'PASSWORD': 1, 'BULLETIN': 2, 'TIME_TABLE': 3};
   isNew = true;
-  tabIndex = {'PROFILE': 0, 'PASSWORD': 1, 'BULLETIN': 2, 'TIME_TABLE': 3};
   tabs = this.updateTabs();
 
   selected = new FormControl(0);
@@ -24,7 +26,6 @@ export class StudentComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     const id: string = this.route.snapshot.params['id'];
-    this.tabs = this.updateTabs();
     if (id != null && this.isNew) {
       this.getStudent(id);
     } else {
@@ -33,12 +34,11 @@ export class StudentComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    // changes.prop contains the old and the new value...
     this.student = changes.student.currentValue;
   }
 
   private getStudent(id: string): void {
-    this.studentService.getStudentById(id).subscribe(
+    this.studentService.getById(id).subscribe(
       (studentData: Student) => {
         this.student = studentData;
         this.isNew = false;
@@ -56,11 +56,11 @@ export class StudentComponent implements OnInit, OnChanges {
    * Get event from child Component and update student
    * @param studentToPersist 
    */
-  onUpdate(student: Student) {
+  onUpdate(request: createStudentRequest | UpdateStudentRequest): void {
     if ( this.isNew ) {
-      this.create(student);
+      this.create(<createStudentRequest>request);
     } else {
-      this.update(student);
+      this.update(<UpdateStudentRequest>request);
     }
   }
 
@@ -68,25 +68,23 @@ export class StudentComponent implements OnInit, OnChanges {
  * Get event from child Component and refersh student
  * @param studentToPersist
  */
-  refresh(student: Student) {
-    this.student = student;
-    console.log('student refreshed');
+  refresh(updateStudent: Student) {
+    this.student = updateStudent;
   }
 
-  private update(studentRequest: Student): void {
-    this.studentService.update(studentRequest).subscribe((StudentData) => {
+  private update(studentRequest: UpdateStudentRequest): void {
+    this.studentService.update(this.student.id, studentRequest).subscribe((StudentData) => {
       this.student = StudentData;
       this.tabs = this.updateTabs();},
     (err) => console.log(err));
   }
 
-  private create (studentRequest: Student): void {
-    this.studentService.save(studentRequest).then((student) => {
+  private create (studentRequest: createStudentRequest): void {
+    this.studentService.create(studentRequest).subscribe((student) => {
         this.student = student;
         this.isNew = false;
         this.tabs = this.updateTabs();
-      })
-      .catch((err) => {
+      }, (err) => {
         alert(this.translate.instant('All.text.create.failed.duplicated'));
       });
   }

@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Gender } from "@app/models/enums/Gender";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -13,15 +13,14 @@ import { Router } from '@angular/router';
 import { DialogContentExampleDialogComponent } from '@app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
 import { MatDialog } from '@angular/material';
 
-
-const EMAIL_PATTERN = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
-
 @Component({
   selector: 'app-student-profile',
   templateUrl: './student-profile.component.html',
   styleUrls: ['./student-profile.component.css']
 })
 export class StudentProfileComponent implements OnInit {
+
+  readonly EMAIL_PATTERN = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
 
   @Input('student')
   student: Student;
@@ -35,18 +34,13 @@ export class StudentProfileComponent implements OnInit {
   genders = Object.keys(Gender);
   levels = Object.keys(Level);
 
-  studentForm: FormGroup;
+  studentForm: FormGroup = this.initFormGroup();
   groups: Group[] = [];
 
-  constructor(private formBuilder: FormBuilder,
-              private groupService: GroupService,
-              public dialog: MatDialog,
-              private router: Router,
-              private studentService: StudentService,
-              private translate: TranslateService) { }
+  constructor(private formBuilder: FormBuilder, private groupService: GroupService, public dialog: MatDialog, private router: Router,
+              private studentService: StudentService, private translate: TranslateService) { }
 
   ngOnInit() {
-    this.initForm();
     this.getGroup();
   }
 
@@ -82,11 +76,11 @@ export class StudentProfileComponent implements OnInit {
     }, err => console.log(err));
   }
 
-  private initForm() {
-    this.studentForm = this.formBuilder.group({
+  private initFormGroup(): FormGroup {
+    return this.formBuilder.group({
       firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       lastName: ['', [Validators.required,  Validators.minLength(3), Validators.maxLength(50)]],
-      email: ['', [Validators.required, Validators.pattern(EMAIL_PATTERN)]],
+      email: ['', [Validators.required, Validators.pattern(this.EMAIL_PATTERN)]],
       birthDate: [null, Validators.required],
       phone: ['', Validators.required],
       gender: ['', Validators.required],
@@ -142,4 +136,5 @@ export class StudentProfileComponent implements OnInit {
   private extractFieldData(property: string): any {
     return this.studentForm.get(property).value;
   }
+
 }

@@ -21,7 +21,7 @@
         </ng-template>
     </form>
     <div class="card-body">
-        <h4 class="card-title">{{user.firstName + user.lastName}}</h4>
+        <h4 class="card-title">{{user.firstName + ' ' + user.lastName}}</h4>
         <p class="card-description">
             {{'label.registered' | translate}}: {{ user.createdAt | date }}
         </p>

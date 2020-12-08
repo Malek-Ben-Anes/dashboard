@@ -36,7 +36,7 @@ export class StudentListComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = true;
-    this.studentsService.getStudents().subscribe(
+    this.studentsService.findAll().subscribe(
       (students: any[]) => {
         this.students = students;
         this.studentsTmp = students;
