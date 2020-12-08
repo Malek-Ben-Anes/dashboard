@@ -5,37 +5,37 @@ import { HttpClient } from '@angular/common/http';
 import { BASE_API_URL } from '@app/app.component';
 import { FileUploadService } from './file-upload.service';
 import { Student } from '@app/models/Student.model';
-
-
-const TEACHER_URL: string = BASE_API_URL + 'teachers';
+import { UpdateTeacherRequest } from '@app/models/requests/teacher/UpdateTeacher.model';
+import { CreateTeacherRequest } from '@app/models/requests/teacher/CreateTeacher.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeacherService {
+  readonly TEACHER_URL: string = BASE_API_URL + 'teachers';
 
   constructor(private fileService: FileUploadService, private http: HttpClient) { }
 
   findAll(): Observable<Teacher[]> {
-    return this.http.get<Teacher[]>(TEACHER_URL);
+    return this.http.get<Teacher[]>(this.TEACHER_URL);
   }
 
   getById(teacherId: string): Observable<Teacher> {
-    return this.http.get<Teacher>(TEACHER_URL + '/' + teacherId);
+    return this.http.get<Teacher>(this.TEACHER_URL + '/' + teacherId);
   }
 
-  create(teacher: Teacher): Observable<Teacher> {
-    return this.http.post<Teacher>(TEACHER_URL, teacher);
+  create(teacherRequest: CreateTeacherRequest): Observable<Teacher> {
+    return this.http.post<Teacher>(this.TEACHER_URL, teacherRequest);
   }
 
-  update(teacher: Teacher): Observable<Teacher> {
-    const Url = `${TEACHER_URL}/${teacher.id}`;
-    return this.http.put<Teacher>(Url, teacher);;
+  update(teacherId: string, teacherRequest: UpdateTeacherRequest): Observable<Teacher> {
+    const Url = `${this.TEACHER_URL}/${teacherId}`;
+    return this.http.put<Teacher>(Url, teacherRequest);;
   }
 
-  updatePassword(teacher: Teacher, other:any): Observable<Teacher> {
-    const Url = `${TEACHER_URL}/${teacher.id}/password`;
-    return this.http.put<Teacher>(Url, teacher);;
+  updatePassword(teacherId: string, other:any): Observable<Teacher> {
+    const Url = `${this.TEACHER_URL}/${teacherId}/password`;
+    return this.http.put<Teacher>(Url, other);;
   }
 
   uploadTimeTable(teacherId: string, file: File): Promise<Student | Teacher> {
@@ -46,7 +46,7 @@ export class TeacherService {
   }
 
   delete(teacherId: string): Observable<any> {
-    const Url = `${TEACHER_URL}/${teacherId}`;
+    const Url = `${this.TEACHER_URL}/${teacherId}`;
     return this.http.delete<any>(Url);
   }
 

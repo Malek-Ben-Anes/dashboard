@@ -28,7 +28,7 @@ export class StudentListComponent implements OnInit {
   studentsTmp: Student[] = [];
 
   dataSource = new MatTableDataSource<Student>(this.studentsTmp);
-  displayedColumns: string[] = ['photo', 'firstname', 'lastname', 'email', 'groupName'];
+  displayedColumns: string[] = ['photo', 'firstName', 'lastName', 'email', 'groupName'];
 
   isLoading = false;
 

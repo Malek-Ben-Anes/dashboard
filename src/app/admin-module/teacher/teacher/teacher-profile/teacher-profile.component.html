@@ -9,17 +9,19 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-body">
-                        <form [formGroup]="teacherForm" (ngSubmit)="onSubmit()">
+                        <form [formGroup]="teacherForm">
 
                             <div class="row">
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="{{'All.text.placeholder.FirstName'|translate}}" formControlName="firstname" required>
+                                        <input matInput placeholder="{{'All.text.placeholder.FirstName'|translate}}"
+                                            formControlName="firstName" required>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="{{'All.text.placeholder.LastName'|translate}}" formControlName="lastname" required>
+                                        <input matInput placeholder="{{'All.text.placeholder.LastName'|translate}}"
+                                            formControlName="lastName" required>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -27,12 +29,14 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="{{'All.text.placeholder.Email'|translate}}" type="email" formControlName="email" required>
+                                        <input matInput placeholder="{{'All.text.placeholder.Email'|translate}}"
+                                            type="email" formControlName="email" required>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-3">
                                     <mat-form-field class="example-full-width">
-                                        <mat-select matInput placeholder="{{'All.text.placeholder.Gender'|translate}}" formControlName="gender">
+                                        <mat-select matInput placeholder="{{'All.text.placeholder.Gender'|translate}}"
+                                            formControlName="gender">
                                             <mat-option *ngFor="let gen of genders" [value]="gen" required>
                                                 {{'GLBL.' + gen|translate}}
                                             </mat-option>
@@ -41,7 +45,8 @@
                                 </div>
                                 <div class="col-md-3" dir="ltr">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="{{'All.text.placeholder.PhoneNumber'|translate}}" type="text" formControlName="phone">
+                                        <input matInput placeholder="{{'All.text.placeholder.PhoneNumber'|translate}}"
+                                            type="text" formControlName="phone">
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -49,7 +54,8 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput [matDatepicker]="picker" placeholder="{{'All.text.placeholder.BirthDate'|translate}}"
+                                        <input matInput [matDatepicker]="picker"
+                                            placeholder="{{'All.text.placeholder.BirthDate'|translate}}"
                                             formControlName="birthDate" required>
                                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                         <mat-datepicker touchUi #picker></mat-datepicker>
@@ -57,8 +63,8 @@
                                 </div>
                                 <div class="col-md-8">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="{{'All.text.placeholder.Address'|translate}}" type="text" formControlName="address"
-                                            required>
+                                        <input matInput placeholder="{{'All.text.placeholder.Address'|translate}}"
+                                            type="text" formControlName="address" required>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -66,20 +72,22 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <mat-form-field class="example-full-width">
-                                        <textarea matInput placeholder="{{'All.text.placeholder.Description'|translate}}"
+                                        <textarea matInput
+                                            placeholder="{{'All.text.placeholder.Description'|translate}}"
                                             formControlName="description" rows="3"></textarea>
                                     </mat-form-field>
                                 </div>
                             </div>
-                            <button mat-raised-button type="submit" class="btn btn-info pull-right"
-                                [disabled]="teacherForm.pristine || teacherForm.invalid"
+
+                            <button mat-raised-button class="btn btn-info pull-right"
+                                [disabled]="teacherForm.pristine || teacherForm.invalid" (click)="onSubmit()"
                                 *ngIf="teacher.id  == null">{{'All.text.Profile.Create'|translate}}</button>
-                            <button mat-raised-button type="submit" class="btn btn-warning pull-right"
-                                [disabled]="teacherForm.invalid"
+
+                            <button mat-raised-button class="btn btn-warning pull-right"
+                                [disabled]="teacherForm.invalid" (click)="onSubmit()"
                                 *ngIf="teacher.id != null">{{'All.text.Profile.Update'|translate}}</button>
-                            <button mat-raised-button
-                                class="btn btn-danger pull-right"
-                                (click)="onDelete(teacher.id)"
+
+                            <button mat-raised-button class="btn btn-danger pull-right" (click)="onDelete(teacher.id)"
                                 *ngIf="teacher.id != null">
                                 {{'All.text.delete'|translate}}
                             </button>

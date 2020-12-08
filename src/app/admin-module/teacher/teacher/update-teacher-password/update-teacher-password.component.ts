@@ -65,9 +65,9 @@ export class UpdateTeacherPasswordComponent implements OnInit {
     if (this.passwordForm.invalid) {
       return;
     }
-    /*this.teacher.password = this.passwordForm.get("password").value;*/
+    ;
     this.teacherService
-      .updatePassword(this.teacher, "")
+      .updatePassword(this.teacher.id, this.passwordForm.get("password").value)
       .subscribe(
         (teacher: Teacher) => {
         this.teacher = teacher;

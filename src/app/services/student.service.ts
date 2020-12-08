@@ -68,10 +68,10 @@ export class StudentService {
     if (filter.groupId && student.group && (student.group.id != filter.groupId)) {
       return false;
     }
-    if (filter.firstname && (student.firstName != filter.firstname)) {
+    if (filter.firstName && (student.firstName != filter.firstName)) {
       return false;
     }
-    if (filter.lastname && (student.lastName != filter.lastname)) {
+    if (filter.lastName && (student.lastName != filter.lastName)) {
       return false;
     }
     if (filter.level  && (student.level != filter.level)) {
@@ -82,8 +82,8 @@ export class StudentService {
 
 }
 interface SearchStudent {
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   level: Level;
   group: Group;
 }

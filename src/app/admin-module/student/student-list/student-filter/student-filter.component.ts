@@ -21,8 +21,8 @@ export class StudentFilterComponent implements OnInit {
   groups: Group[] = [];
 
   studentFilter: StudentFilter = {
-    firstname: undefined,
-    lastname: undefined,
+    firstName: undefined,
+    lastName: undefined,
     level: undefined,
     groupId: undefined
   };
@@ -61,8 +61,8 @@ export class StudentFilterComponent implements OnInit {
 
   private extractFormValue()  {
     this.studentFilter = {
-      firstname: _.trim(this.studentFilterForm.get('firstName').value),
-      lastname: _.trim(this.studentFilterForm.get('lastName').value),
+      firstName: _.trim(this.studentFilterForm.get('firstName').value),
+      lastName: _.trim(this.studentFilterForm.get('lastName').value),
       level: this.studentFilterForm.get('level').value,
       groupId: this.studentFilterForm.get('group').value
     }
@@ -71,8 +71,8 @@ export class StudentFilterComponent implements OnInit {
 }
 
 export interface StudentFilter {
-  firstname: string,
-  lastname: string,
+  firstName: string,
+  lastName: string,
   level: Level,
   groupId: string
 }

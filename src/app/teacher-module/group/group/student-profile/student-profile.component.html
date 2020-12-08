@@ -12,7 +12,7 @@
                     </div>
                     <div class="card-body">
                         <h6 class="card-category text-gray">{{'All.text.student.label'|translate}}</h6>
-                        <h4 class="card-title">{{user.firstname}} {{user.lastname}}</h4>
+                        <h4 class="card-title">{{user.firstName}} {{user.lastName}}</h4>
                         <p class="card-description">
                             {{ user.email }}
                         </p>
@@ -30,12 +30,12 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="{{'label.firstName' | translate}}" formControlName="firstname">
+                                        <input matInput placeholder="{{'label.firstName' | translate}}" formControlName="firstName">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-6">
                                     <mat-form-field class="example-full-width">
-                                        <input i18n matInput placeholder="{{'label.lastName' | translate}}" formControlName="lastname" required />
+                                        <input i18n matInput placeholder="{{'label.lastName' | translate}}" formControlName="lastName" required />
                                     </mat-form-field>
                                 </div>
                             </div>

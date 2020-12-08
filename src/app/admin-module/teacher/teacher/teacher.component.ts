@@ -5,6 +5,8 @@ import { TeacherService } from '@app/services/teacher.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
+import { UpdateTeacherRequest } from '@app/models/requests/teacher/UpdateTeacher.model';
+import { CreateTeacherRequest } from '@app/models/requests/teacher/CreateTeacher.model';
 
 @Component({
   selector: 'app-teacher',
@@ -12,16 +14,14 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./teacher.component.scss']
 })
 export class TeacherComponent implements OnInit, OnChanges {
+  readonly tabIndex = { 'PROFILE': 0, 'PASSWORD': 1, 'GROUPS': 2, 'TIME_TABLE': 3 };
 
-  isNew = true;
-  tabIndex = {'PROFILE': 0, 'PASSWORD': 1, 'GROUPS': 2, 'TIME_TABLE': 3};
   tabs = this.updateTabs();
-
+  isNew = true;
   selected = new FormControl(0);
   teacher: Teacher;
 
-  constructor(private teacherService: TeacherService, private router: Router, private route: ActivatedRoute,
-              private translate: TranslateService) { }
+  constructor(private teacherService: TeacherService, private route: ActivatedRoute, private translate: TranslateService) { }
 
   ngOnInit() {
     const id: string = this.route.snapshot.params['id'];
@@ -42,22 +42,18 @@ export class TeacherComponent implements OnInit, OnChanges {
         this.teacher = studentData;
         this.isNew = false;
         this.tabs = this.updateTabs();
-      },
-      (err: HttpErrorResponse) => {
-        alert("Error teacher not found!")
-      }
-    );
+      }, (err: HttpErrorResponse) => alert("Error teacher not found!"));
   }
 
   /**
    * Get event from child Component and update student
    * @param studentToPersist
    */
-  onUpdate(teacher: Teacher) {
-    if ( this.isNew ) {
-      this.create(teacher);
+  onUpdate(request: CreateTeacherRequest | UpdateTeacherRequest) {
+    if (this.isNew) {
+      this.create(<CreateTeacherRequest>request);
     } else {
-      this.update(teacher);
+      this.update(<UpdateTeacherRequest>request);
     }
   }
 
@@ -69,8 +65,8 @@ export class TeacherComponent implements OnInit, OnChanges {
     this.teacher = teacher;
   }
 
-  private update(studentRequest: Teacher): void {
-    this.teacherService.update(studentRequest).subscribe((StudentData) => {
+  private update(request: UpdateTeacherRequest): void {
+    this.teacherService.update(this.teacher.id, request).subscribe((StudentData) => {
       this.teacher = StudentData;
       this.tabs = this.updateTabs();
     }, (err) => {
@@ -78,8 +74,8 @@ export class TeacherComponent implements OnInit, OnChanges {
     });
   }
 
-  private create (teacherRequest: Teacher): void {
-    this.teacherService.create(teacherRequest).subscribe((StudentData) => {
+  private create(request: CreateTeacherRequest): void {
+    this.teacherService.create(request).subscribe((StudentData) => {
       this.teacher = StudentData;
       this.isNew = false;
       this.tabs = this.updateTabs();
@@ -90,10 +86,10 @@ export class TeacherComponent implements OnInit, OnChanges {
 
   private updateTabs() {
     return [
-      {'label': 'All.tab.EditProfile', 'disabled': false},
-      {'label': 'All.tab.Password', 'disabled': this.isNew},
-      {'label': 'All.text.groups.label', 'disabled': this.isNew},
-      {'label': 'All.text.timeTable.tab.name', 'disabled': this.isNew}];
+      { 'label': 'All.tab.EditProfile', 'disabled': false },
+      { 'label': 'All.tab.Password', 'disabled': this.isNew },
+      { 'label': 'All.text.groups.label', 'disabled': this.isNew },
+      { 'label': 'All.text.timeTable.tab.name', 'disabled': this.isNew }];
   }
 
 }

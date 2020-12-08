@@ -140,8 +140,8 @@ export class StudentAssignComponent implements OnInit {
 
 interface Todo {
   id?: string,
-  firstname?: string,
-  lastname?: string,
+  firstName?: string,
+  lastName?: string,
   email?: string,
   photo?: string,
   group?: string,
