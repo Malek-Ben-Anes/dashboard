@@ -20,6 +20,7 @@
 
     "All.text.password": "Mettre à jour",
     "All.text.updatePassword": "Mettre à jour",
+    "All.text.generatePassword": "Générer",
     "All.text.Registration.File": "Dossier d'inscription",
 
     "All.Password.placeholder": "Saisir le mot de passe",

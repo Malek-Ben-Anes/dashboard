@@ -10,6 +10,7 @@ import { Group } from "app/models/Group";
 import { StudentFilter } from "app/admin-module/student/student-list/student-filter/student-filter.component";
 import { UpdateStudentRequest } from "@app/models/requests/student/UpdateStudent.model";
 import { CreateStudentRequest } from "@app/models/requests/student/CreateStudent.model";
+import { UpdatePasswordRequest } from "@app/models/requests/student/UpdatePasswordRequest.model";
 
 @Injectable({
   providedIn: 'root'
@@ -49,9 +50,9 @@ export class StudentService {
     return _.find(this.students, { id: studentId });
   }
 
-  updatePassword(studentId: string, updatePassword: any): Observable<Student> {
+  updatePassword(studentId: string, updatePassword: UpdatePasswordRequest): Observable<File> {
     const Url = `${this.STUDENT_URL}/${studentId}/password`;
-    return this.http.put<Student>(Url, updatePassword);
+    return this.http.put<File>(Url, updatePassword);
   }
 
   delete(studentId: string): Observable<Student> {

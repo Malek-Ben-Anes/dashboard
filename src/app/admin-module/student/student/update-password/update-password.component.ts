@@ -7,6 +7,7 @@ import { BASE_URL } from "app/app.component";
 import { DialogService } from "app/commons/dialog/dialog.service";
 import { DialogData } from "app/models/DialogData";
 import { TranslateService } from "@ngx-translate/core";
+import { UpdatePasswordRequest } from "@app/models/requests/student/UpdatePasswordRequest.model";
 
 @Component({
   selector: "app-update-password",
@@ -22,39 +23,26 @@ export class UpdatePasswordComponent implements OnInit {
   modifiedStudent = new EventEmitter<Student>();
 
   BASE_URL: string = BASE_URL;
-
-  passwordForm: FormGroup;
+  passwordForm: FormGroup = this.initPasswordForm();
+  hide = true;
+  confirmHide = true;
+  registrationFile: File;
 
   constructor(private formBuilder: FormBuilder, private studentService: StudentService, private dialogService: DialogService,
-              private translate: TranslateService) { }
+    private translate: TranslateService) { }
 
   ngOnInit() {
-    this.initForm();
   }
 
   get f() {
     return this.passwordForm.controls;
   }
 
-  initForm() {
-    this.passwordForm = this.formBuilder.group(
+  initPasswordForm(): FormGroup {
+    return this.formBuilder.group(
       {
-        password: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(50)
-          ]
-        ],
-        passwordConfirm: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(50)
-          ]
-        ]
+        password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]],
+        passwordConfirm: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]]
       },
       { validator: this.passwordMatchValidator }
     );
@@ -69,12 +57,10 @@ export class UpdatePasswordComponent implements OnInit {
       return;
     }
 
-    const updatePassword = true;
-    /*this.student.password = this.passwordForm.get('password').value;*/
+    const updatePassword: UpdatePasswordRequest = {password: this.passwordForm.get('password').value};
     this.studentService.updatePassword(this.student.id, updatePassword)
-      .subscribe((student) => {
-        this.student = student;
-        this.modifiedStudent.emit(this.student);
+      .subscribe((registrationFile) => {
+        this.registrationFile = registrationFile;
         const data: DialogData = {
           dialogTitle: this.translate.instant('All.Password.Message.update.success'),
           dialogMessage: ''
@@ -86,6 +72,23 @@ export class UpdatePasswordComponent implements OnInit {
           dialogMessage: ''
         };
         this.dialogService.openDialog(data);
+      });
+  }
+
+  public onGeneratePassword() {
+    const randomPassword = this.randomPassword();
+    this.passwordForm.setValue({
+      password: randomPassword,
+      passwordConfirm: randomPassword
     });
+  }
+
+  private randomPassword(): string {
+    let result = '';
+    const characters = '0123456789';
+    for (var i = 0; i < 10; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
   }
 }
