@@ -9,7 +9,7 @@ import { Level } from "@app/models/enums/Level";
 import { Group } from "app/models/Group";
 import { StudentFilter } from "app/admin-module/student/student-list/student-filter/student-filter.component";
 import { UpdateStudentRequest } from "@app/models/requests/student/UpdateStudent.model";
-import { createStudentRequest } from "@app/models/requests/student/CreateStudent.model";
+import { CreateStudentRequest } from "@app/models/requests/student/CreateStudent.model";
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +36,7 @@ export class StudentService {
     return this.http.get<Student>(this.STUDENT_URL + '/' + studentId);
   }
 
-  create(createRequest: createStudentRequest): Observable<Student> {
+  create(createRequest: CreateStudentRequest): Observable<Student> {
     return this.http.post<Student>(this.STUDENT_URL, createRequest);
   }
 

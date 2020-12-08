@@ -12,6 +12,8 @@ import { StudentService } from '@app/services/student.service';
 import { Router } from '@angular/router';
 import { DialogContentExampleDialogComponent } from '@app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
 import { MatDialog } from '@angular/material';
+import { CreateStudentRequest } from '@app/models/requests/student/CreateStudent.model';
+import { UpdateStudentRequest } from '@app/models/requests/student/UpdateStudent.model';
 
 @Component({
   selector: 'app-student-profile',
@@ -29,7 +31,7 @@ export class StudentProfileComponent implements OnInit {
   isNew: boolean;
 
   @Output()
-  modifiedStudent = new EventEmitter<Student>();
+  studentRequest = new EventEmitter<CreateStudentRequest | UpdateStudentRequest>();
 
   genders = Object.keys(Gender);
   levels = Object.keys(Level);
@@ -44,32 +46,7 @@ export class StudentProfileComponent implements OnInit {
     this.getGroup();
   }
 
-  onSubmit() {
-    this.extractFormData();
-    this.modifiedStudent.emit(this.student);
-  }
-
-  onConfirmationDelete(studentId: string ) {
-    this.studentService.delete(studentId).subscribe(student => this.router.navigate(['app', 'students']));
-  }
-
-  onDelete(studentId: string): void {
-    const modalDialog: { dialogTitle: string; dialogMessage: string; } =
-    {
-      dialogTitle: this.translate.instant('All.text.delete.title'),
-      dialogMessage: this.translate.instant('All.text.delete.Confirmation')
-    };
-    const dialogRef = this.dialog.open(DialogContentExampleDialogComponent, {
-      width: '450px',
-      height: '200px',
-      data: { dialogTitle: modalDialog.dialogTitle, dialogMessage: modalDialog.dialogMessage }
-    });
-    dialogRef.afterClosed().subscribe(confirmtion => {
-      if (confirmtion) {
-        this.onConfirmationDelete(studentId);
-      }
-    });
-  }
+  
 
   private getGroup() {
     this.groupService.findAll().subscribe(groups => {this.groups = groups; this.updateForm(this.student);
@@ -78,8 +55,8 @@ export class StudentProfileComponent implements OnInit {
 
   private initFormGroup(): FormGroup {
     return this.formBuilder.group({
-      firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      lastName: ['', [Validators.required,  Validators.minLength(3), Validators.maxLength(50)]],
+      firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
+      lastName: ['', [Validators.required,  Validators.minLength(3), Validators.maxLength(60)]],
       email: ['', [Validators.required, Validators.pattern(this.EMAIL_PATTERN)]],
       birthDate: [null, Validators.required],
       phone: ['', Validators.required],
@@ -89,7 +66,7 @@ export class StudentProfileComponent implements OnInit {
       parentName: [''],
       parentPhone: [''],
       address: [''],
-      description: ['', [Validators.minLength(3), Validators.maxLength(500)]],
+      description: ['', [Validators.minLength(6), Validators.maxLength(500)]],
     });
   }
 
@@ -118,23 +95,54 @@ export class StudentProfileComponent implements OnInit {
     }
   }
 
-  private extractFormData(): void {
-    this.student.firstName = this.extractFieldData('firstName');
-    this.student.lastName = this.extractFieldData('lastName');
-    this.student.email = this.extractFieldData('email');
-    this.student.phone = this.extractFieldData('phone');
-    this.student.birthDate = new Date(this.extractFieldData('birthDate'));
-    this.student.gender = this.extractFieldData('gender');
-    this.student.group = this.extractFieldData('group');
-    this.student.level = this.extractFieldData('level');
-    this.student.address = this.extractFieldData('address');
-    this.student.parentName = this.extractFieldData('parentName');
-    this.student.parentPhone = this.extractFieldData('parentPhone');
-    this.student.description = this.extractFieldData('description');
+  onSubmit() {
+    this.studentRequest.emit(this.prepareRequest());
+  }
+
+  private prepareRequest(): CreateStudentRequest | UpdateStudentRequest {
+    let request: CreateStudentRequest | UpdateStudentRequest = new UpdateStudentRequest();
+    if(this.isNew) {
+      request = new CreateStudentRequest();
+      request.email = this.extractFieldData('email');
+    }
+    request.firstName = this.extractFieldData('firstName');
+    request.lastName = this.extractFieldData('lastName');
+    request.phone = this.extractFieldData('phone');
+    request.birthDate = new Date(this.extractFieldData('birthDate'));
+    request.gender = this.extractFieldData('gender');
+    request.groupId = this.extractFieldData('group') ? this.extractFieldData('group').id : null;
+    request.level = this.extractFieldData('level');
+    request.address = this.extractFieldData('address');
+    request.parentName = this.extractFieldData('parentName');
+    request.parentPhone = this.extractFieldData('parentPhone');
+    request.description = this.extractFieldData('description');
+    return request;
   }
 
   private extractFieldData(property: string): any {
     return this.studentForm.get(property).value;
+  }
+
+  onConfirmationDelete(studentId: string ) {
+    this.studentService.delete(studentId).subscribe(student => this.router.navigate(['app', 'students']));
+  }
+
+  onDelete(studentId: string): void {
+    const modalDialog: { dialogTitle: string; dialogMessage: string; } =
+    {
+      dialogTitle: this.translate.instant('All.text.delete.title'),
+      dialogMessage: this.translate.instant('All.text.delete.Confirmation')
+    };
+    const dialogRef = this.dialog.open(DialogContentExampleDialogComponent, {
+      width: '450px',
+      height: '200px',
+      data: { dialogTitle: modalDialog.dialogTitle, dialogMessage: modalDialog.dialogMessage }
+    });
+    dialogRef.afterClosed().subscribe(confirmtion => {
+      if (confirmtion) {
+        this.onConfirmationDelete(studentId);
+      }
+    });
   }
 
 }

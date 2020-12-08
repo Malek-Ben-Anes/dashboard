@@ -5,7 +5,7 @@ import { StudentService } from '@app/services/student.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
-import { createStudentRequest } from '@app/models/requests/student/CreateStudent.model';
+import { CreateStudentRequest } from '@app/models/requests/student/CreateStudent.model';
 import { UpdateStudentRequest } from '@app/models/requests/student/UpdateStudent.model';
 
 @Component({
@@ -56,9 +56,9 @@ export class StudentComponent implements OnInit, OnChanges {
    * Get event from child Component and update student
    * @param studentToPersist 
    */
-  onUpdate(request: createStudentRequest | UpdateStudentRequest): void {
+  onUpdate(request: CreateStudentRequest | UpdateStudentRequest): void {
     if ( this.isNew ) {
-      this.create(<createStudentRequest>request);
+      this.create(<CreateStudentRequest>request);
     } else {
       this.update(<UpdateStudentRequest>request);
     }
@@ -79,14 +79,12 @@ export class StudentComponent implements OnInit, OnChanges {
     (err) => console.log(err));
   }
 
-  private create (studentRequest: createStudentRequest): void {
+  private create(studentRequest: CreateStudentRequest): void {
     this.studentService.create(studentRequest).subscribe((student) => {
         this.student = student;
         this.isNew = false;
         this.tabs = this.updateTabs();
-      }, (err) => {
-        alert(this.translate.instant('All.text.create.failed.duplicated'));
-      });
+      }, (err) => alert(this.translate.instant('All.text.create.failed.duplicated')));
   }
 
   updateTabs() {
