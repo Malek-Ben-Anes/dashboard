@@ -70,7 +70,7 @@ export class UpdatePasswordComponent implements OnInit {
     }
 
     const updatePassword = true;
-    this.student.password = this.passwordForm.get('password').value;
+    /*this.student.password = this.passwordForm.get('password').value;*/
     this.studentService.update(this.student, updatePassword)
       .subscribe((student) => {
         this.student = student;

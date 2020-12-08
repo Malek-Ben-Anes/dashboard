@@ -3,7 +3,7 @@ import { CommonModule, } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { ContentComponent } from '@app/content/content.component';
-import { Library } from '@app/models/Library';
+import { Library } from '@app/models/enums/Library';
 import { AuthGuardService } from '@app/services/auth/auth-guard.service';
 import { TeacherListComponent } from '../teacher/teacher-list/teacher-list.component';
 import { TeacherComponent } from '../teacher/teacher/teacher.component';

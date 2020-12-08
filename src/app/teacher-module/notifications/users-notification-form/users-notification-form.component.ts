@@ -14,7 +14,7 @@ import { NotificationRequest } from '@app/models/Notification';
 import { NotificationService } from '@app/services/notification.service';
 import { User } from '@app/models/User';
 import { DialogContentExampleDialogComponent } from '@app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
-import { Library } from '@app/models/Library';
+import { Library } from '@app/models/enums/Library';
 import { TranslateService } from '@ngx-translate/core';
 import { DialogData } from '@app/models/DialogData';
 import { DialogService } from '@app/commons/dialog/dialog.service';

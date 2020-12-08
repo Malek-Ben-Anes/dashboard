@@ -1,11 +1,9 @@
 import { User } from './User';
 import { Gender } from "./enums/Gender";
 import { Level } from './enums/Level';
-import { Group } from './Group';
 import { Mark } from './Mark';
 
 export class Student extends User {
-
     level?: Level;
     group?: Group;
     parentName?: string;
@@ -19,4 +17,9 @@ export class Student extends User {
         super(_id, _firstname, _lastname, _gender);
         this.marks = _marks;
     }
+
+}
+class Group {
+    id: string;
+    name: string;
 }
