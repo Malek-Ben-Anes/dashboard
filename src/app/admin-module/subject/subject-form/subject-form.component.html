@@ -1,81 +1,104 @@
 <div class="row">
-    <div class="col-md-12">
-        <button
-            mat-raised-button
-            class="btn btn-warning pull-right"
-            (click)="onCreateNewSubject()">
-            {{'All.text.subject.newSubject' | translate}}
-        </button>
-    </div>
+  <div class="col-md-12">
+    <button
+      mat-raised-button
+      class="btn btn-warning pull-right"
+      (click)="onCreateNewSubject()"
+    >
+      {{ "All.text.subject.newSubject" | translate }}
+    </button>
+  </div>
 </div>
 
 <div class="card card-profile">
-    <div class="card-body">
-        <form [formGroup]="subjectForm" (ngSubmit)="onSubmit()">
-            <div class="row">
-                <div class="col-md-3">
-                    <mat-form-field class="example-full-width">
-                        <input matInput placeholder="{{'All.text.subject.label' | translate}}" formControlName="name" required>
-                    </mat-form-field>
-                </div>
-                <div class="col-md-3">
-                    <mat-form-field class="example-full-width">
-                        <input matInput
-                         type="number"
-                         placeholder="{{'All.text.subject.coefficient' | translate}}"
-                         formControlName="coefficient" required>
-                    </mat-form-field>
-                </div>
-                <div class="col-md-3">
-                    <mat-form-field class="example-full-width">
-                        <input matInput
-                         type="number"
-                         placeholder="{{'All.text.subject.volumeHoraire' | translate}}"
-                         formControlName="hourlyVolume" required>
-                    </mat-form-field>
-                </div>
-                <div class="col-md-3">
-                    <mat-form-field class="example-full-width">
-                        <input matInput
-                         type="number"
-                         placeholder="{{'All.text.subject.sessionNumber' | translate}}"
-                         formControlName="sessionNumber" required>
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-8">
-                    <mat-form-field class="example-full-width">
-                        <input matInput placeholder="{{'All.text.subject.description' | translate}}" formControlName="description" required>
-                    </mat-form-field>
-                </div>
+  <div class="card-body">
+    <form [formGroup]="subjectForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-md-3">
+          <mat-form-field class="example-full-width">
+            <input
+              matInput
+              placeholder="{{ 'All.text.subject.label' | translate }}"
+              formControlName="name"
+              required
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field class="example-full-width">
+            <input
+              matInput
+              type="number"
+              placeholder="{{ 'All.text.subject.coefficient' | translate }}"
+              formControlName="coefficient"
+              required
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field class="example-full-width">
+            <input
+              matInput
+              type="number"
+              placeholder="{{ 'All.text.subject.volumeHoraire' | translate }}"
+              formControlName="hourlyVolume"
+              required
+            />
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field class="example-full-width">
+            <input
+              matInput
+              type="number"
+              placeholder="{{ 'All.text.subject.sessionNumber' | translate }}"
+              formControlName="sessionNumber"
+              required
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <mat-form-field class="example-full-width">
+            <input
+              matInput
+              placeholder="{{ 'All.text.subject.description' | translate }}"
+              formControlName="description"
+              required
+            />
+          </mat-form-field>
+        </div>
 
-                <div class="col-md-4" *ngIf="!isNew">
-                    <button
-                        mat-raised-button
-                        [disabled]="subjectForm.invalid"
-                        type="submit"
-                        class="btn btn-warning pull-right">
-                            {{'All.text.update' | translate}}
-                    </button>
-                    <button
-                    mat-raised-button
-                    (click)="onDelete()"
-                    type="submit"
-                    class="btn btn-danger pull-right">
-                        {{'All.text.delete' | translate}}
-                    </button>
-                </div>
-                <div class="col-md-4" *ngIf="isNew">
-                    <button
-                        mat-raised-button
-                        [disabled]="subjectForm.invalid"
-                        type="submit"
-                        class="btn btn-info pull-right">
-                            {{'All.text.create' | translate}}
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
+        <div class="col-md-4" *ngIf="!isNew">
+          <button
+            mat-raised-button
+            [disabled]="subjectForm.invalid"
+            type="submit"
+            class="btn btn-warning pull-right"
+          >
+            {{ "All.text.update" | translate }}
+          </button>
+          <button
+            mat-raised-button
+            (click)="onDelete()"
+            type="submit"
+            class="btn btn-danger pull-right"
+          >
+            {{ "All.text.delete" | translate }}
+          </button>
+        </div>
+        <div class="col-md-4" *ngIf="isNew">
+          <button
+            mat-raised-button
+            [disabled]="subjectForm.invalid"
+            type="submit"
+            class="btn btn-info pull-right"
+          >
+            {{ "All.text.create" | translate }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>

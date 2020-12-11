@@ -1,44 +1,44 @@
 <div class="card card-profile">
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table">
-                <thead class=" text-primary">
-                    <th>
-                        {{'All.text.subject.label' | translate}}
-                    </th>
-                    <th>
-                        {{'All.text.subject.coefficient' | translate}}
-                    </th>
-                    <th>
-                        {{'All.text.subject.volumeHoraire' | translate}}
-                    </th>
-                    <th>
-                        {{'All.text.subject.sessionNumber' | translate}}
-                    </th>
-                    <th>
-                        {{'All.text.subject.description' | translate}}
-                    </th>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let subject of subjects">
-                        <td class="text-primary" (click)="onSelectSubject(subject)">
-                            <a>{{ subject.name }}</a>
-                        </td>
-                        <td>
-                            {{ subject.coefficient }}
-                        </td>
-                        <td>
-                            {{ subject.hourlyVolume }}
-                        </td>
-                        <td>
-                            {{ subject.sessionNumber }}
-                        </td>
-                        <td>
-                            {{ subject.description }}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table">
+        <thead class="text-primary">
+          <th>
+            {{ "All.text.subject.label" | translate }}
+          </th>
+          <th>
+            {{ "All.text.subject.coefficient" | translate }}
+          </th>
+          <th>
+            {{ "All.text.subject.volumeHoraire" | translate }}
+          </th>
+          <th>
+            {{ "All.text.subject.sessionNumber" | translate }}
+          </th>
+          <th>
+            {{ "All.text.subject.description" | translate }}
+          </th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let subject of subjects">
+            <td class="text-primary" (click)="onSelectSubject(subject)">
+              <a>{{ subject.name }}</a>
+            </td>
+            <td>
+              {{ subject.coefficient }}
+            </td>
+            <td>
+              {{ subject.hourlyVolume }}
+            </td>
+            <td>
+              {{ subject.sessionNumber }}
+            </td>
+            <td>
+              {{ subject.description }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
 </div>

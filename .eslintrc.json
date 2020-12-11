@@ -23,9 +23,7 @@
         "max-len": "off",
         "semi": "warn",
         "require-jsdoc": "off",
-        "prettier/prettier": "warn",
         "no-const-assign": "warn",
-        "no-this-before-super": "warn",
-        "alwaysShowRuleFailuresAsWarnings": "warn"
+        "no-this-before-super": "warn"
     }
 }

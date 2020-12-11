@@ -1,21 +1,19 @@
 import * as _ from 'lodash';
-import { Component, OnInit, Input, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { SubjectService } from '@app/services/subject.service';
-import { Subject } from '@app/models/Subject';
-import { Level } from '@app/models/enums/Level';
-import { HttpErrorResponse } from '@angular/common/http';
-import { TranslateService } from '@ngx-translate/core';
-import { DialogContentExampleDialogComponent } from '@app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
-import { MatDialog } from '@angular/material';
+import {Component, OnInit, Input, OnChanges, SimpleChanges, EventEmitter, Output} from '@angular/core';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {SubjectService} from '@app/services/subject.service';
+import {Subject} from '@app/models/Subject';
+import {Level} from '@app/models/enums/Level';
+import {TranslateService} from '@ngx-translate/core';
+import {DialogContentExampleDialogComponent} from '@app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-subject-form',
   templateUrl: './subject-form.component.html',
-  styleUrls: ['./subject-form.component.scss']
+  styleUrls: ['./subject-form.component.scss'],
 })
 export class SubjectFormComponent implements OnInit, OnChanges {
-
   subjects: Subject[] = [];
 
   @Input('level')
@@ -34,9 +32,9 @@ export class SubjectFormComponent implements OnInit, OnChanges {
   levels = Object.keys(Level);
 
   constructor(private formBuilder: FormBuilder,
-              public dialog: MatDialog,
-              private subjectService: SubjectService,
-              private translate: TranslateService) { }
+    public dialog: MatDialog,
+    private subjectService: SubjectService,
+    private translate: TranslateService) { }
 
   ngOnInit() {
     this.initForm();
@@ -50,7 +48,6 @@ export class SubjectFormComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-
     if (!_.isNil(changes.level)) {
       this.level = changes.level.currentValue;
       this.CreateNewSubject();
@@ -84,7 +81,7 @@ export class SubjectFormComponent implements OnInit, OnChanges {
   onConfirmationDelete() {
     this.subjectService
         .delete(this.subjectToSave.id)
-        .subscribe(subject => {
+        .subscribe((subject) => {
           this.onCreateNewSubject();
           this.refershEvent.emit(null);
         });
@@ -94,14 +91,14 @@ export class SubjectFormComponent implements OnInit, OnChanges {
     const modalDialog: { dialogTitle: string; dialogMessage: string; } =
     {
       dialogTitle: this.translate.instant('All.text.delete.title'),
-      dialogMessage: this.translate.instant('All.text.delete.Confirmation')
+      dialogMessage: this.translate.instant('All.text.delete.Confirmation'),
     };
     const dialogRef = this.dialog.open(DialogContentExampleDialogComponent, {
       width: '450px',
       height: '200px',
-      data: { dialogTitle: modalDialog.dialogTitle, dialogMessage: modalDialog.dialogMessage }
+      data: {dialogTitle: modalDialog.dialogTitle, dialogMessage: modalDialog.dialogMessage},
     });
-    dialogRef.afterClosed().subscribe(confirmtion => {
+    dialogRef.afterClosed().subscribe((confirmtion) => {
       if (confirmtion) {
         this.onConfirmationDelete();
       }
@@ -135,22 +132,22 @@ export class SubjectFormComponent implements OnInit, OnChanges {
 
   private save(subject: Subject) {
     this.subjectService.save(subject)
-      .subscribe(subject => {
-        this.subjectToSave = subject;
-        this.isNew = false;
-        this.refershEvent.emit(null);
-        console.log('Subject created');
-      },
+        .subscribe((subject) => {
+          this.subjectToSave = subject;
+          this.isNew = false;
+          this.refershEvent.emit(null);
+          console.log('Subject created');
+        },
         (err) => console.log(err.error));
   }
 
   private update(subject: Subject) {
     this.subjectService.update(subject)
-      .subscribe(subject => {
-        this.subjectToSave = subject;
-        this.refershEvent.emit(null);
-        console.log('subject updated');
-       },
+        .subscribe((subject) => {
+          this.subjectToSave = subject;
+          this.refershEvent.emit(null);
+          console.log('subject updated');
+        },
         (err) => console.log(err.error));
   }
 
