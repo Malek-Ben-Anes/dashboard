@@ -26,10 +26,10 @@
   [user]="teacher"
 ></app-update-password>
 
-<app-teacher-manage-groups
+<app-teacher-groups
   *ngIf="selected.value === tabIndex.GROUPS && teacher != null"
   [teacher]="teacher"
-></app-teacher-manage-groups>
+></app-teacher-groups>
 
 <app-teacher-timetable
   *ngIf="selected.value === tabIndex.TIME_TABLE && teacher != null"

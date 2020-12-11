@@ -1,7 +1,10 @@
 <div class="card">
   <div class="card-body">
+
+    <div class="row">
+      <div class="col-md-12">
+
     <form [formGroup]="subjectsForm" (ngSubmit)="submit()">
-      <div class="row">
         <div  *ngIf="subjectsForm.controls.checkedOptions != null">
           <div formArrayName="checkedOptions"
             *ngFor="let name of subjectsForm.controls.checkedOptions.controls; let i = index">
@@ -13,13 +16,17 @@
               </mat-label>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="offset-md-9 col-md-3">
-          <button mat-raised-button type="submit" class="btn btn-warning pull-right">{{'All.text.save' | translate}}</button>
-          <div class="clearfix"></div>
+
+        <div class="row">
+          <div class="offset-md-9 col-md-3">
+            <button mat-raised-button type="submit" class="btn btn-warning pull-right">{{'All.text.save' | translate}}</button>
+            <div class="clearfix"></div>
+          </div>
         </div>
-      </div>
-    </form>
+        
+      </form>
+
+    </div>
+    </div>
   </div>
 </div>
