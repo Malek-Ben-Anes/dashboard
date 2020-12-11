@@ -1,20 +1,20 @@
-import { Component, OnInit, SimpleChanges, OnChanges } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Teacher } from '@app/models/Teacher.model';
-import { TeacherService } from '@app/services/teacher.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
-import { TranslateService } from '@ngx-translate/core';
-import { UpdateTeacherRequest } from '@app/models/requests/teacher/UpdateTeacher.model';
-import { CreateTeacherRequest } from '@app/models/requests/teacher/CreateTeacher.model';
+import {Component, OnInit, SimpleChanges, OnChanges} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {Teacher} from '@app/models/Teacher.model';
+import {TeacherService} from '@app/services/teacher.service';
+import {ActivatedRoute} from '@angular/router';
+import {HttpErrorResponse} from '@angular/common/http';
+import {TranslateService} from '@ngx-translate/core';
+import {UpdateTeacherRequest} from '@app/models/requests/teacher/UpdateTeacher.model';
+import {CreateTeacherRequest} from '@app/models/requests/teacher/CreateTeacher.model';
 
 @Component({
   selector: 'app-teacher',
   templateUrl: './teacher.component.html',
-  styleUrls: ['./teacher.component.scss']
+  styleUrls: ['./teacher.component.scss'],
 })
 export class TeacherComponent implements OnInit, OnChanges {
-  readonly tabIndex = { 'PROFILE': 0, 'PASSWORD': 1, 'GROUPS': 2, 'TIME_TABLE': 3 };
+  readonly tabIndex = {'PROFILE': 0, 'PASSWORD': 1, 'GROUPS': 2, 'TIME_TABLE': 3};
 
   tabs = this.updateTabs();
   isNew = true;
@@ -38,17 +38,13 @@ export class TeacherComponent implements OnInit, OnChanges {
 
   private getTeacher(id: string): void {
     this.teacherService.getById(id).subscribe(
-      (studentData: Teacher) => {
-        this.teacher = studentData;
-        this.isNew = false;
-        this.tabs = this.updateTabs();
-      }, (err: HttpErrorResponse) => alert("Error teacher not found!"));
+        (studentData: Teacher) => {
+          this.teacher = studentData;
+          this.isNew = false;
+          this.tabs = this.updateTabs();
+        }, (err: HttpErrorResponse) => alert('Error teacher not found!'));
   }
 
-  /**
-   * Get event from child Component and update student
-   * @param studentToPersist
-   */
   onUpdate(request: CreateTeacherRequest | UpdateTeacherRequest) {
     if (this.isNew) {
       this.create(<CreateTeacherRequest>request);
@@ -57,10 +53,6 @@ export class TeacherComponent implements OnInit, OnChanges {
     }
   }
 
-  /**
- * Get event from child Component and refersh student
- * @param studentToPersist 
- */
   refresh(teacher: Teacher) {
     this.teacher = teacher;
   }
@@ -70,7 +62,7 @@ export class TeacherComponent implements OnInit, OnChanges {
       this.teacher = StudentData;
       this.tabs = this.updateTabs();
     }, (err) => {
-      console.log(err)
+      console.log(err);
     });
   }
 
@@ -86,10 +78,9 @@ export class TeacherComponent implements OnInit, OnChanges {
 
   private updateTabs() {
     return [
-      { 'label': 'All.tab.EditProfile', 'disabled': false },
-      { 'label': 'All.tab.Password', 'disabled': this.isNew },
-      { 'label': 'All.text.groups.label', 'disabled': this.isNew },
-      { 'label': 'All.text.timeTable.tab.name', 'disabled': this.isNew }];
+      {'label': 'All.tab.EditProfile', 'disabled': false},
+      {'label': 'All.tab.Password', 'disabled': this.isNew},
+      {'label': 'All.text.groups.label', 'disabled': this.isNew},
+      {'label': 'All.text.timeTable.tab.name', 'disabled': this.isNew}];
   }
-
 }
