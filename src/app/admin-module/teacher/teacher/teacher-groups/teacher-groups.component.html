@@ -4,6 +4,10 @@
 </div>
 
 <div class="row">
-  <app-teacher-subject-list [teacher]="teacher" [selectedGroup]="selectedGroup">
+  <app-teacher-subject-list
+    *ngIf="selectedGroup"
+    [teacher]="teacher"
+    [selectedGroup]="selectedGroup"
+  >
   </app-teacher-subject-list>
 </div>

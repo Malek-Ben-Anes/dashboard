@@ -9,15 +9,19 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./teacher-group-list.component.scss'],
 })
 export class TeacherGroupListComponent implements OnInit {
-  readonly colors = ['primary', 'accent', 'primary', 'basic'];
+  readonly colors = ['primary', 'basic', 'accent'];
 
   @Output('selectedGroup')
   selectedGroupEmitter = new EventEmitter<Group>();
 
   groups: Group[];
+  selectedGroup: Group;
 
-  getColor(index: number): string {
-    return this.colors[index % 4];
+  getColor(index: number, group: Group): string {
+    if (group == this.selectedGroup) {
+      return this.colors[0];
+    }
+    return this.colors[2];
   }
 
   constructor(private groupService: GroupService, private translate: TranslateService) {}
@@ -28,12 +32,13 @@ export class TeacherGroupListComponent implements OnInit {
         .subscribe((groups) => {
           this.groups = groups;
           if (groups.length > 0) {
-            this.selectedGroupEmitter.emit(groups[0]);
+            this.onSelectGroup(groups[0]);
           }
         }, (err) => console.log(err));
   }
 
   onSelectGroup(group: Group): void {
     this.selectedGroupEmitter.emit(group);
+    this.selectedGroup = group;
   }
 }

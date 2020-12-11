@@ -3,7 +3,7 @@
 
     <h4>{{ "All.text.groups.label"|translate }}</h4>
     <div class="example-flex-container">
-      <button *ngFor="let group of groups; let i = index" mat-raised-button [color]="getColor(i)" (click)="onSelectGroup(group)">
+      <button *ngFor="let group of groups; let i = index" mat-raised-button [color]="getColor(i, group)" (click)="onSelectGroup(group)">
         {{group.name}}
       </button>
     </div>

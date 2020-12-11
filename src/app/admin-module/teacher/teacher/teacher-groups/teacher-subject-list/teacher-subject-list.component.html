@@ -4,12 +4,12 @@
     <div class="row">
       <div class="col-md-12">
 
-    <form [formGroup]="subjectsForm" (ngSubmit)="submit()">
+    <form [formGroup]="subjectsForm" >
         <div  *ngIf="subjectsForm.controls.checkedOptions != null">
           <div formArrayName="checkedOptions"
             *ngFor="let name of subjectsForm.controls.checkedOptions.controls; let i = index">
             <mat-label>
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <mat-checkbox class="checkbox-color" matInput [formControlName]="i">{{checkedOptions[i].name}}
                 </mat-checkbox>
               </div>
@@ -19,7 +19,7 @@
 
         <div class="row">
           <div class="offset-md-9 col-md-3">
-            <button mat-raised-button type="submit" class="btn btn-warning pull-right">{{'All.text.save' | translate}}</button>
+            <button mat-raised-button (click)="onSave()" class="btn btn-warning pull-right">{{'All.text.save' | translate}}</button>
             <div class="clearfix"></div>
           </div>
         </div>

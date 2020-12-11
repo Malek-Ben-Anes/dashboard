@@ -28,7 +28,7 @@ import {SubjectFormComponent} from './subject/subject-form/subject-form.componen
 import {SubjectComponent} from './subject/subject.component';
 import {TeacherTimetableComponent} from './teacher/teacher/teacher-timetable/teacher-timetable.component';
 import {TeacherGroupsComponent} from './teacher/teacher/teacher-groups/teacher-groups.component';
-import {TeacherGroupListComponent} from './teacher/teacher/teacher-groups/teacher-group-list/teacher-group-list.component';
+import {TeacherGroupListComponent} from './teacher/teacher/teacher-groups/group-list/teacher-group-list.component';
 import {TeacherSubjectListComponent} from './teacher/teacher/teacher-groups/teacher-subject-list/teacher-subject-list.component';
 import {NotifcationListComponent} from './notifications/notifcation-list/notifcation-list.component';
 import {UsersNotificationFormComponent} from './notifications/users-notification-form/users-notification-form.component';

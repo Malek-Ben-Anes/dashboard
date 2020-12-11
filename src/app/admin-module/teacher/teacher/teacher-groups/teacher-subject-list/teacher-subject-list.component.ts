@@ -54,7 +54,7 @@ export class TeacherSubjectListComponent implements OnInit, OnChanges {
         }, (err) => console.log('check error: ', err));
   }
 
-  submit() {
+  onSave() {
     const checkedOptions = this.subjectsForm.value.checkedOptions
         .map((checked, index) => checked ? {id: this.checkedOptions[index].id} : null)
         .filter((value) => value !== null);
