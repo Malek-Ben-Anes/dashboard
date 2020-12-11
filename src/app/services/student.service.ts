@@ -1,24 +1,22 @@
-import * as _ from "lodash";
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import * as _ from 'lodash';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
 
-import { Student } from "@app/models/Student.model";
-import { BASE_API_URL } from "../app.component";
-import { Level } from "@app/models/enums/Level";
-import { Group } from "app/models/Group";
-import { StudentFilter } from "app/admin-module/student/student-list/student-filter/student-filter.component";
-import { UpdateStudentRequest } from "@app/models/requests/student/UpdateStudent.model";
-import { CreateStudentRequest } from "@app/models/requests/student/CreateStudent.model";
-import { UpdatePasswordRequest } from "@app/models/requests/student/UpdatePasswordRequest.model";
+import {Student} from '@app/models/Student.model';
+import {BASE_API_URL} from '../app.component';
+import {Level} from '@app/models/enums/Level';
+import {Group} from 'app/models/Group';
+import {StudentFilter} from 'app/admin-module/student/student-list/student-filter/student-filter.component';
+import {UpdateStudentRequest} from '@app/models/requests/student/UpdateStudent.model';
+import {CreateStudentRequest} from '@app/models/requests/student/CreateStudent.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StudentService {
-
-  readonly STUDENT_URL: string = BASE_API_URL + "students";
-  readonly GROUP_URL: string = BASE_API_URL + "groups/";
+  readonly STUDENT_URL: string = BASE_API_URL + 'students';
+  readonly GROUP_URL: string = BASE_API_URL + 'groups/';
 
   students: Student[] = [];
 
@@ -33,7 +31,7 @@ export class StudentService {
     return this.http.get<Student[]>(URL);
   }
 
-  getById(studentId: string): Observable<Student>  {
+  getById(studentId: string): Observable<Student> {
     return this.http.get<Student>(this.STUDENT_URL + '/' + studentId);
   }
 
@@ -42,17 +40,12 @@ export class StudentService {
   }
 
   update(studentId: string, updateRequest: UpdateStudentRequest): Observable<Student> {
-    const updateUrl = this.STUDENT_URL  + '/' + studentId;
+    const updateUrl = this.STUDENT_URL + '/' + studentId;
     return this.http.put<Student>(updateUrl, updateRequest);
   }
 
   getSingleStudent(studentId: string): Student {
-    return _.find(this.students, { id: studentId });
-  }
-
-  updatePassword(studentId: string, updatePassword: UpdatePasswordRequest): Observable<any> {
-    const url = `${this.STUDENT_URL}/${studentId}/password`;
-    return this.http.put(url, updatePassword, { responseType: 'blob' })
+    return _.find(this.students, {id: studentId});
   }
 
   delete(studentId: string): Observable<Student> {
@@ -61,7 +54,7 @@ export class StudentService {
   }
 
   public filter(students: Student[], filter: StudentFilter): Student[] {
-    return _.filter(students, student => this.predicate(student, filter));
+    return _.filter(students, (student) => this.predicate(student, filter));
   }
 
   private predicate(student: Student, filter: StudentFilter) {
@@ -74,12 +67,11 @@ export class StudentService {
     if (filter.lastName && (student.lastName != filter.lastName)) {
       return false;
     }
-    if (filter.level  && (student.level != filter.level)) {
+    if (filter.level && (student.level != filter.level)) {
       return false;
     }
     return true;
   }
-
 }
 interface SearchStudent {
   firstName: string;

@@ -1,3 +1,3 @@
-export class UpdatePasswordRequest {
+export class CreatePasswordRequest {
     password: string;
 }

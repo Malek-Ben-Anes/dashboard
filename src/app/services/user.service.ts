@@ -1,28 +1,19 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { BASE_API_URL } from '@app/app.component';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {BASE_API_URL} from '@app/app.component';
+import {CreatePasswordRequest} from '@app/models/password/CreatePasswordRequest.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-
-  private userUrl = BASE_API_URL + 'test/user';
-  private pmUrl = BASE_API_URL + 'test/pm';
-  private adminUrl = BASE_API_URL + 'test/admin';
+  readonly USER_URL: string = BASE_API_URL + 'students';
 
   constructor(private http: HttpClient) { }
 
-  getUserBoard(): Observable<string> {
-    return this.http.get(this.userUrl, { responseType: 'text' });
-  }
-
-  getPMBoard(): Observable<string> {
-    return this.http.get(this.pmUrl, { responseType: 'text' });
-  }
-
-  getAdminBoard(): Observable<string> {
-    return this.http.get(this.adminUrl, { responseType: 'text' });
+  updatePassword(userId: string, updatePassword: CreatePasswordRequest): Observable<any> {
+    const url = `${this.USER_URL}/${userId}/password`;
+    return this.http.put(url, updatePassword, {responseType: 'blob'});
   }
 }

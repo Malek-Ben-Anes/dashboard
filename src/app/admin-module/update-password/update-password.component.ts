@@ -2,13 +2,13 @@ import {Component, OnInit, Input} from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {saveAs} from 'file-saver';
 
-import {Student} from '@app/models/Student.model';
-import {StudentService} from 'app/services/student.service';
 import {BASE_URL} from 'app/app.component';
 import {DialogService} from 'app/commons/dialog/dialog.service';
 import {DialogData} from 'app/models/DialogData';
 import {TranslateService} from '@ngx-translate/core';
 import {UpdatePasswordRequest} from '@app/models/requests/student/UpdatePasswordRequest.model';
+import {User} from '@app/models/User';
+import {UserService} from '@app/services/user.service';
 
 @Component({
   selector: 'app-update-password',
@@ -16,19 +16,20 @@ import {UpdatePasswordRequest} from '@app/models/requests/student/UpdatePassword
   styleUrls: ['./update-password.component.scss'],
 })
 export class UpdatePasswordComponent implements OnInit {
-  @Input('student')
-  student: Student;
+  @Input('user')
+  user: User;
 
   BASE_URL: string = BASE_URL;
-  passwordForm: FormGroup = this.initPasswordForm();
+  passwordForm: FormGroup;
   hide = true;
   confirmHide = true;
   registrationFile: File;
 
-  constructor(private formBuilder: FormBuilder, private studentService: StudentService, private dialogService: DialogService,
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private dialogService: DialogService,
     private translate: TranslateService) { }
 
   ngOnInit() {
+    this.passwordForm = this.initPasswordForm();
   }
 
   get f() {
@@ -55,11 +56,10 @@ export class UpdatePasswordComponent implements OnInit {
     }
 
     const updatePassword: UpdatePasswordRequest = {password: this.passwordForm.get('password').value};
-
-    this.studentService.updatePassword(this.student.id, updatePassword)
+    this.userService.updatePassword(this.user.id, updatePassword)
         .subscribe((response) => {
           const blob = new Blob([response], {type: 'application/pdf'});
-          const registrationFileName = `${this.student.firstName}-${this.student.lastName}-registration.pdf`;
+          const registrationFileName = `${this.user.firstName}-${this.user.lastName}-registration.pdf`;
           saveAs(blob, registrationFileName);
           const data: DialogData = {
             dialogTitle: this.translate.instant('All.Password.Message.update.success'),
