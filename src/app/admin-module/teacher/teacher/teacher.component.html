@@ -11,7 +11,7 @@
 <app-teacher-profile *ngIf="selected.value === tabIndex.PROFILE && teacher != null" [teacher]="teacher" [isNew]="isNew"
         (teacherRequest)="onUpdate($event)"></app-teacher-profile>
 
-<app-update-teacher-password *ngIf="selected.value === tabIndex.PASSWORD && teacher != null" [teacher]="teacher"></app-update-teacher-password>
+<app-update-password *ngIf="selected.value === tabIndex.PASSWORD && teacher != null" [teacher]="teacher"></app-update-password>
 
 <app-teacher-manage-groups *ngIf="selected.value === tabIndex.GROUPS && teacher != null" [teacher]="teacher"
         (modifiedTeacher)="refresh($event)"></app-teacher-manage-groups>
