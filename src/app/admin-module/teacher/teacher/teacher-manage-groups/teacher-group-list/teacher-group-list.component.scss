@@ -1,88 +1,31 @@
-.example-viewport {
-    height: 390px;
-    width: 300px;
-    border: 2px solid gray;
-  }
-  
-  .example-dt {
-    height: 30px;
-    font-weight: bold;
-  }
-  
-  .example-dd {
-    height: 30px;
-  }
+.section {
+  display: table;
+}
 
-  .example-container {
-    height: 400px;
-    overflow: auto;
-  }
-  
-  table {
-    width: 100%;
-  }
+.example-label {
+  display: table-cell;
+  font-size: 14px;
+  margin-left: 8px;
+  min-width: 120px;
+}
 
-  .message {
-    font-size: 1em;
-    font-style: italic;
-    font-weight: 400;
-  }
-  
-  .timeform {
-    float: left;
-    width: 100%;
-  
-    i {
-      margin-left: 20px;
-    }
-  
-    .timestamp{
-      font-size: 0.6em;
-    }
-  }
-  
-  .avatar{
-    width: 39px;
-    margin-right: 20px;
-    border-radius: 50%;
-  }
+.example-button-row {
+  display: table-cell;
+  width: 490px;
+}
 
-  .chatform{
-    width: 600px;
-    margin: 0 auto;
-    margin-top: 50px;
-  }
+.example-button-row .mat-button-base {
+  margin: 8px 8px 8px 0;
+}
 
-  .chatlist{
-    height: 600px;
-    overflow-y: scroll;
-  }
+.example-flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
 
-  .example-container {
-    height: 400px;
-    overflow: auto;
-  }
-  
-  table {
-    width: 100%;
-  }
-
-  .item {
-    border-bottom: 1px solid rgb(209, 209, 209);
-    padding: 3px;
-  }
-
-  .button-no-style {
-    all: unset;
-    width: 100%;
-  }
-
-  .item-hover:hover {  background-color: rgb(209, 209, 209); }
-
-  .item-active:active {  background-color: rgb(86, 169, 251); }
-
-  .item-focus:focus {  background-color: rgb(86, 169, 251); }
-
-  .width-parent  {
-    width: 100%;
-  }
+.example-button-container {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+}

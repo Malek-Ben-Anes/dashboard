@@ -1,16 +1,12 @@
 <div class="card">
   <div class="card-body">
-    <cdk-virtual-scroll-viewport itemSize="50" minBufferPx="200" maxBufferPx="400" class="example-viewport width-parent">
-      <div *cdkVirtualFor="let group of groups" class="example-item">
-        <button class="button-no-style item item-hover item-active item-focus"><span>
-            <div class="block item" (click)="onSelectGroup(group)">
-              <div class="message">
-                <p class="message">{{group.name}}</p>
-              </div>
-            </div>
-          </span>
-        </button>
-      </div>
-    </cdk-virtual-scroll-viewport>
+
+    <h4>{{ "All.text.groups.label"|translate }}</h4>
+    <div class="example-flex-container">
+      <button *ngFor="let group of groups; let i = index" mat-raised-button [color]="getColor(i)" (click)="onSelectGroup(group)">
+        {{group.name}}
+      </button>
+    </div>
+
   </div>
 </div>

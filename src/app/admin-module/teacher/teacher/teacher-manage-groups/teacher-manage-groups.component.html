@@ -1,11 +1,9 @@
 <div class="row">
-        <div class="col-md-4">
-    <app-teacher-group-list *ngIf="groups != null" [groups]="groups" (groupSelected)="onSelectGroup($event)">
-    </app-teacher-group-list>
-        </div>
-        <div class="col-md-8">
-    <app-teacher-subject-list *ngIf="selectedGroup != null && lessonsAssignedToTeacher != null && teacher != null"
-        [teacher]="teacher" [lessons]="lessonsAssignedToTeacher" [selectedGroup]="selectedGroup">
-    </app-teacher-subject-list>
+  <app-teacher-group-list (selectedGroup)="onSelectGroup($event)">
+  </app-teacher-group-list>
 </div>
+
+<div class="row">
+  <app-teacher-subject-list [teacher]="teacher" [selectedGroup]="selectedGroup">
+  </app-teacher-subject-list>
 </div>

@@ -29,11 +29,14 @@ export class TeacherSubjectListComponent implements OnInit, OnChanges {
   subjectsForm: FormGroup;
   checkedOptions = [];
 
+  lessonsAssignedToTeacher: Lesson[];
+
   constructor(private fb: FormBuilder, private subjectService: SubjectService, private lessonService: LessonService,
               private translate: TranslateService) { }
 
   ngOnInit() {
     this.constructView(this.selectedGroup);
+    this.lessonService.findAll(this.teacher.id).then((lessons) => this.lessonsAssignedToTeacher = lessons);
   }
 
   ngOnChanges(changes: SimpleChanges) {
