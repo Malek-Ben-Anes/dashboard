@@ -5,7 +5,7 @@ import {Group} from '@app/models/Group';
 import {Subject} from '@app/models/Subject';
 import {LessonService} from '@app/services/lesson.service';
 import {FormBuilder, FormGroup, FormArray, FormControl} from '@angular/forms';
-import {Lesson} from '@app/models/Lesson';
+import {Lesson} from '@app/models/Lesson.model';
 import {Teacher} from '@app/models/Teacher.model';
 import {TranslateService} from '@ngx-translate/core';
 

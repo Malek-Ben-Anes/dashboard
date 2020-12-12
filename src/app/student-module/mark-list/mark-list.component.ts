@@ -6,7 +6,7 @@ import { TokenStorageService } from '@app/services/auth/token-storage.service';
 import { AuthService } from '@app/services/auth/auth.service';
 import { MarkService } from '@app/services/mark.service';
 import { LessonService } from '@app/services/lesson.service';
-import { Lesson } from '@app/models/Lesson';
+import { Lesson } from '@app/models/Lesson.model';
 import { Mark } from '@app/models/Mark';
 import { TranslateService } from '@ngx-translate/core';
 

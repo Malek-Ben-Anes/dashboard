@@ -5,7 +5,7 @@ import { Student } from '@app/models/Student.model';
 import { MarkService } from '@app/services/mark.service';
 import { Mark } from '@app/models/Mark';
 import { LessonService } from '@app/services/lesson.service';
-import { Lesson } from '@app/models/Lesson';
+import { Lesson } from '@app/models/Lesson.model';
 import { TranslateService } from '@ngx-translate/core';
 import { TokenStorageService } from '@app/services/auth/token-storage.service';
 import { User } from '@app/models/User';

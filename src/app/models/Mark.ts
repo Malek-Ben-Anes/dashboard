@@ -1,7 +1,6 @@
-import { Lesson } from './Lesson';
+import {Lesson} from './Lesson.model';
 
 export class Mark {
-
     id: string;
     observation: string;
     mark: number;
@@ -12,9 +11,9 @@ export class Mark {
     createdAt: number| string;
 
     constructor(studentId?: string, lesson?: Lesson, observation?: string, mark?: number) {
-        this.studentId = studentId;
-        this.lesson = lesson;
-        this.observation = observation;
-        this.mark = mark;
+      this.studentId = studentId;
+      this.lesson = lesson;
+      this.observation = observation;
+      this.mark = mark;
     }
 }

@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 
 import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
-import {Lesson} from '@app/models/Lesson';
+import {Lesson} from '@app/models/Lesson.model';
 import {BASE_API_URL} from '@app/app.component';
 
 const LESSON_URL: string = BASE_API_URL + 'lessons';
