@@ -24,8 +24,6 @@ export class TeacherSubjectListComponent implements OnInit, OnChanges {
   teacher: Teacher;
 
   allSubjects: Subject[];
-
-  lessons: Lesson[];
   subjectsPerLevel: Subject[];
 
   subjectsForm: FormGroup;
@@ -68,44 +66,44 @@ export class TeacherSubjectListComponent implements OnInit, OnChanges {
     this.subjectsForm = this.fb.group({checkedOptions: new FormArray(formControls)});
   }
 
-  onSave() {
-    const checkedOptions = this.subjectsForm.value.checkedOptions
-        .map((checked, index) => checked ? {id: this.checkedOptions[index].id} : null)
-        .filter((value) => value !== null);
-    const uncheckedOptions = _.differenceBy(this.subjectsPerLevel, checkedOptions, 'id');
-    _.forEach(checkedOptions, (checkedOption) => {
-      this.save(this.teacher, this.findSubject(checkedOption.id), this.selectedGroup );
-    });
-    _.forEach(uncheckedOptions, (uncheckedOption) => {
-      this.delete(this.teacher, this.findSubject(uncheckedOption.id), this.selectedGroup );
-    });
-  }
-
   private createCheckBox(subjectId: Subject, groupId: string) {
-    if (_.find(this.lessons, {id: {subjectId: subjectId, groupId: groupId}})) {
+    if (_.find(this.lessonsAssignedToTeacher, {subject: {id: subjectId}, group: {id: groupId}, teacher: {id: this.teacher.id}})) {
       return new FormControl(true);
     }
     return new FormControl(false);
   }
 
-  private updateSubjects(subjects: Subject[]) {
+  private updateSubjects(subjects: Subject[]): SubjectCheckBox[] {
     return _.map(subjects, (subject) => {
-      return {id: subject.id, name: subject.name};
+      return new SubjectCheckBox(subject.id, subject.name);
     });
   }
 
-  private save(teacher: Teacher, subject: Subject, group: Group) {
-    const request = new CreateLessonRequest(teacher.id, subject.id, group.id);
-    this.lessonService.create(request).subscribe((lesson: Lesson) => this.lessons.push(lesson));
+  onUpdate(ischecked, subject: SubjectCheckBox) {
+    if (ischecked) {
+      this.save(subject.id);
+    } else {
+      this.delete(subject.id);
+    }
   }
 
-  delete(teacher: Teacher, subject: Subject, group: Group) {
-    const lessonId = new LessonIdRequest(teacher.id, subject.id, group.id);
+  private save(subjectId: string) {
+    const request = new CreateLessonRequest(this.teacher.id, subjectId, this.selectedGroup.id);
+    this.lessonService.create(request).subscribe((lesson: Lesson) => this.lessonsAssignedToTeacher.push(lesson));
+  }
+
+  delete(subjectId: string) {
+    const lessonId = new LessonIdRequest(this.teacher.id, subjectId, this.selectedGroup.id);
     this.lessonService.delete(lessonId)
         .subscribe((l) => this.lessonsAssignedToTeacher.slice(null));// TODO slice
   }
+}
+class SubjectCheckBox {
+  id: string;
+  name: string;
 
-  private findSubject(subjectId: string): Subject {
-    return _.find(this.allSubjects, {id: subjectId});
+  constructor(_id: string, _name: string) {
+    this.id = _id;
+    this.name = _name;
   }
 }

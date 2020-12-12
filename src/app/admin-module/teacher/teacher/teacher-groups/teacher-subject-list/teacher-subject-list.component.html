@@ -1,6 +1,5 @@
 <div class="card">
   <div class="card-body">
-
     <div class="row">
       <div class="col-md-12">
         <form [formGroup]="subjectsForm">
@@ -18,28 +17,15 @@
                     class="checkbox-color"
                     matInput
                     [formControlName]="i"
+                    (change)="onUpdate($event.checked, checkedOptions[i])"
                     >{{ checkedOptions[i].name }}
                   </mat-checkbox>
                 </div>
               </mat-label>
             </div>
           </div>
-
-          <div class="row">
-            <div class="offset-md-9 col-md-3">
-              <button
-                mat-raised-button
-                (click)="onSave()"
-                class="btn btn-warning pull-right"
-              >
-                {{ "All.text.save" | translate }}
-              </button>
-              <div class="clearfix"></div>
-            </div>
-          </div>
         </form>
       </div>
     </div>
-    
   </div>
 </div>
