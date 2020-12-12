@@ -21,7 +21,7 @@ export class TeacherGroupListComponent implements OnInit {
     if (group == this.selectedGroup) {
       return this.colors[0];
     }
-    return this.colors[2];
+    return this.colors[1];
   }
 
   constructor(private groupService: GroupService, private translate: TranslateService) {}

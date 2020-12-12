@@ -21,7 +21,7 @@ export class TeacherSubjectListComponent implements OnInit, OnChanges {
   @Input('teacher')
   teacher: Teacher;
 
-  subjects: Subject[];
+  allSubjects: Subject[];
 
   lessons: Lesson[];
   subjectsPerLevel: Subject[];
@@ -35,23 +35,35 @@ export class TeacherSubjectListComponent implements OnInit, OnChanges {
               private translate: TranslateService) { }
 
   ngOnInit() {
-    this.constructView(this.selectedGroup);
-    this.lessonService.findAll(this.teacher.id).then((lessons) => this.lessonsAssignedToTeacher = lessons);
+    this.subjectsForm = this.initForm();
+    this.lessonService.findAll(this.teacher.id).subscribe((lessons) => {
+      this.lessonsAssignedToTeacher = lessons;
+      this.updateForm();
+    });
+    this.subjectService.findAll().subscribe((subjects) => {
+      this.allSubjects = subjects;
+      this.subjectsPerLevel = this.subjectService.filter( this.allSubjects, this.selectedGroup.level);
+      this.updateForm();
+    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
     this.selectedGroup = changes.selectedGroup.currentValue;
-    this.constructView(this.selectedGroup);
+    this.subjectsPerLevel = this.subjectService.filter( this.allSubjects, this.selectedGroup.level);
+    this.updateForm();
   }
 
-  private constructView(selectedGroup: Group) {
-    this.initForm();
-    this.subjectService.findAll()
-        .subscribe((subjects) => {
-          this.subjects = subjects;
-          this.subjectsPerLevel = this.subjectService.filter( this.subjects, selectedGroup.level);
-          this.updateForm();
-        }, (err) => console.log('check error: ', err));
+  private initForm(): FormGroup {
+    const formControls = this.checkedOptions.map((control) => new FormControl(false));
+    return this.fb.group({
+      checkedOptions: new FormArray(formControls),
+    });
+  }
+
+  private updateForm() {
+    this.checkedOptions = this.updateSubjects(this.subjectsPerLevel);
+    const formControls = _.map(this.checkedOptions, (subject) => this.createCheckBox(subject.id, this.selectedGroup.id));
+    this.subjectsForm = this.fb.group({checkedOptions: new FormArray(formControls)});
   }
 
   onSave() {
@@ -65,23 +77,6 @@ export class TeacherSubjectListComponent implements OnInit, OnChanges {
     _.forEach(uncheckedOptions, (uncheckedOption) => {
       this.delete(this.teacher, this.findSubject(uncheckedOption.id), this.selectedGroup );
     });
-  }
-
-  private initForm() {
-    const formControls = this.checkedOptions.map((control) => new FormControl(false));
-    this.subjectsForm = this.fb.group({
-      checkedOptions: new FormArray(formControls),
-    });
-  }
-
-  private updateForm() {
-    this.checkedOptions = this.updateSubjects(this.subjectsPerLevel);
-    const formControls = this.createCheckBoxes();
-    this.subjectsForm = this.fb.group({checkedOptions: new FormArray(formControls)});
-  }
-
-  private createCheckBoxes() {
-    return _.map(this.checkedOptions, (subject) => this.createCheckBox(subject.id, this.selectedGroup.id));
   }
 
   private createCheckBox(subjectId: Subject, groupId: string) {
@@ -120,6 +115,6 @@ export class TeacherSubjectListComponent implements OnInit, OnChanges {
   }
 
   private findSubject(subjectId: string): Subject {
-    return _.find(this.subjects, {id: subjectId});
+    return _.find(this.allSubjects, {id: subjectId});
   }
 }
