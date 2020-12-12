@@ -8,6 +8,8 @@ import {FormBuilder, FormGroup, FormArray, FormControl} from '@angular/forms';
 import {Lesson} from '@app/models/Lesson.model';
 import {Teacher} from '@app/models/Teacher.model';
 import {TranslateService} from '@ngx-translate/core';
+import {LessonIdRequest} from '@app/models/requests/lesson/LessonId.model';
+import {CreateLessonRequest} from '@app/models/requests/lesson/CreateLesson.model';
 
 @Component({
   selector: 'app-teacher-subject-list',
@@ -93,25 +95,14 @@ export class TeacherSubjectListComponent implements OnInit, OnChanges {
   }
 
   private save(teacher: Teacher, subject: Subject, group: Group) {
-    const lesson = this.createNewLesson(teacher, subject, group);
-    this.lessonService.saveLesson(lesson).subscribe((lessn: Lesson) => this.lessons.push(lessn));
+    const request = new CreateLessonRequest(teacher.id, subject.id, group.id);
+    this.lessonService.create(request).subscribe((lesson: Lesson) => this.lessons.push(lesson));
   }
 
   delete(teacher: Teacher, subject: Subject, group: Group) {
-    const lesson = this.createNewLesson(teacher, subject, group);
-    this.lessonService.delete(lesson).subscribe(/* (lessn: Lesson) => this.lessons.slice(this.find)*/);
-  }
-
-  createNewLesson(teacher: Teacher, subject: Subject, group: Group) {
-    const lesson = new Lesson();
-    lesson.id.teacherId = teacher.id;
-    lesson.id.subjectId = subject.id;
-    lesson.id.groupId = group.id;
-    lesson.name = subject.name;
-    lesson.groupName = group.name;
-    lesson.teacherName = teacher.firstName;
-    lesson.subjectName = subject.name;
-    return lesson;
+    const lessonId = new LessonIdRequest(teacher.id, subject.id, group.id);
+    this.lessonService.delete(lessonId)
+        .subscribe((l) => this.lessonsAssignedToTeacher.slice(null));// TODO slice
   }
 
   private findSubject(subjectId: string): Subject {

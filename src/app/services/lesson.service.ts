@@ -5,6 +5,8 @@ import {Observable} from 'rxjs';
 import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
 import {Lesson} from '@app/models/Lesson.model';
 import {BASE_API_URL} from '@app/app.component';
+import {CreateLessonRequest} from '@app/models/requests/lesson/CreateLesson.model';
+import {LessonIdRequest} from '@app/models/requests/lesson/LessonId.model';
 
 const LESSON_URL: string = BASE_API_URL + 'lessons';
 
@@ -36,28 +38,15 @@ export class LessonService {
     return result;
   }
 
-  getSingleLesson(id: string): Observable<Lesson> {
-    const URL = `${LESSON_URL}/${id}`;
-    return this.http.get<Lesson>(URL);
+  create(request: CreateLessonRequest): Observable<Lesson> {
+    return this.http.post<Lesson>(LESSON_URL, request);
   }
 
-  saveLesson(lesson: Lesson): Observable<Lesson> {
-    return this.http.post<Lesson>(LESSON_URL, lesson);
-  }
-
-  delete(lesson: Lesson): Observable<Lesson> {
+  delete(lesson: LessonIdRequest): Observable<Lesson> {
     const httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'}), body: lesson,
     };
     return this.http.delete<Lesson>(LESSON_URL, httpOptions);
-  }
-
-  updateLesson(lesson: Lesson): Observable<Lesson> {
-    return this.http.put<Lesson>(LESSON_URL, lesson);
-  }
-
-  getLessonsByGroupId(groupId: string): Observable<Lesson[]> {
-    return this.http.get<Lesson[]>(LESSON_URL);
   }
 }
 
