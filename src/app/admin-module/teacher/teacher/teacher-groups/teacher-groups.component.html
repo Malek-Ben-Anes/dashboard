@@ -1,13 +1,9 @@
-<div class="row">
-  <app-teacher-group-list (selectedGroup)="onSelectGroup($event)">
-  </app-teacher-group-list>
-</div>
+<app-teacher-group-list (selectedGroup)="onSelectGroup($event)">
+</app-teacher-group-list>
 
-<div class="row">
-  <app-teacher-subject-list
-    *ngIf="selectedGroup"
-    [teacher]="teacher"
-    [selectedGroup]="selectedGroup"
-  >
-  </app-teacher-subject-list>
-</div>
+<app-teacher-subject-list
+  *ngIf="selectedGroup"
+  [teacher]="teacher"
+  [selectedGroup]="selectedGroup"
+>
+</app-teacher-subject-list>
