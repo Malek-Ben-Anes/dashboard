@@ -10,6 +10,7 @@ import {Teacher} from '@app/models/Teacher.model';
 import {TranslateService} from '@ngx-translate/core';
 import {LessonIdRequest} from '@app/models/requests/lesson/LessonId.model';
 import {CreateLessonRequest} from '@app/models/requests/lesson/CreateLesson.model';
+import { TokenStorageService } from '@app/services/auth/token-storage.service';
 
 @Component({
   selector: 'app-teacher-subject-list',
@@ -31,10 +32,13 @@ export class TeacherSubjectListComponent implements OnInit, OnChanges {
 
   lessonsAssignedToTeacher: Lesson[];
 
-  constructor(private fb: FormBuilder, private subjectService: SubjectService, private lessonService: LessonService,
-              private translate: TranslateService) { }
+  isRtl: string = 'ltr';
+
+  constructor(private fb: FormBuilder, private subjectService: SubjectService, private storage: TokenStorageService,
+              private lessonService: LessonService, private translate: TranslateService) { }
 
   ngOnInit() {
+    this.isRtl = this.storage.isRtl() ? 'rtl' : 'ltr';
     this.subjectsForm = this.initForm();
     this.lessonService.findAll(this.teacher.id).subscribe((lessons) => {
       this.lessonsAssignedToTeacher = lessons;

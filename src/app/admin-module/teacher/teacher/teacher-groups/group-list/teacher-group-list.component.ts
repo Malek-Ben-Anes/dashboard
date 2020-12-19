@@ -1,7 +1,7 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {Group} from '@app/models/Group';
 import {GroupService} from '@app/services/group.service';
-import { TranslateService } from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-teacher-group-list',
@@ -24,7 +24,7 @@ export class TeacherGroupListComponent implements OnInit {
     return this.colors[1];
   }
 
-  constructor(private groupService: GroupService, private translate: TranslateService) {}
+  constructor(private groupService: GroupService, private translate: TranslateService) { }
 
   ngOnInit() {
     this.groupService
