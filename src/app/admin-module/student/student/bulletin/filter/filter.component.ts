@@ -3,7 +3,7 @@ import { Group } from '@app/models/Group.model';
 import { TokenStorageService } from '@app/services/auth/token-storage.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Level } from '@app/models/enums/Level';
-import { GroupService } from '@app/services/group.service';
+import { GroupService } from '@app/services/http/group.service';
 import { StudentService } from '@app/services/student.service';
 import { TranslateService } from '@ngx-translate/core';
 

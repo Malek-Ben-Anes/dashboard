@@ -5,7 +5,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { Group } from '@app/models/Group.model';
 import { Student } from '@app/models/Student.model';
 import { StudentService } from '@app/services/student.service';
-import { GroupService } from '@app/services/group.service';
+import { GroupService } from '@app/services/http/group.service';
 import { BASE_URL } from '@app/app.component';
 import { TranslateService } from '@ngx-translate/core';
 

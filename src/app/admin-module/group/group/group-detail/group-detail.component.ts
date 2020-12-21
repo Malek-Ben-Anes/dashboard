@@ -4,7 +4,7 @@ import {Group} from '@app/models/Group.model';
 import {BASE_URL} from '@app/app.component';
 import {Validators, FormGroup, FormBuilder} from '@angular/forms';
 import {Level} from '@app/models/enums/Level';
-import {GroupService} from '@app/services/group.service';
+import {GroupService} from '@app/services/http/group.service';
 import {TranslateService} from '@ngx-translate/core';
 import {Router} from '@angular/router';
 import {DialogContentExampleDialogComponent} from '@app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
