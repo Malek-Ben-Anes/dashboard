@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import { Component, OnInit, Input, SimpleChanges, EventEmitter, Output, OnChanges } from '@angular/core';
-import { Group } from '@app/models/Group';
+import { Group } from '@app/models/Group.model';
 import { BASE_URL } from '@app/app.component';
 import { Student } from '@app/models/Student.model';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';

@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import { Component, OnInit } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { Group } from '@app/models/Group';
+import { Group } from '@app/models/Group.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { GroupService } from '@app/services/group.service';

@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import {Component, OnInit, Input, SimpleChanges, OnChanges} from '@angular/core';
 import {SubjectService} from '@app/services/subject.service';
-import {Group} from '@app/models/Group';
+import {Group} from '@app/models/Group.model';
 import {Subject} from '@app/models/Subject';
 import {LessonService} from '@app/services/lesson.service';
 import {FormBuilder, FormGroup, FormArray, FormControl} from '@angular/forms';

@@ -1,5 +1,5 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
-import {Group} from '@app/models/Group';
+import {Group} from '@app/models/Group.model';
 import {GroupService} from '@app/services/group.service';
 import {TranslateService} from '@ngx-translate/core';
 

@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import {Component, OnInit, Input} from '@angular/core';
-import {Group} from '@app/models/Group';
+import {Group} from '@app/models/Group.model';
 import {Student} from '@app/models/Student.model';
 import {MarkService} from '@app/services/mark.service';
 import {Mark} from '@app/models/Mark';

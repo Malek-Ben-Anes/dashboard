@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
-import { Group } from '@app/models/Group';
+import { Group } from '@app/models/Group.model';
 import { Student } from '@app/models/Student.model';
 import { StudentService } from '@app/services/student.service';
 import { GroupService } from '@app/services/group.service';

@@ -1,4 +1,4 @@
-import { Group } from './Group';
+import { Group } from './Group.model';
 import { Trimester } from './enums/Trimester';
 
 export class Bulletin {

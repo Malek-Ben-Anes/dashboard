@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Group } from '@app/models/Group';
+import { Group } from '@app/models/Group.model';
 import { Level } from '@app/models/enums/Level';
 import { GroupService } from '@app/services/group.service';
 import { Routers } from '@app/admin-module/routes/router-link';

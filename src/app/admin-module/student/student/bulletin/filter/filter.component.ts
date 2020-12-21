@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { Group } from '@app/models/Group';
+import { Group } from '@app/models/Group.model';
 import { TokenStorageService } from '@app/services/auth/token-storage.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Level } from '@app/models/enums/Level';

@@ -5,7 +5,7 @@ import {Student} from '@app/models/Student.model';
 import {BASE_API_URL} from '@app/app.component';
 import {Trimester} from '@app/models/enums/Trimester';
 import {Teacher} from '@app/models/Teacher.model';
-import {Group} from '@app/models/Group';
+import {Group} from '@app/models/Group.model';
 
 const USERS_URL: string = BASE_API_URL + 'users/';
 const BULLETIN_URL: string = BASE_API_URL + 'bulletins/';

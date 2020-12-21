@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Group } from '@app/models/Group';
+import { Group } from '@app/models/Group.model';
 import { BASE_URL } from '@app/app.component';
 import { GroupService } from '@app/services/group.service';
 import { HttpResponse } from '@angular/common/http';

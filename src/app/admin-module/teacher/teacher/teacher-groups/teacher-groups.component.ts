@@ -1,6 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {Teacher} from '@app/models/Teacher.model';
-import {Group} from '@app/models/Group';
+import {Group} from '@app/models/Group.model';
 
 @Component({
   selector: 'app-teacher-groups',
