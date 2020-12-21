@@ -75,7 +75,7 @@ export class TeacherProfileComponent implements OnInit {
   }
 
   private prepareRequest(): CreateTeacherRequest | UpdateTeacherRequest {
-    let request: CreateTeacherRequest = new CreateTeacherRequest();
+    const request: CreateTeacherRequest = new CreateTeacherRequest();
     request.firstName = this.extractFieldData('firstName');
     request.lastName = this.extractFieldData('lastName');
     request.phone = this.extractFieldData('phone');

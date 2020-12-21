@@ -1,29 +1,28 @@
 import * as _ from 'lodash';
-import { Component, OnInit } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
-import { Group } from '@app/models/Group.model';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { GroupService } from '@app/services/http/group.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Level } from '@app/models/enums/Level';
-import { StudentService } from '@app/services/student.service';
-import { Observable } from 'rxjs';
-import { BASE_URL } from '@app/app.component';
-import { Teacher } from '@app/models/Teacher.model';
-import { TranslateService } from '@ngx-translate/core';
+import {Component, OnInit} from '@angular/core';
+import {AsyncPipe} from '@angular/common';
+import {Group} from '@app/models/Group.model';
+import {Router, ActivatedRoute} from '@angular/router';
+import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
+import {GroupService} from '@app/services/http/group.service';
+import {HttpErrorResponse} from '@angular/common/http';
+import {Level} from '@app/models/enums/Level';
+import {StudentService} from '@app/services/student.service';
+import {Observable} from 'rxjs';
+import {BASE_URL} from '@app/app.component';
+import {Teacher} from '@app/models/Teacher.model';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-group',
   templateUrl: './group.component.html',
-  styleUrls: ['./group.component.scss']
+  styleUrls: ['./group.component.scss'],
 })
 export class GroupComponent implements OnInit {
-
   isNew = true;
   BASE_URL: string = BASE_URL;
-  tabIndex = {'STUDENTS': 0,  'TIME_TABLE': 1, 'MARKS': 2};
-  tabs = this.updateTabs();
+  tabIndex = {'STUDENTS': 0, 'TIME_TABLE': 1, 'MARKS': 2};
+  tabs;
 
   selected = new FormControl(0);
   teacher: Teacher;
@@ -40,6 +39,7 @@ export class GroupComponent implements OnInit {
     private route: ActivatedRoute, private translate: TranslateService) { }
 
   ngOnInit() {
+    this.tabs = this.updateTabs();
     const id = this.route.snapshot.params['id'];
     if (id != null && this.isNew) {
       this.findById(id);
@@ -49,25 +49,29 @@ export class GroupComponent implements OnInit {
   }
 
   refresh(group: Group) {
-      this.group = group;
+    this.group = group;
   }
 
   private findById(id: string) {
-    this.groupService.find(id).then(group => this.group = group)
-        .then(group => {this.group.students = []; this.isNew = false; this.tabs = this.updateTabs(); })
-        .then(group => this.findStudentsByGroupId(this.group.id))
-        .catch(err => {this.group = new Group(); this.isNew = true; })
+    /* this.groupService.find(id).then((group) => this.group = group)
+        .then((group) => {
+          this.group.students = []; this.isNew = false; this.tabs = this.updateTabs();
+        })
+        // .then((group) => this.findStudentsByGroupId(this.group.id))
+        .catch((err) => {
+          this.group = new Group(); this.isNew = true;
+        });*/
   }
 
-  private findStudentsByGroupId(groupId: string) {
+  /* private findStudentsByGroupId(groupId: string) {
     this.studentService.findStudentsByGroupId(groupId)
-        .subscribe(students => this.group.students = students,  err => console.log(err));
-  }
+        .subscribe((students) => this.group.students = students, (err) => console.log(err));
+  }*/
 
   private updateTabs() {
     return [{'label': this.translate.instant('All.text.students.tab.name'), 'disabled': false},
-            {'label': this.translate.instant('All.text.timeTable.tab.name'), 'disabled': this.isNew},
-            {'label': this.translate.instant('All.text.marks.tab.name'), 'disabled': this.isNew}];
+      {'label': this.translate.instant('All.text.timeTable.tab.name'), 'disabled': this.isNew},
+      {'label': this.translate.instant('All.text.marks.tab.name'), 'disabled': this.isNew}];
   }
 
   checked = false;

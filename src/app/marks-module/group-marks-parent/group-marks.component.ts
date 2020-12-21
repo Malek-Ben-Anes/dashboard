@@ -42,7 +42,7 @@ export class GroupMarksComponent implements OnInit {
         .then((groupMarks) => {
           this._groupMarks = groupMarks;
           if (this.group && this.group.students) {
-            this.onStudentSelected(student || this.group.students[0]);
+            this.onStudentSelected(null );/* student || this.group.students[0]*/
           }
         },
         );

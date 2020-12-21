@@ -1,17 +1,27 @@
 <div class="card card-profile">
   <div class="card-body">
-    <form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="groupForm">
       <div class="row">
         <div class="col-md-8">
           <mat-form-field class="example-full-width">
-            <input matInput [placeholder]="'All.text.placeholder.groupName' | translate" formControlName="name" required>
+            <input
+              matInput
+              [placeholder]="'All.text.placeholder.groupName' | translate"
+              formControlName="name"
+              required
+            />
           </mat-form-field>
         </div>
         <div class="col-md-4">
           <mat-form-field class="example-full-width">
-            <mat-select matInput [placeholder]="'All.text.placeholder.LevelName' | translate" formControlName="level" required>
+            <mat-select
+              matInput
+              [placeholder]="'All.text.placeholder.LevelName' | translate"
+              formControlName="level"
+              required
+            >
               <mat-option *ngFor="let lev of levels" [value]="lev" required>
-                {{'GLBL.label.' + lev | translate}}
+                {{ "GLBL.label." + lev | translate }}
               </mat-option>
             </mat-select>
             <!-- <mat-error *ngIf="animalControl.hasError('required')">Please choose an animal</mat-error>
@@ -22,39 +32,48 @@
       <div class="row">
         <div class="col-md-12">
           <mat-form-field class="example-full-width">
-            <textarea matInput [placeholder]="'All.text.placeholder.AdditionalInformation' | translate"
-             formControlName="description" rows="2"></textarea>
+            <textarea
+              matInput
+              [placeholder]="
+                'All.text.placeholder.AdditionalInformation' | translate
+              "
+              formControlName="description"
+              rows="2"
+            ></textarea>
           </mat-form-field>
         </div>
       </div>
-      <div *ngIf="(!isNew); else newSubject">
         <button
+          *ngIf="!isNew"
           mat-raised-button
           [disabled]="groupForm.invalid"
-          type="submit"
-          class="btn btn-warning pull-right">
-          {{'All.text.update' | translate}}
+          (click)="onUpdate()"
+          class="btn btn-warning pull-right"
+        >
+          {{ "All.text.update" | translate }}
         </button>
+
         <button
+          *ngIf="isNew"
+          mat-raised-button
+          [disabled]="groupForm.pristine || groupForm.invalid"
+          (click)="onCreate()"
+          class="btn btn-info pull-right"
+        >
+          {{ "All.text.create" | translate }}
+        </button>
+
+        <button
+          *ngIf="!isNew"
           mat-raised-button
           [disabled]="groupForm.invalid"
           (click)="onDelete()"
-          class="btn btn-danger pull-right">
-          {{'All.text.delete' | translate}}
+          class="btn btn-danger pull-right"
+        >
+          {{ "All.text.delete" | translate }}
         </button>
 
-      </div>
-      <ng-template #newSubject>
-        <button
-          mat-raised-button
-          [disabled]="groupForm.pristine || groupForm.invalid"
-          type="submit"
-          class="btn btn-info pull-right"
-        >
-        {{'All.text.create' | translate}}
-        </button>
         <div class="clearfix"></div>
-      </ng-template>
     </form>
   </div>
 </div>

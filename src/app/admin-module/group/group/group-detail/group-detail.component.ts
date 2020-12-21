@@ -1,5 +1,4 @@
-import * as _ from 'lodash';
-import {Component, OnInit, Input, SimpleChanges, EventEmitter, Output, OnChanges} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Group} from '@app/models/Group.model';
 import {BASE_URL} from '@app/app.component';
 import {Validators, FormGroup, FormBuilder} from '@angular/forms';
@@ -9,58 +8,91 @@ import {TranslateService} from '@ngx-translate/core';
 import {Router} from '@angular/router';
 import {DialogContentExampleDialogComponent} from '@app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
 import {MatDialog} from '@angular/material';
+import {SubsGroupService} from '@app/services/subs/subs-group.service';
+import {Subscription} from 'rxjs';
+import {CreateGroupRequest} from '@app/models/requests/group/CreateGroup.model';
+import {UpdateGroupRequest} from '@app/models/requests/group/UpdateGroup.model';
 
 @Component({
   selector: 'app-group-detail',
   templateUrl: './group-detail.component.html',
   styleUrls: ['./group-detail.component.scss'],
 })
-export class GroupDetailComponent implements OnInit, OnChanges {
-  BASE_URL: string = BASE_URL;
+export class GroupDetailComponent implements OnInit, OnDestroy {
+  readonly BASE_URL: string = BASE_URL;
 
-  @Input('group') group: Group;
-  @Input('isNew') isNew: boolean;
-
-  @Output()
-  refreshEvent = new EventEmitter<Group>();
+  currentGroup: Group;
+  _subscription: Subscription;
 
   levels = Object.keys(Level);
-
   groupForm: FormGroup;
+  isNew: boolean = true;
 
-  constructor(private formBuilder: FormBuilder, private groupService: GroupService,
-              public dialog: MatDialog,
-              private router: Router,
-              private translate: TranslateService) { }
+  constructor(private formBuilder: FormBuilder, private groupService: GroupService, private subsGroupService: SubsGroupService,
+              public dialog: MatDialog, private router: Router, private translate: TranslateService) { }
 
   ngOnInit() {
-    this.initGroupForm();
+    this.groupForm = this.initGroupForm();
+    this._subscription = this.subsGroupService.getGroup().subscribe((group) => {
+      this.currentGroup = group;
+      this.isNew = false;
+      this.updateForm();
+    }, (err) => {
+      this.currentGroup = new Group();
+      this.isNew = true;
+      this.updateForm();
+    });
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    this.initGroupForm();
-    if (this.groupForm != null && changes.group != null) {
-      this.group = changes.group.currentValue;
-      this.updateForm(this.group);
-    }
-
-    if (changes.isNew != null) {
-      this.isNew = changes.isNew.currentValue;
-    }
+  private initGroupForm(): FormGroup {
+    return this.formBuilder.group({
+      name: ['', Validators.required],
+      level: ['', Validators.required],
+      description: [''],
+    });
   }
 
-  onSubmit() {
-    this.getSubmitedData();
-    if (this.group.id == null) {
-      this.save(this.group);
-    } else {
-      this.update(this.group);
+  private updateForm(): void {
+    this.groupForm.patchValue({
+      name: this.currentGroup.name,
+      description: this.currentGroup.description,
+    });
+    const groupLevel = this.levels.find((level) => level === this.currentGroup.level);
+    this.groupForm.get('level').setValue(groupLevel);
+  }
+
+  onUpdate(): void {
+    this.subsGroupService.updateGroup(<UpdateGroupRequest> this.prepareRequest()).subscribe((group) => {
+      this.currentGroup = group; this.updateForm();
+    }, (err) => console.log(err));
+  }
+
+  onCreate(): void {
+    this.subsGroupService.createGroup(<CreateGroupRequest> this.prepareRequest()).subscribe((group) => {
+      this.currentGroup = group;
+      this.updateForm();
+    }, (err) => console.log(err));
+  }
+
+  private prepareRequest(): UpdateGroupRequest|CreateGroupRequest {
+    const request: UpdateGroupRequest = new UpdateGroupRequest();
+    request.name = this.extractDataFromField('name');
+    request.level = this.extractDataFromField('level');
+    request.description = this.extractDataFromField('description');
+    if (this.isNew) {
+      return <CreateGroupRequest> request;
     }
+    request.id = this.currentGroup.id;
+    return request;
+  }
+
+  private extractDataFromField(property: string): any {
+    return this.groupForm.get(property).value;
   }
 
   onConfirmationDelete() {
     this.groupService
-        .delete(this.group.id)
+        .deleteById(this.currentGroup.id)
         .then((group) => {
           console.log('delete group!');
           this.router.navigate(['app', 'groups']);
@@ -85,56 +117,9 @@ export class GroupDetailComponent implements OnInit, OnChanges {
     });
   }
 
-  private initGroupForm() {
-    if (this.groupForm != null) {
-      return;
+  ngOnDestroy() {
+    if (this._subscription) {
+      this._subscription.unsubscribe();
     }
-
-    this.groupForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      level: ['', Validators.required],
-      description: [''],
-    });
-  }
-
-  private updateForm(group: Group): void {
-    this.groupForm.patchValue({
-      name: group.name,
-      description: group.description,
-    });
-    const toSelect = this.levels.find((level) => level === this.group.level);
-    this.groupForm.get('level').setValue(toSelect);
-  }
-
-  private save(groupRequest: Group) {
-    this.groupService.save(groupRequest)
-        .then((groupData) => {
-          groupData.students = this.group.students; this.group = groupData;
-        })
-        .then((groupData) => {
-          this.updateForm(this.group); this.refreshEvent.emit(this.group);
-        })
-        .catch((err) => console.log(err));
-  }
-
-  private update(groupRequest: Group) {
-    this.groupService.update(groupRequest)
-        .then((groupData) => {
-          groupData.students = this.group.students;
-          this.group = groupData;
-          this.updateForm(this.group);
-          this.refreshEvent.emit(this.group);
-        })
-        .catch((err) => console.log(err));
-  }
-
-  private getSubmitedData() {
-    this.group.name = this.extractDataFromField('name');
-    this.group.level = this.extractDataFromField('level');
-    this.group.description = this.extractDataFromField('description');
-  }
-
-  private extractDataFromField(property: string): any {
-    return this.groupForm.get(property).value;
   }
 }

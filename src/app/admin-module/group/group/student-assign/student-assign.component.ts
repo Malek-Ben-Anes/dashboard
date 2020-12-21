@@ -1,22 +1,21 @@
 import * as _ from 'lodash';
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
-import { Group } from '@app/models/Group.model';
-import { Student } from '@app/models/Student.model';
-import { StudentService } from '@app/services/student.service';
-import { GroupService } from '@app/services/http/group.service';
-import { BASE_URL } from '@app/app.component';
-import { TranslateService } from '@ngx-translate/core';
+import {Group} from '@app/models/Group.model';
+import {Student} from '@app/models/Student.model';
+import {StudentService} from '@app/services/student.service';
+import {GroupService} from '@app/services/http/group.service';
+import {BASE_URL} from '@app/app.component';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-student-assign',
   templateUrl: './student-assign.component.html',
-  styleUrls: ['./student-assign.component.scss']
+  styleUrls: ['./student-assign.component.scss'],
 })
 export class StudentAssignComponent implements OnInit {
-
-  //@Input('groupToChild') groupToChild: Observable<Group>;
+  // @Input('groupToChild') groupToChild: Observable<Group>;
 
   @Input('group') group: Group;
   BASE_URL: string = BASE_URL;
@@ -55,9 +54,9 @@ export class StudentAssignComponent implements OnInit {
       return;
     }
     this.groupService.addStudentsToGroup(this.group.id, addedStudentToGroup)
-        .then(students => this.group.students = students)
-        .then(students => this.refreshEvent.emit(this.group))
-        .catch(err => console.log(err));
+        // .then((students) => this.group.students = students)
+        .then((students) => this.refreshEvent.emit(this.group))
+        .catch((err) => console.log(err));
   }
 
   private deletedStudentFromGroup(deletedStudentFromGroup: Student[]) {
@@ -65,63 +64,62 @@ export class StudentAssignComponent implements OnInit {
       return;
     }
     this.groupService.deleteStudentsFromGroup(this.group.id, deletedStudentFromGroup)
-        .then(students => this.group.students = students)
-        .then(students => this.refreshEvent.emit(this.group))
-        .catch(err => console.log(err));
+        // .then((students) => this.group.students = students)
+        .then((students) => this.refreshEvent.emit(this.group))
+        .catch((err) => console.log(err));
   }
 
   private arrayDifferenceByOrder(arrA: Student[], arrB: Student[]) {
-
     if (arrA == undefined || arrB == undefined) {
       return [];
     }
 
-    //let difference = arrA.filter(item => arrB.indexOf(item) < 0);
-    let difference = arrA.filter( obj =>  !arrB.some( obj2 => obj.id == obj2.id)  );
-    return difference
+    // let difference = arrA.filter(item => arrB.indexOf(item) < 0);
+    const difference = arrA.filter( (obj) => !arrB.some( (obj2) => obj.id == obj2.id) );
+    return difference;
   }
 
 
   private initTodoArray() {
     _.differenceBy(this.unassignedStudents, this.group.students, 'id')
-     .map((student: Student) => this.pushInArray(student, this.todo));
+        .map((student: Student) => this.pushInArray(student, this.todo));
   }
 
   private initDoneArray() {
-    this.unassignedStudents.forEach(student => {
+    this.unassignedStudents.forEach((student) => {
       this.pushInArray(student, this.initial);
-      this.pushInArray(student, this.done)
+      this.pushInArray(student, this.done);
     });
   }
 
   private findUnassignedStudents() {
     this.studentService.findAll()
-      .subscribe(students => { 
-        this.allStudents = students;
-        this.filterUnassignedStudents(students);
-        this.initTodoArray();
-      },
-      err => console.log(err));
+        .subscribe((students) => {
+          this.allStudents = students;
+          this.filterUnassignedStudents(students);
+          this.initTodoArray();
+        },
+        (err) => console.log(err));
   }
 
   private filterUnassignedStudents(students: Student[]): void {
-    this.unassignedStudents = _.filter(students, s => s.group == null);
+    this.unassignedStudents = _.filter(students, (s) => s.group == null);
   }
 
   /**
    * THIS FUNCTION IS TO FULL TODO AND DONE ARRAY OF DATA FROM ALLSTUDENTS AND GROUP.STUDENTS
    * @param student
-   * 
+   *
    */
   private pushInArray(student: Student, arr: any) {
-    let studentI = {
+    const studentI = {
       id: student.id,
       firstName: student.firstName,
       lastName: student.lastName,
       email: student.email,
       photo: student.photo,
-      group: student.group && student.group.name
-    }
+      group: student.group && student.group.name,
+    };
     arr.push(studentI);
   }
 
@@ -131,9 +129,9 @@ export class StudentAssignComponent implements OnInit {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       transferArrayItem(event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex);
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex);
     }
   }
 }

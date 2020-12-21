@@ -16,7 +16,7 @@ import {CreateTeacherRequest} from '@app/models/requests/teacher/CreateTeacher.m
 export class TeacherComponent implements OnInit, OnChanges {
   readonly tabIndex = {'PROFILE': 0, 'PASSWORD': 1, 'GROUPS': 2, 'TIME_TABLE': 3};
 
-  tabs = this.updateTabs();
+  tabs;
   isNew = true;
   selected = new FormControl(0);
   teacher: Teacher;
@@ -24,6 +24,7 @@ export class TeacherComponent implements OnInit, OnChanges {
   constructor(private teacherService: TeacherService, private route: ActivatedRoute, private translate: TranslateService) { }
 
   ngOnInit() {
+    this.tabs = this.updateTabs();
     const id: string = this.route.snapshot.params['id'];
     if (id != null && this.isNew) {
       this.getTeacher(id);
