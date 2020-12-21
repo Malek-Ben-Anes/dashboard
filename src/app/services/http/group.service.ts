@@ -32,9 +32,10 @@ export class GroupService {
     return this.http.post<Group>(this.GROUP_URL, createGroup);
   }
 
-  update(group: Group): Observable<Group> {
+  update(group: Group): Promise<Group> {
     const URL = `${this.GROUP_URL}/${group.id}`;
-    return this.http.put<Group>(URL, group);
+    return new Promise((resolve, reject) => this.http.put<Group>(URL, group)
+        .subscribe( (group) => resolve(group), (err) => reject(err)) );
   }
 
   deleteById(groupId: string): Promise<Group> {

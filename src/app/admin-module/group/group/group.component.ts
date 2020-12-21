@@ -27,10 +27,9 @@ export class GroupComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.tabs = this.updateTabs();
     const groupId = this.route.snapshot.params['id'];
-    if (groupId != null) {
-      this._subscription = this.subsGroupService.getGroupById(groupId).subscribe((group) => {
+    if (groupId) {
+      this._subscription = this.subsGroupService.findById(groupId).subscribe((group) => {
         this.currentGroup = group;
-        this.subsGroupService.setGroup(group);
         this.tabs = this.updateTabs();
       });
     }
@@ -52,6 +51,7 @@ export class GroupComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     if (this._subscription) {
+      this.subsGroupService.clearGroup();
       this._subscription.unsubscribe();
     }
   }

@@ -3,7 +3,6 @@ import {Group} from '@app/models/Group.model';
 import {BASE_URL} from '@app/app.component';
 import {Validators, FormGroup, FormBuilder} from '@angular/forms';
 import {Level} from '@app/models/enums/Level';
-import {GroupService} from '@app/services/http/group.service';
 import {TranslateService} from '@ngx-translate/core';
 import {Router} from '@angular/router';
 import {DialogContentExampleDialogComponent} from '@app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
@@ -28,7 +27,7 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
   groupForm: FormGroup;
   isNew: boolean = true;
 
-  constructor(private formBuilder: FormBuilder, private groupService: GroupService, private subsGroupService: SubsGroupService,
+  constructor(private formBuilder: FormBuilder, private subsGroupService: SubsGroupService,
               public dialog: MatDialog, private router: Router, private translate: TranslateService) { }
 
   ngOnInit() {
@@ -64,8 +63,11 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
 
   onCreate(): void {
     this.subsGroupService.create(<CreateGroupRequest> this.prepareRequest())
-        .subscribe((group) => this.updateForm(),
-            (err) => console.log(err));
+        .subscribe((group) => {
+          this.updateForm();
+          this.isNew = false;
+          this.router.navigate(['app', 'group-detail', group.id]);
+        });
   }
 
   onUpdate(): void {
@@ -90,16 +92,11 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
     return this.groupForm.get(property).value;
   }
 
-  onConfirmationDelete() {
-    this.groupService
-        .deleteById(this.currentGroup.id)
-        .then((group) => {
-          console.log('delete group!');
-          this.router.navigate(['app', 'groups']);
-        });
+  onConfirmDelete() {
+    this.subsGroupService.deleteById(this.currentGroup.id).subscribe(() => this.router.navigate(['app', 'groups']));
   }
 
-  onDelete(): void {
+  onPreDelete(): void {
     const modalDialog: { dialogTitle: string; dialogMessage: string; } =
     {
       dialogTitle: this.translate.instant('All.text.delete.title'),
@@ -112,7 +109,7 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
     });
     dialogRef.afterClosed().subscribe((confirmtion) => {
       if (confirmtion) {
-        this.onConfirmationDelete();
+        this.onConfirmDelete();
       }
     });
   }

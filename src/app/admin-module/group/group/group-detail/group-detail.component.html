@@ -67,7 +67,7 @@
           *ngIf="!isNew"
           mat-raised-button
           [disabled]="groupForm.invalid"
-          (click)="onDelete()"
+          (click)="onPreDelete()"
           class="btn btn-danger pull-right"
         >
           {{ "All.text.delete" | translate }}
