@@ -34,12 +34,13 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.groupForm = this.initGroupForm();
     this._subscription = this.subsGroupService.getGroup().subscribe((group) => {
-      this.currentGroup = group;
-      this.isNew = false;
-      this.updateForm();
-    }, (err) => {
-      this.currentGroup = new Group();
-      this.isNew = true;
+      if (group) {
+        this.currentGroup = group;
+        this.isNew = false;
+      } else {
+        this.currentGroup = new Group();
+        this.isNew = true;
+      }
       this.updateForm();
     });
   }
@@ -61,15 +62,14 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
     this.groupForm.get('level').setValue(groupLevel);
   }
 
-  onUpdate(): void {
-    this.subsGroupService.updateGroup(<UpdateGroupRequest> this.prepareRequest()).subscribe((group) => {
-      this.currentGroup = group; this.updateForm();
-    }, (err) => console.log(err));
+  onCreate(): void {
+    this.subsGroupService.create(<CreateGroupRequest> this.prepareRequest())
+        .subscribe((group) => this.updateForm(),
+            (err) => console.log(err));
   }
 
-  onCreate(): void {
-    this.subsGroupService.createGroup(<CreateGroupRequest> this.prepareRequest()).subscribe((group) => {
-      this.currentGroup = group;
+  onUpdate(): void {
+    this.subsGroupService.update(<UpdateGroupRequest> this.prepareRequest()).subscribe((group) => {
       this.updateForm();
     }, (err) => console.log(err));
   }
