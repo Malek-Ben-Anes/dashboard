@@ -1,24 +1,21 @@
 import * as _ from 'lodash';
-import { Component, OnInit, Input, SimpleChanges, EventEmitter, Output, OnChanges } from '@angular/core';
-import { Group } from '@app/models/Group.model';
-import { BASE_URL } from '@app/app.component';
-import { Student } from '@app/models/Student.model';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { group } from '@angular/animations';
-import { Level } from '@app/models/enums/Level';
-import { GroupService } from '@app/services/group.service';
-import { TranslateService } from '@ngx-translate/core';
-import { Router } from '@angular/router';
-import { DialogContentExampleDialogComponent } from '@app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
-import { MatDialog } from '@angular/material';
+import {Component, OnInit, Input, SimpleChanges, EventEmitter, Output, OnChanges} from '@angular/core';
+import {Group} from '@app/models/Group.model';
+import {BASE_URL} from '@app/app.component';
+import {Validators, FormGroup, FormBuilder} from '@angular/forms';
+import {Level} from '@app/models/enums/Level';
+import {GroupService} from '@app/services/group.service';
+import {TranslateService} from '@ngx-translate/core';
+import {Router} from '@angular/router';
+import {DialogContentExampleDialogComponent} from '@app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
+import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-group-detail',
   templateUrl: './group-detail.component.html',
-  styleUrls: ['./group-detail.component.scss']
+  styleUrls: ['./group-detail.component.scss'],
 })
 export class GroupDetailComponent implements OnInit, OnChanges {
-
   BASE_URL: string = BASE_URL;
 
   @Input('group') group: Group;
@@ -63,25 +60,25 @@ export class GroupDetailComponent implements OnInit, OnChanges {
 
   onConfirmationDelete() {
     this.groupService
-      .delete(this.group.id)
-      .then(group => {
-        console.log("delete group!");
-        this.router.navigate(['app', 'groups']);
-      });
+        .delete(this.group.id)
+        .then((group) => {
+          console.log('delete group!');
+          this.router.navigate(['app', 'groups']);
+        });
   }
 
   onDelete(): void {
     const modalDialog: { dialogTitle: string; dialogMessage: string; } =
     {
       dialogTitle: this.translate.instant('All.text.delete.title'),
-      dialogMessage: this.translate.instant('All.text.delete.Confirmation')
+      dialogMessage: this.translate.instant('All.text.delete.Confirmation'),
     };
     const dialogRef = this.dialog.open(DialogContentExampleDialogComponent, {
       width: '450px',
       height: '200px',
-      data: { dialogTitle: modalDialog.dialogTitle, dialogMessage: modalDialog.dialogMessage }
+      data: {dialogTitle: modalDialog.dialogTitle, dialogMessage: modalDialog.dialogMessage},
     });
-    dialogRef.afterClosed().subscribe(confirmtion => {
+    dialogRef.afterClosed().subscribe((confirmtion) => {
       if (confirmtion) {
         this.onConfirmationDelete();
       }
@@ -103,32 +100,37 @@ export class GroupDetailComponent implements OnInit, OnChanges {
   private updateForm(group: Group): void {
     this.groupForm.patchValue({
       name: group.name,
-      description: group.description
+      description: group.description,
     });
-    const toSelect = this.levels.find(level => level === this.group.level);
+    const toSelect = this.levels.find((level) => level === this.group.level);
     this.groupForm.get('level').setValue(toSelect);
   }
 
   private save(groupRequest: Group) {
     this.groupService.save(groupRequest)
-        .then(groupData => {groupData.students = this.group.students; this.group = groupData})
-        .then(groupData => { this.updateForm(this.group); this.refreshEvent.emit(this.group); })
-        .catch(err => console.log(err));
+        .then((groupData) => {
+          groupData.students = this.group.students; this.group = groupData;
+        })
+        .then((groupData) => {
+          this.updateForm(this.group); this.refreshEvent.emit(this.group);
+        })
+        .catch((err) => console.log(err));
   }
 
   private update(groupRequest: Group) {
     this.groupService.update(groupRequest)
-        .then(groupData => {groupData.students = this.group.students;
-                            this.group = groupData;
-                            this.updateForm(this.group);
-                            this.refreshEvent.emit(this.group);
-                          })
-        .catch(err => console.log(err));
+        .then((groupData) => {
+          groupData.students = this.group.students;
+          this.group = groupData;
+          this.updateForm(this.group);
+          this.refreshEvent.emit(this.group);
+        })
+        .catch((err) => console.log(err));
   }
 
   private getSubmitedData() {
     this.group.name = this.extractDataFromField('name');
-    this.group.level =  this.extractDataFromField('level');
+    this.group.level = this.extractDataFromField('level');
     this.group.description = this.extractDataFromField('description');
   }
 
