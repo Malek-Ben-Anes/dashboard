@@ -5,19 +5,20 @@ import {Student} from '@app/models/Student.model';
 import {BASE_API_URL} from '@app/app.component';
 import {Trimester} from '@app/models/enums/Trimester';
 import {Teacher} from '@app/models/Teacher.model';
+import {map} from 'rxjs/operators';
 import {Group} from '@app/models/Group.model';
 
-const USERS_URL: string = BASE_API_URL + 'users/';
-const BULLETIN_URL: string = BASE_API_URL + 'bulletins/';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FileUploadService {
+  readonly USERS_URL: string = BASE_API_URL + 'users/';
+  readonly BULLETIN_URL: string = BASE_API_URL + 'bulletins/';
   constructor(private http: HttpClient) {}
 
   public uploadPhoto(user: Student | Teacher, file: File): Promise<Student | Teacher> {
-    const PHOTO_UPLOAD_URL = `${USERS_URL}${user.id}/photo`;
+    const PHOTO_UPLOAD_URL = `${this.USERS_URL}${user.id}/photo`;
     const body: FormData = new FormData();
     body.append('file', file);
 
@@ -40,7 +41,7 @@ export class FileUploadService {
 
   public executeCallForGroup(url: string, body: FormData): Promise<Group> {
     return new Promise((resolve, reject) => {
-      this.http.post<Student | Teacher>(url, body, this.prepareHeader())
+      this.http.patch<Group>(url, body, this.prepareHeader())
           .subscribe((response) => {
             if (response.type === 4 && response['body']) {
               const group: Group = response['body'];
@@ -70,6 +71,6 @@ export class FileUploadService {
   }
 
   public deleteBulletin(bulletinId: string): Observable<any> {
-    return this.http.delete(BULLETIN_URL + bulletinId);
+    return this.http.delete(this.BULLETIN_URL + bulletinId);
   }
 }

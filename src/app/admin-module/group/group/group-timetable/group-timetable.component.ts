@@ -1,48 +1,47 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Group } from '@app/models/Group.model';
-import { BASE_URL } from '@app/app.component';
-import { GroupService } from '@app/services/http/group.service';
-import { HttpResponse } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {Group} from '@app/models/Group.model';
+import {BASE_URL} from '@app/app.component';
+import {Subscription} from 'rxjs';
+import {SubsGroupService} from '@app/services/subs/subs-group.service';
 
 @Component({
   selector: 'app-group-timetable',
   templateUrl: './group-timetable.component.html',
-  styleUrls: ['./group-timetable.component.scss']
+  styleUrls: ['./group-timetable.component.scss'],
 })
 export class GroupTimetableComponent implements OnInit {
+  readonly BASE_URL = BASE_URL;
 
-  @Input('group') group: Group;
+  currentGroup: Group;
+  _subscription: Subscription;
 
-  @Output()
-  refreshEvent = new EventEmitter<Group>();
-
-  BASE_URL = BASE_URL;
   response;
 
   selectedFile: File
   isUploading = false;
 
-  constructor(private groupService: GroupService) { }
+  constructor(private subsGroupService: SubsGroupService) { }
 
   ngOnInit() {
+    this._subscription = this.subsGroupService.getGroup().subscribe((group) => {
+      this.currentGroup = group;
+      this.currentGroup.timeTableUrl = group.timeTableUrl + '?random+\=' + Math.random();
+    });
   }
 
   onFileChanged(event) {
-    this.selectedFile = event.target.files[0]
+    this.selectedFile = event.target.files[0];
   }
 
   onUpload() {
     this.isUploading = true;
-    this.groupService.uploadTimeTable(this.group.id, this.selectedFile)
-    .then((group: Group) => {
-        this.isUploading = false;
-        this.group = group;
-        this.group.timeTableUrl = group.timeTableUrl + '?random+\=' + Math.random();
-        this.refreshEvent.emit(this.group);
-      })
-      .catch(err => {
-        this.isUploading = false;
-        alert('Upload Emploi du temps a echoué');
-      });
+    this.subsGroupService.uploadTimeTable(this.currentGroup.id, this.selectedFile)
+        .subscribe((group: Group) => {
+          this.isUploading = false;
+          alert('Upload Emploi du temps a reussi');
+        }, (err) => {
+          this.isUploading = false;
+          alert('Upload Emploi du temps a echoué');
+        });
   }
 }

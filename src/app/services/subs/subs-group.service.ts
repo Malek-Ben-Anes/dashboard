@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, ReplaySubject, Subject} from 'rxjs';
+import {BehaviorSubject, from, Observable, pipe, ReplaySubject, Subject} from 'rxjs';
 import {tap} from 'rxjs/operators';
 
 import {HttpClient, HttpHeaders} from '@angular/common/http';
@@ -9,6 +9,7 @@ import {Student} from '@app/models/Student.model';
 import {FileUploadService} from '../file-upload.service';
 import {UpdateGroupRequest} from '@app/models/requests/group/UpdateGroup.model';
 import {CreateGroupRequest} from '@app/models/requests/group/CreateGroup.model';
+import { fromPromise } from 'rxjs/internal-compatibility';
 @Injectable({
   providedIn: 'root',
 })
@@ -49,11 +50,16 @@ export class SubsGroupService {
     return this.http.delete<Group>(URL).pipe(tap(() => this.clearGroup()));
   }
 
-  uploadTimeTable(groupId: string, file: File): Promise<Group> {
+  uploadTimeTable(groupId: string, file: File): Observable<Group> {
     const TIMETABLE_UPLOAD_URL: string = BASE_API_URL + `groups/${groupId}/timetables`;
     const body: FormData = new FormData();
     body.append('file', file);
-    return this.fileService.executeCallForGroup(TIMETABLE_UPLOAD_URL, body);
+    return fromPromise(this.fileService.executeCallForGroup(TIMETABLE_UPLOAD_URL, body))
+        .pipe(tap((group: Group) => {
+          console.log(group);
+          group.timeTableUrl += '?random+\=' + Math.random();
+          this.setGroup(group);
+        }));
   }
 
   addStudentsToGroup(groupId: string, students: Student[]): Promise<Student[]> {

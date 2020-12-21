@@ -44,13 +44,6 @@ export class GroupService {
         .subscribe((group) => resolve(group), (err) => reject(err)));
   }
 
-  uploadTimeTable(groupId: string, file: File): Promise<Group> {
-    const TIMETABLE_UPLOAD_URL: string = BASE_API_URL + `groups/${groupId}/timetables`;
-    const body: FormData = new FormData();
-    body.append('file', file);
-    return this.fileService.executeCallForGroup(TIMETABLE_UPLOAD_URL, body);
-  }
-
   addStudentsToGroup(groupId: string, students: Student[]): Promise<Student[]> {
     const URL = `${this.GROUP_URL}/${groupId}/students/`;
     return new Promise((resolve, reject) => this.http.post<Student[]>(URL, students)

@@ -22,7 +22,7 @@ export class GroupComponent implements OnInit, OnDestroy {
   currentGroup: Group;
   _subscription: Subscription;
 
-  constructor(private route: ActivatedRoute, private groupService: GroupService, private subsGroupService: SubsGroupService, private translate: TranslateService) { }
+  constructor(private route: ActivatedRoute, private subsGroupService: SubsGroupService, private translate: TranslateService) { }
 
   ngOnInit() {
     this.tabs = this.updateTabs();
