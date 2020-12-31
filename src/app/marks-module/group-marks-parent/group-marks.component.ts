@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Group} from '@app/models/Group.model';
 import {Student} from '@app/models/Student.model';
 import {MarkService} from '@app/services/mark.service';
@@ -8,6 +8,8 @@ import {LessonService} from '@app/services/lesson.service';
 import {Lesson} from '@app/models/Lesson.model';
 import {TranslateService} from '@ngx-translate/core';
 import {TokenStorageService} from '@app/services/auth/token-storage.service';
+import { Subscription } from 'rxjs';
+import { GroupService } from '@app/services/group.service';
 
 @Component({
   selector: 'app-group-marks',
@@ -17,7 +19,8 @@ import {TokenStorageService} from '@app/services/auth/token-storage.service';
 export class GroupMarksComponent implements OnInit {
   // https://hackernoon.com/chatbot-with-angular-5-dialogflow-fdac97fef681
 
-  @Input('group') group: Group;
+  currentGroup: Group;
+  _subscription: Subscription;
 
   // selected student
   student: Student = new Student();
@@ -28,12 +31,18 @@ export class GroupMarksComponent implements OnInit {
 
   constructor(private markService: MarkService,
               private lessonService: LessonService,
+              private groupService: GroupService,
               private translate: TranslateService,
               private storage: TokenStorageService) {}
 
   ngOnInit() {
-    this.findMarks(this.group.id);
-    this.findLessons(this.group.id, this.teacherId);
+    this._subscription = this.groupService.getGroup().subscribe((group) => {
+      this.currentGroup = group;
+    });
+    if (this.currentGroup) {
+      this.findMarks(this.currentGroup.id);
+      this.findLessons(this.currentGroup.id, this.teacherId);
+    }
   }
 
   private findMarks(groupId: string, student?: Student) {
@@ -41,7 +50,7 @@ export class GroupMarksComponent implements OnInit {
         .findAll(undefined, groupId)
         .then((groupMarks) => {
           this._groupMarks = groupMarks;
-          if (this.group && this.group.students) {
+          if (this.currentGroup && this.currentGroup.students) {
             this.onStudentSelected(null );/* student || this.group.students[0]*/
           }
         },
@@ -66,6 +75,12 @@ export class GroupMarksComponent implements OnInit {
   }
 
   refresh(student: Student) {
-    this.findMarks(this.group.id, student);
+    this.findMarks(this.currentGroup.id, student);
+  }
+
+  ngOnDestroy() {
+    if (this._subscription) {
+      this._subscription.unsubscribe();
+    }
   }
 }

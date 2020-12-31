@@ -25,7 +25,9 @@ export class GroupTimetableComponent implements OnInit {
   ngOnInit() {
     this._subscription = this.groupService.getGroup().subscribe((group) => {
       this.currentGroup = group;
-      this.currentGroup.timeTableUrl = group.timeTableUrl + '?random+\=' + Math.random();
+      if (group) {
+        this.currentGroup.timeTableUrl = group.timeTableUrl + '?random+\=' + Math.random();
+      }
     });
   }
 
@@ -38,10 +40,11 @@ export class GroupTimetableComponent implements OnInit {
     this.groupService.uploadTimeTable(this.currentGroup.id, this.selectedFile)
         .subscribe((group: Group) => {
           this.isUploading = false;
+          this.currentGroup.timeTableUrl = group ? group.timeTableUrl + '?random+\=' + Math.random() : null;
           alert('Upload Emploi du temps a reussi');
         }, (err) => {
           this.isUploading = false;
           alert('Upload Emploi du temps a echoué');
-        });
+        }, () => this.isUploading = false);
   }
 }

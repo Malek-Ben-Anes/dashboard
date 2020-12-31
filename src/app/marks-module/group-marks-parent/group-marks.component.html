@@ -1,5 +1,5 @@
 <div class="row">
-    <app-group-student-list *ngIf="group != null" [students]="group.students"
+    <app-group-student-list *ngIf="currentGroup" [students]="currentGroup.students"
         (studentSelected)="onStudentSelected($event)" class="col-md-4">
     </app-group-student-list>
 

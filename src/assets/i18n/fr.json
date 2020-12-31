@@ -197,8 +197,8 @@
     "All.text.group.Name": "Nom du groupe",
     "All.text.group.Level": "Niveau",
     "All.text.group.Effectif": "Effectif",
-    "All.text.group.assignedTo": "Eleves affectes a",
-    "All.text.group.assignedNotTo": "Eleves non affectes a",
+    "All.text.group.assignedTo": "le nombre d'éleves affectés:",
+    "All.text.group.assignedNotTo": "le nombre d'éleves non affectés:",
 
     "All.text.teacher.profile": "Enseignant",
     "All.text.teacher.photo.import": "Importer photo",

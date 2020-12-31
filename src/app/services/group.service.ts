@@ -50,11 +50,9 @@ export class GroupService {
     return this.http.delete<Group>(URL).pipe(tap(() => this.clearGroup()));
   }
 
-  patchGroupStudents(groupId: string, updateStudents: PatchGroupStudentsRequest): Observable<Group> {
+  patchGroupStudents(groupId: string, updateStudents: PatchGroupStudentsRequest): Observable<any> {
     const URL = `${this.GROUP_URL}/${groupId}/students`;
-    return this.http.patch<Group>(URL, updateStudents).pipe(tap((group) => {
-      this.setGroup(group); console.log(group.students.length);
-    }));
+    return this.http.patch<any>(URL, updateStudents);
   }
 
   uploadTimeTable(groupId: string, file: File): Observable<Group> {
@@ -63,8 +61,6 @@ export class GroupService {
     body.append('file', file);
     return fromPromise(this.fileService.executeCallForGroup(TIMETABLE_UPLOAD_URL, body))
         .pipe(tap((group: Group) => {
-          console.log(group);
-          group.timeTableUrl += '?random+\=' + Math.random();
           this.setGroup(group);
         }));
   }

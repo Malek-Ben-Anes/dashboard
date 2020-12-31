@@ -197,8 +197,8 @@
     "All.text.group.Name": "اسم القسم",
     "All.text.group.Level": "المستوى التعليمي",
     "All.text.group.Effectif": "عدد التلاميذ",
-    "All.text.group.assignedTo": "التلميذ مخصص ل",
-    "All.text.group.assignedNotTo": "التلميذ غير مخصص ل",
+    "All.text.group.assignedStudents": "عدد التلميذ المعينين:",
+    "All.text.group.notAssignedStudents": "عدد التلميذ غير المعينين:",
 
     "All.text.teacher.profile": "المعلم",
     "All.text.teacher.photo.import": "تحميل الصورة",
@@ -228,7 +228,7 @@
     "label.date": "التاريخ",
 
     "All.text.create": "إنشاء",
-    "All.text.create.failed.duplicated": "La creation a echoue car l'email est deja utilise",
+    "All.text.create.failed.duplicated": "فشل الإنشاء ، لأنه تم استخدام البريد الإلكتروني من قبل",
     "All.text.update": "تحديث",
     "All.text.save": "تسجيل",
     "All.text.delete": "مسح",
@@ -240,7 +240,7 @@
     "All.text.selectImage": "اختر الصورة",
     "All.text.upload": "تحميل",
     "All.text.uploading": "...جاري التحميل",
-    "All.text.edit": "تخيين",
+    "All.text.edit": "تحيين",
     "All.text.search": "بحث",
     "All.text.undefined": "حيادي",
     "All.text.sessionExpired": "انتهت صلاحية جلستك",

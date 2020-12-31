@@ -4,7 +4,7 @@
     <div class="row" >
       <div class="card">
         <div class="card-body">
-            <h4><b>Students not assigned number: {{unassignedStudents && unassignedStudents.length}}</b></h4>
+            <h4><b>{{'All.text.group.notAssignedStudents' | translate}} {{unassignedStudents && unassignedStudents.length}}</b></h4>
 
             <div class="row">
               <div *ngFor="let student of unassignedStudents; let i = index" class="col-md-3 student-assign">
@@ -27,7 +27,7 @@
     <div class="row" >
       <div class="card">
         <div class="card-body">
-          <h4><b>Students assigned number: {{currentGroupStudents && currentGroupStudents.length}}</b></h4>
+          <h4><b>{{'All.text.group.assignedStudents' | translate}} {{currentGroupStudents && currentGroupStudents.length}}</b></h4>
 
           <div class="row">
             <div *ngFor="let student of currentGroupStudents; let i = index" class="col-md-3 student-assign">

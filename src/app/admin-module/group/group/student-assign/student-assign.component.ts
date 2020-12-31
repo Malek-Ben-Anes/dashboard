@@ -27,7 +27,9 @@ export class StudentAssignComponent implements OnInit {
   ngOnInit() {
     this._subscription = this.groupService.getGroup().subscribe((group) => {
       this.currentGroup = group;
-      this.currentGroupStudents = group ? group.students : [];
+      if (group) {
+        this.currentGroupStudents = group.students;
+      }
     });
     const groupIsNull = true;
     this.studentService.findAll(groupIsNull).subscribe((students) => this.unassignedStudents = students);
@@ -49,16 +51,14 @@ export class StudentAssignComponent implements OnInit {
 
   private updateStudents(request: PatchGroupStudentsRequest) {
     this.groupService.patchGroupStudents(this.currentGroup.id, request)
-        .subscribe((group) => {
+        .subscribe(() => {
           this.studentService.findAll(true).subscribe((students) => this.unassignedStudents = students);
-          this.currentGroupStudents = group ? group.students : [];
-          console.log(this.currentGroupStudents.length);
+          this.groupService.findById(this.currentGroup.id).subscribe();
         });
   }
 
   ngOnDestroy() {
     if (this._subscription) {
-      this.groupService.clearGroup();
       this._subscription.unsubscribe();
     }
   }
