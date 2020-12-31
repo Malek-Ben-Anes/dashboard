@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 
@@ -22,7 +22,12 @@ export class StudentService {
 
   constructor(private http: HttpClient) {}
 
-  findAll(): Observable<Student[]> {
+  findAll(groupIsNull?: boolean): Observable<Student[]> {
+    if (groupIsNull != null) {
+      let params = new HttpParams();
+      params = params.set('groupIsNull', String(groupIsNull));
+      return this.http.get<Student[]>(this.STUDENT_URL, {params: params});
+    }
     return this.http.get<Student[]>(this.STUDENT_URL);
   }
 
@@ -72,10 +77,4 @@ export class StudentService {
     }
     return true;
   }
-}
-interface SearchStudent {
-  firstName: string;
-  lastName: string;
-  level: Level;
-  group: Group;
 }

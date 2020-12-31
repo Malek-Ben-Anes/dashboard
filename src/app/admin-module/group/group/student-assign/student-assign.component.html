@@ -1,70 +1,50 @@
-<div class="main-content">
+<div class="main-content" *ngIf="currentGroup">
   <div class="container-fluid">
 
-    <div class="row">
-      <button mat-raised-button (click)="onSaveStudents()" class="btn btn-warning pull-right">{{'All.text.save' | translate}}</button>
-    </div>
-
-    <div class="row">
+    <div class="row" >
       <div class="card">
         <div class="card-body">
+            <h4><b>Students not assigned number: {{unassignedStudents && unassignedStudents.length}}</b></h4>
 
-          <div cdkDropListGroup>
-            <div class="example-container">
-              <p class="grey"><strong>({{todo.length}})</strong> {{'All.text.group.assignedNotTo' | translate}} {{group.name}}</p>
-              <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todo" [cdkDropListConnectedTo]="[doneList]"
-                class="example-list" (cdkDropListDropped)="drop($event)">
-                <div class="example-box" *ngFor="let student of todo" cdkDrag>
-                  <mat-card-header>
-                    <div class="row">
-                      <div class="col-md-3">
-                        <img class="img profile-icon" [src]="BASE_URL + student.photo"
-                          default="assets/images/profile-logo.png" [alt]="'All.text.timeTable.smileyFace' | translate"/>
-                      </div>
-                      <div class="col-md-9">
-                        <mat-card-title class="black-name">{{student.firstName}} {{student.lastName}}
-                        </mat-card-title>
-                        <br />
-                        <mat-card-subtitle>{{student.email}}</mat-card-subtitle>
-                      </div>
-                    </div>
-                  </mat-card-header>
-                </div>
+            <div class="row">
+              <div *ngFor="let student of unassignedStudents; let i = index" class="col-md-3 student-assign">
+              <button               
+                mat-raised-button
+                color="basic"
+                (click)="onAttachStudent(student)"
+              >
+              <img class="img profile-icon" [src]="BASE_URL + student.photo"
+               default="assets/images/profile-logo.png" [alt]="'All.text.timeTable.smileyFace' | translate"/>
+              {{student.firstName}} {{student.lastName}}
+              </button>
               </div>
             </div>
-
-            <div class="example-container">
-              <p class="grey">
-                <strong>({{done.length}})</strong>
-                {{'All.text.group.assignedTo' | translate}} {{group.name}}
-              </p>
-              <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[todoList]"
-                class="example-list" (cdkDropListDropped)="drop($event)">
-                <div class="example-box" *ngFor="let student of done" cdkDrag>
-                  <mat-card-header>
-                    <div class="row">
-                      <div class="col-md-3">
-                        <img class="img profile-icon" [src]="BASE_URL + student.photo"
-                          default="assets/images/profile-logo.png"
-                          [alt]="'All.text.timeTable.smileyFace' | translate"/>
-                      </div>
-                      <div class="col-md-9">
-                        <mat-card-title class="black-name">{{student.firstName}} {{student.lastName}}
-                        </mat-card-title>
-                        <br />
-                        <mat-card-subtitle>{{student.email}}</mat-card-subtitle>
-                      </div>
-                    </div>
-                  </mat-card-header>
-                </div>
-              </div>
-            </div>
-          </div>
 
         </div>
       </div>
     </div>
 
+    <div class="row" >
+      <div class="card">
+        <div class="card-body">
+          <h4><b>Students assigned number: {{currentGroupStudents && currentGroupStudents.length}}</b></h4>
+
+          <div class="row">
+            <div *ngFor="let student of currentGroupStudents; let i = index" class="col-md-3 student-assign">
+            <button               
+              mat-raised-button
+              color="primary"
+              (click)="onDetachStudent(student)"
+            >
+            <img class="img profile-icon" [src]="BASE_URL + student.photo"
+             default="assets/images/profile-logo.png" [alt]="'All.text.timeTable.smileyFace' | translate"/>
+            {{student.firstName}} {{student.lastName}}
+            </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </div>
 </div>

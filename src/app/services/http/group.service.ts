@@ -1,12 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 
-import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Group} from '@app/models/Group.model';
 import {BASE_API_URL} from '@app/app.component';
-import {Student} from '@app/models/Student.model';
 import {FileUploadService} from '../file-upload.service';
-import { CreateGroupRequest } from '@app/models/requests/group/CreateGroup.model';
+import {CreateGroupRequest} from '@app/models/requests/group/CreateGroup.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -42,20 +41,5 @@ export class GroupService {
     const URL = `${this.GROUP_URL}/${groupId}`;
     return new Promise((resolve, reject) => this.http.delete<Group>(URL)
         .subscribe((group) => resolve(group), (err) => reject(err)));
-  }
-
-  addStudentsToGroup(groupId: string, students: Student[]): Promise<Student[]> {
-    const URL = `${this.GROUP_URL}/${groupId}/students/`;
-    return new Promise((resolve, reject) => this.http.post<Student[]>(URL, students)
-        .subscribe( (students) => resolve(students), (err) => reject(err)) );
-  }
-
-  deleteStudentsFromGroup(groupId: string, students: Student[]): Promise<Student[]> {
-    const URL = `${this.GROUP_URL}/${groupId}/students/`;
-    const httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'}), body: students,
-    };
-    return new Promise((resolve, reject) => this.http.delete<Student[]>(URL, httpOptions)
-        .subscribe( (students) => resolve(students), (err) => reject(err)) );
   }
 }

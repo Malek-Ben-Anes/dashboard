@@ -1,15 +1,16 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, from, Observable, pipe, ReplaySubject, Subject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Group} from '@app/models/Group.model';
 import {BASE_API_URL} from '@app/app.component';
 import {Student} from '@app/models/Student.model';
 import {FileUploadService} from '../file-upload.service';
 import {UpdateGroupRequest} from '@app/models/requests/group/UpdateGroup.model';
 import {CreateGroupRequest} from '@app/models/requests/group/CreateGroup.model';
-import { fromPromise } from 'rxjs/internal-compatibility';
+import {fromPromise} from 'rxjs/internal-compatibility';
+import {PatchGroupStudentsRequest} from '@app/models/requests/group/PatchGroupStudents.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -50,6 +51,13 @@ export class SubsGroupService {
     return this.http.delete<Group>(URL).pipe(tap(() => this.clearGroup()));
   }
 
+  patchGroupStudents(groupId: string, updateStudents: PatchGroupStudentsRequest): Observable<Group> {
+    const URL = `${this.GROUP_URL}/${groupId}/students`;
+    return this.http.patch<Group>(URL, updateStudents).pipe(tap((group) => {
+      this.setGroup(group); console.log(group.students.length);
+    }));
+  }
+
   uploadTimeTable(groupId: string, file: File): Observable<Group> {
     const TIMETABLE_UPLOAD_URL: string = BASE_API_URL + `groups/${groupId}/timetables`;
     const body: FormData = new FormData();
@@ -60,20 +68,5 @@ export class SubsGroupService {
           group.timeTableUrl += '?random+\=' + Math.random();
           this.setGroup(group);
         }));
-  }
-
-  addStudentsToGroup(groupId: string, students: Student[]): Promise<Student[]> {
-    const URL = `${this.GROUP_URL}/${groupId}/students/`;
-    return new Promise((resolve, reject) => this.http.post<Student[]>(URL, students)
-        .subscribe( (students) => resolve(students), (err) => reject(err)) );
-  }
-
-  deleteStudentsFromGroup(groupId: string, students: Student[]): Promise<Student[]> {
-    const URL = `${this.GROUP_URL}/${groupId}/students/`;
-    const httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'}), body: students,
-    };
-    return new Promise((resolve, reject) => this.http.delete<Student[]>(URL, httpOptions)
-        .subscribe( (students) => resolve(students), (err) => reject(err)) );
   }
 }

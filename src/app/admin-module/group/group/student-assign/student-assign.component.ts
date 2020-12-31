@@ -1,13 +1,12 @@
-import * as _ from 'lodash';
-import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-
+import {Component, OnInit} from '@angular/core';
 import {Group} from '@app/models/Group.model';
 import {Student} from '@app/models/Student.model';
 import {StudentService} from '@app/services/student.service';
-import {GroupService} from '@app/services/http/group.service';
 import {BASE_URL} from '@app/app.component';
 import {TranslateService} from '@ngx-translate/core';
+import {Subscription} from 'rxjs';
+import {SubsGroupService} from '@app/services/subs/subs-group.service';
+import {PatchGroupStudentsRequest} from '@app/models/requests/group/PatchGroupStudents.model';
 
 @Component({
   selector: 'app-student-assign',
@@ -15,132 +14,52 @@ import {TranslateService} from '@ngx-translate/core';
   styleUrls: ['./student-assign.component.scss'],
 })
 export class StudentAssignComponent implements OnInit {
-  // @Input('groupToChild') groupToChild: Observable<Group>;
+  readonly BASE_URL: string = BASE_URL;
 
-  @Input('group') group: Group;
-  BASE_URL: string = BASE_URL;
+  currentGroup: Group;
+  _subscription: Subscription;
 
-  @Output()
-  refreshEvent = new EventEmitter<Group>();
-
-  // All available students in all groups.
-  allStudents: Student[];
   unassignedStudents: Student[];
+  currentGroupStudents: any[];
 
-  initial: any = [];
-  todo: any = [];
-  done: any = [];
-
-  constructor(private studentService: StudentService, private groupService: GroupService, private translate: TranslateService) { }
+  constructor(private studentService: StudentService, private subsGroupService: SubsGroupService, private translate: TranslateService) { }
 
   ngOnInit() {
-    this.findUnassignedStudents();
-    this.initDoneArray();
-  }
-
-  onSaveStudents(): void {
-    const added = this.arrayDifferenceByOrder(this.done, this.initial);
-    const eliminated = this.arrayDifferenceByOrder(this.initial, this.done);
-    // Add some students to current group
-    const addedStudentToGroup: Student[] = _.intersectionBy(this.unassignedStudents, added, 'id');
-    this.addStudentsToGroup(addedStudentToGroup);
-    // Delete some students from current group
-    const deletedStudentFromGroup: Student[] = _.intersectionBy(this.unassignedStudents, eliminated, 'id');
-    this.deletedStudentFromGroup(deletedStudentFromGroup);
-  }
-
-  private addStudentsToGroup(addedStudentToGroup: Student[]) {
-    if (_.isEmpty(addedStudentToGroup)) {
-      return;
-    }
-    this.groupService.addStudentsToGroup(this.group.id, addedStudentToGroup)
-        // .then((students) => this.group.students = students)
-        .then((students) => this.refreshEvent.emit(this.group))
-        .catch((err) => console.log(err));
-  }
-
-  private deletedStudentFromGroup(deletedStudentFromGroup: Student[]) {
-    if (_.isEmpty(deletedStudentFromGroup)) {
-      return;
-    }
-    this.groupService.deleteStudentsFromGroup(this.group.id, deletedStudentFromGroup)
-        // .then((students) => this.group.students = students)
-        .then((students) => this.refreshEvent.emit(this.group))
-        .catch((err) => console.log(err));
-  }
-
-  private arrayDifferenceByOrder(arrA: Student[], arrB: Student[]) {
-    if (arrA == undefined || arrB == undefined) {
-      return [];
-    }
-
-    // let difference = arrA.filter(item => arrB.indexOf(item) < 0);
-    const difference = arrA.filter( (obj) => !arrB.some( (obj2) => obj.id == obj2.id) );
-    return difference;
-  }
-
-
-  private initTodoArray() {
-    _.differenceBy(this.unassignedStudents, this.group.students, 'id')
-        .map((student: Student) => this.pushInArray(student, this.todo));
-  }
-
-  private initDoneArray() {
-    this.unassignedStudents.forEach((student) => {
-      this.pushInArray(student, this.initial);
-      this.pushInArray(student, this.done);
+    this._subscription = this.subsGroupService.getGroup().subscribe((group) => {
+      this.currentGroup = group;
+      this.currentGroupStudents = group ? group.students : [];
     });
+    const groupIsNull = true;
+    this.studentService.findAll(groupIsNull).subscribe((students) => this.unassignedStudents = students);
   }
 
-  private findUnassignedStudents() {
-    this.studentService.findAll()
-        .subscribe((students) => {
-          this.allStudents = students;
-          this.filterUnassignedStudents(students);
-          this.initTodoArray();
-        },
-        (err) => console.log(err));
+  onAttachStudent(student: Student): void {
+    const request = new PatchGroupStudentsRequest();
+    request.studentIdsToAssign = [student.id];
+    request.studentIdsToDetach = [];
+    this.updateStudents(request);
   }
 
-  private filterUnassignedStudents(students: Student[]): void {
-    this.unassignedStudents = _.filter(students, (s) => s.group == null);
+  onDetachStudent(student: Student): void {
+    const request = new PatchGroupStudentsRequest();
+    request.studentIdsToDetach = [student.id];
+    request.studentIdsToAssign = [];
+    this.updateStudents(request);
   }
 
-  /**
-   * THIS FUNCTION IS TO FULL TODO AND DONE ARRAY OF DATA FROM ALLSTUDENTS AND GROUP.STUDENTS
-   * @param student
-   *
-   */
-  private pushInArray(student: Student, arr: any) {
-    const studentI = {
-      id: student.id,
-      firstName: student.firstName,
-      lastName: student.lastName,
-      email: student.email,
-      photo: student.photo,
-      group: student.group && student.group.name,
-    };
-    arr.push(studentI);
+  private updateStudents(request: PatchGroupStudentsRequest) {
+    this.subsGroupService.patchGroupStudents(this.currentGroup.id, request)
+        .subscribe((group) => {
+          this.studentService.findAll(true).subscribe((students) => this.unassignedStudents = students);
+          this.currentGroupStudents = group ? group.students : [];
+          console.log(this.currentGroupStudents.length);
+        });
   }
 
-
-  drop(event: CdkDragDrop<Todo[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data,
-          event.container.data,
-          event.previousIndex,
-          event.currentIndex);
+  ngOnDestroy() {
+    if (this._subscription) {
+      this.subsGroupService.clearGroup();
+      this._subscription.unsubscribe();
     }
   }
-}
-
-interface Todo {
-  id?: string,
-  firstName?: string,
-  lastName?: string,
-  email?: string,
-  photo?: string,
-  group?: string,
 }
