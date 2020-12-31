@@ -6,7 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Student } from '@app/models/Student.model';
 import { Level } from '@app/models/enums/Level';
 import { Group } from '@app/models/Group.model';
-import { GroupService } from '@app/services/http/group.service';
+import { GroupService } from '@app/services/group.service';
 import { TranslateService } from '@ngx-translate/core';
 import { StudentService } from '@app/services/student.service';
 import { Router } from '@angular/router';

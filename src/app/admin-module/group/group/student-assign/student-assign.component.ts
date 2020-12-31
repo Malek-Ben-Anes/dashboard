@@ -5,8 +5,8 @@ import {StudentService} from '@app/services/student.service';
 import {BASE_URL} from '@app/app.component';
 import {TranslateService} from '@ngx-translate/core';
 import {Subscription} from 'rxjs';
-import {SubsGroupService} from '@app/services/subs/subs-group.service';
 import {PatchGroupStudentsRequest} from '@app/models/requests/group/PatchGroupStudents.model';
+import {GroupService} from '@app/services/group.service';
 
 @Component({
   selector: 'app-student-assign',
@@ -22,10 +22,10 @@ export class StudentAssignComponent implements OnInit {
   unassignedStudents: Student[];
   currentGroupStudents: any[];
 
-  constructor(private studentService: StudentService, private subsGroupService: SubsGroupService, private translate: TranslateService) { }
+  constructor(private studentService: StudentService, private groupService: GroupService, private translate: TranslateService) { }
 
   ngOnInit() {
-    this._subscription = this.subsGroupService.getGroup().subscribe((group) => {
+    this._subscription = this.groupService.getGroup().subscribe((group) => {
       this.currentGroup = group;
       this.currentGroupStudents = group ? group.students : [];
     });
@@ -48,7 +48,7 @@ export class StudentAssignComponent implements OnInit {
   }
 
   private updateStudents(request: PatchGroupStudentsRequest) {
-    this.subsGroupService.patchGroupStudents(this.currentGroup.id, request)
+    this.groupService.patchGroupStudents(this.currentGroup.id, request)
         .subscribe((group) => {
           this.studentService.findAll(true).subscribe((students) => this.unassignedStudents = students);
           this.currentGroupStudents = group ? group.students : [];
@@ -58,7 +58,7 @@ export class StudentAssignComponent implements OnInit {
 
   ngOnDestroy() {
     if (this._subscription) {
-      this.subsGroupService.clearGroup();
+      this.groupService.clearGroup();
       this._subscription.unsubscribe();
     }
   }

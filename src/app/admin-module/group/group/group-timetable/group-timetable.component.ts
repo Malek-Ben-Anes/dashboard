@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Group} from '@app/models/Group.model';
 import {BASE_URL} from '@app/app.component';
 import {Subscription} from 'rxjs';
-import {SubsGroupService} from '@app/services/subs/subs-group.service';
+import { GroupService } from '@app/services/group.service';
 
 @Component({
   selector: 'app-group-timetable',
@@ -20,10 +20,10 @@ export class GroupTimetableComponent implements OnInit {
   selectedFile: File
   isUploading = false;
 
-  constructor(private subsGroupService: SubsGroupService) { }
+  constructor(private groupService: GroupService) { }
 
   ngOnInit() {
-    this._subscription = this.subsGroupService.getGroup().subscribe((group) => {
+    this._subscription = this.groupService.getGroup().subscribe((group) => {
       this.currentGroup = group;
       this.currentGroup.timeTableUrl = group.timeTableUrl + '?random+\=' + Math.random();
     });
@@ -35,7 +35,7 @@ export class GroupTimetableComponent implements OnInit {
 
   onUpload() {
     this.isUploading = true;
-    this.subsGroupService.uploadTimeTable(this.currentGroup.id, this.selectedFile)
+    this.groupService.uploadTimeTable(this.currentGroup.id, this.selectedFile)
         .subscribe((group: Group) => {
           this.isUploading = false;
           alert('Upload Emploi du temps a reussi');

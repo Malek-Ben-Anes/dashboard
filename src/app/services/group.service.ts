@@ -2,11 +2,10 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Group} from '@app/models/Group.model';
 import {BASE_API_URL} from '@app/app.component';
-import {Student} from '@app/models/Student.model';
-import {FileUploadService} from '../file-upload.service';
+import {FileUploadService} from './file-upload.service';
 import {UpdateGroupRequest} from '@app/models/requests/group/UpdateGroup.model';
 import {CreateGroupRequest} from '@app/models/requests/group/CreateGroup.model';
 import {fromPromise} from 'rxjs/internal-compatibility';
@@ -14,7 +13,7 @@ import {PatchGroupStudentsRequest} from '@app/models/requests/group/PatchGroupSt
 @Injectable({
   providedIn: 'root',
 })
-export class SubsGroupService {
+export class GroupService {
   readonly GROUP_URL: string = BASE_API_URL + 'groups';
 
   private group$ = new BehaviorSubject<Group>(null);
@@ -68,5 +67,14 @@ export class SubsGroupService {
           group.timeTableUrl += '?random+\=' + Math.random();
           this.setGroup(group);
         }));
+  }
+
+  findAll(teacherId?: string): Observable<Group[]> {
+    if (teacherId != null) {
+      const params = new HttpParams().set('teacherId', teacherId);
+      return this.http.get<Group[]>(this.GROUP_URL, {params: params});
+    }
+    // .map((students) => students.sort((s1, s2) => s1.level.localeCompare(s2.level )));
+    return this.http.get<Group[]>(this.GROUP_URL);
   }
 }

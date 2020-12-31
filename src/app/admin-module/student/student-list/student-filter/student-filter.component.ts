@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Level } from '@app/models/enums/Level';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { GroupService } from '@app/services/http/group.service';
+import { GroupService } from '@app/services/group.service';
 import { Group } from '@app/models/Group.model';
 import { Student } from '@app/models/Student.model';
 

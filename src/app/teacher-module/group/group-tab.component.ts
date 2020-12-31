@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Group } from '@app/models/Group.model';
 import { Level } from '@app/models/enums/Level';
-import { GroupService } from '@app/services/http/group.service';
+import { GroupService } from '@app/services/group.service';
 import { BASE_URL } from '@app/app.component';
 import { FormGroup } from '@angular/forms';
 import { Teacher } from '@app/models/Teacher.model';

@@ -4,7 +4,7 @@ import {AsyncPipe} from '@angular/common';
 import {Group} from '@app/models/Group.model';
 import {Router, ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
-import {GroupService} from '@app/services/http/group.service';
+import {GroupService} from '@app/services/group.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Level} from '@app/models/enums/Level';
 import {StudentService} from '@app/services/student.service';

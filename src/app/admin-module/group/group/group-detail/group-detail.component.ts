@@ -7,10 +7,10 @@ import {TranslateService} from '@ngx-translate/core';
 import {Router} from '@angular/router';
 import {DialogContentExampleDialogComponent} from '@app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
 import {MatDialog} from '@angular/material';
-import {SubsGroupService} from '@app/services/subs/subs-group.service';
 import {Subscription} from 'rxjs';
 import {CreateGroupRequest} from '@app/models/requests/group/CreateGroup.model';
 import {UpdateGroupRequest} from '@app/models/requests/group/UpdateGroup.model';
+import { GroupService } from '@app/services/group.service';
 
 @Component({
   selector: 'app-group-detail',
@@ -27,12 +27,12 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
   groupForm: FormGroup;
   isNew: boolean = true;
 
-  constructor(private formBuilder: FormBuilder, private subsGroupService: SubsGroupService,
+  constructor(private formBuilder: FormBuilder, private groupService: GroupService,
               public dialog: MatDialog, private router: Router, private translate: TranslateService) { }
 
   ngOnInit() {
     this.groupForm = this.initGroupForm();
-    this._subscription = this.subsGroupService.getGroup().subscribe((group) => {
+    this._subscription = this.groupService.getGroup().subscribe((group) => {
       if (group) {
         this.currentGroup = group;
         this.isNew = false;
@@ -62,7 +62,7 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
   }
 
   onCreate(): void {
-    this.subsGroupService.create(<CreateGroupRequest> this.prepareRequest())
+    this.groupService.create(<CreateGroupRequest> this.prepareRequest())
         .subscribe((group) => {
           this.updateForm();
           this.isNew = false;
@@ -71,7 +71,7 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
   }
 
   onUpdate(): void {
-    this.subsGroupService.update(<UpdateGroupRequest> this.prepareRequest()).subscribe((group) => {
+    this.groupService.update(<UpdateGroupRequest> this.prepareRequest()).subscribe((group) => {
       this.updateForm();
     }, (err) => console.log(err));
   }
@@ -93,7 +93,7 @@ export class GroupDetailComponent implements OnInit, OnDestroy {
   }
 
   onConfirmDelete() {
-    this.subsGroupService.deleteById(this.currentGroup.id).subscribe(() => this.router.navigate(['app', 'groups']));
+    this.groupService.deleteById(this.currentGroup.id).subscribe(() => this.router.navigate(['app', 'groups']));
   }
 
   onPreDelete(): void {
