@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import {Injectable} from '@angular/core';
 
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {Mark} from '@app/models/Mark';
+import {Mark} from '@app/models/Mark.model';
 import {BASE_API_URL} from '@app/app.component';
 import {Lesson} from '@app/models/Lesson.model';
 

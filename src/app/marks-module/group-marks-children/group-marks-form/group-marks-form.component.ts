@@ -3,7 +3,7 @@ import { Component, OnInit, Input, SimpleChanges, OnChanges, EventEmitter, Outpu
 import { Student } from '@app/models/Student.model';
 import { Lesson } from '@app/models/Lesson.model';
 import { Message } from '@app/models/message';
-import { Mark } from '@app/models/Mark';
+import { Mark } from '@app/models/Mark.model';
 import { MarkService } from '@app/services/mark.service';
 import { TranslateService } from '@ngx-translate/core';
 

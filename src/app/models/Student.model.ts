@@ -1,7 +1,7 @@
 import { User } from './User';
 import { Gender } from "./enums/Gender";
 import { Level } from './enums/Level';
-import { Mark } from './Mark';
+import { Mark } from './Mark.model';
 
 export class Student extends User {
     level?: Level;

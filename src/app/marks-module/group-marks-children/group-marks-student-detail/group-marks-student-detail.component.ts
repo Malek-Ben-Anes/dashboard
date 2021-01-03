@@ -1,33 +1,41 @@
-import * as _ from 'lodash';
-import {Component, OnInit, Input, SimpleChanges, OnChanges, ChangeDetectorRef} from '@angular/core';
+import {Component, OnInit, Input, SimpleChanges, OnChanges, ChangeDetectorRef, OnDestroy} from '@angular/core';
 import {Student} from '@app/models/Student.model';
 import {MarkService} from '@app/services/mark.service';
-import {Mark} from '@app/models/Mark';
+import {Mark} from '@app/models/Mark.model';
 import {Lesson} from '@app/models/Lesson.model';
 import {LessonService} from '@app/services/lesson.service';
 import {TranslateService} from '@ngx-translate/core';
+import {Subscription} from 'rxjs';
+import {Group} from '@app/models/Group.model';
+import {GroupService} from '@app/services/group.service';
 
 @Component({
   selector: 'app-group-marks-student-detail',
   templateUrl: './group-marks-student-detail.component.html',
   styleUrls: ['./group-marks-student-detail.component.scss'],
 })
-export class GroupMarksStudentDetailComponent implements OnInit, OnChanges {
+export class GroupMarksStudentDetailComponent implements OnInit, OnChanges, OnDestroy {
   @Input('student')
   student: Student;
 
-  @Input('lessons')
+  _subscription: Subscription;
+  currentGroup: Group;
+
   lessons: Lesson[];
 
   // marks to be displayed after filtering action.
   marksToDisplay: Mark[];
 
   constructor(private cdRef:ChangeDetectorRef,
+              private groupService: GroupService,
               private lessonService: LessonService,
               private markService: MarkService,
               private translate: TranslateService) { }
 
   ngOnInit() {
+    this._subscription = this.groupService.getGroup().subscribe((group) => {
+      this.currentGroup = group;
+    });
     if (this.currentGroup) {
       this.findMarks(this.currentGroup.id);
       this.findLessons(this.currentGroup.id, this.teacherId);
@@ -68,7 +76,7 @@ export class GroupMarksStudentDetailComponent implements OnInit, OnChanges {
     this.markService
         .findAll(undefined, groupId)
         .then((groupMarks) => {
-          this._groupMarks = groupMarks;
+          //this._groupMarks = groupMarks;
           if (this.currentGroup && this.currentGroup.students) {
             this.onStudentSelected(null );/* student || this.group.students[0]*/
           }
@@ -88,12 +96,18 @@ export class GroupMarksStudentDetailComponent implements OnInit, OnChanges {
 
   onStudentSelected(student: Student) {
     if (student) {
-      student.marks = this.markService.filterMarks(this._groupMarks, student.id);
-      this.studentSelected = Object.assign({}, student);
+      //student.marks = this.markService.filterMarks(this._groupMarks, student.id);
+      //this.studentSelected = Object.assign({}, student);
     }
   }
 
   refresh(student: Student) {
     this.findMarks(this.currentGroup.id, student);
+  }
+
+  ngOnDestroy() {
+    if (this._subscription) {
+      this._subscription.unsubscribe();
+    }
   }
 }

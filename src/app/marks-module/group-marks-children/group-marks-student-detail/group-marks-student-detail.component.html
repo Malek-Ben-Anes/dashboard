@@ -1,20 +1,14 @@
 <div class="col-md-4">
-    <button mat-raised-button >
-        {{'label.subject'|translate}}
+    <button mat-raised-button (click)="onFilterByLesson(null)">
+        {{'All.text.marks.all'|translate}}
     </button>
     <button mat-raised-button>
         {{'label.date'|translate}}
     </button>
+    <button *ngFor="let lesson of lessons" mat-raised-button (click)="onFilterByLesson(lesson)">
+        {{lesson.subject.name}} aa
+    </button>
 </div>
-
-{{'All.text.marks.label'|translate}}
-
-<button mat-raised-button (click)="onFilterByLesson(null)">
-    {{'All.text.marks.all'|translate}}
-</button>
-<button *ngFor="let lesson of lessons" mat-raised-button (click)="onFilterByLesson(lesson)">
-    {{lesson.subjectName}}
-</button>
 
 <div *ngIf="student" class="card-content table-responsive table-full-width marks-list">
     <table class="table">
@@ -26,7 +20,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let mark of marksToDisplay">
-                <td>{{mark.lesson.name}}</td>
+                <td>{{mark.lesson.subject.name}}</td>
                 <td>{{mark.observation}}</td>
                 <td><span [class]="getMarkStyle(mark.mark)">{{mark.mark}}</span></td>
                 <td><span class="timestamp">{{mark.createdAt | date:'dd/MM/yyyy'}}</span></td>

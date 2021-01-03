@@ -1,4 +1,4 @@
-import {Component, OnInit, EventEmitter, Output} from '@angular/core';
+import {Component, OnInit, EventEmitter, Output, OnDestroy} from '@angular/core';
 import {Student} from '@app/models/Student.model';
 import {BASE_URL} from '@app/app.component';
 import {GroupService} from '@app/services/group.service';
@@ -10,7 +10,7 @@ import {Group} from '@app/models/Group.model';
   templateUrl: './group-student-list.component.html',
   styleUrls: ['./group-student-list.component.scss'],
 })
-export class GroupStudentListComponent implements OnInit {
+export class GroupStudentListComponent implements OnInit, OnDestroy {
   readonly BASE_URL: string = BASE_URL;
 
   @Output()
