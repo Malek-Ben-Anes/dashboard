@@ -12,7 +12,7 @@ import { GroupService } from '@app/services/group.service';
   styleUrls: ['./group.component.scss'],
 })
 export class GroupComponent implements OnInit, OnDestroy {
-  readonly tabIndex = {'EDIT_CLASS': 0, 'TIME_TABLE': 1, 'STUDENTS': 2, 'MARKS': 3};
+  readonly tabIndex = {'EDIT_CLASS': 0, 'TIME_TABLE': 1, 'STUDENTS': 2, 'MARKS_LIST': 3, 'EVALUTE_STUDENTS': 4};
   readonly BASE_URL: string = BASE_URL;
 
   selected = new FormControl(0);
@@ -40,6 +40,7 @@ export class GroupComponent implements OnInit, OnDestroy {
       {'label': 'All.text.timeTable.tab.name', 'disabled': !this.currentGroup},
       {'label': 'All.text.students.label', 'disabled': !this.currentGroup},
       {'label': 'All.text.marks.tab.name', 'disabled': !this.currentGroup},
+      {'label': 'All.text.marks.weeklyEvaluation', 'disabled': !this.currentGroup},
     ];
   }
 
