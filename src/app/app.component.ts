@@ -1,10 +1,10 @@
 import * as _ from 'lodash';
-import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { TokenStorageService } from './services/auth/token-storage.service';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
+import {TokenStorageService} from './services/auth/token-storage.service';
+import {ActivatedRoute} from '@angular/router';
 import 'rxjs/add/operator/filter';
-import { environment } from 'environments/environment';
+import {environment} from 'environments/environment';
 
 const AR = 'ar';
 const EN = 'en';
@@ -14,10 +14,9 @@ const LANGUAGE = [AR, FR];
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-
   isRtl: string = 'ltr';
   language: string;
 
@@ -27,7 +26,7 @@ export class AppComponent implements OnInit {
     // the lang to use, if the lang isn't available, it will use the current loader to get them
     this.translate.use(EN);
     if (this.tokenStorage && this.tokenStorage.getLanguage()) {
-      this.translate.use(this.tokenStorage.getLanguage())
+      this.translate.use(this.tokenStorage.getLanguage());
     } else {
       this.tokenStorage.saveLanguage(DEFAULT_LANGUAGE);
     }
@@ -35,7 +34,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     if (this.tokenStorage && this.tokenStorage.getLanguage()) {
-      this.translate.use(this.tokenStorage.getLanguage())
+      this.translate.use(this.tokenStorage.getLanguage());
       this.isRtl = this.direction;
     } else {
       this.tokenStorage.saveLanguage(DEFAULT_LANGUAGE);
@@ -43,25 +42,20 @@ export class AppComponent implements OnInit {
     }
 
     this.activatedRoute.queryParams
-    .filter(params => params.language)
-    .subscribe(params => {
-      if(_.includes(LANGUAGE, params.language)) {
-        this.language = params.language;
-        this.tokenStorage.saveLanguage(this.language);
-        this.translate.use(this.language)
-        this.isRtl = this.direction;
-      }
-    });
+        .filter((params) => params.language)
+        .subscribe((params) => {
+          if (_.includes(LANGUAGE, params.language)) {
+            this.language = params.language;
+            this.tokenStorage.saveLanguage(this.language);
+            this.translate.use(this.language);
+            this.isRtl = this.direction;
+          }
+        });
   }
 
   private get direction(): string {
     return this.tokenStorage.isRtl() ? 'rtl' : 'ltr';
   }
 }
-/*
-export const BASE_URL = 'http://localhost:8091/';
-'https://laplumedor.cfapps.io/';
-export const BASE_API_URL = 'http://vps745280.ovh.net:8091';
-*/
-export const BASE_URL = environment.apiEndpoint;
+export const BASE_URL = environment.resourceEndpoint;
 export const BASE_API_URL = environment.baseApiEndpoint;

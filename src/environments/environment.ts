@@ -8,4 +8,5 @@ export const environment = {
   token: 'YOUR DIALOGFLOW TOKEN',
   apiEndpoint: 'http://localhost:8091/',
   baseApiEndpoint: 'http://localhost:8091/api/',
+  resourceEndpoint: 'http://www.laplume-dor.tn/uploads/'
 };
