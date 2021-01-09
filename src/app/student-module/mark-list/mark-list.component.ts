@@ -1,22 +1,21 @@
 import * as _ from 'lodash';
-import { Component, OnInit } from '@angular/core';
-import { Student } from '@app/models/Student.model';
-import { BASE_URL } from '@app/app.component';
-import { TokenStorageService } from '@app/services/auth/token-storage.service';
-import { AuthService } from '@app/services/auth/auth.service';
-import { MarkService } from '@app/services/mark.service';
-import { LessonService } from '@app/services/lesson.service';
-import { Lesson } from '@app/models/Lesson.model';
-import { Mark } from '@app/models/Mark.model';
-import { TranslateService } from '@ngx-translate/core';
+import {Component, OnInit} from '@angular/core';
+import {Student} from '@app/models/Student.model';
+import {BASE_URL} from '@app/app.component';
+import {TokenStorageService} from '@app/services/auth/token-storage.service';
+import {AuthService} from '@app/services/auth/auth.service';
+import {MarkService} from '@app/services/mark.service';
+import {LessonService} from '@app/services/lesson.service';
+import {Lesson} from '@app/models/Lesson.model';
+import {Mark} from '@app/models/Mark.model';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-mark-list',
   templateUrl: './mark-list.component.html',
-  styleUrls: ['./mark-list.component.scss']
+  styleUrls: ['./mark-list.component.scss'],
 })
 export class MarkListComponent implements OnInit {
-
   BASE_URL: string = BASE_URL;
   student: Student;
 
@@ -24,7 +23,7 @@ export class MarkListComponent implements OnInit {
   lessonsOfCurrentstudent: Lesson[] = [];
 
   // marks to be displayed after filtering action.
-  marksToDisplay: Mark[];
+  marks: Mark[];
 
   constructor(private tokenStorage: TokenStorageService, private authService: AuthService,
               private translate: TranslateService,
@@ -38,25 +37,20 @@ export class MarkListComponent implements OnInit {
   }
 
   public onFilterByLesson(lesson: Lesson) {
-    if (lesson == null) {
-      this.marksToDisplay = this.student.marks;
-    } else {
-      this.marksToDisplay = this.markService.filterLessons(this.student.marks, lesson);
-    }
+    this.marks = this.markService.filterLessons(this.marks, lesson);
   }
 
   private getAllMarks(studentId: string) {
     this.markService.findAll(studentId)
-      .then(marks => { this.student.marks = marks
-                       this.marksToDisplay = marks;
-                       this.lessonsOfCurrentstudent = this.markService.extractLessonsFromMarks(marks);
-                     })
-      .catch(err => console.log(err));
+        .subscribe((marks) => {
+          this.marks = marks;
+          this.lessonsOfCurrentstudent = this.markService.extractLessonsFromMarks(marks);
+        });
   }
 
   public getMarkStyle(mark: number): string {
-    const markColor: string = mark > 15 ? 'green'
-                                        : mark >= 10 ? 'blue' : 'red';
+    const markColor: string = mark > 15 ? 'green' :
+                                        mark >= 10 ? 'blue' : 'red';
     return `${markColor}-color`;
   }
 }

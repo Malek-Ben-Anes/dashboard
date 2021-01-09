@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, SimpleChanges, OnChanges, ChangeDetectorRef, OnDestroy} from '@angular/core';
+import {Component, OnInit, Input, SimpleChanges, OnChanges, OnDestroy} from '@angular/core';
 import {Student} from '@app/models/Student.model';
 import {MarkService} from '@app/services/mark.service';
 import {Mark} from '@app/models/Mark.model';
@@ -21,13 +21,13 @@ export class GroupMarksStudentDetailComponent implements OnInit, OnChanges, OnDe
   _subscription: Subscription;
   currentGroup: Group;
 
-  lessons: Lesson[];
+  allLessons: Lesson[];
 
+  allMarks: Mark[];
   // marks to be displayed after filtering action.
-  marksToDisplay: Mark[];
+  studentMarks: Mark[];
 
-  constructor(private cdRef:ChangeDetectorRef,
-              private groupService: GroupService,
+  constructor(private groupService: GroupService,
               private lessonService: LessonService,
               private markService: MarkService,
               private translate: TranslateService) { }
@@ -35,27 +35,38 @@ export class GroupMarksStudentDetailComponent implements OnInit, OnChanges, OnDe
   ngOnInit() {
     this._subscription = this.groupService.getGroup().subscribe((group) => {
       this.currentGroup = group;
+      if (group) {
+        this.findLessons(this.currentGroup.id);
+        this.findMarks(this.currentGroup.id);
+      }
     });
-    if (this.currentGroup) {
-      this.findMarks(this.currentGroup.id);
-      this.findLessons(this.currentGroup.id, this.teacherId);
-    }
-    this.marksToDisplay = this.student && this.student.marks;
+  }
+
+  private findLessons(groupId: string) {
+    this.lessonService.findAll(undefined, groupId).subscribe((lessons) => this.allLessons = lessons);
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.student != null) {
+    if (changes && changes.student && changes.student.currentValue) {
       this.student = changes.student.currentValue;
-      this.marksToDisplay = this.student && this.student.marks;
+      this.filterMarks(this.student.id);
+    }
+    if (this.currentGroup) {
+      this.findLessons(this.currentGroup.id);
+      this.findMarks(this.currentGroup.id);
     }
   }
 
-  public onFilterByLesson(lesson: Lesson) {
-    if (lesson == null) {
-      this.marksToDisplay = this.student && this.student.marks;
-    } else {
-      this.marksToDisplay = this.markService.filterLessons(this.student && this.student.marks, lesson);
-    }
+  filterMarks(studentId: string) {
+    this.studentMarks = this.allMarks.filter((mark: Mark) => mark.studentId == studentId);
+  }
+
+  onSelectLesson(lesson: Lesson) {
+    console.log(lesson);
+  }
+
+  onSelectWeek(week: Lesson) {
+    console.log(week);
   }
 
   getMarkStyle(mark) {
@@ -68,41 +79,8 @@ export class GroupMarksStudentDetailComponent implements OnInit, OnChanges, OnDe
     }
   }
 
-  ngAfterViewChecked() {
-    this.cdRef.detectChanges();
-  }
-
   private findMarks(groupId: string, student?: Student) {
-    this.markService
-        .findAll(undefined, groupId)
-        .then((groupMarks) => {
-          //this._groupMarks = groupMarks;
-          if (this.currentGroup && this.currentGroup.students) {
-            this.onStudentSelected(null );/* student || this.group.students[0]*/
-          }
-        },
-        );
-  }
-
-  private get teacherId(): string {
-    // const user: User = this.storage.getLoggedUser();
-    return 'TEACHER';// user.discriminatorValue == 'TEACHER' ? user.id : _.undefined;
-  }
-
-  private findLessons(groupId: string, teacherId: string = _.undefined) {
-    this.lessonService.findAll(teacherId, groupId)
-        .subscribe((lessons) => this.lessons = lessons);
-  }
-
-  onStudentSelected(student: Student) {
-    if (student) {
-      //student.marks = this.markService.filterMarks(this._groupMarks, student.id);
-      //this.studentSelected = Object.assign({}, student);
-    }
-  }
-
-  refresh(student: Student) {
-    this.findMarks(this.currentGroup.id, student);
+    this.markService.findAll(undefined, this.currentGroup.id).subscribe((marks) => this.allMarks = marks);
   }
 
   ngOnDestroy() {

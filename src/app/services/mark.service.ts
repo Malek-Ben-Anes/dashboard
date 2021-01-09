@@ -5,6 +5,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Mark} from '@app/models/Mark.model';
 import {BASE_API_URL} from '@app/app.component';
 import {Lesson} from '@app/models/Lesson.model';
+import {Observable} from 'rxjs';
 
 const STUDENT_URL: string = BASE_API_URL + 'students/';
 const MARK_URL: string = BASE_API_URL + 'marks/';
@@ -15,22 +16,26 @@ const MARK_URL: string = BASE_API_URL + 'marks/';
 export class MarkService {
   constructor(private http: HttpClient) {}
 
-  findAll(studentId?: string, groupId?: string): Promise<Mark[]> {
+  findAll(studentId?: string, groupId?: string): Observable<Mark[]> {
     const params: HttpParams = this.buildHttpParams(studentId, groupId);
-    return new Promise((resolve, reject) => {
-      this.http.get<Mark[]>(MARK_URL, {params: params})
+    return this.http.get<Mark[]>(MARK_URL, {params: params});
+    /*
           .subscribe((marks) => {
             const sortedMarks = _.sortBy(marks, ['createdAt', 'updatedAt']).reverse();
             resolve(sortedMarks);
           }, (err) => reject(err));
-    });
+    });*/
   }
 
-  private buildHttpParams(studentId?: string, groupId?: string): HttpParams {
-    if (!_.isNil(studentId)) {
+  private buildHttpParams(studentId?: string, groupId?: string, subjectId?: string, teacherId?: string): HttpParams {
+    if (studentId) {
       return new HttpParams().set('studentId', studentId);
-    } else if (!_.isNil(groupId)) {
+    } else if (groupId) {
       return new HttpParams().set('groupId', groupId);
+    } else if (subjectId) {
+      return new HttpParams().set('subjectId', subjectId);
+    } else if (teacherId) {
+      return new HttpParams().set('teacherId', teacherId);
     }
   }
 
@@ -53,7 +58,7 @@ export class MarkService {
   public extractLessonsFromMarks(marks: Mark[]): Lesson[] {
     if (!_.isNil(marks) && !_.isEmpty(marks)) {
       return _.chain(marks)
-          .map((mark: Mark) => mark.lesson)
+          //.map((mark: Mark) => mark.lesson)
           .uniqBy('id.subjectId')
           .value();
     }

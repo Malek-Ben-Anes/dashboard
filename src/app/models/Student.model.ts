@@ -1,7 +1,5 @@
-import { User } from './User';
-import { Gender } from "./enums/Gender";
-import { Level } from './enums/Level';
-import { Mark } from './Mark.model';
+import {User} from './User';
+import {Level} from './enums/Level';
 
 export class Student extends User {
     level?: Level;
@@ -10,8 +8,6 @@ export class Student extends User {
     parentPhone?: string;
     description?: string;
     bulletins?: {};
-    marks?: Mark[]; // TODO remove marks
-
 }
 class Group {
     id: string;
