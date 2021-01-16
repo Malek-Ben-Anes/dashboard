@@ -1,9 +1,10 @@
-import {Component, OnInit, Input, SimpleChanges, OnChanges} from '@angular/core';
+import {Component, OnInit, Input, SimpleChanges, OnChanges, ViewChild} from '@angular/core';
 import {Student} from '@app/models/Student.model';
 import {MarkService} from '@app/services/mark.service';
 import {Mark} from '@app/models/Mark.model';
 import {Lesson} from '@app/models/Lesson.model';
 import {TranslateService} from '@ngx-translate/core';
+import {MatPaginator, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-group-marks-student-detail',
@@ -14,9 +15,15 @@ export class GroupMarksStudentDetailComponent implements OnInit, OnChanges {
   @Input('student')
   student: Student;
 
-  allMarks: Mark[];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   // marks to be displayed after filtering action.
-  studentMarks: Mark[];
+  studentMarks: Mark[] = [];
+
+  dataSource = new MatTableDataSource<Mark>();
+  displayedColumns: string[] = ['subjectName', 'teacherName', 'mark', 'observation', 'updatedAt'];
+
+  isLoading = false;
 
   constructor(private markService: MarkService, private translate: TranslateService) { }
 
@@ -31,10 +38,6 @@ export class GroupMarksStudentDetailComponent implements OnInit, OnChanges {
       this.student = changes.student.currentValue;
       this.findMarks(this.student.id);
     }
-  }
-
-  filterMarks(studentId: string) {
-    this.studentMarks = this.allMarks.filter((mark: Mark) => mark.studentId == studentId);
   }
 
   onSelectWeek(week: Lesson) {
@@ -52,9 +55,16 @@ export class GroupMarksStudentDetailComponent implements OnInit, OnChanges {
   }
 
   private findMarks(studentId: string) {
+    this.isLoading = true;
     this.markService.findAll(studentId).subscribe((marks) => {
-      this.allMarks = marks;
-      this.filterMarks(this.student.id);
+      this.studentMarks = marks.reverse();
+      this.refershPaginator();
     });
+  }
+
+  private refershPaginator() {
+    this.isLoading = false;
+    this.dataSource = new MatTableDataSource<Mark>(this.studentMarks);
+    this.dataSource.paginator = this.paginator;
   }
 }
