@@ -1,7 +1,7 @@
-<div class="row">
+<!-- <div class="row">
     <div class="col-md-4">
         <mat-form-field>
-            <input matInput placeholder="{{'label.date'|translate}}" formControlName="marksDate" required>
+             <input matInput placeholder="{{'label.date'|translate}}" formControlName="marksDate" required> 
         </mat-form-field>
     </div>
     <div class="col-md-4">
@@ -13,27 +13,36 @@
             </mat-select>
         </mat-form-field>
     </div>
-</div>
+</div>  -->
 
 <div class="card">
-    <div class="card-body">
-        <div *ngIf="student" class="card-content table-responsive table-full-width marks-list">
-            <table class="table">
-                <thead>
-                    <th>{{'All.text.marks.subject'|translate}}</th>
-                    <th>{{'All.text.marks.observation'|translate}}</th>
-                    <th>{{'All.text.marks.mark'|translate}}</th>
-                    <th>{{'All.text.marks.date'|translate}}</th>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let mark of studentMarks">
-                        <td>{{mark.subjectName}}</td>
-                        <td>{{mark.observation}}</td>
-                        <td><span [class]="getMarkStyle(mark.mark)">{{mark.mark}}</span></td>
-                        <td><span class="timestamp">{{mark.createdAt | date:'dd/MM/yyyy'}}</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+  <div class="card-body">
+    <div
+      *ngIf="student"
+      class="card-content table-responsive table-full-width marks-list"
+    >
+      <table class="table">
+        <thead>
+          <th>{{ "All.text.marks.subject" | translate }}</th>
+          <th>{{ "All.text.marks.teacher" | translate }}</th>
+          <th>{{ "All.text.marks.observation" | translate }}</th>
+          <th>{{ "All.text.marks.mark" | translate }}</th>
+          <th>{{ "All.text.marks.date" | translate }}</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let mark of studentMarks">
+            <td>{{ mark.subjectName }}</td>
+            <td>{{ mark.teacherName }}</td>
+            <td>{{ mark.observation }}</td>
+            <td>
+              <span [class]="getMarkStyle(mark.mark)">{{ mark.mark }}</span>
+            </td>
+            <td>
+              <span class="timestamp">{{mark.createdAt | date: "dd/MM/yyyy"}}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
+</div>

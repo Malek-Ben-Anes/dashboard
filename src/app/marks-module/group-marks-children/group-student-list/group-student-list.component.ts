@@ -25,12 +25,14 @@ export class GroupStudentListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this._subscription = this.groupService.getGroup().subscribe((group) => {
       this.currentGroup = group;
-      this.studentList = group ? group.students : [];
+      this.studentList = group && group.students ? group.students : [];
+      this.onSelectStudent(this.studentList && this.studentList[0]);
     });
   }
 
   onSelectStudent(student: Student): void {
     this.studentSelected.emit(student);
+    console.log(student.id);
   }
 
   ngOnDestroy() {

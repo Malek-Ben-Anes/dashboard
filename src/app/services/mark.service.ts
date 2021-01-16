@@ -16,15 +16,9 @@ const MARK_URL: string = BASE_API_URL + 'marks/';
 export class MarkService {
   constructor(private http: HttpClient) {}
 
-  findAll(studentId?: string, groupId?: string): Observable<Mark[]> {
+  findAll(studentId: string, groupId?: string): Observable<Mark[]> {
     const params: HttpParams = this.buildHttpParams(studentId, groupId);
     return this.http.get<Mark[]>(MARK_URL, {params: params});
-    /*
-          .subscribe((marks) => {
-            const sortedMarks = _.sortBy(marks, ['createdAt', 'updatedAt']).reverse();
-            resolve(sortedMarks);
-          }, (err) => reject(err));
-    });*/
   }
 
   private buildHttpParams(studentId?: string, groupId?: string, subjectId?: string, teacherId?: string): HttpParams {

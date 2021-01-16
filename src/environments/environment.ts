@@ -6,7 +6,7 @@
 export const environment = {
   production: false,
   token: 'YOUR DIALOGFLOW TOKEN',
-  apiEndpoint: 'https://bck.laplumedor.net:8091/',
-  baseApiEndpoint: 'https://bck.laplumedor.net:8091/api/',
+  apiEndpoint: 'http://localhost:8091/',
+  baseApiEndpoint: 'http://localhost:8091/api/',
   resourceEndpoint: 'https://www.laplumedor.net/uploads/'
 };
