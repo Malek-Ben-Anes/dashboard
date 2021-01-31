@@ -44,7 +44,6 @@ export class AuthInterceptor implements HttpInterceptor {
         catchError((err: any) => {
           if (err instanceof HttpErrorResponse) {
             if (err.status === 401) {
-              // this.auth.collectFailedRequest(request);
               const data: DialogData = {
                 dialogTitle: err && err.error.message ? this.translate.instant('All.text.sessionExpired') : '',
                 dialogMessage: '',
@@ -56,8 +55,8 @@ export class AuthInterceptor implements HttpInterceptor {
               }
               return throwError(err);
             }
+            return throwError(err);
           }
-          return of(err);
         }));
   }
 }

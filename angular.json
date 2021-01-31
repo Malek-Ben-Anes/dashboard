@@ -100,17 +100,6 @@
               "src/favicon.ico"
             ]
           }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "eslintConfig": ".eslintrc.js",
-            "lintFilePatterns": [
-              "**/*.spec.ts",
-              "**/*.d.ts"
-            ],
-            "exclude": []
-          }
         }
       }
     },

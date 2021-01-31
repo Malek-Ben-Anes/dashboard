@@ -1,3 +1,4 @@
 export class UpdatePasswordRequest {
-    password: string;
+    oldPassword: string;
+    newPassword: string;
 }

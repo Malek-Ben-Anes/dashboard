@@ -23,6 +23,7 @@
     "All.text.generatePassword": "انشاء آلي",
     "All.text.Registration.File": "ملف التسجيل",
 
+    "All.oldPassword.placeholder": "أدخل كلمة المرور",
     "All.Password.placeholder": "أدخل كلمة المرور",
     "All.Password.placeholder.confirm": "تأكيد كلمة المرور الجديدة",
     "All.Password.Message.update.success": "تم تحديث كلمة المرور بنجاح!",
@@ -63,6 +64,8 @@
     "header.bulletins": "دفاتر الأعداد",
     "header.notifications": "إشعارات",
     "header.logout": "تسجيل الخروج",
+    "header.password": "كلمة السر",
+    "header.profile": "الملف الشخصي",
 
     "header.student.profile": "الملف الشخصي",
     "header.student.marks": "الملاحظات",

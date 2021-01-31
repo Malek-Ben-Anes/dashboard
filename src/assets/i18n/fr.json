@@ -18,12 +18,13 @@
     "All.tab.Notifications.Retrieve": "Notifications",
     "All.tab.Notifications.send": "Envoyer notification",
 
-    "All.text.password": "Mettre à jour",
-    "All.text.updatePassword": "Mettre à jour",
+    "All.text.password": "Mot de passe",
+    "All.text.updatePassword": "Mot de passe",
     "All.text.generatePassword": "Générer",
     "All.text.Registration.File": "Dossier d'inscription",
 
-    "All.Password.placeholder": "Saisir le mot de passe",
+    "All.oldPassword.placeholder": "Saisir le mot de passe actuel",
+    "All.Password.placeholder": "Saisir le nouveau mot de passe",
     "All.Password.placeholder.confirm": "Confirmer le nouveau mot de passe",
     "All.Password.Message.update.success": "Le mot de passe a été mis à jour avec succès!",
     "All.Password.Message.update.failed": "La mise à jour du mot de passe a échoué :(",
@@ -63,6 +64,8 @@
     "header.bulletins": "Bulletins",
     "header.notifications": "Notifications",
     "header.logout": "Se deconnecter",
+    "header.password": "Mot de passe",
+    "header.profile": "Profil",
 
     "header.student.profile": "Mon Profile",
     "header.student.marks": "Notes",

@@ -23,7 +23,9 @@
       <span class="caret"></span>
     </a>
     <ul class="dropdown-menu">
-      <li><a (click)="logout()">{{'header.logout' | translate}}</a></li>
+      <li><a (click)="updateProfile()">{{'header.profile' | translate}}</a></li>
+      <li><a (click)="updatePasswordRedirect()">{{'All.text.updatePassword' | translate}}</a></li>
+      <li><a (click)="logout()">{{'header.logout' | translate}}</a></li> 
     </ul>
   </li>
 </ul>
