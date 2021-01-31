@@ -1,0 +1,13 @@
+.footer-page {
+    clear: both;
+    position: relative;
+    height: 200px;
+    margin-top: -200px;
+    display: contents !important;
+}
+
+p {
+    text-align: center;
+    font-size: 13px;
+}
+

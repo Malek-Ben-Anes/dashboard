@@ -35,5 +35,7 @@
 
 body {
   background-image: url("assets/login-background.jpg");
-  background-size: cover 100%;
+  background-attachment: fixed;
+  size: 100%;
+  min-height: 100%;
 }

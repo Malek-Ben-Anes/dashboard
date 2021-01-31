@@ -15,6 +15,7 @@ import {AppRoutingModule} from '@app/app.routing';
 import {ToastrModule} from 'ngx-toastr';
 import {AppComponent} from '@app/app.component';
 import {LoginComponent} from './login/login.component';
+import {FooterComponent} from '@app/footer/footer.component';
 import {FourOhFourComponent} from './four-oh-four/four-oh-four.component';
 import {DialogContentExampleDialogComponent} from './commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
 import {ContentComponent} from './content/content.component';
@@ -53,6 +54,7 @@ import {PatchPasswordComponent} from './patch-password/patch-password.component'
   declarations: [
     AppComponent,
     LoginComponent,
+    FooterComponent,
     FourOhFourComponent,
     ContentComponent,
     PatchPasswordComponent,
