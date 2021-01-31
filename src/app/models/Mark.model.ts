@@ -5,7 +5,7 @@ export class Mark {
     teacherName: string;
     observation: string;
     mark: number;
-    updatable: boolean;
+    isUpdatable: boolean;
     createdAt: Date;
     updatedAt: Date;
 }

@@ -32,7 +32,6 @@ export class GroupStudentListComponent implements OnInit, OnDestroy {
 
   onSelectStudent(student: Student): void {
     this.studentSelected.emit(student);
-    console.log(student.id);
   }
 
   ngOnDestroy() {

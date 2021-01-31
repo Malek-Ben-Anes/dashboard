@@ -25,6 +25,6 @@
   *ngIf="selected.value === tabIndex.TIME_TABLE"
 ></app-group-timetable>
 
-<app-group-marks *ngIf="selected.value === tabIndex.MARKS_LIST"></app-group-marks>
+<app-group-marks *ngIf="selected.value === tabIndex.MARKS_LIST" [showForm]="false"></app-group-marks>
 
-<app-group-marks *ngIf="selected.value === tabIndex.EVALUTE_STUDENTS"></app-group-marks>
+<app-group-marks *ngIf="selected.value === tabIndex.EVALUTE_STUDENTS" [showForm]="true"></app-group-marks>

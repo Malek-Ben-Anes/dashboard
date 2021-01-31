@@ -6,6 +6,7 @@ import {Message} from '@app/models/message';
 import {Mark} from '@app/models/Mark.model';
 import {MarkService} from '@app/services/mark.service';
 import {TranslateService} from '@ngx-translate/core';
+import {LessonService} from '@app/services/lesson.service';
 
 @Component({
   selector: 'app-group-marks-form',
@@ -13,29 +14,25 @@ import {TranslateService} from '@ngx-translate/core';
   styleUrls: ['./group-marks-form.component.scss'],
 })
 export class GroupMarksFormComponent implements OnInit, OnChanges {
-  @Input('student') student: Student;
+  @Input('student')
+  student: Student;
 
-  @Input('lessons') lessons: Lesson[];
-
-  @Output()
-  refresh = new EventEmitter<Student>();
-
+  lessons: Lesson[];
   message: Message = new Message();
   newEvaluationMarks: Mark[];
 
   constructor(private markService: MarkService,
+              private lessonSerivce: LessonService,
               private translate: TranslateService) { }
 
   ngOnInit() {
-    //this.generateMarksForm();
+    this.lessonSerivce.findAll().subscribe((lessons) => this.lessons = lessons);
+    this.markService.findAll(this.student.id).subscribe((marks) => this.newEvaluationMarks = marks); /*&& marks.filter((x: Mark) => x && x.isUpdatable*/
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.student) {
       this.student = changes.student.currentValue;
-    }
-    if (changes.lessons) {
-      this.lessons = changes.lessons.currentValue;
     }
     // this.generateMarksForm();
   }
@@ -44,7 +41,6 @@ export class GroupMarksFormComponent implements OnInit, OnChanges {
     const marksToBePersisted: Mark[] = _.filter(this.newEvaluationMarks, (mark: Mark) => this.isToPersist(mark));
     this.markService.save(this.student.id, marksToBePersisted)
         .then((marksAdded: Mark[]) => {
-          this.refresh.emit(this.student);
           // this.student.marks = this.student.marks.concat(marksToBePersisted);;
           // this.generateMarksForm();
         })
@@ -59,14 +55,17 @@ export class GroupMarksFormComponent implements OnInit, OnChanges {
     event.currentTarget.disabled = true;
     this.markService.delete(mark.id)
         .then((data) => {
-          //this.deleteMarkFromStudent(mark);
-          //this.refresh.emit(this.student);
-          //this.generateMarksForm();
+          // this.deleteMarkFromStudent(mark);
+          // this.refresh.emit(this.student);
+          // this.generateMarksForm();
         })
         .catch((err) => console.log(err));
   }
 
-  /*private generateMarksForm() {
+  onUpdateMark(event, mark: Mark) {
+  }
+
+  /* private generateMarksForm() {
     this.newEvaluationMarks = [];
     const updatableMarks: Mark[] = _.filter(this.student.marks, (mark: Mark) => mark.updatable);
     _.forEach(this.lessons, (lesson) => this.newEvaluationMarks.push(this.addNewMark(updatableMarks, lesson)));

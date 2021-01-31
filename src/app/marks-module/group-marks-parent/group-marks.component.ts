@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Student} from '@app/models/Student.model';
 
 @Component({
@@ -7,6 +7,9 @@ import {Student} from '@app/models/Student.model';
   styleUrls: ['./group-marks.component.scss'],
 })
 export class GroupMarksComponent implements OnInit {
+  @Input('showForm')
+  showForm: boolean;
+  
   studentSelected: Student;
 
   constructor() {}
