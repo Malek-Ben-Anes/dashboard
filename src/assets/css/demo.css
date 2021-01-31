@@ -32,3 +32,8 @@
 .table-responsive {
   display: contents;
 }
+
+body {
+  background-image: url("assets/login-background.jpg");
+  background-size: cover 100%;
+}

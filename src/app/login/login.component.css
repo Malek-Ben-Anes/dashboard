@@ -26,3 +26,13 @@
     display: flex;
     justify-content: center;
 }
+
+.login-panel {
+    opacity: 0.9;
+    background-color: white;
+    border-radius: 4px;
+}
+
+.enter-credentials {
+    text-align: center;
+}
