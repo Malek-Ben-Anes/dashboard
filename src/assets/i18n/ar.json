@@ -78,6 +78,8 @@
     "header.teacher.groups": "الأقسام",
     "header.teacher.marks": "الملاحظات",
 
+    "footer.laplumedor": " مدرسة القلم الذهبي © 2021",
+
     "signIn.credentials.title": "أدخل التفاصيل الخاصة بك",
     "signIn.credentials.email": "البريد الإلكتروني",
     "signIn.credentials.password": "كلمة السر",
