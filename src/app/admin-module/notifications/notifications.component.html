@@ -1,12 +1,13 @@
 <div class="card card-profile">
     <div class="card-body">
             <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
-                    <mat-tab *ngFor="let tab of TABS; let i = index" [label]="TABS[i].label | translate"
-                     [disabled]="TABS[i] === TABS[0]"></mat-tab>
+                    <mat-tab *ngFor="let tab of TABS; let i = index" [label]="TABS[i].label | translate"></mat-tab>                     
             </mat-tab-group>
     </div>
 </div>
-<app-notifcation-list *ngIf="selected.value === TABS[0].NOTIFICATIONS_LIST" [notifications]="notifications" [newNotifications]="newNotifications"
-></app-notifcation-list>
-<app-users-notification-form *ngIf="selected.value === TABS[1].NOTIFY_USERS" [notifications]="notifications"
+<app-users-notification-form *ngIf="selected.value === TABS[0].NOTIFY_USERS" [notifications]="notifications"
 ></app-users-notification-form>
+<app-notifcation-list *ngIf="selected.value === TABS[1].NOTIFICATIONS_RECEIVED" [notifications]="notifications" [newNotifications]="newNotifications"
+></app-notifcation-list>
+<app-notifcation-list *ngIf="selected.value === TABS[2].NOTIFICATIONS_SENT" [notifications]="notifications" [newNotifications]="newNotifications"
+></app-notifcation-list>
