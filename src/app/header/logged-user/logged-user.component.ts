@@ -23,12 +23,11 @@ export const ROUTES: any | RouteInfo[][] =
     {'router': '/app/notifications', 'label': 'header.notifications', 'icon': 'bell'}],
 
   TEACHER_NAVIGATION_BAR: [
-    {'router': '/app/show-teacher-profile', 'label': 'header.teacher.profile'},
     {'router': '/app/show-teacher-time-table', 'label': 'header.teacher.timetable'},
     {'router': '/app/show-groups-list', 'label': 'header.teacher.groups'},
     {'router': '/app/prof-notifications', 'label': 'header.notifications', 'icon': 'bell'}],
 
-  STUDENT_NAVIGATION_BAR: [{'router': '/app/show-profile', 'label': 'header.student.profile'},
+  STUDENT_NAVIGATION_BAR: [
     {'router': '/app/show-marks-list', 'label': 'header.student.marks'},
     {'router': '/app/show-bulletins', 'label': 'header.student.bulletins'},
     {'router': '/app/show-time-table', 'label': 'header.student.timetable'},
@@ -69,8 +68,12 @@ export class LoggedUserComponent implements OnInit {
     this.router.navigate(['app', 'update-user-password']);
   }
 
-  updateProfile() {
-    this.router.navigate(['app', 'update-user-password']);
+  showProfile() {
+    if (this.authority === 'ROLE_TEACHER') {
+      this.router.navigate(['app', 'show-teacher-profile']);
+    } else if (this.authority === 'ROLE_STUDENT') {
+      this.router.navigate(['app', 'show-profile']);
+    }
   }
 
   /**
