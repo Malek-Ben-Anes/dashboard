@@ -25,7 +25,7 @@ export class NotifcationListComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['Title', 'Content', 'Notifier', 'Date'];
 
   isLoading = false;
-  currentUser: User;
+  
 
   constructor(private translate: TranslateService, private authService: AuthService, private notificationService: NotificationService, private cdr: ChangeDetectorRef) {
   }

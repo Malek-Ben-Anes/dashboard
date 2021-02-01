@@ -3,41 +3,28 @@
         <div class="row">
             <div class="col-md-12">
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <button mat-raised-button type="button" class="btn btn-warning pull-right"
-                        routerLink="/app/teacher-profile">
-                            {{'All.text.create' | translate}}
-                        </button>
-                    </div>
-                </div>
 
                 <div class="mat-elevation-z8 table-responsive">
 
                         <mat-spinner *ngIf="isLoading" [diameter]="150" class="center"></mat-spinner>
                         <table mat-table *ngIf="!isLoading" [dataSource]="dataSource" class="table">
     
-                            <ng-container matColumnDef="photo">
-                                <th class="text-primary" mat-header-cell *matHeaderCellDef> {{'All.text.label.Photo' | translate}} </th>
-                                <td mat-cell *matCellDef="let teacher">{{teacher.id}}</td>
-                            </ng-container>
-    
-                            <ng-container matColumnDef="firstName">
+                            <ng-container matColumnDef="Title" class="text-primary">
                                 <th mat-header-cell *matHeaderCellDef> {{'All.text.label.FirstName' | translate}} </th>
                                 <td mat-cell *matCellDef="let teacher"> {{teacher.firstName}} </td>
                             </ng-container>
     
-                            <ng-container matColumnDef="lastName">
+                            <ng-container matColumnDef="Content">
                                 <th mat-header-cell *matHeaderCellDef> {{'All.text.label.LastName' | translate}} </th>
                                 <td mat-cell *matCellDef="let teacher"> {{teacher.lastName}} </td>
                             </ng-container>
     
-                            <ng-container matColumnDef="phone">
+                            <ng-container matColumnDef="Notifier" class="text-primary">
                                     <th mat-header-cell *matHeaderCellDef> {{'All.text.label.PhoneNumber' | translate}} </th>
                                     <td mat-cell *matCellDef="let teacher"> {{teacher.phone}} </td>
                             </ng-container>
                                 
-                            <ng-container matColumnDef="description" class="text-primary">
+                            <ng-container matColumnDef="Date">
                                     <th mat-header-cell *matHeaderCellDef> {{'All.text.label.Description' | translate}} </th>
                                     <td mat-cell *matCellDef="let teacher"> {{teacher.description}} </td>
                             </ng-container>
