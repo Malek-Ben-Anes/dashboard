@@ -190,7 +190,7 @@
     "All.text.notifications.send": "ارسال",
     "All.text.notifications.Date": "التاريخ",
     "All.text.notifications.OptionSelected": "الخيارات المحددة",
-    "All.text.notifications.noContent": "لا يوجد أي رسالة!",
+    "All.text.notifications.noContent": "لا يوجد أي رسالة !",
     "All.text.notifications.confirmation.modal.message": " سوف تشعر ${selectedOptionNumber} ${seletedChoice}",
     "All.text.notifications.confirmation.modal.title": "تأكيد إرسال الإشعارات",
     "All.text.notifications.selectedElemetns": "تأكيد إرسال الإشعارات",

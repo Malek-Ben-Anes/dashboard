@@ -5,7 +5,7 @@ export class Notification {
     id: string;
     createdAt: string;
     updatedAt: string;
-    notifierId: String;
+    notifier: User;
     notified: User;
     title: string;
     content: string;

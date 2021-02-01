@@ -14,14 +14,24 @@ const NOTIFICATION_URL: string = BASE_API_URL + 'notifications/';
 export class NotificationService {
   constructor(private http: HttpClient) { }
 
-  find(notifiedId: string, notifierId?: string, groupId?: string): Promise<Notification[]> {
-    const params = new HttpParams().set('notifiedId', notifiedId);
+  findAll(notifiedId?: string, notifierId?: string, groupId?: string): Promise<Notification[]> {
+    const params = this.buildHttpParams(notifiedId, notifierId, groupId);
     return new Promise((resolve, reject) => this.http.get<Notification[]>(NOTIFICATION_URL, {params: params})
         .subscribe((notifications) => {
           const sortedNotifications = _.sortBy(notifications, ['createdAt', 'updatedAt']).reverse();
           resolve(sortedNotifications);
         },
         (err) => reject(err)));
+  }
+
+  private buildHttpParams(notifiedId?: string, notifierId?: string, groupId?: string): HttpParams {
+    if (notifiedId) {
+      return new HttpParams().set('notifiedId', notifiedId);
+    } else if (notifierId) {
+      return new HttpParams().set('notifierId', notifierId);
+    } else if (groupId) {
+      return new HttpParams().set('groupId', groupId);
+    }
   }
 
   save(notificationRequest: NotificationRequest, notifyUser: boolean, notifyGroup: boolean): Promise<Notification> {
