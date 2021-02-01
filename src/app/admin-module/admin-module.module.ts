@@ -30,7 +30,7 @@ import {TeacherTimetableComponent} from './teacher/teacher/teacher-timetable/tea
 import {TeacherGroupsComponent} from './teacher/teacher/teacher-groups/teacher-groups.component';
 import {TeacherGroupListComponent} from './teacher/teacher/teacher-groups/group-list/teacher-group-list.component';
 import {TeacherSubjectListComponent} from './teacher/teacher/teacher-groups/teacher-subject-list/teacher-subject-list.component';
-import {NotifcationListComponent} from './notifications/notifcation-list/notifcation-list.component';
+import {NotifcationListComponent} from './notifications/notifcations-list/notifcation-list.component';
 import {UsersNotificationFormComponent} from './notifications/users-notification-form/users-notification-form.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {HttpModule} from '@angular/http';
@@ -43,6 +43,7 @@ import {DialogContentExampleDialogComponent} from '@app/commons/dialog-content-e
 import {SharedModule} from '@app/commons/shared.module';
 import {ErrorDialogComponent} from '@app/commons/error-dialog/error-dialog.component';
 import {MarksModuleModule} from '@app/marks-module/marks-module.module';
+import {NotificationListComponent} from './notifications/notification-list/notification-list.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import {MarksModuleModule} from '@app/marks-module/marks-module.module';
     NotificationsComponent,
     NotifcationListComponent,
     UsersNotificationFormComponent,
+    NotificationListComponent,
   ],
   entryComponents: [
     DialogContentExampleDialogComponent,

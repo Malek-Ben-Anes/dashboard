@@ -1,0 +1,21 @@
+.profile-image {
+    width: 79px;
+    height: 79px;
+    border-radius: 50%;
+}
+
+table {
+    width: 100%;
+  }
+
+th {
+    color: #9c27b0 !important;
+    font-weight: bold;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}

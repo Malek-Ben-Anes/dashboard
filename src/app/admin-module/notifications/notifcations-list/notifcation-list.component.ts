@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Notification} from '@app/models/Notification';
 import {TranslateService} from '@ngx-translate/core';
 import {AuthService} from '@app/services/auth/auth.service';
@@ -12,20 +12,22 @@ import {MatPaginator, MatTableDataSource} from '@angular/material';
   styleUrls: ['./notifcation-list.component.scss'],
 })
 export class NotifcationListComponent implements OnInit, AfterViewInit {
-  @Input('notifReceived')
-  notifReceived: string;
+  @Input('notifReceived') notifReceived: string;
 
-  @ViewChild(MatPaginator)
-  paginator: MatPaginator;
 
   notifications: Notification[] = [];
+  dataSource = new MatTableDataSource<Notification>([]);
+  @ViewChild(MatPaginator, {read: true}) paginator: MatPaginator;
+
+  
+  sort;
+
   displayedColumns: string[] = ['Title', 'Content', 'Notifier', 'Date'];
-  dataSource: MatTableDataSource<any> = new MatTableDataSource<Notification>(this.notifications);
 
   isLoading = false;
   currentUser: User;
 
-  constructor(private translate: TranslateService, private authService: AuthService, private notificationService: NotificationService) {
+  constructor(private translate: TranslateService, private authService: AuthService, private notificationService: NotificationService, private cdr: ChangeDetectorRef) {
   }
 
   async ngOnInit() {
@@ -41,7 +43,11 @@ export class NotifcationListComponent implements OnInit, AfterViewInit {
     findAllCall
         .then((notifs) => {
           this.notifications = notifs;
+          this.dataSource.data = this.notifications;
           this.dataSource = new MatTableDataSource<Notification>(this.notifications);
+          this.dataSource.sort = this.sort;
+          this.cdr.detectChanges();
+          this.isLoading = false;
         })
         .catch((err) => {
           console.log(err);
@@ -50,7 +56,6 @@ export class NotifcationListComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.isLoading = false;
     this.dataSource.paginator = this.paginator;
   }
 }
