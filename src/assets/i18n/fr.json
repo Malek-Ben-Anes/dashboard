@@ -174,7 +174,7 @@
     "All.text.placeholder.AdditionalInformation": "Des informations supplemenatires",
 
     "All.text.notifications.Title": "Titre",
-    "All.text.notifications.Content": "Contenu",
+    "All.text.notifications.content": "Contenu",
     "All.text.notifications.Type": "Contenu",
     "All.text.notifications.Type.NOTIF1": "sortie scolaire",
     "All.text.notifications.Type.NOTIF2": "Evenement",
@@ -187,6 +187,7 @@
     "All.text.notifications.receivedNotifications": "Notifications reçues",
     "All.text.notifications.notifier": "Notifier",
     "All.text.notifications.NotifierAction": "Notifier les destinataires",
+    "All.text.notifications.sender": "Expéditeur",
     "All.text.notifications.send": "Envoyer",
     "All.text.notifications.Date": "Date",
     "All.text.notifications.OptionSelected": "Options sélectionnées",

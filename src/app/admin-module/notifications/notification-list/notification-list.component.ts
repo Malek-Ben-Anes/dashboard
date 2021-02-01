@@ -1,30 +1,26 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {TeacherService} from '@app/services/teacher.service';
 
-import {Teacher} from '@app/models/Teacher.model';
-import {BASE_URL} from '@app/app.component';
-import {Gender} from '@app/models/enums/Gender';
 import {MatTableDataSource, MatPaginator} from '@angular/material';
-import {Routers} from '@app/admin-module/routes/router-link';
 import {User} from '@app/models/User';
 import {NotificationService} from '@app/services/notification.service';
 import {AuthService} from '@app/services/auth/auth.service';
+import {Notification} from '@app/models/Notification';
 
 @Component({
-  selector: 'app-notif-list',
+  selector: 'app-notification-list',
   templateUrl: './notification-list.component.html',
   styleUrls: ['./notification-list.component.css'],
 })
 export class NotificationListComponent implements OnInit {
-  BASE_URL: string = BASE_URL;
-  APP_TEACHER_PROFILE: string = Routers.APP_TEACHER_PROFILE;
+  @Input('isNotifReceived') isNotifReceived: string;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   errorMessage: string;
 
-  teachers: Teacher[] = [];
+  notifications: Notification[] = [];
 
-  dataSource = new MatTableDataSource<Teacher>(this.teachers);
+  dataSource = new MatTableDataSource<Notification>(this.notifications);
   displayedColumns: string[] = ['Title', 'Content', 'Notifier', 'Date'];
 
   isLoading = false;
@@ -35,24 +31,27 @@ export class NotificationListComponent implements OnInit {
   ngOnInit() {
     this.authService.getLoggedUser().then((user) => {
       this.currentUser = user;
-      this.findAllTeachers();
+      const notifiedId = this.isNotifReceived ? this.currentUser.id : undefined;
+      const notifierId = !this.isNotifReceived ? this.currentUser.id : undefined;
+      this.findNotifications(notifiedId, notifierId);
     });
   }
 
-  findAllTeachers(): void {
+  findNotifications(notifiedId: string, notifierId: string): void {
     this.isLoading = true;
-    this.teachersService.findAll().subscribe((teachers) => {
-      this.teachers = teachers;
-      this.refershPaginator();
-    },
-    (error) => this.errorMessage = `${error.status}: ${error.error.message}`,
-    () => this.isLoading = false);
+    this.notificationService.findAll(notifiedId, notifierId)
+        .then((notifs) => {
+          this.notifications = notifs;
+          this.refershPaginator();
+        }).catch((error) => {
+          this.errorMessage = `${error.status}: ${error.error.message}`,
+          this.isLoading = false;
+        });
   }
-
 
   private refershPaginator() {
     this.isLoading = false;
-    this.dataSource = new MatTableDataSource<Teacher>(this.teachers);
+    this.dataSource = new MatTableDataSource<Notification>(this.notifications);
     this.dataSource.paginator = this.paginator;
   }
 }

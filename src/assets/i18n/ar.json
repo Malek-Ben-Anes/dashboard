@@ -174,7 +174,7 @@
     "All.text.placeholder.AdditionalInformation": "معلومات اضافية",
 
     "All.text.notifications.Title": "العنوان",
-    "All.text.notifications.Content": "المحتوى",
+    "All.text.notifications.content": "المحتوى",
     "All.text.notifications.Type": "المحتوى",
     "All.text.notifications.Type.NOTIF1": "رحلات مدرسية",
     "All.text.notifications.Type.NOTIF2": "تظاهرات",
@@ -187,6 +187,7 @@
     "All.text.notifications.receivedNotifications": "الإشعارات المستلمة",
     "All.text.notifications.notifier": "اشعار",
     "All.text.notifications.NotifierAction": "إعلام",
+    "All.text.notifications.sender": "المرسل",
     "All.text.notifications.send": "ارسال",
     "All.text.notifications.Date": "التاريخ",
     "All.text.notifications.OptionSelected": "الخيارات المحددة",
