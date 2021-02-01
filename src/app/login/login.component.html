@@ -27,7 +27,7 @@
         </mat-form-field>
 
         <div class="form-group center">
-          <div *ngIf="isLogging; else isNotLogging">
+          <div *ngIf="isLogging">
             <button mat-raised-button class="btn btn-primary">
               {{'signIn.credentials.loading' | translate}}<i class="fa fa-circle-o-notch fa-spin"></i>
             </button>

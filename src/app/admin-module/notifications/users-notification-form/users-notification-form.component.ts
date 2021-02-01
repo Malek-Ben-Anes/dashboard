@@ -11,7 +11,7 @@ import {GroupService} from '@app/services/group.service';
 import {StudentService} from '@app/services/student.service';
 import {TeacherService} from '@app/services/teacher.service';
 import {Notif} from '@app/models/enums/Notif';
-import {Notification, NotificationRequest} from '@app/models/Notification';
+import {Notification} from '@app/models/Notification';
 import {NotificationService} from '@app/services/notification.service';
 import {AuthService} from '@app/services/auth/auth.service';
 import {User} from '@app/models/User';
@@ -20,6 +20,8 @@ import {Library} from '@app/models/enums/Library';
 import {TranslateService} from '@ngx-translate/core';
 import {DialogData} from '@app/models/DialogData';
 import {DialogService} from '@app/commons/dialog/dialog.service';
+import {BASE_URL} from '@app/app.component';
+import { NotificationRequest } from '@app/models/requests/notification/CreateNotification.model';
 
 @Component({
   selector: 'app-users-notification-form',
@@ -27,6 +29,7 @@ import {DialogService} from '@app/commons/dialog/dialog.service';
   styleUrls: ['./users-notification-form.component.scss'],
 })
 export class UsersNotificationFormComponent implements OnInit {
+  readonly BASE_URL: string = BASE_URL;
   private static Library: Library;
   @Input('notifications') notifications: Notification[];
 
@@ -60,7 +63,6 @@ export class UsersNotificationFormComponent implements OnInit {
     const loggedUserName = this._loggedUser ? `${this._loggedUser.firstName} ${ this._loggedUser.lastName}` : '';
     this.notifForm = this.formBuilder.group({
       notifier: [loggedUserName, Validators.required],
-      // notified: [null, Validators.required],
       title: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(255)]],
       content: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(500)]],
       type: [null, Validators.required],

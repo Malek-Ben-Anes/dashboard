@@ -1,32 +1,13 @@
-import { User } from './User';
+import {User} from '@app/models/User';
+import {Notif} from './enums/Notif';
 
 export class Notification {
     id: string;
-    notifier: User;
+    createdAt: string;
+    updatedAt: string;
+    notifierId: String;
     notified: User;
-    title?: string;
-    content: string;
-    type: Notif;
-
-    constructor() {}
-}
-
-export class NotificationRequest {
-    notifierId: string;
-    notifiedIds: string[];
     title: string;
     content: string;
     type: Notif;
-
-    constructor() {}
 }
-
-enum Notif {
-    Notif1,
-    Notif2,
-    Notif3,
-    Notif4,
-    NotifN
-}
-
-

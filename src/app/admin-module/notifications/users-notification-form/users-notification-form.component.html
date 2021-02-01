@@ -1,42 +1,8 @@
-<div class="col-md-12">
-  <div class="row">
-    <button (click)="onToggleButton('TEACHER')" class="btn margin-30"
-      [ngClass]="selected !== 'TEACHER' ? 'btn-outline-secondary' : 'btn-info'">
-      {{'label.teacher' | translate}}
-    </button>
-    <button (click)="onToggleButton('GROUP')" class="btn margin-30"
-      [ngClass]="selected !== 'GROUP' ? 'btn-outline-secondary' : 'btn-info'">
-      {{'label.group' | translate}}
-    </button>
-    <button (click)="onToggleButton('STUDENT')" class="btn margin-30"
-      [ngClass]="selected !== 'STUDENT' ? 'btn-outline-secondary' : 'btn-info'">
-      {{'label.student' | translate}}
-    </button>
-
-    <mat-form-field class="example-full-width" *ngIf="selected === 'STUDENT'">
-      <mat-select matInput placeholder="{{'All.text.groups.select' | translate}}" (selectionChange)="onSelectGroup($event.value)">
-        <mat-option *ngFor="let grp of allGroups" [value]="grp">
-          {{ grp.name }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <div class="clearfix"></div>
-    <!-- <mat-form-field class="example-full-width">
-     <mat-select matInput placeholder="Group" formControlName="group">
-        <mat-option *ngFor="let grp of groups" [value]="grp">
-          <mat-option [value]="null" [disabled]="true">Select Category</mat-option> -->
-    <!-- <mat-option *ngFor="let grp of groups" [value]="grp" [selected]="grp.name == student.group.name"> 
-          {{ grp.name }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>-->
-  </div>
-</div>
 <div class="row">
   <div class="col-md-12">
     <div class="card">
       <div class="card-body">
-        <form [formGroup]="notifForm">
+        <form [formGroup]="notifForm" *ngIf="notifForm">
           <div class="row">
             <div class="col-md-5">
               <mat-form-field class="example-full-width">
@@ -54,7 +20,7 @@
             </div>
             <div class="col-md-4">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="{{'All.text.notifications.Notifier' | translate}}" formControlName="notifier"
+                <input matInput placeholder="{{'All.text.notifications.notifier' | translate}}" formControlName="notifier"
                  [disabled]="true">
               </mat-form-field>
             </div>
@@ -77,6 +43,31 @@
   </div>
 </div>
 
+<div class="col-md-12">
+  <div class="row">
+    <div>
+      <button (click)="onToggleButton('TEACHER')" class="mat-raised-button choice-toggle" [ngClass]="selected!=='TEACHER'?'mat-basic':'mat-primary'">
+        {{'label.teacher' | translate}}
+      </button>
+      <button (click)="onToggleButton('GROUP')" class="mat-raised-button choice-toggle" [ngClass]="selected!=='GROUP'?'mat-basic':'mat-primary'">
+        {{'label.group' | translate}}
+      </button>
+      <button (click)="onToggleButton('STUDENT')" class="mat-raised-button choice-toggle" [ngClass]="selected!=='STUDENT'?'mat-basic':'mat-primary'">
+        {{'label.student' | translate}}
+      </button>
+    </div>
+
+    <mat-form-field class="group-selection" *ngIf="selected === 'STUDENT'">
+      <mat-select matInput placeholder="{{'All.text.groups.select' | translate}}" (selectionChange)="onSelectGroup($event.value)">
+        <mat-option *ngFor="let grp of allGroups" [value]="grp">
+          {{ grp.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="clearfix"></div>
+  </div>
+</div>
 <div class="card card-profile">
   <div class="card-body">
     <div class="row">
@@ -90,9 +81,9 @@
 
       <div class="col-md-12">
         <mat-selection-list #selections (selectionChange)="onSelectCheckBox($event, selections.selectedOptions)">
-          <mat-list-option  *ngFor="let element of selectedOptions" [value]="element" selected
+          <mat-list-option  *ngFor="let e of selectedOptions" [value]="e" selected
            style="display:inline-block; width:33%; text-align:center;">
-            {{element.name}}
+            {{e.name}}{{e.firstName}} {{e.lastName}}            
           </mat-list-option>
         </mat-selection-list>
       </div>

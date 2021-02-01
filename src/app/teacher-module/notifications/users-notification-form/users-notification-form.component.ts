@@ -10,7 +10,6 @@ import {Student} from '@app/models/Student.model';
 import {GroupService} from '@app/services/group.service';
 import {StudentService} from '@app/services/student.service';
 import {Notif} from '@app/models/enums/Notif';
-import {NotificationRequest} from '@app/models/Notification';
 import {NotificationService} from '@app/services/notification.service';
 import {User} from '@app/models/User';
 import {DialogContentExampleDialogComponent} from '@app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
@@ -18,6 +17,7 @@ import {Library} from '@app/models/enums/Library';
 import {TranslateService} from '@ngx-translate/core';
 import {DialogData} from '@app/models/DialogData';
 import {DialogService} from '@app/commons/dialog/dialog.service';
+import { NotificationRequest } from '@app/models/requests/notification/CreateNotification.model';
 
 @Component({
   selector: 'app-users-notification-form',
