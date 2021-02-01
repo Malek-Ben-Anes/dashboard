@@ -37,7 +37,7 @@ export class NotificationListComponent implements OnInit {
   }
 
   private retrieveLoggedUserNotifications (userId: string): void {
-    this.notificationService.find(userId)
+    this.notificationService.findAll(userId)
         .then(notifications => {this.notifications = notifications; console.log(this.notifications)})
         .catch(err => console.log(err));
   }

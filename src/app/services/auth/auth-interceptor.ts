@@ -55,7 +55,9 @@ export class AuthInterceptor implements HttpInterceptor {
               }
               return throwError(err);
             }
-            return throwError(err);
+            if (err.status > 299 && err. status < 200) {
+              return throwError(err);
+            }
           }
         }));
   }

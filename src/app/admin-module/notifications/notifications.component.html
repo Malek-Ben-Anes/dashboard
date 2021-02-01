@@ -7,5 +7,5 @@
 </div>
 <app-users-notification-form *ngIf="selected.value === TABS[0].NOTIFY_USERS" [notifications]="notifications"
 ></app-users-notification-form>
-<app-notifcation-list *ngIf="selected.value === TABS[1].NOTIFICATIONS_RECEIVED" [notifications]="notifications" [newNotifications]="newNotifications"
-></app-notifcation-list>
+<app-notifcation-list *ngIf="selected.value === TABS[1].NOTIFICATIONS_RECEIVED" [notifReceived]="true"></app-notifcation-list>
+<app-notifcation-list *ngIf="selected.value === TABS[2].NOTIFICATIONS_SENT" [notifReceived]="false"></app-notifcation-list>

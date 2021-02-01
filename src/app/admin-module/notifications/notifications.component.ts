@@ -16,7 +16,7 @@ export class NotificationsComponent implements OnInit {
   readonly TABS = [
     {'NOTIFY_USERS': 0, 'label': 'All.text.notifications.notifier'},
     {'NOTIFICATIONS_RECEIVED': 1, 'label': 'All.text.notifications.receivedNotifications'},
-    // {'NOTIFICATIONS_SENT': 2, 'label': 'All.text.notifications.sentNotifications'},
+    {'NOTIFICATIONS_SENT': 2, 'label': 'All.text.notifications.sentNotifications'},
   ];
 
   selected = new FormControl(0);
@@ -42,7 +42,7 @@ export class NotificationsComponent implements OnInit {
   }
 
   retrieveLoggedUserNotifications(userId: string) {
-    this.notificationService.find(userId)
+    this.notificationService.findAll(userId)
         .then((notifications) => this.notifications = notifications)
         .catch((err) => console.log(err));
   }
