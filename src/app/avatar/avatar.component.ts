@@ -4,7 +4,6 @@ import {BASE_URL} from '@app/app.component';
 import {FileUploadService} from '@app/services/file-upload.service';
 import {Student} from '@app/models/Student.model';
 import {Teacher} from '@app/models/Teacher.model';
-import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-avatar',
