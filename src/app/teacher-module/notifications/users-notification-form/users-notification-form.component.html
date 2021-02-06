@@ -27,7 +27,7 @@
           <div class="row">
             <div class="col-md-5">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="{{'All.text.notifications.Title'|translate}}" formControlName="title" required>
+                <input matInput placeholder="{{'All.text.notifications.title'|translate}}" formControlName="title" required>
                 <mat-error *ngIf="notifForm && notifForm.controls.title.errors && notifForm.controls.title.errors.required">
                   {{'All.Input.ErrorMessage.Required'|translate}}
                 </mat-error>
@@ -47,7 +47,7 @@
             </div>
             <div class="col-md-4">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="{{'All.text.notifications.Notifier'|translate}}" formControlName="notifier" [disabled]="true">
+                <input matInput placeholder="{{'All.text.notifications.notifier'|translate}}" formControlName="notifier" [disabled]="true">
               </mat-form-field>
             </div>
             <div class="col-md-10">

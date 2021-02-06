@@ -173,7 +173,7 @@
     "All.text.placeholder.Description": "تفصيل",
     "All.text.placeholder.AdditionalInformation": "معلومات اضافية",
 
-    "All.text.notifications.Title": "العنوان",
+    "All.text.notifications.title": "العنوان",
     "All.text.notifications.content": "المحتوى",
     "All.text.notifications.Type": "المحتوى",
     "All.text.notifications.Type.NOTIF1": "رحلات مدرسية",
@@ -186,7 +186,7 @@
     "All.text.notifications.sentNotifications": "الإشعارات المرسلة",
     "All.text.notifications.receivedNotifications": "الإشعارات المستلمة",
     "All.text.notifications.notifier": "اشعار",
-    "All.text.notifications.NotifierAction": "إعلام",
+    "All.text.notifications.notifierAction": "إعلام",
     "All.text.notifications.sender": "المرسل",
     "All.text.notifications.receiver": "المتلقي",
     "All.text.notifications.send": "ارسال",

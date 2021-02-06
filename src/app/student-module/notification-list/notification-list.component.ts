@@ -1,34 +1,44 @@
 import * as _ from 'lodash';
-import { Component, OnInit } from '@angular/core';
-import { NotificationService } from '@app/services/notification.service';
-import { TokenStorageService } from '@app/services/auth/token-storage.service';
-import { AuthService } from '@app/services/auth/auth.service';
-import { Notification } from '@app/models/Notification';
-import { TranslateService } from '@ngx-translate/core';
-import { User } from '@app/models/User';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {NotificationService} from '@app/services/notification.service';
+import {TokenStorageService} from '@app/services/auth/token-storage.service';
+import {AuthService} from '@app/services/auth/auth.service';
+import {Notification} from '@app/models/Notification';
+import {TranslateService} from '@ngx-translate/core';
+import {User} from '@app/models/User';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-notification-list',
   templateUrl: './notification-list.component.html',
-  styleUrls: ['./notification-list.component.scss']
+  styleUrls: ['./notification-list.component.scss'],
 })
 export class NotificationListComponent implements OnInit {
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  errorMessage: string;
+
+
   loggedUser: User;
   userNotificationsNumber: number;
-  notifications: Notification[];
+  notifications: Notification[] = [];
 
-  constructor(private tokenStorage: TokenStorageService, private authService: AuthService,
+  dataSource = new MatTableDataSource<Notification>(this.notifications);
+  displayedColumns: string[] = ['Title', 'Content', 'Notifier', 'Date'];
+
+  isLoading = false;
+
+  constructor(private authService: AuthService,
               private notificationService: NotificationService, private translate: TranslateService) {
   }
 
   ngOnInit() {
     if (this.authService.getIsLoggedUser()) {
-      this.authService.getLoggedUser().then(loggedUser => {
-          this.loggedUser = loggedUser;
-          this.userNotificationsNumber = this.formatNotificationsNumber(this.loggedUser.newNotifications);
-          this.retrieveLoggedUserNotifications(this.loggedUser.id);
-        });
+      this.authService.getLoggedUser().then((loggedUser) => {
+        this.loggedUser = loggedUser;
+        this.userNotificationsNumber = this.formatNotificationsNumber(this.loggedUser.newNotifications);
+        this.retrieveLoggedUserNotifications(this.loggedUser.id);
+      });
     }
   }
 
@@ -36,9 +46,18 @@ export class NotificationListComponent implements OnInit {
     return _.isNil(userNotif) || _.isNaN(userNotif) ? 0 : userNotif;
   }
 
-  private retrieveLoggedUserNotifications (userId: string): void {
+  private retrieveLoggedUserNotifications(userId: string): void {
     this.notificationService.findAll(userId)
-        .then(notifications => {this.notifications = notifications; console.log(this.notifications)})
-        .catch(err => console.log(err));
+        .then((notifications) => {
+          this.notifications = notifications;
+          this.refershPaginator();
+        })
+        .catch((err) => console.log(err));
+  }
+
+  private refershPaginator() {
+    this.isLoading = false;
+    this.dataSource = new MatTableDataSource<Notification>(this.notifications);
+    this.dataSource.paginator = this.paginator;
   }
 }
