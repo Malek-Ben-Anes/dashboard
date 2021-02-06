@@ -99,10 +99,9 @@ export class UsersNotificationFormComponent implements OnInit {
 
   onSubmitNotification() {
     const notifiedIds: string[] = _.map(this.selectedOptions, 'id');
-    const notificationRequest: NotificationRequest = this.prepareQuery(notifiedIds);
-    const notifyUser: boolean = (this.selected === Library.STUDENT) || (this.selected === Library.TEACHER);
-    const notifyGroup: boolean = this.selected === Library.GROUP;
-    this.notificationService.save(notificationRequest, notifyUser, notifyGroup)
+    const request: NotificationRequest = this.prepareQuery(notifiedIds);
+    request.isNotifyGroup = this.selected === Library.GROUP;
+    this.notificationService.save(request)
         .then((notification) => {
           console.log(notification);
           const data: DialogData = {

@@ -34,11 +34,9 @@ export class NotificationService {
     }
   }
 
-  save(notificationRequest: NotificationRequest, notifyUser: boolean, notifyGroup: boolean): Promise<Notification> {
-    const params: HttpParams = new HttpParams().set('notifyUser', String(notifyUser))
-        .set('notifyGroup', String(notifyGroup));
+  save(notificationRequest: NotificationRequest): Promise<Notification> {
     return new Promise((resolve, reject) =>
-      this.http.post<Notification>(NOTIFICATION_URL, notificationRequest, {params: params})
+      this.http.post<Notification>(NOTIFICATION_URL, notificationRequest)
           .subscribe((notification) => resolve(notification), (err) => reject(err)));
   }
 

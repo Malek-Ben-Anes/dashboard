@@ -13,7 +13,7 @@ import {Notification} from '@app/models/Notification';
   styleUrls: ['./notification-list.component.css'],
 })
 export class NotificationListComponent implements OnInit {
-  @Input('isNotifReceived') isNotifReceived: string;
+  @Input('isNotifReceived') isNotifReceived: boolean;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   errorMessage: string;
@@ -21,7 +21,7 @@ export class NotificationListComponent implements OnInit {
   notifications: Notification[] = [];
 
   dataSource = new MatTableDataSource<Notification>(this.notifications);
-  displayedColumns: string[] = ['Title', 'Content', 'Notifier', 'Date'];
+  displayedColumns: string[] = ['Title', 'Content', 'Notifier', 'Notified', 'Date'];
 
   isLoading = false;
   currentUser: User;

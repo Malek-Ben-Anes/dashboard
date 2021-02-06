@@ -1,11 +1,11 @@
 export enum Notif {
-    NOTIF1,
-    NOTIF2,
-    NOTIF3,
-    NOTIF4,
-    NOTIF5,
-    NOTIF6,
-    NOTIFN,
+    NOTIF1 = 'NOTIF1',
+    NOTIF2 = 'NOTIF2',
+    NOTIF3 = 'NOTIF3',
+    NOTIF4 = 'NOTIF4',
+    NOTIF5 = 'NOTIF5',
+    NOTIF6 = 'NOTIF6',
+    NOTIFN = 'NOTIFN',
 }
 
 

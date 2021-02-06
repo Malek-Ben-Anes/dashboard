@@ -97,13 +97,11 @@ export class UsersNotificationFormComponent implements OnInit {
   }
 
   onSubmitNotification() {
-    const notifiedIds: string[] = _.map(this.selectedOptions, 'id');
-    const notificationRequest: NotificationRequest = this.prepareQuery(notifiedIds);
-    const notifyUser: boolean = (this.selected === Library.STUDENT) || (this.selected === Library.TEACHER);
-    const notifyGroup: boolean = this.selected === Library.GROUP;
-    this.notificationService.save(notificationRequest, notifyUser, notifyGroup)
+    const request: NotificationRequest = this.prepareQuery();
+    request.isNotifyGroup = this.selected === Library.GROUP;
+    request.notifiedIds = _.map(this.selectedOptions, 'id');
+    this.notificationService.save(request)
         .then((notification) => {
-          console.log(notification);
           const data: DialogData = {
             dialogTitle: this.translate.instant('All.text.notifications.modal.send.success.title'),
             dialogMessage: '',
@@ -148,10 +146,10 @@ export class UsersNotificationFormComponent implements OnInit {
         }, (err) => console.log(err));
   }
 
-  private prepareQuery(notifiedIds: string[]): NotificationRequest {
+  private prepareQuery(): NotificationRequest {
     return this.notificationService
         .buildNotificationRequest(this._loggedUser.id,
-            notifiedIds,
+            undefined,
             this.extractFieldData('title'),
             this.extractFieldData('content'),
             this.extractFieldData('type'));

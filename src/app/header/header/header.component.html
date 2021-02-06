@@ -9,7 +9,7 @@
         </a>
       </div>
     </div>
-    <app-logged-user class="inline" *ngIf="isLogged && loggedUser !=null" [loggedUser]="loggedUser" [roles]="roles"></app-logged-user>
+    <app-logged-user class="inline" *ngIf="isLogged && loggedUser" [loggedUser]="loggedUser" [roles]="roles"></app-logged-user>
     <app-landing-page *ngIf="!isLogged"></app-landing-page>
 
   </div>
