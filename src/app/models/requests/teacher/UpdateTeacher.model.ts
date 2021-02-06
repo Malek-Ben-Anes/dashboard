@@ -1,10 +1,9 @@
-import { Gender } from "@app/models/enums/Gender";
-import { Level } from '@app/models/enums/Level';
+import {Gender} from '@app/models/enums/Gender';
 
 export class UpdateTeacherRequest {
-    firstName: string;
-    lastName: string;
-    gender: Gender;
+    firstName?: string;
+    lastName?: string;
+    gender?: Gender;
     photo: string;
     birthDate: Date;
     phone: string;

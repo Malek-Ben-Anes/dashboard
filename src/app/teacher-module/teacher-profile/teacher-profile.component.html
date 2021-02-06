@@ -50,13 +50,15 @@
                                 <div class="col-md-3">
                                     <mat-form-field class="example-full-width">
                                         <input matInput placeholder="{{'All.text.placeholder.Gender'|translate}}" type="text"
-                                         value="{{'GLBL.' + user.gender | translate}}"
-                                         formControlName="gender">
+                                         value="{{'GLBL.'+user.gender | translate}}">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-3">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="{{'All.text.placeholder.BirthDate'|translate}}" formControlName="birthDate" required>
+                                        <input matInput [matDatepicker]="picker" placeholder="{{'All.text.placeholder.BirthDate'|translate}}"
+                                            formControlName="birthDate" required>
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker touchUi #picker></mat-datepicker>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -83,6 +85,9 @@
                                     </mat-form-field>
                                 </div>
                             </div>
+
+                            <button mat-raised-button class="btn btn-warning pull-right" [disabled]="form.invalid"
+                             (click)="onUpdate()" >{{'All.text.Profile.Update'|translate}}</button>                            
                         </form>
 
                     </div>

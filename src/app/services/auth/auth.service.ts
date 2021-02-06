@@ -46,6 +46,7 @@ export class AuthService {
 
   public saveLoggedUser(loggedUser: User) {
     this._loggedUser = loggedUser;
+    this.tokenStorage.saveLoggedUser(loggedUser);
   }
 
   public saveNewNotifications(newNotifications: number) {
