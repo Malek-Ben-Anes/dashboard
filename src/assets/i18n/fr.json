@@ -78,7 +78,7 @@
     "header.teacher.groups": "Groupes",
     "header.teacher.marks": "Notes",
 
-    "footer.laplumedor": "La plume d'or © 2021",    
+    "footer.laplumedor": "La plume d'or © {{currentYear}}",    
 
     "signIn.credentials.title": "Saisir vos coordonnées",
     "signIn.credentials.email": "E-mail",
