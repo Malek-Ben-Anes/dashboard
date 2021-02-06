@@ -1,9 +1,8 @@
-import * as _ from 'lodash';
 import {Injectable} from '@angular/core';
 import {HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse} from '@angular/common/http';
 import {TokenStorageService} from './token-storage.service';
 import {catchError, tap, retry} from 'rxjs/operators';
-import {Observable, throwError, of} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
 import {AuthService} from './auth.service';
 import {ErrorDialogService} from './error-dialog.service';

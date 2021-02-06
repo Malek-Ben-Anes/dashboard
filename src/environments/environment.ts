@@ -7,5 +7,6 @@ export const environment = {
   production: false,
   apiEndpoint: 'http://localhost:8091/',
   baseApiEndpoint: 'http://localhost:8091/api/',
-  resourceEndpoint: 'https://www.laplumedor.net/uploads/'
+  resourceEndpoint: 'https://www.laplumedor.net/uploads/',
+  landingPageUrl: 'https://www.laplumedor.net/',
 };

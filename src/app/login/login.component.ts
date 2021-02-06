@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
       data => {
           this.isLogging = false;
           this.isLoggedIn = true;
-          this.reloadPage();
+          window.location.reload();
       }, err => {
           this.displayErrorMessage(err);
       }, () => { if(!this.isLoggedIn) this.displayErrorMessage();});
@@ -67,15 +67,7 @@ export class LoginComponent implements OnInit {
   logout() {
     window.location.reload();
     this.tokenStorage.signOut();
-    this.LogoutUserInAuthService();
-  }
-
-  private LogoutUserInAuthService(): void {
     this.authService.saveLoggedUser(null);
     this.authService.saveIsLoggedUser(false);
-  }
-
-  private reloadPage() {
-    window.location.reload();
   }
 }

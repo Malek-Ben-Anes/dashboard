@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {TokenStorageService} from '@app/services/auth/token-storage.service';
+import {environment} from 'environments/environment';
 
 @Component({
   selector: 'app-landing-page',
@@ -8,48 +9,45 @@ import {TokenStorageService} from '@app/services/auth/token-storage.service';
   styleUrls: ['./landing-page.component.scss'],
 })
 export class LandingPageComponent implements OnInit {
-  landingPageNavBar = [];
+  landingPageNavBar: Header[] = [];
+  language: string
 
   constructor(private translate: TranslateService,
               private storage: TokenStorageService) {
   }
 
   ngOnInit() {
-    this.landingPageNavBar = this.landingPageLinks();
-    this.switchLanguage(this.storage.getLanguage());
+    this.switchLanguage();
     this.landingPageLinks();
   }
 
-  private landingPageLinks(): Header[] {
-    return [
+  private async landingPageLinks() {
+    const direction = await this.storage.isRtl() ? '' : 'FR/';
+    const baseUrl = environment.landingPageUrl + direction;
+    this.landingPageNavBar = [
       {
-        href: `${this.links()}index.html`,
+        href: `${baseUrl}index.html`,
         label: 'header.accueil',
       },
       {
-        href: `${this.links()}notre-ecole/index.html`,
+        href: `${baseUrl}notre-ecole/index.html`,
         label: 'header.aboutUs',
       },
       {
-        href: `${this.links()}clubs/index.html`,
+        href: `${baseUrl}clubs/index.html`,
         label: 'header.clubs',
       },
-      {href: `${this.links()}contact/index.html`,
+      {href: `${baseUrl}contact/index.html`,
         label: 'header.contact',
       },
     ];
   }
 
-  private links(): string {
-    return this.storage.isRtl() ? '' : '/FR/';
-  }
-
-  switchLanguage(language: string) {
-    if (language == null) return;
-
-    this.translate.use(language);
-    this.storage.saveLanguage(language);
-    this.landingPageNavBar = this.landingPageLinks();
+  async switchLanguage(lang?: string) {
+    this.language = lang ? lang : await this.storage.getLanguage();
+    this.translate.use(this.language);
+    this.storage.saveLanguage(this.language);
+    this.landingPageLinks();
   }
 }
 
