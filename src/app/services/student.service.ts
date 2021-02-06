@@ -5,8 +5,6 @@ import {Observable} from 'rxjs';
 
 import {Student} from '@app/models/Student.model';
 import {BASE_API_URL} from '../app.component';
-import {Level} from '@app/models/enums/Level';
-import {Group} from '@app/models/Group.model';
 import {StudentFilter} from 'app/admin-module/student/student-list/student-filter/student-filter.component';
 import {UpdateStudentRequest} from '@app/models/requests/student/UpdateStudent.model';
 import {CreateStudentRequest} from '@app/models/requests/student/CreateStudent.model';

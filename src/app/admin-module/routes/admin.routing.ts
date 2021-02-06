@@ -13,7 +13,7 @@ import {StudentComponent} from '../student/student/student.component';
 import {StudentListComponent} from '../student/student-list/student-list.component';
 import {BulletinComponent} from '../student/student/bulletin/bulletin.component';
 import {SubjectComponent} from '../subject/subject.component';
-import {NotificationsComponent} from '../notifications/notifications.component';
+import {NotificationsComponent} from '../../notification-module/notification-parent/notification.component';
 import {Routers} from './router-link';
 
 const routes: Routes = [

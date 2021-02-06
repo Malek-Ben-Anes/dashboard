@@ -32,9 +32,6 @@ export const ROUTES: any | RouteInfo[][] =
     {'router': '/app/show-bulletins', 'label': 'header.student.bulletins'},
     {'router': '/app/show-time-table', 'label': 'header.student.timetable'},
     {'router': '/app/show-notifications', 'label': 'header.student.notifications', 'icon': 'bell'}],
-  // https://stackoverflow.com/questions/44073964/dynamic-template-based-on-value-rather-than-variable-with-ngtemplateoutlet
-  /* https://stackoverflow.com/questions/31548311/angular-html-binding
-     https://gearheart.io/blog/passing-pieces-of-markup-to-components-in-angular-2-and-problems-with-dynamic-content/ */
 };
 @Component({
   selector: 'app-logged-user',

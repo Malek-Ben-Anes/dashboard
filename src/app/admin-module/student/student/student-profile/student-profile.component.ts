@@ -1,27 +1,26 @@
 import * as _ from 'lodash';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 
-import { Gender } from "@app/models/enums/Gender";
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Student } from '@app/models/Student.model';
-import { Level } from '@app/models/enums/Level';
-import { Group } from '@app/models/Group.model';
-import { GroupService } from '@app/services/group.service';
-import { TranslateService } from '@ngx-translate/core';
-import { StudentService } from '@app/services/student.service';
-import { Router } from '@angular/router';
-import { DialogContentExampleDialogComponent } from '@app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
-import { MatDialog } from '@angular/material';
-import { CreateStudentRequest } from '@app/models/requests/student/CreateStudent.model';
-import { UpdateStudentRequest } from '@app/models/requests/student/UpdateStudent.model';
+import {Gender} from '@app/models/enums/Gender';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {Student} from '@app/models/Student.model';
+import {Level} from '@app/models/enums/Level';
+import {Group} from '@app/models/Group.model';
+import {GroupService} from '@app/services/group.service';
+import {TranslateService} from '@ngx-translate/core';
+import {StudentService} from '@app/services/student.service';
+import {Router} from '@angular/router';
+import {DialogContentExampleDialogComponent} from '@app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
+import {MatDialog} from '@angular/material';
+import {CreateStudentRequest} from '@app/models/requests/student/CreateStudent.model';
+import {UpdateStudentRequest} from '@app/models/requests/student/UpdateStudent.model';
 
 @Component({
   selector: 'app-student-profile',
   templateUrl: './student-profile.component.html',
-  styleUrls: ['./student-profile.component.css']
+  styleUrls: ['./student-profile.component.css'],
 })
 export class StudentProfileComponent implements OnInit {
-
   readonly EMAIL_PATTERN = '^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$';
 
   @Input('student')
@@ -47,14 +46,15 @@ export class StudentProfileComponent implements OnInit {
   }
 
   private getGroup() {
-    this.groupService.findAll().subscribe(groups => {this.groups = groups; this.updateForm(this.student);
-    }, err => console.log(err));
+    this.groupService.findAll().subscribe((groups) => {
+      this.groups = groups; this.updateForm(this.student);
+    }, (err) => console.log(err));
   }
 
   private initFormGroup(): FormGroup {
     return this.formBuilder.group({
       firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
-      lastName: ['', [Validators.required,  Validators.minLength(3), Validators.maxLength(60)]],
+      lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
       email: ['', [Validators.required, Validators.pattern(this.EMAIL_PATTERN)]],
       birthDate: [null, Validators.required],
       phone: ['', Validators.required],
@@ -85,7 +85,7 @@ export class StudentProfileComponent implements OnInit {
       this.studentForm.controls['email'].disable();
     }
     this.studentForm.get('birthDate').setValue(new Date(this.student.birthDate));
-    const toSelect2 = this.levels.find(level => level === this.student.level);
+    const toSelect2 = this.levels.find((level) => level === this.student.level);
     this.studentForm.get('level').setValue(toSelect2);
     if (this.student.group != null) {
       const toSelect1 = _.find(this.groups, (group) => group.id === this.student.group.id);
@@ -99,7 +99,7 @@ export class StudentProfileComponent implements OnInit {
 
   private prepareRequest(): CreateStudentRequest | UpdateStudentRequest {
     let request: CreateStudentRequest | UpdateStudentRequest = new UpdateStudentRequest();
-    if(this.isNew) {
+    if (this.isNew) {
       request = new CreateStudentRequest();
       request.email = this.extractFieldData('email');
     }
@@ -122,25 +122,24 @@ export class StudentProfileComponent implements OnInit {
   }
 
   onConfirmationDelete(studentId: string ) {
-    this.studentService.delete(studentId).subscribe(student => this.router.navigate(['app', 'students']));
+    this.studentService.delete(studentId).subscribe((student) => this.router.navigate(['app', 'students']));
   }
 
   onDelete(studentId: string): void {
     const modalDialog: { dialogTitle: string; dialogMessage: string; } =
     {
       dialogTitle: this.translate.instant('All.text.delete.title'),
-      dialogMessage: this.translate.instant('All.text.delete.Confirmation')
+      dialogMessage: this.translate.instant('All.text.delete.Confirmation'),
     };
     const dialogRef = this.dialog.open(DialogContentExampleDialogComponent, {
       width: '450px',
       height: '200px',
-      data: { dialogTitle: modalDialog.dialogTitle, dialogMessage: modalDialog.dialogMessage }
+      data: {dialogTitle: modalDialog.dialogTitle, dialogMessage: modalDialog.dialogMessage},
     });
-    dialogRef.afterClosed().subscribe(confirmtion => {
+    dialogRef.afterClosed().subscribe((confirmtion) => {
       if (confirmtion) {
         this.onConfirmationDelete(studentId);
       }
     });
   }
-
 }

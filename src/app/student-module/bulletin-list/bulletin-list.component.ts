@@ -1,19 +1,19 @@
+
 import * as _ from 'lodash';
-import { Component, OnInit } from '@angular/core';
-import { Student } from '@app/models/Student.model';
-import { BASE_URL } from '@app/app.component';
-import { TokenStorageService } from '@app/services/auth/token-storage.service';
-import { AuthService } from '@app/services/auth/auth.service';
-import { TranslateService } from '@ngx-translate/core';
-import { Bulletin } from '@app/models/Bulletin';
+import {Component, OnInit} from '@angular/core';
+import {Student} from '@app/models/Student.model';
+import {BASE_URL} from '@app/app.component';
+import {TokenStorageService} from '@app/services/auth/token-storage.service';
+import {AuthService} from '@app/services/auth/auth.service';
+import {TranslateService} from '@ngx-translate/core';
+import {Bulletin} from '@app/models/Bulletin';
 
 @Component({
   selector: 'app-bulletin-list',
   templateUrl: './bulletin-list.component.html',
-  styleUrls: ['./bulletin-list.component.scss']
+  styleUrls: ['./bulletin-list.component.scss'],
 })
 export class BulletinListComponent implements OnInit {
-
   BASE_URL: string = BASE_URL;
   student: Student;
 
@@ -27,7 +27,7 @@ export class BulletinListComponent implements OnInit {
   }
 
   displayBulletins(): boolean {
-    return this.student &&  !_.isEmpty(this.student.bulletins);
+    return this.student && !_.isEmpty(this.student.bulletins);
   }
 
   public getTrimester(bulletin: Bulletin): string {

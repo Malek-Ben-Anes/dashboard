@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UsersNotificationFormComponent } from './users-notification-form.component';
+import { UsersNotificationFormComponent } from './notification-form.component';
 
 describe('UsersNotificationFormComponent', () => {
   let component: UsersNotificationFormComponent;

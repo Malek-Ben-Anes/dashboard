@@ -9,8 +9,8 @@ import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-notifications',
-  templateUrl: './notifications.component.html',
-  styleUrls: ['./notifications.component.css'],
+  templateUrl: './notification.component.html',
+  styleUrls: ['./notification.component.css'],
 })
 export class NotificationsComponent implements OnInit {
   readonly TABS = [

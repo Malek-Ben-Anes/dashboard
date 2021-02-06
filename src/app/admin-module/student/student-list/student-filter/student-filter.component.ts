@@ -1,18 +1,17 @@
 import * as _ from 'lodash';
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { Level } from '@app/models/enums/Level';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { GroupService } from '@app/services/group.service';
-import { Group } from '@app/models/Group.model';
-import { Student } from '@app/models/Student.model';
+import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
+import {Level} from '@app/models/enums/Level';
+import {FormGroup, FormBuilder} from '@angular/forms';
+import {GroupService} from '@app/services/group.service';
+import {Group} from '@app/models/Group.model';
+import {Student} from '@app/models/Student.model';
 
 @Component({
   selector: 'app-student-filter',
   templateUrl: './student-filter.component.html',
-  styleUrls: ['./student-filter.component.scss']
+  styleUrls: ['./student-filter.component.scss'],
 })
 export class StudentFilterComponent implements OnInit {
-
   @Input() students: Student;
   @Output() studentsFilter = new EventEmitter<StudentFilter>();
 
@@ -24,7 +23,7 @@ export class StudentFilterComponent implements OnInit {
     firstName: undefined,
     lastName: undefined,
     level: undefined,
-    groupId: undefined
+    groupId: undefined,
   };
 
   constructor(private formBuilder: FormBuilder, private groupService: GroupService) { }
@@ -32,8 +31,8 @@ export class StudentFilterComponent implements OnInit {
   ngOnInit() {
     this.initForm();
     this.groupService.findAll()
-        .subscribe(groups => this.groups = groups
-        , err => console.log(err));
+        .subscribe((groups) => this.groups = groups
+            , (err) => console.log(err));
   }
 
   initForm() {
@@ -41,14 +40,14 @@ export class StudentFilterComponent implements OnInit {
       firstName: [],
       lastName: [],
       level: [],
-      group: []
+      group: [],
     });
   }
 
   onSearch() {
     this.extractFormValue();
 
-    const compactedFilter = _(this.studentFilter).omitBy(_.isNil).omitBy(_.isEmpty).value()
+    const compactedFilter = _(this.studentFilter).omitBy(_.isNil).omitBy(_.isEmpty).value();
     const emptyFields = _.isEmpty(compactedFilter);
 
     if (!emptyFields) {
@@ -59,15 +58,14 @@ export class StudentFilterComponent implements OnInit {
     }
   }
 
-  private extractFormValue()  {
+  private extractFormValue() {
     this.studentFilter = {
       firstName: _.trim(this.studentFilterForm.get('firstName').value),
       lastName: _.trim(this.studentFilterForm.get('lastName').value),
       level: this.studentFilterForm.get('level').value,
-      groupId: this.studentFilterForm.get('group').value
-    }
+      groupId: this.studentFilterForm.get('group').value,
+    };
   }
-
 }
 
 export interface StudentFilter {

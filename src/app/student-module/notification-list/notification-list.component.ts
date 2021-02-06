@@ -1,7 +1,6 @@
 import * as _ from 'lodash';
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NotificationService} from '@app/services/notification.service';
-import {TokenStorageService} from '@app/services/auth/token-storage.service';
 import {AuthService} from '@app/services/auth/auth.service';
 import {Notification} from '@app/models/Notification';
 import {TranslateService} from '@ngx-translate/core';

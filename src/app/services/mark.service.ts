@@ -52,7 +52,6 @@ export class MarkService {
   public extractLessonsFromMarks(marks: Mark[]): Lesson[] {
     if (!_.isNil(marks) && !_.isEmpty(marks)) {
       return _.chain(marks)
-          //.map((mark: Mark) => mark.lesson)
           .uniqBy('id.subjectId')
           .value();
     }

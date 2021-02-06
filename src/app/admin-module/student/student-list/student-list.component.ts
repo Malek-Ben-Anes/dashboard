@@ -1,26 +1,25 @@
 import * as _ from 'lodash';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 
-import { Student } from '@app/models/Student.model';
-import { StudentService } from '@app/services/student.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { BASE_URL } from '@app/app.component';
-import { Routers } from '@app/admin-module/routes/router-link';
-import { StudentFilter } from './student-filter/student-filter.component';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import {Student} from '@app/models/Student.model';
+import {StudentService} from '@app/services/student.service';
+import {HttpErrorResponse} from '@angular/common/http';
+import {BASE_URL} from '@app/app.component';
+import {Routers} from '@app/admin-module/routes/router-link';
+import {StudentFilter} from './student-filter/student-filter.component';
+import {MatPaginator, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-student-list',
   templateUrl: './student-list.component.html',
-  styleUrls: ['./student-list.component.css']
+  styleUrls: ['./student-list.component.css'],
 })
 export class StudentListComponent implements OnInit {
-
   BASE_URL = BASE_URL;
   STUDENT_PROFILE: string = Routers.APP_STUDENT_PROFILE;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  
+
   // This variable is needed retrieving data from server
   students: Student[] = [];
 
@@ -37,18 +36,18 @@ export class StudentListComponent implements OnInit {
   ngOnInit() {
     this.isLoading = true;
     this.studentsService.findAll().subscribe(
-      (students: any[]) => {
-        this.students = students;
-        this.studentsTmp = students;
-        this.refershPaginator();
-        console.log(this.students);
-      }, (err: HttpErrorResponse) => {
-        if (err.error instanceof Error) {
-          console.log('Client-side error occured.');
-        } else {
-          console.log('Server-side error occured.');
-        }
-      }, () => this.isLoading = false);
+        (students: any[]) => {
+          this.students = students;
+          this.studentsTmp = students;
+          this.refershPaginator();
+          console.log(this.students);
+        }, (err: HttpErrorResponse) => {
+          if (err.error instanceof Error) {
+            console.log('Client-side error occured.');
+          } else {
+            console.log('Server-side error occured.');
+          }
+        }, () => this.isLoading = false);
   }
 
   refreshStudents(filter: StudentFilter) {
@@ -66,5 +65,4 @@ export class StudentListComponent implements OnInit {
     this.dataSource = new MatTableDataSource<Student>(this.studentsTmp);
     this.dataSource.paginator = this.paginator;
   }
-
 }
