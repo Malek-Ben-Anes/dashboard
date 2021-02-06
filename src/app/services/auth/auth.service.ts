@@ -51,8 +51,11 @@ export class AuthService {
   }
 
   public saveNewNotifications(newNotifications: number) {
-    this._loggedUser.newNotifications = newNotifications;
     this.tokenStorage.saveUserNewNotifications(`${newNotifications}`);
+    const loggedUser = this.tokenStorage.getLoggedUser();
+    loggedUser.newNotifications = newNotifications;
+    this._loggedUser.newNotifications = newNotifications;
+    this.tokenStorage.saveLoggedUser(loggedUser);
   }
 
   public emitUserSubject() {
