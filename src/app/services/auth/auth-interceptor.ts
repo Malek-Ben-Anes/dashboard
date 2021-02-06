@@ -10,14 +10,15 @@ import {ErrorDialogService} from './error-dialog.service';
 import {DialogData} from '@app/models/DialogData';
 import {TranslateService} from '@ngx-translate/core';
 
-const CROS_ORIGIN_KEY = 'Access-Control-Allow-Origin';
-const TOKEN_HEADER_KEY = 'Authorization';
-const CONTENT_TYPE_KEY = 'Content-Type';
-const ACCEPT_KEY = 'Accept';
-const MULTIPART_FILE = 'multipart/form-data';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+  private readonly CROS_ORIGIN_KEY = 'Access-Control-Allow-Origin';
+  private readonly TOKEN_HEADER_KEY = 'Authorization';
+  private readonly CONTENT_TYPE_KEY = 'Content-Type';
+  private readonly ACCEPT_KEY = 'Accept';
+  private readonly MULTIPART_FILE = 'multipart/form-data';
+
   constructor(private storage: TokenStorageService, private auth: AuthService, private errorDialogService: ErrorDialogService,
                 private toasterService: ToastrService,
                 private translate: TranslateService) { }
@@ -25,19 +26,19 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = this.storage.getToken();
     if (token != null) {
-      request = request.clone({headers: request.headers.set(TOKEN_HEADER_KEY, `Bearer ${token}`)});
+      request = request.clone({headers: request.headers.set(this.TOKEN_HEADER_KEY, `Bearer ${token}`)});
     }
-    if (!request.headers.has(CONTENT_TYPE_KEY)) {
-      request = request.clone({headers: request.headers.set(CONTENT_TYPE_KEY, 'application/json')});
-    } else if (request.headers.get(CONTENT_TYPE_KEY).includes(MULTIPART_FILE)) {
+    if (!request.headers.has(this.CONTENT_TYPE_KEY)) {
+      request = request.clone({headers: request.headers.set(this.CONTENT_TYPE_KEY, 'application/json')});
+    } else if (request.headers.get(this.CONTENT_TYPE_KEY).includes(this.MULTIPART_FILE)) {
       // 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'
       // THIS IS A WORK AROUND FOR UPLOAD MULITPART REQUEST ISSUE
-      request = request.clone({headers: request.headers.delete(CONTENT_TYPE_KEY)});
+      request = request.clone({headers: request.headers.delete(this.CONTENT_TYPE_KEY)});
     }
-    if (!request.headers.has(CROS_ORIGIN_KEY)) {
-      request = request.clone({headers: request.headers.set(CROS_ORIGIN_KEY, '*')});
+    if (!request.headers.has(this.CROS_ORIGIN_KEY)) {
+      request = request.clone({headers: request.headers.set(this.CROS_ORIGIN_KEY, '*')});
     }
-    request = request.clone({headers: request.headers.set(ACCEPT_KEY, '*/*')});
+    request = request.clone({headers: request.headers.set(this.ACCEPT_KEY, '*/*')});
     return next.handle(request).pipe(
         tap(),
         retry(2),
@@ -50,8 +51,8 @@ export class AuthInterceptor implements HttpInterceptor {
               };
               if (this.storage.getToken()) {
                 this.errorDialogService.openDialog(data);
-                this.storage.signOut();
-                setTimeout(() => window.location.reload(), 3000);
+                // this.storage.signOut();
+                // setTimeout(() => window.location.reload(), 3000);
               }
               return throwError(err);
             }

@@ -22,6 +22,7 @@ import {DialogData} from '@app/models/DialogData';
 import {DialogService} from '@app/commons/dialog/dialog.service';
 import {BASE_URL} from '@app/app.component';
 import { NotificationRequest } from '@app/models/requests/notification/CreateNotification.model';
+import { TokenStorageService } from '@app/services/auth/token-storage.service';
 
 @Component({
   selector: 'app-users-notification-form',
@@ -45,17 +46,25 @@ export class NotificationFormComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private formBuilder: FormBuilder, private authService: AuthService,
               private dialogService: DialogService,
+              private tokenStorage: TokenStorageService,
               private notificationService: NotificationService, private translate: TranslateService,
               private teacherService: TeacherService, private groupService: GroupService, private studentService: StudentService) { }
 
   ngOnInit() {
     this.initializeNotificationForm();
-    this.groupService.findAll().subscribe((groups) => this.allGroups = groups, (err) => console.log(err));
+    this.findGroups();
     this.teacherService.findAll()
         .subscribe((teachers) => {
           this.allTeachers = teachers; this.selectedOptions = teachers; this.onToggleButton(Library.TEACHER);
         },
         (err) => console.log(err));
+  }
+
+  private async findGroups() {
+    const roles: string[] = await this.tokenStorage.getAuthorities();
+    const teacherId = await roles.includes('ROLE_TEACHER') ? this._loggedUser.id : undefined;
+    console.log('teacherId', teacherId);
+    this.groupService.findAll(teacherId).subscribe((groups) => this.allGroups = groups, (err) => console.log(err));
   }
 
   private async initializeNotificationForm() {
