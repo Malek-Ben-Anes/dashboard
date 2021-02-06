@@ -47,6 +47,11 @@ export class StudentService {
     return this.http.put<Student>(updateUrl, updateRequest);
   }
 
+  patch(studentId: string, updateRequest: UpdateStudentRequest): Observable<Student> {
+    const updateUrl = this.STUDENT_URL + '/' + studentId;
+    return this.http.patch<Student>(updateUrl, updateRequest);
+  }
+
   getSingleStudent(studentId: string): Student {
     return _.find(this.students, {id: studentId});
   }
