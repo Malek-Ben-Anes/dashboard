@@ -55,7 +55,6 @@ export class LoggedUserComponent implements OnInit {
     _.every(this.roles, (role) => {
       this.getNavigationBarConfiguration(role);
     });
-    console.log(this.loggedUser);
   }
 
   logout() {

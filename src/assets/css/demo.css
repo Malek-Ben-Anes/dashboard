@@ -34,11 +34,11 @@
 }
 
 body {
-  background-image: url("assets/login-background.jpg");
+  background-image: url("assets/images/background/login-background.jpg");
   background-attachment: fixed;
   size: 100%;
   min-height: 100%;
-  background-size: contain;
+  background-size: cover;
 }
 
 th.mat-header-cell {
