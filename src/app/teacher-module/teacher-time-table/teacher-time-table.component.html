@@ -4,7 +4,7 @@
       <div class="card">
         <div class="card-body">
             <img *ngIf=" user.timeTableUrl; else noTimeTable"
-             class="img time-table"
+             class="img time-table error-404"
              default="assets/images/404-error.jpg"
              [src]="BASE_URL + user.timeTableUrl"
              [alt]="user.firstName + ' Time table'"
