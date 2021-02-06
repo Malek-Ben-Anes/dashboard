@@ -50,6 +50,11 @@ export class AuthService {
     this._loggedUser = loggedUser;
   }
 
+  public saveNewNotifications(newNotifications: number) {
+    this._loggedUser.newNotifications = newNotifications;
+    this.tokenStorage.saveUserNewNotifications(`${newNotifications}`);
+  }
+
   public emitUserSubject() {
     this._loggedUser = this.tokenStorage.getLoggedUser();
     this.subject.next(this._loggedUser);
@@ -57,7 +62,7 @@ export class AuthService {
 
   save(user: User) {
     this._loggedUser = user;
-    this.tokenStorage.saveLoggedUser(this._loggedUser)
+    this.tokenStorage.saveLoggedUser(this._loggedUser);
     this.subject.next(this._loggedUser);
   }
 

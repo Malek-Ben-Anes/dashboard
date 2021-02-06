@@ -6,7 +6,7 @@ import {AuthService} from '@app/services/auth/auth.service';
 import {Notification} from '@app/models/Notification';
 import {TranslateService} from '@ngx-translate/core';
 import {User} from '@app/models/User';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import {MatPaginator, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-notification-list',
@@ -14,7 +14,6 @@ import { MatPaginator, MatTableDataSource } from '@angular/material';
   styleUrls: ['./notification-list.component.scss'],
 })
 export class NotificationListComponent implements OnInit {
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   errorMessage: string;
 
@@ -51,6 +50,9 @@ export class NotificationListComponent implements OnInit {
         .then((notifications) => {
           this.notifications = notifications;
           this.refershPaginator();
+          setTimeout(() => {
+            this.authService.saveNewNotifications(0);
+          }, 2000);
         })
         .catch((err) => console.log(err));
   }
