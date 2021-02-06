@@ -88,6 +88,7 @@
     "signIn.credentials.failure": "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى",
 
     "signIn.credentials.email.required": "البريد الإلكتروني مطلوب",
+    "signIn.credentials.email.patternNotCorrect": "البريد الإلكتروني غير صحيح",
     "signIn.credentials.password.required": "كلمة المرور مطلوبة",
     "signIn.credentials.password.constraint.length": "يجب أن تكون كلمة المرور ستة أحرف على الأقل",
 

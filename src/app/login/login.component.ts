@@ -1,36 +1,54 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
-import { AuthService } from '@app/services/auth/auth.service';
-import { TokenStorageService } from '@app/services/auth/token-storage.service';
-import { AuthLoginInfo } from '@app/services/auth/login-info';
-import { JwtResponse } from '@app/services/auth/jwt-response';
-import { TranslateService } from '@ngx-translate/core';
-import { HttpErrorResponse } from '@angular/common/http';
+import {AuthService} from '@app/services/auth/auth.service';
+import {TokenStorageService} from '@app/services/auth/token-storage.service';
+import {AuthLoginInfo} from '@app/services/auth/login-info';
+import {TranslateService} from '@ngx-translate/core';
+import {HttpErrorResponse} from '@angular/common/http';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  form: any = {};
+  email = new FormControl('', [Validators.required, Validators.email]);
+  password = new FormControl('', [Validators.required, Validators.minLength(6)]);
+
   isLoggedIn = false;
   isLoginFailed = false;
-  errorMessage = '';
+  errorMessage;
   roles: string[] = [];
   isLogging: boolean = false;
 
   constructor(private authService: AuthService, private translate: TranslateService, private tokenStorage: TokenStorageService, private router: Router) {
   }
 
-  ngOnInit() {
-    this.isLoggedIn = this.tokenStorage.getIsLoggedUser();
+  async ngOnInit() {
+    this.isLoggedIn = await this.tokenStorage.getIsLoggedUser();
     if (this.isLoggedIn) {
       this.navigateToLoggedUser();
     } else {
       this.router.navigate(['app', 'auth', 'login']);
-    }  
+    }
+  }
+
+  onSignIn() {
+    if (this.email.valid && this.password.valid) {
+      const loginInfo = new AuthLoginInfo(this.email.value, this.password.value);
+      this.authService.signIn(loginInfo).subscribe(
+          (data) => {
+            this.isLogging = false;
+            this.isLoggedIn = true;
+            window.location.reload();
+          }, (err) => {
+            this.displayErrorMessage(err);
+          }, () => {
+            if (!this.isLoggedIn) this.displayErrorMessage();
+          });
+    }
   }
 
   private navigateToLoggedUser() {
@@ -44,24 +62,13 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  onSignIn() {
-    this.isLogging = true;
-    const loginInfo = new AuthLoginInfo(this.form.username, this.form.password);
-
-    this.authService.signIn(loginInfo).subscribe(
-      data => {
-          this.isLogging = false;
-          this.isLoggedIn = true;
-          window.location.reload();
-      }, err => {
-          this.displayErrorMessage(err);
-      }, () => { if(!this.isLoggedIn) this.displayErrorMessage();});
-  }
-
   private displayErrorMessage(err?: HttpErrorResponse): void {
     this.isLoginFailed = true;
     this.isLogging = false;
-    this.errorMessage = err ? err.error.message : this.translate.instant("signIn.credentials.failure");
+    this.errorMessage = err ? err.error.message : this.translate.instant('signIn.credentials.failure');
+    setTimeout(() => {
+      this.errorMessage = undefined;
+    }, 2500);
   }
 
   logout() {

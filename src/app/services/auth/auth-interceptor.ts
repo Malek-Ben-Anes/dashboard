@@ -50,8 +50,8 @@ export class AuthInterceptor implements HttpInterceptor {
               };
               if (this.storage.getToken()) {
                 this.errorDialogService.openDialog(data);
-                // this.storage.signOut();
-                // setTimeout(() => window.location.reload(), 3000);
+                this.storage.signOut();
+                setTimeout(() => window.location.reload(), 3000);
               }
               return throwError(err);
             }

@@ -88,6 +88,7 @@
     "signIn.credentials.failure": "Échec de la connexion. Veuillez réessayer.",
 
     "signIn.credentials.email.required": "Email requis",
+    "signIn.credentials.email.patternNotCorrect": "Le champ e-mail saisi n'est pas correct",
     "signIn.credentials.password.required": "Mot de passe requis",
     "signIn.credentials.password.constraint.length": "Le mot de passe doit comporter au moins 6 caractères",
 

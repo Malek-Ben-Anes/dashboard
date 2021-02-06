@@ -3,7 +3,7 @@ export class AuthLoginInfo {
     private password: string;
 
     constructor(username: string, password: string) {
-        this.username = username;
-        this.password = password;
+      this.username = username && username.trim();
+      this.password = password && password.trim();
     }
 }
