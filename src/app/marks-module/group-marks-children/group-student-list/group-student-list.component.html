@@ -7,7 +7,7 @@
           <span>
             <div class="block item item-hover item-active" (click)="onSelectStudent(student)">
                 <img class="img profile-icon" [src]="BASE_URL + student.photo"
-                 default="assets/images/profile-logo.png" alt="Smiley face"/>
+                [default]="'assets/images/icon/STUDENT-'+student.gender+'.png'" alt="Smiley face"/>
                  <span class="message">{{student.firstName}} {{student.lastName}}</span>
             </div>
           </span>

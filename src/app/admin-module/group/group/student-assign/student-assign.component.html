@@ -14,7 +14,7 @@
                 (click)="onAttachStudent(student)"
               >
               <img class="img profile-icon" [src]="BASE_URL + student.photo"
-               default="assets/images/profile-logo.png" [alt]="'All.text.timeTable.smileyFace' | translate"/>
+              [default]="'assets/images/icon/STUDENT-'+student.gender+'.png'" [alt]="'All.text.timeTable.smileyFace' | translate"/>
               {{student.firstName}} {{student.lastName}}
               </button>
               </div>
@@ -37,8 +37,9 @@
               (click)="onDetachStudent(student)"
             >
             <img class="img profile-icon" [src]="BASE_URL + student.photo"
-             default="assets/images/profile-logo.png" [alt]="'All.text.timeTable.smileyFace' | translate"/>
-            {{student.firstName}} {{student.lastName}}
+             [default]="'assets/images/icon/STUDENT-'+student.gender+'.png'"
+             [alt]="'All.text.timeTable.smileyFace' | translate"/>
+             {{student.firstName}} {{student.lastName}}
             </button>
             </div>
           </div>

@@ -24,7 +24,7 @@
                                 <a [routerLink]="STUDENT_PROFILE + student.id">
                                     <img class="profile-image" 
                                      [src]="BASE_URL + student.photo" 
-                                     default="assets/images/profile-logo.png"
+                                     [default]="'assets/images/icon/STUDENT-'+student.gender+'.png'"
                                      [alt]="'All.text.timeTable.smileyFace' | translate"/>
                                 </a>
                             </td>

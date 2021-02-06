@@ -39,14 +39,6 @@ export class TeacherListComponent implements OnInit {
     () => this.isLoading = false);
   }
 
-  getPhoto(gender: Gender): string {
-    if(gender !=null) {
-      return `assets/images/teacher-${gender.toLowerCase}.png`;
-    }
-    return 'assets/images/profile-logo.png';
-  }
-
-
   private refershPaginator() {
     this.isLoading = false;
     this.dataSource = new MatTableDataSource<Teacher>(this.teachers);

@@ -17,8 +17,12 @@
 <ul class="nav navbar-nav horiz navbar-right" routerLinkActive="active">
   <li class="nav-item dropdown">
     <a class="dropdown-toggle nav-link background-white" data-toggle="dropdown">
-      <img  class="radius-image" [src]="loggedUser && loggedUser.photo"
-       default="assets/images/profile-logo.png" alt="smile-face"/>
+
+      <img *ngIf="loggedUser.type == 'USER'" class="radius-image" src="assets/images/icon/ADMIN.png" alt="smile-face"/>
+
+       <img *ngIf="loggedUser.type != 'USER'" class="radius-image" [src]="BASE_URL + loggedUser?.photo" 
+        [default]="'assets/images/icon/'+loggedUser.type+'-'+loggedUser.gender+'.png'"
+        alt="smile-face"/>
         {{loggedUser.firstName || loggedUser.lastName}}
       <span class="caret"></span>
     </a>

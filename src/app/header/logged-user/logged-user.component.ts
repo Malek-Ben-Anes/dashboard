@@ -6,6 +6,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {User} from '@app/models/User';
 import {RouterLink} from '@app/app.routing';
 import {TokenStorageService} from '@app/services/auth/token-storage.service';
+import { BASE_URL } from '@app/app.component';
 
 
 declare interface RouteInfo {
@@ -40,6 +41,7 @@ export const ROUTES: any | RouteInfo[][] =
 })
 export class LoggedUserComponent implements OnInit {
   ROUTER_LINK: RouterLink;
+  readonly BASE_URL: string = BASE_URL;
 
   @Input('loggedUser') loggedUser: User;
   @Input('roles') roles: string[];
@@ -53,6 +55,7 @@ export class LoggedUserComponent implements OnInit {
     _.every(this.roles, (role) => {
       this.getNavigationBarConfiguration(role);
     });
+    console.log(this.loggedUser);
   }
 
   logout() {

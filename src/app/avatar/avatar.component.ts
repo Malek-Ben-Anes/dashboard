@@ -2,8 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 
 import {BASE_URL} from '@app/app.component';
 import {FileUploadService} from '@app/services/file-upload.service';
-import {Student} from '@app/models/Student.model';
-import {Teacher} from '@app/models/Teacher.model';
+import {User} from '@app/models/User';
 
 @Component({
   selector: 'app-avatar',
@@ -13,7 +12,7 @@ import {Teacher} from '@app/models/Teacher.model';
 export class AvatarComponent implements OnInit {
   BASE_URL: string = BASE_URL;
 
-  @Input('user') user: Teacher | Student;
+  @Input('user') user: User;
 
   selectedFile: File
   isUploading = false;
@@ -25,6 +24,7 @@ export class AvatarComponent implements OnInit {
   onFileChanged(event) {
     this.selectedFile = event.target.files[0];
   }
+
 
   onUpload() {
     this.isUploading = true;

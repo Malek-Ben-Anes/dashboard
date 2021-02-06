@@ -1,8 +1,8 @@
 <div class="card card-profile">
     <div class="card-avatar">
         <a>
-            <img class="img profile-image" [src]="BASE_URL + user.photo" default="assets/images/profile-logo.svg"
-                alt="Smiley face" height="42" width="42" />
+            <img class="img profile-image" [src]="BASE_URL+user.photo" [default]="'assets/images/icon/'+user.type+'-'+user.gender+'.png'"
+            alt="Smiley face" height="42" width="42" />
         </a>
     </div>
 

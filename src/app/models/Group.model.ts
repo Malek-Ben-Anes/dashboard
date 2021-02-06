@@ -1,4 +1,5 @@
 import {Level} from './enums/Level';
+import {Student} from './Student.model';
 
 export class Group {
     id: string;
@@ -10,12 +11,4 @@ export class Group {
     createdAt: Date;
     updatedAt: Date;
     students: Student[];
-}
-
-class Student {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  photo: string;
 }

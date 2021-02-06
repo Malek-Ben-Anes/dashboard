@@ -21,7 +21,8 @@
                                 <th class="text-primary" mat-header-cell *matHeaderCellDef> {{'All.text.label.Photo' | translate}} </th>
                                 <td mat-cell *matCellDef="let teacher">  
                                     <a [routerLink]="APP_TEACHER_PROFILE + teacher.id">
-                                        <img class="profile-image" [src]="BASE_URL + teacher.photo" default="assets/images/profile-logo.png"
+                                        <img class="profile-image" [src]="BASE_URL + teacher.photo"
+                                         [default]="'assets/images/icon/TEACHER-'+teacher.gender+'.png'"
                                          [alt]="'All.text.timeTable.smileyFace' | translate"/>
                                     </a>
                                 </td>
