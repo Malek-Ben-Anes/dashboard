@@ -33,7 +33,7 @@ export class NotificationsComponent implements OnInit {
   private RestoreSomeDate() {
     let userNotif: number;
     this.authService.getLoggedUser()
-                    .then(user => { this.loggedUser = user; console.log(this.loggedUser);
+                    .then(user => { this.loggedUser = user;
                                     userNotif = this.loggedUser.newNotifications;
                                     this.retrieveLoggedUserNotifications(this.loggedUser.id);
                                   });

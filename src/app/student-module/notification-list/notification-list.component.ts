@@ -52,7 +52,7 @@ export class NotificationListComponent implements OnInit {
           this.refershPaginator();
           setTimeout(() => {
             this.authService.saveNewNotifications(0);
-          }, 2000);
+          }, 1000);
         })
         .catch((err) => console.log(err));
   }

@@ -43,6 +43,11 @@ export class NotificationListComponent implements OnInit {
         .then((notifs) => {
           this.notifications = notifs;
           this.refershPaginator();
+          if (notifiedId) {
+            setTimeout(() => {
+              this.authService.saveNewNotifications(0);
+            }, 1000);
+          }
         }).catch((error) => {
           this.errorMessage = `${error.status}: ${error.error.message}`,
           this.isLoading = false;

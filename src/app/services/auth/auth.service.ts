@@ -1,26 +1,25 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
-import * as jwt_decode from "jwt-decode";
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
+import {Observable, Subject} from 'rxjs';
+import * as jwt_decode from 'jwt-decode';
 
-import { JwtResponse, JwtTokenResponse } from './jwt-response';
-import { AuthLoginInfo } from './login-info';
-import { BASE_API_URL } from '@app/app.component';
-import { User } from '@app/models/User';
-import { TokenStorageService } from './token-storage.service';
-import { map } from 'rxjs/operators';
+import {JwtResponse, JwtTokenResponse} from './jwt-response';
+import {AuthLoginInfo} from './login-info';
+import {BASE_API_URL} from '@app/app.component';
+import {User} from '@app/models/User';
+import {TokenStorageService} from './token-storage.service';
+import {map} from 'rxjs/operators';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({'Content-Type': 'application/json'}),
 };
 
 const LOGIN_URL = BASE_API_URL + 'auth/sign_in';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   private subject = new Subject<User>();
   private isLoggedUser: boolean;
   private _loggedUser: User;
@@ -31,11 +30,10 @@ export class AuthService {
 
   signIn(credentials: AuthLoginInfo): Observable<JwtResponse> {
     return this.http.post<JwtTokenResponse>(LOGIN_URL, credentials, httpOptions)
-            .pipe(map((jwtToken: JwtTokenResponse) =>
-            {
-              this.saveLoggedUserIntoStorage(jwtToken.token);
-              return jwtToken.token;
-            }));
+        .pipe(map((jwtToken: JwtTokenResponse) => {
+          this.saveLoggedUserIntoStorage(jwtToken.token);
+          return jwtToken.token;
+        }));
   }
 
   // TODO remove promise @Deprecated
@@ -118,8 +116,7 @@ export class AuthService {
   private getDecodedAccessToken(token: any): JwtResponse {
     try {
       return jwt_decode(token);
-    }
-    catch (Error) {
+    } catch (Error) {
       console.log(Error.message);
       return null;
     }
