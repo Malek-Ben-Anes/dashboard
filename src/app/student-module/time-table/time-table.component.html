@@ -12,13 +12,13 @@
         <div class="row">
             <a mat-raised-button class="btn btn-link" [href]="BASE_URL + timeTableUrl" target="_blank" download="emploi-du-temps">
                 <img class="img time-table" [src]="BASE_URL + timeTableUrl" [alt]="student.group.name + ' Time table'"
-                  default="assets/images/image-not-found-404.png"/>
+                  default="assets/images/404-error.jpg"/>
               </a>
       </div>
     </div>
     <ng-template #noContent>
       {{'All.text.timeTable.noContent' | translate}}
-      <img class="img time-table" src="assets/images/image-not-found-404.png" [alt]="student + ' Time table'"/>
+      <img class="img time-table" src="assets/images/404-error.jpg" [alt]="student.firstName + ' Time table'"/>
     </ng-template>
   </div>
 </div>
