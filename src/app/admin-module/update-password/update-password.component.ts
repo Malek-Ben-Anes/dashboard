@@ -8,7 +8,7 @@ import {DialogData} from 'app/models/DialogData';
 import {TranslateService} from '@ngx-translate/core';
 import {User} from '@app/models/User';
 import {CreatePasswordRequest} from '@app/models/password/CreatePasswordRequest.model';
-import {UserService} from '@app/services/user.service copy';
+import {UserService} from '@app/services/user.service';
 
 @Component({
   selector: 'app-update-password',

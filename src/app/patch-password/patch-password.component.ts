@@ -7,7 +7,7 @@ import {UpdatePasswordRequest} from '@app/models/requests/student/UpdatePassword
 import {User} from '@app/models/User';
 import {MessageFactory} from '@app/services/message.factory';
 import {AuthService} from '@app/services/auth/auth.service';
-import {UserService} from '@app/services/user.service copy';
+import {UserService} from '@app/services/user.service';
 
 @Component({
   selector: 'app-patch-password',
