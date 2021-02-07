@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {BASE_API_URL} from '@app/app.component';
 import {CreatePasswordRequest} from '@app/models/password/CreatePasswordRequest.model';
-import {UpdatePasswordRequest} from '@app/models/password/updatePasswordRequest.model';
+import {UpdatePasswordRequest} from '@app/models/password/UpdatePasswordRequest.model';
 
 @Injectable({
   providedIn: 'root',
