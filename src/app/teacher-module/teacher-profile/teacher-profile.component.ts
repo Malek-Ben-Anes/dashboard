@@ -8,7 +8,6 @@ import {UpdateTeacherRequest} from '@app/models/requests/teacher/UpdateTeacher.m
 import {DatePipe} from '@angular/common';
 import {TranslateService} from '@ngx-translate/core';
 import {TeacherService} from '@app/services/teacher.service';
-import { Console } from 'console';
 
 @Component({
   selector: 'app-teacher-profile',
