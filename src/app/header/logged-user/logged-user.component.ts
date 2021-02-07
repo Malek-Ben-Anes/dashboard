@@ -63,6 +63,10 @@ export class LoggedUserComponent implements OnInit {
     this.router.navigate(['app', 'auth', 'login']);
   }
 
+  isAdmin(): boolean {
+    return this.loggedUser.type.toLocaleUpperCase() != 'STUDENT' && this.loggedUser.type.toLocaleUpperCase() != 'TEACHER';
+  }
+
   updatePasswordRedirect() {
     this.router.navigate(['app', 'update-user-password']);
   }
