@@ -58,4 +58,4 @@ export class AppComponent implements OnInit {
   }
 }
 export const BASE_URL = environment.resourceEndpoint;
-export const BASE_API_URL = environment.baseApiEndpoint;
+export const BASE_API_URL = environment.apiUrl;
