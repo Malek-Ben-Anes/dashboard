@@ -2,6 +2,7 @@ dist/
 node_modules/
 __MACOSX/
 documentation/
+.DS_Store
 
 src/app/app.component.ts
 src/assets/plume-d-or/
