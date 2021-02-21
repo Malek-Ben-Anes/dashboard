@@ -1,5 +1,12 @@
 # FrontEnd Plumedor
 
+
+## Runtime Requirements 
+You should use node 8 to run the app
+```Shell
+$ nvm list
+$ nvm use v8.X.X (choose lts version)
+```
 ## Build Project for Production Env
 
 ```Shell
