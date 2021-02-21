@@ -38,10 +38,10 @@ export class AuthInterceptor implements HttpInterceptor {
               let errorMsg = '';
               if (error.error instanceof ErrorEvent) {
                 console.log('this is client side error');
-                errorMsg = `Error: ${error.error.message}`;
+                errorMsg = `Error: ${error.message}`;
               } else {
                 console.log('this is server side error');
-                errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
+                errorMsg = `Error Code: ${error.status}, Message: ${error.message}`;
               }
               return throwError(errorMsg);
             }),

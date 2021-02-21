@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
     this.translate.setDefaultLang(EN);
     // the lang to use, if the lang isn't available, it will use the current loader to get them
     this.translate.use(EN);
-    if (this.tokenStorage && this.tokenStorage.getLanguage()) {
+    if (this.tokenStorage.getLanguage()) {
       this.translate.use(this.tokenStorage.getLanguage());
     } else {
       this.tokenStorage.saveLanguage(DEFAULT_LANGUAGE);
@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.tokenStorage && this.tokenStorage.getLanguage()) {
+    if (this.tokenStorage.getLanguage()) {
       this.translate.use(this.tokenStorage.getLanguage());
       this.isRtl = this.direction;
     } else {
