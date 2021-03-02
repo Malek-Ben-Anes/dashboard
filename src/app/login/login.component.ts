@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
   private displayErrorMessage(err?: HttpErrorResponse): void {
     this.isLoginFailed = true;
     this.isLogging = false;
-    this.errorMessage = err ? err.error.message : this.translate.instant('signIn.credentials.failure');
+    this.errorMessage = err && err.error ? err.error.message : this.translate.instant('signIn.credentials.failure');
     setTimeout(() => {
       this.errorMessage = undefined;
     }, 2500);
