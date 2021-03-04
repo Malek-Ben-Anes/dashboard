@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {BASE_API_URL} from '@app/app.component';
-import {CreatePasswordRequest} from '@app/models/password/CreatePasswordRequest.model';
-import {UpdatePasswordRequest} from '@app/models/password/UpdatePasswordRequest.model';
+import {CreatePasswordRequest} from '@app/models/password/CreatePasswordRequest.model.ts';
+import {UpdatePasswordRequest} from '@app/models/password/UpdatePasswordRequest.model.ts';
 
 @Injectable({
   providedIn: 'root',
