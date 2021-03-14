@@ -40,6 +40,10 @@ export class NotificationService {
           .subscribe((notification) => resolve(notification), (err) => reject(err)));
   }
 
+  delete(notificationId: String): Promise<any> {
+    return this.http.delete<any>(NOTIFICATION_URL + notificationId).toPromise();
+  }
+
   public buildNotificationRequest(notifierId: string, notifiedIds: string[],
       title: string, content: string, type: Notif): NotificationRequest {
     const request: NotificationRequest = new NotificationRequest();

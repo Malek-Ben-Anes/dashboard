@@ -34,6 +34,9 @@ export class NotificationListComponent implements OnInit {
       const notifiedId = this.isNotifReceived ? this.currentUser.id : undefined;
       const notifierId = !this.isNotifReceived ? this.currentUser.id : undefined;
       this.findNotifications(notifiedId, notifierId);
+      if (!this.isNotifReceived) {
+        this.displayedColumns.push('Delete');
+      }
     });
   }
 
@@ -58,5 +61,10 @@ export class NotificationListComponent implements OnInit {
     this.isLoading = false;
     this.dataSource = new MatTableDataSource<Notification>(this.notifications);
     this.dataSource.paginator = this.paginator;
+  }
+
+  onDelete(event, notificationId: string) {
+    event.currentTarget.disabled = true;
+    this.notificationService.delete(notificationId).then().catch((err) => alert(err));
   }
 }
