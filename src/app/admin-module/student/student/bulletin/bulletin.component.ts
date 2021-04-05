@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import { TokenStorageService } from '@app/services/auth/token-storage.service';
 import { BASE_URL } from '@app/app.component';
 import { Student } from '@app/models/Student.model';
 import { Trimester } from '@app/models/enums/Trimester';
@@ -34,7 +33,7 @@ export class BulletinComponent implements OnInit {
   }
 
   onFileChanged(event) {
-    this.selectedFile = event.target.files[0]
+    this.selectedFile = event.target.files[0];
   }
 
   onUpload() {

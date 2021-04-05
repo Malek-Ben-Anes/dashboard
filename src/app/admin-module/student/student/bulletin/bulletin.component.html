@@ -25,7 +25,8 @@
         </div>
         <div class="col-md-6">
           <div *ngIf="!isUploading">
-            <button mat-raised-button class="btn btn-warning" (click)="onUpload()">
+            <button mat-raised-button class="btn btn-warning" (click)="onUpload()"
+              [disabled]="!selectedTrimester || !selectedFile">
               <span class="glyphicon glyphicon-cloud-upload"></span>{{'All.text.upload' | translate}}
             </button>
           </div>
@@ -60,7 +61,7 @@
               </a>
             </td>
             <td>
-              <strong>{{ bulletin.trimester }}</strong>
+              <strong>{{'All.text.Trimesters.'+bulletin.trimester | translate}}</strong>
             </td>
             <td>
               {{ bulletin.createdAt | date }}

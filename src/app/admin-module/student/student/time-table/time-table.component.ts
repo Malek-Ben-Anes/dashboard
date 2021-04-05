@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Student } from '@app/models/Student.model';
-import { BASE_URL } from '@app/app.component';
-import { TranslateService } from '@ngx-translate/core';
+import {Component, OnInit, Input} from '@angular/core';
+import {Student} from '@app/models/Student.model';
+import {TranslateService} from '@ngx-translate/core';
+import {environment} from 'environments/environment';
 
 @Component({
   selector: 'app-time-table',
@@ -10,28 +10,12 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class TimeTableComponent implements OnInit {
 
-  BASE_URL: string = BASE_URL;
+  BASE_URL = environment.resourceEndpoint;
   @Input('student') student: Student;
 
   constructor(private translate: TranslateService) { }
 
   ngOnInit() {
-  }
-
-  getTimetableLink() {
-    try {
-      /*return BASE_URL + this.student.group.timeTableUrl;*/
-    } catch(ex) {
-      return BASE_URL + undefined;
-    }
-  }
-
-  getGroupName() {
-    try {
-      return this.student.group.name + ' Time table';
-    } catch(ex) {
-      return 'Time table';
-    }
   }
 
 }
