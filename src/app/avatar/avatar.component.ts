@@ -3,6 +3,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {BASE_URL} from '@app/app.component';
 import {FileUploadService} from '@app/services/file-upload.service';
 import {User} from '@app/models/User';
+import {Url} from '@app/models/shared';
 
 @Component({
   selector: 'app-avatar',
@@ -25,12 +26,12 @@ export class AvatarComponent implements OnInit {
     this.selectedFile = event.target.files[0];
   }
 
-
   onUpload() {
     this.isUploading = true;
     this.fileUploadService.uploadPhoto(this.user, this.selectedFile)
-        .then((user) => {
-          this.user = user; this.isUploading = false;
+        .then((data: any) => {
+          this.user.photo = data.body.url + '?random+\=' + Math.random();
+          this.isUploading = false;
         })
         .catch((err) => {
           alert(err); this.isUploading = false;

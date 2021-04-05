@@ -1,17 +1,17 @@
 <div class="card card-profile">
   <div class="card-body">
-    <div *ngIf="student != null; else noContent">
+    <div *ngIf="student?.group?.timeTableUrl; else noContent">
         <div class="row">
             <div *ngIf="student.group.timeTableUrl" class="offset-md-10 col-md-2">
-              <a mat-raised-button class="btn btn-link" [href]="getTimetableLink()" target="_blank" download="emploi-du-temps">
-                <span class="material-icons">arrow_downward</span>{{'All.text.download' | translate}}
+              <a mat-raised-button class="btn btn-link" [href]="BASE_URL + student.group.timeTableUrl" target="_blank" download="emploi-du-temps.png">
+                <span class="material-icons">arrow_downward</span>{{'All.text.download'|translate}}
               </a>
             </div>
           </div>
           <div class="row">
-              <a mat-raised-button class="btn btn-link" [href]="getTimetableLink()" target="_blank" download="emploi-du-temps">
-                  <img class="img time-table" default="assets/images/404-error.jpg" class="error-404"
-                   [src]="getTimetableLink()" [alt]="getGroupName()"/>
+              <a mat-raised-button class="btn btn-link" [href]="BASE_URL + student.group.timeTableUrl" download="emploi-du-temps">
+                  <img class="img time-table" default="assets/images/404-error.jpg" class="error-404"                  
+                   [src]="BASE_URL + student.group.timeTableUrl" alt="table table"/>
               </a>
         </div>
     </div>

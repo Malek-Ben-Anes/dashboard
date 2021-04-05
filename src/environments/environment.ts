@@ -7,6 +7,6 @@ export const environment = {
   production: false,
   url: 'http://localhost:8091/',
   apiUrl: 'http://localhost:8091/api/',
-  resourceEndpoint: 'https://www.laplumedor.net/',
+  resourceEndpoint: 'https://laplumedor.s3.eu-central-1.amazonaws.com/',
   landingPageUrl: 'https://www.laplumedor.net/',
 };

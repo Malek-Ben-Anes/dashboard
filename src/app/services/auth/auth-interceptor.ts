@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse} from '@angular/common/http';
 import {TokenStorageService} from './token-storage.service';
-import {catchError} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
 import {Observable, throwError} from 'rxjs';
 import {ErrorDialogService} from './error-dialog.service';
 import {TranslateService} from '@ngx-translate/core';
@@ -22,6 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(this.prepareRequest(request))
         .pipe(
+            map((data) => data),
             catchError((error: HttpErrorResponse) => {
               if (error.status === 401) {
                 const data: DialogData = {
@@ -35,15 +36,16 @@ export class AuthInterceptor implements HttpInterceptor {
                 }
                 return throwError(error);
               }
-              let errorMsg = '';
-              if (error.error instanceof ErrorEvent) {
-                console.log('this is client side error');
-                errorMsg = `Error: ${error.message}`;
-              } else {
+              if (error.error) {
+                let errorMsg = '';
+                if (error.error instanceof ErrorEvent) {
+                  console.log('this is client side error');
+                  errorMsg = `Error: ${error.message}`;
+                }
                 console.log('this is server side error');
                 errorMsg = `Error Code: ${error.status}, Message: ${error.message}`;
+                return throwError(errorMsg);
               }
-              return throwError(errorMsg);
             }),
         );
   }

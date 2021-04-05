@@ -31,6 +31,15 @@
                                 <td mat-cell *matCellDef="let notif"> {{notif.createdAt}} </td>
                         </ng-container>
 
+                        <ng-container matColumnDef="Delete" *ngIf="!isNotifReceived">
+                            <th mat-header-cell *matHeaderCellDef> {{'All.text.delete'|translate}} </th>
+                            <td mat-cell *matCellDef="let notif">
+                                <button (click)="onDelete($event, notif.id)" type="button" class="btn btn-danger btn-sm">
+                                  {{'All.text.delete' | translate}} X
+                                </button>
+                            </td>
+                        </ng-container>
+
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                     </table>

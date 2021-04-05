@@ -4,8 +4,7 @@
             <div class="row">
                 <div class="col-md-3">
                     <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
-                    <img class="img profile-image" src="assets/images/upload-pdf-icon.png" alt="upload bulletin"
-                        height="39" width="39" />
+                    <img class="img upload-icon" src="assets/images/icon/upload-pdf-icon.ico" alt="upload bulletin" />
                     <button mat-raised-button class="btn btn-default" (click)="fileInput.click()">
                         {{'All.text.selectFile' | translate}}
                     </button>

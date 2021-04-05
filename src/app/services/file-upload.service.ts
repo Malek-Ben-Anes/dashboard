@@ -5,9 +5,8 @@ import {Student} from '@app/models/Student.model';
 import {BASE_API_URL} from '@app/app.component';
 import {Trimester} from '@app/models/enums/Trimester';
 import {Teacher} from '@app/models/Teacher.model';
-import {map} from 'rxjs/operators';
 import {Group} from '@app/models/Group.model';
-
+import {Url} from '@app/models/shared';
 
 @Injectable({
   providedIn: 'root',
@@ -17,12 +16,16 @@ export class FileUploadService {
   readonly BULLETIN_URL: string = BASE_API_URL + 'bulletins/';
   constructor(private http: HttpClient) {}
 
-  public uploadPhoto(user: Student | Teacher, file: File): Promise<Student | Teacher> {
+  public uploadPhoto(user: Student | Teacher, file: File): Promise<any> {
     const PHOTO_UPLOAD_URL = `${this.USERS_URL}${user.id}/photo`;
     const body: FormData = new FormData();
     body.append('file', file);
 
-    return this.executeCall(PHOTO_UPLOAD_URL, body);
+    return this.executeCallForUrl(PHOTO_UPLOAD_URL, body);
+  }
+
+  private executeCallForUrl(url: string, body: FormData): Promise<any> {
+    return this.http.put<any>(url, body, this.prepareHeader()).toPromise();
   }
 
   public executeCall(url: string, body: FormData): Promise<Student | Teacher> {
@@ -45,6 +48,7 @@ export class FileUploadService {
           .subscribe((response) => {
             if (response.type === 4 && response['body']) {
               const group: Group = response['body'];
+              group.timeTableUrl += '?random+\=' + Math.random();
               resolve(group);
             }
           },

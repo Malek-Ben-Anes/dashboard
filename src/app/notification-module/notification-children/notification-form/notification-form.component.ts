@@ -44,6 +44,9 @@ export class NotificationFormComponent implements OnInit {
   StudentsOfSelectedGroup: Student[];
   selectedOptions: Teacher[] | Group[] | Student[];
 
+  selectedFile: File
+  isUploading = false;
+
   constructor(public dialog: MatDialog, private formBuilder: FormBuilder, private authService: AuthService,
               private dialogService: DialogService,
               private tokenStorage: TokenStorageService,
@@ -104,10 +107,15 @@ export class NotificationFormComponent implements OnInit {
     return {dialogMessage: dialogMessage, dialogTitle: dialogTitle};
   }
 
+  onFileChanged(event) {
+    this.selectedFile = event.target.files[0];
+  }
+
   onSubmitNotification() {
     const request: NotificationRequest = this.prepareQuery();
     request.isNotifyGroup = this.selected === Library.GROUP;
     request.notifiedIds = _.map(this.selectedOptions, 'id');
+    // request.file = this.selectedFile;
     this.notificationService.save(request)
         .then((notification) => {
           const data: DialogData = {

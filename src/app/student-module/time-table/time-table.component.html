@@ -1,17 +1,18 @@
 <div class="card card-profile">
   <div class="card-body">
-    <div *ngIf="timeTableUrl; else noContent">
+    <div *ngIf="student?.group?.timeTableUrl; else noContent">
         <div class="row">
           <div class="offset-md-10 col-md-2">
-            <a mat-raised-button class="btn btn-link" [href]="BASE_URL + timeTableUrl" target="_blank" download="emploi-du-temps">
+            <a mat-raised-button class="btn btn-link" [href]="BASE_URL + student.group.timeTableUrl"
+               target="_blank" download="emploi-du-temps">
               <span class="material-icons">arrow_downward</span>
               {{'student.bulletins.download'|translate}}
             </a>
           </div>
         </div>
         <div class="row">
-            <a mat-raised-button class="btn btn-link" [href]="BASE_URL + timeTableUrl" target="_blank" download="emploi-du-temps">
-                <img class="img time-table" [src]="BASE_URL + timeTableUrl" [alt]="student.group.name + ' Time table'"
+            <a mat-raised-button class="btn btn-link" [href]="BASE_URL + student.group.timeTableUrl" target="_blank" download="emploi-du-temps">
+                <img class="img time-table" [src]="BASE_URL + student.group.timeTableUrl" [alt]="student.group.name + ' Time table'"
                   default="assets/images/404-error.jpg" class="error-404" />
               </a>
       </div>
