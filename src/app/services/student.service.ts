@@ -38,6 +38,10 @@ export class StudentService {
     return this.http.get<Student>(this.STUDENT_URL + '/' + studentId);
   }
 
+  findById(studentId: string): Promise<Student> {
+    return this.http.get<Student>(this.STUDENT_URL + '/' + studentId).toPromise();
+  }
+
   create(createRequest: CreateStudentRequest): Observable<Student> {
     return this.http.post<Student>(this.STUDENT_URL, createRequest);
   }

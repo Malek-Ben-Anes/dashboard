@@ -26,6 +26,14 @@ export class LessonService {
     return this.http.get<Lesson[]>(LESSON_URL);
   }
 
+  search(teacherId?: string, groupId?: string): Promise<Lesson[]> {
+    if (teacherId != null || groupId != null) {
+      const params = this.buildHttpParams(teacherId, groupId);
+      return this.http.get<Lesson[]>(LESSON_URL, {params: params}).toPromise();
+    }
+    return this.http.get<Lesson[]>(LESSON_URL).toPromise();
+  }
+
   private buildHttpParams(teacherId?: string, groupId?: string): HttpParams {
     let result = new HttpParams();
     if (teacherId) {
