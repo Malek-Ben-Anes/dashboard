@@ -26,7 +26,7 @@ import {AdminModuleModule} from './admin-module/admin-module.module';
 import {TeacherModuleModule} from './teacher-module/teacher-module.module';
 import {DatePipe} from '@angular/common';
 import {SharedModule} from './commons/shared.module';
-import {PatchPasswordComponent} from './patch-password/patch-password.component';
+import {PatchPasswordComponent} from '@app/commons/patch-password/patch-password.component';
 
 @NgModule({
   imports: [

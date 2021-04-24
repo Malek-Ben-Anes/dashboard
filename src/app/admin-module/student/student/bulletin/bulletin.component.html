@@ -8,12 +8,12 @@
           <button mat-raised-button class="btn btn-default" (click)="fileInput.click()">
               {{'All.text.selectFile' | translate}}
           </button>
-          <dinpv *ngIf="isUploading">
+          <div *ngIf="isUploading">
             <button mat-raised-button class="btn btn-warning buttonload">
                 {{'All.text.uploading' | translate}}<i class="fa fa-circle-o-notch fa-spin"></i>
                 
             </button>
-          </dinpv>
+          </div>
         </div>
         <div class="col-md-3">
           <mat-form-field class="example-full-width">
