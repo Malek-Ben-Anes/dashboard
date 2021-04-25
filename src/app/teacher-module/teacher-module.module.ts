@@ -1,7 +1,7 @@
 import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {TeacherProfileComponent} from './teacher-profile/teacher-profile.component';
-import {TeacherRoutingModule} from './routes/teacher.routing';
+import {TeacherRoutingModule} from './teacher.routing';
 import {ScrollDispatchModule} from '@angular/cdk/scrolling';
 import {MaterialModule} from '@app/material.module';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
