@@ -13,11 +13,14 @@ export class GroupStudentsComponent implements OnInit {
   BASE_URL: string = BASE_URL;
   APP_STUDENT_PROFILE: string = TeacherRouterLink.APP_STUDENT_PROFILE;
 
-  @Input('students') students: Student[];
+  @Input()
+  students: Student[];
 
   constructor() { }
 
   ngOnInit() {
+    console.log(this.students);
   }
+  
 
 }

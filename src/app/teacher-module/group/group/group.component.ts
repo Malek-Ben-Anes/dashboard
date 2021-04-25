@@ -15,7 +15,6 @@ import {TranslateService} from '@ngx-translate/core';
   styleUrls: ['./group.component.scss'],
 })
 export class GroupComponent implements OnInit {
-  isNew = true;
   BASE_URL: string = BASE_URL;
   tabIndex = {'STUDENTS': 0, 'TIME_TABLE': 1, 'MARKS': 2};
   tabs;
@@ -34,40 +33,18 @@ export class GroupComponent implements OnInit {
   constructor(private groupService: GroupService, private studentService: StudentService,
     private route: ActivatedRoute, private translate: TranslateService) { }
 
-  ngOnInit() {
-    this.tabs = this.updateTabs();
-    const id = this.route.snapshot.params['id'];
-    if (id != null && this.isNew) {
-      this.findById(id);
-    } else {
-      this.group = new Group();
-    }
-  }
-
-  refresh(group: Group) {
-    this.group = group;
-  }
-
-  private findById(id: string) {
-    /* this.groupService.find(id).then((group) => this.group = group)
-        .then((group) => {
-          this.group.students = []; this.isNew = false; this.tabs = this.updateTabs();
-        })
-        // .then((group) => this.findStudentsByGroupId(this.group.id))
-        .catch((err) => {
-          this.group = new Group(); this.isNew = true;
-        });*/
-  }
-
-  /* private findStudentsByGroupId(groupId: string) {
-    this.studentService.findStudentsByGroupId(groupId)
-        .subscribe((students) => this.group.students = students, (err) => console.log(err));
-  }*/
-
-  private updateTabs() {
-    return [{'label': this.translate.instant('All.text.students.tab.name'), 'disabled': false},
-      {'label': this.translate.instant('All.text.timeTable.tab.name'), 'disabled': this.isNew},
-      {'label': this.translate.instant('All.text.marks.tab.name'), 'disabled': this.isNew}];
+  async ngOnInit() {
+    this.tabs = await [
+      {'label': 'All.text.students.tab.name'},
+      {'label': 'All.text.timeTable.tab.name'},
+      {'label': 'All.text.marks.tab.name'},
+    ];
+    const groupId = await this.route.snapshot.params['id'];
+    this.groupService.findById(groupId)
+        .subscribe((group) => {
+          this.group = group;
+          console.log(this.group);
+        });
   }
 
   checked = false;
