@@ -6,17 +6,17 @@ import {ScrollDispatchModule} from '@angular/cdk/scrolling';
 import {MaterialModule} from '@app/material.module';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {TeacherTimeTableComponent} from './teacher-time-table/teacher-time-table.component';
-import {GroupTabComponent} from './group/group-tab.component';
-import {GroupComponent} from './group/group/group.component';
+import {GroupComponent} from './group/group-details/group.component';
 import {RouterModule} from '@angular/router';
-import {GroupStudentsComponent} from './group/group/group-students/group-students.component';
-import {GroupTimetableComponent} from './group/group/group-timetable/group-timetable.component';
+import {GroupStudentsComponent} from './group/group-details/group-students/group-students.component';
+import {GroupTimetableComponent} from './group/group-details/group-timetable/group-timetable.component';
 import {SharedModule} from '@app/commons/shared.module';
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {HttpClient} from '@angular/common/http';
 import {HttpLoaderFactory} from '@app/header/header.module';
-import {StudentProfileComponent} from './group/group/student-profile/student-profile.component';
+import {StudentProfileComponent} from './group/group-details/student-profile/student-profile.component';
 import {MarksModuleModule} from '@app/marks-module/marks-module.module';
+import { GroupTabComponent } from './group/group-list/group-tab.component';
 
 @NgModule({
   declarations: [

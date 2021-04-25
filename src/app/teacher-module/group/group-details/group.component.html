@@ -13,4 +13,6 @@
 
 <app-group-timetable *ngIf="selected.value === tabIndex.TIME_TABLE && group != null" id="timetable" [group]="group"></app-group-timetable>
 
-<app-group-marks *ngIf="selected.value === tabIndex.MARKS && group != null" id="marks" [group]="group"></app-group-marks>
+<app-group-marks *ngIf="selected.value === tabIndex.MARKS_LIST && group != null" [showForm]="false" [group]="group" ></app-group-marks>
+
+<app-group-marks *ngIf="selected.value === tabIndex.EVALUTE_STUDENTS && group != null" [showForm]="true" [group]="group" ></app-group-marks>

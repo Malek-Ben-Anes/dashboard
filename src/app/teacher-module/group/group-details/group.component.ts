@@ -16,7 +16,7 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class GroupComponent implements OnInit {
   BASE_URL: string = BASE_URL;
-  tabIndex = {'STUDENTS': 0, 'TIME_TABLE': 1, 'MARKS': 2};
+  tabIndex = {'STUDENTS': 0, 'TIME_TABLE': 1, 'MARKS_LIST': 2, 'EVALUTE_STUDENTS': 3};
   tabs;
 
   selected = new FormControl(0);

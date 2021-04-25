@@ -8,10 +8,10 @@ import {AuthGuardService} from '@app/services/auth/auth-guard.service';
 import {TeacherProfileComponent} from '../teacher-profile/teacher-profile.component';
 import {TeacherRouterLink} from './router-link';
 import {TeacherTimeTableComponent} from '../teacher-time-table/teacher-time-table.component';
-import {GroupTabComponent} from '../group/group-tab.component';
-import {GroupComponent} from '../group/group/group.component';
-import {StudentProfileComponent} from '../group/group/student-profile/student-profile.component';
+import {GroupComponent} from '../group/group-details/group.component';
+import {StudentProfileComponent} from '../group/group-details/student-profile/student-profile.component';
 import {NotificationsComponent} from '@app/notification-module/notification-parent/notification.component';
+import { GroupTabComponent } from '../group/group-list/group-tab.component';
 
 const routes: Routes = [
   {
