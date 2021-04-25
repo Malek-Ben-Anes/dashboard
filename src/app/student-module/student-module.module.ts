@@ -13,6 +13,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MaterialModule } from '@app/material.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '@app/commons/shared.module';
+import { MarksModuleModule } from '@app/marks-module/marks-module.module';
 
 @NgModule({
   declarations: [StudentProfileComponent, BulletinListComponent, NotificationListComponent, MarkListComponent, TimeTableComponent],
@@ -24,7 +25,8 @@ import { SharedModule } from '@app/commons/shared.module';
     MaterialModule,
     TranslateModule,
     ScrollDispatchModule,
-    SharedModule
+    SharedModule,
+    MarksModuleModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
