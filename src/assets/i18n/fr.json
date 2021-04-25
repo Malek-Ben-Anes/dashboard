@@ -200,6 +200,8 @@
     "All.text.notifications.selectedElemetns": "Confirmation d'envoi des notifications",
     "All.text.notifications.modal.send.success.title": "Les utilisaterus ont ete notifies",
     "All.text.notifications.modal.send.fail.title": "la notification des utilisaterus a echoue!",
+    "All.text.notifications.selectAll": "Sélectionner",
+    "All.text.notifications.deSelectAll": "Désélectionner",
 
     "All.text.emails.senderName": "Expéditeur",
     "All.text.emails.senderEmail": "E-mail",

@@ -27,6 +27,15 @@
               {{notif.notified?.lastName}} </strong></td>
         </ng-container>
 
+        <ng-container matColumnDef="File" class="text-primary">
+          <th mat-header-cell *matHeaderCellDef> {{'All.text.notifications.file'|translate}} </th>
+          <td mat-cell *matCellDef="let notif" class="text-primary">
+              <a [href]="BASE_URL+notif.fileUrl" target="_blank" *ngIf="notif.fileUrl">
+                  <img src="assets/images/pdf-icon.png" alt="pièce jointe" height="42" width="42" />
+              </a>
+          </td>
+      </ng-container>
+
         <ng-container matColumnDef="Date">
           <th mat-header-cell *matHeaderCellDef> {{'All.text.notifications.Date'|translate}} </th>
           <td mat-cell *matCellDef="let notif"> {{notif.createdAt}} </td>

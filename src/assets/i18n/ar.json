@@ -200,6 +200,8 @@
     "All.text.notifications.selectedElemetns": "تأكيد إرسال الإشعارات",
     "All.text.notifications.modal.send.success.title": "تم اعلام المستعملين",
     "All.text.notifications.modal.send.fail.title": "فشل إشعار المستخدم!",
+    "All.text.notifications.selectAll": "تحديد",
+    "All.text.notifications.deSelectAll": "إلغاء",
 
     "All.text.emails.senderName": "مرسل",
     "All.text.emails.senderEmail": "البريد الإلكتروني",

@@ -1,6 +1,6 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, ViewChild} from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatSelectionList} from '@angular/material';
 
 import * as _ from 'lodash';
 
@@ -25,14 +25,15 @@ import { NotificationRequest } from '@app/models/requests/notification/CreateNot
 import { TokenStorageService } from '@app/services/auth/token-storage.service';
 
 @Component({
-  selector: 'app-users-notification-form',
-  templateUrl: './notification-form.component.html',
-  styleUrls: ['./notification-form.component.scss'],
+  selector: "app-users-notification-form",
+  templateUrl: "./notification-form.component.html",
+  styleUrls: ["./notification-form.component.scss"],
 })
 export class NotificationFormComponent implements OnInit {
   readonly BASE_URL: string = BASE_URL;
   private static Library: Library;
   @Input() notifications: Notification[];
+  @ViewChild('selections') selections: MatSelectionList;
 
   NOTIFS = Object.keys(Notif);
   selected: string = Library.TEACHER;
@@ -42,25 +43,33 @@ export class NotificationFormComponent implements OnInit {
   allTeachers: Teacher[];
   allGroups: Group[];
   StudentsOfSelectedGroup: Student[];
-  selectedOptions: Teacher[] | Group[] | Student[];
+  optionList: Teacher[] | Group[] | Student[];
 
   selectedFile: File;
   isUploading = false;
 
-  constructor(public dialog: MatDialog, private formBuilder: FormBuilder, private authService: AuthService,
-              private dialogService: DialogService,
-              private tokenStorage: TokenStorageService,
-              private notificationService: NotificationService, private translate: TranslateService,
-              private teacherService: TeacherService, private groupService: GroupService, private studentService: StudentService) { }
+  constructor(
+    public dialog: MatDialog,
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private dialogService: DialogService,
+    private tokenStorage: TokenStorageService,
+    private notificationService: NotificationService,
+    private translate: TranslateService,
+    private teacherService: TeacherService,
+    private groupService: GroupService,
+    private studentService: StudentService,
+  ) {}
 
   ngOnInit() {
     this.initializeNotificationForm();
     this.findGroups();
     this.teacherService.findAll()
         .subscribe((teachers) => {
-          this.allTeachers = teachers; this.selectedOptions = teachers; this.onToggleButton(Library.TEACHER);
+          this.allTeachers = teachers; this.optionList = teachers; this.onToggleButton(Library.TEACHER);
         },
-        (err) => console.log(err));
+      (err) => console.log(err)
+    );
   }
 
   private async findGroups() {
@@ -95,7 +104,7 @@ export class NotificationFormComponent implements OnInit {
   }
 
   private computeModalDialog(): {dialogTitle: string; dialogMessage: string;} {
-    const selectedOptionNumber: number = this.selectedOptions.length;
+    const selectedOptionNumber: number = _.map(this.selections.selectedOptions.selected, 'value').length;
     const seletedChoice: string = this.translate.instant('label.' + this.selected.toLowerCase());
     const dialogMessagePattern: string = this.translate.instant('All.text.notifications.confirmation.modal.message');
     const compiled = _.template(dialogMessagePattern);
@@ -114,7 +123,8 @@ export class NotificationFormComponent implements OnInit {
   onSubmitNotification() {
     const request: NotificationRequest = this.prepareQuery();
     request.isNotifyGroup = this.selected === Library.GROUP;
-    request.notifiedIds = _.map(this.selectedOptions, 'id');
+    const selectedOptions = _.map(this.selections.selectedOptions.selected, 'value');
+    request.notifiedIds = _.map(selectedOptions, 'id');
     this.notificationService.save(request, this.selectedFile)
         .then((notification) => {
           const data: DialogData = {
@@ -132,42 +142,49 @@ export class NotificationFormComponent implements OnInit {
         });
   }
 
+  onDeselectAll() {
+    this.selections.deselectAll();
+  }
+
+  onSelectAll() {
+    this.selections.selectAll();
+  }
+
   public onToggleButton(choice: string): void {
     this.selected = choice;
     if (choice === Library.TEACHER) {
-      this.selectedOptions = this.allTeachers;
+      this.optionList = this.allTeachers;
     } else if (choice === Library.GROUP) {
-      this.selectedOptions = this.allGroups;
+      this.optionList = this.allGroups;
     } else if (choice === Library.STUDENT) {
       this.selected = Library.STUDENT;
     }
   }
 
   onSelectGroup(groupSelected: Group) {
-    if (this.selected = Library.STUDENT) {
+    if ((this.selected = Library.STUDENT)) {
       this.findStudentsByGroupId(groupSelected.id);
     }
   }
 
-  onSelectCheckBox(e, selectedOptions): void {
-    this.selectedOptions = _.map(selectedOptions.selected, (selectedOption) => selectedOption.value);
-  }
-
   private findStudentsByGroupId(groupId: string) {
-    this.studentService.findStudentsByGroupId(groupId)
-        .subscribe((students) => {
+    this.studentService.findStudentsByGroupId(groupId).subscribe(
+        (students) => {
           this.StudentsOfSelectedGroup = students;
-          this.selectedOptions = students;
-        }, (err) => console.log(err));
+          this.optionList = students;
+        },
+        (err) => console.log(err)
+    );
   }
 
   private prepareQuery(): NotificationRequest {
-    return this.notificationService
-        .buildNotificationRequest(this._loggedUser.id,
-            undefined,
-            this.extractFieldData('title'),
-            this.extractFieldData('content'),
-            this.extractFieldData('type'));
+    return this.notificationService.buildNotificationRequest(
+        this._loggedUser.id,
+        undefined,
+        this.extractFieldData("title"),
+        this.extractFieldData("content"),
+        this.extractFieldData("type")
+    );
   }
 
   private extractFieldData(property: string): any {
