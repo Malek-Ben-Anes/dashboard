@@ -9,5 +9,6 @@ export class Notification {
     notified: User;
     title: string;
     content: string;
+    fileUrl: string;
     type: Notif;
 }

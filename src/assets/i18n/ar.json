@@ -191,6 +191,7 @@
     "All.text.notifications.sender": "المرسل",
     "All.text.notifications.receiver": "المتلقي",
     "All.text.notifications.send": "ارسال",
+    "All.text.notifications.file": "ملف",
     "All.text.notifications.Date": "التاريخ",
     "All.text.notifications.OptionSelected": "الخيارات المحددة",
     "All.text.notifications.noContent": "لا يوجد أي رسالة !",
@@ -199,6 +200,8 @@
     "All.text.notifications.selectedElemetns": "تأكيد إرسال الإشعارات",
     "All.text.notifications.modal.send.success.title": "تم اعلام المستعملين",
     "All.text.notifications.modal.send.fail.title": "فشل إشعار المستخدم!",
+    "All.text.notifications.selectAll": "تحديد",
+    "All.text.notifications.deSelectAll": "إلغاء",
 
     "All.text.emails.senderName": "مرسل",
     "All.text.emails.senderEmail": "البريد الإلكتروني",

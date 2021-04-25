@@ -34,18 +34,26 @@ export class NotificationService {
     }
   }
 
-  save(notificationRequest: NotificationRequest): Promise<Notification> {
-    return new Promise((resolve, reject) =>
-      this.http.post<Notification>(NOTIFICATION_URL, notificationRequest)
-          .subscribe((notification) => resolve(notification), (err) => reject(err)));
+  save(data: NotificationRequest, file: any): Promise<any> {
+    const body: FormData = new FormData();
+    body.append('data', JSON.stringify(data));
+    body.append('file', file);
+    return this.http.post<any>(NOTIFICATION_URL, body, this.prepareHeader()).toPromise();
+  }
+
+  private prepareHeader(): any {
+    const headers: any = {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'multipart/form-data; charset=utf-8',
+    };
+    return {headers: headers, reportProgress: true, observe: 'events'};
   }
 
   delete(notificationId: String): Promise<any> {
     return this.http.delete<any>(NOTIFICATION_URL + notificationId).toPromise();
   }
 
-  public buildNotificationRequest(notifierId: string, notifiedIds: string[],
-      title: string, content: string, type: Notif): NotificationRequest {
+  public buildNotificationRequest(notifierId: string, notifiedIds: string[], title: string, content: string, type: Notif): NotificationRequest {
     const request: NotificationRequest = new NotificationRequest();
     request.notifierId = notifierId;
     request.notifiedIds = notifiedIds;

@@ -7,4 +7,5 @@ export class NotificationRequest {
     content: string;
     type: Notif;
     isNotifyGroup : boolean;
+    file: any;
 }

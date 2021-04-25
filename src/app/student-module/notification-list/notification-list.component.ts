@@ -6,6 +6,7 @@ import {Notification} from '@app/models/Notification';
 import {TranslateService} from '@ngx-translate/core';
 import {User} from '@app/models/User';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-notification-list',
@@ -16,13 +17,15 @@ export class NotificationListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   errorMessage: string;
 
+  BASE_URL = environment.resourceEndpoint;
+
 
   loggedUser: User;
   userNotificationsNumber: number;
   notifications: Notification[] = [];
 
   dataSource = new MatTableDataSource<Notification>(this.notifications);
-  displayedColumns: string[] = ['Title', 'Content', 'Notifier', 'Date'];
+  displayedColumns: string[] = ['Title', 'Content', 'Notifier', 'File', 'Date'];
 
   isLoading = false;
 

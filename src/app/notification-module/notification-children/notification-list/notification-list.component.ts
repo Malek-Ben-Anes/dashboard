@@ -6,6 +6,7 @@ import {User} from '@app/models/User';
 import {NotificationService} from '@app/services/notification.service';
 import {AuthService} from '@app/services/auth/auth.service';
 import {Notification} from '@app/models/Notification';
+import {environment} from 'environments/environment';
 
 @Component({
   selector: 'app-notification-list',
@@ -18,10 +19,12 @@ export class NotificationListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   errorMessage: string;
 
+  BASE_URL = environment.resourceEndpoint;
+
   notifications: Notification[] = [];
 
   dataSource = new MatTableDataSource<Notification>(this.notifications);
-  displayedColumns: string[] = ['Title', 'Content', 'Notifier', 'Notified', 'Date'];
+  displayedColumns: string[] = ['Title', 'Content', 'Notifier', 'Notified', 'File', 'Date'];
 
   isLoading = false;
   currentUser: User;
