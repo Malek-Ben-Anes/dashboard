@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Student } from '@app/models/Student.model';
 import { BASE_URL } from '@app/app.component';
-import { TeacherRouterLink } from '../../../routes/router-link';
+import { TeacherRouterLink } from '@app/teacher-module/teacher.routing';
 
 @Component({
   selector: 'app-group-students',
@@ -13,11 +13,11 @@ export class GroupStudentsComponent implements OnInit {
   BASE_URL: string = BASE_URL;
   APP_STUDENT_PROFILE: string = TeacherRouterLink.APP_STUDENT_PROFILE;
 
-  @Input('students') students: Student[];
+  @Input()
+  students: Student[];
 
   constructor() { }
 
   ngOnInit() {
   }
-
 }

@@ -8,7 +8,7 @@ export class Mark {
     groupId: string;
     observation: string;
     mark: number;
-    isUpdatable: boolean;
+    updatable: boolean;
     createdAt: Date;
     updatedAt: Date;
 }

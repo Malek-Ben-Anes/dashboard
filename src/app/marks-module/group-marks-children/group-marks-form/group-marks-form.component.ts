@@ -5,9 +5,9 @@ import {Lesson} from '@app/models/Lesson.model';
 import {Mark} from '@app/models/Mark.model';
 import {MarkService} from '@app/services/mark.service';
 import {TranslateService} from '@ngx-translate/core';
-import {LessonService} from '@app/services/lesson.service';
 import {CreateMarkRequest} from '@app/models/requests/mark/CreateMark.model';
-import { StudentService } from '@app/services/student.service';
+import { Group } from '@app/models/Group.model';
+import { UpdateMarkRequest } from '@app/models/requests/mark/UpdateMark.model';
 
 @Component({
   selector: 'app-group-marks-form',
@@ -15,74 +15,78 @@ import { StudentService } from '@app/services/student.service';
   styleUrls: ['./group-marks-form.component.scss'],
 })
 export class GroupMarksFormComponent implements OnInit, OnChanges {
-  @Input('student') student: Student;
+  @Input()
+  student: Student;
 
+  @Input()
+  group: Group;
+
+  @Input()
   lessons: Lesson[];
-  newEvaluationMarks: Mark[] = [];
-  studentMarks: Mark[] = [];
+
+  newEvaluationMarks: Mark[];
+  studentMarks: Mark[];
   isLoading = false;
 
   constructor(private markService: MarkService,
-              private lessonSerivce: LessonService,
-              private studentService: StudentService,
               private translate: TranslateService) { }
 
-  async ngOnInit() {
+  ngOnInit() {
+    this.updateForms(this.lessons);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.student && changes.student.currentValue) {
+      this.student = changes.student.currentValue;
+      this.updateForms(this.lessons);
+    }
+  }
+
+  private async updateForms(lessons: Lesson[]) {
     this.isLoading = true;
-    await this.studentService.findById(this.student.id).then((student) => {
-      this.student = student;
-      this.isLoading = false;
-    });
-    this.retrieveLessons();
-    this.retrieveMarks();
+    await this.markService.findAllPromise(this.student.id)
+        .then((marks: Mark[]) => {
+          this.studentMarks = marks;
+        }, (err) => this.isLoading = false );
+
+    const formEntries: Mark[] = [];
+    if (lessons) {
+      lessons.forEach((lesson) => {
+        const existingMark: Mark = _.chain(this.studentMarks)
+            .filter((mark) => mark.subjectId === lesson.subject.id && mark.teacherId === lesson.teacher.id && mark.updatable)
+            .first()
+            .value();
+        if (existingMark) {
+          formEntries.push(existingMark);
+        } else {
+          formEntries.push(this.buildMark(lesson));
+        }
+      });
+    }
+    this.newEvaluationMarks = formEntries;
+    this.isLoading = false;
   }
 
   private buildMark(lesson: Lesson): Mark {
     const mark = new Mark();
-    mark.isUpdatable = true;
     mark.groupId = lesson.group.id;
     mark.teacherId = lesson.teacher.id;
     mark.teacherName = lesson.teacher.name;
     mark.studentId = this.student.id;
     mark.subjectId = lesson.subject.id;
     mark.subjectName = lesson.subject.name;
+    mark.updatable = true;
     return mark;
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.student) {
-      this.student = changes.student.currentValue;
-      this.retrieveMarks();
-    }
-  }
-
-  private retrieveMarks() {
-    this.isLoading = true;
-    this.markService.search(this.student.id, undefined, true)
-        .then((marks: Mark[]) => {
-          this.studentMarks = marks;
-          this.isLoading = false;
-        }).catch(()=> this.isLoading = false);
-  }
-
-  private retrieveLessons() {
-    this.isLoading = true;
-    const groupId = this.student && this.student.group ? this.student.group.id : null;
-    this.lessonSerivce.search(undefined, groupId).then((lessons) => {
-      this.lessons = lessons;
-      this.lessons.forEach((lesson) => this.newEvaluationMarks.push(this.buildMark(lesson)));
-      this.isLoading = false;
-    }).catch(()=> this.isLoading = false);
   }
 
   onSave(event, mark: Mark) {
     // If mark exists then update else persist
     if (mark.id) {
-      this.markService.update(mark.id, mark.mark, mark.observation).then((data) => data);
+      const request: UpdateMarkRequest = new UpdateMarkRequest(mark.mark, mark.observation);
+      this.markService.update(mark.id, request).then((data) => this.updateForms(this.lessons));
     } else {
-      // mark -> CreateMarkRequest
       const request: CreateMarkRequest = new CreateMarkRequest(mark);
-      this.markService.save(this.student.id, request).then((data) => this.retrieveMarks());
+      this.markService.save(request).then((data) => this.updateForms(this.lessons));
     }
   }
 

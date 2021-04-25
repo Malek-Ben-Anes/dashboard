@@ -4,7 +4,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {Routes, RouterModule} from '@angular/router';
 
 import {LoginComponent} from './login/login.component';
-import {PatchPasswordComponent} from './patch-password/patch-password.component';
+import {PatchPasswordComponent} from '@app/commons/patch-password/patch-password.component';
 import {AuthGuardService} from './services/auth/auth-guard.service';
 export class RouterLink {
     public static AUTH_LOGIN = 'auth/login';

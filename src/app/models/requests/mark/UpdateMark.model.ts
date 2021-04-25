@@ -1,4 +1,9 @@
-export class UpdateGroupRequest {
-    mark: number;
-    observation: string;
+export class UpdateMarkRequest {
+  mark: number;
+  observation: string;
+
+  constructor(mark: number, observation: string) {
+    this.mark = mark;
+    this.observation = observation;
+  }
 }

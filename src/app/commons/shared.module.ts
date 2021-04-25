@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { ImagePreloadDirective } from "./image-preload/image-preload.directive";
-import { AvatarComponent } from "@app/avatar/avatar.component";
+import { AvatarComponent } from "@app/commons/avatar/avatar.component";
 import { MaterialModule } from "@app/material.module";
 import { ErrorDialogComponent } from "./error-dialog/error-dialog.component";
 import { DialogContentExampleDialogComponent } from "./dialog-content-example-dialog/dialog-content-example-dialog.component";

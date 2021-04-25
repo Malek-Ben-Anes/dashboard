@@ -5,7 +5,7 @@ import { GroupMarksStudentDetailComponent } from './group-marks-children/group-m
 import { GroupStudentListComponent } from './group-marks-children/group-student-list/group-student-list.component';
 import { GroupMarksComponent } from './group-marks-parent/group-marks.component';
 import { HttpClient } from '@angular/common/http';
-import { TeacherRoutingModule } from '@app/teacher-module/routes/teacher.routing';
+import { TeacherRoutingModule } from '@app/teacher-module/teacher.routing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '@app/material.module';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';

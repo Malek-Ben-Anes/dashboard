@@ -1,37 +1,9 @@
 <div class="card">
   <div class="card-body">
     <mat-spinner *ngIf="isLoading" [diameter]="150" class="center"></mat-spinner>
-    <ul>
+    <ul *ngIf="!isLoading">
 
-      <li *ngFor="let newMark of newEvaluationMarks">
-        <div class="row">
-          <div class="col-md-2">
-            <strong>{{newMark.subjectName}} :</strong>
-          </div>
-
-          <div class="col-md-2">
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="{{'All.text.marks.label.enter.mark'|translate}}" type="number"
-                [(ngModel)]="newMark.mark" required>
-            </mat-form-field>
-          </div>
-
-          <div class="col-md-5">
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="{{'All.text.marks.label.enter.observation'|translate}}" type="text"
-                [(ngModel)]="newMark.observation" required>
-            </mat-form-field>
-          </div>
-
-          <div class="col-md-2" *ngIf="!newMark.isUpdatable">
-            <button (click)="onSave($event, newMark)" type="button"
-              class="btn btn-warning btn-sm">{{'All.text.save'|translate}}</button>
-          </div>
-
-        </div>
-      </li>
-
-      <li *ngFor="let mark of studentMarks">
+      <li *ngFor="let mark of newEvaluationMarks">
         <div class="row">
           <div class="col-md-2">
             <strong>{{mark.subjectName}} :</strong>
@@ -51,11 +23,11 @@
             </mat-form-field>
           </div>
 
-          <div class="col-md-1" *ngIf="!mark.isUpdatable">
+          <div class="col-md-1" *ngIf="mark.updatable">
             <button (click)="onDeleteMark($event, mark)" type="button" class="btn btn-danger btn-sm">X</button>
           </div>
 
-          <div class="col-md-2" *ngIf="!mark.isUpdatable">
+          <div class="col-md-2" *ngIf="mark.updatable">
             <button (click)="onSave($event, mark)" type="button"
               class="btn btn-warning btn-sm">{{'All.text.save'|translate}}</button>
           </div>
