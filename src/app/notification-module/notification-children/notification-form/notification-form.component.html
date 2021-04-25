@@ -32,7 +32,7 @@
             </div>
             <div class="col-md-2">
               <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
-              <button mat-raised-button class="btn btn-default" (click)="fileInput.click()">
+              <button mat-raised-button class="btn" [ngClass]="selectedFile?'btn-primary':'btn-default'" (click)="fileInput.click()">
                   {{'All.text.selectFile' | translate}}
               </button>
             </div>

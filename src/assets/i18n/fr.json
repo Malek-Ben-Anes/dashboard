@@ -191,6 +191,7 @@
     "All.text.notifications.sender": "Expéditeur",
     "All.text.notifications.receiver": "Destinataire",
     "All.text.notifications.send": "Envoyer",
+    "All.text.notifications.file": "Fichier",
     "All.text.notifications.Date": "Date",
     "All.text.notifications.OptionSelected": "Options sélectionnées",
     "All.text.notifications.noContent": "Aucune notification à afficher!",

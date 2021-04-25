@@ -32,7 +32,7 @@ import { TokenStorageService } from '@app/services/auth/token-storage.service';
 export class NotificationFormComponent implements OnInit {
   readonly BASE_URL: string = BASE_URL;
   private static Library: Library;
-  @Input('notifications') notifications: Notification[];
+  @Input() notifications: Notification[];
 
   NOTIFS = Object.keys(Notif);
   selected: string = Library.TEACHER;
@@ -44,7 +44,7 @@ export class NotificationFormComponent implements OnInit {
   StudentsOfSelectedGroup: Student[];
   selectedOptions: Teacher[] | Group[] | Student[];
 
-  selectedFile: File
+  selectedFile: File;
   isUploading = false;
 
   constructor(public dialog: MatDialog, private formBuilder: FormBuilder, private authService: AuthService,
@@ -115,8 +115,7 @@ export class NotificationFormComponent implements OnInit {
     const request: NotificationRequest = this.prepareQuery();
     request.isNotifyGroup = this.selected === Library.GROUP;
     request.notifiedIds = _.map(this.selectedOptions, 'id');
-    // request.file = this.selectedFile;
-    this.notificationService.save(request)
+    this.notificationService.save(request, this.selectedFile)
         .then((notification) => {
           const data: DialogData = {
             dialogTitle: this.translate.instant('All.text.notifications.modal.send.success.title'),
