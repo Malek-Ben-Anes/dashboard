@@ -38,6 +38,7 @@ export class GroupComponent implements OnInit {
       {'label': 'All.text.students.tab.name'},
       {'label': 'All.text.timeTable.tab.name'},
       {'label': 'All.text.marks.tab.name'},
+      {'label': 'All.text.marks.weeklyEvaluation'},
     ];
     const groupId = await this.route.snapshot.params['id'];
     this.groupService.findById(groupId)
