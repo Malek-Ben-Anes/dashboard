@@ -1,4 +1,4 @@
-import {Component, OnInit, EventEmitter, Output, OnDestroy} from '@angular/core';
+import {Component, OnInit, EventEmitter, Output, OnDestroy, Input} from '@angular/core';
 import {Student} from '@app/models/Student.model';
 import {BASE_URL} from '@app/app.component';
 import {GroupService} from '@app/services/group.service';
@@ -12,6 +12,9 @@ import {Group} from '@app/models/Group.model';
 })
 export class GroupStudentListComponent implements OnInit, OnDestroy {
   readonly BASE_URL: string = BASE_URL;
+
+  @Input()
+  group: Group;
 
   @Output()
   studentSelected = new EventEmitter<Student>();

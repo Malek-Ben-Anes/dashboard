@@ -2,9 +2,9 @@
     <app-group-student-list (studentSelected)="onStudentSelected($event)" class="col-md-4">
     </app-group-student-list>
 
-    <app-group-marks-student-detail *ngIf="!showForm" [student]="studentSelected" class="col-md-8">
+    <app-group-marks-student-detail *ngIf="!showForm" [student]="student" class="col-md-8">
     </app-group-marks-student-detail>
 
-    <app-group-marks-form *ngIf="showForm" [student]="studentSelected" class="col-md-8">
+    <app-group-marks-form *ngIf="showForm && lessons && student" [lessons]="lessons" [student]="student" [group]="group" class="col-md-8">
     </app-group-marks-form>
 </div>

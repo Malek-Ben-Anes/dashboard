@@ -7,8 +7,8 @@ import {BASE_API_URL} from '@app/app.component';
 import {Lesson} from '@app/models/Lesson.model';
 import {Observable} from 'rxjs';
 import { CreateMarkRequest } from '@app/models/requests/mark/CreateMark.model';
+import { UpdateMarkRequest } from '@app/models/requests/mark/UpdateMark.model';
 
-const STUDENT_URL: string = BASE_API_URL + 'students/';
 const MARK_URL: string = BASE_API_URL + 'marks/';
 
 @Injectable({
@@ -22,9 +22,14 @@ export class MarkService {
     return this.http.get<Mark[]>(MARK_URL, {params: params});
   }
 
-  search(studentId: string, groupId?: string, isUpdatable?: boolean): Promise<Mark[]> {
-    const params: HttpParams = this.buildHttpParams(studentId, groupId, isUpdatable);
+  findAllPromise(studentId: string, groupId?: string): Promise<Mark[]> {
+    const params: HttpParams = this.buildHttpParams(studentId, groupId);
     return this.http.get<Mark[]>(MARK_URL, {params: params}).toPromise();
+  }
+
+  search(studentId: string, groupId?: string, isUpdatable?: boolean): Observable<Mark[]> {
+    const params: HttpParams = this.buildHttpParams(studentId, groupId, isUpdatable);
+    return this.http.get<Mark[]>(MARK_URL, {params: params});
   }
 
   private buildHttpParams(studentId?: string, groupId?: string, isUpdatable?: boolean, subjectId?: string, teacherId?: string): HttpParams {
@@ -41,13 +46,12 @@ export class MarkService {
     }
   }
 
-  save(studentId: string, marksRequest: CreateMarkRequest): Promise<Mark[]> {
-    const MARK_URL = `${STUDENT_URL}`;
+  save(marksRequest: CreateMarkRequest): Promise<Mark[]> {
     return this.http.post<Mark[]>(MARK_URL, marksRequest).toPromise();
   }
 
-  update(markId: string, mark: number, observation: string): Promise<Mark[]> {
-    return this.http.put<Mark[]>(`${MARK_URL}${markId}`, {mark, observation}).toPromise();
+  update(markId: string, request: UpdateMarkRequest): Promise<Mark[]> {
+    return this.http.put<Mark[]>(`${MARK_URL}${markId}`, request).toPromise();
   }
 
   delete(markId: string): Promise<Mark> {
