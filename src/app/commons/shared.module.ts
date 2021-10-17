@@ -17,6 +17,7 @@ import { DragDropModule } from "@angular/cdk/drag-drop";
 import { ToastrModule } from "ngx-toastr";
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import { PinnedButtonComponent } from "./pinned-button/pinned-button.component";
 @NgModule({
   declarations: [
     ImagePreloadDirective,
@@ -24,6 +25,7 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
     ImagePreloadDirective,
     DialogContentExampleDialogComponent,
     ErrorDialogComponent,
+    PinnedButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -55,6 +57,7 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
     ImagePreloadDirective,
     DialogContentExampleDialogComponent,
     ErrorDialogComponent,
+    PinnedButtonComponent,
   ],
 })
 export class SharedModule {}

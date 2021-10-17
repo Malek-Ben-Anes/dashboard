@@ -27,9 +27,9 @@ import { TeacherModuleModule } from './teacher-module/teacher-module.module';
 import { DatePipe } from '@angular/common';
 import { SharedModule } from './commons/shared.module';
 import { PatchPasswordComponent } from '@app/commons/patch-password/patch-password.component';
-import { StudentService } from './services/student.service';
 import { HttpService } from './services/shared/http.service';
 import { WebService } from './services/shared/web.service';
+import { PinnedButtonComponent } from './commons/pinned-button/pinned-button.component';
 
 @NgModule({
   imports: [

@@ -1,15 +1,5 @@
 <div class="row">
   <div class="col-md-12">
-    <div class="row">
-      <button
-        mat-raised-button
-        type="button"
-        class="btn btn-warning pull-right"
-        [routerLink]="GROUP_DETAIL"
-      >
-        {{ "All.text.create" | translate }}
-      </button>
-    </div>
 
     <div class="card">
       <table class="table">
@@ -41,3 +31,6 @@
     </div>
   </div>
 </div>
+
+
+<app-pinned-button [routerLink]="GROUP_DETAIL" [tooltip]="'All.text.create'|translate"></app-pinned-button>
