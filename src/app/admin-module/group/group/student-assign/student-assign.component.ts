@@ -32,7 +32,7 @@ export class StudentAssignComponent implements OnInit {
       }
     });
     const groupIsNull = true;
-    this.studentService.findAll(groupIsNull).subscribe((students) => this.unassignedStudents = students);
+    this.studentService.findAll(groupIsNull).then((students) => this.unassignedStudents = students);
   }
 
   onAttachStudent(student: Student): void {
@@ -52,7 +52,7 @@ export class StudentAssignComponent implements OnInit {
   private updateStudents(request: PatchGroupStudentsRequest) {
     this.groupService.patchGroupStudents(this.currentGroup.id, request)
         .subscribe(() => {
-          this.studentService.findAll(true).subscribe((students) => this.unassignedStudents = students);
+          this.studentService.findAll(true).then((students) => this.unassignedStudents = students);
           this.groupService.findById(this.currentGroup.id).subscribe();
         });
   }

@@ -35,10 +35,16 @@
 
 body {
   background-image: url("assets/images/background/login-background.jpg");
-  background-attachment: fixed;
   size: 100%;
   min-height: 100%;
-  background-size: contain;
+  min-width: 100%;
+
+  background-attachment: fixed;
+
+  /* Center and scale the image nicely */
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 th.mat-header-cell {

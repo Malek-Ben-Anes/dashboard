@@ -94,18 +94,19 @@ export class TeacherProfileComponent implements OnInit {
     return this.teacherForm.get(property).value;
   }
 
-  onConfirmationDelete(teacherId: string) {
-    this.teachersService.delete(teacherId).subscribe(teacher => {
-      console.log("teacher deleted!");
+  async onConfirmationDelete(teacherId: string) {
+    try {
+      await this.teachersService.delete(teacherId);
       this.router.navigate(['app', 'teachers']);
-    });
+    } catch {
+    }
   }
 
   onDelete(teacherId: string): void {
     const modalDialog: { dialogTitle: string; dialogMessage: string; } =
     {
       dialogTitle: this.translate.instant('All.text.delete.title'),
-      dialogMessage: this.translate.instant('All.text.delete.Confirmation')
+      dialogMessage: this.translate.instant('All.text.delete.Confirmation'),
     };
     const dialogRef = this.dialog.open(DialogContentExampleDialogComponent, {
       width: '450px',

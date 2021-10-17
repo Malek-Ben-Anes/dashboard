@@ -3,7 +3,6 @@ import { TeacherService } from '@app/services/teacher.service';
 
 import { Teacher } from '@app/models/Teacher.model';
 import { BASE_URL } from '@app/app.component';
-import { Gender } from "@app/models/enums/Gender";
 import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { Routers } from '@app/admin-module/routes/router-link';
 
@@ -31,12 +30,15 @@ export class TeacherListComponent implements OnInit {
   ngOnInit() {
     this.findAllTeachers();
   }
-  
-  findAllTeachers(): void {
+
+  async findAllTeachers() {
     this.isLoading = true;
-    this.teachersService.findAll().subscribe(teachers => {this.teachers = teachers; this.refershPaginator()},
-    error => this.errorMessage = `${error.status}: ${error.error.message}`,
-    () => this.isLoading = false);
+    try {
+      this.teachers = await this.teachersService.findAll();
+      this.refershPaginator();
+    } finally {
+      this.isLoading = false;
+    }
   }
 
   private refershPaginator() {

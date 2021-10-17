@@ -45,7 +45,7 @@ export class LandingPageComponent implements OnInit {
 
   async switchLanguage(lang?: string) {
     this.language = lang ? lang : await this.storage.getLanguage();
-    this.translate.use(this.language);
+    await this.translate.use(this.language);
     this.storage.saveLanguage(this.language);
     this.landingPageLinks();
   }

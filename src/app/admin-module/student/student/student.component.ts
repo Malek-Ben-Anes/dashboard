@@ -38,18 +38,17 @@ export class StudentComponent implements OnInit, OnChanges {
   }
 
   private getStudent(id: string): void {
-    this.studentService.getById(id).subscribe(
+    this.studentService.getById(id)
+      .then(
         (studentData: Student) => {
           this.student = studentData;
           this.isNew = false;
           this.tabs = this.updateTabs();
           console.log(studentData);
-        },
-        (err: HttpErrorResponse) => {
+        }).catch((err: HttpErrorResponse) => {
           this.student = new Student();
           this.isNew = true;
-        },
-    );
+        });
   }
 
   onUpdate(request: CreateStudentRequest | UpdateStudentRequest): void {
@@ -65,7 +64,7 @@ export class StudentComponent implements OnInit, OnChanges {
   }
 
   private update(studentRequest: UpdateStudentRequest): void {
-    this.studentService.update(this.student.id, studentRequest).subscribe((StudentData) => {
+    this.studentService.update(this.student.id, studentRequest).then((StudentData) => {
       this.student = StudentData;
       this.tabs = this.updateTabs();
     },
@@ -73,7 +72,7 @@ export class StudentComponent implements OnInit, OnChanges {
   }
 
   private create(studentRequest: CreateStudentRequest): void {
-    this.studentService.create(studentRequest).subscribe((student) => {
+    this.studentService.create(studentRequest).then((student) => {
       this.student = student;
       this.isNew = false;
       this.tabs = this.updateTabs();

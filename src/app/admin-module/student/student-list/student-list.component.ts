@@ -1,13 +1,13 @@
 import * as _ from 'lodash';
-import {Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
-import {Student} from '@app/models/Student.model';
-import {StudentService} from '@app/services/student.service';
-import {HttpErrorResponse} from '@angular/common/http';
-import {BASE_URL} from '@app/app.component';
-import {Routers} from '@app/admin-module/routes/router-link';
-import {StudentFilter} from './student-filter/student-filter.component';
-import {MatPaginator, MatTableDataSource} from '@angular/material';
+import { Student } from '@app/models/Student.model';
+import { StudentService } from '@app/services/student.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { BASE_URL } from '@app/app.component';
+import { Routers } from '@app/admin-module/routes/router-link';
+import { StudentFilter } from './student-filter/student-filter.component';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-student-list',
@@ -33,21 +33,15 @@ export class StudentListComponent implements OnInit {
 
   constructor(private studentsService: StudentService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.isLoading = true;
-    this.studentsService.findAll().subscribe(
-        (students: any[]) => {
-          this.students = students;
-          this.studentsTmp = students;
-          this.refershPaginator();
-          console.log(this.students);
-        }, (err: HttpErrorResponse) => {
-          if (err.error instanceof Error) {
-            console.log('Client-side error occured.');
-          } else {
-            console.log('Server-side error occured.');
-          }
-        }, () => this.isLoading = false);
+    try {
+      this.students = await this.studentsService.findAll();
+      this.studentsTmp = this.students;
+    } finally {
+      this.isLoading = false;
+    }
+    this.refershPaginator();
   }
 
   refreshStudents(filter: StudentFilter) {

@@ -29,11 +29,17 @@
 
 .login-panel {
     opacity: 0.9;
-    background-color: whitesmoke;
+    background-color: white;
     border-radius: 4px;
-    margin: 65px 10vw;
+    margin: 6em 7em;
+    height: 420px;
 }
 
 .enter-credentials {
     text-align: center;
+}
+
+.login-panel-background {
+    background-image: url('assets/images/login-modal.jpg');
+    background-size: cover;
 }

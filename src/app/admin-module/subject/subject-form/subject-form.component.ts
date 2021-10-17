@@ -7,6 +7,7 @@ import {Level} from '@app/models/enums/Level';
 import {TranslateService} from '@ngx-translate/core';
 import {DialogContentExampleDialogComponent} from '@app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
 import {MatDialog} from '@angular/material';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-subject-form',
@@ -34,7 +35,8 @@ export class SubjectFormComponent implements OnInit, OnChanges {
   constructor(private formBuilder: FormBuilder,
     public dialog: MatDialog,
     private subjectService: SubjectService,
-    private translate: TranslateService) { }
+    private translate: TranslateService,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
     this.initForm();
@@ -50,7 +52,7 @@ export class SubjectFormComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (!_.isNil(changes.level)) {
       this.level = changes.level.currentValue;
-      this.CreateNewSubject();
+      this.createNewSubject();
     }
     if (!_.isNil(changes.subjectToSave)) {
       this.subjectToSave = changes.subjectToSave.currentValue;
@@ -64,13 +66,14 @@ export class SubjectFormComponent implements OnInit, OnChanges {
 
   public onCreateNewSubject() {
     this.initForm();
-    this.CreateNewSubject();
+    this.createNewSubject();
     // this.updateForm(this.subjectToSave);
   }
 
   onSubmit() {
     this.getSubmitedData();
     console.log(this.subjectToSave);
+    this.toastr.success('Hello world!', 'Toastr fun!');
     if (this.subjectToSave.id == null) {
       this.save(this.subjectToSave);
     } else {
@@ -105,7 +108,7 @@ export class SubjectFormComponent implements OnInit, OnChanges {
     });
   }
 
-  private CreateNewSubject() {
+  private createNewSubject() {
     this.isNew = true;
     this.subjectToSave = new Subject();
   }

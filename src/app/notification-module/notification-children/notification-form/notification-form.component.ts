@@ -1,26 +1,26 @@
-import {Component, OnInit, Input, ViewChild} from '@angular/core';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {MatDialog, MatSelectionList} from '@angular/material';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatDialog, MatSelectionList } from '@angular/material';
 
 import * as _ from 'lodash';
 
-import {Teacher} from '@app/models/Teacher.model';
-import {Group} from '@app/models/Group.model';
-import {Student} from '@app/models/Student.model';
-import {GroupService} from '@app/services/group.service';
-import {StudentService} from '@app/services/student.service';
-import {TeacherService} from '@app/services/teacher.service';
-import {Notif} from '@app/models/enums/Notif';
-import {Notification} from '@app/models/Notification';
-import {NotificationService} from '@app/services/notification.service';
-import {AuthService} from '@app/services/auth/auth.service';
-import {User} from '@app/models/User';
-import {DialogContentExampleDialogComponent} from '@app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
-import {Library} from '@app/models/enums/Library';
-import {TranslateService} from '@ngx-translate/core';
-import {DialogData} from '@app/models/DialogData';
-import {DialogService} from '@app/commons/dialog/dialog.service';
-import {BASE_URL} from '@app/app.component';
+import { Teacher } from '@app/models/Teacher.model';
+import { Group } from '@app/models/Group.model';
+import { Student } from '@app/models/Student.model';
+import { GroupService } from '@app/services/group.service';
+import { StudentService } from '@app/services/student.service';
+import { TeacherService } from '@app/services/teacher.service';
+import { Notif } from '@app/models/enums/Notif';
+import { Notification } from '@app/models/Notification';
+import { NotificationService } from '@app/services/notification.service';
+import { AuthService } from '@app/services/auth/auth.service';
+import { User } from '@app/models/User';
+import { DialogContentExampleDialogComponent } from '@app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
+import { Library } from '@app/models/enums/Library';
+import { TranslateService } from '@ngx-translate/core';
+import { DialogData } from '@app/models/DialogData';
+import { DialogService } from '@app/commons/dialog/dialog.service';
+import { BASE_URL } from '@app/app.component';
 import { NotificationRequest } from '@app/models/requests/notification/CreateNotification.model';
 import { TokenStorageService } from '@app/services/auth/token-storage.service';
 
@@ -59,17 +59,14 @@ export class NotificationFormComponent implements OnInit {
     private teacherService: TeacherService,
     private groupService: GroupService,
     private studentService: StudentService,
-  ) {}
+  ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.initializeNotificationForm();
     this.findGroups();
-    this.teacherService.findAll()
-        .subscribe((teachers) => {
-          this.allTeachers = teachers; this.optionList = teachers; this.onToggleButton(Library.TEACHER);
-        },
-      (err) => console.log(err)
-    );
+    this.allTeachers = await this.teacherService.findAll();
+    this.optionList = this.allTeachers;
+    this.onToggleButton(Library.TEACHER);
   }
 
   private async findGroups() {
@@ -80,7 +77,7 @@ export class NotificationFormComponent implements OnInit {
 
   private async initializeNotificationForm() {
     await this.authService.getLoggedUser().then((loggedUser) => this._loggedUser = loggedUser);
-    const loggedUserName = this._loggedUser ? `${this._loggedUser.firstName} ${ this._loggedUser.lastName}` : '';
+    const loggedUserName = this._loggedUser ? `${this._loggedUser.firstName} ${this._loggedUser.lastName}` : '';
     this.notifForm = this.formBuilder.group({
       notifier: [loggedUserName, Validators.required],
       title: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(255)]],
@@ -94,7 +91,7 @@ export class NotificationFormComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogContentExampleDialogComponent, {
       width: '450px',
       height: '200px',
-      data: {dialogTitle: modalDialog.dialogTitle, dialogMessage: modalDialog.dialogMessage},
+      data: { dialogTitle: modalDialog.dialogTitle, dialogMessage: modalDialog.dialogMessage },
     });
     dialogRef.afterClosed().subscribe((confirmtion) => {
       if (confirmtion) {
@@ -103,7 +100,7 @@ export class NotificationFormComponent implements OnInit {
     });
   }
 
-  private computeModalDialog(): {dialogTitle: string; dialogMessage: string;} {
+  private computeModalDialog(): { dialogTitle: string; dialogMessage: string; } {
     const selectedOptionNumber: number = _.map(this.selections.selectedOptions.selected, 'value').length;
     const seletedChoice: string = this.translate.instant('label.' + this.selected.toLowerCase());
     const dialogMessagePattern: string = this.translate.instant('All.text.notifications.confirmation.modal.message');
@@ -113,7 +110,7 @@ export class NotificationFormComponent implements OnInit {
       'seletedChoice': seletedChoice,
     });
     const dialogTitle = this.translate.instant('All.text.notifications.confirmation.modal.title');
-    return {dialogMessage: dialogMessage, dialogTitle: dialogTitle};
+    return { dialogMessage: dialogMessage, dialogTitle: dialogTitle };
   }
 
   onFileChanged(event) {
@@ -126,20 +123,20 @@ export class NotificationFormComponent implements OnInit {
     const selectedOptions = _.map(this.selections.selectedOptions.selected, 'value');
     request.notifiedIds = _.map(selectedOptions, 'id');
     this.notificationService.save(request, this.selectedFile)
-        .then((notification) => {
-          const data: DialogData = {
-            dialogTitle: this.translate.instant('All.text.notifications.modal.send.success.title'),
-            dialogMessage: '',
-          };
-          this.dialogService.openDialog(data);
-        })
-        .catch((err) => {
-          const data: DialogData = {
-            dialogTitle: this.translate.instant('All.text.notifications.modal.send.fail.title'),
-            dialogMessage: '',
-          };
-          this.dialogService.openDialog(data);
-        });
+      .then((notification) => {
+        const data: DialogData = {
+          dialogTitle: this.translate.instant('All.text.notifications.modal.send.success.title'),
+          dialogMessage: '',
+        };
+        this.dialogService.openDialog(data);
+      })
+      .catch((err) => {
+        const data: DialogData = {
+          dialogTitle: this.translate.instant('All.text.notifications.modal.send.fail.title'),
+          dialogMessage: '',
+        };
+        this.dialogService.openDialog(data);
+      });
   }
 
   onDeselectAll() {
@@ -168,22 +165,20 @@ export class NotificationFormComponent implements OnInit {
   }
 
   private findStudentsByGroupId(groupId: string) {
-    this.studentService.findStudentsByGroupId(groupId).subscribe(
-        (students) => {
-          this.StudentsOfSelectedGroup = students;
-          this.optionList = students;
-        },
-        (err) => console.log(err)
-    );
+    this.studentService.findStudentsByGroupId(groupId).then(
+      (students) => {
+        this.StudentsOfSelectedGroup = students;
+        this.optionList = students;
+      }).catch((err) => console.log(err));
   }
 
   private prepareQuery(): NotificationRequest {
     return this.notificationService.buildNotificationRequest(
-        this._loggedUser.id,
-        undefined,
-        this.extractFieldData("title"),
-        this.extractFieldData("content"),
-        this.extractFieldData("type")
+      this._loggedUser.id,
+      undefined,
+      this.extractFieldData('title'),
+      this.extractFieldData('content'),
+      this.extractFieldData('type'),
     );
   }
 

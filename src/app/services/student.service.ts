@@ -1,54 +1,59 @@
 import * as _ from 'lodash';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable, Injector } from '@angular/core';
+import { Observable } from 'rxjs';
 
-import {Student} from '@app/models/Student.model';
-import {BASE_API_URL} from '../app.component';
-import {StudentFilter} from 'app/admin-module/student/student-list/student-filter/student-filter.component';
-import {UpdateStudentRequest} from '@app/models/requests/student/UpdateStudent.model';
-import {CreateStudentRequest} from '@app/models/requests/student/CreateStudent.model';
+import { Student } from '@app/models/Student.model';
+import { BASE_API_URL } from '../app.component';
+import { StudentFilter } from 'app/admin-module/student/student-list/student-filter/student-filter.component';
+import { UpdateStudentRequest } from '@app/models/requests/student/UpdateStudent.model';
+import { CreateStudentRequest } from '@app/models/requests/student/CreateStudent.model';
+import { BaseCrudService } from './shared/base-crud/base-crud.service';
+import { WebService } from './shared/web.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class StudentService {
+export class StudentService extends BaseCrudService<Student, Student> {
+  modelName = BASE_API_URL + 'students';
   readonly STUDENT_URL: string = BASE_API_URL + 'students';
   readonly GROUP_URL: string = BASE_API_URL + 'groups/';
 
   students: Student[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(injector: Injector, protected http: HttpClient, protected webService: WebService) {
+    super(injector);
+  }
 
-  findAll(groupIsNull?: boolean): Observable<Student[]> {
+  findAll(groupIsNull?: boolean): Promise<Student[]> {
     if (groupIsNull != null) {
       let params = new HttpParams();
       params = params.set('groupIsNull', String(groupIsNull));
-      return this.http.get<Student[]>(this.STUDENT_URL, {params: params});
+      return this.webService.get<Student[]>(this.STUDENT_URL, { params: params });
     }
-    return this.http.get<Student[]>(this.STUDENT_URL);
+    return this.webService.get<Student[]>(this.STUDENT_URL);
   }
 
-  findStudentsByGroupId(groupId: string): Observable<Student[]> {
+  findStudentsByGroupId(groupId: string): Promise<Student[]> {
     const URL = `${this.GROUP_URL}${groupId}/students/`;
-    return this.http.get<Student[]>(URL);
+    return this.webService.get<Student[]>(URL);
   }
 
-  getById(studentId: string): Observable<Student> {
-    return this.http.get<Student>(this.STUDENT_URL + '/' + studentId);
+  getById(studentId: string): Promise<Student> {
+    return this.webService.get<Student>(this.STUDENT_URL + '/' + studentId);
   }
 
   findById(studentId: string): Promise<Student> {
-    return this.http.get<Student>(this.STUDENT_URL + '/' + studentId).toPromise();
+    return this.webService.get<Student>(this.STUDENT_URL + '/' + studentId);
   }
 
-  create(createRequest: CreateStudentRequest): Observable<Student> {
-    return this.http.post<Student>(this.STUDENT_URL, createRequest);
+  create(createRequest: CreateStudentRequest): Promise<Student> {
+    return this.webService.post<Student>(this.STUDENT_URL, createRequest);
   }
 
-  update(studentId: string, updateRequest: UpdateStudentRequest): Observable<Student> {
+  update(studentId: string, updateRequest: UpdateStudentRequest): Promise<Student> {
     const updateUrl = this.STUDENT_URL + '/' + studentId;
-    return this.http.put<Student>(updateUrl, updateRequest);
+    return this.webService.put<Student>(updateUrl, updateRequest);
   }
 
   patch(studentId: string, updateRequest: UpdateStudentRequest): Observable<Student> {
@@ -57,12 +62,12 @@ export class StudentService {
   }
 
   getSingleStudent(studentId: string): Student {
-    return _.find(this.students, {id: studentId});
+    return _.find(this.students, { id: studentId });
   }
 
-  delete(studentId: string): Observable<Student> {
+  delete(studentId: string): Promise<Student> {
     const Url = `${this.STUDENT_URL}/${studentId}`;
-    return this.http.delete<Student>(Url);
+    return this.http.delete<Student>(Url).toPromise();
   }
 
   public filter(students: Student[], filter: StudentFilter): Student[] {

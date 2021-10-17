@@ -35,13 +35,14 @@ export class StudentProfileComponent implements OnInit {
   genders = Object.keys(Gender);
   levels = Object.keys(Level);
 
-  studentForm: FormGroup = this.initFormGroup();
+  studentForm: FormGroup;
   groups: Group[] = [];
 
   constructor(private formBuilder: FormBuilder, private groupService: GroupService, public dialog: MatDialog, private router: Router,
               private studentService: StudentService, private translate: TranslateService) { }
 
   ngOnInit() {
+    this.studentForm = this.initFormGroup();
     this.getGroup();
   }
 
@@ -122,7 +123,7 @@ export class StudentProfileComponent implements OnInit {
   }
 
   onConfirmationDelete(studentId: string ) {
-    this.studentService.delete(studentId).subscribe((student) => this.router.navigate(['app', 'students']));
+    this.studentService.delete(studentId).then((student) => this.router.navigate(['app', 'students']));
   }
 
   onDelete(studentId: string): void {
