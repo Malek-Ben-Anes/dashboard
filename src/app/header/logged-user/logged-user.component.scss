@@ -11,7 +11,8 @@
 }
 
 .background-white {
-    background-color: #fff;
+    background: none;
+    padding: 0;
 }
 
 .radius-image {
@@ -41,4 +42,10 @@
 
 .main-navigation .menu>li>a:hover, .jet-menu>li>a:hover {
     color: #ffaf1c;
+}
+
+@media screen and (max-width: 940px) {
+    .flex-menu {
+        display: -webkit-inline-box;
+    }
 }

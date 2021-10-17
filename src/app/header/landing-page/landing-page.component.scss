@@ -28,3 +28,9 @@
 .jet-current-menu-item {
     color: #ffaf1c !important;;
 }
+
+@media screen and (max-width: 940px) {
+    .flex-menu {
+        display: -webkit-inline-box;
+    }
+}

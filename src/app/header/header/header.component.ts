@@ -15,6 +15,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   loggedUser: User;
   roles: string[];
 
+  showMenuItems = false;
+
   constructor(private tokenStorage: TokenStorageService, private authService: AuthService) {
   }
 
@@ -29,5 +31,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.loggedUserSubscription.unsubscribe();
+  }
+
+  showBar() {
+    this.showMenuItems = !this.showMenuItems;
+    console.log(this.showMenuItems);
   }
 }

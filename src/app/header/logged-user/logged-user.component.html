@@ -1,20 +1,11 @@
-<ul class="nav navbar-nav jet-menu">
+<ul class="nav navbar-nav jet-menu flex-menu">
   <li class="nav-item" routerLinkActive="active" *ngFor="let route of navBar">
     <a class="nav-link" [routerLink]="route.router">
       <div *ngIf="route.icon !== 'bell' else bell"></div>
       {{route.label | translate}}
     </a>
   </li>
-</ul>
 
-<ng-template #bell>
-  <i class="material-icons margin-5">notifications</i>
-  <span *ngIf="loggedUser.newNotifications && loggedUser.newNotifications!=0" class="notification position">
-    {{loggedUser.newNotifications}}
-  </span>
-</ng-template>
-
-<ul class="nav navbar-nav horiz navbar-right" routerLinkActive="active">
   <li class="nav-item dropdown">
     <a class="dropdown-toggle nav-link background-white" data-toggle="dropdown">
 
@@ -33,3 +24,10 @@
     </ul>
   </li>
 </ul>
+
+<ng-template #bell>
+  <i class="material-icons margin-5">notifications</i>
+  <span *ngIf="loggedUser.newNotifications && loggedUser.newNotifications!=0" class="notification position">
+    {{loggedUser.newNotifications}}
+  </span>
+</ng-template>
