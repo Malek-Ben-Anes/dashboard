@@ -14,15 +14,13 @@ export class GroupListComponent implements OnInit {
   GROUP_DETAIL: string = Routers.APP_GROUP_DETAIL;
 
   groups: Group[];
+  totalStudentCount = 0
   levels = Object.keys(Level);
 
   constructor(private groupService: GroupService, private translate: TranslateService) { }
 
-  ngOnInit() {
-    this.findAll();
-  }
-
-  private findAll(): void {
-    this.groupService.findAll().subscribe((groups) => this.groups = groups, (err) => console.log(err));
+  async ngOnInit() {
+    this.groups = await this.groupService.findAll();
+    this.totalStudentCount = this.groups.reduce((sum, group) => sum + group.studentsNumber, 0);
   }
 }

@@ -5,3 +5,15 @@
 
 // then import toastr scss
 @import "~ngx-toastr/toastr-bs4-alert.scss";
+
+
+.spinner-center-screen {
+    position: absolute !important;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    width: 100px;
+    height: 100px;
+    z-index: 1;
+}

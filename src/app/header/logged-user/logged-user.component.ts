@@ -21,18 +21,18 @@ export const ROUTES: any | RouteInfo[][] =
     {'router': '/app/teachers', 'label': 'header.teachers'},
     {'router': '/app/subjects', 'label': 'header.program'},
     {'router': '/app/groups', 'label': 'header.groups'},
-    {'router': '/app/notifications', 'label': 'header.notifications', 'icon': 'bell'}],
+    {'router': '/app/notifications', 'label': '', 'icon': 'bell'}],
 
   TEACHER_NAVIGATION_BAR: [
     {'router': '/app/show-teacher-time-table', 'label': 'header.teacher.timetable'},
     {'router': '/app/show-groups-list', 'label': 'header.teacher.groups'},
-    {'router': '/app/prof-notifications', 'label': 'header.notifications', 'icon': 'bell'}],
+    {'router': '/app/prof-notifications', 'label': '', 'icon': 'bell'}],
 
   STUDENT_NAVIGATION_BAR: [
     {'router': '/app/show-marks-list', 'label': 'header.student.marks'},
     {'router': '/app/show-bulletins', 'label': 'header.student.bulletins'},
     {'router': '/app/show-time-table', 'label': 'header.student.timetable'},
-    {'router': '/app/show-notifications', 'label': 'header.student.notifications', 'icon': 'bell'}],
+    {'router': '/app/show-notifications', 'label': '', 'icon': 'bell'}],
 };
 @Component({
   selector: 'app-logged-user',

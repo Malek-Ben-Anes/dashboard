@@ -44,12 +44,11 @@ export class FilterBulletinComponent implements OnInit {
     });
   }
 
-  private getGroupsByRole() {
+  private async getGroupsByRole() {
     if (this.authority = 'admin') {
-      this.groupService.findAll()
-      .subscribe(groups => this.allGroups = groups, err => console.log(err));
+      this.allGroups = await this.groupService.findAll();
     } else if (this.authority = 'pm') {
-      this.groupService.findAll(this.authId).subscribe(groups => this.allGroups = groups, err => console.log(err));
+      this.allGroups = await this.groupService.findAll(this.authId);
     }
   }
 
@@ -80,7 +79,7 @@ export class FilterBulletinComponent implements OnInit {
 
   selectLevel(levelSelected) {
     if (levelSelected !== undefined) {
-      this.groups = this.allGroups.filter(group => levelSelected === group.level);
+      this.groups = this.allGroups.filter((group) => levelSelected === group.level);
     }
   }
 }

@@ -72,7 +72,7 @@ export class NotificationFormComponent implements OnInit {
   private async findGroups() {
     const roles: string[] = await this.tokenStorage.getAuthorities();
     const teacherId = await roles.includes('ROLE_TEACHER') ? this._loggedUser.id : undefined;
-    this.groupService.findAll(teacherId).subscribe((groups) => this.allGroups = groups, (err) => console.log(err));
+    this.allGroups = await this.groupService.findAll(teacherId);
   }
 
   private async initializeNotificationForm() {

@@ -6,11 +6,19 @@
                 </mat-tab-group>
         </div>
 </div>
-<app-student-profile *ngIf="selected.value === tabIndex.PROFILE && student != null" [student]="student" [isNew]="isNew"
+
+<mat-spinner *ngIf="isLoading" [diameter]="100" class="spinner-center-screen"></mat-spinner>
+
+<ng-container *ngIf="!isLoading">
+        <app-student-profile *ngIf="selected.value === tabIndex.PROFILE && student != null" [student]="student" [isNew]="isNew"
         (studentRequest)="onUpdate($event)"></app-student-profile>
 
-<app-update-password *ngIf="selected.value === tabIndex.PASSWORD && student != null" [user]="student"></app-update-password>
+        <app-update-password *ngIf="selected.value === tabIndex.PASSWORD && student != null" [user]="student"></app-update-password>
 
-<app-bulletin *ngIf="selected.value === tabIndex.BULLETIN && student != null" [student]="student"></app-bulletin>
+        <app-bulletin *ngIf="selected.value === tabIndex.BULLETIN && student != null" [student]="student"></app-bulletin>
 
-<app-time-table *ngIf="selected.value === tabIndex.TIME_TABLE && student != null" [student]="student"></app-time-table>
+        <app-time-table *ngIf="selected.value === tabIndex.TIME_TABLE && student != null" [student]="student"></app-time-table>
+</ng-container>        
+
+
+<app-pinned-button [routerLink]="STUDENT_PROFILE" [tooltip]="'All.text.create'|translate"></app-pinned-button>

@@ -28,17 +28,11 @@ export class GroupTabComponent implements OnInit {
   constructor(private groupService: GroupService, private tokenStorage: TokenStorageService, private authService: AuthService,
               private translate: TranslateService) { }
 
-  ngOnInit() {
-    this.findAll();
-  }
-
-  private findAll(): void {
+  async ngOnInit() {
     if (this.authService.getIsLoggedUser()) {
       this.isLogged = true;
-      this.user =  this.tokenStorage.getLoggedUser() as Teacher;
+      this.user = this.tokenStorage.getLoggedUser() as Teacher;
     }
-    this.groupService.findAll(this.user.id)
-        .subscribe(groups => this.groups = groups
-        , err => console.log(err));
+    this.groups = await this.groupService.findAll(this.user.id);
   }
 }

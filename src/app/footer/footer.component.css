@@ -1,9 +1,10 @@
-.footer-page {
-    clear: both;
-    position: relative;
-    height: 200px;
-    margin-top: -200px;
-    display: contents !important;
+#footer-text {   
+    position: absolute;
+    bottom: 10px;
+    z-index: -1;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    left: 50%;
 }
 
 p {

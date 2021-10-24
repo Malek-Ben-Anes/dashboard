@@ -28,11 +28,9 @@ export class StudentFilterComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private groupService: GroupService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.initForm();
-    this.groupService.findAll()
-        .subscribe((groups) => this.groups = groups
-            , (err) => console.log(err));
+    this.groups = await this.groupService.findAll();
   }
 
   initForm() {

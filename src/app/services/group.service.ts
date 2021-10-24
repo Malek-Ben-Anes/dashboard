@@ -65,12 +65,12 @@ export class GroupService {
         }));
   }
 
-  findAll(teacherId?: string): Observable<Group[]> {
+  findAll(teacherId?: string): Promise<Group[]> {
     if (teacherId != null) {
       const params = new HttpParams().set('teacherId', teacherId);
-      return this.http.get<Group[]>(this.GROUP_URL, {params: params});
+      return this.http.get<Group[]>(this.GROUP_URL, {params: params}).toPromise();
     }
     // .map((students) => students.sort((s1, s2) => s1.level.localeCompare(s2.level )));
-    return this.http.get<Group[]>(this.GROUP_URL);
+    return this.http.get<Group[]>(this.GROUP_URL).toPromise();
   }
 }

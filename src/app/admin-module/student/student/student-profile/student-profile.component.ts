@@ -41,15 +41,10 @@ export class StudentProfileComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private groupService: GroupService, public dialog: MatDialog, private router: Router,
               private studentService: StudentService, private translate: TranslateService) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.studentForm = this.initFormGroup();
-    this.getGroup();
-  }
-
-  private getGroup() {
-    this.groupService.findAll().subscribe((groups) => {
-      this.groups = groups; this.updateForm(this.student);
-    }, (err) => console.log(err));
+    this.groups = await this.groupService.findAll();
+    this.updateForm(this.student);
   }
 
   private initFormGroup(): FormGroup {

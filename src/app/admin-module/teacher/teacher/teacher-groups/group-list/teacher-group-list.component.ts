@@ -26,15 +26,11 @@ export class TeacherGroupListComponent implements OnInit {
 
   constructor(private groupService: GroupService, private translate: TranslateService) { }
 
-  ngOnInit() {
-    this.groupService
-        .findAll()
-        .subscribe((groups) => {
-          this.groups = groups;
-          if (groups.length > 0) {
-            this.onSelectGroup(groups[0]);
-          }
-        }, (err) => console.log(err));
+  async ngOnInit() {
+    this.groups = await this.groupService.findAll();
+    if (this.groups.length > 0) {
+      this.onSelectGroup(this.groups[0]);
+    }
   }
 
   onSelectGroup(group: Group): void {
