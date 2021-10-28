@@ -47,27 +47,27 @@ export class HttpService {
   }
 
   public getObservable<T>(url: string, headers: HttpHeaders = null, responseType: any = 'json'): Observable<T> {
-    const result = this.httpClient.get<T>(url, {headers: headers, responseType: responseType});
+    const result = this.httpClient.get<T>(url);
     return result;
   }
 
 
   public async post<T>(url: string, body: any, headers: HttpHeaders = null, responseType: any = 'json') {
-    const result = this.postObservable<T>(url, body, headers, responseType).toPromise();
+    const result = this.postObservable<T>(url, body, responseType).toPromise();
     return result;
   }
 
   public postObservable<T>(url: string, body: any, headers: HttpHeaders = null, responseType: any = 'json'): Observable<T> {
-    const result = this.httpClient.post<T>(url, body, {withCredentials: true, headers: headers, responseType: responseType});
+    const result = this.httpClient.post<T>(url, body);
     return result;
   }
 
   public async put<T>(url: string, body: any, headers: HttpHeaders = null, responseType: any = 'json') {
-    const result = this.httpClient.put<T>(url, body, {withCredentials: true, headers: headers, responseType: responseType}).toPromise();
+    const result = this.httpClient.put<T>(url, body).toPromise();
     return result;
   }
 
   public async delete<T>(url: string, headers: HttpHeaders = null, responseType: any = 'json') {
-    await this.httpClient.delete(url, {headers: headers, responseType: responseType}).toPromise();
+    await this.httpClient.delete(url).toPromise();
   }
 }

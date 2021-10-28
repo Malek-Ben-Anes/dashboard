@@ -24,13 +24,11 @@ export class StudentProfileComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     const id = this.route.snapshot.params['id'];
-    if (id != null) {
-      this.studentService.getById(id).then((student) => {
-        this.user = student;
-        console.log(this.user); this.initializeForm(this.user);
-      }).catch(err => err);
+    if (id) {
+      this.user = await this.studentService.findById(id);
+      this.initializeForm(this.user)
     }
   }
 

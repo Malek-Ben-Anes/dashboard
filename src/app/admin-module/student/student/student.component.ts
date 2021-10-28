@@ -43,7 +43,7 @@ export class StudentComponent implements OnInit {
   private async findStudent(id: string) {
     this.isLoading = true;
     try {
-      this.student = await this.studentService.getById(id);
+      this.student = await this.studentService.findById(id);
       this.isNew = false;
       this.tabs = this.refreshTabs();
     } finally {
@@ -73,22 +73,26 @@ export class StudentComponent implements OnInit {
     this.student = updateStudent;
   }
 
-  private async update(studentRequest: UpdateStudentRequest) {
+  private async create(studentRequest: CreateStudentRequest) {
     try {
-      this.student = await this.studentService.update(this.student.id, studentRequest);
-      this.toast.success('Profile update!', 'Profil eleve est mis à jour!');
-    } catch {
-      this.toast.error('Profile update!', 'Echec Profil eleve');
+      this.student = await this.studentService.postEntity(studentRequest);
+      this.toast.success('Profil eleve est mis à jour!', 'OK!');
+      this.isNew = false;
+    } catch (e) {
+      if (e) {
+        this.toast.error('Echec creation Profil eleve', 'KO!');
+      } else {
+        this.toast.error(await this.translate.instant('All.text.create.failed.duplicated'), 'KO!');
+      }
     }
   }
 
-  private async create(studentRequest: CreateStudentRequest) {
+  private async update(studentRequest: UpdateStudentRequest) {
     try {
-      this.student = await this.studentService.create(studentRequest);
-      this.toast.success('Hello world!', 'Toastr fun!');
-      this.isNew = false;
+      this.student = await this.studentService.putEntity(studentRequest, this.student.id);
+      this.toast.success('Profil eleve est mis à jour!', 'OK!');
     } catch {
-      this.toast.error('Hello world!', await this.translate.instant('All.text.create.failed.duplicated'));
+      this.toast.error('Echec de la mise à jour profil eleve', 'KO!');
     }
   }
 }

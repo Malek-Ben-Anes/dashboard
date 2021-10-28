@@ -13,12 +13,11 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  createPassword(
-      userId: string,
+  createPassword(userId: string,
       createPassword: CreatePasswordRequest,
-  ): Observable<any> {
+  ): Promise<any> {
     const url = `${this.USER_URL}/${userId}/password`;
-    return this.http.post(url, createPassword, {responseType: 'blob'});
+    return this.http.post(url, createPassword, {responseType: 'blob'}).toPromise();
   }
 
   updatePassword(

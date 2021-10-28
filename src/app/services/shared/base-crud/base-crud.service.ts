@@ -116,7 +116,7 @@ export abstract class BaseCrudService<T, U> {
     }
   }
 
-  public async postEntity(model: T): Promise<U> {
+  public async postEntity(model: T|any): Promise<U> {
     let result = this.webService.post<U>(this.modelName, model);
     // update cache
     let entityResult = await result;
@@ -133,7 +133,7 @@ export abstract class BaseCrudService<T, U> {
     return entityResult;
   }
 
-  public async putEntity(model: T, id: number): Promise<U> {
+  public async putEntity(model: T|any, id: string): Promise<U> {
     const result = this.webService.put<U>(this.modelName + '/' + id, model);
 
     // update cache
@@ -147,13 +147,13 @@ export abstract class BaseCrudService<T, U> {
     return entityResult;
   }
 
-  public async remove(id: number) {
+  public async remove(id: string) {
     await this.webService.delete(this.modelName + '/' + id);
     this.cacheService.clear();
     this.emitUpdate(id, null);
   }
 
-  public emitUpdate(id: number, newValue: U) {
+  public emitUpdate(id: string, newValue: U) {
     if (!this.entityUpdateEvents[id]) {
       this.entityUpdateEvents[id] = new EventEmitter();
     }
@@ -163,7 +163,7 @@ export abstract class BaseCrudService<T, U> {
     // to do : auto update cache without clear it
   }
 
-  subscribeEntity(id: number, callback: (p: U) => void): Subscription {
+  subscribeEntity(id: string, callback: (p: U) => void): Subscription {
     if (!this.entityUpdateEvents[id]) {
       this.entityUpdateEvents[id] = new EventEmitter();
     }

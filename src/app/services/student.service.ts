@@ -39,23 +39,6 @@ export class StudentService extends BaseCrudService<Student, Student> {
     return this.webService.get<Student[]>(URL);
   }
 
-  getById(studentId: string): Promise<Student> {
-    return this.webService.get<Student>(this.STUDENT_URL + '/' + studentId);
-  }
-
-  findById(studentId: string): Promise<Student> {
-    return this.webService.get<Student>(this.STUDENT_URL + '/' + studentId);
-  }
-
-  create(createRequest: CreateStudentRequest): Promise<Student> {
-    return this.webService.post<Student>(this.STUDENT_URL, createRequest);
-  }
-
-  update(studentId: string, updateRequest: UpdateStudentRequest): Promise<Student> {
-    const updateUrl = this.STUDENT_URL + '/' + studentId;
-    return this.webService.put<Student>(updateUrl, updateRequest);
-  }
-
   patch(studentId: string, updateRequest: UpdateStudentRequest): Observable<Student> {
     const updateUrl = this.STUDENT_URL + '/' + studentId;
     return this.http.patch<Student>(updateUrl, updateRequest);
@@ -63,11 +46,6 @@ export class StudentService extends BaseCrudService<Student, Student> {
 
   getSingleStudent(studentId: string): Student {
     return _.find(this.students, { id: studentId });
-  }
-
-  delete(studentId: string): Promise<Student> {
-    const Url = `${this.STUDENT_URL}/${studentId}`;
-    return this.http.delete<Student>(Url).toPromise();
   }
 
   public filter(students: Student[], filter: StudentFilter): Student[] {

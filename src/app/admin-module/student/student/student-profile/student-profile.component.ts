@@ -14,6 +14,7 @@ import {DialogContentExampleDialogComponent} from '@app/commons/dialog-content-e
 import {MatDialog} from '@angular/material';
 import {CreateStudentRequest} from '@app/models/requests/student/CreateStudent.model';
 import {UpdateStudentRequest} from '@app/models/requests/student/UpdateStudent.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-student-profile',
@@ -39,7 +40,7 @@ export class StudentProfileComponent implements OnInit {
   groups: Group[] = [];
 
   constructor(private formBuilder: FormBuilder, private groupService: GroupService, public dialog: MatDialog, private router: Router,
-              private studentService: StudentService, private translate: TranslateService) { }
+              private studentService: StudentService, private translate: TranslateService, private toast: ToastrService) { }
 
   async ngOnInit() {
     this.studentForm = this.initFormGroup();
@@ -117,15 +118,21 @@ export class StudentProfileComponent implements OnInit {
     return this.studentForm.get(property).value;
   }
 
-  onConfirmationDelete(studentId: string ) {
-    this.studentService.delete(studentId).then((student) => this.router.navigate(['app', 'students']));
+  async onConfirmationDelete(studentId: string ) {
+    try {
+      this.studentService.remove(studentId);
+      this.toast.success('Suppression est effectuée avec succés', 'OK!');
+      setTimeout(() => this.router.navigate(['app', 'students']), 1000);
+    } catch {
+      this.toast.success('Suppression a échoué', 'OK!');
+    }
   }
 
-  onDelete(studentId: string): void {
+  async onDelete(studentId: string) {
     const modalDialog: { dialogTitle: string; dialogMessage: string; } =
     {
-      dialogTitle: this.translate.instant('All.text.delete.title'),
-      dialogMessage: this.translate.instant('All.text.delete.Confirmation'),
+      dialogTitle: await this.translate.instant('All.text.delete.title'),
+      dialogMessage: await this.translate.instant('All.text.delete.Confirmation'),
     };
     const dialogRef = this.dialog.open(DialogContentExampleDialogComponent, {
       width: '450px',

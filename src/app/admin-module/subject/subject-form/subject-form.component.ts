@@ -72,12 +72,16 @@ export class SubjectFormComponent implements OnInit, OnChanges {
 
   onSubmit() {
     this.getSubmitedData();
-    console.log(this.subjectToSave);
-    this.toastr.success('Hello world!', 'Toastr fun!');
-    if (this.subjectToSave.id == null) {
-      this.save(this.subjectToSave);
-    } else {
-      this.update(this.subjectToSave);
+    try {
+      if (this.subjectToSave.id == null) {
+        this.save(this.subjectToSave);
+        this.toastr.success('OK', 'Création avec succès du groupe!');
+      } else {
+        this.update(this.subjectToSave);
+        this.toastr.success('OK', 'Mise à jour avec succès du groupe!');
+      }
+    } catch {
+      this.toastr.error('KO', 'Echec creation ou mise à jour du groupe');
     }
   }
 

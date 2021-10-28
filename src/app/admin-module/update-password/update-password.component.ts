@@ -9,6 +9,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {User} from '@app/models/User';
 import {CreatePasswordRequest} from '@app/models/password/CreatePasswordRequest.model';
 import {UserService} from '@app/services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-update-password',
@@ -28,8 +29,8 @@ export class UpdatePasswordComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private dialogService: DialogService,
     private translate: TranslateService,
+    private toast: ToastrService,
   ) {}
 
   ngOnInit() {
@@ -70,55 +71,29 @@ export class UpdatePasswordComponent implements OnInit {
       {mismatch: true};
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.passwordForm.invalid) {
       return;
     }
+    const updatePassword: CreatePasswordRequest = {password: this.passwordForm.get('password').value};
 
-    const updatePassword: CreatePasswordRequest = {
-      password: this.passwordForm.get('password').value,
-    };
-    this.userService.createPassword(this.user.id, updatePassword).subscribe(
-        (response) => {
-          const blob = new Blob([response], {type: 'application/pdf'});
-          const registrationFileName = `${this.user.firstName}-${this.user.lastName}-registration.pdf`;
-          saveAs(blob, registrationFileName);
-          const data: DialogData = {
-            dialogTitle: this.translate.instant(
-                'All.Password.Message.update.success',
-            ),
-            dialogMessage: '',
-          };
-          this.dialogService.openDialog(data);
-        },
-        (err) => {
-          const data: DialogData = {
-            dialogTitle: this.translate.instant(
-                'All.Password.Message.update.failed',
-            ),
-            dialogMessage: '',
-          };
-          this.dialogService.openDialog(data);
-        },
-    );
+    try {
+      const response = await this.userService.createPassword(this.user.id, updatePassword);
+      const blob = new Blob([response], {type: 'application/pdf'});
+      const registrationFileName = `${this.user.firstName}-${this.user.lastName}-registration.pdf`;
+      saveAs(blob, registrationFileName);
+      this.toast.success(await this.translate.instant('All.Password.Message.update.success'), 'OK!');
+    } catch {
+      this.toast.error(await this.translate.instant('All.text.create.failed.duplicated'), 'KO!');
+    }
   }
 
   public onGeneratePassword() {
-    const randomPassword = this.randomPassword();
-    this.passwordForm.setValue({
-      password: randomPassword,
-      passwordConfirm: randomPassword,
-    });
-  }
-
-  private randomPassword(): string {
-    let result = '';
+    let randomPassword = '';
     const characters = '0123456789';
     for (let i = 0; i < 8; i++) {
-      result += characters.charAt(
-          Math.floor(Math.random() * characters.length),
-      );
+      randomPassword += characters.charAt(Math.floor(Math.random() * characters.length));
     }
-    return result;
+    this.passwordForm.patchValue({password: randomPassword, passwordConfirm: randomPassword});
   }
 }
