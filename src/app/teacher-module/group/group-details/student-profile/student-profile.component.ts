@@ -46,7 +46,7 @@ export class StudentProfileComponent implements OnInit {
       parentName: [{ value: student.parentName, disabled: true }],
       parentPhone: [{ value: student.parentPhone, disabled: true }],
       address: [{ value: student.address, disabled: true }],
-      description: [{ value: student.description, disabled: true }],
+      description: [{ value: student.description, disabled: true}],
     });
   }
 
