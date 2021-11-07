@@ -30,18 +30,17 @@
                  <mat-hint align="end">{{message.value.length}} / 500</mat-hint>
               </mat-form-field>
             </div>
-            <div class="col-md-2">
-              <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
-              <button mat-raised-button class="btn" [ngClass]="selectedFile?'btn-primary':'btn-default'" (click)="fileInput.click()">
-                  {{'All.text.selectFile' | translate}}
-              </button>
+            <div class="col-md-3">
+                <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+                <button mat-raised-button class="btn" [ngClass]="selectedFile?'btn-primary':'btn-default'" (click)="fileInput.click()">
+                    {{'All.text.selectFile' | translate}}
+                </button>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
               <button mat-raised-button type="submit" (click)="openDialog()"
-                [disabled]="notifForm.pristine || notifForm.invalid"
-                class="btn btn-warning pull-right">{{'All.text.notifications.notifierAction' | translate}}</button>
-              <div class="clearfix"></div>
-            </div>
+                      [disabled]="notifForm.pristine || notifForm.invalid"
+                      class="btn btn-warning pull-right">{{'All.text.notifications.notifierAction' | translate}}</button>
+          </div>
           </div>
         </form>
       </div>

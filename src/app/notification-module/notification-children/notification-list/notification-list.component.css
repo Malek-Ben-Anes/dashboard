@@ -19,3 +19,36 @@ th {
     margin-right: auto;
     width: 50%;
 }
+
+.example-action-buttons {
+    padding-bottom: 20px;
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+    flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.example-headers-align .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+}
+
+.footer-less {
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.profile-image-avatar {
+    width: 39px;
+    height: 39px;
+}
+
+.subject-align {
+    display: inline-flex !important;
+    align-items: center;
+}

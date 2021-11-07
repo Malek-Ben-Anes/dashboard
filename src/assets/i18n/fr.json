@@ -203,6 +203,8 @@
     "All.text.notifications.selectedElemetns": "Confirmation d'envoi des notifications",
     "All.text.notifications.modal.send.success.title": "Les utilisaterus ont ete notifies",
     "All.text.notifications.modal.send.fail.title": "la notification des utilisaterus a echoue!",
+    "All.text.notifications.fileUpload.success": "Le document a été sauvegardé avec succés!",
+    "All.text.notifications.fileUpload.failure": "L'enregistrement  du document a échoué!",
     "All.text.notifications.selectAll": "Sélectionner",
     "All.text.notifications.deSelectAll": "Désélectionner",
 

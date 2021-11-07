@@ -1,61 +1,15 @@
-<div class="main-content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="mat-elevation-z8 table-responsive">
-                    <mat-spinner *ngIf="isLoading" [diameter]="150" class="center"></mat-spinner>
+<div>
+    <div *ngIf="isLoading">
+        <mat-spinner [diameter]="150" class="center"></mat-spinner>
+    </div>
 
-                    <table mat-table *ngIf="!isLoading" [dataSource]="dataSource" class="table">
-                        <ng-container matColumnDef="Title" class="text-primary">
-                            <th mat-header-cell *matHeaderCellDef> {{'All.text.notifications.notifier'|translate}} </th>
-                            <td mat-cell *matCellDef="let notif" class="text-primary"><strong> {{notif.title}} </strong></td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="Content">
-                            <th mat-header-cell *matHeaderCellDef> {{'All.text.notifications.content'|translate}} </th>
-                            <td mat-cell *matCellDef="let notif"> {{notif.content}} </td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="Notifier" class="text-primary">
-                                <th mat-header-cell *matHeaderCellDef> {{'All.text.notifications.sender'|translate}} </th>
-                                <td mat-cell *matCellDef="let notif" class="text-primary"><strong>{{notif.notifier?.firstName}} {{notif.notifier?.lastName}} </strong></td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="Notified" class="text-primary">
-                            <th mat-header-cell *matHeaderCellDef> {{'All.text.notifications.receiver'|translate}} </th>
-                            <td mat-cell *matCellDef="let notif" class="text-primary"><strong>{{notif.notified?.firstName}} {{notif.notified?.lastName}} </strong></td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="File" class="text-primary">
-                            <th mat-header-cell *matHeaderCellDef> {{'All.text.notifications.file'|translate}} </th>
-                            <td mat-cell *matCellDef="let notif" class="text-primary">
-                                <a [href]="BASE_URL+notif.fileUrl" target="_blank" *ngIf="notif.fileUrl">
-                                    <img src="assets/images/pdf-icon.png" alt="pièce jointe" height="42" width="42" />
-                                </a>
-                            </td>
-                        </ng-container>
-                            
-                        <ng-container matColumnDef="Date">
-                                <th mat-header-cell *matHeaderCellDef> {{'All.text.notifications.Date'|translate}} </th>
-                                <td mat-cell *matCellDef="let notif"> {{notif.createdAt}} </td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="Delete" *ngIf="!isNotifReceived">
-                            <th mat-header-cell *matHeaderCellDef> {{'All.text.delete'|translate}} </th>
-                            <td mat-cell *matCellDef="let notif">
-                                <button (click)="onDelete($event, notif.id)" type="button" class="btn btn-danger btn-sm">
-                                  {{'All.text.delete' | translate}} X
-                                </button>
-                            </td>
-                        </ng-container>
-
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                    </table>
-                    <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
-                </div>
-                <br/><br/>
-            </div>
+    <div *ngIf="!isLoading">
+        <div *ngFor="let notification of notifications | slice: lowValue : highValue">
+            <app-notification-content [notification]="notification"  [isNotifReceived]="isNotifReceived"></app-notification-content>
         </div>
     </div>
 </div>
+
+<br />
+<mat-paginator #paginator [pageSize]="pageSize" [length]="notifications?.length" (page)="pageEvent = getPaginatorData($event)"></mat-paginator>
+<br />

@@ -201,8 +201,10 @@
     "All.text.notifications.confirmation.modal.message": " سوف تشعر ${selectedOptionNumber} ${seletedChoice}",
     "All.text.notifications.confirmation.modal.title": "تأكيد إرسال الإشعارات",
     "All.text.notifications.selectedElemetns": "تأكيد إرسال الإشعارات",
-    "All.text.notifications.modal.send.success.title": "تم اعلام المستعملين",
+    "All.text.notifications.modal.send.success.title": "تم اعلام المستخدمين",
     "All.text.notifications.modal.send.fail.title": "فشل إشعار المستخدم!",
+    "All.text.notifications.fileUpload.success": "تم اعلام المستخدمين",
+    "All.text.notifications.fileUpload.failure": "فشل حفظ الملف!",
     "All.text.notifications.selectAll": "تحديد",
     "All.text.notifications.deSelectAll": "إلغاء",
 

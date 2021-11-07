@@ -12,19 +12,10 @@ import {Url} from '@app/models/shared';
   providedIn: 'root',
 })
 export class FileUploadService {
-  readonly USERS_URL: string = BASE_API_URL + 'users/';
   readonly BULLETIN_URL: string = BASE_API_URL + 'bulletins/';
   constructor(private http: HttpClient) {}
 
-  public uploadPhoto(user: Student | Teacher, file: File): Promise<any> {
-    const PHOTO_UPLOAD_URL = `${this.USERS_URL}${user.id}/photo`;
-    const body: FormData = new FormData();
-    body.append('file', file);
-
-    return this.executeCallForUrl(PHOTO_UPLOAD_URL, body);
-  }
-
-  private executeCallForUrl(url: string, body: FormData): Promise<any> {
+  public executeCallForUrl(url: string, body: FormData): Promise<any> {
     return this.http.put<any>(url, body, this.prepareHeader()).toPromise();
   }
 

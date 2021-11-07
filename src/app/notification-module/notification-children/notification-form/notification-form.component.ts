@@ -18,11 +18,10 @@ import { User } from '@app/models/User';
 import { DialogContentExampleDialogComponent } from '@app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
 import { Library } from '@app/models/enums/Library';
 import { TranslateService } from '@ngx-translate/core';
-import { DialogData } from '@app/models/DialogData';
-import { DialogService } from '@app/commons/dialog/dialog.service';
 import { BASE_URL } from '@app/app.component';
 import { NotificationRequest } from '@app/models/requests/notification/CreateNotification.model';
 import { TokenStorageService } from '@app/services/auth/token-storage.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: "app-users-notification-form",
@@ -52,13 +51,13 @@ export class NotificationFormComponent implements OnInit {
     public dialog: MatDialog,
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private dialogService: DialogService,
     private tokenStorage: TokenStorageService,
     private notificationService: NotificationService,
     private translate: TranslateService,
     private teacherService: TeacherService,
     private groupService: GroupService,
     private studentService: StudentService,
+    private toast: ToastrService,
   ) { }
 
   async ngOnInit() {
@@ -79,7 +78,7 @@ export class NotificationFormComponent implements OnInit {
     await this.authService.getLoggedUser().then((loggedUser) => this._loggedUser = loggedUser);
     const loggedUserName = this._loggedUser ? `${this._loggedUser.firstName} ${this._loggedUser.lastName}` : '';
     this.notifForm = this.formBuilder.group({
-      notifier: [loggedUserName, Validators.required],
+      notifier: [{value: loggedUserName, disabled: true}],
       title: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(255)]],
       content: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(500)]],
       type: [null, Validators.required],
@@ -110,33 +109,34 @@ export class NotificationFormComponent implements OnInit {
       'seletedChoice': seletedChoice,
     });
     const dialogTitle = this.translate.instant('All.text.notifications.confirmation.modal.title');
-    return { dialogMessage: dialogMessage, dialogTitle: dialogTitle };
+    return {dialogMessage: dialogMessage, dialogTitle: dialogTitle};
   }
 
   onFileChanged(event) {
     this.selectedFile = event.target.files[0];
   }
 
-  onSubmitNotification() {
+  async onSubmitNotification() {
     const request: NotificationRequest = this.prepareQuery();
     request.isNotifyGroup = this.selected === Library.GROUP;
     const selectedOptions = _.map(this.selections.selectedOptions.selected, 'value');
     request.notifiedIds = _.map(selectedOptions, 'id');
-    this.notificationService.save(request, this.selectedFile)
-      .then((notification) => {
-        const data: DialogData = {
-          dialogTitle: this.translate.instant('All.text.notifications.modal.send.success.title'),
-          dialogMessage: '',
-        };
-        this.dialogService.openDialog(data);
-      })
-      .catch((err) => {
-        const data: DialogData = {
-          dialogTitle: this.translate.instant('All.text.notifications.modal.send.fail.title'),
-          dialogMessage: '',
-        };
-        this.dialogService.openDialog(data);
-      });
+    let notifCreated;
+    try {
+      notifCreated = await this.notificationService.save(request);
+      this.toast.success(await this.translate.instant('All.text.notifications.modal.send.success.title'), 'OK!');
+    } catch {
+      this.toast.error(await this.translate.instant('All.text.notifications.modal.send.fail.title'), 'KO!');
+    }
+
+    if (this.selectedFile && notifCreated) {
+      try {
+        await this.notificationService.uploadFile(notifCreated.id, this.selectedFile);
+        this.toast.success(await this.translate.instant('All.text.notifications.fileUpload.success'), 'OK!');
+      } catch {
+        this.toast.error(await this.translate.instant('All.text.notifications.fileUpload.failure'), 'KO!');
+      }
+    }
   }
 
   onDeselectAll() {
@@ -158,27 +158,21 @@ export class NotificationFormComponent implements OnInit {
     }
   }
 
-  onSelectGroup(groupSelected: Group) {
+  async onSelectGroup(groupSelected: Group) {
     if ((this.selected = Library.STUDENT)) {
-      this.findStudentsByGroupId(groupSelected.id);
+      const students = await this.studentService.findStudentsByGroupId(groupSelected.id);
+      this.StudentsOfSelectedGroup = students;
+      this.optionList = students;
     }
-  }
-
-  private findStudentsByGroupId(groupId: string) {
-    this.studentService.findStudentsByGroupId(groupId).then(
-      (students) => {
-        this.StudentsOfSelectedGroup = students;
-        this.optionList = students;
-      }).catch((err) => console.log(err));
   }
 
   private prepareQuery(): NotificationRequest {
     return this.notificationService.buildNotificationRequest(
-      this._loggedUser.id,
-      undefined,
-      this.extractFieldData('title'),
-      this.extractFieldData('content'),
-      this.extractFieldData('type'),
+        this._loggedUser.id,
+        undefined,
+        this.extractFieldData('title'),
+        this.extractFieldData('content'),
+        this.extractFieldData('type'),
     );
   }
 

@@ -4,6 +4,7 @@ import {BASE_URL} from '@app/app.component';
 import {FileUploadService} from '@app/services/file-upload.service';
 import {User} from '@app/models/User';
 import {Url} from '@app/models/shared';
+import { UserService } from '@app/services/user.service';
 
 @Component({
   selector: 'app-avatar',
@@ -18,7 +19,7 @@ export class AvatarComponent implements OnInit {
   selectedFile: File
   isUploading = false;
 
-  constructor(private fileUploadService: FileUploadService) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {}
 
@@ -28,7 +29,7 @@ export class AvatarComponent implements OnInit {
 
   onUpload() {
     this.isUploading = true;
-    this.fileUploadService.uploadPhoto(this.user, this.selectedFile)
+    this.userService.uploadPhoto(this.user, this.selectedFile)
         .then((data: any) => {
           this.user.photo = data.body.url + '?random+\=' + Math.random();
           this.isUploading = false;

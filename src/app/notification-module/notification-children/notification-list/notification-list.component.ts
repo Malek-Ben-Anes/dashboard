@@ -1,12 +1,13 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {TeacherService} from '@app/services/teacher.service';
 
-import {MatTableDataSource, MatPaginator} from '@angular/material';
+import {MatTableDataSource, MatPaginator, MatAccordion} from '@angular/material';
 import {User} from '@app/models/User';
 import {NotificationService} from '@app/services/notification.service';
 import {AuthService} from '@app/services/auth/auth.service';
 import {Notification} from '@app/models/Notification';
 import {environment} from 'environments/environment';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-notification-list',
@@ -14,60 +15,52 @@ import {environment} from 'environments/environment';
   styleUrls: ['./notification-list.component.css'],
 })
 export class NotificationListComponent implements OnInit {
+
+  @ViewChild(MatAccordion) accordion: MatAccordion;
   @Input('isNotifReceived') isNotifReceived: boolean;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  errorMessage: string;
+  panelOpenState = false;
 
   BASE_URL = environment.resourceEndpoint;
 
   notifications: Notification[] = [];
 
-  dataSource = new MatTableDataSource<Notification>(this.notifications);
-  displayedColumns: string[] = ['Title', 'Content', 'Notifier', 'Notified', 'File', 'Date'];
-
   isLoading = false;
   currentUser: User;
 
-  constructor(private authService: AuthService, private notificationService: NotificationService, private teachersService: TeacherService) { }
+  pageIndex:number = 0;
+  pageSize:number = 15;
+  lowValue:number = 0;
+  highValue:number = 15;
 
-  ngOnInit() {
-    this.authService.getLoggedUser().then((user) => {
-      this.currentUser = user;
-      const notifiedId = this.isNotifReceived ? this.currentUser.id : undefined;
-      const notifierId = !this.isNotifReceived ? this.currentUser.id : undefined;
-      this.findNotifications(notifiedId, notifierId);
-      if (!this.isNotifReceived) {
-        this.displayedColumns.push('Delete');
-      }
-    });
+  constructor(private authService: AuthService, private notificationService: NotificationService, private teachersService: TeacherService, private toast: ToastrService) { }
+
+  async ngOnInit() {
+    this.currentUser = await this.authService.getLoggedUser();
+    const notifiedId = this.isNotifReceived ? this.currentUser.id : undefined;
+    const notifierId = !this.isNotifReceived ? this.currentUser.id : undefined;
+    await this.findNotifications(notifiedId, notifierId);
   }
 
-  findNotifications(notifiedId: string, notifierId: string): void {
-    this.isLoading = true;
-    this.notificationService.findAll(notifiedId, notifierId)
-        .then((notifs) => {
-          this.notifications = notifs;
-          this.refershPaginator();
-          if (notifiedId) {
-            setTimeout(() => {
-              this.authService.saveNewNotifications(0);
-            }, 1000);
-          }
-        }).catch((error) => {
-          this.errorMessage = `${error.status}: ${error.error.message}`,
-          this.isLoading = false;
-        });
+  getPaginatorData(event) {
+    if (event.pageIndex === this.pageIndex + 1) {
+      this.lowValue = this.lowValue + this.pageSize;
+      this.highValue = this.highValue + this.pageSize;
+    } else if (event.pageIndex === this.pageIndex - 1) {
+      this.lowValue = this.lowValue - this.pageSize;
+      this.highValue = this.highValue - this.pageSize;
+    }
+    this.pageIndex = event.pageIndex;
   }
 
-  private refershPaginator() {
-    this.isLoading = false;
-    this.dataSource = new MatTableDataSource<Notification>(this.notifications);
-    this.dataSource.paginator = this.paginator;
-  }
-
-  onDelete(event, notificationId: string) {
-    event.currentTarget.disabled = true;
-    this.notificationService.delete(notificationId).then().catch((err) => alert(err));
+  async findNotifications(notifiedId: string, notifierId: string) {
+    try {
+      this.isLoading = true;
+      this.notifications = await this.notificationService.findAll(notifiedId, notifierId);
+    } catch (error) {
+      this.toast.error(`${error.status}: ${error.error.message}`, 'KO!');
+    } finally {
+      this.isLoading = false;
+    }
   }
 }

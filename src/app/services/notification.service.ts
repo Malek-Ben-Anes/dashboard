@@ -5,6 +5,7 @@ import {BASE_API_URL} from '@app/app.component';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Notif} from '@app/models/enums/Notif';
 import { NotificationRequest } from '@app/models/requests/notification/CreateNotification.model';
+import { FileUploadService } from './file-upload.service';
 
 const NOTIFICATION_URL: string = BASE_API_URL + 'notifications/';
 
@@ -12,7 +13,7 @@ const NOTIFICATION_URL: string = BASE_API_URL + 'notifications/';
   providedIn: 'root',
 })
 export class NotificationService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private fileService: FileUploadService) { }
 
   findAll(notifiedId?: string, notifierId?: string, groupId?: string): Promise<Notification[]> {
     const params = this.buildHttpParams(notifiedId, notifierId, groupId);
@@ -34,19 +35,15 @@ export class NotificationService {
     }
   }
 
-  save(data: NotificationRequest, file: any): Promise<any> {
-    const body: FormData = new FormData();
-    body.append('data', JSON.stringify(data));
-    body.append('file', file);
-    return this.http.post<any>(NOTIFICATION_URL, body, this.prepareHeader()).toPromise();
+  save(request: NotificationRequest): Promise<Notification> {
+    return this.http.post<Notification>(NOTIFICATION_URL, request).toPromise();
   }
 
-  private prepareHeader(): any {
-    const headers: any = {
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'multipart/form-data; charset=utf-8',
-    };
-    return {headers: headers, reportProgress: true, observe: 'events'};
+  public uploadFile(notificationId: string, file: File): Promise<any> {
+    const PHOTO_UPLOAD_URL = `${NOTIFICATION_URL}${notificationId}/fileUrl`;
+    const body: FormData = new FormData();
+    body.append('file', file);
+    return this.fileService.executeCallForUrl(PHOTO_UPLOAD_URL, body);
   }
 
   delete(notificationId: String): Promise<any> {
