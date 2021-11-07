@@ -8,8 +8,8 @@ import { AuthGuardService } from '@app/services/auth/auth-guard.service';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
 import { MarkListComponent } from './mark-list/mark-list.component';
 import { BulletinListComponent } from './bulletin-list/bulletin-list.component';
-import { NotificationListComponent } from './notification-list/notification-list.component';
 import { TimeTableComponent } from './time-table/time-table.component';
+import { NotificationListContentComponent } from './notification-list/notification-list.component';
 
 export class StudentRouterLink {
     public static SHOW_PROFILE = 'show-profile';
@@ -51,7 +51,7 @@ const routes: Routes = [
             {
                 path: StudentRouterLink.SHOW_NOTIFICATIONS,
                 canActivate: [AuthGuardService],
-                component: NotificationListComponent,
+                component: NotificationListContentComponent,
                 data: { expectedRole: Library.ROLE_STUDENT }
             }
         ]

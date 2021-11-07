@@ -203,7 +203,7 @@
     "All.text.notifications.selectedElemetns": "تأكيد إرسال الإشعارات",
     "All.text.notifications.modal.send.success.title": "تم اعلام المستخدمين",
     "All.text.notifications.modal.send.fail.title": "فشل إشعار المستخدم!",
-    "All.text.notifications.fileUpload.success": "تم اعلام المستخدمين",
+    "All.text.notifications.fileUpload.success": "تم حفظ الملف بنجاح!",
     "All.text.notifications.fileUpload.failure": "فشل حفظ الملف!",
     "All.text.notifications.selectAll": "تحديد",
     "All.text.notifications.deSelectAll": "إلغاء",

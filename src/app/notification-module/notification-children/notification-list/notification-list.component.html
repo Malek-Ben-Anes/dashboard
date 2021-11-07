@@ -11,5 +11,5 @@
 </div>
 
 <br />
-<mat-paginator #paginator [pageSize]="pageSize" [length]="notifications?.length" (page)="pageEvent = getPaginatorData($event)"></mat-paginator>
+<mat-paginator #paginator [pageSize]="pageSize" [length]="notifications?.length" (page)="getPaginatorData($event)"></mat-paginator>
 <br />

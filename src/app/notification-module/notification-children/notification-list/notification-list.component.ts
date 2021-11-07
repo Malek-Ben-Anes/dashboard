@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {TeacherService} from '@app/services/teacher.service';
 
-import {MatTableDataSource, MatPaginator, MatAccordion} from '@angular/material';
+import {MatAccordion, PageEvent} from '@angular/material';
 import {User} from '@app/models/User';
 import {NotificationService} from '@app/services/notification.service';
 import {AuthService} from '@app/services/auth/auth.service';
@@ -28,6 +28,7 @@ export class NotificationListComponent implements OnInit {
   isLoading = false;
   currentUser: User;
 
+  pageEvent: PageEvent;
   pageIndex:number = 0;
   pageSize:number = 15;
   lowValue:number = 0;
