@@ -11,7 +11,7 @@
             </div>
             <div class="col-md-3">
               <mat-form-field class="example-full-width">
-                <mat-select matInput placeholder="{{'All.text.notifications.Type' | translate}}" formControlName="type" required>
+                <mat-select matInput placeholder="{{'All.text.label.Subject' | translate}}" formControlName="type" required>
                   <mat-option *ngFor="let NOTIF of NOTIFS" [value]="NOTIF" required>
                     {{'All.text.notifications.Type.' + NOTIF | translate}}
                   </mat-option>
@@ -24,10 +24,10 @@
                  [disabled]="true">
               </mat-form-field>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-12">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="{{'All.text.notifications.content' | translate}}"
-                 type="text" formControlName="content" required>
+                 <textarea matInput type="text" [placeholder]="'All.text.label.Description' | translate" formControlName="content" rows="2" #message maxlength="500" required></textarea>
+                 <mat-hint align="end">{{message.value.length}} / 500</mat-hint>
               </mat-form-field>
             </div>
             <div class="col-md-2">

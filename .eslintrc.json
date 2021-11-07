@@ -26,6 +26,7 @@
         "no-const-assign": "warn",
         "no-this-before-super": "warn",
         "prettier/prettier": "warn",
-        "object-curly-spacing": "warn" 
+        "object-curly-spacing": "warn",
+        "linebreak-style": "off"
     }
 }
