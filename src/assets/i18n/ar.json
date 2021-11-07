@@ -178,6 +178,7 @@
 
     "All.text.notifications.title": "العنوان",
     "All.text.notifications.content": "المحتوى",
+    "All.text.notifications.count": "تم اشعار {{count}} أعضاء:",
     "All.text.notifications.Type": "المحتوى",
     "All.text.notifications.Type.NOTIF1": " تمارين للإنجاز",
     "All.text.notifications.Type.NOTIF2": "الاجتماعات",

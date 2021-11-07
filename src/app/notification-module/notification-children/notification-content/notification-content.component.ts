@@ -1,12 +1,11 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {TeacherService} from '@app/services/teacher.service';
-
-import {MatTableDataSource, MatPaginator} from '@angular/material';
 import {User} from '@app/models/User';
 import {NotificationService} from '@app/services/notification.service';
 import {AuthService} from '@app/services/auth/auth.service';
 import {Notification} from '@app/models/Notification';
 import {environment} from 'environments/environment';
+import { MatAccordion } from '@angular/material';
 
 @Component({
   selector: 'app-notification-content',
@@ -14,31 +13,32 @@ import {environment} from 'environments/environment';
   styleUrls: ['./notification-content.component.css'],
 })
 export class NotificationContentComponent implements OnInit {
+  @ViewChild(MatAccordion) accordion: MatAccordion;
   @Input('isNotifReceived') isNotifReceived: boolean;
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
   errorMessage: string;
+
+  panelOpenState = false;
 
   BASE_URL = environment.resourceEndpoint;
 
   notifications: Notification[] = [];
 
-  dataSource = new MatTableDataSource<Notification>();
-
   isLoading = false;
   currentUser: User;
 
-
-  public array: any;
-
-  public currentPage = 0;
-  public totalSize = 0;
-
   pageIndex:number = 0;
-  pageSize:number = 50;
+  pageSize:number = 15;
   lowValue:number = 0;
-  highValue:number = 50; 
+  highValue:number = 15;
 
+  constructor(private authService: AuthService, private notificationService: NotificationService, private teachersService: TeacherService) { }
+
+  async ngOnInit() {
+    this.currentUser = await this.authService.getLoggedUser();
+    const notifiedId = this.isNotifReceived ? this.currentUser.id : undefined;
+    const notifierId = !this.isNotifReceived ? this.currentUser.id : undefined;
+    await this.findNotifications(notifiedId, notifierId);
+  }
 
   getPaginatorData(event) {
     if (event.pageIndex === this.pageIndex + 1) {
@@ -51,60 +51,14 @@ export class NotificationContentComponent implements OnInit {
     this.pageIndex = event.pageIndex;
   }
 
-  constructor(private authService: AuthService, private notificationService: NotificationService, private teachersService: TeacherService) { }
-
-  ngOnInit() {
-
-    this.getArray();
-  }
-
-  public handlePage(e: any) {
-    this.currentPage = e.pageIndex;
-    this.pageSize = e.pageSize;
-    this.iterator();
-  }
-
-  private async getArray() {
-    this.currentUser = await this.authService.getLoggedUser();
-    const notifiedId = this.isNotifReceived ? this.currentUser.id : undefined;
-    const notifierId = !this.isNotifReceived ? this.currentUser.id : undefined;
-    await this.findNotifications(notifiedId, notifierId);
-  }
-  
-  private iterator() {
-    const end = (this.currentPage + 1) * this.pageSize;
-    const start = this.currentPage * this.pageSize;
-    const part = this.array.slice(start, end);
-    this.dataSource = part;
-  }
-
   async findNotifications(notifiedId: string, notifierId: string) {
     this.isLoading = true;
     try {
       this.notifications = await this.notificationService.findAll(notifiedId, notifierId);
-
-      this.dataSource.paginator = this.paginator;
-      this.array = this.notifications;
-      this.totalSize = this.array.length;
-      this.iterator();
-
-
-      /*this.refershPaginator();
-      if (notifiedId) {
-        setTimeout(() => {
-          this.authService.saveNewNotifications(0);
-        }, 1000);
-      }*/
     } catch (error) {
       this.errorMessage = `${error.status}: ${error.error.message}`,
       this.isLoading = false;
     }
-  }
-
-  private refershPaginator() {
-    this.isLoading = false;
-    this.dataSource = new MatTableDataSource<Notification>(this.notifications);
-    this.dataSource.paginator = this.paginator;
   }
 
   onDelete(event, notificationId: string) {

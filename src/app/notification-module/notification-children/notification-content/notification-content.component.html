@@ -1,54 +1,94 @@
-<div class="card" *ngFor="let notif of notifications | slice: lowValue : highValue">
-    <div class="card-body">
-        <br />
-
-        <div class="row">
-            <div class="col-md-8">
-                <h4>{{notif.title}}</h4>
+<div *ngFor="let notif of notifications | slice: lowValue : highValue">
+    <div class="card footer-less">
+        <div class="card-body">
+            <br />
+    
+            <div class="row">
+                <div class="col-md-9">
+                    <h4>{{notif.title}}</h4>
+                </div>
+                <div class="col-md-3 pull-right">
+                    <p class="card-description  pull-right">
+                        <mat-panel-description>
+                            <mat-icon>date_range</mat-icon>
+                            {{'All.text.notifications.Date'|translate}}: {{notif.createdAt | date: 'dd/MM/yyyy'}}
+                        </mat-panel-description>
+                    </p>
+                </div>
             </div>
-            <div class="col-md-2">
-                <p class="card-description">
-                    {{'All.text.notifications.Date'|translate}}: {{notif.createdAt | date: 'dd/MM/yyyy'}}
-                </p>
+    
+            <hr />
+    
+            <div class="row">
+                <div class="col-md-5 subject-align">
+                    <label>{{'All.text.label.Subject'|translate}} : </label>
+                    <span >
+                        <mat-chip-list aria-label="Fish selection">
+                            <mat-chip color="accent" selected>{{'All.text.notifications.Type.' + notif.type | translate}}</mat-chip>
+                        </mat-chip-list>
+                    </span>                    
+                </div>
+                <div class="col-md-5">
+                    <label>{{'All.text.notifications.sender'|translate}} : </label>
+                    <img class="profile-image profile-image-avatar" [src]="BASE_URL + notif.notifier?.photo" [default]="'assets/images/icon/ADMIN.png'"/>
+                    <strong> {{notif.notifier?.firstName}} {{notif.notifier?.lastName}} </strong>
+                </div>
+                <div class="col-md-2" *ngIf="notif.fileUrl">
+                    <label>{{'All.text.notifications.file'|translate}} </label>
+                    <a [href]="BASE_URL+notif.fileUrl" target="_blank">
+                        <img src="assets/images/pdf-icon.png" alt="pièce jointe" height="42" width="42" />
+                    </a>
+                </div>
             </div>
-            <div class="col-md-2">
-                <button (click)="onDelete($event, notif.id)" type="button" class="btn btn-danger btn-sm" *ngIf="!isNotifReceived">
-                    {{'All.text.delete' | translate}} X
-                </button>
+    
+            <div class="row margin-top-16">
+                <div class="col-md-12">
+                    <label>{{'All.text.notifications.content'|translate}}: </label>
+                </div>
+                <div class="col-md-12">
+                    <span>{{notif.content}}</span>
+                </div>
             </div>
+    
         </div>
+    
+    </div>
 
-        <hr />
+    <div class="notification-footer" *ngIf="notif">
+        <mat-accordion>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false">
 
-        <div class="row">
-            <div class="col-md-4">
-                <label>{{'All.text.label.Subject'|translate}} : </label>
-                <span> {{'All.text.notifications.Type.' + notif.type | translate}}</span>
-            </div>
-            <div class="col-md-4">
-                <label>{{'All.text.notifications.sender'|translate}} : </label>
-                <strong> {{notif.notifier?.firstName}} {{notif.notifier?.lastName}} </strong>
-            </div>
-            <div class="col-md-4" *ngIf="notif.fileUrl">
-                <label>{{'All.text.notifications.file'|translate}} </label>
-                <a [href]="BASE_URL+notif.fileUrl" target="_blank">
-                    <img src="assets/images/pdf-icon.png" alt="pièce jointe" height="42" width="42" />
-                </a>
-            </div>
-        </div>
+            <!-- Panel title -->
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{'All.text.notifications.count'|translate: {count: notif.notifiedUsers.length} }}
+                </mat-panel-title>
+              </mat-expansion-panel-header>
 
-        <div class="row">
-            <div class="col-md-12">
-                <label>{{'All.text.notifications.content'|translate}}: </label>
-            </div>
-            <div class="col-md-12">
-                <span>{{notif.content}}</span>
-            </div>
-        </div>
+              <!-- Panel body -->
+              <div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button (click)="onDelete($event, notif.id)" type="button" class="btn btn-danger btn-sm pull-right" *ngIf="!isNotifReceived">
+                            {{'All.text.delete' | translate}} X
+                        </button>
+                    </div>
+                </div>
 
+                <div class="row">
+                    <div class="col-md-3 margin-top-16" *ngFor="let notified of notif.notifiedUsers">
+                        <img class="profile-image profile-image-avatar" [src]="BASE_URL + notified?.photo" [default]="'assets/images/icon/ADMIN.png'"/>
+                        <strong> {{notified?.firstName}} {{notified?.lastName}} </strong>
+                    </div>
+                </div>
+              </div>
+
+            </mat-expansion-panel>
+        </mat-accordion>
     </div>
 </div>
 
-<mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true" [length]="totalSize"
-    [pageIndex]="currentPage" (page)="pageEvent = getPaginatorData($event)">
-</mat-paginator>
+<br />
+<mat-paginator #paginator [pageSize]="pageSize" [length]="notifications?.length" (page)="pageEvent = getPaginatorData($event)"></mat-paginator>
+<br />

@@ -178,6 +178,7 @@
 
     "All.text.notifications.title": "Titre",
     "All.text.notifications.content": "Contenu",
+    "All.text.notifications.count": "{{count}} membres sont notifié(s): ",
     "All.text.notifications.Type": "Contenu",
     "All.text.notifications.Type.NOTIF6": "Exercice(s) à faire",
     "All.text.notifications.Type.NOTIF5": "Réunion",

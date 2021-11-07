@@ -6,7 +6,7 @@ export class Notification {
     createdAt: string;
     updatedAt: string;
     notifier: User;
-    notified: User;
+    notifiedUsers: User[];
     title: string;
     content: string;
     fileUrl: string;
