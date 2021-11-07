@@ -10,4 +10,6 @@
 <app-notification-list *ngIf="selected.value === TABS[1].NOTIFICATIONS_RECEIVED" [isNotifReceived]="true"></app-notification-list>
 <app-notification-list *ngIf="selected.value === TABS[2].NOTIFICATIONS_SENT" [isNotifReceived]="false"></app-notification-list>
 
+<app-notification-content *ngIf="selected.value === TABS[3].NOTIFICATIONS_SENT" [isNotifReceived]="false"></app-notification-content>
+
 

@@ -12,12 +12,14 @@ import {HttpLoaderFactory} from '@app/header/header.module';
 import {NotificationsComponent} from './notification-parent/notification.component';
 import {NotificationListComponent} from './notification-children/notification-list/notification-list.component';
 import {NotificationFormComponent} from './notification-children/notification-form/notification-form.component';
+import { NotificationContentComponent } from './notification-children/notification-content/notification-content.component';
 
 @NgModule({
   declarations: [
     NotificationsComponent,
     NotificationListComponent,
     NotificationFormComponent,
+    NotificationContentComponent,
   ],
   imports: [
     CommonModule,
@@ -40,6 +42,7 @@ import {NotificationFormComponent} from './notification-children/notification-fo
     NotificationsComponent,
     NotificationListComponent,
     NotificationFormComponent,
+    NotificationContentComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

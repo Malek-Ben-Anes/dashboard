@@ -17,9 +17,10 @@ export class NotificationsComponent implements OnInit {
     {'NOTIFY_USERS': 0, 'label': 'All.text.notifications.notifier'},
     {'NOTIFICATIONS_RECEIVED': 1, 'label': 'All.text.notifications.receivedNotifications'},
     {'NOTIFICATIONS_SENT': 2, 'label': 'All.text.notifications.sentNotifications'},
+    {'NOTIFICATIONS_SENT': 3, 'label': 'All.text.notifications.sentNotifications'},
   ];
 
-  selected = new FormControl(0);
+  selected = new FormControl(3);
   loggedUser: User;
   newNotifications: number;
   notifications: Notification[];

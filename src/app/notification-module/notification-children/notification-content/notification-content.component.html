@@ -1,0 +1,54 @@
+<div class="card" *ngFor="let notif of notifications | slice: lowValue : highValue">
+    <div class="card-body">
+        <br />
+
+        <div class="row">
+            <div class="col-md-8">
+                <h4>{{notif.title}}</h4>
+            </div>
+            <div class="col-md-2">
+                <p class="card-description">
+                    {{'All.text.notifications.Date'|translate}}: {{notif.createdAt | date: 'dd/MM/yyyy'}}
+                </p>
+            </div>
+            <div class="col-md-2">
+                <button (click)="onDelete($event, notif.id)" type="button" class="btn btn-danger btn-sm" *ngIf="!isNotifReceived">
+                    {{'All.text.delete' | translate}} X
+                </button>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row">
+            <div class="col-md-4">
+                <label>{{'All.text.label.Subject'|translate}} : </label>
+                <span> {{'All.text.notifications.Type.' + notif.type | translate}}</span>
+            </div>
+            <div class="col-md-4">
+                <label>{{'All.text.notifications.sender'|translate}} : </label>
+                <strong> {{notif.notifier?.firstName}} {{notif.notifier?.lastName}} </strong>
+            </div>
+            <div class="col-md-4" *ngIf="notif.fileUrl">
+                <label>{{'All.text.notifications.file'|translate}} </label>
+                <a [href]="BASE_URL+notif.fileUrl" target="_blank">
+                    <img src="assets/images/pdf-icon.png" alt="pièce jointe" height="42" width="42" />
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <label>{{'All.text.notifications.content'|translate}}: </label>
+            </div>
+            <div class="col-md-12">
+                <span>{{notif.content}}</span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<mat-paginator #paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true" [length]="totalSize"
+    [pageIndex]="currentPage" (page)="pageEvent = getPaginatorData($event)">
+</mat-paginator>

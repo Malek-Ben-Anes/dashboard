@@ -27,6 +27,10 @@
         "no-this-before-super": "warn",
         "prettier/prettier": "warn",
         "object-curly-spacing": "warn",
-        "linebreak-style": "off"
+        "linebreak-style": "off",
+        "no-trailing-spaces": "warn",
+        "padded-blocks": "warn",
+        "func-style": "warn",
+        "*": "warn"
     }
 }
