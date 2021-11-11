@@ -32,6 +32,8 @@
         "padded-blocks": "warn",
         "func-style": "warn",
         "*": "warn",
-        "no-unused-vars": "warn"
+        "no-unused-vars": "warn",
+        "spaced-comment": "warn",
+        "key-spacing": "warn"
     }
 }

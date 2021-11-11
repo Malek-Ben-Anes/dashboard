@@ -207,6 +207,10 @@
     "All.text.notifications.fileUpload.failure": "L'enregistrement  du document a échoué!",
     "All.text.notifications.selectAll": "Sélectionner",
     "All.text.notifications.deSelectAll": "Désélectionner",
+    "All.text.notifications": {
+        "title": "Notification",
+        "justReceivedNotifiction": "Vous venez de recevoir une notification!"
+    },
 
     "All.text.emails.senderName": "Expéditeur",
     "All.text.emails.senderEmail": "E-mail",
