@@ -207,10 +207,8 @@
     "All.text.notifications.fileUpload.failure": "فشل حفظ الملف!",
     "All.text.notifications.selectAll": "تحديد",
     "All.text.notifications.deSelectAll": "إلغاء",
-    "All.text.notifications": {
-        "title": "إشعار",
-        "justReceivedNotifiction": "لقد تلقيت إشعارًا للتو!"
-    },
+    "All.text.notifications.alert": "إشعار",
+    "All.text.notifications.justReceivedNotifiction": "لقد تلقيت إشعارًا للتو!",
 
     "All.text.emails.senderName": "مرسل",
     "All.text.emails.senderEmail": "البريد الإلكتروني",

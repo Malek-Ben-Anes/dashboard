@@ -63,7 +63,7 @@
         <!-- Panel title -->
             <mat-expansion-panel-header>
             <mat-panel-title>
-                {{'All.text.notifications.count'|translate: {count: notification.notifiedUsers.length} }}
+                {{'All.text.notifications.count'|translate: {count: (notification.notifiedUsers && notification.notifiedUsers.length ? notification.notifiedUsers.length : 0)} }}
             </mat-panel-title>
             </mat-expansion-panel-header>
 

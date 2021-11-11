@@ -45,7 +45,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       if (notification && notification.notifiedUsers && notification.notifiedUsers.length) {
         if (notification.notifiedUsers.find((notified) => notified.id === this.loggedUser.id)) {
           const message = await this.translate.instant('All.text.notifications.justReceivedNotifiction');
-          const title = await this.translate.instant('All.text.notifications.title');
+          const title = await this.translate.instant('All.text.notifications.alert');
           this.toast.info(message, title);
         }
       }
