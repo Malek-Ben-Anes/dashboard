@@ -19,8 +19,7 @@
     </div>
 
     <div *ngIf="isLogged && loggedUser">
-      <app-logged-user [ngClass]="showMenuItems ? 'display-menu-items' : 'hide-menu-items'"
-        [loggedUser]="loggedUser" [roles]="roles"></app-logged-user>
+      <app-logged-user [ngClass]="showMenuItems ? 'display-menu-items' : 'hide-menu-items'" [roles]="roles"></app-logged-user>
     </div>
 
     <div *ngIf="!isLogged">

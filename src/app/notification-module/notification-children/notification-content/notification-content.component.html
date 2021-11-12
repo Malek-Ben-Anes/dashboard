@@ -25,7 +25,7 @@
                 <label>{{'All.text.label.Subject'|translate}} : </label>
                 <span >
                     <mat-chip-list aria-label="Fish selection">
-                        <mat-chip color="accent" selected>{{'All.text.notifications.Type.' + notification.type | translate}}</mat-chip>
+                        <mat-chip class="mat-chip-color" [ngClass]="'mat-chip-' + notification.type" selected>{{'All.text.notifications.Type.' + notification.type | translate}}</mat-chip>
                     </mat-chip-list>
                 </span>                    
             </div>
@@ -63,7 +63,7 @@
         <!-- Panel title -->
             <mat-expansion-panel-header>
             <mat-panel-title>
-                {{'All.text.notifications.count'|translate: {count: (notification.notifiedUsers && notification.notifiedUsers.length ? notification.notifiedUsers.length : 0)} }}
+                {{'All.text.notifications.count'|translate: {count: (notification.notifiedUsers && notification.notifiedUsers.length >=1 ? notification.notifiedUsers.length : 0)} }}
             </mat-panel-title>
             </mat-expansion-panel-header>
 

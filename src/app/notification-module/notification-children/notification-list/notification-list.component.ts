@@ -40,7 +40,23 @@ export class NotificationListComponent implements OnInit {
     this.currentUser = await this.authService.getLoggedUser();
     const notifiedId = this.isNotifReceived ? this.currentUser.id : undefined;
     const notifierId = !this.isNotifReceived ? this.currentUser.id : undefined;
-    await this.findNotifications(notifiedId, notifierId);
+    try {
+      await this.findNotifications(notifiedId, notifierId);
+      this.setNewNotificationsToZero();
+    } catch {
+    }
+  }
+
+  private async setNewNotificationsToZero() {
+    const notifiedId = this.isNotifReceived ? this.currentUser.id : undefined;
+    if (notifiedId) {
+      setTimeout(async () => {
+        this.currentUser = await this.authService.getLoggedUser();
+        this.currentUser.newNotifications = 0;
+        this.authService.save(this.currentUser);
+        this.authService.emitUserSubject();
+      }, 500);
+    }
   }
 
   getPaginatorData(event) {

@@ -28,12 +28,12 @@ export class AuthService {
 
   constructor(private http: HttpClient, private tokenStorage: TokenStorageService) { }
 
-  signIn(credentials: AuthLoginInfo): Observable<JwtResponse> {
+  signIn(credentials: AuthLoginInfo): Promise<JwtResponse> {
     return this.http.post<JwtTokenResponse>(LOGIN_URL, credentials, httpOptions)
         .pipe(map((jwtToken: JwtTokenResponse) => {
           this.saveLoggedUserIntoStorage(jwtToken.token);
           return jwtToken.token;
-        }));
+        })).toPromise();
   }
 
   // TODO remove promise @Deprecated

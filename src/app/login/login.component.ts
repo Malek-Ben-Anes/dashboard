@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   errorMessage;
   roles: string[] = [];
   isLogging: boolean = false;
+  hide = true;
 
   constructor(private authService: AuthService, private translate: TranslateService, private tokenStorage: TokenStorageService, private router: Router) {
   }
@@ -35,19 +36,18 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  onSignIn() {
-    if (this.email.valid && this.password.valid) {
-      const loginInfo = new AuthLoginInfo(this.email.value, this.password.value);
-      this.authService.signIn(loginInfo).subscribe(
-        (data) => {
-          this.isLogging = false;
-          this.isLoggedIn = true;
-          window.location.reload();
-        }, (err) => {
-          this.displayErrorMessage(err);
-        }, () => {
-          if (!this.isLoggedIn) this.displayErrorMessage();
-        });
+  async onSignIn() {
+    if (!this.email.valid || !this.password.valid) return;
+    const loginInfo = new AuthLoginInfo(this.email.value, this.password.value);
+    try {
+      this.isLogging = false;
+      await this.authService.signIn(loginInfo);
+      this.isLoggedIn = true;
+      window.location.reload();
+    } catch (err) {
+      this.displayErrorMessage(err);
+    } finally {
+      this.isLogging = false;
     }
   }
 

@@ -10,7 +10,7 @@
       <h3 class="enter-credentials">{{'signIn.credentials.title' | translate}}</h3>
       <br>
 
-      <form name="form" (ngSubmit)="onSignIn()" #f="ngForm" novalidate>
+      <form name="form" #f="ngForm" novalidate>
         <mat-form-field class="example-full-width">
             <input matInput [placeholder]="'signIn.credentials.email' | translate" type="email" [formControl]="email" required/>
             <mat-error *ngIf="email.errors?.required">
@@ -22,7 +22,10 @@
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <input matInput [placeholder]="'signIn.credentials.password' | translate" [formControl]="password" type="password" required/>
+            <input matInput [placeholder]="'signIn.credentials.password' | translate" [formControl]="password" [type]="hide ? 'password' : 'text'" required/>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
             <mat-error *ngIf="password.errors?.required">
                 {{'signIn.credentials.password.required' | translate}}
             </mat-error>
@@ -38,18 +41,11 @@
         </div>
 
         <div class="form-group center">
-          <div *ngIf="isLogging">
-            <button mat-raised-button class="btn btn-warning">
-              {{'signIn.credentials.loading' | translate}}<i class="fa fa-circle-o-notch fa-spin"></i>
+            <button mat-raised-button class="btn btn-warning" [disabled]="email?.invalid && password?.invalid" (click)="onSignIn()">
+              <span class="glyphicon glyphicon-cloud-upload" *ngIf="!isLogging">{{'signIn.credentials.login' | translate}}</span>
+              <i class="fa fa-circle-o-notch fa-spin" *ngIf="isLogging"></i>
             </button>
-          </div>
-          <div *ngIf="!isLogging">
-            <button mat-raised-button class="btn btn-warning" [disabled]="email?.invalid && password?.invalid ">
-              <span class="glyphicon glyphicon-cloud-upload">{{'signIn.credentials.login' | translate}}</span>
-            </button>
-          </div>
         </div>
-
       </form>
     </div>
     

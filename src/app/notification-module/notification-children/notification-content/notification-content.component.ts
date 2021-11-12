@@ -7,6 +7,10 @@ import {Notification} from '@app/models/Notification';
 import {environment} from 'environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import { Profile } from '@app/models/enums/Profile';
+import { TranslateService } from '@ngx-translate/core';
+import { DialogContentExampleDialogComponent } from '@app/commons/dialog-content-example-dialog/dialog-content-example-dialog.component';
+import { async } from '@angular/core/testing';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-notification-content',
@@ -23,7 +27,10 @@ export class NotificationContentComponent implements OnInit {
 
   currentUser: User;
 
-  constructor(private authService: AuthService, private notificationService: NotificationService, private teachersService: TeacherService, private toast: ToastrService) { }
+  constructor(private notificationService: NotificationService,
+              private toast: ToastrService,
+              private dialog: MatDialog,
+              private translate: TranslateService) { }
 
   async ngOnInit() {
 
@@ -36,11 +43,26 @@ export class NotificationContentComponent implements OnInit {
 
   async onDelete(event, notificationId: string) {
     event.currentTarget.disabled = true;
-    try {
-      await this.notificationService.delete(notificationId);
-      this.toast.success(`La suppression a été effectué avec Succés!`, 'OK!');
-    } catch (e) {
-      this.toast.error(`La suppression de la Notification a échoué!`, 'KO!');
-    }
+
+    const modalDialog: { dialogTitle: string; dialogMessage: string; } =
+    {
+      dialogTitle: this.translate.instant('All.text.delete.title'),
+      dialogMessage: this.translate.instant('All.text.delete.Confirmation'),
+    };
+    const dialogRef = this.dialog.open(DialogContentExampleDialogComponent, {
+      width: '450px',
+      height: '200px',
+      data: {dialogTitle: modalDialog.dialogTitle, dialogMessage: modalDialog.dialogMessage},
+    });
+    dialogRef.afterClosed().subscribe(async (confirmtion) => {
+      if (confirmtion) {
+        try {
+          await this.notificationService.delete(notificationId);
+          this.toast.success(await this.translate.instant(`All.text.toast.SuccessDelete`), 'OK!');
+        } catch (e) {
+          this.toast.error(await this.translate.instant(`All.text.toast.failureDelete`), 'KO!');
+        }
+      }
+    });
   }
 }

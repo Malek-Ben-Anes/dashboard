@@ -34,9 +34,10 @@
     "All.Password.ErrorMessage.NotMatch": "Emploi du temps",
 
     "All.Input.ErrorMessage.MinLength": "Minimum six caractères",
-    "All.Input.ErrorMessage.Required": "Champs obligatoire*",
+    "All.Input.ErrorMessage.Required": "Champs obligatoire *",
 
-
+    "All.text.toast.SuccessDelete": "La suppression a été effectué avec Succés!",
+    "All.text.toast.failureDelete": "La suppression a échoué!",
 
     "All.text.Profile.Create": "Creer un profil",
     "All.text.Profile.Update": "mettre a jour",

@@ -23,6 +23,8 @@
     "All.text.updatePassword": "تحديث كلمة السر",
     "All.text.generatePassword": "انشاء آلي",
     "All.text.Registration.File": "ملف التسجيل",
+    "All.text.toast.SuccessDelete": "تم الحذف بنجاح!",
+    "All.text.toast.failureDelete": "فشل الحذف!",
 
     "All.oldPassword.placeholder": "أدخل كلمة المرور",
     "All.Password.placeholder": "أدخل كلمة المرور",

@@ -7,6 +7,11 @@ import {User} from '@app/models/User';
 import {RouterLink} from '@app/app.routing';
 import {TokenStorageService} from '@app/services/auth/token-storage.service';
 import { BASE_URL } from '@app/app.component';
+import { ToastrService } from 'ngx-toastr';
+import { WebsocketService } from '@app/services/shared/web-socket/websocket.service';
+import { Notification } from '@app/models/Notification';
+import { AuthService } from '@app/services/auth/auth.service';
+import { Subscription } from 'rxjs';
 
 
 declare interface RouteInfo {
@@ -43,18 +48,53 @@ export class LoggedUserComponent implements OnInit {
   ROUTER_LINK: RouterLink;
   readonly BASE_URL: string = BASE_URL;
 
-  @Input('loggedUser') loggedUser: User;
+  loggedUserSubscription: Subscription;
   @Input('roles') roles: string[];
+
+  loggedUser: User;
 
   authority: string;
   navBar = [];
 
-  constructor(private tokenStorage: TokenStorageService, private router: Router, private translate: TranslateService) { }
+  userSubps: Subscription;
 
-  ngOnInit() {
+  constructor(private tokenStorage: TokenStorageService,
+              private router: Router,
+              private translate: TranslateService,
+              private toast: ToastrService,
+              private webSocket: WebsocketService,
+              private authService: AuthService) {
+  }
+
+  async ngOnInit() {
+    this.loggedUser = await this.authService.getLoggedUser();
+
+    this.userSubps = this.authService.getUser().subscribe((user) => this.loggedUser = user);
     _.every(this.roles, (role) => {
       this.getNavigationBarConfiguration(role);
     });
+    this.loadWebSocket();
+  }
+
+  async loadWebSocket() {
+    await this.webSocket.connect();
+    // update user on state change
+    this.webSocket.subscribe('/workflow/states', async (notification: Notification) => {
+      if (notification && notification.notifiedUsers && notification.notifiedUsers.length && this.loggedUser) {
+        if (notification.notifiedUsers.find((notified) => notified.id === this.loggedUser.id)) {
+          const message = await this.translate.instant('All.text.notifications.justReceivedNotifiction');
+          const title = await this.translate.instant('All.text.notifications.alert');
+          this.toast.info(message, title);
+          this.updateUserNewNotifications();
+        }
+      }
+    });
+  }
+
+  private async updateUserNewNotifications() {
+    this.loggedUser.newNotifications++;
+    this.authService.save(this.loggedUser);
+    this.authService.emitUserSubject();
   }
 
   logout() {
@@ -64,7 +104,7 @@ export class LoggedUserComponent implements OnInit {
   }
 
   isAdmin(): boolean {
-    return this.loggedUser.type.toLocaleUpperCase() != 'STUDENT' && this.loggedUser.type.toLocaleUpperCase() != 'TEACHER';
+    return this.loggedUser && this.loggedUser.type && this.loggedUser.type.toLocaleUpperCase() != 'STUDENT' && this.loggedUser.type.toLocaleUpperCase() != 'TEACHER';
   }
 
   updatePasswordRedirect() {
@@ -79,9 +119,6 @@ export class LoggedUserComponent implements OnInit {
     }
   }
 
-  /**
-   * Get navigation bar links routes and configurations depending on user Role
-   */
   private getNavigationBarConfiguration(role) {
     switch (role) {
       case 'ROLE_ADMIN':
@@ -97,6 +134,15 @@ export class LoggedUserComponent implements OnInit {
       default:
         this.authority = 'ROLE_STUDENT';
         this.navBar = ROUTES.STUDENT_NAVIGATION_BAR;
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.loggedUserSubscription) {
+      this.loggedUserSubscription.unsubscribe();
+    }
+    if (this.userSubps) {
+      this.userSubps.unsubscribe();
     }
   }
 }

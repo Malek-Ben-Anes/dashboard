@@ -22,10 +22,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   showMenuItems = false;
 
   constructor(private tokenStorage: TokenStorageService,
-              private authService: AuthService,
-              private toast: ToastrService,
-              private translate: TranslateService,
-              private webSocket: WebsocketService) {
+              private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -34,27 +31,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.loggedUserSubscription = this.authService.getUser().subscribe((loggedUser) => this.loggedUser = loggedUser);
       this.authService.emitUserSubject();
       this.roles = this.tokenStorage.getAuthorities();
-      this.loadWebSocket();
     }
-  }
-
-  async loadWebSocket() {
-    await this.webSocket.connect();
-    // update user on state change
-    this.webSocket.subscribe('/workflow/states', async (notification: Notification) => {
-      if (notification && notification.notifiedUsers && notification.notifiedUsers.length) {
-        if (notification.notifiedUsers.find((notified) => notified.id === this.loggedUser.id)) {
-          const message = await this.translate.instant('All.text.notifications.justReceivedNotifiction');
-          const title = await this.translate.instant('All.text.notifications.alert');
-          this.toast.info(message, title);
-        }
-      }
-    });
   }
 
   ngOnDestroy() {
     this.loggedUserSubscription.unsubscribe();
-    // this.webSocket.unsubscribe();
   }
 
   showBar() {

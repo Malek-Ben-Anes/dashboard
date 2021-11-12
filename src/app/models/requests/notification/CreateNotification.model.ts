@@ -1,4 +1,4 @@
-import { Notif } from "@app/models/enums/Notif";
+import {Notif} from '@app/models/enums/Notif';
 
 export class NotificationRequest {
     notifierId: string;
