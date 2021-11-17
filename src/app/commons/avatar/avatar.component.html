@@ -1,7 +1,7 @@
 <div class="card card-profile">
     <div class="card-avatar">
         <a>
-            <img class="img profile-image" [src]="BASE_URL+user.photo" [default]="'assets/images/icon/' + (user.type ? user.type+'-'+user.gender : 'ADMIN') +'.png'"
+            <img class="img profile-image" [src]="BASE_URL+user.photo" [default]="'assets/images/icon/' + (user && user.type ? user.type+'-'+user.gender : 'ADMIN') +'.png'"
             alt="" height="42" width="42" />
         </a>
     </div>

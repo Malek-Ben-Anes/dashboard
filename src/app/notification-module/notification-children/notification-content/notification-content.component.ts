@@ -38,7 +38,7 @@ export class NotificationContentComponent implements OnInit {
 
   isAllowedToDelete(): boolean {
     // Notifier user and Admins are the unique profiles that are allowed to delete a notification.
-    return !this.isNotifReceived || this.currentUser.type === Profile.USER;
+    return !this.isNotifReceived || this.currentUser && this.currentUser.type === Profile.USER;
   }
 
   async onDelete(event, notificationId: string) {

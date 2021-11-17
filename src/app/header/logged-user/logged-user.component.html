@@ -11,7 +11,7 @@
 
       <img *ngIf="isAdmin()" class="radius-image" src="assets/images/icon/ADMIN.png"/>
 
-       <img *ngIf="!isAdmin() && loggedUser.type" class="radius-image" [src]="BASE_URL + loggedUser?.photo" 
+       <img *ngIf="!isAdmin() && loggedUser && loggedUser.type" class="radius-image" [src]="BASE_URL + loggedUser?.photo" 
         [default]="'assets/images/icon/'+loggedUser.type+'-'+loggedUser.gender+'.png'"
         alt="smile-face"/>
         {{loggedUser.firstName || loggedUser.lastName}}

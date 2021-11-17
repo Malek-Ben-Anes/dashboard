@@ -36,7 +36,7 @@ export class GroupMarksComponent implements OnInit {
   ngOnInit() {
     if (this.authService.getIsLoggedUser()) {
       const loggedUser: Teacher = this.tokenStorage.getLoggedUser() as Teacher;
-      this.loggedInTeacher = loggedUser.type == Profile.TEACHER ? loggedUser : undefined;
+      this.loggedInTeacher = loggedUser && loggedUser.type == Profile.TEACHER ? loggedUser : undefined;
     }
     const teacherId: string = this.loggedInTeacher ? this.loggedInTeacher.id : undefined;
     this.lessonSerivce.search(teacherId, this.group.id).then((lessons) => {
