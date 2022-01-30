@@ -23,9 +23,7 @@
 
         <mat-form-field class="example-full-width">
             <input matInput [placeholder]="'signIn.credentials.password' | translate" [formControl]="password" [type]="hide ? 'password' : 'text'" required/>
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
+            <mat-icon matSuffix (click)="hide = !hide" id="mat-icon-hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             <mat-error *ngIf="password.errors?.required">
                 {{'signIn.credentials.password.required' | translate}}
             </mat-error>

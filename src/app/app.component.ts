@@ -6,11 +6,12 @@ import {ActivatedRoute} from '@angular/router';
 import 'rxjs/add/operator/filter';
 import {environment} from 'environments/environment';
 
+/*const EN = 'en';*/
 const AR = 'ar';
-const EN = 'en';
 const FR = 'fr';
 const DEFAULT_LANGUAGE = AR;
 const LANGUAGE = [AR, FR];
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -22,14 +23,20 @@ export class AppComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, private tokenStorage: TokenStorageService, private translate: TranslateService) {
     // this language will be used as a fallback when a translation isn't found in the current language
-    this.translate.setDefaultLang(EN);
+    this.setDefaultLang();
     // the lang to use, if the lang isn't available, it will use the current loader to get them
-    this.translate.use(EN);
+    this.translate.use(FR);
     if (this.tokenStorage.getLanguage()) {
       this.translate.use(this.tokenStorage.getLanguage());
     } else {
       this.tokenStorage.saveLanguage(DEFAULT_LANGUAGE);
     }
+  }
+
+  private setDefaultLang() {
+    this.translate.addLangs([AR, FR]);
+    this.translate.setDefaultLang(FR);
+    this.language = FR;
   }
 
   ngOnInit() {

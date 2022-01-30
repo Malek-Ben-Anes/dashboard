@@ -43,3 +43,7 @@
     background-image: url('assets/images/login-modal.jpg');
     background-size: cover;
 }
+
+#mat-icon-hide {
+    transform: scale(0.8);
+}
